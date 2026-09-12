@@ -1,0 +1,1071 @@
+{
+  "projekt": "Mathematik NRW – vorbereitende Materialstruktur",
+  "stand": "2026-09-12",
+  "statistik": {
+    "bereiche": 9,
+    "inhaltsfelder": 33,
+    "themen": 105,
+    "materialien": 33
+  },
+  "bereiche": [
+    {
+      "id": "klasse-5",
+      "titel": "Klasse 5",
+      "stufe": "Sekundarstufe I – Erprobungsstufe",
+      "kurztitel": "Klasse 5",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-5/01-arithmetik-algebra/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-natuerliche-zahlen-und-stellenwert",
+              "titel": "Natürliche Zahlen, Stellenwerttafel, Zahlenstrahl, Wortform",
+              "materialien": []
+            },
+            {
+              "id": "02-grundrechenarten-und-rechengesetze",
+              "titel": "Grundrechenarten mit natürlichen Zahlen; Kommutativ-, Assoziativ- und Distributivgesetz",
+              "materialien": []
+            },
+            {
+              "id": "03-groessen-und-einheiten",
+              "titel": "Länge, Zeit, Geld, Masse sowie erste Flächen- und Volumeneinheiten",
+              "materialien": []
+            },
+            {
+              "id": "04-brueche-als-anteile",
+              "titel": "Anteile, Bruchteile von Größen, Bruchdarstellungen und Grundvorstellungen",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-5/02-funktionen/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-tabellen-diagramme-und-zuordnungen",
+              "titel": "Zusammenhänge in Tabellen und Diagrammen; einfache Zuordnungen",
+              "materialien": []
+            },
+            {
+              "id": "02-massstab-modellieren-und-fermi-aufgaben",
+              "titel": "Maßstab, Modellieren, Schätzen und Fermi-Aufgaben",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-5/03-geometrie/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-grundfiguren-koordinatensystem-und-symmetrie",
+              "titel": "Punkte, Strecken, Geraden, Grundfiguren, Koordinatensystem, Symmetrie",
+              "materialien": []
+            },
+            {
+              "id": "02-parallel-senkrecht-und-winkel",
+              "titel": "Lagebeziehungen, Winkel messen und zeichnen",
+              "materialien": []
+            },
+            {
+              "id": "03-umfang-und-flaecheninhalt",
+              "titel": "Umfang und Flächeninhalt von Rechteck und Quadrat; Zerlegen und Ergänzen",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-5/04-stochastik/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-daten-erheben-haeufigkeiten-und-diagramme",
+              "titel": "Daten erheben; absolute Häufigkeiten; Tabellen und Diagramme",
+              "materialien": []
+            },
+            {
+              "id": "02-lagekennwerte-einstieg",
+              "titel": "Arithmetisches Mittel und Median als einfache Kennwerte",
+              "materialien": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "klasse-6",
+      "titel": "Klasse 6",
+      "stufe": "Sekundarstufe I – Erprobungsstufe",
+      "kurztitel": "Klasse 6",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-6/01-arithmetik-algebra/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-teilbarkeit-primzahlen-und-primfaktorzerlegung",
+              "titel": "Teilbarkeit, Primzahlen, Primfaktorzerlegung, Teilbarkeitsregeln",
+              "materialien": []
+            },
+            {
+              "id": "02-positive-rationale-zahlen",
+              "titel": "Brüche, endliche und periodische Dezimalzahlen, Prozentdarstellung",
+              "materialien": []
+            },
+            {
+              "id": "03-rechnen-mit-bruechen-und-dezimalzahlen",
+              "titel": "Grundrechenarten mit einfachen Brüchen und endlichen Dezimalzahlen",
+              "materialien": []
+            },
+            {
+              "id": "04-ganze-zahlen-und-zahlbereichserweiterung",
+              "titel": "Darstellung ganzer Zahlen und Zahlbereichserweiterung",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-6/02-funktionen/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-groessenabhaengigkeiten-und-tabellen",
+              "titel": "Abhängigkeiten zwischen Größen in Wort, Tabelle, Diagramm und Termansätzen",
+              "materialien": []
+            },
+            {
+              "id": "02-proportionale-grundideen-und-dreisatz",
+              "titel": "Proportionale Zusammenhänge und Dreisatz als vorbereitende Zuordnung",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-6/03-geometrie/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-quader-oberflaeche-und-volumen",
+              "titel": "Quader und Würfel; Netze, Oberfläche und Volumen",
+              "materialien": []
+            },
+            {
+              "id": "02-winkel-kreise-und-konstruktionen",
+              "titel": "Winkel, Kreis, Zeichnen und einfache Konstruktionen",
+              "materialien": []
+            },
+            {
+              "id": "03-symmetrie-und-abbildungen",
+              "titel": "Achsensymmetrie, Punktsymmetrie und einfache Abbildungen",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-6/04-stochastik/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-relative-haeufigkeiten",
+              "titel": "Absolute und relative Häufigkeiten vergleichen und interpretieren",
+              "materialien": []
+            },
+            {
+              "id": "02-einfache-zufallsexperimente-und-wahrscheinlichkeit",
+              "titel": "Einfache Zufallsexperimente, Ergebnis/Ereignis, empirische Wahrscheinlichkeit",
+              "materialien": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "klasse-7",
+      "titel": "Klasse 7",
+      "stufe": "Sekundarstufe I – erste Stufe bis Ende SI",
+      "kurztitel": "Klasse 7",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-7/01-arithmetik-algebra/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-rationale-zahlen-und-vorzeichenregeln",
+              "titel": "Rationale Zahlen; Zahlengerade; Vorzeichenregeln; Rechengesetze",
+              "materialien": []
+            },
+            {
+              "id": "02-terme-variablen-und-termumformungen",
+              "titel": "Variable als Veränderliche, Platzhalter und Unbekannte; Terme umformen",
+              "materialien": []
+            },
+            {
+              "id": "03-lineare-gleichungen",
+              "titel": "Lineare Gleichungen algebraisch lösen und im Kontext deuten",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-7/02-funktionen/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-proportionale-und-antiproportionale-zuordnungen",
+              "titel": "Proportionale und antiproportionale Zuordnungen; Darstellungen und Dreisatz",
+              "materialien": []
+            },
+            {
+              "id": "02-prozent-und-zinsrechnung",
+              "titel": "Prozentrechnung, prozentuale Veränderung und Zinsrechnung",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-7/03-geometrie/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-winkelbeziehungen",
+              "titel": "Neben-, Scheitel-, Stufen- und Wechselwinkel; geometrisch argumentieren",
+              "materialien": []
+            },
+            {
+              "id": "02-dreieckskonstruktionen-und-kongruenz",
+              "titel": "Dreiecke konstruieren; Kongruenzsätze; eindeutige Konstruierbarkeit",
+              "materialien": []
+            },
+            {
+              "id": "03-innenwinkelsummen",
+              "titel": "Innenwinkelsumme im Dreieck und in Vielecken; Begründen und Anwenden",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-7/04-stochastik/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-laplace-wahrscheinlichkeit",
+              "titel": "Laplace-Experimente und Wahrscheinlichkeiten",
+              "materialien": []
+            },
+            {
+              "id": "02-baumdiagramme-und-pfadregeln-einstieg",
+              "titel": "Mehrstufige Zufallsexperimente, Baumdiagramme und erste Pfadregeln",
+              "materialien": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "klasse-8",
+      "titel": "Klasse 8",
+      "stufe": "Sekundarstufe I – erste Stufe bis Ende SI",
+      "kurztitel": "Klasse 8",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-8/01-arithmetik-algebra/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-termumformungen-und-binomische-formeln",
+              "titel": "Termumformungen, Rechengesetze und binomische Formeln",
+              "materialien": []
+            },
+            {
+              "id": "02-lineare-gleichungssysteme",
+              "titel": "Lineare Gleichungssysteme mit zwei Variablen; algebraische und grafische Verfahren",
+              "materialien": []
+            },
+            {
+              "id": "03-bruchterme-und-elementare-bruchgleichungen",
+              "titel": "Bruchterme und elementare Bruchgleichungen",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-8/02-funktionen/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-lineare-funktionen",
+              "titel": "Lineare Funktionen; Steigung, Achsenabschnitt, Darstellungswechsel, Modellieren",
+              "materialien": []
+            },
+            {
+              "id": "02-funktionen-und-lineare-gleichungssysteme",
+              "titel": "Schnittpunkte linearer Funktionen als Lösung von LGS",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-8/03-geometrie/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-vielecke-flaechen-und-prismen",
+              "titel": "Flächenberechnungen an Vielecken; Prismen und zusammengesetzte Figuren/Körper",
+              "materialien": []
+            },
+            {
+              "id": "02-geometrisches-argumentieren-und-konstruieren",
+              "titel": "Konstruktion, Begründung und digitale Geometriewerkzeuge",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-8/04-stochastik/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-mehrstufige-zufallsexperimente-und-pfadregeln",
+              "titel": "Mehrstufige Zufallsexperimente; Baumdiagramme; Produkt- und Summenregel",
+              "materialien": []
+            },
+            {
+              "id": "02-datenanalyse-und-boxplots",
+              "titel": "Daten darstellen und beurteilen; Quartile und Boxplots",
+              "materialien": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "klasse-9",
+      "titel": "Klasse 9",
+      "stufe": "Sekundarstufe I – zweite Stufe bis Ende SI",
+      "kurztitel": "Klasse 9",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-9/01-arithmetik-algebra/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-reelle-zahlen-und-wurzeln",
+              "titel": "Reelle Zahlen, Quadratwurzeln und Irrationalität",
+              "materialien": []
+            },
+            {
+              "id": "02-potenzen-und-potenzgesetze",
+              "titel": "Potenzen, Potenzgesetze und Zahlendarstellungen",
+              "materialien": []
+            },
+            {
+              "id": "03-quadratische-gleichungen",
+              "titel": "Quadratische Gleichungen und Lösungsverfahren",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-9/02-funktionen/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-quadratische-funktionen",
+              "titel": "Quadratische Funktionen; Normalparabel, Transformationen, Eigenschaften",
+              "materialien": []
+            },
+            {
+              "id": "02-nullstellen-und-modellierung",
+              "titel": "Nullstellen, Scheitelpunkt und Anwendungen quadratischer Funktionen",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-9/03-geometrie/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-satz-des-pythagoras",
+              "titel": "Satz des Pythagoras, Umkehrung und Anwendungen in Ebene und Raum",
+              "materialien": []
+            },
+            {
+              "id": "02-aehnlichkeit-und-zentrische-streckung",
+              "titel": "Ähnlichkeit und zentrische Streckung",
+              "materialien": []
+            },
+            {
+              "id": "03-strahlensaetze",
+              "titel": "Strahlensätze und Anwendungen",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-9/04-stochastik/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-statistische-daten-und-kennwerte",
+              "titel": "Datenerhebungen, Kennwerte und Streuung beschreiben und vergleichen",
+              "materialien": []
+            },
+            {
+              "id": "02-statistische-darstellungen-kritisch-bewerten",
+              "titel": "Diagramme, Skalierungen und mögliche Manipulationen kritisch beurteilen",
+              "materialien": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "klasse-10",
+      "titel": "Klasse 10",
+      "stufe": "Sekundarstufe I – zweite Stufe bis Ende SI",
+      "kurztitel": "Klasse 10",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-10/01-arithmetik-algebra/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-potenzgesetze-und-rationale-exponenten",
+              "titel": "Potenzgesetze; Potenzen mit rationalen Exponenten",
+              "materialien": []
+            },
+            {
+              "id": "02-exponentielle-gleichungen-und-logarithmus-einstieg",
+              "titel": "Exponentielle Gleichungen und Logarithmus als Umkehroperation",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-10/02-funktionen/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-exponentielle-funktionen-und-wachstum",
+              "titel": "Exponentielle Funktionen; Wachstums- und Zerfallsprozesse",
+              "materialien": []
+            },
+            {
+              "id": "02-sinus-und-kosinusfunktionen",
+              "titel": "Sinus- und Kosinusfunktion; periodische Vorgänge und Einheitskreis",
+              "materialien": []
+            },
+            {
+              "id": "03-funktionsvergleich-und-modellierung",
+              "titel": "Lineare, quadratische und exponentielle Modelle vergleichen und anwenden",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-10/03-geometrie/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-trigonometrie-im-rechtwinkligen-dreieck",
+              "titel": "Sinus, Kosinus und Tangens im rechtwinkligen Dreieck",
+              "materialien": []
+            },
+            {
+              "id": "02-kosinussatz",
+              "titel": "Kosinussatz und Anwendungen",
+              "materialien": []
+            },
+            {
+              "id": "03-kreise-kreisboegen-und-kreissektoren",
+              "titel": "Kreisumfang, Kreisfläche, Kreisbogen, Kreissektor und Tangente",
+              "materialien": []
+            },
+            {
+              "id": "04-koerper-oberflaeche-und-volumen",
+              "titel": "Kugel, Zylinder, Prisma, Kegel, Pyramide; Oberfläche und Volumen",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "klasse-10/04-stochastik/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-bedingte-wahrscheinlichkeit-und-vierfeldertafel",
+              "titel": "Bedingte Wahrscheinlichkeit und Vierfeldertafel",
+              "materialien": []
+            },
+            {
+              "id": "02-stochastische-unabhaengigkeit",
+              "titel": "Stochastische Unabhängigkeit prüfen und interpretieren",
+              "materialien": []
+            },
+            {
+              "id": "03-baumdiagramme-und-pfadregeln",
+              "titel": "Baumdiagramme und Pfadregeln bei mehrstufigen Zufallsexperimenten",
+              "materialien": []
+            },
+            {
+              "id": "04-statistische-daten-und-manipulation",
+              "titel": "Statistische Daten, Erhebungen und Darstellungen kritisch beurteilen",
+              "materialien": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ef",
+      "titel": "Einführungsphase (EF)",
+      "stufe": "Sekundarstufe II – KLP 2023",
+      "kurztitel": "EF",
+      "inhaltsfelder": [
+        {
+          "id": "01-funktionen-und-analysis",
+          "titel": "Funktionen und Analysis",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "ef/01-funktionen-und-analysis/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-potenz-und-ganzrationale-funktionen",
+              "titel": "Potenzfunktionen mit ganzzahligen Exponenten und ganzrationale Funktionen",
+              "materialien": []
+            },
+            {
+              "id": "02-funktionseigenschaften-und-transformationen",
+              "titel": "Graphenverlauf, Definitions-/Wertebereich, Nullstellen, Symmetrie, Verhalten im Unendlichen; Spiegelung/Verschiebung/Streckung",
+              "materialien": []
+            },
+            {
+              "id": "03-mittlere-und-lokale-aenderungsraten",
+              "titel": "Mittlere und lokale Änderungsrate; Sekante und Tangente",
+              "materialien": []
+            },
+            {
+              "id": "04-ableitungsbegriff-und-graphisches-ableiten",
+              "titel": "Grundverständnis des Ableitungsbegriffs und graphisches Ableiten",
+              "materialien": []
+            },
+            {
+              "id": "05-differentialrechnung-ganzrationaler-funktionen",
+              "titel": "Potenz-, Summen- und Faktorregel; Monotonie, Extrema, Krümmung, Wendepunkte",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "02-analytische-geometrie-und-lineare-algebra",
+          "titel": "Analytische Geometrie und Lineare Algebra",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "ef/02-analytische-geometrie-und-lineare-algebra/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-koordinatisierung-des-raumes",
+              "titel": "Punkte, Ortsvektoren und Vektoren im Raum",
+              "materialien": []
+            },
+            {
+              "id": "02-vektoroperationen-und-eigenschaften",
+              "titel": "Addition, skalare Multiplikation, Länge und Kollinearität",
+              "materialien": []
+            },
+            {
+              "id": "03-geraden-und-strecken-in-parameterform",
+              "titel": "Geraden und Strecken in Parameterform",
+              "materialien": []
+            },
+            {
+              "id": "04-lagebeziehungen-und-schnittpunkte-von-geraden",
+              "titel": "Identisch, parallel, windschief, sich schneidend; Schnittpunkte von Geraden",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "03-stochastik",
+          "titel": "Stochastik",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "ef/03-stochastik/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-mehrstufige-zufallsexperimente",
+              "titel": "Urnenmodelle, Baumdiagramme und Pfadregeln",
+              "materialien": []
+            },
+            {
+              "id": "02-vierfeldertafeln-und-bedingte-wahrscheinlichkeit",
+              "titel": "Vierfeldertafeln und bedingte Wahrscheinlichkeiten",
+              "materialien": []
+            },
+            {
+              "id": "03-stochastische-unabhaengigkeit",
+              "titel": "Stochastische Unabhängigkeit in mehrstufigen Situationen",
+              "materialien": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q1-q2-grundkurs",
+      "titel": "Qualifikationsphase – Grundkurs (Q1/Q2)",
+      "stufe": "Sekundarstufe II – KLP 2023",
+      "kurztitel": "Q1/Q2 GK",
+      "inhaltsfelder": [
+        {
+          "id": "01-funktionen-und-analysis",
+          "titel": "Funktionen und Analysis",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "q1-q2-grundkurs/01-funktionen-und-analysis/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-ganzrationale-und-exponentialfunktionen",
+              "titel": "Ganzrationale Funktionen und Exponentialfunktionen; Eigenschaften und Transformationen",
+              "materialien": []
+            },
+            {
+              "id": "02-produktregel-und-zusammengesetzte-funktionen",
+              "titel": "Produktregel; einfache Verkettungen der natürlichen Exponentialfunktion mit linearen Funktionen",
+              "materialien": []
+            },
+            {
+              "id": "03-extremwertprobleme-und-steckbriefaufgaben",
+              "titel": "Extremwertprobleme und Rekonstruktion von Funktionstermen",
+              "materialien": []
+            },
+            {
+              "id": "04-exponentialfunktionen-wachstum-und-zerfall",
+              "titel": "Exponentialfunktionen, natürliche Exponentialfunktion, Wachstum und Zerfall",
+              "materialien": []
+            },
+            {
+              "id": "05-integralbegriff-produktsumme-und-orientierte-flaeche",
+              "titel": "Produktsummen, orientierte Fläche, Bestands- und Integralfunktion",
+              "materialien": []
+            },
+            {
+              "id": "06-stammfunktionen-bestimmtes-integral-und-hauptsatz",
+              "titel": "Stammfunktion, bestimmtes Integral und Hauptsatz der Differential- und Integralrechnung",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "02-analytische-geometrie-und-lineare-algebra",
+          "titel": "Analytische Geometrie und Lineare Algebra",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "q1-q2-grundkurs/02-analytische-geometrie-und-lineare-algebra/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-skalarprodukt-und-winkel",
+              "titel": "Skalarprodukt, Orthogonalität, Winkel zwischen Vektoren",
+              "materialien": []
+            },
+            {
+              "id": "02-ebenen-parameter-und-koordinatenform",
+              "titel": "Ebenen in Parameter- und Koordinatenform; Normalenvektor",
+              "materialien": []
+            },
+            {
+              "id": "03-schnittwinkel-und-schnittpunkte",
+              "titel": "Schnittwinkel; Schnittpunkte von Geraden und Ebenen",
+              "materialien": []
+            },
+            {
+              "id": "04-lineare-gleichungssysteme-und-gauss",
+              "titel": "Lineare Gleichungssysteme und algorithmisches Lösungsverfahren",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "03-stochastik",
+          "titel": "Stochastik",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "q1-q2-grundkurs/03-stochastik/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-mehrstufige-zufallsexperimente-wiederholung-und-vertiefung",
+              "titel": "Urnenmodelle, Baumdiagramme, Vierfeldertafeln, bedingte Wahrscheinlichkeit, Pfadregeln",
+              "materialien": []
+            },
+            {
+              "id": "02-zufallsgroessen-und-kenngroessen",
+              "titel": "Diskrete Zufallsgrößen; Erwartungswert, Varianz und Standardabweichung",
+              "materialien": []
+            },
+            {
+              "id": "03-binomialverteilung",
+              "titel": "Binomialverteilung; Kenngrößen und Histogramme",
+              "materialien": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q1-q2-leistungskurs",
+      "titel": "Qualifikationsphase – Leistungskurs (Q1/Q2)",
+      "stufe": "Sekundarstufe II – KLP 2023",
+      "kurztitel": "Q1/Q2 LK",
+      "inhaltsfelder": [
+        {
+          "id": "01-funktionen-und-analysis",
+          "titel": "Funktionen und Analysis",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "q1-q2-leistungskurs/01-funktionen-und-analysis/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-ganzrationale-exponential-und-trigonometrische-funktionen",
+              "titel": "Ganzrationale, Exponential-, Sinus- und Kosinusfunktionen",
+              "materialien": []
+            },
+            {
+              "id": "02-produktregel-kettenregel-und-funktionenscharen",
+              "titel": "Produktregel, Kettenregel, Funktionenscharen",
+              "materialien": []
+            },
+            {
+              "id": "03-extremwertprobleme-und-steckbriefaufgaben",
+              "titel": "Extremwertprobleme und Rekonstruktion von Funktionstermen",
+              "materialien": []
+            },
+            {
+              "id": "04-logarithmus-und-umkehrfunktionen",
+              "titel": "Natürliche Logarithmusfunktion, Umkehrfunktionen und rationale Potenzfunktionen",
+              "materialien": []
+            },
+            {
+              "id": "05-integralbegriff-und-integralfunktion",
+              "titel": "Produktsumme, orientierte Fläche, Bestandsfunktion und Integralfunktion",
+              "materialien": []
+            },
+            {
+              "id": "06-stammfunktionen-bestimmtes-integral-und-hauptsatz",
+              "titel": "Stammfunktion, bestimmtes Integral und Hauptsatz der Differential- und Integralrechnung",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "02-analytische-geometrie-und-lineare-algebra",
+          "titel": "Analytische Geometrie und Lineare Algebra",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "q1-q2-leistungskurs/02-analytische-geometrie-und-lineare-algebra/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-skalarprodukt-und-winkel",
+              "titel": "Skalarprodukt, Orthogonalität und Winkel",
+              "materialien": []
+            },
+            {
+              "id": "02-ebenen-parameter-koordinaten-und-normalenform",
+              "titel": "Ebenen in Parameter-, Koordinaten- und Normalenform",
+              "materialien": []
+            },
+            {
+              "id": "03-schnittwinkel-und-schnittpunkte",
+              "titel": "Schnittwinkel und Schnittpunkte von Geraden/Ebenen",
+              "materialien": []
+            },
+            {
+              "id": "04-lagebeziehungen-und-abstaende",
+              "titel": "Lagebeziehungen und Abstände zwischen Punkten, Geraden und Ebenen",
+              "materialien": []
+            },
+            {
+              "id": "05-lineare-gleichungssysteme-und-gauss",
+              "titel": "Lineare Gleichungssysteme und algorithmische Lösungsverfahren",
+              "materialien": []
+            }
+          ]
+        },
+        {
+          "id": "03-stochastik",
+          "titel": "Stochastik",
+          "materialien": [
+            {
+              "titel": "Wiederholung",
+              "datei": "wiederholung.pptx",
+              "typ": "PPTX",
+              "url": "q1-q2-leistungskurs/03-stochastik/wiederholung.pptx"
+            }
+          ],
+          "themen": [
+            {
+              "id": "01-mehrstufige-zufallsexperimente",
+              "titel": "Urnenmodelle, Baumdiagramme, Vierfeldertafeln, bedingte Wahrscheinlichkeiten und Pfadregeln",
+              "materialien": []
+            },
+            {
+              "id": "02-zufallsgroessen-und-kenngroessen",
+              "titel": "Diskrete Zufallsgrößen; Erwartungswert, Varianz und Standardabweichung",
+              "materialien": []
+            },
+            {
+              "id": "03-binomialverteilung-und-sigma-regeln",
+              "titel": "Binomialkoeffizient, Binomialverteilung, Histogramme und σ-Regeln",
+              "materialien": []
+            },
+            {
+              "id": "04-beurteilende-statistik",
+              "titel": "Prognoseintervall, Konfidenzintervall und Stichprobenumfang",
+              "materialien": []
+            },
+            {
+              "id": "05-normalverteilung",
+              "titel": "Dichtefunktion, Gaußsche Glockenkurve, Parameter μ und σ, Verteilungsfunktion",
+              "materialien": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

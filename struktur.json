@@ -1,0 +1,706 @@
+{
+  "projekt": "Mathematik NRW – vorbereitende Materialstruktur",
+  "fach": "Mathematik",
+  "bundesland": "Nordrhein-Westfalen",
+  "schulform": "Gymnasium G9 / gymnasiale Oberstufe",
+  "stand": "2026-09-12",
+  "hinweise": [
+    "Die vier Inhaltsfelder der Sekundarstufe I sind KLP-verbindlich. Die konkrete Verteilung einzelner Themen auf die Jahrgangsstufen 5 bis 10 ist eine vorbereitende Organisationsstruktur und muss mit dem schulinternen Lehrplan/Fachkonferenzbeschluss abgeglichen werden.",
+    "In der gymnasialen Oberstufe gilt der Kernlehrplan Mathematik 2023 seit 01.08.2023 beginnend mit der Einführungsphase aufsteigend.",
+    "Für die Qualifikationsphase legt der KLP Kompetenzen bis zum Ende der Qualifikationsphase fest; die Aufteilung auf Q1 und Q2 ist nicht landesweit als starre Reihenfolge vorgegeben. Deshalb werden Q1/Q2 in dieser Struktur zusammengeführt.",
+    "Leere Themenordner werden über .gitkeep in Git versioniert."
+  ],
+  "quellen": {
+    "sek_i_klp_2019": "https://lehrplannavigator.nrw.de/system/files/media/document/file/g9_m_klp_3401_2019_06_23_0.pdf",
+    "sek_i_qua_lis_unterstuetzung": "https://www.schulentwicklung.nrw.de/materialdatenbank/material/view/5679",
+    "sek_ii_klp_2023": "https://lehrplannavigator.nrw.de/system/files/media/document/file/gost_klp_m_2023_06_07.pdf",
+    "abiturbeispiel_gk_stochastik_neuer_klp": "https://www.standardsicherung.schulministerium.nrw.de/system/files/media/document/file/2.pruefungsteil_gk_ab2026_stochastik_b4_cas.pdf",
+    "abiturbeispiel_lk_stochastik_neuer_klp": "https://www.standardsicherung.schulministerium.nrw.de/system/files/media/document/file/2.pruefungsteil_lk_ab2026_stochastik_b4_cas.pdf",
+    "abiturbeispiel_gk_geometrie_neuer_klp": "https://www.standardsicherung.schulministerium.nrw.de/system/files/media/document/file/2.pruefungsteil_gk_ab2026_geometrie_b3_cas.pdf",
+    "abiturbeispiel_lk_geometrie_neuer_klp": "https://www.standardsicherung.schulministerium.nrw.de/system/files/media/document/file/2.pruefungsteil_lk_ab2026_geometrie_b3_wtr.pdf",
+    "abiturbeispiel_lk_analysis_neuer_klp": "https://www.standardsicherung.schulministerium.nrw.de/system/files/media/document/file/2.pruefungsteil_lk_ab2026_analysis_b2_cas.pdf"
+  },
+  "bereiche": [
+    {
+      "id": "klasse-5",
+      "titel": "Klasse 5",
+      "stufe": "Sekundarstufe I – Erprobungsstufe",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "themen": [
+            {
+              "id": "01-natuerliche-zahlen-und-stellenwert",
+              "titel": "Natürliche Zahlen, Stellenwerttafel, Zahlenstrahl, Wortform"
+            },
+            {
+              "id": "02-grundrechenarten-und-rechengesetze",
+              "titel": "Grundrechenarten mit natürlichen Zahlen; Kommutativ-, Assoziativ- und Distributivgesetz"
+            },
+            {
+              "id": "03-groessen-und-einheiten",
+              "titel": "Länge, Zeit, Geld, Masse sowie erste Flächen- und Volumeneinheiten"
+            },
+            {
+              "id": "04-brueche-als-anteile",
+              "titel": "Anteile, Bruchteile von Größen, Bruchdarstellungen und Grundvorstellungen"
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "themen": [
+            {
+              "id": "01-tabellen-diagramme-und-zuordnungen",
+              "titel": "Zusammenhänge in Tabellen und Diagrammen; einfache Zuordnungen"
+            },
+            {
+              "id": "02-massstab-modellieren-und-fermi-aufgaben",
+              "titel": "Maßstab, Modellieren, Schätzen und Fermi-Aufgaben"
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "themen": [
+            {
+              "id": "01-grundfiguren-koordinatensystem-und-symmetrie",
+              "titel": "Punkte, Strecken, Geraden, Grundfiguren, Koordinatensystem, Symmetrie"
+            },
+            {
+              "id": "02-parallel-senkrecht-und-winkel",
+              "titel": "Lagebeziehungen, Winkel messen und zeichnen"
+            },
+            {
+              "id": "03-umfang-und-flaecheninhalt",
+              "titel": "Umfang und Flächeninhalt von Rechteck und Quadrat; Zerlegen und Ergänzen"
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "themen": [
+            {
+              "id": "01-daten-erheben-haeufigkeiten-und-diagramme",
+              "titel": "Daten erheben; absolute Häufigkeiten; Tabellen und Diagramme"
+            },
+            {
+              "id": "02-lagekennwerte-einstieg",
+              "titel": "Arithmetisches Mittel und Median als einfache Kennwerte"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "klasse-6",
+      "titel": "Klasse 6",
+      "stufe": "Sekundarstufe I – Erprobungsstufe",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "themen": [
+            {
+              "id": "01-teilbarkeit-primzahlen-und-primfaktorzerlegung",
+              "titel": "Teilbarkeit, Primzahlen, Primfaktorzerlegung, Teilbarkeitsregeln"
+            },
+            {
+              "id": "02-positive-rationale-zahlen",
+              "titel": "Brüche, endliche und periodische Dezimalzahlen, Prozentdarstellung"
+            },
+            {
+              "id": "03-rechnen-mit-bruechen-und-dezimalzahlen",
+              "titel": "Grundrechenarten mit einfachen Brüchen und endlichen Dezimalzahlen"
+            },
+            {
+              "id": "04-ganze-zahlen-und-zahlbereichserweiterung",
+              "titel": "Darstellung ganzer Zahlen und Zahlbereichserweiterung"
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "themen": [
+            {
+              "id": "01-groessenabhaengigkeiten-und-tabellen",
+              "titel": "Abhängigkeiten zwischen Größen in Wort, Tabelle, Diagramm und Termansätzen"
+            },
+            {
+              "id": "02-proportionale-grundideen-und-dreisatz",
+              "titel": "Proportionale Zusammenhänge und Dreisatz als vorbereitende Zuordnung"
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "themen": [
+            {
+              "id": "01-quader-oberflaeche-und-volumen",
+              "titel": "Quader und Würfel; Netze, Oberfläche und Volumen"
+            },
+            {
+              "id": "02-winkel-kreise-und-konstruktionen",
+              "titel": "Winkel, Kreis, Zeichnen und einfache Konstruktionen"
+            },
+            {
+              "id": "03-symmetrie-und-abbildungen",
+              "titel": "Achsensymmetrie, Punktsymmetrie und einfache Abbildungen"
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "themen": [
+            {
+              "id": "01-relative-haeufigkeiten",
+              "titel": "Absolute und relative Häufigkeiten vergleichen und interpretieren"
+            },
+            {
+              "id": "02-einfache-zufallsexperimente-und-wahrscheinlichkeit",
+              "titel": "Einfache Zufallsexperimente, Ergebnis/Ereignis, empirische Wahrscheinlichkeit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "klasse-7",
+      "titel": "Klasse 7",
+      "stufe": "Sekundarstufe I – erste Stufe bis Ende SI",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "themen": [
+            {
+              "id": "01-rationale-zahlen-und-vorzeichenregeln",
+              "titel": "Rationale Zahlen; Zahlengerade; Vorzeichenregeln; Rechengesetze"
+            },
+            {
+              "id": "02-terme-variablen-und-termumformungen",
+              "titel": "Variable als Veränderliche, Platzhalter und Unbekannte; Terme umformen"
+            },
+            {
+              "id": "03-lineare-gleichungen",
+              "titel": "Lineare Gleichungen algebraisch lösen und im Kontext deuten"
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "themen": [
+            {
+              "id": "01-proportionale-und-antiproportionale-zuordnungen",
+              "titel": "Proportionale und antiproportionale Zuordnungen; Darstellungen und Dreisatz"
+            },
+            {
+              "id": "02-prozent-und-zinsrechnung",
+              "titel": "Prozentrechnung, prozentuale Veränderung und Zinsrechnung"
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "themen": [
+            {
+              "id": "01-winkelbeziehungen",
+              "titel": "Neben-, Scheitel-, Stufen- und Wechselwinkel; geometrisch argumentieren"
+            },
+            {
+              "id": "02-dreieckskonstruktionen-und-kongruenz",
+              "titel": "Dreiecke konstruieren; Kongruenzsätze; eindeutige Konstruierbarkeit"
+            },
+            {
+              "id": "03-innenwinkelsummen",
+              "titel": "Innenwinkelsumme im Dreieck und in Vielecken; Begründen und Anwenden"
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "themen": [
+            {
+              "id": "01-laplace-wahrscheinlichkeit",
+              "titel": "Laplace-Experimente und Wahrscheinlichkeiten"
+            },
+            {
+              "id": "02-baumdiagramme-und-pfadregeln-einstieg",
+              "titel": "Mehrstufige Zufallsexperimente, Baumdiagramme und erste Pfadregeln"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "klasse-8",
+      "titel": "Klasse 8",
+      "stufe": "Sekundarstufe I – erste Stufe bis Ende SI",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "themen": [
+            {
+              "id": "01-termumformungen-und-binomische-formeln",
+              "titel": "Termumformungen, Rechengesetze und binomische Formeln"
+            },
+            {
+              "id": "02-lineare-gleichungssysteme",
+              "titel": "Lineare Gleichungssysteme mit zwei Variablen; algebraische und grafische Verfahren"
+            },
+            {
+              "id": "03-bruchterme-und-elementare-bruchgleichungen",
+              "titel": "Bruchterme und elementare Bruchgleichungen"
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "themen": [
+            {
+              "id": "01-lineare-funktionen",
+              "titel": "Lineare Funktionen; Steigung, Achsenabschnitt, Darstellungswechsel, Modellieren"
+            },
+            {
+              "id": "02-funktionen-und-lineare-gleichungssysteme",
+              "titel": "Schnittpunkte linearer Funktionen als Lösung von LGS"
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "themen": [
+            {
+              "id": "01-vielecke-flaechen-und-prismen",
+              "titel": "Flächenberechnungen an Vielecken; Prismen und zusammengesetzte Figuren/Körper"
+            },
+            {
+              "id": "02-geometrisches-argumentieren-und-konstruieren",
+              "titel": "Konstruktion, Begründung und digitale Geometriewerkzeuge"
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "themen": [
+            {
+              "id": "01-mehrstufige-zufallsexperimente-und-pfadregeln",
+              "titel": "Mehrstufige Zufallsexperimente; Baumdiagramme; Produkt- und Summenregel"
+            },
+            {
+              "id": "02-datenanalyse-und-boxplots",
+              "titel": "Daten darstellen und beurteilen; Quartile und Boxplots"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "klasse-9",
+      "titel": "Klasse 9",
+      "stufe": "Sekundarstufe I – zweite Stufe bis Ende SI",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "themen": [
+            {
+              "id": "01-reelle-zahlen-und-wurzeln",
+              "titel": "Reelle Zahlen, Quadratwurzeln und Irrationalität"
+            },
+            {
+              "id": "02-potenzen-und-potenzgesetze",
+              "titel": "Potenzen, Potenzgesetze und Zahlendarstellungen"
+            },
+            {
+              "id": "03-quadratische-gleichungen",
+              "titel": "Quadratische Gleichungen und Lösungsverfahren"
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "themen": [
+            {
+              "id": "01-quadratische-funktionen",
+              "titel": "Quadratische Funktionen; Normalparabel, Transformationen, Eigenschaften"
+            },
+            {
+              "id": "02-nullstellen-und-modellierung",
+              "titel": "Nullstellen, Scheitelpunkt und Anwendungen quadratischer Funktionen"
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "themen": [
+            {
+              "id": "01-satz-des-pythagoras",
+              "titel": "Satz des Pythagoras, Umkehrung und Anwendungen in Ebene und Raum"
+            },
+            {
+              "id": "02-aehnlichkeit-und-zentrische-streckung",
+              "titel": "Ähnlichkeit und zentrische Streckung"
+            },
+            {
+              "id": "03-strahlensaetze",
+              "titel": "Strahlensätze und Anwendungen"
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "themen": [
+            {
+              "id": "01-statistische-daten-und-kennwerte",
+              "titel": "Datenerhebungen, Kennwerte und Streuung beschreiben und vergleichen"
+            },
+            {
+              "id": "02-statistische-darstellungen-kritisch-bewerten",
+              "titel": "Diagramme, Skalierungen und mögliche Manipulationen kritisch beurteilen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "klasse-10",
+      "titel": "Klasse 10",
+      "stufe": "Sekundarstufe I – zweite Stufe bis Ende SI",
+      "inhaltsfelder": [
+        {
+          "id": "01-arithmetik-algebra",
+          "titel": "Arithmetik/Algebra",
+          "themen": [
+            {
+              "id": "01-potenzgesetze-und-rationale-exponenten",
+              "titel": "Potenzgesetze; Potenzen mit rationalen Exponenten"
+            },
+            {
+              "id": "02-exponentielle-gleichungen-und-logarithmus-einstieg",
+              "titel": "Exponentielle Gleichungen und Logarithmus als Umkehroperation"
+            }
+          ]
+        },
+        {
+          "id": "02-funktionen",
+          "titel": "Funktionen",
+          "themen": [
+            {
+              "id": "01-exponentielle-funktionen-und-wachstum",
+              "titel": "Exponentielle Funktionen; Wachstums- und Zerfallsprozesse"
+            },
+            {
+              "id": "02-sinus-und-kosinusfunktionen",
+              "titel": "Sinus- und Kosinusfunktion; periodische Vorgänge und Einheitskreis"
+            },
+            {
+              "id": "03-funktionsvergleich-und-modellierung",
+              "titel": "Lineare, quadratische und exponentielle Modelle vergleichen und anwenden"
+            }
+          ]
+        },
+        {
+          "id": "03-geometrie",
+          "titel": "Geometrie",
+          "themen": [
+            {
+              "id": "01-trigonometrie-im-rechtwinkligen-dreieck",
+              "titel": "Sinus, Kosinus und Tangens im rechtwinkligen Dreieck"
+            },
+            {
+              "id": "02-kosinussatz",
+              "titel": "Kosinussatz und Anwendungen"
+            },
+            {
+              "id": "03-kreise-kreisboegen-und-kreissektoren",
+              "titel": "Kreisumfang, Kreisfläche, Kreisbogen, Kreissektor und Tangente"
+            },
+            {
+              "id": "04-koerper-oberflaeche-und-volumen",
+              "titel": "Kugel, Zylinder, Prisma, Kegel, Pyramide; Oberfläche und Volumen"
+            }
+          ]
+        },
+        {
+          "id": "04-stochastik",
+          "titel": "Stochastik",
+          "themen": [
+            {
+              "id": "01-bedingte-wahrscheinlichkeit-und-vierfeldertafel",
+              "titel": "Bedingte Wahrscheinlichkeit und Vierfeldertafel"
+            },
+            {
+              "id": "02-stochastische-unabhaengigkeit",
+              "titel": "Stochastische Unabhängigkeit prüfen und interpretieren"
+            },
+            {
+              "id": "03-baumdiagramme-und-pfadregeln",
+              "titel": "Baumdiagramme und Pfadregeln bei mehrstufigen Zufallsexperimenten"
+            },
+            {
+              "id": "04-statistische-daten-und-manipulation",
+              "titel": "Statistische Daten, Erhebungen und Darstellungen kritisch beurteilen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ef",
+      "titel": "Einführungsphase (EF)",
+      "stufe": "Sekundarstufe II – KLP 2023",
+      "inhaltsfelder": [
+        {
+          "id": "01-funktionen-und-analysis",
+          "titel": "Funktionen und Analysis",
+          "themen": [
+            {
+              "id": "01-potenz-und-ganzrationale-funktionen",
+              "titel": "Potenzfunktionen mit ganzzahligen Exponenten und ganzrationale Funktionen"
+            },
+            {
+              "id": "02-funktionseigenschaften-und-transformationen",
+              "titel": "Graphenverlauf, Definitions-/Wertebereich, Nullstellen, Symmetrie, Verhalten im Unendlichen; Spiegelung/Verschiebung/Streckung"
+            },
+            {
+              "id": "03-mittlere-und-lokale-aenderungsraten",
+              "titel": "Mittlere und lokale Änderungsrate; Sekante und Tangente"
+            },
+            {
+              "id": "04-ableitungsbegriff-und-graphisches-ableiten",
+              "titel": "Grundverständnis des Ableitungsbegriffs und graphisches Ableiten"
+            },
+            {
+              "id": "05-differentialrechnung-ganzrationaler-funktionen",
+              "titel": "Potenz-, Summen- und Faktorregel; Monotonie, Extrema, Krümmung, Wendepunkte"
+            }
+          ]
+        },
+        {
+          "id": "02-analytische-geometrie-und-lineare-algebra",
+          "titel": "Analytische Geometrie und Lineare Algebra",
+          "themen": [
+            {
+              "id": "01-koordinatisierung-des-raumes",
+              "titel": "Punkte, Ortsvektoren und Vektoren im Raum"
+            },
+            {
+              "id": "02-vektoroperationen-und-eigenschaften",
+              "titel": "Addition, skalare Multiplikation, Länge und Kollinearität"
+            },
+            {
+              "id": "03-geraden-und-strecken-in-parameterform",
+              "titel": "Geraden und Strecken in Parameterform"
+            },
+            {
+              "id": "04-lagebeziehungen-und-schnittpunkte-von-geraden",
+              "titel": "Identisch, parallel, windschief, sich schneidend; Schnittpunkte von Geraden"
+            }
+          ]
+        },
+        {
+          "id": "03-stochastik",
+          "titel": "Stochastik",
+          "themen": [
+            {
+              "id": "01-mehrstufige-zufallsexperimente",
+              "titel": "Urnenmodelle, Baumdiagramme und Pfadregeln"
+            },
+            {
+              "id": "02-vierfeldertafeln-und-bedingte-wahrscheinlichkeit",
+              "titel": "Vierfeldertafeln und bedingte Wahrscheinlichkeiten"
+            },
+            {
+              "id": "03-stochastische-unabhaengigkeit",
+              "titel": "Stochastische Unabhängigkeit in mehrstufigen Situationen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q1-q2-grundkurs",
+      "titel": "Qualifikationsphase – Grundkurs (Q1/Q2)",
+      "stufe": "Sekundarstufe II – KLP 2023",
+      "inhaltsfelder": [
+        {
+          "id": "01-funktionen-und-analysis",
+          "titel": "Funktionen und Analysis",
+          "themen": [
+            {
+              "id": "01-ganzrationale-und-exponentialfunktionen",
+              "titel": "Ganzrationale Funktionen und Exponentialfunktionen; Eigenschaften und Transformationen"
+            },
+            {
+              "id": "02-produktregel-und-zusammengesetzte-funktionen",
+              "titel": "Produktregel; einfache Verkettungen der natürlichen Exponentialfunktion mit linearen Funktionen"
+            },
+            {
+              "id": "03-extremwertprobleme-und-steckbriefaufgaben",
+              "titel": "Extremwertprobleme und Rekonstruktion von Funktionstermen"
+            },
+            {
+              "id": "04-exponentialfunktionen-wachstum-und-zerfall",
+              "titel": "Exponentialfunktionen, natürliche Exponentialfunktion, Wachstum und Zerfall"
+            },
+            {
+              "id": "05-integralbegriff-produktsumme-und-orientierte-flaeche",
+              "titel": "Produktsummen, orientierte Fläche, Bestands- und Integralfunktion"
+            },
+            {
+              "id": "06-stammfunktionen-bestimmtes-integral-und-hauptsatz",
+              "titel": "Stammfunktion, bestimmtes Integral und Hauptsatz der Differential- und Integralrechnung"
+            }
+          ]
+        },
+        {
+          "id": "02-analytische-geometrie-und-lineare-algebra",
+          "titel": "Analytische Geometrie und Lineare Algebra",
+          "themen": [
+            {
+              "id": "01-skalarprodukt-und-winkel",
+              "titel": "Skalarprodukt, Orthogonalität, Winkel zwischen Vektoren"
+            },
+            {
+              "id": "02-ebenen-parameter-und-koordinatenform",
+              "titel": "Ebenen in Parameter- und Koordinatenform; Normalenvektor"
+            },
+            {
+              "id": "03-schnittwinkel-und-schnittpunkte",
+              "titel": "Schnittwinkel; Schnittpunkte von Geraden und Ebenen"
+            },
+            {
+              "id": "04-lineare-gleichungssysteme-und-gauss",
+              "titel": "Lineare Gleichungssysteme und algorithmisches Lösungsverfahren"
+            }
+          ]
+        },
+        {
+          "id": "03-stochastik",
+          "titel": "Stochastik",
+          "themen": [
+            {
+              "id": "01-mehrstufige-zufallsexperimente-wiederholung-und-vertiefung",
+              "titel": "Urnenmodelle, Baumdiagramme, Vierfeldertafeln, bedingte Wahrscheinlichkeit, Pfadregeln"
+            },
+            {
+              "id": "02-zufallsgroessen-und-kenngroessen",
+              "titel": "Diskrete Zufallsgrößen; Erwartungswert, Varianz und Standardabweichung"
+            },
+            {
+              "id": "03-binomialverteilung",
+              "titel": "Binomialverteilung; Kenngrößen und Histogramme"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q1-q2-leistungskurs",
+      "titel": "Qualifikationsphase – Leistungskurs (Q1/Q2)",
+      "stufe": "Sekundarstufe II – KLP 2023",
+      "inhaltsfelder": [
+        {
+          "id": "01-funktionen-und-analysis",
+          "titel": "Funktionen und Analysis",
+          "themen": [
+            {
+              "id": "01-ganzrationale-exponential-und-trigonometrische-funktionen",
+              "titel": "Ganzrationale, Exponential-, Sinus- und Kosinusfunktionen"
+            },
+            {
+              "id": "02-produktregel-kettenregel-und-funktionenscharen",
+              "titel": "Produktregel, Kettenregel, Funktionenscharen"
+            },
+            {
+              "id": "03-extremwertprobleme-und-steckbriefaufgaben",
+              "titel": "Extremwertprobleme und Rekonstruktion von Funktionstermen"
+            },
+            {
+              "id": "04-logarithmus-und-umkehrfunktionen",
+              "titel": "Natürliche Logarithmusfunktion, Umkehrfunktionen und rationale Potenzfunktionen"
+            },
+            {
+              "id": "05-integralbegriff-und-integralfunktion",
+              "titel": "Produktsumme, orientierte Fläche, Bestandsfunktion und Integralfunktion"
+            },
+            {
+              "id": "06-stammfunktionen-bestimmtes-integral-und-hauptsatz",
+              "titel": "Stammfunktion, bestimmtes Integral und Hauptsatz der Differential- und Integralrechnung"
+            }
+          ]
+        },
+        {
+          "id": "02-analytische-geometrie-und-lineare-algebra",
+          "titel": "Analytische Geometrie und Lineare Algebra",
+          "themen": [
+            {
+              "id": "01-skalarprodukt-und-winkel",
+              "titel": "Skalarprodukt, Orthogonalität und Winkel"
+            },
+            {
+              "id": "02-ebenen-parameter-koordinaten-und-normalenform",
+              "titel": "Ebenen in Parameter-, Koordinaten- und Normalenform"
+            },
+            {
+              "id": "03-schnittwinkel-und-schnittpunkte",
+              "titel": "Schnittwinkel und Schnittpunkte von Geraden/Ebenen"
+            },
+            {
+              "id": "04-lagebeziehungen-und-abstaende",
+              "titel": "Lagebeziehungen und Abstände zwischen Punkten, Geraden und Ebenen"
+            },
+            {
+              "id": "05-lineare-gleichungssysteme-und-gauss",
+              "titel": "Lineare Gleichungssysteme und algorithmische Lösungsverfahren"
+            }
+          ]
+        },
+        {
+          "id": "03-stochastik",
+          "titel": "Stochastik",
+          "themen": [
+            {
+              "id": "01-mehrstufige-zufallsexperimente",
+              "titel": "Urnenmodelle, Baumdiagramme, Vierfeldertafeln, bedingte Wahrscheinlichkeiten und Pfadregeln"
+            },
+            {
+              "id": "02-zufallsgroessen-und-kenngroessen",
+              "titel": "Diskrete Zufallsgrößen; Erwartungswert, Varianz und Standardabweichung"
+            },
+            {
+              "id": "03-binomialverteilung-und-sigma-regeln",
+              "titel": "Binomialkoeffizient, Binomialverteilung, Histogramme und σ-Regeln"
+            },
+            {
+              "id": "04-beurteilende-statistik",
+              "titel": "Prognoseintervall, Konfidenzintervall und Stichprobenumfang"
+            },
+            {
+              "id": "05-normalverteilung",
+              "titel": "Dichtefunktion, Gaußsche Glockenkurve, Parameter μ und σ, Verteilungsfunktion"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
