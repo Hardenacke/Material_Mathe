@@ -1,280 +1,482 @@
-const page = document.body.dataset.page || 'home';
+const catalogRoot = document.getElementById("catalog");
+const summaryRoot = document.getElementById("summary");
+const searchInput = document.getElementById("search");
 
-const esc = (value = '') => String(value).replace(/[&<>'"]/g, char => ({
-  '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-}[char]));
+let catalogData = null;
+let route = { areaId: "", fieldId: "" };
+let lastMaterialRoute = "";
 
-const norm = (value = '') => String(value)
-  .toLocaleLowerCase('de')
-  .normalize('NFD')
-  .replace(/[\u0300-\u036f]/g, '');
-
-const fieldKind = title => {
-  const text = norm(title);
-  if (text.includes('stochastik') || text.includes('wahrscheinlichkeit') || text.includes('daten')) return 'statistics';
-  if (text.includes('geometrie') || text.includes('vektor') || text.includes('lineare algebra')) return 'geometry';
-  if (text.includes('funktion') || text.includes('analysis')) return 'functions';
-  return 'algebra';
-};
-
-const materialCount = area => area.inhaltsfelder.reduce((sum, field) => (
-  sum + field.materialien.length + field.themen.reduce((topicSum, topic) => topicSum + topic.materialien.length, 0)
-), 0);
-
-const materialHtml = (material, accentContext = '') => `
-  <a class="material-link" href="${encodeURI(material.url)}" ${accentContext}>
-    <span>${esc(material.titel)}</span><span class="file-type">${esc(material.typ)}</span>
-  </a>`;
-
-const statChips = items => items.map((item, index) => (
-  `<span class="stat-chip">${index === items.length - 1 ? `<strong>${esc(item)}</strong>` : esc(item)}</span>`
-)).join('');
-
-function courseGroup(area) {
-  const stage = norm(area.stufe);
-  if (stage.includes('sekundarstufe ii')) return 'Sekundarstufe II';
-  if (stage.includes('erprobungsstufe')) return 'Sekundarstufe I · Erprobungsstufe';
-  return 'Sekundarstufe I';
+function normalize(value) {
+  return String(value || "")
+    .toLocaleLowerCase("de-DE")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
-function renderHome(data) {
-  const content = document.querySelector('#content');
-  const status = document.querySelector('#status');
-  const stats = document.querySelector('#heroStats');
-
-  stats.innerHTML = statChips([
-    `${data.statistik.bereiche} Klassen & Kurse`,
-    `${data.statistik.inhaltsfelder} Inhaltsfelder`,
-    `${data.statistik.materialien} Materialien`
-  ]);
-
-  const groups = new Map();
-  data.bereiche.forEach(area => {
-    const group = courseGroup(area);
-    if (!groups.has(group)) groups.set(group, []);
-    groups.get(group).push(area);
-  });
-
-  content.innerHTML = [...groups.entries()].map(([group, areas]) => `
-    <section class="course-group" aria-labelledby="${esc(norm(group).replace(/\s+/g, '-'))}">
-      <div class="group-heading">
-        <div>
-          <p class="eyebrow">Kursauswahl</p>
-          <h2 id="${esc(norm(group).replace(/\s+/g, '-'))}">${esc(group)}</h2>
-          <p>${areas.length} ${areas.length === 1 ? 'Kurs' : 'Klassen / Kurse'}</p>
-        </div>
-      </div>
-      <div class="course-grid">
-        ${areas.map(area => `
-          <a class="course-card" href="kurs.html?kurs=${encodeURIComponent(area.id)}" data-course-link>
-            <div>
-              <span class="course-label">${esc(area.stufe)}</span>
-              <h3>${esc(area.kurztitel || area.titel)}</h3>
-              <p class="course-meta">${area.inhaltsfelder.length} Inhaltsfelder mit klarer Themenstruktur</p>
-            </div>
-            <div class="course-bottom">
-              <div class="course-counts">
-                <span class="mini-chip">${area.inhaltsfelder.length} Bereiche</span>
-                <span class="mini-chip">${materialCount(area)} Materialien</span>
-              </div>
-              <span class="course-arrow" aria-hidden="true">→</span>
-            </div>
-          </a>`).join('')}
-      </div>
-    </section>`).join('');
-
-  status.textContent = `Stand ${data.stand} · Bitte Klasse oder Kurs auswählen.`;
-  content.hidden = false;
-
-  document.querySelectorAll('[data-course-link]').forEach(link => {
-    link.addEventListener('click', event => {
-      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      document.querySelectorAll('.course-card.is-selected').forEach(card => card.classList.remove('is-selected'));
-      link.classList.add('is-selected');
-      const target = link.href;
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.setTimeout(() => { window.location.href = target; }, reduced ? 0 : 210);
-    });
-  });
+function createText(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  element.textContent = text;
+  return element;
 }
 
-function renderCourse(data) {
-  const params = new URLSearchParams(window.location.search);
-  const courseId = params.get('kurs');
-  const area = data.bereiche.find(item => item.id === courseId);
-  const content = document.querySelector('#content');
-  const status = document.querySelector('#status');
+function createButton(className, text, onClick) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = className;
+  button.textContent = text;
+  button.addEventListener("click", onClick);
+  return button;
+}
 
-  if (!area) {
-    document.querySelector('#courseTitle').textContent = 'Kurs nicht gefunden';
-    document.querySelector('#courseSubtitle').textContent = 'Bitte wähle einen gültigen Kurs aus.';
-    document.querySelector('#fieldNav').innerHTML = '';
-    content.innerHTML = '<div class="error-panel"><strong>Dieser Kurs ist nicht vorhanden.</strong><br><a href="index.html">Zur Klassen- und Kursauswahl</a></div>';
-    content.hidden = false;
-    status.textContent = '';
+function plural(count, singular, pluralForm) {
+  return `${count} ${count === 1 ? singular : pluralForm}`;
+}
+
+function fieldTheme(field) {
+  const text = normalize(field.titel);
+  if (text.includes("stochastik") || text.includes("wahrscheinlichkeit") || text.includes("daten")) {
+    return { accent: "#b4781d", accentDark: "#744918", accentSoft: "#fff1d8" };
+  }
+  if (text.includes("geometrie") || text.includes("vektor") || text.includes("lineare algebra")) {
+    return { accent: "#765f9f", accentDark: "#47366b", accentSoft: "#f0ebf7" };
+  }
+  if (text.includes("funktion") || text.includes("analysis")) {
+    return { accent: "#1e8a83", accentDark: "#23454a", accentSoft: "#e4f4ef" };
+  }
+  return { accent: "#276b73", accentDark: "#23454a", accentSoft: "#e7f3f0" };
+}
+
+function applyTheme(element, theme) {
+  if (!theme) return element;
+  element.style.setProperty("--topic-accent", theme.accent);
+  element.style.setProperty("--card-accent", theme.accent);
+  element.style.setProperty("--topic-accent-dark", theme.accentDark);
+  element.style.setProperty("--topic-accent-soft", theme.accentSoft);
+  return element;
+}
+
+function areaTotals(area) {
+  return area.inhaltsfelder.reduce(
+    (total, field) => ({
+      topics: total.topics + field.themen.length,
+      files: total.files + field.materialien.length + field.themen.reduce((sum, topic) => sum + topic.materialien.length, 0)
+    }),
+    { topics: 0, files: 0 }
+  );
+}
+
+function catalogTotals(areas) {
+  return areas.reduce(
+    (total, area) => {
+      const areaCount = areaTotals(area);
+      return {
+        fields: total.fields + area.inhaltsfelder.length,
+        topics: total.topics + areaCount.topics,
+        files: total.files + areaCount.files
+      };
+    },
+    { fields: 0, topics: 0, files: 0 }
+  );
+}
+
+function materialText(materials) {
+  return (materials || []).map((material) => `${material.titel} ${material.typ} ${material.datei}`).join(" ");
+}
+
+function topicText(topic) {
+  return `${topic.titel} ${materialText(topic.materialien)}`;
+}
+
+function fieldText(field) {
+  return `${field.titel} ${materialText(field.materialien)} ${field.themen.map(topicText).join(" ")}`;
+}
+
+function areaText(area) {
+  return `${area.titel} ${area.kurztitel || ""} ${area.stufe} ${area.inhaltsfelder.map(fieldText).join(" ")}`;
+}
+
+function parseHash() {
+  const parts = window.location.hash
+    .replace(/^#\/?/, "")
+    .split("/")
+    .filter(Boolean)
+    .map(decodeURIComponent);
+
+  route = {
+    areaId: parts[0] || "",
+    fieldId: parts[1] || ""
+  };
+}
+
+function navigate(areaId, fieldId = "") {
+  const nextHash = areaId
+    ? `#/${encodeURIComponent(areaId)}${fieldId ? `/${encodeURIComponent(fieldId)}` : ""}`
+    : "#/";
+
+  if (window.location.hash === nextHash) {
+    parseHash();
+    render();
+  } else {
+    window.location.hash = nextHash;
+  }
+}
+
+function findArea(areaId) {
+  return catalogData.bereiche.find((area) => area.id === areaId) || null;
+}
+
+function findField(area, fieldId) {
+  return area.inhaltsfelder.find((field) => field.id === fieldId) || null;
+}
+
+function areaOwnMatchesQuery(area, query) {
+  if (!query) return true;
+  return normalize(`${area.titel} ${area.kurztitel || ""} ${area.stufe}`).includes(normalize(query));
+}
+
+function fieldOwnMatchesQuery(field, query) {
+  if (!query) return true;
+  return normalize(field.titel).includes(normalize(query));
+}
+
+function topicMatchesQuery(topic, query) {
+  if (!query) return true;
+  return normalize(topicText(topic)).includes(normalize(query));
+}
+
+function fieldMatchesQuery(field, query) {
+  if (!query) return true;
+  if (fieldOwnMatchesQuery(field, query)) return true;
+  return normalize(`${materialText(field.materialien)} ${field.themen.map(topicText).join(" ")}`).includes(normalize(query));
+}
+
+function areaMatchesQuery(area, query) {
+  if (!query) return true;
+  if (areaOwnMatchesQuery(area, query)) return true;
+  return normalize(areaText(area)).includes(normalize(query));
+}
+
+function fieldsForArea(area, query) {
+  if (!query || areaOwnMatchesQuery(area, query)) return area.inhaltsfelder;
+  return area.inhaltsfelder.filter((field) => fieldMatchesQuery(field, query));
+}
+
+function filterMaterials(materials, query) {
+  if (!query) return materials || [];
+  const needle = normalize(query);
+  return (materials || []).filter((material) => normalize(materialText([material])).includes(needle));
+}
+
+function filterTopics(field, query) {
+  if (!query || fieldOwnMatchesQuery(field, query)) return field.themen;
+  return field.themen.filter((topic) => topicMatchesQuery(topic, query));
+}
+
+function setSummary(text) {
+  summaryRoot.textContent = text;
+}
+
+function renderBreadcrumb(area, field) {
+  const breadcrumb = document.createElement("nav");
+  breadcrumb.className = "breadcrumb";
+  breadcrumb.setAttribute("aria-label", "Pfad");
+
+  breadcrumb.appendChild(createButton("crumb-button", "Klassen und Kurse", () => navigate("")));
+
+  if (area) {
+    breadcrumb.appendChild(createText("span", "crumb-separator", "/"));
+    breadcrumb.appendChild(createButton("crumb-button", area.kurztitel || area.titel, () => navigate(area.id)));
+  }
+
+  if (field) {
+    breadcrumb.appendChild(createText("span", "crumb-separator", "/"));
+    breadcrumb.appendChild(createText("span", "crumb-current", field.titel));
+  }
+
+  return breadcrumb;
+}
+
+function renderHome(query) {
+  const areas = catalogData.bereiche.filter((area) => areaMatchesQuery(area, query));
+  const totals = catalogTotals(areas);
+
+  catalogRoot.replaceChildren();
+  setSummary(query
+    ? `${areas.length} passende Bereiche · ${plural(totals.fields, "Inhaltsfeld", "Inhaltsfelder")}`
+    : `${catalogData.statistik.bereiche} Bereiche · ${catalogData.statistik.inhaltsfelder} Inhaltsfelder · ${catalogData.statistik.themen} Themen · ${catalogData.statistik.materialien} Materialien`
+  );
+
+  const header = document.createElement("section");
+  header.className = "view-header";
+  header.appendChild(createText("p", "step-label", "Schritt 1 von 2"));
+  header.appendChild(createText("h2", "", "Klasse oder Kurs auswählen"));
+  header.appendChild(createText("p", "view-copy", "Wähle zuerst den Bereich aus. Danach erscheinen die Inhaltsfelder dieses Bereichs mit Themen und Materialien."));
+  catalogRoot.appendChild(header);
+
+  if (!areas.length) {
+    catalogRoot.appendChild(createText("p", "empty-state", "Keine passenden Klassen oder Kurse gefunden."));
     return;
   }
 
-  document.title = `${area.titel} – Mathematik NRW`;
-  document.querySelector('#courseStage').textContent = area.stufe;
-  document.querySelector('#courseTitle').textContent = area.titel;
-  document.querySelector('#courseSubtitle').textContent = 'Inhaltsfelder, Themen und Materialien';
-  document.querySelector('#heroStats').innerHTML = statChips([
-    `${area.inhaltsfelder.length} Inhaltsfelder`,
-    `${area.inhaltsfelder.reduce((sum, field) => sum + field.themen.length, 0)} Themen`,
-    `${materialCount(area)} Materialien`
-  ]);
+  const grid = document.createElement("div");
+  grid.className = "class-grid";
 
-  const fieldNav = document.querySelector('#fieldNav');
-  fieldNav.innerHTML = area.inhaltsfelder.map(field => `
-    <button class="field-jump" type="button" data-field-target="field-${esc(field.id)}" data-kind="${fieldKind(field.titel)}">
-      ${esc(field.titel)}
-    </button>`).join('');
+  for (const area of areas) {
+    const totalsForArea = areaTotals(area);
+    const button = createButton("class-card", "", () => navigate(area.id));
+    button.appendChild(createText("span", "card-kicker", "Bereich"));
+    button.appendChild(createText("span", "class-title", area.kurztitel || area.titel));
+    button.appendChild(createText("span", "card-description", area.titel === area.kurztitel ? area.stufe : `${area.titel} · ${area.stufe}`));
+    button.appendChild(createText(
+      "span",
+      "card-meta",
+      `${plural(area.inhaltsfelder.length, "Inhaltsfeld", "Inhaltsfelder")} · ${plural(totalsForArea.topics, "Thema", "Themen")} · ${plural(totalsForArea.files, "Datei", "Dateien")}`
+    ));
+    grid.appendChild(button);
+  }
 
-  content.innerHTML = area.inhaltsfelder.map(field => {
-    const kind = fieldKind(field.titel);
-    const topicMaterials = field.themen.reduce((sum, topic) => sum + topic.materialien.length, 0);
-    const totalFieldMaterials = field.materialien.length + topicMaterials;
-    const searchText = norm([
-      field.titel,
-      ...field.materialien.map(item => item.titel),
-      ...field.themen.map(topic => topic.titel),
-      ...field.themen.flatMap(topic => topic.materialien.map(item => item.titel))
-    ].join(' '));
-
-    return `
-      <details class="field-card" id="field-${esc(field.id)}" data-kind="${kind}" data-search="${esc(searchText)}">
-        <summary class="field-summary">
-          <span class="field-accent" aria-hidden="true"></span>
-          <span>
-            <h2>${esc(field.titel)}</h2>
-            <p>${field.themen.length} Themen · ${totalFieldMaterials} ${totalFieldMaterials === 1 ? 'Material' : 'Materialien'}</p>
-          </span>
-          <span class="count-badge">${field.themen.length} Themen</span>
-          <span class="field-chevron" aria-hidden="true">›</span>
-        </summary>
-        <div class="field-body">
-          ${field.materialien.length ? `
-            <section class="field-materials" aria-label="Materialien zu ${esc(field.titel)}">
-              <p class="field-materials-title">Übergreifendes Material</p>
-              <div class="material-list">${field.materialien.map(item => materialHtml(item)).join('')}</div>
-            </section>` : ''}
-          <ol class="topic-list">
-            ${field.themen.map((topic, index) => `
-              <li class="topic" data-search="${esc(norm([topic.titel, ...topic.materialien.map(item => item.titel)].join(' ')))}">
-                <span class="topic-num">${String(index + 1).padStart(2, '0')}</span>
-                <div>
-                  <p class="topic-title">${esc(topic.titel)}</p>
-                  ${topic.materialien.length
-                    ? `<div class="material-list">${topic.materialien.map(item => materialHtml(item)).join('')}</div>`
-                    : '<p class="empty-note">Noch kein Material zu diesem Thema abgelegt.</p>'}
-                </div>
-              </li>`).join('')}
-          </ol>
-        </div>
-      </details>`;
-  }).join('');
-
-  status.textContent = `Stand ${data.stand} · ${materialCount(area)} Materialien in ${area.titel}.`;
-  status.dataset.default = status.textContent;
-  content.hidden = false;
-
-  setupFieldNavigation();
-  setupSearch();
+  catalogRoot.appendChild(grid);
 }
 
-function setupFieldNavigation() {
-  const buttons = [...document.querySelectorAll('[data-field-target]')];
-  const cards = [...document.querySelectorAll('.field-card')];
+function renderFieldPicker(area, fields, selectedField) {
+  const section = document.createElement("section");
+  section.className = "topic-picker-section";
+  section.appendChild(createText("p", "step-label", "Schritt 2 von 2"));
+  section.appendChild(createText("h2", "", "Inhaltsfeld auswählen"));
 
-  const select = (button, card) => {
-    buttons.forEach(item => item.classList.toggle('is-selected', item === button));
-    cards.forEach(item => item.classList.remove('is-selected'));
-    card.open = true;
-    card.classList.add('is-selected');
-    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.setTimeout(() => card.classList.remove('is-selected'), 650);
-  };
+  const grid = document.createElement("div");
+  grid.className = "topic-grid";
 
-  buttons.forEach(button => {
-    button.addEventListener('click', () => {
-      const card = document.getElementById(button.dataset.fieldTarget);
-      if (card) select(button, card);
-    });
-  });
-
-  cards.forEach(card => {
-    card.addEventListener('toggle', () => {
-      if (!card.open) return;
-      const button = buttons.find(item => item.dataset.fieldTarget === card.id);
-      buttons.forEach(item => item.classList.toggle('is-selected', item === button));
-      card.classList.remove('is-selected');
-      void card.offsetWidth;
-      card.classList.add('is-selected');
-      window.setTimeout(() => card.classList.remove('is-selected'), 650);
-    });
-  });
-}
-
-function setupSearch() {
-  const search = document.querySelector('#searchInput');
-  const reset = document.querySelector('#resetSearch');
-  const status = document.querySelector('#status');
-
-  const apply = () => {
-    const query = norm(search.value.trim());
-    let visibleFields = 0;
-    let visibleTopics = 0;
-
-    document.querySelectorAll('.field-card').forEach(card => {
-      const cardMatches = !query || (card.dataset.search || '').includes(query);
-      card.classList.toggle('search-hidden', !cardMatches);
-      if (!cardMatches) return;
-      visibleFields++;
-
-      const topics = [...card.querySelectorAll('.topic')];
-      topics.forEach(topic => {
-        const topicMatches = !query || (topic.dataset.search || '').includes(query);
-        topic.classList.toggle('search-hidden', !topicMatches);
-        if (topicMatches) visibleTopics++;
-      });
-
-      if (query) card.open = true;
-    });
-
-    document.querySelectorAll('.field-jump').forEach(button => {
-      const card = document.getElementById(button.dataset.fieldTarget);
-      button.classList.toggle('search-hidden', !!card?.classList.contains('search-hidden'));
-    });
-
-    status.textContent = query
-      ? `${visibleFields} Inhaltsfelder · ${visibleTopics} passende Themen für „${search.value.trim()}“.`
-      : status.dataset.default;
-  };
-
-  search.addEventListener('input', apply);
-  reset.addEventListener('click', () => {
-    search.value = '';
-    apply();
-    search.focus();
-  });
-}
-
-async function init() {
-  const status = document.querySelector('#status');
-  try {
-    const response = await fetch('data.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    if (page === 'course') renderCourse(data);
-    else renderHome(data);
-  } catch (error) {
-    if (status) {
-      status.innerHTML = '<strong>Die Materialliste konnte nicht geladen werden.</strong><br>Starte die Seite über einen Webserver; direktes Öffnen per <code>file://</code> wird von Browsern häufig blockiert.';
+  for (const field of fields) {
+    const theme = fieldTheme(field);
+    const totals = {
+      topics: field.themen.length,
+      files: field.materialien.length + field.themen.reduce((sum, topic) => sum + topic.materialien.length, 0)
+    };
+    const button = createButton("topic-button", "", () => navigate(area.id, field.id));
+    applyTheme(button, theme);
+    if (selectedField && selectedField.id === field.id) {
+      button.classList.add("is-selected");
+      button.setAttribute("aria-current", "true");
     }
+    button.appendChild(createText("span", "topic-title", field.titel));
+    button.appendChild(createText("span", "topic-description", `${plural(totals.topics, "Thema", "Themen")} in diesem Inhaltsfeld`));
+    button.appendChild(createText("span", "card-meta", `${plural(totals.files, "Datei", "Dateien")}`));
+    grid.appendChild(button);
+  }
+
+  section.appendChild(grid);
+  return section;
+}
+
+function renderMaterialLink(material, theme) {
+  const link = document.createElement("a");
+  link.className = "file-link";
+  applyTheme(link, theme);
+  link.href = encodeURI(material.url);
+  link.appendChild(createText("span", "file-title", material.titel));
+
+  const meta = document.createElement("span");
+  meta.className = "file-meta";
+  meta.appendChild(createText("span", "badge", material.typ || "Datei"));
+  meta.appendChild(createText("span", "badge soft", material.datei || "Material"));
+  link.appendChild(meta);
+  return link;
+}
+
+function renderFieldFiles(field, query, theme) {
+  const files = fieldOwnMatchesQuery(field, query) ? field.materialien : filterMaterials(field.materialien, query);
+  const section = document.createElement("section");
+  section.className = "resource-section";
+  section.appendChild(createText("h3", "", "Dateien zum Inhaltsfeld"));
+
+  if (!files.length) {
+    section.appendChild(createText("p", "empty-topic", query ? "Keine passenden Dateien in diesem Inhaltsfeld gefunden." : "Noch keine übergreifenden Dateien vorhanden."));
+    return section;
+  }
+
+  const list = document.createElement("div");
+  list.className = "file-list";
+  for (const material of files) {
+    list.appendChild(renderMaterialLink(material, theme));
+  }
+
+  section.appendChild(list);
+  return section;
+}
+
+function renderTopics(field, query, theme) {
+  const topics = filterTopics(field, query);
+  const section = document.createElement("section");
+  section.className = "resource-section";
+  section.appendChild(createText("h3", "", "Themen"));
+
+  if (!topics.length) {
+    section.appendChild(createText("p", "empty-topic", "Keine passenden Themen gefunden."));
+    return section;
+  }
+
+  const list = document.createElement("div");
+  list.className = "topic-list";
+
+  topics.forEach((topic, index) => {
+    const card = document.createElement("article");
+    card.className = "topic-card";
+    applyTheme(card, theme);
+
+    const number = createText("span", "topic-num", String(index + 1).padStart(2, "0"));
+    const body = document.createElement("div");
+    body.appendChild(createText("h4", "topic-card-title", topic.titel));
+
+    const topicMaterials = fieldOwnMatchesQuery(field, query) ? topic.materialien : filterMaterials(topic.materialien, query);
+    if (topicMaterials.length) {
+      const files = document.createElement("div");
+      files.className = "file-list compact";
+      for (const material of topicMaterials) {
+        files.appendChild(renderMaterialLink(material, theme));
+      }
+      body.appendChild(files);
+    } else {
+      body.appendChild(createText("p", "empty-topic", "Noch kein Material zu diesem Thema abgelegt."));
+    }
+
+    card.appendChild(number);
+    card.appendChild(body);
+    list.appendChild(card);
+  });
+
+  section.appendChild(list);
+  return section;
+}
+
+function renderFieldDetail(field, query) {
+  const theme = fieldTheme(field);
+  const visibleFieldFiles = fieldOwnMatchesQuery(field, query) ? field.materialien : filterMaterials(field.materialien, query);
+  const visibleTopics = filterTopics(field, query);
+  const visibleTopicFiles = visibleTopics.reduce((sum, topic) => {
+    const files = fieldOwnMatchesQuery(field, query) ? topic.materialien : filterMaterials(topic.materialien, query);
+    return sum + files.length;
+  }, 0);
+
+  const detail = document.createElement("section");
+  detail.className = "topic-detail";
+  detail.id = "themenmaterial";
+  applyTheme(detail, theme);
+
+  const header = document.createElement("div");
+  header.className = "topic-detail-header";
+  header.appendChild(createText("p", "card-kicker", "Materialien zum Inhaltsfeld"));
+  header.appendChild(createText("h2", "", field.titel));
+  header.appendChild(createText("p", "view-copy", "Themenübersicht und direkt verlinkte Materialien aus der Mathe-Ablage."));
+  header.appendChild(createText(
+    "p",
+    "resource-count",
+    `${plural(visibleTopics.length, "Thema", "Themen")} · ${plural(visibleFieldFiles.length + visibleTopicFiles, "Datei", "Dateien")}`
+  ));
+
+  detail.appendChild(header);
+  detail.appendChild(renderFieldFiles(field, query, theme));
+  detail.appendChild(renderTopics(field, query, theme));
+  return detail;
+}
+
+function renderAreaPage(area, query) {
+  const fields = fieldsForArea(area, query);
+  const selectedField = route.fieldId ? findField(area, route.fieldId) : null;
+  const visibleSelectedField = selectedField && fieldMatchesQuery(selectedField, query) ? selectedField : null;
+  const totals = areaTotals(area);
+
+  catalogRoot.replaceChildren();
+  setSummary(`${area.kurztitel || area.titel} · ${plural(area.inhaltsfelder.length, "Inhaltsfeld", "Inhaltsfelder")} · ${plural(totals.topics, "Thema", "Themen")} · ${plural(totals.files, "Datei", "Dateien")}`);
+
+  catalogRoot.appendChild(renderBreadcrumb(area, visibleSelectedField));
+
+  const header = document.createElement("section");
+  header.className = "view-header";
+  header.appendChild(createText("p", "step-label", "Ausgewählter Bereich"));
+  header.appendChild(createText("h2", "", area.titel));
+  header.appendChild(createText("p", "view-copy", "Wähle ein Inhaltsfeld aus. Darunter werden Themen und zugehörige Dateien angezeigt."));
+  catalogRoot.appendChild(header);
+
+  if (!fields.length) {
+    catalogRoot.appendChild(createText("p", "empty-state", "Keine passenden Inhaltsfelder gefunden."));
+    return;
+  }
+
+  catalogRoot.appendChild(renderFieldPicker(area, fields, visibleSelectedField));
+
+  if (visibleSelectedField) {
+    catalogRoot.appendChild(renderFieldDetail(visibleSelectedField, query));
+    const materialRoute = `${route.areaId}/${route.fieldId}`;
+    const material = document.getElementById("themenmaterial");
+    if (route.fieldId && material && materialRoute !== lastMaterialRoute) {
+      material.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    lastMaterialRoute = materialRoute;
+  } else {
+    lastMaterialRoute = `${route.areaId}/`;
+    const empty = document.createElement("section");
+    empty.className = "empty-panel";
+    empty.appendChild(createText("h3", "", "Noch kein Inhaltsfeld ausgewählt"));
+    empty.appendChild(createText("p", "", "Wähle oben ein Inhaltsfeld aus, um Themen und Dateien zu sehen."));
+    catalogRoot.appendChild(empty);
+  }
+}
+
+function render() {
+  if (!catalogData) return;
+  const query = searchInput.value.trim();
+
+  if (!route.areaId) {
+    renderHome(query);
+    return;
+  }
+
+  const area = findArea(route.areaId);
+  if (!area) {
+    navigate("");
+    return;
+  }
+
+  renderAreaPage(area, query);
+}
+
+async function start() {
+  try {
+    parseHash();
+    const response = await fetch("data.json", { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    catalogData = await response.json();
+    render();
+  } catch (error) {
+    summaryRoot.textContent = "";
+    catalogRoot.replaceChildren();
+    const message = document.createElement("div");
+    message.className = "error";
+    message.textContent = "Das automatische Verzeichnis konnte nicht geladen werden. Starte die Seite über einen lokalen Webserver oder prüfe den GitHub-Pages-Build.";
+    catalogRoot.appendChild(message);
     console.error(error);
   }
 }
 
-init();
+window.addEventListener("hashchange", () => {
+  parseHash();
+  render();
+});
+
+searchInput.addEventListener("input", () => {
+  render();
+});
+
+document.addEventListener("pointerdown", (event) => {
+  const target = event.target.closest(".class-card, .topic-button, .file-link, .crumb-button");
+  if (!target) return;
+
+  target.classList.remove("is-pressing");
+  target.offsetWidth;
+  target.classList.add("is-pressing");
+  window.setTimeout(() => target.classList.remove("is-pressing"), 180);
+});
+
+start();

@@ -33,7 +33,7 @@ def main():
         shutil.rmtree(OUT, onerror=remove_readonly)
     OUT.mkdir(parents=True)
 
-    for name in ["index.html", "kurs.html", "style.css", "script.js", "favicon.svg"]:
+    for name in ["index.html", "style.css", "script.js", "favicon.svg"]:
         shutil.copy2(ROOT / name, OUT / name)
 
     for area in STRUCT["bereiche"]:

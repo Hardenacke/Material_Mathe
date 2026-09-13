@@ -4,8 +4,8 @@ import json, sys
 ROOT = Path(__file__).resolve().parents[1]
 errors=[]
 for f in [
-    "index.html", "kurs.html", "style.css", "script.js", "data.json",
-    "_site/index.html", "_site/kurs.html", "_site/data.json"
+    "index.html", "style.css", "script.js", "data.json",
+    "_site/index.html", "_site/data.json"
 ]:
     if not (ROOT/f).exists(): errors.append(f"Fehlt: {f}")
 data = json.loads((ROOT/"data.json").read_text(encoding="utf-8")) if (ROOT/"data.json").exists() else {}

@@ -3,49 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#17324d">
-  <meta name="description" content="Mathematik-Materialien für Gymnasium NRW – Auswahl nach Klasse und Kurs.">
-  <title>Mathematik NRW – Klassen- und Kursauswahl</title>
+  <meta name="theme-color" content="#23454a">
+  <meta name="description" content="Mathematik-Materialsammlung mit zweistufiger Auswahl nach Klasse oder Kurs und Inhaltsfeld.">
+  <title>Mathematiksammlung</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-<body data-page="home">
-  <a class="skip-link" href="#courseSelection">Zur Kursauswahl springen</a>
+<body>
+  <a class="skip-link" href="#catalog">Zum Material springen</a>
 
-  <header class="hero hero-home">
+  <header class="hero">
     <div class="hero-inner">
-      <div class="brand-row">
-        <div class="brand-mark" aria-hidden="true">∑</div>
-        <div>
-          <p class="eyebrow">Gymnasium · Nordrhein-Westfalen</p>
-          <h1>Mathematik</h1>
-          <p class="subtitle">Wähle zuerst deine Klasse oder deinen Kurs.</p>
-        </div>
-      </div>
-      <div class="hero-stats" id="heroStats" aria-label="Materialstatistik"></div>
+      <p class="eyebrow">Mathematik · Materialsammlung</p>
+      <h1>Mathematiksammlung</h1>
+      <p class="intro">Wähle zuerst eine Klasse oder einen Kurs aus. Danach findest du im Inhaltsfeld die passenden Themen und Dateien.</p>
+      <label class="search-wrap" for="search">
+        <span class="sr-only">Materialien durchsuchen</span>
+        <input id="search" type="search" placeholder="Klasse, Kurs, Inhaltsfeld, Thema oder Material suchen ..." autocomplete="off">
+      </label>
     </div>
   </header>
 
-  <main id="courseSelection" class="page-shell home-shell">
-    <div id="status" class="status" role="status" aria-live="polite">Kurse werden geladen …</div>
-    <div id="content" class="course-groups" hidden></div>
-
-    <section class="info-panel compact-info">
-      <div>
-        <p class="eyebrow">Navigation</p>
-        <h2>Zweistufig und übersichtlich</h2>
-      </div>
-      <p>Auf dieser Seite wählst du nur die Klasse oder den Kurs. Anschließend werden die zugehörigen Inhaltsfelder, Themen und Materialien auf einer eigenen Kursseite angezeigt.</p>
-    </section>
+  <main class="page-shell">
+    <div id="summary" class="summary" aria-live="polite"></div>
+    <div id="catalog" class="catalog" aria-live="polite">
+      <p class="loading">Verzeichnis wird geladen ...</p>
+    </div>
   </main>
 
-  <footer>
-    <div class="footer-inner">
-      <span>Mathematik NRW · Materialsammlung</span>
-      <a href="dokumentation/ABITURVORGABEN_SEKII.md">Abiturvorgaben Sek II</a>
-    </div>
+  <footer class="footer">
+    <p>Die Übersicht wird automatisch aus der Mathematik-Ordnerstruktur erzeugt.</p>
   </footer>
-
-  <script src="script.js" defer></script>
 </body>
 </html>
