@@ -4,49 +4,38 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#17324d">
-  <meta name="description" content="Mathematik-Materialien für Gymnasium NRW – geordnet nach Jahrgangsstufen und Inhaltsfeldern.">
-  <title>Mathematik NRW – Materialübersicht</title>
+  <meta name="description" content="Mathematik-Materialien für Gymnasium NRW – Auswahl nach Klasse und Kurs.">
+  <title>Mathematik NRW – Klassen- und Kursauswahl</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <a class="skip-link" href="#material">Zum Material springen</a>
-  <header class="hero">
+<body data-page="home">
+  <a class="skip-link" href="#courseSelection">Zur Kursauswahl springen</a>
+
+  <header class="hero hero-home">
     <div class="hero-inner">
       <div class="brand-row">
         <div class="brand-mark" aria-hidden="true">∑</div>
         <div>
           <p class="eyebrow">Gymnasium · Nordrhein-Westfalen</p>
           <h1>Mathematik</h1>
-          <p class="subtitle">Materialien nach Jahrgang, Inhaltsfeld und Thema</p>
+          <p class="subtitle">Wähle zuerst deine Klasse oder deinen Kurs.</p>
         </div>
       </div>
       <div class="hero-stats" id="heroStats" aria-label="Materialstatistik"></div>
     </div>
   </header>
 
-  <nav class="stage-nav" aria-label="Lernbereiche">
-    <div class="stage-nav-inner" id="stageNav"></div>
-  </nav>
+  <main id="courseSelection" class="page-shell home-shell">
+    <div id="status" class="status" role="status" aria-live="polite">Kurse werden geladen …</div>
+    <div id="content" class="course-groups" hidden></div>
 
-  <main id="material" class="page-shell">
-    <section class="toolbar" aria-label="Materialsuche und Filter">
-      <label class="search-box" for="searchInput">
-        <span aria-hidden="true">⌕</span>
-        <input id="searchInput" type="search" autocomplete="off" placeholder="Thema oder Material suchen …">
-      </label>
-      <button id="resetSearch" class="secondary-button" type="button">Zurücksetzen</button>
-    </section>
-
-    <div id="status" class="status" role="status" aria-live="polite">Materialien werden geladen …</div>
-    <div id="content" class="content" hidden></div>
-
-    <section class="info-panel">
+    <section class="info-panel compact-info">
       <div>
-        <p class="eyebrow">Hinweis</p>
-        <h2>Lehrplanorientierte Materialablage</h2>
+        <p class="eyebrow">Navigation</p>
+        <h2>Zweistufig und übersichtlich</h2>
       </div>
-      <p>Die Inhaltsfelder orientieren sich an den Kernlehrplänen Mathematik NRW. Die konkrete Verteilung einzelner Themen auf die Jahrgangsstufen der Sekundarstufe I ist eine vorbereitende Organisationsstruktur und kann an den schulinternen Lehrplan angepasst werden.</p>
+      <p>Auf dieser Seite wählst du nur die Klasse oder den Kurs. Anschließend werden die zugehörigen Inhaltsfelder, Themen und Materialien auf einer eigenen Kursseite angezeigt.</p>
     </section>
   </main>
 

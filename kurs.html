@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17324d">
+  <meta name="description" content="Mathematik-Materialien nach Inhaltsfeldern und Themen.">
+  <title>Mathematik NRW – Kursmaterialien</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="course">
+  <a class="skip-link" href="#material">Zum Material springen</a>
+
+  <header class="hero course-hero">
+    <div class="hero-inner">
+      <a class="back-link" href="index.html" aria-label="Zurück zur Klassen- und Kursauswahl">
+        <span aria-hidden="true">←</span> Alle Klassen &amp; Kurse
+      </a>
+      <div class="course-heading-row">
+        <div class="brand-mark small" aria-hidden="true">∑</div>
+        <div>
+          <p class="eyebrow" id="courseStage">Mathematik</p>
+          <h1 id="courseTitle">Kurs wird geladen …</h1>
+          <p class="subtitle" id="courseSubtitle">Inhaltsfelder, Themen und Materialien</p>
+        </div>
+      </div>
+      <div class="hero-stats" id="heroStats" aria-label="Kursstatistik"></div>
+    </div>
+  </header>
+
+  <nav class="field-nav" aria-label="Inhaltsfelder">
+    <div class="field-nav-inner" id="fieldNav"></div>
+  </nav>
+
+  <main id="material" class="page-shell course-shell">
+    <section class="toolbar course-toolbar" aria-label="Materialsuche">
+      <label class="search-box" for="searchInput">
+        <span aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" autocomplete="off" placeholder="Thema oder Material in diesem Kurs suchen …">
+      </label>
+      <button id="resetSearch" class="secondary-button" type="button">Zurücksetzen</button>
+    </section>
+
+    <div id="status" class="status" role="status" aria-live="polite">Materialien werden geladen …</div>
+    <div id="content" class="field-stack" hidden></div>
+
+    <section class="info-panel compact-info">
+      <div>
+        <p class="eyebrow">Farblegende</p>
+        <h2>Inhaltsfelder auf einen Blick</h2>
+      </div>
+      <div class="legend" aria-label="Farben der Inhaltsfelder">
+        <span class="legend-chip algebra">Arithmetik / Algebra</span>
+        <span class="legend-chip functions">Funktionen / Analysis</span>
+        <span class="legend-chip geometry">Geometrie</span>
+        <span class="legend-chip statistics">Stochastik</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>Mathematik NRW · Materialsammlung</span>
+      <a href="index.html">Klassen- und Kursauswahl</a>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

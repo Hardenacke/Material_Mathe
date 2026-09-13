@@ -2,7 +2,7 @@
 """Baut die veröffentlichbare GitHub-Pages-Ausgabe nach _site/."""
 from __future__ import annotations
 from pathlib import Path
-import json, shutil, sys
+import json, os, shutil, stat, sys
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
@@ -23,12 +23,17 @@ def copy_dir(name: str):
         shutil.copytree(src, OUT / name, dirs_exist_ok=True, ignore=ignore)
 
 
+def remove_readonly(func, path: str, _exc_info):
+    os.chmod(path, stat.S_IWRITE)
+    func(path)
+
+
 def main():
     if OUT.exists():
-        shutil.rmtree(OUT)
+        shutil.rmtree(OUT, onerror=remove_readonly)
     OUT.mkdir(parents=True)
 
-    for name in ["index.html", "style.css", "script.js", "favicon.svg"]:
+    for name in ["index.html", "kurs.html", "style.css", "script.js", "favicon.svg"]:
         shutil.copy2(ROOT / name, OUT / name)
 
     for area in STRUCT["bereiche"]:

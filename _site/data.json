@@ -5,7 +5,7 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 33
+    "materialien": 32
   },
   "bereiche": [
     {
@@ -794,14 +794,7 @@
         {
           "id": "03-stochastik",
           "titel": "Stochastik",
-          "materialien": [
-            {
-              "titel": "Wiederholung",
-              "datei": "wiederholung.pptx",
-              "typ": "PPTX",
-              "url": "ef/03-stochastik/wiederholung.pptx"
-            }
-          ],
+          "materialien": [],
           "themen": [
             {
               "id": "01-mehrstufige-zufallsexperimente",
