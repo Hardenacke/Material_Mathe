@@ -502,17 +502,21 @@ function renderAreaPage(area, query) {
   header.appendChild(createText("p", "view-copy", "Wähle ein Inhaltsfeld aus. Darunter werden Themen und zugehörige Dateien angezeigt."));
   catalogRoot.appendChild(header);
 
-  const supportSection = renderAreaSupport(area, query);
-  if (supportSection) {
-    catalogRoot.appendChild(supportSection);
-  }
-
   if (!fields.length) {
     catalogRoot.appendChild(createText("p", "empty-state", "Keine passenden Inhaltsfelder gefunden."));
+    const supportSection = renderAreaSupport(area, query);
+    if (supportSection) {
+      catalogRoot.appendChild(supportSection);
+    }
     return;
   }
 
   catalogRoot.appendChild(renderFieldPicker(area, fields, visibleSelectedField));
+
+  const supportSection = renderAreaSupport(area, query);
+  if (supportSection) {
+    catalogRoot.appendChild(supportSection);
+  }
 
   if (visibleSelectedField) {
     catalogRoot.appendChild(renderFieldDetail(visibleSelectedField, query));

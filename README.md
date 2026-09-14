@@ -62,7 +62,7 @@ Unterstützte sichtbare Materialtypen sind u. a. HTML, PDF, PowerPoint, Word, Ex
 
 Lernspiele liegen gesammelt unter `lernspiele/`, damit ihre gemeinsame JavaScript-/CSS-Basis und Offline-Dateien erhalten bleiben. `werkzeuge/katalog.py` ordnet sie anhand von `lernspiele/data.json` fachlich den passenden vorhandenen Inhaltsfeldern und Themen zu und markiert sie auf der Website als Kategorie `Lernspiel`.
 
-Jahrgangsbezogene Question-Shell-Dateien liegen im jeweiligen Bereichsordner unter `unterstuetzung/`. Sie werden auf der Website vor der Inhaltsfeldauswahl angezeigt und sind bewusst keinem einzelnen Themenfeld zugeordnet.
+Jahrgangsbezogene Question-Shell-Dateien liegen im jeweiligen Bereichsordner unter `unterstuetzung/`. Sie werden auf der Website unter der Inhaltsfeldauswahl angezeigt und sind bewusst keinem einzelnen Themenfeld zugeordnet.
 
 ## Fachliche Grundlage
 
