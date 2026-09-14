@@ -18,6 +18,7 @@ DISPLAY_EXT = {
 TECHNICAL_DIRS = {"assets", "css", "js", "images", "img", "fonts", "vendor", "lib"}
 HIDDEN_NAMES = {".gitkeep", "desktop.ini", "thumbs.db"}
 LEARNING_GAMES_DIR = ROOT / "lernspiele"
+SUPPORT_DIR_NAME = "unterstuetzung"
 
 SI_DOMAIN_FIELDS = {
     "arithmetik-algebra": "01-arithmetik-algebra",
@@ -128,7 +129,7 @@ def is_display_material(file: Path) -> bool:
 
 
 def material_sort_key(material: dict) -> tuple:
-    type_order = {"Lernspiel": 0, "HTML": 1, "PPTX": 2}
+    type_order = {"Unterstützung": 0, "Lernspiel": 1, "HTML": 2, "PPTX": 3}
     return (type_order.get(material.get("typ"), 50), material.get("titel", "").lower())
 
 
@@ -152,6 +153,26 @@ def materials_in(folder: Path, recursive: bool = False) -> list[dict]:
             "url": file.relative_to(ROOT).as_posix(),
         })
     return sort_materials(result)
+
+
+def support_title(file: Path) -> str:
+    label = file.stem.replace("question_shells_", "").replace("_", " ")
+    if label.startswith("klasse-"):
+        label = label.replace("klasse-", "Klasse ")
+    elif label in {"ef", "q1", "q2"}:
+        label = label.upper()
+    return f"Question Shells {label}".strip()
+
+
+def support_materials_in(area_dir: Path) -> list[dict]:
+    support_dir = area_dir / SUPPORT_DIR_NAME
+    materials = materials_in(support_dir)
+    for material in materials:
+        material["titel"] = support_title(support_dir / material["datei"])
+        material["typ"] = "Unterstützung"
+        material["kategorie"] = "Unterstützung"
+        material["beschreibung"] = "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+    return sort_materials(materials)
 
 
 def learning_game_destination(game_path: Path) -> tuple[str, str, str] | None:
@@ -217,6 +238,7 @@ def learning_games_by_destination() -> dict[tuple[str, str, str], list[dict]]:
 def catalog_categories(areas: list[dict]) -> list[str]:
     categories = set()
     for area in areas:
+        categories.update(material["kategorie"] for material in area.get("unterstuetzung", []))
         for field in area["inhaltsfelder"]:
             categories.update(material["kategorie"] for material in field["materialien"])
             for topic in field["themen"]:
@@ -227,7 +249,7 @@ def catalog_categories(areas: list[dict]) -> list[str]:
 def build_catalog() -> dict:
     areas = []
     games_by_destination = learning_games_by_destination()
-    total_fields = total_topics = total_materials = total_learning_games = 0
+    total_fields = total_topics = total_materials = total_learning_games = total_support = 0
     for area in STRUCT["bereiche"]:
         out_area = {k: area[k] for k in ("id", "titel", "stufe")}
         out_area["kurztitel"] = (
@@ -235,7 +257,10 @@ def build_catalog() -> dict:
             .replace("Qualifikationsphase – Grundkurs (Q1/Q2)", "Q1/Q2 GK")
             .replace("Qualifikationsphase – Leistungskurs (Q1/Q2)", "Q1/Q2 LK")
         )
+        out_area["unterstuetzung"] = support_materials_in(ROOT / area["id"])
         out_area["inhaltsfelder"] = []
+        total_support += len(out_area["unterstuetzung"])
+        total_materials += len(out_area["unterstuetzung"])
         for field in area["inhaltsfelder"]:
             field_dir = ROOT / area["id"] / field["id"]
             out_field = {"id": field["id"], "titel": field["titel"]}
@@ -266,6 +291,7 @@ def build_catalog() -> dict:
             "themen": total_topics,
             "materialien": total_materials,
             "lernspiele": total_learning_games,
+            "unterstuetzung": total_support,
         },
         "kategorien": catalog_categories(areas),
         "bereiche": areas,

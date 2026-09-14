@@ -5,12 +5,14 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 106,
-    "lernspiele": 74
+    "materialien": 117,
+    "lernspiele": 74,
+    "unterstuetzung": 11
   },
   "kategorien": [
     "Lernspiel",
-    "PPTX"
+    "PPTX",
+    "Unterstützung"
   ],
   "bereiche": [
     {
@@ -18,6 +20,16 @@
       "titel": "Klasse 5",
       "stufe": "Sekundarstufe I – Erprobungsstufe",
       "kurztitel": "Klasse 5",
+      "unterstuetzung": [
+        {
+          "titel": "Question Shells Klasse 5",
+          "datei": "question_shells_klasse-5.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "klasse-5/unterstuetzung/question_shells_klasse-5.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-arithmetik-algebra",
@@ -260,6 +272,16 @@
       "titel": "Klasse 6",
       "stufe": "Sekundarstufe I – Erprobungsstufe",
       "kurztitel": "Klasse 6",
+      "unterstuetzung": [
+        {
+          "titel": "Question Shells Klasse 6",
+          "datei": "question_shells_klasse-6.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "klasse-6/unterstuetzung/question_shells_klasse-6.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-arithmetik-algebra",
@@ -488,6 +510,16 @@
       "titel": "Klasse 7",
       "stufe": "Sekundarstufe I – erste Stufe bis Ende SI",
       "kurztitel": "Klasse 7",
+      "unterstuetzung": [
+        {
+          "titel": "Question Shells Klasse 7",
+          "datei": "question_shells_klasse-7.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "klasse-7/unterstuetzung/question_shells_klasse-7.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-arithmetik-algebra",
@@ -739,6 +771,16 @@
       "titel": "Klasse 8",
       "stufe": "Sekundarstufe I – erste Stufe bis Ende SI",
       "kurztitel": "Klasse 8",
+      "unterstuetzung": [
+        {
+          "titel": "Question Shells Klasse 8",
+          "datei": "question_shells_klasse-8.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "klasse-8/unterstuetzung/question_shells_klasse-8.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-arithmetik-algebra",
@@ -957,6 +999,16 @@
       "titel": "Klasse 9",
       "stufe": "Sekundarstufe I – zweite Stufe bis Ende SI",
       "kurztitel": "Klasse 9",
+      "unterstuetzung": [
+        {
+          "titel": "Question Shells Klasse 9",
+          "datei": "question_shells_klasse-9.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "klasse-9/unterstuetzung/question_shells_klasse-9.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-arithmetik-algebra",
@@ -1164,6 +1216,16 @@
       "titel": "Klasse 10",
       "stufe": "Sekundarstufe I – zweite Stufe bis Ende SI",
       "kurztitel": "Klasse 10",
+      "unterstuetzung": [
+        {
+          "titel": "Question Shells Klasse 10",
+          "datei": "question_shells_klasse-10.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "klasse-10/unterstuetzung/question_shells_klasse-10.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-arithmetik-algebra",
@@ -1387,6 +1449,16 @@
       "titel": "Einführungsphase (EF)",
       "stufe": "Sekundarstufe II – KLP 2023",
       "kurztitel": "EF",
+      "unterstuetzung": [
+        {
+          "titel": "Question Shells EF",
+          "datei": "question_shells_ef.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "ef/unterstuetzung/question_shells_ef.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-funktionen-und-analysis",
@@ -1582,6 +1654,24 @@
       "titel": "Qualifikationsphase – Grundkurs (Q1/Q2)",
       "stufe": "Sekundarstufe II – KLP 2023",
       "kurztitel": "Q1/Q2 GK",
+      "unterstuetzung": [
+        {
+          "titel": "Question Shells Q1",
+          "datei": "question_shells_q1.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "q1-q2-grundkurs/unterstuetzung/question_shells_q1.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        },
+        {
+          "titel": "Question Shells Q2",
+          "datei": "question_shells_q2.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "q1-q2-grundkurs/unterstuetzung/question_shells_q2.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-funktionen-und-analysis",
@@ -1864,6 +1954,24 @@
       "titel": "Qualifikationsphase – Leistungskurs (Q1/Q2)",
       "stufe": "Sekundarstufe II – KLP 2023",
       "kurztitel": "Q1/Q2 LK",
+      "unterstuetzung": [
+        {
+          "titel": "Question Shells Q1",
+          "datei": "question_shells_q1.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "q1-q2-leistungskurs/unterstuetzung/question_shells_q1.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        },
+        {
+          "titel": "Question Shells Q2",
+          "datei": "question_shells_q2.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "q1-q2-leistungskurs/unterstuetzung/question_shells_q2.html",
+          "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-funktionen-und-analysis",

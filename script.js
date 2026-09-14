@@ -63,7 +63,7 @@ function areaTotals(area) {
       topics: total.topics + field.themen.length,
       files: total.files + field.materialien.length + field.themen.reduce((sum, topic) => sum + topic.materialien.length, 0)
     }),
-    { topics: 0, files: 0 }
+    { topics: 0, files: (area.unterstuetzung || []).length }
   );
 }
 
@@ -121,7 +121,7 @@ function fieldText(field) {
 }
 
 function areaText(area) {
-  return `${area.titel} ${area.kurztitel || ""} ${area.stufe} ${area.inhaltsfelder.map(fieldText).join(" ")}`;
+  return `${area.titel} ${area.kurztitel || ""} ${area.stufe} ${materialText(area.unterstuetzung)} ${area.inhaltsfelder.map(fieldText).join(" ")}`;
 }
 
 function parseHash() {
@@ -305,6 +305,27 @@ function renderFieldPicker(area, fields, selectedField) {
   return section;
 }
 
+function renderAreaSupport(area, query) {
+  const materialQuery = areaOwnMatchesQuery(area, query) ? "" : query;
+  const materials = filterMaterials(area.unterstuetzung, materialQuery);
+  if (!materials.length) return null;
+
+  const theme = { accent: "#c85f48", accentDark: "#23454a", accentSoft: "#faebe5" };
+  const section = document.createElement("section");
+  section.className = "support-section";
+  section.appendChild(createText("p", "step-label", "Unterstützung"));
+  section.appendChild(createText("h2", "", "Question Shells"));
+  section.appendChild(createText("p", "view-copy", "Jahrgangsbezogene Vorlagen zum Erstellen von Aufgaben, unabhängig vom Inhaltsfeld."));
+
+  const list = document.createElement("div");
+  list.className = "support-list";
+  for (const material of materials) {
+    list.appendChild(renderMaterialLink(material, theme));
+  }
+  section.appendChild(list);
+  return section;
+}
+
 function renderCategoryFilter(field, activeCategory) {
   const categories = fieldCategories(field);
   if (categories.length < 2) return null;
@@ -480,6 +501,11 @@ function renderAreaPage(area, query) {
   header.appendChild(createText("h2", "", area.titel));
   header.appendChild(createText("p", "view-copy", "Wähle ein Inhaltsfeld aus. Darunter werden Themen und zugehörige Dateien angezeigt."));
   catalogRoot.appendChild(header);
+
+  const supportSection = renderAreaSupport(area, query);
+  if (supportSection) {
+    catalogRoot.appendChild(supportSection);
+  }
 
   if (!fields.length) {
     catalogRoot.appendChild(createText("p", "empty-state", "Keine passenden Inhaltsfelder gefunden."));

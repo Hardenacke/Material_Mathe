@@ -15,7 +15,11 @@ for k,v in expected.items():
     if s.get(k)!=v: errors.append(f"{k}: erwartet {v}, gefunden {s.get(k)}")
 if s.get("materialien",0) < 33: errors.append("Weniger als 33 sichtbare Materialien; Wiederholungs-PPTs fehlen möglicherweise.")
 if (ROOT/"lernspiele").exists() and s.get("lernspiele",0) < 1: errors.append("Lernspiele vorhanden, aber nicht im Katalog sichtbar.")
+if any((ROOT/area.get("id","")/"unterstuetzung").exists() for area in data.get("bereiche",[])) and s.get("unterstuetzung",0) < 1: errors.append("Unterstützungsdateien vorhanden, aber nicht im Katalog sichtbar.")
 for area in data.get("bereiche",[]):
+    for mat in area.get("unterstuetzung",[]):
+        if not (ROOT/mat["url"]).exists(): errors.append(f"Materialpfad fehlt: {mat['url']}")
+        if (ROOT/"_site").exists() and not (ROOT/"_site"/mat["url"]).exists(): errors.append(f"Materialpfad fehlt in _site: {mat['url']}")
     for field in area.get("inhaltsfelder",[]):
         for mat in field.get("materialien",[]):
             if not (ROOT/mat["url"]).exists(): errors.append(f"Materialpfad fehlt: {mat['url']}")
