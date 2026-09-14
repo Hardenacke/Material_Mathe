@@ -9,6 +9,7 @@ Dieses Repository bündelt die vorbereitete Mathematik-Ordnerstruktur, alle Wied
 - **9 Lernbereiche/Kursstufen:** Klasse 5–10, EF, Q1/Q2 GK und Q1/Q2 LK
 - **33 Inhaltsfelder** mit je einer editierbaren `wiederholung.pptx`
 - **105 Themenordner** als Ablage für Lernpfade, Arbeitsblätter, Simulationen und weitere Materialien
+- **Lernspiele** als auswählbare Materialkategorie, veröffentlicht aus `lernspiele/`
 - `struktur.json` als fachliches Strukturregister
 - `dokumentation/ABITURVORGABEN_SEKII.md` für die Sek-II-Ausrichtung
 - gemeinsame PPTX/POTX-Designvorlagen unter `gemeinsam/vorlagen/`
@@ -57,6 +58,8 @@ klasse-8/
 `assets`, `css`, `js`, `images`, `fonts` und ähnliche technische Unterordner werden mit veröffentlicht, aber nicht als eigenständige Materialkarten angezeigt.
 
 Unterstützte sichtbare Materialtypen sind u. a. HTML, PDF, PowerPoint, Word, Excel, CSV, Markdown, LaTeX, ZIP, Bilder, Audio und Video.
+
+Lernspiele liegen gesammelt unter `lernspiele/`, damit ihre gemeinsame JavaScript-/CSS-Basis und Offline-Dateien erhalten bleiben. `werkzeuge/katalog.py` ordnet sie anhand von `lernspiele/data.json` fachlich den passenden vorhandenen Inhaltsfeldern und Themen zu und markiert sie auf der Website als Kategorie `Lernspiel`.
 
 ## Fachliche Grundlage
 

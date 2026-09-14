@@ -5,6 +5,7 @@ const searchInput = document.getElementById("search");
 let catalogData = null;
 let route = { areaId: "", fieldId: "" };
 let lastMaterialRoute = "";
+let selectedMaterialCategory = "all";
 
 function normalize(value) {
   return String(value || "")
@@ -81,7 +82,34 @@ function catalogTotals(areas) {
 }
 
 function materialText(materials) {
-  return (materials || []).map((material) => `${material.titel} ${material.typ} ${material.datei}`).join(" ");
+  return (materials || [])
+    .map((material) => `${material.titel} ${material.typ} ${material.datei} ${material.beschreibung || ""} ${(material.kompetenzen || []).join(" ")}`)
+    .join(" ");
+}
+
+function materialCategory(material) {
+  return material.kategorie || material.typ || "Datei";
+}
+
+function fieldMaterials(field) {
+  const materials = [...(field.materialien || [])];
+  for (const topic of field.themen || []) {
+    materials.push(...(topic.materialien || []));
+  }
+  return materials;
+}
+
+function fieldCategories(field) {
+  return [...new Set(fieldMaterials(field).map(materialCategory))].sort((a, b) => {
+    if (a === "Lernspiel") return -1;
+    if (b === "Lernspiel") return 1;
+    return a.localeCompare(b, "de-DE");
+  });
+}
+
+function categoryForField(field) {
+  const categories = fieldCategories(field);
+  return categories.includes(selectedMaterialCategory) ? selectedMaterialCategory : "all";
 }
 
 function topicText(topic) {
@@ -162,14 +190,21 @@ function fieldsForArea(area, query) {
   return area.inhaltsfelder.filter((field) => fieldMatchesQuery(field, query));
 }
 
-function filterMaterials(materials, query) {
-  if (!query) return materials || [];
+function filterMaterials(materials, query, category = "all") {
   const needle = normalize(query);
-  return (materials || []).filter((material) => normalize(materialText([material])).includes(needle));
+  return (materials || []).filter((material) => {
+    if (category !== "all" && materialCategory(material) !== category) return false;
+    return !query || normalize(materialText([material])).includes(needle);
+  });
 }
 
-function filterTopics(field, query) {
-  if (!query || fieldOwnMatchesQuery(field, query)) return field.themen;
+function filterTopics(field, query, category = "all") {
+  const fieldMatch = fieldOwnMatchesQuery(field, query);
+  const materialQuery = fieldMatch ? "" : query;
+  if (category !== "all") {
+    return field.themen.filter((topic) => filterMaterials(topic.materialien, materialQuery, category).length);
+  }
+  if (!query || fieldMatch) return field.themen;
   return field.themen.filter((topic) => topicMatchesQuery(topic, query));
 }
 
@@ -270,12 +305,53 @@ function renderFieldPicker(area, fields, selectedField) {
   return section;
 }
 
+function renderCategoryFilter(field, activeCategory) {
+  const categories = fieldCategories(field);
+  if (categories.length < 2) return null;
+
+  const counts = fieldMaterials(field).reduce((acc, material) => {
+    const category = materialCategory(material);
+    acc.set(category, (acc.get(category) || 0) + 1);
+    return acc;
+  }, new Map());
+
+  const filter = document.createElement("div");
+  filter.className = "category-filter";
+  filter.setAttribute("aria-label", "Materialkategorie");
+
+  const options = ["all", ...categories];
+  for (const category of options) {
+    const label = category === "all" ? "Alle" : category;
+    const count = category === "all" ? fieldMaterials(field).length : counts.get(category);
+    const button = createButton("category-button", `${label} (${count})`, () => {
+      selectedMaterialCategory = category;
+      render();
+    });
+    if (category === activeCategory) {
+      button.classList.add("is-selected");
+      button.setAttribute("aria-pressed", "true");
+    } else {
+      button.setAttribute("aria-pressed", "false");
+    }
+    filter.appendChild(button);
+  }
+
+  return filter;
+}
+
 function renderMaterialLink(material, theme) {
   const link = document.createElement("a");
   link.className = "file-link";
   applyTheme(link, theme);
   link.href = encodeURI(material.url);
-  link.appendChild(createText("span", "file-title", material.titel));
+
+  const copy = document.createElement("span");
+  copy.className = "file-copy";
+  copy.appendChild(createText("span", "file-title", material.titel));
+  if (material.beschreibung) {
+    copy.appendChild(createText("span", "file-description", material.beschreibung));
+  }
+  link.appendChild(copy);
 
   const meta = document.createElement("span");
   meta.className = "file-meta";
@@ -285,8 +361,9 @@ function renderMaterialLink(material, theme) {
   return link;
 }
 
-function renderFieldFiles(field, query, theme) {
-  const files = fieldOwnMatchesQuery(field, query) ? field.materialien : filterMaterials(field.materialien, query);
+function renderFieldFiles(field, query, theme, category) {
+  const materialQuery = fieldOwnMatchesQuery(field, query) ? "" : query;
+  const files = filterMaterials(field.materialien, materialQuery, category);
   const section = document.createElement("section");
   section.className = "resource-section";
   section.appendChild(createText("h3", "", "Dateien zum Inhaltsfeld"));
@@ -306,8 +383,9 @@ function renderFieldFiles(field, query, theme) {
   return section;
 }
 
-function renderTopics(field, query, theme) {
-  const topics = filterTopics(field, query);
+function renderTopics(field, query, theme, category) {
+  const topics = filterTopics(field, query, category);
+  const materialQuery = fieldOwnMatchesQuery(field, query) ? "" : query;
   const section = document.createElement("section");
   section.className = "resource-section";
   section.appendChild(createText("h3", "", "Themen"));
@@ -329,7 +407,7 @@ function renderTopics(field, query, theme) {
     const body = document.createElement("div");
     body.appendChild(createText("h4", "topic-card-title", topic.titel));
 
-    const topicMaterials = fieldOwnMatchesQuery(field, query) ? topic.materialien : filterMaterials(topic.materialien, query);
+    const topicMaterials = filterMaterials(topic.materialien, materialQuery, category);
     if (topicMaterials.length) {
       const files = document.createElement("div");
       files.className = "file-list compact";
@@ -352,10 +430,12 @@ function renderTopics(field, query, theme) {
 
 function renderFieldDetail(field, query) {
   const theme = fieldTheme(field);
-  const visibleFieldFiles = fieldOwnMatchesQuery(field, query) ? field.materialien : filterMaterials(field.materialien, query);
-  const visibleTopics = filterTopics(field, query);
+  const activeCategory = categoryForField(field);
+  const materialQuery = fieldOwnMatchesQuery(field, query) ? "" : query;
+  const visibleFieldFiles = filterMaterials(field.materialien, materialQuery, activeCategory);
+  const visibleTopics = filterTopics(field, query, activeCategory);
   const visibleTopicFiles = visibleTopics.reduce((sum, topic) => {
-    const files = fieldOwnMatchesQuery(field, query) ? topic.materialien : filterMaterials(topic.materialien, query);
+    const files = filterMaterials(topic.materialien, materialQuery, activeCategory);
     return sum + files.length;
   }, 0);
 
@@ -376,8 +456,10 @@ function renderFieldDetail(field, query) {
   ));
 
   detail.appendChild(header);
-  detail.appendChild(renderFieldFiles(field, query, theme));
-  detail.appendChild(renderTopics(field, query, theme));
+  const categoryFilter = renderCategoryFilter(field, activeCategory);
+  if (categoryFilter) detail.appendChild(categoryFilter);
+  detail.appendChild(renderFieldFiles(field, query, theme, activeCategory));
+  detail.appendChild(renderTopics(field, query, theme, activeCategory));
   return detail;
 }
 
@@ -470,7 +552,7 @@ searchInput.addEventListener("input", () => {
 });
 
 document.addEventListener("pointerdown", (event) => {
-  const target = event.target.closest(".class-card, .topic-button, .file-link, .crumb-button");
+  const target = event.target.closest(".class-card, .topic-button, .file-link, .crumb-button, .category-button");
   if (!target) return;
 
   target.classList.remove("is-pressing");

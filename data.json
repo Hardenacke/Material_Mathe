@@ -5,8 +5,13 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 32
+    "materialien": 106,
+    "lernspiele": 74
   },
+  "kategorien": [
+    "Lernspiel",
+    "PPTX"
+  ],
   "bereiche": [
     {
       "id": "klasse-5",
@@ -22,6 +27,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-5/01-arithmetik-algebra/wiederholung.pptx"
             }
           ],
@@ -34,17 +40,62 @@
             {
               "id": "02-grundrechenarten-und-rechengesetze",
               "titel": "Grundrechenarten mit natürlichen Zahlen; Kommutativ-, Assoziativ- und Distributivgesetz",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Rechenwege-Werkstatt",
+                  "datei": "rechenstrategien.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-5/arithmetik-algebra/rechenstrategien.html",
+                  "beschreibung": "Natürliche Zahlen und Rechengesetze",
+                  "kompetenzen": [
+                    "Geschickt zerlegen",
+                    "Rechenreihenfolge",
+                    "Überschlag",
+                    "Rechenfehler erklären"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-groessen-und-einheiten",
               "titel": "Länge, Zeit, Geld, Masse sowie erste Flächen- und Volumeneinheiten",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Maßband-Mission",
+                  "datei": "messen.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-5/arithmetik-algebra/messen.html",
+                  "beschreibung": "Größen und Einheiten",
+                  "kompetenzen": [
+                    "Längen umrechnen",
+                    "Einheiten wählen",
+                    "Zeit berechnen",
+                    "Flächeneinheiten"
+                  ]
+                }
+              ]
             },
             {
               "id": "04-brueche-als-anteile",
               "titel": "Anteile, Bruchteile von Größen, Bruchdarstellungen und Grundvorstellungen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Bruch-Atelier",
+                  "datei": "bruchbild.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-5/arithmetik-algebra/bruchbild.html",
+                  "beschreibung": "Brüche als Anteile",
+                  "kompetenzen": [
+                    "Anteile färben",
+                    "Brüche vergleichen",
+                    "Gleichwertige Brüche",
+                    "Bruchteile bestimmen"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -56,6 +107,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-5/02-funktionen/wiederholung.pptx"
             }
           ],
@@ -63,7 +115,22 @@
             {
               "id": "01-tabellen-diagramme-und-zuordnungen",
               "titel": "Zusammenhänge in Tabellen und Diagrammen; einfache Zuordnungen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Muster-Express",
+                  "datei": "muster.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-5/funktionen/muster.html",
+                  "beschreibung": "Muster, Tabellen und Maßstab",
+                  "kompetenzen": [
+                    "Muster fortsetzen",
+                    "Tabellen ergänzen",
+                    "Maßstab anwenden",
+                    "Regel erklären"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-massstab-modellieren-und-fermi-aufgaben",
@@ -80,6 +147,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-5/03-geometrie/wiederholung.pptx"
             }
           ],
@@ -87,7 +155,36 @@
             {
               "id": "01-grundfiguren-koordinatensystem-und-symmetrie",
               "titel": "Punkte, Strecken, Geraden, Grundfiguren, Koordinatensystem, Symmetrie",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Figuren-Finder",
+                  "datei": "figuren.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-5/geometrie/figuren.html",
+                  "beschreibung": "Grundbegriffe und Vierecke",
+                  "kompetenzen": [
+                    "Figuren klassifizieren",
+                    "Parallel und senkrecht",
+                    "Winkelarten",
+                    "Begriffe begründen"
+                  ]
+                },
+                {
+                  "titel": "Spiegel-Werkstatt",
+                  "datei": "spiegel.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-5/geometrie/spiegel.html",
+                  "beschreibung": "Achsensymmetrie",
+                  "kompetenzen": [
+                    "Muster spiegeln",
+                    "Spiegelpunkt finden",
+                    "Achsenabstand",
+                    "Fehler erkennen"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-parallel-senkrecht-und-winkel",
@@ -97,7 +194,22 @@
             {
               "id": "03-umfang-und-flaecheninhalt",
               "titel": "Umfang und Flächeninhalt von Rechteck und Quadrat; Zerlegen und Ergänzen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Würfel-Werft",
+                  "datei": "wuerfel.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-5/geometrie/wuerfel.html",
+                  "beschreibung": "Volumen und Oberfläche von Quadern",
+                  "kompetenzen": [
+                    "Schichten zählen",
+                    "Volumen bestimmen",
+                    "Oberfläche bestimmen",
+                    "Volumen vergleichen"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -109,6 +221,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-5/04-stochastik/wiederholung.pptx"
             }
           ],
@@ -116,7 +229,22 @@
             {
               "id": "01-daten-erheben-haeufigkeiten-und-diagramme",
               "titel": "Daten erheben; absolute Häufigkeiten; Tabellen und Diagramme",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Daten-Detektive",
+                  "datei": "daten5.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-5/stochastik/daten5.html",
+                  "beschreibung": "Erheben und Darstellen von Daten",
+                  "kompetenzen": [
+                    "Diagramme lesen",
+                    "Häufigkeiten zählen",
+                    "Spannweite",
+                    "Aussagen prüfen"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-lagekennwerte-einstieg",
@@ -141,6 +269,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-6/01-arithmetik-algebra/wiederholung.pptx"
             }
           ],
@@ -148,17 +277,62 @@
             {
               "id": "01-teilbarkeit-primzahlen-und-primfaktorzerlegung",
               "titel": "Teilbarkeit, Primzahlen, Primfaktorzerlegung, Teilbarkeitsregeln",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Teiler-Scanner",
+                  "datei": "teiler.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-6/arithmetik-algebra/teiler.html",
+                  "beschreibung": "Teilbarkeit und Primfaktoren",
+                  "kompetenzen": [
+                    "Teilbarkeitsregeln",
+                    "Primzahlen",
+                    "Primfaktoren",
+                    "Teiler im Kontext"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-positive-rationale-zahlen",
               "titel": "Brüche, endliche und periodische Dezimalzahlen, Prozentdarstellung",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Komma-Kasse",
+                  "datei": "komma.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-6/arithmetik-algebra/komma.html",
+                  "beschreibung": "Dezimalzahlen und Darstellungswechsel",
+                  "kompetenzen": [
+                    "Dezimalzahlen addieren",
+                    "Multiplizieren",
+                    "Bruch und Dezimalzahl",
+                    "Größenordnung"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-rechnen-mit-bruechen-und-dezimalzahlen",
               "titel": "Grundrechenarten mit einfachen Brüchen und endlichen Dezimalzahlen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Bruch-Küche",
+                  "datei": "bruchrechnen.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-6/arithmetik-algebra/bruchrechnen.html",
+                  "beschreibung": "Grundrechenarten mit Brüchen",
+                  "kompetenzen": [
+                    "Addieren",
+                    "Multiplizieren",
+                    "Dividieren",
+                    "Fehler und Kontext"
+                  ]
+                }
+              ]
             },
             {
               "id": "04-ganze-zahlen-und-zahlbereichserweiterung",
@@ -175,6 +349,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-6/02-funktionen/wiederholung.pptx"
             }
           ],
@@ -187,7 +362,22 @@
             {
               "id": "02-proportionale-grundideen-und-dreisatz",
               "titel": "Proportionale Zusammenhänge und Dreisatz als vorbereitende Zuordnung",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Dreisatz-Express",
+                  "datei": "dreisatz.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-6/funktionen/dreisatz.html",
+                  "beschreibung": "Zusammenhänge zwischen Größen",
+                  "kompetenzen": [
+                    "Einheitspreis",
+                    "Dreisatz",
+                    "Maßstab",
+                    "Modellgrenzen"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -199,6 +389,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-6/03-geometrie/wiederholung.pptx"
             }
           ],
@@ -206,7 +397,22 @@
             {
               "id": "01-quader-oberflaeche-und-volumen",
               "titel": "Quader und Würfel; Netze, Oberfläche und Volumen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Flächen-und-Netze-Werkstatt",
+                  "datei": "flaechen.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-6/geometrie/flaechen.html",
+                  "beschreibung": "Flächen, Zerlegung und Quadernetze",
+                  "kompetenzen": [
+                    "Dreiecksfläche",
+                    "Zerlegen",
+                    "Netze lesen",
+                    "Umfang und Fläche"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-winkel-kreise-und-konstruktionen",
@@ -216,7 +422,22 @@
             {
               "id": "03-symmetrie-und-abbildungen",
               "titel": "Achsensymmetrie, Punktsymmetrie und einfache Abbildungen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Koordinaten-Navigator",
+                  "datei": "abbildung.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-6/geometrie/abbildung.html",
+                  "beschreibung": "Verschiebung, Drehung und Punktsymmetrie",
+                  "kompetenzen": [
+                    "Verschieben",
+                    "Punktspiegeln",
+                    "Drehen",
+                    "Abbildungen unterscheiden"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -228,6 +449,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-6/04-stochastik/wiederholung.pptx"
             }
           ],
@@ -235,7 +457,22 @@
             {
               "id": "01-relative-haeufigkeiten",
               "titel": "Absolute und relative Häufigkeiten vergleichen und interpretieren",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Daten-Labor",
+                  "datei": "statistik6.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-6/stochastik/statistik6.html",
+                  "beschreibung": "Mittelwert, Median, Quartile und Boxplot",
+                  "kompetenzen": [
+                    "Mittelwert",
+                    "Median",
+                    "Boxplot lesen",
+                    "Ausreißer beurteilen"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-einfache-zufallsexperimente-und-wahrscheinlichkeit",
@@ -260,6 +497,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-7/01-arithmetik-algebra/wiederholung.pptx"
             }
           ],
@@ -267,17 +505,90 @@
             {
               "id": "01-rationale-zahlen-und-vorzeichenregeln",
               "titel": "Rationale Zahlen; Zahlengerade; Vorzeichenregeln; Rechengesetze",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Vorzeichen-Navigator",
+                  "datei": "vorzeichen.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-7/arithmetik-algebra/vorzeichen.html",
+                  "beschreibung": "Rationale Zahlen",
+                  "kompetenzen": [
+                    "Zahlen ordnen",
+                    "Addieren",
+                    "Multiplizieren",
+                    "Vorzeichen begründen"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-terme-variablen-und-termumformungen",
               "titel": "Variable als Veränderliche, Platzhalter und Unbekannte; Terme umformen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Algebra-Bauplatz",
+                  "datei": "terme-legen.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-7/arithmetik-algebra/terme-legen.html",
+                  "beschreibung": "Terme mit Algebra-Plättchen",
+                  "kompetenzen": [
+                    "Variable als Platzhalter darstellen",
+                    "Koeffizienten deuten",
+                    "Vorzeichen mit Plättchen darstellen",
+                    "Term und Fläche verknüpfen"
+                  ]
+                },
+                {
+                  "titel": "Term-Labor",
+                  "datei": "terme.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-7/arithmetik-algebra/terme.html",
+                  "beschreibung": "Variablen, Termwerte und Umformung",
+                  "kompetenzen": [
+                    "Einsetzen",
+                    "Zusammenfassen",
+                    "Ausmultiplizieren",
+                    "Term modellieren"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-lineare-gleichungen",
               "titel": "Lineare Gleichungen algebraisch lösen und im Kontext deuten",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Gleichungswaage",
+                  "datei": "gleichungen-legen.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-7/arithmetik-algebra/gleichungen-legen.html",
+                  "beschreibung": "Lineare Gleichungen mit Algebra-Plättchen",
+                  "kompetenzen": [
+                    "Gleichheit erhalten",
+                    "Äquivalenzumformungen ausführen",
+                    "Nullpaare nutzen",
+                    "Variable isolieren"
+                  ]
+                },
+                {
+                  "titel": "Waagen-Werkstatt",
+                  "datei": "gleichung.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-7/arithmetik-algebra/gleichung.html",
+                  "beschreibung": "Lineare Gleichungen",
+                  "kompetenzen": [
+                    "Lösung bestimmen",
+                    "Umformung planen",
+                    "Fehler lokalisieren",
+                    "Gleichung modellieren"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -289,6 +600,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-7/02-funktionen/wiederholung.pptx"
             }
           ],
@@ -296,12 +608,42 @@
             {
               "id": "01-proportionale-und-antiproportionale-zuordnungen",
               "titel": "Proportionale und antiproportionale Zuordnungen; Darstellungen und Dreisatz",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Zuordnungs-Zentrale",
+                  "datei": "zuordnung.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-7/funktionen/zuordnung.html",
+                  "beschreibung": "Proportionale und antiproportionale Zuordnungen",
+                  "kompetenzen": [
+                    "Proportionalität",
+                    "Antiproportionalität",
+                    "Konstante bestimmen",
+                    "Modell begründen"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-prozent-und-zinsrechnung",
               "titel": "Prozentrechnung, prozentuale Veränderung und Zinsrechnung",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Prozent-Markt",
+                  "datei": "prozent.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-7/funktionen/prozent.html",
+                  "beschreibung": "Prozent- und Zinsrechnung",
+                  "kompetenzen": [
+                    "Prozentwert",
+                    "Grundwert",
+                    "Änderungsfaktoren",
+                    "Rabatte beurteilen"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -313,6 +655,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-7/03-geometrie/wiederholung.pptx"
             }
           ],
@@ -320,7 +663,22 @@
             {
               "id": "01-winkelbeziehungen",
               "titel": "Neben-, Scheitel-, Stufen- und Wechselwinkel; geometrisch argumentieren",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Winkel-Detektiv",
+                  "datei": "winkel.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-7/geometrie/winkel.html",
+                  "beschreibung": "Winkelsätze und Innenwinkelsumme",
+                  "kompetenzen": [
+                    "Nebenwinkel",
+                    "Innenwinkelsumme",
+                    "Winkelsätze",
+                    "Beweiskette"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-dreieckskonstruktionen-und-kongruenz",
@@ -342,6 +700,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-7/04-stochastik/wiederholung.pptx"
             }
           ],
@@ -349,7 +708,22 @@
             {
               "id": "01-laplace-wahrscheinlichkeit",
               "titel": "Laplace-Experimente und Wahrscheinlichkeiten",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Zufalls-Labor",
+                  "datei": "zufall7.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-7/stochastik/zufall7.html",
+                  "beschreibung": "Laplace und relative Häufigkeit",
+                  "kompetenzen": [
+                    "Laplace-Modell",
+                    "Relative Häufigkeit",
+                    "Simulation deuten",
+                    "Gegenereignis"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-baumdiagramme-und-pfadregeln-einstieg",
@@ -374,6 +748,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-8/01-arithmetik-algebra/wiederholung.pptx"
             }
           ],
@@ -381,17 +756,77 @@
             {
               "id": "01-termumformungen-und-binomische-formeln",
               "titel": "Termumformungen, Rechengesetze und binomische Formeln",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Binomische Baupläne",
+                  "datei": "binomisch.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-8/arithmetik-algebra/binomisch.html",
+                  "beschreibung": "Binomische Formeln",
+                  "kompetenzen": [
+                    "Quadrat ausmultiplizieren",
+                    "Differenz von Quadraten",
+                    "Flächen deuten",
+                    "Fehler korrigieren"
+                  ]
+                },
+                {
+                  "titel": "Quadrat-Atelier",
+                  "datei": "quadratische-legen.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-8/arithmetik-algebra/quadratische-legen.html",
+                  "beschreibung": "Quadratische Terme und Gleichungen mit Algebra-Plättchen",
+                  "kompetenzen": [
+                    "x²-, x- und 1-Plättchen deuten",
+                    "Quadratische Ergänzung visualisieren",
+                    "Faktorpaare finden",
+                    "Nullproduktregel anwenden",
+                    "Lösungswege begründen"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-lineare-gleichungssysteme",
               "titel": "Lineare Gleichungssysteme mit zwei Variablen; algebraische und grafische Verfahren",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Gleichungs-Duo",
+                  "datei": "lgs.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-8/arithmetik-algebra/lgs.html",
+                  "beschreibung": "Lineare Gleichungssysteme",
+                  "kompetenzen": [
+                    "LGS lösen",
+                    "Verfahren wählen",
+                    "Lösungsanzahl",
+                    "Modellieren"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-bruchterme-und-elementare-bruchgleichungen",
               "titel": "Bruchterme und elementare Bruchgleichungen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Bruchterm-Wächter",
+                  "datei": "bruchterm.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-8/arithmetik-algebra/bruchterm.html",
+                  "beschreibung": "Definitionsmenge und Bruchgleichungen",
+                  "kompetenzen": [
+                    "Verbotene Werte",
+                    "Bruchgleichung",
+                    "Kürzen",
+                    "Probe"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -403,6 +838,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-8/02-funktionen/wiederholung.pptx"
             }
           ],
@@ -410,7 +846,22 @@
             {
               "id": "01-lineare-funktionen",
               "titel": "Lineare Funktionen; Steigung, Achsenabschnitt, Darstellungswechsel, Modellieren",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Graphen-Schaltzentrale",
+                  "datei": "linear.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-8/funktionen/linear.html",
+                  "beschreibung": "Lineare Funktionen",
+                  "kompetenzen": [
+                    "Steigung",
+                    "Achsenabschnitt",
+                    "Zielgraph einstellen",
+                    "Parameter im Kontext"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-funktionen-und-lineare-gleichungssysteme",
@@ -427,6 +878,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-8/03-geometrie/wiederholung.pptx"
             }
           ],
@@ -439,7 +891,22 @@
             {
               "id": "02-geometrisches-argumentieren-und-konstruieren",
               "titel": "Konstruktion, Begründung und digitale Geometriewerkzeuge",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Konstruktions-Atelier",
+                  "datei": "thales.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-8/geometrie/thales.html",
+                  "beschreibung": "Kongruenz, Thales und Flächen",
+                  "kompetenzen": [
+                    "Thales anwenden",
+                    "Kongruenz",
+                    "Konstruktionsfolge",
+                    "Fläche und Höhe"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -451,6 +918,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-8/04-stochastik/wiederholung.pptx"
             }
           ],
@@ -458,7 +926,22 @@
             {
               "id": "01-mehrstufige-zufallsexperimente-und-pfadregeln",
               "titel": "Mehrstufige Zufallsexperimente; Baumdiagramme; Produkt- und Summenregel",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Zufalls-Pfade",
+                  "datei": "baum.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-8/stochastik/baum.html",
+                  "beschreibung": "Baumdiagramme und Pfadregeln",
+                  "kompetenzen": [
+                    "Pfadprodukt",
+                    "Pfadsumme",
+                    "Ohne Zurücklegen",
+                    "Fehlerdiagnose"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-datenanalyse-und-boxplots",
@@ -483,6 +966,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-9/01-arithmetik-algebra/wiederholung.pptx"
             }
           ],
@@ -495,12 +979,42 @@
             {
               "id": "02-potenzen-und-potenzgesetze",
               "titel": "Potenzen, Potenzgesetze und Zahlendarstellungen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Potenzen-und-Wurzeln-Werkstatt",
+                  "datei": "potenz.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-9/arithmetik-algebra/potenz.html",
+                  "beschreibung": "Reelle Zahlen und Potenzgesetze",
+                  "kompetenzen": [
+                    "Potenzgesetze",
+                    "Wurzeln vereinfachen",
+                    "Wurzeln eingrenzen",
+                    "Zahlbereiche"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-quadratische-gleichungen",
               "titel": "Quadratische Gleichungen und Lösungsverfahren",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Quadratische Werkstatt",
+                  "datei": "quadratisch.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-9/arithmetik-algebra/quadratisch.html",
+                  "beschreibung": "Quadratische Gleichungen",
+                  "kompetenzen": [
+                    "Verfahrenswahl",
+                    "Lösungsmenge",
+                    "Quadratische Ergänzung",
+                    "Kontext und Probe"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -512,6 +1026,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-9/02-funktionen/wiederholung.pptx"
             }
           ],
@@ -519,7 +1034,22 @@
             {
               "id": "01-quadratische-funktionen",
               "titel": "Quadratische Funktionen; Normalparabel, Transformationen, Eigenschaften",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Parabel-Werkstatt",
+                  "datei": "parabel.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-9/funktionen/parabel.html",
+                  "beschreibung": "Quadratische Funktionen",
+                  "kompetenzen": [
+                    "Scheitelpunkt",
+                    "Parameter steuern",
+                    "Nullstellen",
+                    "Darstellungen verbinden"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-nullstellen-und-modellierung",
@@ -533,9 +1063,24 @@
           "titel": "Geometrie",
           "materialien": [
             {
+              "titel": "Kreis-Werkstatt",
+              "datei": "kreis.html",
+              "typ": "Lernspiel",
+              "kategorie": "Lernspiel",
+              "url": "lernspiele/klasse-9/geometrie/kreis.html",
+              "beschreibung": "Kreis, Kreissektor und Zylinder",
+              "kompetenzen": [
+                "Umfang",
+                "Kreisfläche",
+                "Sektoren",
+                "Zylindervolumen"
+              ]
+            },
+            {
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-9/03-geometrie/wiederholung.pptx"
             }
           ],
@@ -543,7 +1088,22 @@
             {
               "id": "01-satz-des-pythagoras",
               "titel": "Satz des Pythagoras, Umkehrung und Anwendungen in Ebene und Raum",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Pythagoras-Route",
+                  "datei": "pythagoras.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-9/geometrie/pythagoras.html",
+                  "beschreibung": "Pythagoras und Ähnlichkeit",
+                  "kompetenzen": [
+                    "Hypotenuse",
+                    "Kathete",
+                    "Ähnlichkeit",
+                    "Anwendbarkeit begründen"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-aehnlichkeit-und-zentrische-streckung",
@@ -565,6 +1125,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-9/04-stochastik/wiederholung.pptx"
             }
           ],
@@ -577,7 +1138,22 @@
             {
               "id": "02-statistische-darstellungen-kritisch-bewerten",
               "titel": "Diagramme, Skalierungen und mögliche Manipulationen kritisch beurteilen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Diagramm-Redaktion",
+                  "datei": "kritik.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-9/stochastik/kritik.html",
+                  "beschreibung": "Statistische Aussagen und Manipulation",
+                  "kompetenzen": [
+                    "Skalierung",
+                    "Relative Änderung",
+                    "Stichprobe",
+                    "Darstellung beurteilen"
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -597,6 +1173,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-10/01-arithmetik-algebra/wiederholung.pptx"
             }
           ],
@@ -609,7 +1186,22 @@
             {
               "id": "02-exponentielle-gleichungen-und-logarithmus-einstieg",
               "titel": "Exponentielle Gleichungen und Logarithmus als Umkehroperation",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Exponenten-Detektiv",
+                  "datei": "logarithmus.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-10/arithmetik-algebra/logarithmus.html",
+                  "beschreibung": "Exponentialgleichungen und Logarithmen",
+                  "kompetenzen": [
+                    "Exponenten finden",
+                    "Logarithmus nutzen",
+                    "Zehnerpotenzen",
+                    "Grenzen prüfen"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -621,6 +1213,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-10/02-funktionen/wiederholung.pptx"
             }
           ],
@@ -628,12 +1221,42 @@
             {
               "id": "01-exponentielle-funktionen-und-wachstum",
               "titel": "Exponentielle Funktionen; Wachstums- und Zerfallsprozesse",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Wachstums-Scanner",
+                  "datei": "wachstum.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-10/funktionen/wachstum.html",
+                  "beschreibung": "Exponentielle Modelle",
+                  "kompetenzen": [
+                    "Wachstumsfaktor",
+                    "Modell erkennen",
+                    "Verdopplungszeit",
+                    "Modellgrenze"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-sinus-und-kosinusfunktionen",
               "titel": "Sinus- und Kosinusfunktion; periodische Vorgänge und Einheitskreis",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Wellen-Werkstatt",
+                  "datei": "sinus.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-10/funktionen/sinus.html",
+                  "beschreibung": "Sinusfunktion und Einheitskreis",
+                  "kompetenzen": [
+                    "Amplitude",
+                    "Periode",
+                    "Einheitskreis",
+                    "Modell einstellen"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-funktionsvergleich-und-modellierung",
@@ -650,6 +1273,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-10/03-geometrie/wiederholung.pptx"
             }
           ],
@@ -657,7 +1281,22 @@
             {
               "id": "01-trigonometrie-im-rechtwinkligen-dreieck",
               "titel": "Sinus, Kosinus und Tangens im rechtwinkligen Dreieck",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Höhen-Expedition",
+                  "datei": "trigo.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-10/geometrie/trigo.html",
+                  "beschreibung": "Trigonometrie und Kosinussatz",
+                  "kompetenzen": [
+                    "Verhältnis wählen",
+                    "Höhe berechnen",
+                    "Winkel bestimmen",
+                    "Kosinussatz"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-kosinussatz",
@@ -672,7 +1311,22 @@
             {
               "id": "04-koerper-oberflaeche-und-volumen",
               "titel": "Kugel, Zylinder, Prisma, Kegel, Pyramide; Oberfläche und Volumen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Körper-Manufaktur",
+                  "datei": "koerper.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-10/geometrie/koerper.html",
+                  "beschreibung": "Kegel, Pyramide, Kugel und zusammengesetzte Körper",
+                  "kompetenzen": [
+                    "Pyramidenvolumen",
+                    "Kegelvolumen",
+                    "Kugelvolumen",
+                    "Zerlegung und Cavalieri"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -684,6 +1338,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "klasse-10/04-stochastik/wiederholung.pptx"
             }
           ],
@@ -691,7 +1346,22 @@
             {
               "id": "01-bedingte-wahrscheinlichkeit-und-vierfeldertafel",
               "titel": "Bedingte Wahrscheinlichkeit und Vierfeldertafel",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Vierfelder-Ermittlung",
+                  "datei": "vierfelder.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/klasse-10/stochastik/vierfelder.html",
+                  "beschreibung": "Bedingte Wahrscheinlichkeit und Unabhängigkeit",
+                  "kompetenzen": [
+                    "Tafel ergänzen",
+                    "Bedingte Wahrscheinlichkeit",
+                    "Schnittwahrscheinlichkeit",
+                    "Unabhängigkeit"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-stochastische-unabhaengigkeit",
@@ -726,6 +1396,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "ef/01-funktionen-und-analysis/wiederholung.pptx"
             }
           ],
@@ -738,12 +1409,42 @@
             {
               "id": "02-funktionseigenschaften-und-transformationen",
               "titel": "Graphenverlauf, Definitions-/Wertebereich, Nullstellen, Symmetrie, Verhalten im Unendlichen; Spiegelung/Verschiebung/Streckung",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Transformations-Labor",
+                  "datei": "transform.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/ef/analysis/transform.html",
+                  "beschreibung": "Funktionen und Parameter",
+                  "kompetenzen": [
+                    "Verschiebung",
+                    "Streckung",
+                    "Symmetrie",
+                    "Definitionsbereich"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-mittlere-und-lokale-aenderungsraten",
               "titel": "Mittlere und lokale Änderungsrate; Sekante und Tangente",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Tangenten-Labor",
+                  "datei": "ableitung.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/ef/analysis/ableitung.html",
+                  "beschreibung": "Mittlere und lokale Änderungsrate",
+                  "kompetenzen": [
+                    "Sekantensteigung",
+                    "Tangentensteigung",
+                    "Ableitungsgraph",
+                    "Grenzprozess"
+                  ]
+                }
+              ]
             },
             {
               "id": "04-ableitungsbegriff-und-graphisches-ableiten",
@@ -753,7 +1454,22 @@
             {
               "id": "05-differentialrechnung-ganzrationaler-funktionen",
               "titel": "Potenz-, Summen- und Faktorregel; Monotonie, Extrema, Krümmung, Wendepunkte",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Kurven-Detektiv",
+                  "datei": "kurven.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/ef/analysis/kurven.html",
+                  "beschreibung": "Extrema, Monotonie und Krümmung",
+                  "kompetenzen": [
+                    "Extremstellen",
+                    "Monotonie",
+                    "Wendestellen",
+                    "Randwerte"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -765,6 +1481,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "ef/02-analytische-geometrie-und-lineare-algebra/wiederholung.pptx"
             }
           ],
@@ -777,7 +1494,22 @@
             {
               "id": "02-vektoroperationen-und-eigenschaften",
               "titel": "Addition, skalare Multiplikation, Länge und Kollinearität",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Vektor-Navigator",
+                  "datei": "vektor.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/ef/analytische-geometrie/vektor.html",
+                  "beschreibung": "Vektoren und Strecken im Raum",
+                  "kompetenzen": [
+                    "Verbindungsvektor",
+                    "Länge",
+                    "Kollinearität",
+                    "Parameter deuten"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-geraden-und-strecken-in-parameterform",
@@ -787,7 +1519,22 @@
             {
               "id": "04-lagebeziehungen-und-schnittpunkte-von-geraden",
               "titel": "Identisch, parallel, windschief, sich schneidend; Schnittpunkte von Geraden",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Geraden-Lagecheck",
+                  "datei": "geraden.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/ef/analytische-geometrie/geraden.html",
+                  "beschreibung": "Lagebeziehungen und LGS",
+                  "kompetenzen": [
+                    "Richtungen prüfen",
+                    "Lage bestimmen",
+                    "Schnittpunkt",
+                    "LGS deuten"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -799,7 +1546,22 @@
             {
               "id": "01-mehrstufige-zufallsexperimente",
               "titel": "Urnenmodelle, Baumdiagramme und Pfadregeln",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Stochastik-Brücke",
+                  "datei": "bruecke.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/ef/stochastik/bruecke.html",
+                  "beschreibung": "Wiederholung vor der Qualifikationsphase",
+                  "kompetenzen": [
+                    "Pfadregel wiederholen",
+                    "Bedingung deuten",
+                    "Unabhängigkeit",
+                    "Modellgrenze"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-vierfeldertafeln-und-bedingte-wahrscheinlichkeit",
@@ -829,6 +1591,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "q1-q2-grundkurs/01-funktionen-und-analysis/wiederholung.pptx"
             }
           ],
@@ -841,22 +1604,96 @@
             {
               "id": "02-produktregel-und-zusammengesetzte-funktionen",
               "titel": "Produktregel; einfache Verkettungen der natürlichen Exponentialfunktion mit linearen Funktionen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Produktregel-Puzzle",
+                  "datei": "produkt.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/grundkurs/analysis/produkt.html",
+                  "beschreibung": "Produktregel und Ableitungsstruktur",
+                  "kompetenzen": [
+                    "Faktoren erkennen",
+                    "Regel aufbauen",
+                    "Ableitung auswerten",
+                    "Fehler korrigieren"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-extremwertprobleme-und-steckbriefaufgaben",
               "titel": "Extremwertprobleme und Rekonstruktion von Funktionstermen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Modell-Baumeister",
+                  "datei": "steckbrief.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/grundkurs/analysis/steckbrief.html",
+                  "beschreibung": "Rekonstruktion und Optimierung",
+                  "kompetenzen": [
+                    "Bedingungen übersetzen",
+                    "Parameter bestimmen",
+                    "Zielfunktion",
+                    "Optimum prüfen"
+                  ]
+                }
+              ]
             },
             {
               "id": "04-exponentialfunktionen-wachstum-und-zerfall",
               "titel": "Exponentialfunktionen, natürliche Exponentialfunktion, Wachstum und Zerfall",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Exponential-Labor",
+                  "datei": "exp.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/grundkurs/analysis/exp.html",
+                  "beschreibung": "Kettenregel und Wachstumsmodelle",
+                  "kompetenzen": [
+                    "Innere Ableitung",
+                    "Rate deuten",
+                    "Wachstumszeit",
+                    "Grenzwert"
+                  ]
+                }
+              ]
             },
             {
               "id": "05-integralbegriff-produktsumme-und-orientierte-flaeche",
               "titel": "Produktsummen, orientierte Fläche, Bestands- und Integralfunktion",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Analysis-Mission: Wassertank",
+                  "datei": "abi_analysis.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/grundkurs/analysis/abi_analysis.html",
+                  "beschreibung": "Vernetzte Analysis im Kontext",
+                  "kompetenzen": [
+                    "Rate analysieren",
+                    "Bestand rekonstruieren",
+                    "Extremum deuten",
+                    "Modell beurteilen"
+                  ]
+                },
+                {
+                  "titel": "Integral-Werkstatt",
+                  "datei": "integral.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/grundkurs/analysis/integral.html",
+                  "beschreibung": "Integral und Bestandsrekonstruktion",
+                  "kompetenzen": [
+                    "Produktsumme",
+                    "Stammfunktion",
+                    "Orientierte Fläche",
+                    "Bestand"
+                  ]
+                }
+              ]
             },
             {
               "id": "06-stammfunktionen-bestimmtes-integral-und-hauptsatz",
@@ -873,6 +1710,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "q1-q2-grundkurs/02-analytische-geometrie-und-lineare-algebra/wiederholung.pptx"
             }
           ],
@@ -880,17 +1718,62 @@
             {
               "id": "01-skalarprodukt-und-winkel",
               "titel": "Skalarprodukt, Orthogonalität, Winkel zwischen Vektoren",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Winkel-Scanner",
+                  "datei": "skalar.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/grundkurs/analytische-geometrie/skalar.html",
+                  "beschreibung": "Skalarprodukt und Schnittwinkel",
+                  "kompetenzen": [
+                    "Skalarprodukt",
+                    "Orthogonalität",
+                    "Vektorwinkel",
+                    "Gerade-Ebene-Winkel"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-ebenen-parameter-und-koordinatenform",
               "titel": "Ebenen in Parameter- und Koordinatenform; Normalenvektor",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Ebenen-Werkstatt",
+                  "datei": "ebenen.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/grundkurs/analytische-geometrie/ebenen.html",
+                  "beschreibung": "Ebenen und lineare Gleichungssysteme",
+                  "kompetenzen": [
+                    "Punktprobe",
+                    "Normalenvektor",
+                    "Schnittparameter",
+                    "Ebenenform"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-schnittwinkel-und-schnittpunkte",
               "titel": "Schnittwinkel; Schnittpunkte von Geraden und Ebenen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Raum-Mission: Landebahn",
+                  "datei": "abi_raum.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/grundkurs/analytische-geometrie/abi_raum.html",
+                  "beschreibung": "Räumliche Modellierung",
+                  "kompetenzen": [
+                    "Modell aufstellen",
+                    "Durchstoßpunkt",
+                    "Schnittwinkel",
+                    "Ergebnis beurteilen"
+                  ]
+                }
+              ]
             },
             {
               "id": "04-lineare-gleichungssysteme-und-gauss",
@@ -907,6 +1790,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "q1-q2-grundkurs/03-stochastik/wiederholung.pptx"
             }
           ],
@@ -914,17 +1798,62 @@
             {
               "id": "01-mehrstufige-zufallsexperimente-wiederholung-und-vertiefung",
               "titel": "Urnenmodelle, Baumdiagramme, Vierfeldertafeln, bedingte Wahrscheinlichkeit, Pfadregeln",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Stochastik-Mission: Qualitätscheck",
+                  "datei": "abi_sto.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/grundkurs/stochastik/abi_sto.html",
+                  "beschreibung": "Bedingung, Binomialmodell und Interpretation",
+                  "kompetenzen": [
+                    "Bedingte Wahrscheinlichkeit",
+                    "Binomialmodell",
+                    "Ereignis berechnen",
+                    "Aussage beurteilen"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-zufallsgroessen-und-kenngroessen",
               "titel": "Diskrete Zufallsgrößen; Erwartungswert, Varianz und Standardabweichung",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Faire-Spiele-Werkstatt",
+                  "datei": "erwartung.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/grundkurs/stochastik/erwartung.html",
+                  "beschreibung": "Zufallsgrößen und Kenngrößen",
+                  "kompetenzen": [
+                    "Erwartungswert",
+                    "Fairer Einsatz",
+                    "Varianz",
+                    "Gewinn interpretieren"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-binomialverteilung",
               "titel": "Binomialverteilung; Kenngrößen und Histogramme",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Binomial-Labor",
+                  "datei": "binomial.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/grundkurs/stochastik/binomial.html",
+                  "beschreibung": "Bernoulli-Kette und Binomialverteilung",
+                  "kompetenzen": [
+                    "Modell prüfen",
+                    "Einzelwahrscheinlichkeit",
+                    "Erwartung und Streuung",
+                    "Histogramm deuten"
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -944,6 +1873,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "q1-q2-leistungskurs/01-funktionen-und-analysis/wiederholung.pptx"
             }
           ],
@@ -956,12 +1886,56 @@
             {
               "id": "02-produktregel-kettenregel-und-funktionenscharen",
               "titel": "Produktregel, Kettenregel, Funktionenscharen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Exponential-Labor · LK-Basis",
+                  "datei": "exp.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/leistungskurs/analysis/exp.html",
+                  "beschreibung": "Kettenregel und Wachstumsmodelle",
+                  "kompetenzen": [
+                    "Innere Ableitung",
+                    "Rate deuten",
+                    "Wachstumszeit",
+                    "Grenzwert"
+                  ]
+                },
+                {
+                  "titel": "Produktregel-Puzzle · LK-Basis",
+                  "datei": "produkt.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/leistungskurs/analysis/produkt.html",
+                  "beschreibung": "Produktregel und Ableitungsstruktur",
+                  "kompetenzen": [
+                    "Faktoren erkennen",
+                    "Regel aufbauen",
+                    "Ableitung auswerten",
+                    "Fehler korrigieren"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-extremwertprobleme-und-steckbriefaufgaben",
               "titel": "Extremwertprobleme und Rekonstruktion von Funktionstermen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Modell-Baumeister · LK-Basis",
+                  "datei": "steckbrief.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/leistungskurs/analysis/steckbrief.html",
+                  "beschreibung": "Rekonstruktion und Optimierung",
+                  "kompetenzen": [
+                    "Bedingungen übersetzen",
+                    "Parameter bestimmen",
+                    "Zielfunktion",
+                    "Optimum prüfen"
+                  ]
+                }
+              ]
             },
             {
               "id": "04-logarithmus-und-umkehrfunktionen",
@@ -971,7 +1945,36 @@
             {
               "id": "05-integralbegriff-und-integralfunktion",
               "titel": "Produktsumme, orientierte Fläche, Bestandsfunktion und Integralfunktion",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Analysis-Mission: Wassertank · LK-Basis",
+                  "datei": "abi_analysis.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/leistungskurs/analysis/abi_analysis.html",
+                  "beschreibung": "Vernetzte Analysis im Kontext",
+                  "kompetenzen": [
+                    "Rate analysieren",
+                    "Bestand rekonstruieren",
+                    "Extremum deuten",
+                    "Modell beurteilen"
+                  ]
+                },
+                {
+                  "titel": "Integral-Werkstatt · LK-Basis",
+                  "datei": "integral.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/leistungskurs/analysis/integral.html",
+                  "beschreibung": "Integral und Bestandsrekonstruktion",
+                  "kompetenzen": [
+                    "Produktsumme",
+                    "Stammfunktion",
+                    "Orientierte Fläche",
+                    "Bestand"
+                  ]
+                }
+              ]
             },
             {
               "id": "06-stammfunktionen-bestimmtes-integral-und-hauptsatz",
@@ -988,6 +1991,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "q1-q2-leistungskurs/02-analytische-geometrie-und-lineare-algebra/wiederholung.pptx"
             }
           ],
@@ -995,22 +1999,82 @@
             {
               "id": "01-skalarprodukt-und-winkel",
               "titel": "Skalarprodukt, Orthogonalität und Winkel",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Winkel-Scanner · LK-Basis",
+                  "datei": "skalar.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/leistungskurs/analytische-geometrie/skalar.html",
+                  "beschreibung": "Skalarprodukt und Schnittwinkel",
+                  "kompetenzen": [
+                    "Skalarprodukt",
+                    "Orthogonalität",
+                    "Vektorwinkel",
+                    "Gerade-Ebene-Winkel"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-ebenen-parameter-koordinaten-und-normalenform",
               "titel": "Ebenen in Parameter-, Koordinaten- und Normalenform",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Ebenen-Werkstatt · LK-Basis",
+                  "datei": "ebenen.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/leistungskurs/analytische-geometrie/ebenen.html",
+                  "beschreibung": "Ebenen und lineare Gleichungssysteme",
+                  "kompetenzen": [
+                    "Punktprobe",
+                    "Normalenvektor",
+                    "Schnittparameter",
+                    "Ebenenform"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-schnittwinkel-und-schnittpunkte",
               "titel": "Schnittwinkel und Schnittpunkte von Geraden/Ebenen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Raum-Mission: Landebahn · LK-Basis",
+                  "datei": "abi_raum.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/leistungskurs/analytische-geometrie/abi_raum.html",
+                  "beschreibung": "Räumliche Modellierung",
+                  "kompetenzen": [
+                    "Modell aufstellen",
+                    "Durchstoßpunkt",
+                    "Schnittwinkel",
+                    "Ergebnis beurteilen"
+                  ]
+                }
+              ]
             },
             {
               "id": "04-lagebeziehungen-und-abstaende",
               "titel": "Lagebeziehungen und Abstände zwischen Punkten, Geraden und Ebenen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Abstands-Werkstatt · LK",
+                  "datei": "abstand.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/leistungskurs/analytische-geometrie/abstand.html",
+                  "beschreibung": "Abstände, Lot und Spiegelung",
+                  "kompetenzen": [
+                    "Punkt-Ebene-Abstand",
+                    "Lotfußpunkt",
+                    "Spiegelpunkt",
+                    "Abstand begründen"
+                  ]
+                }
+              ]
             },
             {
               "id": "05-lineare-gleichungssysteme-und-gauss",
@@ -1027,6 +2091,7 @@
               "titel": "Wiederholung",
               "datei": "wiederholung.pptx",
               "typ": "PPTX",
+              "kategorie": "PPTX",
               "url": "q1-q2-leistungskurs/03-stochastik/wiederholung.pptx"
             }
           ],
@@ -1034,27 +2099,102 @@
             {
               "id": "01-mehrstufige-zufallsexperimente",
               "titel": "Urnenmodelle, Baumdiagramme, Vierfeldertafeln, bedingte Wahrscheinlichkeiten und Pfadregeln",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Stochastik-Mission: Qualitätscheck · LK-Basis",
+                  "datei": "abi_sto.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/leistungskurs/stochastik/abi_sto.html",
+                  "beschreibung": "Bedingung, Binomialmodell und Interpretation",
+                  "kompetenzen": [
+                    "Bedingte Wahrscheinlichkeit",
+                    "Binomialmodell",
+                    "Ereignis berechnen",
+                    "Aussage beurteilen"
+                  ]
+                }
+              ]
             },
             {
               "id": "02-zufallsgroessen-und-kenngroessen",
               "titel": "Diskrete Zufallsgrößen; Erwartungswert, Varianz und Standardabweichung",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Faire-Spiele-Werkstatt · LK-Basis",
+                  "datei": "erwartung.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/leistungskurs/stochastik/erwartung.html",
+                  "beschreibung": "Zufallsgrößen und Kenngrößen",
+                  "kompetenzen": [
+                    "Erwartungswert",
+                    "Fairer Einsatz",
+                    "Varianz",
+                    "Gewinn interpretieren"
+                  ]
+                }
+              ]
             },
             {
               "id": "03-binomialverteilung-und-sigma-regeln",
               "titel": "Binomialkoeffizient, Binomialverteilung, Histogramme und σ-Regeln",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Binomial-Labor · LK-Basis",
+                  "datei": "binomial.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q1/leistungskurs/stochastik/binomial.html",
+                  "beschreibung": "Bernoulli-Kette und Binomialverteilung",
+                  "kompetenzen": [
+                    "Modell prüfen",
+                    "Einzelwahrscheinlichkeit",
+                    "Erwartung und Streuung",
+                    "Histogramm deuten"
+                  ]
+                }
+              ]
             },
             {
               "id": "04-beurteilende-statistik",
               "titel": "Prognoseintervall, Konfidenzintervall und Stichprobenumfang",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Intervall-Detektiv · LK",
+                  "datei": "konfidenz.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/leistungskurs/stochastik/konfidenz.html",
+                  "beschreibung": "Prognose- und Konfidenzintervalle",
+                  "kompetenzen": [
+                    "Prognoseintervall",
+                    "Konfidenzintervall",
+                    "Stichprobenumfang",
+                    "Interpretation"
+                  ]
+                }
+              ]
             },
             {
               "id": "05-normalverteilung",
               "titel": "Dichtefunktion, Gaußsche Glockenkurve, Parameter μ und σ, Verteilungsfunktion",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Normalverteilungs-Labor · LK",
+                  "datei": "normal.html",
+                  "typ": "Lernspiel",
+                  "kategorie": "Lernspiel",
+                  "url": "lernspiele/q2/leistungskurs/stochastik/normal.html",
+                  "beschreibung": "Normalverteilung",
+                  "kompetenzen": [
+                    "Standardisieren",
+                    "Sigma-Intervall",
+                    "Dichte und Wahrscheinlichkeit",
+                    "Parameterwirkung"
+                  ]
+                }
+              ]
             }
           ]
         }

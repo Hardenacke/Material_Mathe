@@ -38,6 +38,7 @@ def main():
 
     for area in STRUCT["bereiche"]:
         copy_dir(area["id"])
+    copy_dir("lernspiele")
     copy_dir("gemeinsam")
     copy_dir("dokumentation")
 

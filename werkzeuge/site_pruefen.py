@@ -14,13 +14,16 @@ expected={"bereiche":9,"inhaltsfelder":33,"themen":105}
 for k,v in expected.items():
     if s.get(k)!=v: errors.append(f"{k}: erwartet {v}, gefunden {s.get(k)}")
 if s.get("materialien",0) < 33: errors.append("Weniger als 33 sichtbare Materialien; Wiederholungs-PPTs fehlen möglicherweise.")
+if (ROOT/"lernspiele").exists() and s.get("lernspiele",0) < 1: errors.append("Lernspiele vorhanden, aber nicht im Katalog sichtbar.")
 for area in data.get("bereiche",[]):
     for field in area.get("inhaltsfelder",[]):
         for mat in field.get("materialien",[]):
             if not (ROOT/mat["url"]).exists(): errors.append(f"Materialpfad fehlt: {mat['url']}")
+            if (ROOT/"_site").exists() and not (ROOT/"_site"/mat["url"]).exists(): errors.append(f"Materialpfad fehlt in _site: {mat['url']}")
         for topic in field.get("themen",[]):
             for mat in topic.get("materialien",[]):
                 if not (ROOT/mat["url"]).exists(): errors.append(f"Materialpfad fehlt: {mat['url']}")
+                if (ROOT/"_site").exists() and not (ROOT/"_site"/mat["url"]).exists(): errors.append(f"Materialpfad fehlt in _site: {mat['url']}")
 if errors:
     print("SITE-PRÜFUNG FEHLGESCHLAGEN")
     for e in errors: print("-",e)

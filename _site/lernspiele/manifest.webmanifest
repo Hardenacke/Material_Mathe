@@ -1,0 +1,10 @@
+{
+  "name": "Mathe-Lernspiele NRW",
+  "short_name": "Mathe-Spiele",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7fbfa",
+  "theme_color": "#08796e",
+  "lang": "de",
+  "icons": []
+}
