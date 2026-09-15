@@ -313,8 +313,8 @@ function renderAreaSupport(area, query) {
   const theme = { accent: "#c85f48", accentDark: "#23454a", accentSoft: "#faebe5" };
   const section = document.createElement("section");
   section.className = "support-section";
-  section.appendChild(createText("p", "step-label", "Unterstützung"));
-  section.appendChild(createText("h2", "", "Hilfen für diesen Jahrgang"));
+  section.appendChild(createText("p", "step-label", "Kategorie"));
+  section.appendChild(createText("h2", "", "Unterstützung"));
   section.appendChild(createText("p", "view-copy", "Erklärvideos und Vorlagen zum Lernen und Erstellen von Aufgaben."));
 
   const list = document.createElement("div");
@@ -514,9 +514,6 @@ function renderAreaPage(area, query) {
   catalogRoot.appendChild(renderFieldPicker(area, fields, visibleSelectedField));
 
   const supportSection = renderAreaSupport(area, query);
-  if (supportSection) {
-    catalogRoot.appendChild(supportSection);
-  }
 
   if (visibleSelectedField) {
     catalogRoot.appendChild(renderFieldDetail(visibleSelectedField, query));
@@ -533,6 +530,10 @@ function renderAreaPage(area, query) {
     empty.appendChild(createText("h3", "", "Noch kein Inhaltsfeld ausgewählt"));
     empty.appendChild(createText("p", "", "Wähle oben ein Inhaltsfeld aus, um Themen und Dateien zu sehen."));
     catalogRoot.appendChild(empty);
+  }
+
+  if (supportSection) {
+    catalogRoot.appendChild(supportSection);
   }
 }
 
