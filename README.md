@@ -11,6 +11,7 @@ Dieses Repository bündelt die vorbereitete Mathematik-Ordnerstruktur, alle Wied
 - **105 Themenordner** als Ablage für Lernpfade, Arbeitsblätter, Simulationen und weitere Materialien
 - **Lernspiele** als auswählbare Materialkategorie, veröffentlicht aus `lernspiele/`
 - **Question Shells** als bereichsweite Unterstützung unter `*/unterstuetzung/`
+- **Drei Erklärvideos zu Wurzeln** für Klasse 9 unter Unterstützung: Quadratzahlen, Intervallschachtelung und Heron-Verfahren; mit Manim gerendert und mit Übungen ergänzt
 - `struktur.json` als fachliches Strukturregister
 - `dokumentation/ABITURVORGABEN_SEKII.md` für die Sek-II-Ausrichtung
 - gemeinsame PPTX/POTX-Designvorlagen unter `gemeinsam/vorlagen/`

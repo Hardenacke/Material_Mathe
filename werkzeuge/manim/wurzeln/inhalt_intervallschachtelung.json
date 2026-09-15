@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "mathematik-klasse-9-intervallschachtelung-wurzel-20",
+  "title": "Intervallschachtelung: √20 näherungsweise bestimmen",
+  "grade": "Klasse 9",
+  "subject": "Mathematik",
+  "curriculum": ["Ari-6", "Ari-9", "Ope-4", "Ope-8", "Kom-4"],
+  "learning_goals": [
+    "Eine Quadratwurzel durch Vergleichen benachbarter Quadratzahlen eingrenzen.",
+    "Eine einfache Intervallschachtelung schrittweise durchführen.",
+    "Erklären, warum ein engeres Intervall einen genaueren Näherungswert liefert.",
+    "Die Intervallbreite als Aussage über die mögliche Abweichung deuten."
+  ],
+  "key_example": {
+    "radicand": 20,
+    "steps": [
+      "4² = 16 < 20 < 25 = 5² → 4 < √20 < 5",
+      "(4,4)² = 19,36 < 20 < 20,25 = (4,5)² → 4,4 < √20 < 4,5",
+      "(4,47)² = 19,9809 < 20 < 20,0704 = (4,48)² → 4,47 < √20 < 4,48"
+    ],
+    "approximation": "√20 ≈ 4,47"
+  },
+  "scenes": [
+    "Problem und erste Begrenzung",
+    "Graph y = x² und Zahlengerade mit Intervall [4; 5]",
+    "Zehntelwerte testen",
+    "Hundertstelwerte testen",
+    "Intervallbreite und Genauigkeit",
+    "Merksatz und Transferfrage"
+  ],
+  "voiceover": {
+    "enabled": false,
+    "language": "de-DE",
+    "screen_text_is_sufficient": true
+  },
+  "source": "video_intervallschachtelung.py",
+  "scene": "Intervallschachtelung",
+  "output": "intervallschachtelung_sqrt20.mp4"
+}

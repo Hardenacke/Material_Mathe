@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "mathematik-klasse-9-heron-verfahren-wurzel-20",
+  "title": "Heron-Verfahren: Wie wird aus einem Rechteck ein Quadrat?",
+  "grade": "Klasse 9",
+  "subject": "Mathematik",
+  "curriculum": ["Ari-6", "Ari-9", "Ope-4", "Ope-8", "Kom-4"],
+  "learning_goals": [
+    "Die zwei Seiten eines Rechtecks der Fläche a als x und a/x beschreiben.",
+    "Aus dem Mittelwert der Seiten die Heron-Vorschrift x_(n+1)=(x_n+a/x_n)/2 entwickeln.",
+    "Mit einem positiven Startwert mindestens zwei Schritte selbst ausführen.",
+    "Erklären, warum bei gleich langen Seiten die Quadratwurzel erreicht wird.",
+    "An einem Startwert oberhalb der Quadratwurzel die engeren sicheren Grenzen beobachten."
+  ],
+  "key_example": {
+    "radicand": 20,
+    "start": 5,
+    "iteration": "x_(n+1) = (x_n + 20/x_n) / 2",
+    "values_unrounded": [5, 4.5, 4.472222222222222, 4.472135955831607],
+    "display": ["x₀ = 5; y₀ = 4", "x₁ = 4,5; y₁ ≈ 4,4444", "x₂ ≈ 4,47222; y₂ ≈ 4,47205", "x₃ ≈ 4,47214"],
+    "check": "(4,47214)² ≈ 20,00004 ≈ 20"
+  },
+  "scenes": [
+    "Leitfrage und Verbindung zur Intervallschachtelung",
+    "Rechteck der Fläche 20 mit Seiten 5 und 4",
+    "Erster Mittelwert: 4,5; Flächeninhalt bewahren",
+    "Zweiter Mittelwert: etwa 4,47222",
+    "Zwei Zahlengeraden mit immer engeren Grenzen",
+    "Dritter Wert und Probe mit gerundeter Zahl",
+    "Heron-Regel und Übung zu √50"
+  ],
+  "voiceover": {"enabled": false, "language": "de-DE", "screen_text_is_sufficient": true},
+  "source": "video_heron.py",
+  "scene": "HeronVerfahren",
+  "output": "heron_sqrt20.mp4",
+  "sources": [
+    "https://toolbox.edu.tum.de/pages/modules/4/62.html",
+    "https://lehrplannavigator.nrw.de/system/files/media/document/file/g9_m_silp_2020_01_31.pdf"
+  ]
+}

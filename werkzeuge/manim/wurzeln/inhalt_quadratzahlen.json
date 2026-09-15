@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "mathematik-klasse-9-wurzelziehen-quadratzahlen",
+  "title": "Warum ist √25 = 5? Wurzelziehen bei Quadratzahlen",
+  "grade": "Klasse 9",
+  "subject": "Mathematik",
+  "curriculum": ["Ari-7", "Ari-9", "Ope-4", "Ope-8", "Kom-4"],
+  "learning_goals": [
+    "Das Radizieren als Umkehrung des Quadrierens erklären.",
+    "Quadratwurzeln einfacher Quadratzahlen ohne digitale Werkzeuge bestimmen.",
+    "Radikand, Wurzelzeichen und Wurzelwert sicher benennen.",
+    "Das Ergebnis mit der Gegenaufgabe bzw. Probe überprüfen.",
+    "Die Quadratwurzel als nichtnegative Zahl von den Lösungen einer quadratischen Gleichung unterscheiden."
+  ],
+  "key_example": {
+    "root": "√25 = 5",
+    "check": "5 · 5 = 25",
+    "terminology": {
+      "25": "Radikand",
+      "√": "Wurzelzeichen",
+      "5": "Wurzelwert"
+    }
+  },
+  "scenes": [
+    "Leitfrage",
+    "Flächenmodell mit 5 × 5 Einheitsfeldern",
+    "Gegenaufgaben: Quadrieren und Radizieren",
+    "Kurzer Begriff-Check vor der Auflösung",
+    "Fachbegriffe am Wurzelausdruck",
+    "Probe und Abgrenzung zu x² = 25",
+    "Merksatz und Transferfrage"
+  ],
+  "voiceover": {
+    "enabled": false,
+    "language": "de-DE",
+    "screen_text_is_sufficient": true
+  },
+  "source": "video_quadratzahlen.py",
+  "scene": "WurzelQuadratzahlen",
+  "output": "wurzelziehen_quadratzahlen.mp4"
+}

@@ -156,6 +156,10 @@ def materials_in(folder: Path, recursive: bool = False) -> list[dict]:
 
 
 def support_title(file: Path) -> str:
+    if file.name == "wurzeln-erklaervideos.html":
+        return "Wurzeln verstehen – drei Erklärvideos"
+    if not file.stem.startswith("question_shells_"):
+        return pretty_title(file)
     label = file.stem.replace("question_shells_", "").replace("_", " ")
     if label.startswith("klasse-"):
         label = label.replace("klasse-", "Klasse ")
@@ -171,7 +175,10 @@ def support_materials_in(area_dir: Path) -> list[dict]:
         material["titel"] = support_title(support_dir / material["datei"])
         material["typ"] = "Unterstützung"
         material["kategorie"] = "Unterstützung"
-        material["beschreibung"] = "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        if material["datei"] == "wurzeln-erklaervideos.html":
+            material["beschreibung"] = "Quadratzahlen, Intervallschachtelung und Heron-Verfahren: drei Erklärvideos mit Übungen zu Quadratwurzeln."
+        elif material["datei"].startswith("question_shells_"):
+            material["beschreibung"] = "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
     return sort_materials(materials)
 
 

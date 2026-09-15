@@ -1,0 +1,38 @@
+{
+  "wurzelziehen_quadratzahlen.mp4": {
+    "renderer": "Manim Community 0.19.2",
+    "scene": "WurzelQuadratzahlen",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 1439,
+    "duration_seconds": 47.967,
+    "sha256": "8146de4cf0e0710fa448fd79474b2f22b90fd8c57750c489ea207f48565f726c",
+    "source_sha256": "87b7f8e5a703d812746ea7f2065ea0cf8a5761f0ec5bc1c096abc3d88b59beec",
+    "shared_sha256": "b7766f4e86748289651899bbf64b3470e71ad48204aca3326e7eca07e1cc56e4"
+  },
+  "intervallschachtelung_sqrt20.mp4": {
+    "renderer": "Manim Community 0.19.2",
+    "scene": "Intervallschachtelung",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 1592,
+    "duration_seconds": 53.067,
+    "sha256": "860ef47036885970e0224a3d614654761258fd2f56b15f9b27c56a393866df8e",
+    "source_sha256": "4db6f13660bcffddad11819e2c36d702831f33fe5569a509ccfd6c3b2a8be637",
+    "shared_sha256": "b7766f4e86748289651899bbf64b3470e71ad48204aca3326e7eca07e1cc56e4"
+  },
+  "heron_sqrt20.mp4": {
+    "renderer": "Manim Community 0.19.2",
+    "scene": "HeronVerfahren",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 1497,
+    "duration_seconds": 49.9,
+    "sha256": "fcf7bcb8c9addeea6bac52f886d9cfa245dd53daeebd769cab6894eddb81831d",
+    "source_sha256": "66b51ed445d2591952f73b883bbf8094e3d58d7bc07057e280ed31c0f5734188",
+    "shared_sha256": "b7766f4e86748289651899bbf64b3470e71ad48204aca3326e7eca07e1cc56e4"
+  }
+}

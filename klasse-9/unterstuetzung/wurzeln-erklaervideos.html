@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wurzeln verstehen · Klasse 9</title>
+  <style>
+    :root { color-scheme: light; --ink: #172b4d; --muted: #52606d; --blue: #1851be; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 1rem; background: #f7fafc; color: var(--ink); font: 1rem/1.6 system-ui, sans-serif; }
+    main { max-width: 980px; margin: auto; }
+    a { color: var(--blue); text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    .back { display: inline-block; padding: .65rem 0; }
+    header { padding: clamp(1rem, 4vw, 2rem); border-radius: 1rem; background: linear-gradient(135deg, #dce9ff, #e3f6f3); }
+    .eyebrow { margin: 0; font-weight: 700; color: var(--blue); }
+    h1 { margin: .3rem 0; font-size: clamp(1.7rem, 5vw, 2.6rem); line-height: 1.2; }
+    h2 { margin: 0 0 .5rem; font-size: clamp(1.2rem, 3vw, 1.6rem); line-height: 1.35; }
+    p { margin: .65rem 0; }
+    nav ol { padding-left: 1.4rem; }
+    nav a { display: inline-block; padding: .4rem 0; }
+    section { margin-top: 1.25rem; padding: clamp(1rem, 3vw, 1.5rem); border-radius: 1rem; background: white; border: 1px solid #d9e2ec; scroll-margin-top: 1rem; }
+    video { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; border-radius: .6rem; background: #f7fafc; }
+    .download { display: inline-block; margin: .8rem 0; padding: .65rem 1rem; border-radius: .5rem; color: white; background: var(--blue); text-decoration: none; font-weight: 650; }
+    .exercise { border-top: 1px solid #d9e2ec; margin-top: .5rem; padding-top: .7rem; }
+    details { padding: .5rem .8rem; background: #eff5fc; border-radius: .5rem; }
+    summary { cursor: pointer; padding: .4rem 0; font-weight: 650; }
+    footer { padding: 1.5rem 0; color: var(--muted); }
+  </style>
+</head>
+<body>
+<main>
+  <a class="back" href="../../index.html#/klasse-9">← Zurück zu Klasse 9</a>
+  <header>
+    <p class="eyebrow">Klasse 9 · Unterstützung</p>
+    <h1>Wurzeln verstehen</h1>
+    <p>Drei Erklärvideos führen dich vom Wurzelziehen zu zwei Verfahren, mit denen du Quadratwurzeln näherungsweise bestimmst.</p>
+    <p>Die Videos haben keinen Ton. Alle Erklärungen stehen im Bild. Pausiere bei Bedarf, rechne mit und probiere anschließend die Übungen.</p>
+    <nav aria-label="Videos">
+      <ol>
+        <li><a href="#quadratzahlen">Wurzelziehen bei Quadratzahlen</a></li>
+        <li><a href="#intervallschachtelung">Intervallschachtelung</a></li>
+        <li><a href="#heron">Das Heron-Verfahren</a></li>
+      </ol>
+    </nav>
+  </header>
+  <section id="quadratzahlen" aria-labelledby="titel-quadratzahlen">
+    <h2 id="titel-quadratzahlen">1. Warum ist √25 = 5?</h2>
+    <p>Vom Quadrat mit 25 Einheitsfeldern zur Wurzel: Lerne Wurzelzeichen, Radikand und Wurzelwert kennen.</p>
+    <video controls playsinline preload="metadata" poster="assets/wurzeln/wurzelziehen_quadratzahlen.jpg" aria-label="Erklärvideo: Wurzelziehen bei Quadratzahlen">
+      <source src="assets/wurzeln/wurzelziehen_quadratzahlen.mp4" type="video/mp4">
+      Dein Browser kann das Video nicht abspielen. Nutze den Download darunter.
+    </video>
+    <a class="download" href="assets/wurzeln/wurzelziehen_quadratzahlen.mp4" download>Video 1 herunterladen</a>
+    <p><strong>Merke:</strong> Die Quadratwurzel ist nichtnegativ. Daher gilt √25 = 5. Die Gleichung x² = 25 hat dagegen zwei Lösungen: −5 und 5.</p>
+    <div class="exercise">
+      <p><strong>Du bist dran:</strong> Berechne √81, nenne Radikand und Wurzelwert und mache die Probe.</p>
+      <details><summary>Lösung anzeigen</summary><p>√81 = 9. Der Radikand ist 81, der Wurzelwert ist 9. Probe: 9 · 9 = 81.</p></details>
+    </div>
+  </section>
+  <section id="intervallschachtelung" aria-labelledby="titel-intervall">
+    <h2 id="titel-intervall">2. Intervallschachtelung: √20 eingrenzen</h2>
+    <p>Vergleiche Quadrate und verenge die Grenzen Schritt für Schritt: von ganzen Zahlen zu Zehnteln und Hundertsteln.</p>
+    <video controls playsinline preload="metadata" poster="assets/wurzeln/intervallschachtelung_sqrt20.jpg" aria-label="Erklärvideo: Intervallschachtelung für die Wurzel aus 20">
+      <source src="assets/wurzeln/intervallschachtelung_sqrt20.mp4" type="video/mp4">
+      Dein Browser kann das Video nicht abspielen. Nutze den Download darunter.
+    </video>
+    <a class="download" href="assets/wurzeln/intervallschachtelung_sqrt20.mp4" download>Video 2 herunterladen</a>
+    <p><strong>Merke:</strong> (4,47)² &lt; 20 &lt; (4,48)². Also liegt √20 zwischen 4,47 und 4,48. Verwendest du 4,47 als Näherung, ist der Fehler kleiner als 0,01.</p>
+    <div class="exercise">
+      <p><strong>Du bist dran:</strong> Zwischen welchen aufeinanderfolgenden ganzen Zahlen liegt √50? Grenze anschließend auf Zehntel ein.</p>
+      <details><summary>Lösung anzeigen</summary><p>7² = 49 &lt; 50 &lt; 64 = 8², also 7 &lt; √50 &lt; 8. Mit (7,0)² = 49 und (7,1)² = 50,41 folgt 7,0 &lt; √50 &lt; 7,1.</p></details>
+    </div>
+  </section>
+  <section id="heron" aria-labelledby="titel-heron">
+    <h2 id="titel-heron">3. Heron-Verfahren: Vom Rechteck zum Quadrat</h2>
+    <p>Die Rechtecke behalten die Fläche 20. Aus dem Mittelwert ihrer Seiten entsteht jeweils eine bessere Näherung für √20.</p>
+    <video controls playsinline preload="metadata" poster="assets/wurzeln/heron_sqrt20.jpg" aria-label="Erklärvideo: Heron-Verfahren für die Wurzel aus 20">
+      <source src="assets/wurzeln/heron_sqrt20.mp4" type="video/mp4">
+      Dein Browser kann das Video nicht abspielen. Nutze den Download darunter.
+    </video>
+    <a class="download" href="assets/wurzeln/heron_sqrt20.mp4" download>Video 3 herunterladen</a>
+    <p><strong>Merke:</strong> Für eine Fläche a &gt; 0 und einen positiven Startwert x berechnest du die zweite Seite a / x. Der Mittelwert (x + a / x) / 2 ist der neue Wert für x. Wiederhole diese Schritte.</p>
+    <div class="exercise">
+      <p><strong>Du bist dran:</strong> Starte für √50 mit x₀ = 8. Berechne die zweite Seite und anschließend den neuen Näherungswert x₁.</p>
+      <details><summary>Lösung anzeigen</summary><p>Die zweite Seite ist 50 / 8 = 6,25. Der Mittelwert ergibt x₁ = (8 + 6,25) / 2 = 7,125. Für das neue Rechteck berechnest du die zweite Seite mit 50 / 7,125 ≈ 7,01754.</p></details>
+    </div>
+  </section>
+  <footer><a href="../../index.html#/klasse-9">Weitere Materialien für Klasse 9</a></footer>
+</main>
+</body>
+</html>

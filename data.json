@@ -5,9 +5,9 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 117,
+    "materialien": 118,
     "lernspiele": 74,
-    "unterstuetzung": 11
+    "unterstuetzung": 12
   },
   "kategorien": [
     "Lernspiel",
@@ -1007,6 +1007,14 @@
           "kategorie": "Unterstützung",
           "url": "klasse-9/unterstuetzung/question_shells_klasse-9.html",
           "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        },
+        {
+          "titel": "Wurzeln verstehen – drei Erklärvideos",
+          "datei": "wurzeln-erklaervideos.html",
+          "typ": "Unterstützung",
+          "kategorie": "Unterstützung",
+          "url": "klasse-9/unterstuetzung/wurzeln-erklaervideos.html",
+          "beschreibung": "Quadratzahlen, Intervallschachtelung und Heron-Verfahren: drei Erklärvideos mit Übungen zu Quadratwurzeln."
         }
       ],
       "inhaltsfelder": [

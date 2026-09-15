@@ -314,8 +314,8 @@ function renderAreaSupport(area, query) {
   const section = document.createElement("section");
   section.className = "support-section";
   section.appendChild(createText("p", "step-label", "Unterstützung"));
-  section.appendChild(createText("h2", "", "Question Shells"));
-  section.appendChild(createText("p", "view-copy", "Jahrgangsbezogene Vorlagen zum Erstellen von Aufgaben, unabhängig vom Inhaltsfeld."));
+  section.appendChild(createText("h2", "", "Hilfen für diesen Jahrgang"));
+  section.appendChild(createText("p", "view-copy", "Erklärvideos und Vorlagen zum Lernen und Erstellen von Aufgaben."));
 
   const list = document.createElement("div");
   list.className = "support-list";

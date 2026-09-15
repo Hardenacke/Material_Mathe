@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "collection_id": "mathematik-klasse-9-reelle-zahlen-wurzeln",
+  "title": "Reelle Zahlen: Wurzeln verstehen",
+  "subject": "Mathematik",
+  "grade": "Klasse 9",
+  "curriculum_source": "https://lehrplannavigator.nrw.de/system/files/media/document/file/g9_m_silp_2020_01_31.pdf",
+  "videos": [
+    {
+      "id": "mathematik-klasse-9-wurzelziehen-quadratzahlen",
+      "title": "Warum ist √25 = 5? Wurzelziehen bei Quadratzahlen",
+      "source": "video_quadratzahlen.py",
+      "scene": "WurzelQuadratzahlen",
+      "output": "wurzelziehen_quadratzahlen.mp4",
+      "content": "inhalt_quadratzahlen.json"
+    },
+    {
+      "id": "mathematik-klasse-9-intervallschachtelung-wurzel-20",
+      "title": "Intervallschachtelung: √20 näherungsweise bestimmen",
+      "source": "video_intervallschachtelung.py",
+      "scene": "Intervallschachtelung",
+      "output": "intervallschachtelung_sqrt20.mp4",
+      "content": "inhalt_intervallschachtelung.json"
+    },
+    {
+      "id": "mathematik-klasse-9-heron-verfahren-wurzel-20",
+      "title": "Heron-Verfahren: Wie wird aus einem Rechteck ein Quadrat?",
+      "source": "video_heron.py",
+      "scene": "HeronVerfahren",
+      "output": "heron_sqrt20.mp4",
+      "content": "inhalt_heron.json"
+    }
+  ]
+}
