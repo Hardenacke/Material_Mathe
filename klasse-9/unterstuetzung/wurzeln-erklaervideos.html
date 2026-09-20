@@ -21,7 +21,9 @@
     nav a { display: inline-block; padding: .4rem 0; }
     section { margin-top: 1.25rem; padding: clamp(1rem, 3vw, 1.5rem); border-radius: 1rem; background: white; border: 1px solid #d9e2ec; scroll-margin-top: 1rem; }
     video { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; border-radius: .6rem; background: #f7fafc; }
-    .download { display: inline-block; margin: .8rem 0; padding: .65rem 1rem; border-radius: .5rem; color: white; background: var(--blue); text-decoration: none; font-weight: 650; }
+    .actions { display: flex; flex-wrap: wrap; gap: .6rem; margin: .8rem 0; }
+    .download { display: inline-block; padding: .65rem 1rem; border-radius: .5rem; color: white; background: var(--blue); text-decoration: none; font-weight: 650; }
+    .learn { background: #167a47; }
     .exercise { border-top: 1px solid #d9e2ec; margin-top: .5rem; padding-top: .7rem; }
     details { padding: .5rem .8rem; background: #eff5fc; border-radius: .5rem; }
     summary { cursor: pointer; padding: .4rem 0; font-weight: 650; }
@@ -34,24 +36,28 @@
   <header>
     <p class="eyebrow">Klasse 9 · Unterstützung</p>
     <h1>Wurzeln verstehen</h1>
-    <p>Drei Erklärvideos führen dich vom Wurzelziehen zu zwei Verfahren, mit denen du Quadratwurzeln näherungsweise bestimmst.</p>
-    <p>Die Videos haben keinen Ton. Alle Erklärungen stehen im Bild. Pausiere bei Bedarf, rechne mit und probiere anschließend die Übungen.</p>
+    <p>Drei überarbeitete Erklärvideos führen dich vom Wurzelziehen zu zwei Verfahren, mit denen du Quadratwurzeln näherungsweise bestimmst.</p>
+    <p>Die Videos enthalten deutsches Voiceover und bleiben auch ohne Ton verständlich. Kurze Pausen geben dir Zeit zum Lesen, Mitrechnen und Nachdenken.</p>
     <nav aria-label="Videos">
       <ol>
         <li><a href="#quadratzahlen">Wurzelziehen bei Quadratzahlen</a></li>
         <li><a href="#intervallschachtelung">Intervallschachtelung</a></li>
         <li><a href="#heron">Das Heron-Verfahren</a></li>
+        <li><a href="assets/wurzeln/lernwege/index.html">Interaktive Lernwege</a></li>
       </ol>
     </nav>
   </header>
   <section id="quadratzahlen" aria-labelledby="titel-quadratzahlen">
     <h2 id="titel-quadratzahlen">1. Warum ist √25 = 5?</h2>
-    <p>Vom Quadrat mit 25 Einheitsfeldern zur Wurzel: Lerne Wurzelzeichen, Radikand und Wurzelwert kennen.</p>
+    <p>Vom Quadrat mit 25 Einheitsfeldern zur Wurzel: Lerne Wurzelzeichen, Radikand und Wurzelwert kennen und prüfe die Lösung mit der Gegenaufgabe.</p>
     <video controls playsinline preload="metadata" poster="assets/wurzeln/wurzelziehen_quadratzahlen.jpg" aria-label="Erklärvideo: Wurzelziehen bei Quadratzahlen">
       <source src="assets/wurzeln/wurzelziehen_quadratzahlen.mp4" type="video/mp4">
       Dein Browser kann das Video nicht abspielen. Nutze den Download darunter.
     </video>
-    <a class="download" href="assets/wurzeln/wurzelziehen_quadratzahlen.mp4" download>Video 1 herunterladen</a>
+    <div class="actions">
+      <a class="download" href="assets/wurzeln/wurzelziehen_quadratzahlen.mp4" download>Video 1 herunterladen</a>
+      <a class="download learn" href="assets/wurzeln/lernwege/01-quadratzahlen.html">Lernweg bearbeiten</a>
+    </div>
     <p><strong>Merke:</strong> Die Quadratwurzel ist nichtnegativ. Daher gilt √25 = 5. Die Gleichung x² = 25 hat dagegen zwei Lösungen: −5 und 5.</p>
     <div class="exercise">
       <p><strong>Du bist dran:</strong> Berechne √81, nenne Radikand und Wurzelwert und mache die Probe.</p>
@@ -65,7 +71,10 @@
       <source src="assets/wurzeln/intervallschachtelung_sqrt20.mp4" type="video/mp4">
       Dein Browser kann das Video nicht abspielen. Nutze den Download darunter.
     </video>
-    <a class="download" href="assets/wurzeln/intervallschachtelung_sqrt20.mp4" download>Video 2 herunterladen</a>
+    <div class="actions">
+      <a class="download" href="assets/wurzeln/intervallschachtelung_sqrt20.mp4" download>Video 2 herunterladen</a>
+      <a class="download learn" href="assets/wurzeln/lernwege/02-intervallschachtelung.html">Lernweg bearbeiten</a>
+    </div>
     <p><strong>Merke:</strong> (4,47)² &lt; 20 &lt; (4,48)². Also liegt √20 zwischen 4,47 und 4,48. Verwendest du 4,47 als Näherung, ist der Fehler kleiner als 0,01.</p>
     <div class="exercise">
       <p><strong>Du bist dran:</strong> Zwischen welchen aufeinanderfolgenden ganzen Zahlen liegt √50? Grenze anschließend auf Zehntel ein.</p>
@@ -79,7 +88,10 @@
       <source src="assets/wurzeln/heron_sqrt20.mp4" type="video/mp4">
       Dein Browser kann das Video nicht abspielen. Nutze den Download darunter.
     </video>
-    <a class="download" href="assets/wurzeln/heron_sqrt20.mp4" download>Video 3 herunterladen</a>
+    <div class="actions">
+      <a class="download" href="assets/wurzeln/heron_sqrt20.mp4" download>Video 3 herunterladen</a>
+      <a class="download learn" href="assets/wurzeln/lernwege/03-heron-verfahren.html">Lernweg bearbeiten</a>
+    </div>
     <p><strong>Merke:</strong> Für eine Fläche a &gt; 0 und einen positiven Startwert x berechnest du die zweite Seite a / x. Der Mittelwert (x + a / x) / 2 ist der neue Wert für x. Wiederhole diese Schritte.</p>
     <div class="exercise">
       <p><strong>Du bist dran:</strong> Starte für √50 mit x₀ = 8. Berechne die zweite Seite und anschließend den neuen Näherungswert x₁.</p>

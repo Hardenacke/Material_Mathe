@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heron-Verfahren: √20 – Lernweg Klasse 9</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="basis.js"></script>
+  <script defer src="heron.js"></script>
+</head>
+<body>
+  <header class="top"><div class="wrap">
+    <p class="eyebrow">Lernweg 3 von 3 · Reelle Zahlen</p>
+    <h1>Wie nähert Heron √20 an?</h1>
+    <p class="lede">Das Rechteck hat immer die Fläche 20. Du berechnest seine Seiten selbst und beobachtest, wie daraus nahezu ein Quadrat wird.</p>
+  </div></header>
+  <main class="wrap">
+    <nav class="path-nav" aria-label="Lernwege">
+      <a class="secondary" href="index.html">Übersicht</a>
+      <a class="secondary" href="01-quadratzahlen.html">1 · Quadratzahlen</a>
+      <a class="secondary" href="02-intervallschachtelung.html">2 · Intervalle</a>
+      <a href="03-heron-verfahren.html" aria-current="page">3 · Heron</a>
+    </nav>
+    <section class="video-block"><details>
+      <summary>Erklärvideo „Heron-Verfahren“ ansehen</summary>
+      <video controls playsinline preload="metadata"><source src="../heron_sqrt20.mp4" type="video/mp4">Das Videoelement wird nicht unterstützt.</video>
+      <small>Lokale MP4-Vorschau; die Rechnung kannst du ohne Video ausprobieren.</small>
+    </details></section>
+    <section class="step">
+      <span class="step-number">1 · Rechteck und Flächeninhalt</span>
+      <h2>Zwei Seiten – eine feste Fläche</h2>
+      <p>Für √20 suchen wir die positive Seite eines <strong>Quadrats mit Fläche 20</strong>. Wir beginnen mit einem Rechteck: Eine Seite ist x₀ = 5. Die andere muss y₀ = 20 / x₀ sein.</p>
+      <svg id="heron-rechteck" class="viz" viewBox="0 0 700 360" role="img" aria-label="Rechteck mit Fläche 20 und Seiten 5 und 4"></svg>
+      <p id="seiten-anzeige" class="callout" aria-live="polite">x₀ = 5; y₀ = 4. Genau: 5 · 4 = 20.</p>
+      <div class="task">
+        <label for="y0">Berechne y₀ = 20 / 5.</label>
+        <input id="y0" type="text" inputmode="decimal" autocomplete="off" placeholder="Zahl eingeben">
+        <button id="y0-pruefen" class="button" type="button">Zweite Seite prüfen</button>
+        <p id="y0-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+      <p class="callout blue">Solange x &gt; 0 gilt, hat die zweite Seite 20 / x. Beim Verändern der ersten Seite bleibt die Fläche daher <strong>x · (20 / x) = 20</strong>.</p>
+    </section>
+    <section class="step" id="mittelwert-aufgabe" hidden>
+      <span class="step-number">2 · Erstes Mittel</span>
+      <h2>Die Seitenlängen angleichen</h2>
+      <p>5 ist länger als 4. Ihre Mitte liegt dazwischen. Setze den <strong>Mittelwert</strong> als neue erste Seite ein.</p>
+      <p class="formula">x₁ = (x₀ + y₀) / 2 = (5 + 4) / 2</p>
+      <div class="task">
+        <label for="x1">Berechne x₁.</label>
+        <input id="x1" type="text" inputmode="decimal" autocomplete="off" placeholder="Zahl eingeben">
+        <button id="x1-pruefen" class="button" type="button">Mittelwert prüfen</button>
+        <p id="x1-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+      <p>Nach einer richtigen Rechnung verändert sich das Rechteck. Seine Breite ist dann x₁, seine Höhe wieder 20 / x₁.</p>
+    </section>
+    <section class="step" id="zweiter-schritt" hidden>
+      <span class="step-number">3 · Dasselbe nochmals</span>
+      <h2>Wie nah kommen die Seiten zusammen?</h2>
+      <p>Mit x₁ = 4,5 ist die zweite Seite y₁ = 20 / 4,5. Berechne sie und bilde danach erneut den Mittelwert. Für die angezeigte Zahl kannst du runden; das Rechteck rechnet intern mit dem ungerundeten Wert.</p>
+      <div class="task">
+        <div class="controls">
+          <div><label for="y1">y₁ = 20 / 4,5 ≈ ?</label><input id="y1" type="text" inputmode="decimal" autocomplete="off" placeholder="z. B. vier Stellen"></div>
+          <div><label for="x2">x₂ = (4,5 + y₁) / 2 ≈ ?</label><input id="x2" type="text" inputmode="decimal" autocomplete="off" placeholder="z. B. fünf Stellen"></div>
+          <button id="zweiter-pruefen" class="button" type="button">Zweiten Schritt prüfen</button>
+        </div>
+        <p id="zweiter-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+      <details class="tip"><summary>Tipp zum zweiten Schritt</summary><p>20 / 4,5 = 4,4444…; der Mittelwert von 4,5 und 4,4444… ist etwa 4,47222.</p></details>
+    </section>
+    <section class="step" id="naechster-schritt" hidden>
+      <span class="step-number">4 · Wiederholen und begründen</span>
+      <h2>Ein dritter Schritt wird noch genauer</h2>
+      <p>Das Rechteck hat weiterhin die Fläche 20. Für x₂ berechnen wir wieder 20 / x₂ und nehmen den Mittelwert der beiden Seiten.</p>
+      <button id="iterieren" class="button" type="button">Dritten Schritt zeigen</button>
+      <p id="iteration-feedback" class="feedback" role="status" aria-live="polite"></p>
+      <p class="callout orange">Warum wirkt es? Die gesuchte √20 liegt zwischen den positiven Seiten x und 20/x. Die beiden Seiten rücken bei jedem Schritt zusammen. Sind sie irgendwann gleich, gilt x · x = 20 und damit x = √20.</p>
+    </section>
+    <section class="step" id="ergebnis" hidden>
+      <span class="step-number">5 · Probe und Übertragung</span>
+      <h2>Deine Näherung prüfen</h2>
+      <p class="formula">√20 ≈ 4,47214</p>
+      <p>Die Probe mit der <strong>gerundeten</strong> Zahl ergibt (4,47214)² ≈ 20,00004. Sie liegt sehr nah am Radikanden 20.</p>
+      <p>Der Heron-Schritt lautet allgemein:</p>
+      <p class="callout blue formula">xₙ₊₁ = (xₙ + a / xₙ) / 2, &nbsp; a &gt; 0, x₀ &gt; 0</p>
+      <div class="task">
+        <p><strong>Übertragung:</strong> Für √50 wählst du x₀ = 8. Was sind die zweite Rechteckseite y₀ und der erste Mittelwert x₁?</p>
+        <div class="controls">
+          <div><label for="y50">y₀ = 50 / 8</label><input id="y50" type="text" inputmode="decimal" autocomplete="off"></div>
+          <div><label for="x50">x₁ = (8 + y₀) / 2</label><input id="x50" type="text" inputmode="decimal" autocomplete="off"></div>
+          <button id="fuenfzig-pruefen" class="button" type="button">Transfer prüfen</button>
+        </div>
+        <p id="fuenfzig-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+      <h3>Probiere einen eigenen Startwert</h3>
+      <label for="start-experiment">Positive erste Seite: <output id="start-wert" for="start-experiment">6</output></label>
+      <input id="start-experiment" type="range" min="4" max="8" step="0.25" value="6">
+      <svg id="experiment-rechteck" class="viz" viewBox="0 0 700 360" role="img" aria-label="Experimentelles Rechteck mit Fläche 20"></svg>
+      <p id="experiment-anzeige" class="callout"></p>
+      <button id="experiment-iterieren" class="button secondary" type="button">Nächsten Mittelwert bilden</button>
+      <p id="experiment-feedback" class="feedback" role="status" aria-live="polite"></p>
+      <p>Verschiebe den Schieber und starte neu. Auch wenn deine Anfangsseite nicht 5 ist, bleibt die Fläche 20.</p>
+    </section>
+    <nav class="foot-nav" aria-label="Zurück">
+      <a class="button secondary" href="02-intervallschachtelung.html">Zurück: Intervalle</a>
+      <a class="button secondary" href="index.html">Alle Lernwege</a>
+    </nav>
+  </main>
+</body>
+</html>

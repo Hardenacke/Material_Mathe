@@ -37,15 +37,15 @@ function plural(count, singular, pluralForm) {
 function fieldTheme(field) {
   const text = normalize(field.titel);
   if (text.includes("stochastik") || text.includes("wahrscheinlichkeit") || text.includes("daten")) {
-    return { accent: "#b4781d", accentDark: "#744918", accentSoft: "#fff1d8" };
+    return { accent: "#eab308", accentDark: "#634d00", accentSoft: "#fff7cc", onAccent: "#19191f" };
   }
   if (text.includes("geometrie") || text.includes("vektor") || text.includes("lineare algebra")) {
-    return { accent: "#765f9f", accentDark: "#47366b", accentSoft: "#f0ebf7" };
+    return { accent: "#a855f7", accentDark: "#5b1b92", accentSoft: "#f4e8ff", onAccent: "#19191f" };
   }
   if (text.includes("funktion") || text.includes("analysis")) {
-    return { accent: "#1e8a83", accentDark: "#23454a", accentSoft: "#e4f4ef" };
+    return { accent: "#7c3aed", accentDark: "#442080", accentSoft: "#f0e8ff", onAccent: "#ffffff" };
   }
-  return { accent: "#276b73", accentDark: "#23454a", accentSoft: "#e7f3f0" };
+  return { accent: "#6d28d9", accentDark: "#3b176e", accentSoft: "#eee7ff", onAccent: "#ffffff" };
 }
 
 function applyTheme(element, theme) {
@@ -54,6 +54,7 @@ function applyTheme(element, theme) {
   element.style.setProperty("--card-accent", theme.accent);
   element.style.setProperty("--topic-accent-dark", theme.accentDark);
   element.style.setProperty("--topic-accent-soft", theme.accentSoft);
+  element.style.setProperty("--topic-on-accent", theme.onAccent || "#ffffff");
   return element;
 }
 
@@ -310,7 +311,7 @@ function renderAreaSupport(area, query) {
   const materials = filterMaterials(area.unterstuetzung, materialQuery);
   if (!materials.length) return null;
 
-  const theme = { accent: "#c85f48", accentDark: "#23454a", accentSoft: "#faebe5" };
+  const theme = { accent: "#eab308", accentDark: "#634d00", accentSoft: "#fff7cc", onAccent: "#19191f" };
   const section = document.createElement("section");
   section.className = "support-section";
   section.appendChild(createText("p", "step-label", "Kategorie"));

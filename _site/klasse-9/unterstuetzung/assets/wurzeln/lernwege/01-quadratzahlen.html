@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quadratzahlen und Wurzeln – Lernweg Klasse 9</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="basis.js"></script>
+  <script defer src="quadratzahlen.js"></script>
+</head>
+<body>
+  <header class="top"><div class="wrap">
+    <p class="eyebrow">Lernweg 1 von 3 · Reelle Zahlen</p>
+    <h1>Warum ist √25 gleich 5?</h1>
+    <p class="lede">Ein Quadrat macht die Gegenaufgabe sichtbar. Du bestimmst die Seite, prüfst dein Ergebnis und benennst die Teile des Wurzelausdrucks.</p>
+  </div></header>
+  <main class="wrap">
+    <nav class="path-nav" aria-label="Lernwege">
+      <a class="secondary" href="index.html">Übersicht</a>
+      <a href="01-quadratzahlen.html" aria-current="page">1 · Quadratzahlen</a>
+      <a class="secondary" href="02-intervallschachtelung.html">2 · Intervalle</a>
+      <a class="secondary" href="03-heron-verfahren.html">3 · Heron</a>
+    </nav>
+    <section class="video-block"><details>
+      <summary>Erklärvideo „Warum ist √25 = 5?“ ansehen</summary>
+      <video controls playsinline preload="metadata"><source src="../wurzelziehen_quadratzahlen.mp4" type="video/mp4">Das Videoelement wird nicht unterstützt.</video>
+      <small>Lokale MP4-Vorschau; du kannst die Aufgaben auch ohne Video bearbeiten.</small>
+    </details></section>
+    <section class="step" id="flaechen">
+      <span class="step-number">1 · Erkunden</span>
+      <h2>Welches Quadrat hat 25 Felder?</h2>
+      <p>Stelle die Anzahl der Kästchen pro Seite ein. Die Fläche verändert sich dabei mit.</p>
+      <label for="seiten-slider"><strong>Kästchen pro Seite:</strong> <output id="seiten-wert" for="seiten-slider">4</output></label>
+      <input id="seiten-slider" type="range" min="1" max="10" step="1" value="4">
+      <div id="quadrat-gitter" class="side-grid" style="--side:4" role="img" aria-label="Quadrat mit 4 Reihen und 4 Spalten, also 16 Feldern"></div>
+      <p id="flaechen-wert" class="formula" aria-live="polite"></p>
+      <div class="task">
+        <p><strong>Deine Aufgabe:</strong> Stelle genau 25 Felder ein. Warum passt die Seitenlänge?</p>
+        <button class="button" type="button" id="flaechen-pruefen">Einstellung prüfen</button>
+        <p id="flaechen-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+      <p class="callout blue">Quadrieren: Seitenlänge · Seitenlänge = Flächeninhalt. Wurzelziehen fragt umgekehrt nach der <strong>nichtnegativen</strong> Seitenlänge.</p>
+    </section>
+    <section class="step">
+      <span class="step-number">2 · Begriffe zuordnen</span>
+      <h2>Wie heißen die drei Teile?</h2>
+      <p>Tippe ein Zeichen oder eine Zahl im Ausdruck an. Wähle dann den passenden Fachbegriff und prüfe ihn.</p>
+      <div class="term-row" role="group" aria-label="Teile des Ausdrucks Wurzel 25 gleich 5">
+        <button class="term-button root" data-role="zeichen" type="button" aria-pressed="false" aria-label="Zeichen vor der Zahl 25">√</button>
+        <button class="term-button radicand" data-role="radikand" type="button" aria-pressed="false" aria-label="Zahl 25 unter dem Wurzelzeichen">25</button>
+        <span class="term-sep" aria-hidden="true">=</span>
+        <button class="term-button wert" data-role="wert" type="button" aria-pressed="false" aria-label="Ergebnis 5">5</button>
+      </div>
+      <div class="controls">
+        <div><label for="begriff-auswahl">Fachbegriff</label>
+          <select id="begriff-auswahl">
+            <option value="">Bitte wählen</option>
+            <option value="radikand">Radikand</option>
+            <option value="zeichen">Wurzelzeichen</option>
+            <option value="wert">Wurzelwert</option>
+          </select>
+        </div>
+        <button class="button" type="button" id="begriff-pruefen">Zuordnung prüfen</button>
+      </div>
+      <p id="begriffe-feedback" class="feedback" role="status" aria-live="polite"></p>
+      <ul class="status-list" aria-label="Erkannte Fachbegriffe">
+        <li id="geloest-zeichen">Wurzelzeichen</li>
+        <li id="geloest-radikand">Radikand</li>
+        <li id="geloest-wert">Wurzelwert</li>
+      </ul>
+    </section>
+    <section class="step">
+      <span class="step-number">3 · Probe und Gegenaufgabe</span>
+      <h2>Prüfe √25 = 5</h2>
+      <p>Wenn 5 der Wurzelwert ist, muss sein Quadrat wieder den <strong>Radikanden 25</strong> ergeben.</p>
+      <div class="task">
+        <label for="probe-ergebnis">5 · 5 = ?</label>
+        <input id="probe-ergebnis" type="text" inputmode="numeric" autocomplete="off" placeholder="Ergebnis eingeben">
+        <button class="button" type="button" id="probe-pruefen">Probe prüfen</button>
+        <p id="probe-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+      <div class="task">
+        <p><strong>Achtung:</strong> Die Gleichung x² = 25 fragt nach allen Zahlen, deren Quadrat 25 ist. Welche Lösungen hat sie?</p>
+        <div class="controls" role="group" aria-label="Lösungen von x Quadrat gleich 25">
+          <label><input type="radio" name="gleichung" value="plus"> nur 5</label>
+          <label><input type="radio" name="gleichung" value="beide"> −5 und 5</label>
+          <label><input type="radio" name="gleichung" value="minus"> nur −5</label>
+        </div>
+        <button class="button" type="button" id="gleichung-pruefen">Lösungen prüfen</button>
+        <p id="gleichung-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+    <section class="step">
+      <span class="step-number">4 · Übertragen</span>
+      <h2>Geht das auch mit 81?</h2>
+      <p>Suche den nichtnegativen Wurzelwert. Schreibe danach das Ergebnis der Probe auf.</p>
+      <div class="task controls">
+        <div><label for="wurzel81">√81 = ?</label><input id="wurzel81" type="text" inputmode="numeric" autocomplete="off"></div>
+        <div><label for="probe81">Wurzelwert · Wurzelwert = ?</label><input id="probe81" type="text" inputmode="numeric" autocomplete="off"></div>
+        <button class="button" type="button" id="transfer-pruefen">Beides prüfen</button>
+      </div>
+      <p id="transfer-feedback" class="feedback" role="status" aria-live="polite"></p>
+      <details class="tip"><summary>Tipp für den Transfer</summary><p>Suche eine positive Zahl, deren Quadrat 81 ist. Die Probe muss wieder 81 ergeben.</p></details>
+      <p class="callout orange">Merke: √a = b genau dann, wenn b² = a <strong>und b ≥ 0</strong>. Bei einer Gleichung x² = a können dagegen zwei Lösungen auftreten.</p>
+    </section>
+    <nav class="foot-nav" aria-label="Weiter">
+      <a class="button secondary" href="index.html">Zur Übersicht</a>
+      <a class="button" href="02-intervallschachtelung.html">Weiter: √20 eingrenzen</a>
+    </nav>
+  </main>
+</body>
+</html>

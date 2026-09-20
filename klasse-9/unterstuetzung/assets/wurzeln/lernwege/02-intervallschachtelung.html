@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intervallschachtelung: √20 – Lernweg Klasse 9</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="basis.js"></script>
+  <script defer src="intervalle.js"></script>
+</head>
+<body>
+  <header class="top"><div class="wrap">
+    <p class="eyebrow">Lernweg 2 von 3 · Reelle Zahlen</p>
+    <h1>Wo liegt √20?</h1>
+    <p class="lede">Die 20 ist keine Quadratzahl. Du prüfst selbst Zahlen durch Quadrieren und schließt die gesuchte Wurzel zwischen immer engere Grenzen ein.</p>
+  </div></header>
+  <main class="wrap">
+    <nav class="path-nav" aria-label="Lernwege">
+      <a class="secondary" href="index.html">Übersicht</a>
+      <a class="secondary" href="01-quadratzahlen.html">1 · Quadratzahlen</a>
+      <a href="02-intervallschachtelung.html" aria-current="page">2 · Intervalle</a>
+      <a class="secondary" href="03-heron-verfahren.html">3 · Heron</a>
+    </nav>
+    <section class="video-block"><details>
+      <summary>Erklärvideo „Intervallschachtelung“ ansehen</summary>
+      <video controls playsinline preload="metadata"><source src="../intervallschachtelung_sqrt20.mp4" type="video/mp4">Das Videoelement wird nicht unterstützt.</video>
+      <small>Lokale MP4-Vorschau; zum Erkunden genügt auch der Lernweg.</small>
+    </details></section>
+    <section class="step">
+      <span class="step-number">1 · Vorwissen</span>
+      <h2>Beginne mit bekannten Quadratzahlen</h2>
+      <p>4² = 16 und 5² = 25. Weil das Quadrat einer <strong>positiven</strong> Zahl mit der Zahl wächst, liegt 20 dazwischen:</p>
+      <p class="callout blue formula">4² &lt; 20 &lt; 5² &nbsp; ⇒ &nbsp; 4 &lt; √20 &lt; 5</p>
+      <p>Im Graphen suchst du einen x-Wert, dessen Quadrat 20 ergibt. Verändere den Punkt; sein Quadrat steht daneben.</p>
+      <label for="zahl-test">Zahl zum Testen: <output id="test-zahl" for="zahl-test">4,00</output></label>
+      <input id="zahl-test" type="range" min="4" max="5" step="0.01" value="4">
+      <svg id="parabel" class="viz" viewBox="0 0 680 300" role="img" aria-label="Graph y gleich x Quadrat mit waagerechter Linie y gleich 20 und einem veränderlichen Testpunkt"></svg>
+      <p id="test-rechnung" class="callout orange" aria-live="polite"></p>
+      <p>Ein Test <em>unter</em> 20 liefert eine untere Grenze; ein Test <em>über</em> 20 liefert eine obere Grenze. Der genaue Wert bleibt zunächst unbekannt.</p>
+    </section>
+    <section class="step">
+      <span class="step-number">2 · Zahlengerade</span>
+      <h2>Wie breit ist unser sicherer Bereich?</h2>
+      <p id="zoom-hinweis" class="callout blue" aria-live="polite">Sicheres Intervall [4; 5], Breite 1. √20 liegt irgendwo im blauen Abschnitt.</p>
+      <svg id="zahlengerade" class="viz" viewBox="0 0 700 190" role="img" aria-label="Zahlengerade mit sicherem Intervall von 4 bis 5"></svg>
+      <p>Bei jedem Schritt vergrößern wir den Ausschnitt der Zahlengeraden. Die angezeigte <strong>Intervallbreite</strong> verrät, wie genau eine Grenze als Näherung ist.</p>
+    </section>
+    <section class="step">
+      <span class="step-number">3 · Zehntel</span>
+      <h2>Welche benachbarten Zehntel passen?</h2>
+      <p>Teste den Zahlenschieber oben. Wähle danach die <strong>engsten benachbarten Zehntel</strong>, deren Quadrate 20 von unten und oben begrenzen.</p>
+      <div class="task">
+        <div class="controls">
+          <div><label for="zehntel-unten">Untere Grenze</label><select id="zehntel-unten">
+            <option value="">Wähle</option><option value="4.3">4,3</option><option value="4.4">4,4</option><option value="4.5">4,5</option><option value="4.6">4,6</option>
+          </select></div>
+          <div><label for="zehntel-oben">Obere Grenze</label><select id="zehntel-oben">
+            <option value="">Wähle</option><option value="4.4">4,4</option><option value="4.5">4,5</option><option value="4.6">4,6</option>
+          </select></div>
+          <button id="zehntel-pruefen" class="button" type="button">Grenzen prüfen</button>
+        </div>
+        <p id="zehntel-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+      <details class="tip"><summary>Tipp zu den Zehnteln</summary><p>Rechne (4,4)² und (4,5)² aus. Die Klammern bedeuten: Die ganze Dezimalzahl wird quadriert.</p></details>
+    </section>
+    <section class="step" id="hundertstel-aufgabe" hidden>
+      <span class="step-number">4 · Hundertstel</span>
+      <h2>Schachtle noch enger</h2>
+      <p>Du weißt jetzt: 4,4 &lt; √20 &lt; 4,5. Suche erneut die <strong>engsten benachbarten</strong> Grenzen, diesmal mit zwei Nachkommastellen.</p>
+      <div class="task">
+        <div class="controls">
+          <div><label for="hundertstel-unten">Untere Grenze</label><select id="hundertstel-unten">
+            <option value="">Wähle</option><option value="4.45">4,45</option><option value="4.46">4,46</option><option value="4.47">4,47</option><option value="4.48">4,48</option>
+          </select></div>
+          <div><label for="hundertstel-oben">Obere Grenze</label><select id="hundertstel-oben">
+            <option value="">Wähle</option><option value="4.47">4,47</option><option value="4.48">4,48</option><option value="4.49">4,49</option><option value="4.50">4,50</option>
+          </select></div>
+          <button id="hundertstel-pruefen" class="button" type="button">Hundertstel prüfen</button>
+        </div>
+        <p id="hundertstel-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+      <details class="tip"><summary>Tipp zu den Hundertsteln</summary><p>Vergleiche (4,47)² = 19,9809 mit 20 und (4,48)² = 20,0704 mit 20.</p></details>
+    </section>
+    <section class="step" id="ergebnis" hidden>
+      <span class="step-number">5 · Begründen und übertragen</span>
+      <h2>Warum ist 4,47 ein guter Näherungswert?</h2>
+      <p class="callout formula">4,47 &lt; √20 &lt; 4,48</p>
+      <p>Zwischen den Grenzen liegt nur 0,01. Wenn du 4,47 als Näherung nimmst, ist deine Abweichung daher <strong>kleiner als 0,01</strong>. Wir haben den genauen Wert dazu nicht gebraucht.</p>
+      <div class="task">
+        <p><strong>Übertragung:</strong> Wähle die benachbarten ganzen Zahlen, zwischen denen √50 liegt.</p>
+        <div class="controls">
+          <div><label for="fuenfzig-unten">Untere Grenze</label><select id="fuenfzig-unten"><option value="">Wähle</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div>
+          <div><label for="fuenfzig-oben">Obere Grenze</label><select id="fuenfzig-oben"><option value="">Wähle</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select></div>
+          <button id="fuenfzig-pruefen" class="button" type="button">Übertragung prüfen</button>
+        </div>
+        <p id="fuenfzig-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+    <nav class="foot-nav" aria-label="Weiter">
+      <a class="button secondary" href="01-quadratzahlen.html">Zurück: Quadratzahlen</a>
+      <a class="button" href="03-heron-verfahren.html">Weiter: Heron-Verfahren</a>
+    </nav>
+  </main>
+</body>
+</html>
