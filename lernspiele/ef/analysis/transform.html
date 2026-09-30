@@ -1,7 +1,742 @@
 <!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#245cad"><meta name="description" content="Kompetenzorientiertes Mathematik-Lernspiel: Funktionen und Parameter"><title>Transformations-Labor – Einführungsphase (EF)</title><link rel="stylesheet" href="../../shared/game.css"><link rel="stylesheet" href="../../shared/themes.css"></head>
-<body class="upper" style="--accent:#245cad"><div id="app"><p>Spiel wird geladen …</p></div>
-<noscript><p>Für dieses Lernspiel muss JavaScript aktiviert sein.</p></noscript>
-<script>window.G={};window.GAME_META={"id":"transform","grade":"EF","gradeTitle":"Einführungsphase (EF)","course":"","field":"ana","fieldTitle":"Funktionen und Analysis","title":"Transformations-Labor","topic":"Funktionen und Parameter","goal":"Sage eine Parameterwirkung voraus und erreiche einen Zielgraphen.","skills":["Verschiebung","Streckung","Symmetrie","Definitionsbereich"],"duration":"15–25 Minuten","color":"#245cad","hubPath":"../../index.html","mirror":false,"defaultLook":"studio","lookReason":"Das Vergleichen von Zielgraphen und Parameterwirkungen steht in einer ruhigen Laboransicht im Fokus."};</script>
-<script src="../../shared/themes.js"></script><script src="../../shared/math.js"></script><script src="../../shared/tasks-56.js"></script><script src="../../shared/tasks-78.js"></script><script src="../../shared/tasks-910.js"></script><script src="../../shared/tasks-efq.js"></script><script src="../../shared/game-engine.js"></script>
-</body></html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eef5ff">
+<meta name="description" content="EF-Lernspiel zu Transformationen von Funktionsgraphen">
+<title>Transformations-Lab EF – Lernspiel</title>
+<link rel="stylesheet" href="../../shared/themes.css">
+<style>
+:root{
+  --bg:#eef5ff; --surface:#ffffff; --surface2:#f7faff; --ink:#14213d; --muted:#5f6f88;
+  --line:#d9e4f2; --primary:#2157d5; --primary2:#173fa3; --accent:#f59e0b;
+  --good:#137a4a; --bad:#b42318; --shadow:0 14px 35px rgba(28,55,95,.10);
+  --radius:22px;
+}
+:root[data-look]{--bg:var(--paper);--surface:var(--card);--surface2:var(--soft);--primary:#245cad;--primary2:#173f7a}
+:root[data-look=retro64]{--primary:#5957c8;--primary2:#242d65;--accent:#ffcc84;--good:#2f855a;--bad:#c2410c}
+:root[data-look=pixel]{--primary:#315c44;--primary2:#244538;--accent:#e9b94f;--good:#315c44;--bad:#9b451d}
+:root[data-look=paper]{--primary:#8b4b33;--primary2:#493e33;--accent:#dfb66b;--good:#5c7658;--bad:#a44f36}
+:root[data-look=studio]{--primary:#245cad;--primary2:#172d42;--accent:#cb866a;--good:#23715c;--bad:#b5473e}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+button,select{font:inherit}
+button{touch-action:manipulation}
+.wrap{width:min(1120px,calc(100% - 28px));margin:0 auto;padding:18px 0 42px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:-.02em}
+.logo{width:44px;height:44px;border-radius:14px;background:var(--primary);display:grid;place-items:center;color:white;box-shadow:var(--shadow);font-weight:900}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.btn{border:0;border-radius:14px;min-height:48px;padding:0 16px;font-weight:800;cursor:pointer;background:var(--primary);color:white;box-shadow:0 7px 18px rgba(33,87,213,.18)}
+.btn:hover{background:var(--primary2)}
+.btn.secondary{background:white;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.ghost{background:transparent;color:var(--primary);border:1px solid #bcd0ff;box-shadow:none}
+.btn.warn{background:#fff4e5;color:#8a4b00;border:1px solid #ffd498;box-shadow:none}
+.btn:disabled{opacity:.48;cursor:not-allowed}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:stretch;margin:10px 0 18px}
+.card{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.hero h1{font-size:clamp(2rem,5vw,4.1rem);line-height:.98;letter-spacing:-.055em;margin:4px 0 14px}
+.kicker{display:inline-flex;align-items:center;gap:8px;border:1px solid #c5d7ff;color:var(--primary2);background:#f1f6ff;border-radius:999px;padding:7px 11px;font-weight:800;font-size:.9rem}
+.lead{font-size:1.08rem;line-height:1.55;color:var(--muted);max-width:68ch}
+.formula-card{display:flex;flex-direction:column;justify-content:center;background:linear-gradient(145deg,#173fa3,#2157d5);color:white;border-color:transparent}
+.formula-title{font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;opacity:.8;font-weight:800}
+.master-formula{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.55rem,4vw,2.35rem);margin:12px 0 8px;white-space:nowrap}
+.formula-note{font-size:.91rem;line-height:1.45;opacity:.85}
+.section-title{font-size:1.25rem;margin:8px 0 12px;letter-spacing:-.02em}
+.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.choice-card{min-height:150px;text-align:left;border:2px solid var(--line);border-radius:18px;padding:16px;background:white;color:var(--ink);cursor:pointer;transition:.18s transform,.18s border-color,.18s box-shadow;touch-action:manipulation}
+.choice-card:hover{transform:translateY(-2px);border-color:#9eb8ff}
+.choice-card.selected{border-color:var(--primary);box-shadow:0 0 0 4px rgba(33,87,213,.10);background:#f4f7ff}
+.choice-card .tag{display:inline-block;font-size:.75rem;font-weight:900;border-radius:999px;padding:5px 8px;background:#edf2ff;color:var(--primary2);margin-bottom:10px}
+.choice-card h3{margin:0 0 7px;font-size:1.05rem}
+.choice-card p{margin:0;color:var(--muted);line-height:1.4;font-size:.92rem}
+.start-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap}
+.micro{font-size:.86rem;color:var(--muted)}
+.hidden{display:none!important}
+.hud{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;margin:10px 0 14px}
+.hud-card{background:white;border:1px solid var(--line);border-radius:18px;padding:13px 16px;box-shadow:var(--shadow)}
+.progress-track{height:10px;background:#eaf0f7;border-radius:999px;overflow:hidden;margin-top:7px}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#72a0ff);border-radius:999px;transition:width .3s ease}
+.stats{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pill{min-height:42px;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:999px;background:white;border:1px solid var(--line);font-weight:850;white-space:nowrap}
+.pill.timer.low{color:var(--bad);border-color:#ffb4ad;background:#fff3f2}
+.game-grid{display:grid;grid-template-columns:minmax(0,1.16fr) minmax(300px,.84fr);gap:16px;align-items:start}
+.graph-card{padding:15px}
+.graph-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:4px 4px 12px}
+.graph-head h2{margin:0;font-size:1.15rem}
+.graph-head .base{color:var(--muted);font-weight:700;margin-top:3px}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}.dot{width:11px;height:11px;border-radius:999px;display:inline-block}.dot.f{background:#2b6cb0}.dot.g{background:#f59e0b}
+.canvas-wrap{position:relative;width:100%;aspect-ratio:4/3;min-height:330px;border-radius:17px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+canvas{width:100%;height:100%;display:block}
+.task-card h2{margin:0 0 7px;font-size:1.28rem}.task-card p{color:var(--muted);line-height:1.45}
+.param-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.param-btn{min-height:88px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:16px;padding:12px;text-align:left;cursor:pointer;touch-action:manipulation}
+.param-btn strong{display:block;font-size:1.18rem;margin-bottom:3px}.param-btn span{font-size:.82rem;color:var(--muted);line-height:1.25;display:block}
+.param-btn.selected{border-color:var(--primary);background:#eef3ff;box-shadow:0 0 0 3px rgba(33,87,213,.09)}
+.param-btn.correct{border-color:#55b98a;background:#effaf5}.param-btn.wrong{border-color:#ff9c91;background:#fff2f1}
+.action-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.feedback{margin-top:13px;border-radius:14px;padding:12px 13px;line-height:1.45;border:1px solid transparent;font-weight:650}
+.feedback.good{background:#effaf5;border-color:#b9ead2;color:#0c5a38}.feedback.bad{background:#fff2f1;border-color:#ffc4be;color:#8f2018}.feedback.info{background:#f1f6ff;border-color:#c5d7ff;color:#21458a}
+.value-grid{display:grid;gap:10px;margin:12px 0}.value-row{display:grid;grid-template-columns:70px 1fr;align-items:center;gap:10px}.value-row label{font-weight:900;font-size:1.12rem}.value-row select{min-height:52px;border:2px solid var(--line);border-radius:13px;background:white;padding:0 12px;color:var(--ink);font-weight:750}
+.solution{background:#f8fafc;border:1px dashed #b8c7da;border-radius:14px;padding:13px;margin-top:12px}.solution .eq{font-family:Georgia,"Times New Roman",serif;font-size:1.15rem;font-weight:700;margin-bottom:7px}.solution ul{margin:7px 0 0;padding-left:20px;color:#42526b;line-height:1.45}
+.hint-box{margin-top:11px;background:#fff9e8;border:1px solid #f7d889;border-radius:14px;padding:12px;color:#6e4b00;line-height:1.45}
+.end-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.big-score{font-size:clamp(3rem,10vw,6rem);font-weight:950;letter-spacing:-.07em;line-height:.9;color:var(--primary)}
+.metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.metric{padding:13px;background:var(--surface2);border:1px solid var(--line);border-radius:14px}.metric b{font-size:1.28rem;display:block}.metric span{color:var(--muted);font-size:.84rem}
+.param-report{display:grid;gap:9px;margin-top:12px}.report-row{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center}.mini-track{height:9px;background:#e8edf4;border-radius:999px;overflow:hidden}.mini-fill{height:100%;background:var(--primary);border-radius:999px}
+.badge{display:inline-flex;align-items:center;gap:7px;border-radius:999px;background:#fff7df;border:1px solid #f5d06f;color:#735100;padding:8px 11px;font-weight:850;margin:8px 6px 0 0}
+.teacher-note{font-size:.8rem;color:#7b8799;margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.look-select{min-height:48px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font-weight:800;padding:0 12px}
+.home-link{text-decoration:none;display:inline-flex;align-items:center}
+html[data-look=pixel] .card,html[data-look=pixel] .btn,html[data-look=pixel] .choice-card,html[data-look=pixel] .param-btn,html[data-look=pixel] .look-select{border-radius:4px}
+html[data-look=paper] .card{background-image:radial-gradient(#8b785318 .7px,transparent .7px);background-size:8px 8px}
+html[data-look=studio] .card,html[data-look=studio] .hud-card{box-shadow:none}
+@media(max-width:850px){.hero,.game-grid,.end-grid{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr}.formula-card{min-height:180px}.hud{grid-template-columns:1fr}.stats{justify-content:flex-start}.canvas-wrap{min-height:300px}}
+@media(max-width:520px){.wrap{width:min(100% - 18px,1120px)}.card{padding:16px;border-radius:18px}.param-grid{grid-template-columns:1fr}.master-formula{font-size:1.45rem}.value-row{grid-template-columns:55px 1fr}.topbar{align-items:flex-start}.brand{font-size:.95rem}.logo{width:40px;height:40px}.btn{min-height:50px}.canvas-wrap{min-height:280px;aspect-ratio:1/1}.metric-grid{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand"><div class="logo">f→g</div><div>Transformations-Lab <span style="color:var(--muted);font-weight:700">EF</span></div></div>
+    <div class="top-actions">
+      <select class="look-select" id="lookSelect" aria-label="Stil auswählen">
+        <option value="studio">Mathe-Studio</option>
+        <option value="retro64">Retro 64</option>
+        <option value="pixel">Pixel-Werkstatt</option>
+        <option value="paper">Papierwelt</option>
+      </select>
+      <a class="btn secondary home-link" href="../../index.html">Startseite</a>
+      <button class="btn secondary hidden" id="resetBtn" type="button">Neu starten</button>
+    </div>
+  </header>
+
+  <main id="startScreen">
+    <section class="hero">
+      <div class="card">
+        <span class="kicker">🎯 Funktionen erkennen · Parameter deuten</span>
+        <h1>Entschlüssele die Transformation.</h1>
+        <p class="lead">Du siehst jeweils den Ausgangsgraphen <b>f</b> und den transformierten Graphen <b>g</b>. Finde heraus, welche Parameter wirken – und bestimme anschließend passende Parameterwerte. Mehrere Transformationen können gleichzeitig aktiv sein.</p>
+      </div>
+      <div class="card formula-card">
+        <div class="formula-title">Superform im Spiel</div>
+        <div class="master-formula"><i>g</i>(<i>x</i>) = <i>a</i> · <i>f</i>(<i>b</i> · (<i>x</i> − <i>c</i>)) + <i>d</i></div>
+        <div class="formula-note">So ist <b>c</b> direkt die horizontale Verschiebung: c &gt; 0 nach rechts. Bei <b>b</b> wirkt die Streckung/Stauchung in x-Richtung umgekehrt.</div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-bottom:14px">
+      <h2 class="section-title">1. Wähle dein Niveau</h2>
+      <div class="choice-grid" id="levelChoices">
+        <button class="choice-card selected" data-level="1" type="button"><span class="tag">NIVEAU 1</span><h3>Spurensuche</h3><p>Genau ein Parameter wirkt. Transformation erkennen und einen einfachen Wert bestimmen.</p></button>
+        <button class="choice-card" data-level="2" type="button"><span class="tag">NIVEAU 2</span><h3>Kombination</h3><p>Ein oder zwei Parameter wirken gleichzeitig. Du musst mehrere Veränderungen auseinanderhalten.</p></button>
+        <button class="choice-card" data-level="3" type="button"><span class="tag">NIVEAU 3</span><h3>Parametercode</h3><p>Zwei bis vier Parameter können aktiv sein. Am Ende bestimmst du den vollständigen Code a, b, c, d.</p></button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">2. Wähle deinen Spielmodus</h2>
+      <div class="choice-grid" id="modeChoices">
+        <button class="choice-card selected" data-mode="training" type="button"><span class="tag">OHNE DRUCK</span><h3>Training</h3><p>8 Aufgaben, kein Timer, keine Leben. Fehler sind erlaubt; Tipps und Erklärungen helfen weiter.</p></button>
+        <button class="choice-card" data-mode="mission" type="button"><span class="tag">MISSION</span><h3>Mission</h3><p>10 Aufgaben, 50 Sekunden pro Aufgabe, 4 Leben. Zeitbonus und Serienpunkte.</p></button>
+        <button class="choice-card" data-mode="sprint" type="button"><span class="tag">CHECK</span><h3>Sprint</h3><p>10 Aufgaben, 35 Sekunden, 3 Leben, keine Tipps. Für die schnelle Selbstüberprüfung.</p></button>
+      </div>
+      <div class="start-row">
+        <div class="micro">Fortschritt und Bestwert werden nur lokal auf diesem Gerät gespeichert.</div>
+        <button class="btn" id="startBtn" type="button">Spiel starten →</button>
+      </div>
+    </section>
+  </main>
+
+  <main id="gameScreen" class="hidden">
+    <section class="hud">
+      <div class="hud-card">
+        <div style="display:flex;justify-content:space-between;gap:8px"><b id="missionLabel">Aufgabe 1 / 8</b><span class="micro" id="difficultyLabel">Niveau 1 · Training</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+      <div class="stats">
+        <div class="pill">⭐ <span id="scoreLabel">0</span></div>
+        <div class="pill">🔥 <span id="streakLabel">0</span></div>
+        <div class="pill" id="livesPill">❤️ <span id="livesLabel">∞</span></div>
+        <div class="pill timer hidden" id="timerPill">⏱ <span id="timerLabel">--</span>s</div>
+      </div>
+    </section>
+
+    <section class="game-grid">
+      <div class="card graph-card">
+        <div class="graph-head">
+          <div><h2>Vergleiche f und g</h2><div class="base" id="baseFunctionLabel">f(x) = x²</div></div>
+          <div class="legend"><span><i class="dot f"></i> f</span><span><i class="dot g"></i> g</span></div>
+        </div>
+        <div class="canvas-wrap"><canvas id="graphCanvas" aria-label="Koordinatensystem mit dem Ausgangsgraphen f und dem transformierten Graphen g"></canvas></div>
+      </div>
+
+      <div class="card task-card">
+        <div id="phaseIdentify">
+          <span class="kicker" id="taskTypeLabel">Schritt 1 · erkennen</span>
+          <h2 style="margin-top:10px">Welche Parameter sind aktiv?</h2>
+          <p>Wähle <b>alle</b> Parameter, die gegenüber der Grundfunktion verändert wurden.</p>
+          <div class="param-grid" id="parameterButtons">
+            <button class="param-btn" data-param="a" type="button"><strong>a</strong><span>y-Richtung: strecken / stauchen; ggf. Spiegelung an x-Achse</span></button>
+            <button class="param-btn" data-param="b" type="button"><strong>b</strong><span>x-Richtung: stauchen / strecken; ggf. Spiegelung an y-Achse</span></button>
+            <button class="param-btn" data-param="c" type="button"><strong>c</strong><span>Verschiebung nach rechts oder links</span></button>
+            <button class="param-btn" data-param="d" type="button"><strong>d</strong><span>Verschiebung nach oben oder unten</span></button>
+          </div>
+          <div class="action-row">
+            <button class="btn" id="checkIdentifyBtn" type="button">Auswahl prüfen</button>
+            <button class="btn warn" id="hintBtn" type="button">💡 Tipp 1</button>
+          </div>
+          <div id="hintBox" class="hint-box hidden"></div>
+          <div id="identifyFeedback" class="feedback hidden" role="status"></div>
+        </div>
+
+        <div id="phaseValues" class="hidden">
+          <span class="kicker">Schritt 2 · bestimmen</span>
+          <h2 style="margin-top:10px" id="valueTitle">Bestimme den Parameterwert.</h2>
+          <p id="valuePrompt">Nutze markante Punkte des Graphen. Wähle die passenden Werte aus.</p>
+          <div class="value-grid" id="valueGrid"></div>
+          <div class="action-row"><button class="btn" id="checkValuesBtn" type="button">Werte prüfen</button></div>
+          <div id="valueFeedback" class="feedback hidden" role="status"></div>
+        </div>
+
+        <div id="phaseSolution" class="hidden">
+          <span class="kicker">Auswertung</span>
+          <h2 style="margin-top:10px">Transformation entschlüsselt</h2>
+          <div class="solution" id="solutionBox"></div>
+          <div class="action-row"><button class="btn" id="nextBtn" type="button">Nächste Aufgabe →</button></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <main id="endScreen" class="hidden">
+    <section class="card end-grid">
+      <div>
+        <span class="kicker">Mission abgeschlossen</span>
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);margin:12px 0 18px;letter-spacing:-.05em">Deine Auswertung</h1>
+        <div class="big-score" id="endScore">0</div>
+        <div class="micro" style="margin-top:8px">Punkte</div>
+        <div id="badgeArea"></div>
+        <div class="action-row" style="margin-top:18px">
+          <button class="btn" id="playAgainBtn" type="button">Noch einmal</button>
+          <button class="btn secondary" id="changeSetupBtn" type="button">Niveau / Modus ändern</button>
+        </div>
+      </div>
+      <div>
+        <h2 style="margin-top:0">Diagnose</h2>
+        <div class="metric-grid">
+          <div class="metric"><b id="recognitionMetric">0%</b><span>Parameter erkannt</span></div>
+          <div class="metric"><b id="valuesMetric">0%</b><span>Werte bestimmt</span></div>
+          <div class="metric"><b id="bestMetric">0</b><span>Bestwert lokal</span></div>
+          <div class="metric"><b id="timeMetric">–</b><span>Ø Zeit / Aufgabe</span></div>
+        </div>
+        <h3 style="margin-bottom:8px">Sicherheit nach Parameter</h3>
+        <div class="param-report" id="paramReport"></div>
+        <div id="recommendation" class="feedback info" style="margin-top:14px"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>window.GAME_META={"id":"transform","grade":"EF","gradeTitle":"Einführungsphase (EF)","course":"","field":"ana","fieldTitle":"Funktionen und Analysis","title":"Transformations-Labor","topic":"Funktionseigenschaften und Transformationen","skills":["Parameterwirkung","Verschiebung","Streckung","Spiegelung"],"duration":"15–25 Minuten","color":"#245cad","hubPath":"../../index.html","defaultLook":"studio","lookReason":"Das Vergleichen von Zielgraphen und Parameterwirkungen steht in einer ruhigen Laboransicht im Fokus."};</script>
+<script src="../../shared/themes.js"></script>
+<script>
+(()=>{
+'use strict';
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+const BASES = [
+  {id:'quad', label:'f(x) = x²', eval:x=>x*x, symmetric:'even'},
+  {id:'cubic', label:'f(x) = ¼x³', eval:x=>0.25*x*x*x, symmetric:'odd'},
+  {id:'sin', label:'f(x) = sin(x)', eval:x=>Math.sin(x), symmetric:'odd'},
+  {id:'asym', label:'f(x) = 0,12x³ + 0,30x² − 0,80x', eval:x=>0.12*x*x*x+0.30*x*x-0.80*x, symmetric:'none'},
+  {id:'wave', label:'f(x) = 1,4·sin(x) + 0,35·sin(2x)', eval:x=>1.4*Math.sin(x)+0.35*Math.sin(2*x), symmetric:'odd'}
+];
+
+const LEVELS = {
+  1:{name:'Spurensuche', min:1,max:1},
+  2:{name:'Kombination', min:1,max:2},
+  3:{name:'Parametercode', min:2,max:4}
+};
+const MODES = {
+  training:{name:'Training', length:8, timer:0, lives:Infinity, hints:true, scoreMult:1},
+  mission:{name:'Mission', length:10, timer:50, lives:4, hints:true, scoreMult:1.25},
+  sprint:{name:'Sprint', length:10, timer:35, lives:3, hints:false, scoreMult:1.5}
+};
+
+const state = {
+  level:1, mode:'training', index:0, score:0, streak:0, lives:Infinity,
+  task:null, selected:new Set(), phase:'identify', timer:null, seconds:0,
+  taskStarted:0, taskMistake:false, taskTimedOut:false,
+  recognition:{correct:0,total:0}, values:{correct:0,total:0},
+  perParam:{a:{ok:0,total:0},b:{ok:0,total:0},c:{ok:0,total:0},d:{ok:0,total:0}},
+  elapsed:[], hintCount:0, hintCooldown:null
+};
+const LOOK_KEY='mathe_lernspiele_look_v2_'+encodeURIComponent(JSON.stringify(['EF','','transform']));
+
+function initLookSelect(){
+  const select=$('#lookSelect');
+  if(!select)return;
+  const fallback=window.GAME_META?.defaultLook||'studio';
+  let current=fallback;
+  try{
+    const stored=localStorage.getItem(LOOK_KEY);
+    if(['retro64','pixel','paper','studio'].includes(stored)) current=stored;
+  }catch{}
+  document.documentElement.dataset.look=current;
+  select.value=current;
+  if(window.GameLook?.apply) window.GameLook.apply(current,false);
+  select.addEventListener('change',()=>{
+    document.documentElement.dataset.look=select.value;
+    if(window.GameLook?.apply) window.GameLook.apply(select.value,true);
+    else try{localStorage.setItem(LOOK_KEY,select.value);}catch{}
+    if(!$('#gameScreen').classList.contains('hidden')&&state.task)requestAnimationFrame(drawGraph);
+  });
+}
+
+function rand(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function sample(arr,n){const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a.slice(0,n)}
+function formatNum(n){
+  if(Math.abs(n-0.5)<1e-9) return '0,5'; if(Math.abs(n+0.5)<1e-9) return '−0,5';
+  if(Number.isInteger(n)) return String(n).replace('-', '−');
+  return String(n).replace('.',',').replace('-', '−');
+}
+function valChanged(p,v){return (p==='a'||p==='b') ? Math.abs(v-1)>1e-9 : Math.abs(v)>1e-9}
+
+function generateTask(){
+  const cfg=LEVELS[state.level];
+  const count=cfg.min + Math.floor(Math.random()*(cfg.max-cfg.min+1));
+  let active=sample(['a','b','c','d'],count);
+  let params={a:1,b:1,c:0,d:0};
+
+  // Positive scaling values dominate combination tasks to avoid equivalent descriptions.
+  const aVals = state.level===1 ? [2,0.5,-1,-2] : [2,0.5,1.5,-1];
+  const bValsSingle = [2,0.5,-1];
+  const bValsCombo = [2,0.5,1.5];
+  const cVals = state.level===3 ? [-2,-1,1,2] : [-2,-1,1,2];
+  const dVals = state.level===3 ? [-3,-2,-1,1,2,3] : [-2,-1,1,2];
+  if(active.includes('a')) params.a=rand(aVals);
+  if(active.includes('b')) params.b=rand(count===1?bValsSingle:bValsCombo);
+  if(active.includes('c')) params.c=rand(cVals);
+  if(active.includes('d')) params.d=rand(dVals);
+
+  let base=rand(BASES);
+  // Vertical and horizontal scaling can be indistinguishable for pure power functions.
+  // Therefore a/b tasks use non-homogeneous or periodic base functions.
+  if(active.includes('a') || active.includes('b')) base=rand(BASES.filter(x=>['sin','asym','wave'].includes(x.id)));
+  // Reflections can also be equivalent for even/odd functions; use an asymmetric polynomial.
+  if(params.a<0 || params.b<0) base=BASES.find(x=>x.id==='asym');
+  // Avoid exact cancellation of reflections in combinations.
+  if(params.a<0 && params.b<0) params.b=2;
+  // Periodic shifts are kept out of the hardest combined tasks for unambiguous reading.
+  if(active.includes('c') && state.level===3 && (base.id==='sin'||base.id==='wave')) base=BASES.find(x=>x.id==='asym');
+
+  active=['a','b','c','d'].filter(k=>valChanged(k,params[k]));
+  return {base,params,active};
+}
+
+function gEval(task,x){const {a,b,c,d}=task.params; return a*task.base.eval(b*(x-c))+d}
+
+function formula(task){
+  const {a,b,c,d}=task.params;
+  const aTxt=formatNum(a), bTxt=formatNum(b);
+  const cPart = c===0 ? 'x' : c>0 ? `(x − ${formatNum(c)})` : `(x + ${formatNum(Math.abs(c))})`;
+  const dPart = d===0 ? '' : d>0 ? ` + ${formatNum(d)}` : ` − ${formatNum(Math.abs(d))}`;
+  return `g(x) = ${aTxt} · f(${bTxt} · ${cPart})${dPart}`;
+}
+
+function describeParam(p,v){
+  const av=Math.abs(v);
+  if(p==='a'){
+    const bits=[];
+    if(av>1) bits.push(`Streckung in y-Richtung mit Faktor ${formatNum(av)}`);
+    else if(av<1) bits.push(`Stauchung in y-Richtung mit Faktor ${formatNum(av)}`);
+    if(v<0) bits.push('Spiegelung an der x-Achse');
+    return bits.join(' und ');
+  }
+  if(p==='b'){
+    const bits=[];
+    if(av>1) bits.push(`Stauchung in x-Richtung (Parameter b = ${formatNum(v)}; geometrischer Faktor ${formatNum(1/av)})`);
+    else if(av<1) bits.push(`Streckung in x-Richtung (Parameter b = ${formatNum(v)}; geometrischer Faktor ${formatNum(1/av)})`);
+    if(v<0) bits.push('Spiegelung an der y-Achse');
+    return bits.join(' und ');
+  }
+  if(p==='c') return v>0 ? `Verschiebung um ${formatNum(v)} nach rechts` : `Verschiebung um ${formatNum(Math.abs(v))} nach links`;
+  if(p==='d') return v>0 ? `Verschiebung um ${formatNum(v)} nach oben` : `Verschiebung um ${formatNum(Math.abs(v))} nach unten`;
+  return '';
+}
+
+function inactiveExplanation(p){
+  if(p==='a') return '<b>a ist nicht aktiv:</b> a = 1. Es gibt also keine zusätzliche Streckung/Stauchung in y-Richtung und keine Spiegelung an der x-Achse.';
+  if(p==='b') return '<b>b ist nicht aktiv:</b> b = 1. Es gibt also keine zusätzliche Streckung/Stauchung in x-Richtung und keine Spiegelung an der y-Achse.';
+  if(p==='c') return '<b>c ist nicht aktiv:</b> c = 0. Der Graph wird nicht zusätzlich nach rechts oder links verschoben.';
+  if(p==='d') return '<b>d ist nicht aktiv:</b> d = 0. Der Graph wird nicht zusätzlich nach oben oder unten verschoben.';
+  return '';
+}
+
+function activeExplanation(p){
+  const v=state.task.params[p];
+  if(p==='a'){
+    const av=Math.abs(v), parts=[];
+    if(av>1) parts.push(`Die Abstände der Funktionswerte zur x-Achse werden mit ${formatNum(av)} vervielfacht`);
+    else if(av<1) parts.push(`Die Abstände der Funktionswerte zur x-Achse werden mit ${formatNum(av)} verkleinert`);
+    if(v<0) parts.push('zusätzlich wechseln die y-Werte ihr Vorzeichen – das entspricht einer Spiegelung an der x-Achse');
+    return `<b>a ist aktiv (a = ${formatNum(v)}):</b> ${parts.join('; ')}.`;
+  }
+  if(p==='b'){
+    const av=Math.abs(v), geom=1/av, parts=[];
+    if(av>1) parts.push(`markante x-Abstände werden auf ${formatNum(geom)} ihres ursprünglichen Wertes verkleinert – der Graph wird in x-Richtung gestaucht`);
+    else if(av<1) parts.push(`markante x-Abstände werden mit dem Faktor ${formatNum(geom)} vergrößert – der Graph wird in x-Richtung gestreckt`);
+    if(v<0) parts.push('zusätzlich werden die x-Werte gespiegelt – das entspricht einer Spiegelung an der y-Achse');
+    return `<b>b ist aktiv (b = ${formatNum(v)}):</b> ${parts.join('; ')}.`;
+  }
+  if(p==='c') return `<b>c ist aktiv (c = ${formatNum(v)}):</b> Der gesamte Graph ist bei gleicher Form um ${formatNum(Math.abs(v))} Einheit${Math.abs(v)===1?'':'en'} nach ${v>0?'rechts':'links'} verschoben.`;
+  if(p==='d') return `<b>d ist aktiv (d = ${formatNum(v)}):</b> Der gesamte Graph ist bei gleicher Form um ${formatNum(Math.abs(v))} Einheit${Math.abs(v)===1?'':'en'} nach ${v>0?'oben':'unten'} verschoben.`;
+  return '';
+}
+
+function recognitionErrorFeedback(chosen,correct){
+  const missing=correct.filter(p=>!chosen.includes(p));
+  const extra=chosen.filter(p=>!correct.includes(p));
+  const lines=[];
+  if(missing.length){
+    lines.push(`<b>Übersehen:</b> ${missing.join(', ')}`);
+    missing.forEach(p=>lines.push(activeExplanation(p)));
+  }
+  if(extra.length){
+    lines.push(`<b>Zu viel ausgewählt:</b> ${extra.join(', ')}`);
+    extra.forEach(p=>lines.push(inactiveExplanation(p)));
+  }
+  lines.push(`<b>Richtig aktiv:</b> ${correct.join(', ')}.`);
+  lines.push('Vergleiche beim nächsten Mal zuerst die Lage markanter Punkte und danach Breite bzw. Höhe des Graphen.');
+  return lines.join('<br>');
+}
+
+function valueErrorExplanation(p,chosen,actual){
+  const c=formatNum(chosen), a=formatNum(actual);
+  if(p==='a'){
+    const chosenEffect=Math.abs(chosen)>1?`eine stärkere Streckung in y-Richtung mit Faktor ${formatNum(Math.abs(chosen))}`:Math.abs(chosen)<1?`eine Stauchung in y-Richtung mit Faktor ${formatNum(Math.abs(chosen))}`:'keine Streckung/Stauchung in y-Richtung';
+    const signNote=chosen<0?' und eine Spiegelung an der x-Achse':'';
+    return `<b>a:</b> Du hast ${c} gewählt. Das würde ${chosenEffect}${signNote} bedeuten. Am Graphen passt stattdessen <b>a = ${a}</b>: ${describeParam('a',actual)}.`;
+  }
+  if(p==='b'){
+    const geom=1/Math.abs(chosen);
+    const chosenEffect=Math.abs(chosen)>1?`den Graphen in x-Richtung auf den Faktor ${formatNum(geom)} zusammendrücken`:Math.abs(chosen)<1?`den Graphen in x-Richtung mit Faktor ${formatNum(geom)} verbreitern`:'die Breite unverändert lassen';
+    const signNote=chosen<0?' und zusätzlich an der y-Achse spiegeln':'';
+    return `<b>b:</b> Du hast ${c} gewählt. Das würde ${chosenEffect}${signNote}. Die sichtbare Breite passt zu <b>b = ${a}</b>: ${describeParam('b',actual)}.`;
+  }
+  if(p==='c'){
+    const dir=chosen===0?'gar nicht horizontal verschieben':`um ${formatNum(Math.abs(chosen))} nach ${chosen>0?'rechts':'links'} verschieben`;
+    return `<b>c:</b> Du hast ${c} gewählt. Das würde den Graphen ${dir}. Die markanten x-Positionen zeigen jedoch <b>c = ${a}</b>, also ${describeParam('c',actual).toLowerCase()}.`;
+  }
+  if(p==='d'){
+    const dir=chosen===0?'gar nicht vertikal verschieben':`um ${formatNum(Math.abs(chosen))} nach ${chosen>0?'oben':'unten'} verschieben`;
+    return `<b>d:</b> Du hast ${c} gewählt. Das würde den Graphen ${dir}. Die markanten y-Positionen zeigen jedoch <b>d = ${a}</b>, also ${describeParam('d',actual).toLowerCase()}.`;
+  }
+  return '';
+}
+
+function drawGraph(){
+  const canvas=$('#graphCanvas'), wrap=canvas.parentElement;
+  const rect=wrap.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
+  canvas.width=Math.max(1,Math.round(rect.width*dpr)); canvas.height=Math.max(1,Math.round(rect.height*dpr));
+  const ctx=canvas.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0);
+  const W=rect.width,H=rect.height;
+  const xmin=-6,xmax=6,ymin=-6,ymax=6;
+  const sx=x=> (x-xmin)/(xmax-xmin)*W, sy=y=> H-(y-ymin)/(ymax-ymin)*H;
+  ctx.clearRect(0,0,W,H); ctx.fillStyle='#ffffff';ctx.fillRect(0,0,W,H);
+  ctx.lineWidth=1;ctx.strokeStyle='#e8eef6';
+  for(let x=Math.ceil(xmin);x<=xmax;x++){ctx.beginPath();ctx.moveTo(sx(x),0);ctx.lineTo(sx(x),H);ctx.stroke()}
+  for(let y=Math.ceil(ymin);y<=ymax;y++){ctx.beginPath();ctx.moveTo(0,sy(y));ctx.lineTo(W,sy(y));ctx.stroke()}
+  ctx.strokeStyle='#8da0b8';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(0,sy(0));ctx.lineTo(W,sy(0));ctx.stroke();ctx.beginPath();ctx.moveTo(sx(0),0);ctx.lineTo(sx(0),H);ctx.stroke();
+  ctx.fillStyle='#718096';ctx.font='11px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif';
+  for(let x=-5;x<=5;x++){if(x===0)continue;ctx.fillText(String(x),sx(x)+3,sy(0)+14)}
+  for(let y=-5;y<=5;y++){if(y===0)continue;ctx.fillText(String(y),sx(0)+5,sy(y)-4)}
+  ctx.fillText('x',W-13,sy(0)-7);ctx.fillText('y',sx(0)+8,13);
+
+  function plot(fn,color,width){
+    ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();
+    let pen=false;
+    const N=Math.max(700,Math.floor(W*1.6));
+    for(let i=0;i<=N;i++){
+      const x=xmin+(xmax-xmin)*i/N, y=fn(x);
+      const valid=Number.isFinite(y)&&Math.abs(y)<200;
+      if(!valid){pen=false;continue}
+      const px=sx(x),py=sy(y);
+      if(py<-H||py>2*H){pen=false;continue}
+      if(!pen){ctx.moveTo(px,py);pen=true}else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+  }
+  plot(state.task.base.eval,'#2b6cb0',2.7);
+  plot(x=>gEval(state.task,x),'#f59e0b',3.1);
+}
+
+function setFeedback(el,type,html){el.className=`feedback ${type}`;el.innerHTML=html;el.classList.remove('hidden')}
+function clearFeedback(){['#identifyFeedback','#valueFeedback'].forEach(s=>{$(s).className='feedback hidden';$(s).innerHTML=''})}
+
+function startGame(){
+  enableParamButtons();
+  state.level=Number($('.choice-card.selected[data-level]')?.dataset.level||1);
+  state.mode=$('.choice-card.selected[data-mode]')?.dataset.mode||'training';
+  state.index=0;state.score=0;state.streak=0;state.lives=MODES[state.mode].lives;
+  state.recognition={correct:0,total:0};state.values={correct:0,total:0};
+  state.perParam={a:{ok:0,total:0},b:{ok:0,total:0},c:{ok:0,total:0},d:{ok:0,total:0}};
+  state.elapsed=[];
+  $('#startScreen').classList.add('hidden');$('#endScreen').classList.add('hidden');$('#gameScreen').classList.remove('hidden');
+  $('#resetBtn').classList.remove('hidden');
+  nextTask(true);
+}
+
+function nextTask(first=false){
+  clearInterval(state.timer); clearInterval(state.hintCooldown);
+  const mode=MODES[state.mode];
+  if(!first) state.index++;
+  if(state.index>=mode.length || (Number.isFinite(state.lives)&&state.lives<=0)){finishGame();return}
+  state.task=generateTask();state.selected=new Set();state.phase='identify';state.taskMistake=false;state.taskTimedOut=false;state.hintCount=0;
+  state.taskStarted=performance.now();
+  $('#phaseIdentify').classList.remove('hidden');$('#phaseValues').classList.add('hidden');$('#phaseSolution').classList.add('hidden');
+  $('#checkIdentifyBtn').textContent='Auswahl prüfen';
+  $('#checkValuesBtn').textContent='Werte prüfen';
+  $('#hintBox').classList.add('hidden');$('#hintBox').innerHTML='';
+  $$('.param-btn').forEach(b=>b.classList.remove('selected','correct','wrong'));
+  $('#hintBtn').classList.toggle('hidden',!mode.hints);$('#hintBtn').disabled=false;$('#hintBtn').textContent='💡 Tipp 1';
+  $('#baseFunctionLabel').textContent=state.task.base.label;
+  updateHud();
+  requestAnimationFrame(drawGraph);
+  startTimer();
+}
+
+function updateHud(){
+  const mode=MODES[state.mode], total=mode.length;
+  $('#missionLabel').textContent=`Aufgabe ${state.index+1} / ${total}`;
+  $('#difficultyLabel').textContent=`Niveau ${state.level} · ${mode.name}`;
+  $('#progressFill').style.width=`${(state.index/total)*100}%`;
+  $('#scoreLabel').textContent=Math.round(state.score);$('#streakLabel').textContent=state.streak;
+  $('#livesLabel').textContent=Number.isFinite(state.lives)?String(state.lives):'∞';
+  $('#livesPill').classList.toggle('hidden',!Number.isFinite(state.lives));
+  $('#timerPill').classList.toggle('hidden',mode.timer===0);
+}
+
+function startTimer(){
+  const mode=MODES[state.mode]; if(!mode.timer)return;
+  state.seconds=mode.timer;$('#timerLabel').textContent=state.seconds;$('#timerPill').classList.remove('low');
+  state.timer=setInterval(()=>{
+    state.seconds--;$('#timerLabel').textContent=state.seconds;
+    if(state.seconds<=10)$('#timerPill').classList.add('low');
+    if(state.seconds<=0){clearInterval(state.timer);timeExpired()}
+  },1000);
+}
+
+function timeExpired(){
+  if(state.phase==='solution'||state.phase==='valueReview'||state.phase==='identifyReview')return;
+  state.taskTimedOut=true;state.taskMistake=true;state.streak=0;
+  if(Number.isFinite(state.lives)) state.lives=Math.max(0,state.lives-1);
+  revealRecognition();
+  const correct=[...state.task.active].sort();
+  const details=correct.map(activeExplanation).join('<br>');
+  setFeedback($('#identifyFeedback'),'bad',`<b>Zeit abgelaufen.</b><br>Richtig aktiv sind: <b>${correct.join(', ')}</b>.<br>${details}`);
+  state.phase='identifyReview';
+  $('#checkIdentifyBtn').textContent='Weiter zu Schritt 2 →';
+  updateHud();
+}
+
+function revealRecognition(){
+  $$('.param-btn').forEach(b=>{
+    const p=b.dataset.param;b.disabled=true;
+    if(state.task.active.includes(p)) b.classList.add('correct');
+    else if(state.selected.has(p)) b.classList.add('wrong');
+  });
+}
+function enableParamButtons(){ $$('.param-btn').forEach(b=>b.disabled=false) }
+
+function checkRecognition(){
+  if(state.phase==='identifyReview'){
+    renderValues();
+    return;
+  }
+  if(state.phase!=='identify')return;
+  const chosen=[...state.selected].sort(), correct=[...state.task.active].sort();
+  if(chosen.length===0){setFeedback($('#identifyFeedback'),'info','Wähle mindestens einen Parameter aus.');return}
+  const ok=chosen.length===correct.length && chosen.every((x,i)=>x===correct[i]);
+  state.recognition.total++;
+  state.task.active.forEach(p=>state.perParam[p].total++);
+  if(ok){
+    state.recognition.correct++; state.task.active.forEach(p=>state.perParam[p].ok++);
+    const bonus=scoreForStep(85);state.score+=bonus;state.streak++;
+    setFeedback($('#identifyFeedback'),'good',`Richtig. Du hast alle aktiven Parameter erkannt. +${Math.round(bonus)} Punkte`);
+    revealRecognition(); updateHud(); state.phase='values';
+    setTimeout(renderValues,900);
+  } else {
+    state.taskMistake=true;state.streak=0;
+    setFeedback($('#identifyFeedback'),'bad',recognitionErrorFeedback(chosen,correct));
+    revealRecognition(); updateHud();
+    state.phase='identifyReview';
+    $('#checkIdentifyBtn').textContent='Weiter zu Schritt 2 →';
+  }
+}
+
+function scoreForStep(base){
+  const mode=MODES[state.mode];
+  let timeBonus=0;if(mode.timer) timeBonus=Math.max(0,state.seconds)*1.1;
+  return (base+timeBonus+Math.min(state.streak,5)*8)*mode.scoreMult;
+}
+
+function valueTargets(){return state.level===3?['a','b','c','d']:[...state.task.active]}
+function optionsFor(p,actual){
+  const pool=(p==='a'||p==='b')?[-2,-1,-0.5,0.5,1,1.5,2]:[-3,-2,-1,0,1,2,3];
+  if(!pool.includes(actual)) pool.push(actual);
+  return [...new Set(pool)].sort((x,y)=>x-y);
+}
+
+function renderValues(){
+  $('#phaseIdentify').classList.add('hidden');$('#phaseValues').classList.remove('hidden');
+  const targets=valueTargets();
+  $('#valueTitle').textContent=state.level===3?'Bestimme den vollständigen Parametercode.':targets.length>1?'Bestimme die aktiven Parameterwerte.':'Bestimme den Parameterwert.';
+  $('#valuePrompt').innerHTML=state.level===3?'Auch unveränderte Parameter gehören zum Code: <b>a = 1, b = 1, c = 0, d = 0</b> sind die Standardwerte.':'Nutze Lage, Breite und Höhe markanter Punkte des Graphen.';
+  const grid=$('#valueGrid');grid.innerHTML='';
+  targets.forEach(p=>{
+    const row=document.createElement('div');row.className='value-row';
+    const lab=document.createElement('label');lab.htmlFor=`sel-${p}`;lab.textContent=`${p} =`;
+    const sel=document.createElement('select');sel.id=`sel-${p}`;sel.dataset.param=p;
+    const ph=document.createElement('option');ph.value='';ph.textContent='Wert wählen …';sel.appendChild(ph);
+    optionsFor(p,state.task.params[p]).forEach(v=>{const o=document.createElement('option');o.value=String(v);o.textContent=formatNum(v);sel.appendChild(o)});
+    row.append(lab,sel);grid.appendChild(row);
+  });
+}
+
+function checkValues(){
+  if(state.phase==='valueReview'){
+    showSolution();
+    return;
+  }
+  if(state.phase!=='values')return;
+  const sels=$$('#valueGrid select');
+  if(sels.some(s=>s.value==='')){setFeedback($('#valueFeedback'),'info','Bitte wähle für jeden gefragten Parameter einen Wert.');return}
+  let all=true,okCount=0;
+  const errors=[];
+  sels.forEach(s=>{
+    const p=s.dataset.param, v=Number(s.value), actual=state.task.params[p];
+    state.values.total++; state.perParam[p].total++;
+    if(Math.abs(v-actual)<1e-9){okCount++;state.values.correct++;state.perParam[p].ok++;s.style.borderColor='#55b98a'}
+    else{all=false;s.style.borderColor='#ff9c91';errors.push(valueErrorExplanation(p,v,actual))}
+    s.disabled=true;
+  });
+  if(all){
+    const bonus=scoreForStep(115);state.score+=bonus;state.streak++;
+    setFeedback($('#valueFeedback'),'good',`Alle Werte stimmen. +${Math.round(bonus)} Punkte`);
+    finalizeTask(true);
+  }else{
+    state.taskMistake=true;state.streak=0;
+    setFeedback($('#valueFeedback'),'bad',`<b>${okCount} von ${sels.length} Werten stimmen.</b><br>${errors.join('<br>')}`);
+    finalizeTask(false);
+    $('#checkValuesBtn').textContent='Lösung ansehen →';
+  }
+}
+
+function finalizeTask(showImmediately=true){
+  clearInterval(state.timer);clearInterval(state.hintCooldown);
+  if(state.taskMistake && !state.taskTimedOut && Number.isFinite(state.lives)) state.lives=Math.max(0,state.lives-1);
+  const sec=Math.max(1,(performance.now()-state.taskStarted)/1000);state.elapsed.push(sec);
+  updateHud();
+  if(showImmediately){
+    state.phase='solution';
+    setTimeout(showSolution,650);
+  }else{
+    state.phase='valueReview';
+  }
+}
+
+function showSolution(){
+  state.phase='solution';
+  $('#phaseValues').classList.add('hidden');$('#phaseSolution').classList.remove('hidden');
+  const lis=state.task.active.map(p=>`<li><b>${p}</b>: ${describeParam(p,state.task.params[p])}</li>`).join('');
+  const std=state.level===3?'<li><b>Standardwerte:</b> Nicht aktive Parameter bleiben bei a = 1, b = 1, c = 0 bzw. d = 0.</li>':'';
+  $('#solutionBox').innerHTML=`<div class="eq">${formula(state.task)}</div><ul>${lis}${std}</ul>`;
+  $('#nextBtn').textContent=(state.index+1>=MODES[state.mode].length || (Number.isFinite(state.lives)&&state.lives<=0))?'Auswertung ansehen →':'Nächste Aufgabe →';
+}
+
+function hint(){
+  if(!MODES[state.mode].hints || state.phase!=='identify')return;
+  state.hintCount++;
+  const h1='Vergleiche markante Punkte: Ändern sich vor allem die <b>x-Koordinaten</b>, die <b>y-Koordinaten</b> oder wird der ganze Graph verschoben?';
+  const active=state.task.active;
+  const clues=[];
+  if(active.includes('d')) clues.push('Achte darauf, ob charakteristische Punkte überall gleich weit nach oben oder unten wandern.');
+  if(active.includes('c')) clues.push('Achte darauf, ob die Form unverändert bleibt, aber markante x-Positionen nach rechts oder links wandern.');
+  if(active.includes('a')) clues.push('Vergleiche die Abstände zur x-Achse: Werden die y-Werte vervielfacht oder wechseln sie das Vorzeichen?');
+  if(active.includes('b')) clues.push('Vergleiche die Breite des Graphen: Bei b > 1 wird er in x-Richtung zusammengedrückt.');
+  const text=state.hintCount===1?h1:(clues[0]||h1);
+  $('#hintBox').innerHTML=text;$('#hintBox').classList.remove('hidden');
+  if(state.hintCount>=2){$('#hintBtn').disabled=true;$('#hintBtn').textContent='Tipps genutzt';return}
+  let left=30;$('#hintBtn').disabled=true;$('#hintBtn').textContent=`Nächster Tipp in ${left}s`;
+  state.hintCooldown=setInterval(()=>{left--;$('#hintBtn').textContent=`Nächster Tipp in ${left}s`;if(left<=0){clearInterval(state.hintCooldown);$('#hintBtn').disabled=false;$('#hintBtn').textContent='💡 Tipp 2'}},1000);
+}
+
+function finishGame(){
+  clearInterval(state.timer);clearInterval(state.hintCooldown);
+  $('#gameScreen').classList.add('hidden');$('#endScreen').classList.remove('hidden');$('#resetBtn').classList.add('hidden');
+  const mode=MODES[state.mode];
+  const rec=state.recognition.total?Math.round(100*state.recognition.correct/state.recognition.total):0;
+  const val=state.values.total?Math.round(100*state.values.correct/state.values.total):0;
+  const score=Math.round(state.score);$('#endScore').textContent=score;$('#recognitionMetric').textContent=rec+'%';$('#valuesMetric').textContent=val+'%';
+  const key=`transformLab-best-L${state.level}-${state.mode}`;const old=Number(localStorage.getItem(key)||0);const best=Math.max(old,score);localStorage.setItem(key,String(best));$('#bestMetric').textContent=best;
+  const avg=state.elapsed.length?Math.round(state.elapsed.reduce((a,b)=>a+b,0)/state.elapsed.length):0;$('#timeMetric').textContent=avg?avg+' s':'–';
+  renderParamReport();renderBadges(rec,val,score,old);renderRecommendation(rec,val);
+  $('#progressFill').style.width='100%';
+}
+
+function renderParamReport(){
+  const box=$('#paramReport');box.innerHTML='';
+  const names={a:'a',b:'b',c:'c',d:'d'};
+  ['a','b','c','d'].forEach(p=>{
+    const d=state.perParam[p], pct=d.total?Math.round(100*d.ok/d.total):0;
+    const row=document.createElement('div');row.className='report-row';
+    row.innerHTML=`<b>${names[p]}</b><div class="mini-track"><div class="mini-fill" style="width:${pct}%"></div></div><span class="micro">${d.total?pct+'%':'–'}</span>`;box.appendChild(row);
+  });
+}
+function renderBadges(rec,val,score,old){
+  const area=$('#badgeArea');area.innerHTML='';
+  const badges=[];
+  if(rec>=90)badges.push('🔎 Graphen-Detektiv');
+  if(val>=90)badges.push('🎛 Parameter-Profi');
+  if(rec===100&&val===100)badges.push('🏆 Perfekter Code');
+  if(score>old&&score>0)badges.push('✨ Neuer Bestwert');
+  if(!badges.length)badges.push('🧭 Nächste Runde bereit');
+  badges.forEach(t=>{const s=document.createElement('span');s.className='badge';s.textContent=t;area.appendChild(s)});
+}
+function renderRecommendation(rec,val){
+  let text='';
+  const weakest=['a','b','c','d'].map(p=>({p,...state.perParam[p],pct:state.perParam[p].total?state.perParam[p].ok/state.perParam[p].total:2})).sort((x,y)=>x.pct-y.pct)[0];
+  if(rec<70) text='Trainiere zuerst weiter das <b>Erkennen der Transformationsart</b>. Vergleiche dabei bewusst x- und y-Koordinaten markanter Punkte.';
+  else if(val<70) text='Die Transformationsarten sitzen schon besser. Übe jetzt gezielt das <b>Ablesen der Parameterwerte</b> aus markanten Punkten.';
+  else text='Du erkennst Transformationen und Parameterwerte sicher. Wechsle auf ein höheres Niveau oder in den Sprint.';
+  if(weakest&&weakest.pct<1.5) text+=` Dein aktuell unsicherster Parameter ist <b>${weakest.p}</b>.`;
+  $('#recommendation').innerHTML=text;
+}
+
+function goHome(){
+  clearInterval(state.timer);clearInterval(state.hintCooldown);
+  $('#gameScreen').classList.add('hidden');$('#endScreen').classList.add('hidden');$('#startScreen').classList.remove('hidden');$('#resetBtn').classList.add('hidden');
+  enableParamButtons();
+}
+
+$$('#levelChoices .choice-card').forEach(b=>b.addEventListener('click',()=>{$$('#levelChoices .choice-card').forEach(x=>x.classList.remove('selected'));b.classList.add('selected')}));
+$$('#modeChoices .choice-card').forEach(b=>b.addEventListener('click',()=>{$$('#modeChoices .choice-card').forEach(x=>x.classList.remove('selected'));b.classList.add('selected')}));
+$$('.param-btn').forEach(b=>b.addEventListener('click',()=>{if(state.phase!=='identify')return;const p=b.dataset.param;if(state.selected.has(p)){state.selected.delete(p);b.classList.remove('selected')}else{state.selected.add(p);b.classList.add('selected')}}));
+$('#startBtn').addEventListener('click',startGame);$('#checkIdentifyBtn').addEventListener('click',checkRecognition);$('#checkValuesBtn').addEventListener('click',checkValues);$('#nextBtn').addEventListener('click',()=>{enableParamButtons();nextTask(false)});$('#hintBtn').addEventListener('click',hint);
+$('#resetBtn').addEventListener('click',()=>{if(confirm('Aktuelle Runde neu starten?'))startGame()});
+$('#playAgainBtn').addEventListener('click',startGame);$('#changeSetupBtn').addEventListener('click',goHome);
+window.addEventListener('resize',()=>{if(!$('#gameScreen').classList.contains('hidden')&&state.task)requestAnimationFrame(drawGraph)});
+initLookSelect();
+
+})();
+</script>
+</body>
+</html>
