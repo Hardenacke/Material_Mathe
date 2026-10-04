@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#126c72">
+  <meta name="color-scheme" content="light">
+  <title>Transformationen von Funktionen · EF</title>
+  <style>
+
+    :root {
+      color-scheme: light;
+      --ink: #18333e;
+      --muted: #536b76;
+      --teal: #126c72;
+      --blue: #2563db;
+      --line: #dce8eb;
+      --bg: #f0f6f6;
+      --a: #a04c13;
+      --b: #6653b4;
+      --c: #2465b2;
+      --d: #11726b;
+      --graph-height: clamp(330px, calc(100vh - 340px), 560px);
+      --graph-height: clamp(330px, calc(100svh - 340px), 560px);
+      font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-text-size-adjust: 100%;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; color: var(--ink); background: var(--bg); }
+    button, input, summary { -webkit-tap-highlight-color: transparent; }
+    button, input { font: inherit; }
+    button, summary { touch-action: manipulation; }
+    button { cursor: pointer; }
+    button:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--blue); outline-offset: 3px;
+    }
+    .page {
+      max-width: 1480px; margin: 0 auto;
+      padding: 24px max(20px, env(safe-area-inset-right)) 32px max(20px, env(safe-area-inset-left));
+    }
+    .hero { position: relative; display: flex; gap: 24px; align-items: center; margin-bottom: 22px; }
+    .hero-copy { flex: 1; min-width: 0; }
+    .eyebrow { display: flex; align-items: center; gap: 9px; color: var(--teal); font-size: .75rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 7px; }
+    .eyebrow svg { width: 25px; height: 18px; }
+    h1 { font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.16; letter-spacing: -.035em; margin: 0 0 8px; }
+    .intro { max-width: 830px; color: var(--muted); margin: 0; font-size: .98rem; }
+    .parabola-mark { width: 180px; height: 98px; flex: 0 0 auto; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 356px; gap: 20px; align-items: start; }
+    .card { min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 8px 28px #214b5710; }
+    .graph-card { padding: 17px; position: sticky; top: 16px; }
+    .graph-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    h2 { font-size: 1.08rem; line-height: 1.3; letter-spacing: -.02em; margin: 0; }
+    .section-kicker { display: block; color: var(--muted); font-size: .76rem; margin-bottom: 3px; }
+    .graph-actions { display: flex; align-items: center; gap: 6px; }
+    .icon-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); min-height: 46px; min-width: 46px; padding: 8px 11px; font-size: .86rem; font-weight: 650; }
+    .icon-button svg { height: 19px; width: 19px; flex: 0 0 auto; }
+    .axis-caption { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; color: var(--muted); font-size: .8rem; margin: 8px 0; }
+    .engine-status { display: inline-flex; gap: 6px; align-items: center; font-size: .72rem; color: #617985; }
+    .engine-status::before { content: ""; height: 6px; width: 6px; background: #89a9b1; border-radius: 50%; }
+    .engine-status.ready::before { background: #21836b; }
+    .ggb-wrap { position: relative; width: 100%; height: var(--graph-height); min-height: 0; overflow: hidden; border: 1px solid #e3ecef; border-radius: 14px; background: white; }
+    #ggb-element, #local-graph { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #ggb-element { visibility: hidden; }
+    .ggb-wrap.ggb-ready #ggb-element { visibility: visible; }
+    .ggb-wrap.ggb-ready #local-graph { visibility: hidden; }
+    #local-graph { display: block; pointer-events: none; }
+    .legend { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 11px; }
+    .legend-items { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; color: var(--muted); font-size: .8rem; }
+    .legend-item { display: inline-flex; align-items: center; gap: 7px; }
+    .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #263d49; }
+    .curve-key { width: 22px; height: 0; border-top: 3px solid var(--blue); border-radius: 2px; }
+    .domain { color: var(--muted); font-size: .76rem; }
+    .graph-note { font-size: .77rem; line-height: 1.5; margin: 11px 0 0; color: var(--muted); }
+    .data-details { margin-top: 13px; border-top: 1px solid var(--line); }
+    summary { cursor: pointer; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 12px; list-style: none; font-size: .87rem; font-weight: 650; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 1.25rem; font-weight: 450; color: var(--teal); }
+    details[open] > summary::after { content: "−"; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: .82rem; font-variant-numeric: tabular-nums; margin: 4px 0 9px; }
+    .data-table th { color: var(--muted); font-weight: 650; font-size: .75rem; background: #f4f8f9; }
+    .data-table td, .data-table th { padding: 7px 9px; text-align: center; border-bottom: 1px solid #e7eff1; }
+    .data-table td:nth-child(2), .data-table th:nth-child(2) { border-right: 1px solid var(--line); }
+    .controls { padding: 20px; }
+    .controls-heading { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+    .step-tag { display: inline-grid; place-items: center; width: 29px; height: 29px; background: #e5f2f0; border-radius: 9px; color: var(--teal); font-size: .78rem; font-weight: 750; }
+    .formula { background: #f1f7f8; border: 1px solid #e0ecee; border-radius: 14px; padding: 13px 8px; text-align: center; margin-bottom: 7px; font: 1.22rem/1.5 "Cambria Math", "Times New Roman", serif; white-space: nowrap; }
+    .formula i { font-weight: 650; }
+    .param-a { color: var(--a); } .param-b { color: var(--b); } .param-c { color: var(--c); } .param-d { color: var(--d); }
+    .control-help { margin: 0 0 15px; color: var(--muted); font-size: .77rem; }
+    .parameter-grid { display: grid; gap: 10px; }
+    .control { --param-color: var(--a); --fill: 20%; padding: 12px; background: #fff; border: 1px solid var(--line); border-radius: 14px; }
+    .control[data-param="b"] { --param-color: var(--b); }
+    .control[data-param="c"] { --param-color: var(--c); }
+    .control[data-param="d"] { --param-color: var(--d); }
+    .control-head { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+    .parameter-label { display: flex; align-items: center; gap: 8px; font-size: .84rem; font-weight: 700; cursor: pointer; }
+    .letter { display: inline-grid; place-items: center; flex: 0 0 27px; height: 29px; width: 27px; background: #f2f6f7; color: var(--param-color); border-radius: 8px; font: italic 700 1.15rem/1 "Cambria Math", "Times New Roman", serif; }
+    .number-edit { display: flex; align-items: center; min-height: 44px; border: 1px solid #deeaec; background: #f8fbfb; border-radius: 9px; padding: 0 7px 0 2px; flex: 0 0 auto; }
+    .number-edit input { width: 62px; min-height: 42px; color: var(--param-color); background: transparent; border: 0; padding: 7px 3px; font-size: 16px; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; border-radius: 7px; }
+    .number-edit .unit { font-size: .75rem; color: var(--muted); padding-left: 4px; }
+    .number-edit:focus-within { box-shadow: 0 0 0 2px var(--param-color); }
+    .number-edit input:focus { outline: 0; }
+    .range-row { display: flex; align-items: center; gap: 8px; margin-top: 7px; }
+    .step-button { flex: 0 0 44px; min-width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 10px; background: #f8fbfb; color: var(--param-color); font-size: 1.45rem; line-height: 1; font-weight: 450; }
+    .step-button:disabled { color: #95a9b0; background: #f6f9fa; cursor: default; }
+    input[type="range"] { -webkit-appearance: none; appearance: none; min-width: 0; flex: 1; width: 100%; height: 44px; margin: 0; background: transparent; cursor: pointer; touch-action: pan-y; }
+    input[type="range"]::-webkit-slider-runnable-track { height: 6px; background: linear-gradient(to right, var(--param-color) 0%, var(--param-color) var(--fill), #dfebed var(--fill), #dfebed 100%); border-radius: 9px; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; margin-top: -11px; background: #fff; border: 4px solid var(--param-color); border-radius: 50%; box-shadow: 0 2px 6px #1d45532a; }
+    input[type="range"]::-moz-range-track { height: 6px; background: #dfebed; border-radius: 9px; }
+    input[type="range"]::-moz-range-progress { height: 6px; background: var(--param-color); border-radius: 9px; }
+    input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; background: #fff; border: 4px solid var(--param-color); border-radius: 50%; }
+    .explain { color: var(--muted); font-size: .76rem; line-height: 1.4; margin: 5px 0 0; }
+    .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0; }
+    .metric { background: #f2f7f8; border-radius: 11px; padding: 10px; }
+    .metric span { display: block; color: var(--muted); font-size: .71rem; }
+    .metric strong { display: block; font-size: .94rem; font-variant-numeric: tabular-nums; margin-top: 2px; }
+    .aux { margin-top: 12px; border-top: 1px solid var(--line); }
+    .toggle-grid { display: grid; gap: 7px; margin: 2px 0 10px; }
+    .toggle { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 11px; background: #fafcfc; cursor: pointer; -webkit-user-select: none; user-select: none; font-size: .83rem; }
+    .toggle input { width: 22px; height: 22px; margin: 0; accent-color: var(--teal); flex: 0 0 auto; }
+    .toggle:has(input:checked) { background: #eaf5f2; border-color: #aacfc7; }
+    .buttons { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
+    .action { min-height: 48px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; font-weight: 700; font-size: .9rem; color: var(--ink); background: #fff; }
+    .action.primary { background: var(--teal); color: white; border-color: var(--teal); box-shadow: 0 3px 9px #126c7224; }
+    .action:active, .icon-button:active, .step-button:not(:disabled):active { transform: translateY(1px); }
+    .quality { margin-top: 12px; padding: 13px; background: #eef6f3; border: 1px solid #cce3da; border-radius: 13px; }
+    .quality h3 { font-size: .87rem; margin: 0 0 10px; }
+    .quality-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 5px 0; font-size: .78rem; }
+    .quality-row strong { color: #1a6557; font-size: 1rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .quality p { color: var(--muted); font-size: .75rem; margin: 9px 0 0; }
+    .hint { margin-top: 13px; border-top: 1px solid var(--line); }
+    .hint ol { padding-left: 20px; margin: 0 0 9px; color: var(--muted); font-size: .81rem; line-height: 1.65; }
+    .hint li + li { margin-top: 5px; }
+    .reflection { margin: 14px 0 0; background: #f4f8fa; border-radius: 12px; color: var(--muted); font-size: .8rem; padding: 12px; }
+    .reflection strong { color: var(--ink); display: block; margin-bottom: 3px; font-size: .83rem; }
+    .footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin: 17px 3px 0; color: var(--muted); font-size: .75rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .graph-focused { overflow: hidden; }
+    .graph-focused::before { content: ""; position: fixed; inset: 0; background: #18333e70; z-index: 90; }
+    .graph-focused .graph-card { position: fixed; inset: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); z-index: 100; display: flex; flex-direction: column; box-shadow: 0 15px 50px #18333e30; }
+    .graph-focused .ggb-wrap { flex: 1; height: auto; min-height: 0; }
+    .graph-focused .data-details, .graph-focused .graph-note { display: none; }
+    .graph-focused .graph-header, .graph-focused .axis-caption, .graph-focused .legend { flex: 0 0 auto; }
+    @media (min-width: 1250px) { .layout { grid-template-columns: minmax(0, 1fr) 382px; } .controls { padding: 22px; } .graph-card { padding: 20px; } }
+    @media (max-width: 959px) {
+      .page { padding-top: 20px; }
+      .hero { margin-bottom: 17px; }
+      .parabola-mark { width: 120px; }
+      .layout { grid-template-columns: minmax(0, 1fr) 320px; gap: 14px; }
+      .graph-card { padding: 12px; }
+      .controls { padding: 15px; }
+      .formula { font-size: 1.1rem; }
+      .graph-action-text { display: none; }
+      .graph-focused .graph-action-text { display: inline; }
+    }
+    @media (max-width: 719px) {
+      :root { --graph-height: clamp(290px, 38vh, 400px); --graph-height: clamp(290px, 38svh, 400px); }
+      .layout { grid-template-columns: 1fr; gap: 16px; }
+      .graph-card { position: static; }
+      .controls { padding: 20px; }
+      .parameter-grid { grid-template-columns: 1fr 1fr; }
+      .formula { font-size: 1.4rem; }
+      .metrics { margin-bottom: 5px; }
+      .toggle-grid { grid-template-columns: repeat(3, 1fr); }
+      .buttons { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 599px) {
+      :root { --graph-height: 325px; }
+      .page { padding: 16px 10px 24px; }
+      .hero { gap: 8px; }
+      .parabola-mark { display: none; }
+      h1 { font-size: 1.9rem; }
+      .intro { font-size: .9rem; }
+      .card { border-radius: 17px; }
+      .graph-card { padding: 11px; }
+      .graph-action-text { display: none; }
+      .graph-focused .graph-action-text { display: inline; }
+      .graph-header { gap: 5px; }
+      .graph-actions { gap: 5px; }
+      .graph-header h2 { font-size: .97rem; }
+      .controls { padding: 16px; }
+      .parameter-grid { grid-template-columns: 1fr; }
+      .toggle-grid { grid-template-columns: 1fr; }
+      .formula { font-size: 1.24rem; }
+      .data-table td, .data-table th { padding: 7px 4px; }
+      .graph-focused .graph-card { padding: 11px; }
+    }
+    @media (max-height: 520px) and (min-width: 700px) {
+      :root { --graph-height: 290px; }
+      .graph-card { position: static; }
+      .hero { margin-bottom: 12px; }
+      .parabola-mark { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
+  
+    .task-nav { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)) minmax(155px,1.2fr); gap: 9px; margin: 0 0 19px; }
+    .task-button { --task-color: var(--a); display: flex; align-items: center; gap: 10px; padding: 10px 12px; min-height: 59px; border: 1px solid var(--line); border-radius: 13px; color: var(--muted); background: #fff; text-align: left; }
+    .task-button[data-task="b"] { --task-color: var(--b); }
+    .task-button[data-task="c"] { --task-color: var(--c); }
+    .task-button[data-task="d"], .task-button[data-task="free"] { --task-color: var(--d); }
+    .task-button[aria-selected="true"] { border-color: var(--task-color); box-shadow: inset 0 0 0 1px var(--task-color); background: #f8fbfb; color: var(--ink); }
+    .task-index { display: inline-grid; place-items: center; flex: 0 0 32px; height: 32px; border-radius: 9px; background: #f0f5f6; color: var(--task-color); font-weight: 750; font-size: .9rem; }
+    .task-button span:last-child { font-size: .77rem; line-height: 1.35; }
+    .task-button strong { display: block; color: var(--task-color); font-size: .93rem; }
+    .base-function { display: inline-block; margin-top: 10px; padding: 4px 11px; border: 1px solid #d2e5e5; background: #e8f3f1; color: var(--teal); border-radius: 9px; font: 1.05rem/1.5 "Cambria Math", "Times New Roman", serif; }
+    .task-instruction { border-left: 3px solid var(--active-color,var(--a)); padding-left: 12px; margin: 14px 0; }
+    .task-instruction p { font-size: .87rem; line-height: 1.55; margin: 0; }
+    .task-instruction p + p { margin-top: 7px; color: var(--muted); font-size: .8rem; }
+    .formula { white-space: normal; overflow-wrap: anywhere; }
+    .current-model { padding: 8px 10px 12px; font: 1.09rem/1.5 "Cambria Math", "Times New Roman", serif; color: var(--active-color,var(--a)); border-bottom: 1px solid var(--line); margin: 0 0 13px; overflow-wrap: anywhere; }
+    .current-model small { display: block; font: .71rem/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--muted); margin-bottom: 3px; }
+    .control .number-edit input { width: 64px; }
+    .parameter-grid:not(.all-parameters) { grid-template-columns: 1fr; }
+    .parameter-limits { display: flex; justify-content: space-between; gap: 6px; color: var(--muted); font-size: .68rem; margin: 0 51px; font-variant-numeric: tabular-nums; }
+    .graph-card .legend-items { gap: 13px; }
+    .base-key { display: inline-block; width: 22px; border-top: 2px dashed #777e84; }
+    .curve-key { border-color: var(--active-color,var(--a)); }
+    .graph-note { line-height: 1.45; }
+    .toggle-grid { grid-template-columns: 1fr; }
+    .compare-options { display: grid; gap: 7px; margin: 15px 0 12px; }
+    .degenerate-note { color: #685229; background: #faf5e9; border: 1px solid #eadcba; padding: 10px 12px; border-radius: 11px; font-size: .78rem; margin: 12px 0 0; }
+    .task-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 13px; }
+    .task-pager .action { font-size: .83rem; }
+    .action:disabled { color: #9aaab1; background: #f7f9fa; cursor: default; box-shadow: none; border-color: var(--line); }
+    .notes { margin-top: 15px; border-top: 1px solid var(--line); padding-top: 14px; }
+    .notes label { font-size: .85rem; font-weight: 700; display: block; margin-bottom: 6px; }
+    textarea { display: block; width: 100%; min-height: 108px; resize: vertical; border: 1px solid var(--line); border-radius: 11px; padding: 10px 12px; color: var(--ink); background: #fafdfe; font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    textarea:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+    .notes-help { display: block; color: var(--muted); font-size: .72rem; margin-top: 5px; }
+    .graph-focused .graph-card .degenerate-note { flex: 0 0 auto; }
+    @media (max-width: 959px) { .task-button { padding: 8px; gap: 7px; } .task-nav { gap: 7px; grid-template-columns: repeat(4,minmax(0,1fr)) minmax(124px,1.15fr); } .task-index { flex-basis: 27px; width: 27px; height: 29px; } .task-button span:last-child { font-size: .72rem; } .task-button strong { font-size: .85rem; } }
+    @media (max-width: 719px) { .task-nav { grid-template-columns: repeat(4,minmax(0,1fr)); } .task-button[data-task="free"] { grid-column: 1 / -1; min-height: 46px; justify-content: center; } .task-button { justify-content: center; text-align: center; flex-direction: column; gap: 4px; } .task-button[data-task="free"] { flex-direction: row; } .task-button[data-task="free"] strong { display: inline; } .task-nav .task-index { display: none; } .task-button span:last-child { font-size: .68rem; } .task-pager { grid-template-columns: 1fr 1fr; } }
+    @media print { .task-nav,.graph-actions,.range-row,.compare-options,.task-pager,#reset,.engine-status,.notes-help,.hint { display:none !important; } .layout { display:block; } .graph-card { position:static; break-inside:avoid; box-shadow:none; } .controls { margin-top:15px; break-inside:avoid; } .ggb-wrap { height:360px; } .page { padding:0; } .footer { display:none; } }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header class="hero" id="page-header">
+    <div class="hero-copy">
+      <div class="eyebrow"><svg viewBox="0 0 25 18" fill="none" aria-hidden="true"><path d="M2 16 12.5 2 23 16M6 11h13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Mathematik · EF · Funktionen</div>
+      <h1>Was verändert eine Parabel?</h1>
+      <p class="intro">Erkunde die Wirkung der vier Parameter. Verändere zunächst einen Parameter und vergleiche den Graphen mit der Ausgangsfunktion.</p>
+      <span class="base-function">Ausgangsfunktion: <i>f</i>(<i>x</i>) = −<i>x</i><sup>2</sup></span>
+    </div>
+    <svg class="parabola-mark" viewBox="0 0 210 110" fill="none" aria-hidden="true">
+      <rect x="1" y="1" width="208" height="108" rx="28" fill="#e0f0ee"/>
+      <path d="M18 58h174M67 15v82" stroke="#b3cfca" stroke-width="1.5"/>
+      <path d="M19 100Q67-79 115 100" stroke="#7e9693" stroke-width="2" stroke-dasharray="5 5"/>
+      <path d="M69 94Q118-59 167 94" stroke="#126c72" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="118" cy="17.5" r="4" fill="#126c72"/>
+      <path d="M132 21h35" stroke="#e6b363" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </header>
+  <nav class="task-nav" id="task-nav" role="tablist" aria-label="Aufgaben zur Funktionstransformation">
+    <button class="task-button" id="tab-a" type="button" role="tab" data-task="a" aria-controls="task-panel" aria-selected="true"><span class="task-index">01</span><span><strong>Parameter a</strong>y-Richtung</span></button>
+    <button class="task-button" id="tab-b" type="button" role="tab" data-task="b" aria-controls="task-panel" aria-selected="false" tabindex="-1"><span class="task-index">02</span><span><strong>Parameter b</strong>x-Richtung</span></button>
+    <button class="task-button" id="tab-c" type="button" role="tab" data-task="c" aria-controls="task-panel" aria-selected="false" tabindex="-1"><span class="task-index">03</span><span><strong>Parameter c</strong>Links / rechts</span></button>
+    <button class="task-button" id="tab-d" type="button" role="tab" data-task="d" aria-controls="task-panel" aria-selected="false" tabindex="-1"><span class="task-index">04</span><span><strong>Parameter d</strong>Oben / unten</span></button>
+    <button class="task-button" id="tab-free" type="button" role="tab" data-task="free" aria-controls="task-panel" aria-selected="false" tabindex="-1"><span class="task-index">ƒ</span><span><strong>Freies Erkunden</strong>Alle vier Parameter</span></button>
+  </nav>
+  <main class="layout" id="task-panel" role="tabpanel" aria-labelledby="tab-a">
+    <section class="card graph-card" id="graph-card" aria-labelledby="graph-title">
+      <div class="graph-header">
+        <div><span class="section-kicker">Beobachten &amp; vergleichen</span><h2 id="graph-title">Parabeln im Vergleich</h2></div>
+        <div class="graph-actions">
+          <button class="icon-button" id="view-reset" type="button" aria-label="Grafikausschnitt zurücksetzen" title="Grafikausschnitt zurücksetzen"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 7M4 4v6h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="icon-button" id="expand-graph" type="button" aria-expanded="false" aria-controls="graph-card"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="graph-action-text" id="expand-label">Vergrößern</span><span class="sr-only" id="expand-sr">Grafik vergrößern</span></button>
+        </div>
+      </div>
+      <div class="axis-caption"><span>Ein Kästchen = eine Einheit</span><span class="engine-status" id="engine-status" role="status">Grafik wird vorbereitet …</span></div>
+      <div class="ggb-wrap" id="graph-wrap"><svg id="local-graph" role="img" aria-label="Ausgangsfunktion minus x Quadrat und transformierter Funktionsgraph"></svg><div id="ggb-element" aria-label="GeoGebra-Grafik der Funktionstransformation"></div></div>
+      <div class="legend"><div class="legend-items"><span class="legend-item" id="base-legend"><span class="base-key"></span><span>f(x) = −x²</span></span><span class="legend-item"><span class="curve-key"></span><span id="model-legend">g(x) = a · f(x)</span></span></div></div>
+      <p class="graph-note" id="graph-note">Die graue Kurve zeigt die Ausgangsfunktion. Die farbige Kurve verändert sich mit deinem Regler.</p>
+      <p class="degenerate-note" id="degenerate-note" hidden>Der Graph ist jetzt eine waagerechte Gerade. Es gibt keinen eindeutigen Scheitelpunkt.</p>
+    </section>
+    <aside class="card controls" id="controls" aria-labelledby="controls-title">
+      <div class="controls-heading"><span class="step-tag" id="task-number" aria-hidden="true">01</span><h2 id="controls-title">Wirkung von a untersuchen</h2></div>
+      <div class="task-instruction"><p id="task-instruction">Verändere a und beobachte, welchen Effekt a auf die Parabel hat.</p><p id="task-focus">Untersuche besonders Scheitelpunkt, Öffnung und Breite.</p></div>
+      <div class="formula" id="formula"><i>g</i>(<i>x</i>) = <i class="param-a">a</i> · <i>f</i>(<i>x</i>)</div>
+      <div class="current-model"><small>Mit deinen Werten</small><span id="current-formula">g(x) = −x²</span></div>
+      <p class="control-help" id="control-help">Ziehe den Regler. Mit − / + oder im Zahlenfeld kannst du genauer einstellen.</p>
+      <div class="parameter-grid" id="parameter-grid"></div>
+      <div class="compare-options"><label class="toggle"><input id="toggle-base" type="checkbox" checked>Ausgangsfunktion anzeigen</label><label class="toggle"><input id="toggle-vertex" type="checkbox" checked>Scheitelpunkt anzeigen</label></div>
+      <button class="action" type="button" id="reset" style="width:100%">Parameter zurücksetzen</button>
+      <div class="task-pager"><button class="action" type="button" id="previous" disabled>← Zurück</button><button class="action primary" type="button" id="next">Weiter →</button></div>
+      <details class="hint" id="hint"><summary>Ein Tipp für deine Untersuchung</summary><ol id="hint-items"></ol></details>
+      <div class="notes"><label for="observation">Deine Beobachtung</label><textarea id="observation" maxlength="4000" placeholder="Was bleibt gleich? Was verändert sich?" aria-describedby="notes-help"></textarea><span class="notes-help" id="notes-help">Halte deine Ergebnisse zu dieser Aufgabe fest.</span></div>
+    </aside>
+  </main>
+  <footer class="footer" id="page-footer"><span>Vier Parameter · vier Untersuchungen · dein Ergebnis</span><span>Ausgangsfunktion f(x) = −x²</span></footer>
+</div>
+<noscript><p style="padding:20px">Bitte aktiviere JavaScript, um die Aufgaben und Regler zu verwenden.</p></noscript>
+<script>
+(() => {
+  'use strict';
+  const embeddedGgb = "UEsDBBQAAAAIAGCORF09P2WrqgUAABAVAAAMAAAAZ2VvZ2VicmEueG1s1Zhbb9s2FICf219xoJckW2OLutqF3SJJMWxAWhRLN3R7GEBLtMRYFgWRiuVhP36HpCQ7tzYJMqwNEIvXw3O+c6Hs2dt2XcAVqyUX5fyAjNwDYGUiUl5m84NGLY8nB2/fvJxlTGRsUVPA5aV83Uo+d3Klqtfj8WazGW38kaizsee6ZPz5/flFkrM1PealVLRMmANLUa+pmjvhyHWG07AXjKa+O/IcoFU1d5KCSskTB6qCKr1l7mwcwLNel+IDXTNZ0YRZ2eciocoI0VrITo1eS6MMipTjVqbjLFuM8OloMxr+5uWL2YaXqdjAhqcqnztTF5XKGc9y1DDSnbFeVKGaFUsUv2ISt+51gadzR60rxyyjpZ5/MRsPrSvONkPDLCZoNZd8UTDcWDdIhJfLGk2aO0taSOxLtS3YgtbDQDFYiJsl/5t1ilrdcdR1X+l/VPhVMCg9Hs5WQhQoD2SuV3dCuWJrOXdciH2IPPgHCIQugSiGVxACmeIj9iAOIY5w0gMSQhDiIJlApJ8x+DFOBODDBPRq4kMQ6M0T/Aj0HIkgRIl6MHZ13wU/gNAHQnDICwA8FzxPtwl4Pq4IQwhxk9aBaJ38CIIIO/4EgimggloUASC4N5roBShgCiFq4YFPwNdCPFQ/Bi+CyIXQg4hoNV0ICATmLJybgK9tiDC+hOQD25wV1QDIQORl1ajr4JJ12ntOCVxOCxNo3YZUJKvTm6wZlWpfLgbILoRudI3HCrpgBebdhQ4FuKIFOqo7YClK1QUBmXTSTCzPWJMUPOW0/B0d38fch2a9YDWYpjBGGilawFeCPhGiTi+2EuME2j9Zjbv9ECe3XTvCtkyojuMAFdnutc1+dnXBlEIjJNCWyZ5ZVvN0v/2LPBVFOtCpBC/VGa1UU+u64/gO1FqzkzIrmMFhjMDMT1YL0V4YEF5kZX3aVmxHapGdiULUgInkhSGu6J6L7mkWadWGZYFd1S2Ke0Fa9E6U51pR+lAtyu9FocOshp29pDfWHc7iEroBGx8Wg/H23GkdaEquzm0Po4snq53FeoN15oBSskLHjChPikJsWHo9dIfTyJ2nbZ/3NG0ppFyqz2a/bv0xtD7lTFE0exQirekkjkP89KaTPn5vRO5sxeqSFTYISwyhRjTSZsH+kY1kH6nKT8r0V5ahXh+pLqMKVbZrrdo2K1nC17jVTng9IR1TvyEEO5yyrGYDPZvV1xNQVjWjqcwZUzuv2jy5maizcW/ETFEs9qb+r3lp5te0tfIUq4YNMql5pfMFFljwV2zIEiSoJaR7FmkuEnvGH+g6pd32qaaltNcrjrISrnDup6Zc2S7erI3KRa2dnVKFG/Q1iE5dM6woyqRO2axZra/dLkhOzL2GZjWdceRWrKscAwdvOx3waInqU1A3fuZpymxpFXhhc7U1l1VfgzDGQCwuMap2V509d9/NuGKXfL7NUEK65AvQqqLK6c4dBd3qeqeV7SsR+ofpamJHh3TVR70X6Q3Lxh2Rr7I5/cbYEA0D2cS2ehFdvh7LJnomNmc32bj/Lxuf2LBxPctm+gQ28TOxefetsbFhQ/ypYTP1Ho9m8nA0LZZQqd/5B7Xw9ajVb12H7RHM4fC4/evQOzrqrV42pSlytuxdJ7ubG2TdYnDtzrsPwdRWlanNHP24n4B3J4Hp3QT8/qWNtyy9dSvd6XC/t5yEX3B4ODicr6uCL7dngi2XPOFI59ZV+WUHZJ0Dss4BJ/ADaGccPQh59kTkj6vkwZ3Qifts1KP7s+yZMOcd5txiXh4eniLoh2LOb2P+L26FeziT74gz7zjznnMLx3D2MMr8qZQfd7/cQ9n7jihfdpQvB8pH8CO8exDlyydTfsxNdQ9k/zuCvOogr65VZlM3uqjGvwdjXz0Vu/2+a64cpD75YmiHd1MPno16/MzUx/vfpMxvKd0Ph2/+BVBLAQIUAxQAAAAIAGCORF09P2WrqgUAABAVAAAMAAAAAAAAAAAAAACAAQAAAABnZW9nZWJyYS54bWxQSwUGAAAAAAEAAQA6AAAA1AUAAAAA";
+  const $ = id => document.getElementById(id);
+  const parameters = {
+    a:{label:'Streckung in y-Richtung',min:-3,max:3,step:0.05,value:1,color:'#eb7418',rgb:[235,116,24],explain:'Untersuche auch a = 0 und negative Werte.'},
+    b:{label:'Streckung in x-Richtung',min:-3,max:3,step:0.05,value:1,color:'#7c4baa',rgb:[124,75,170],explain:'Vergleiche positive und negative Werte von b.'},
+    c:{label:'Horizontale Verschiebung',min:-2,max:10,step:0.1,value:0,color:'#1f66be',rgb:[31,102,190],explain:'Beobachte die Lage des Scheitelpunkts.'},
+    d:{label:'Vertikale Verschiebung',min:-2,max:6,step:0.1,value:0,color:'#228b5c',rgb:[34,139,92],explain:'Beobachte die Lage des Scheitelpunkts.'}
+  };
+  const tasks = {
+    a:{name:'g',number:'01',title:'Wirkung von a untersuchen',instruction:'Verändere a und beobachte, welchen Effekt a auf die Parabel hat.',focus:'Untersuche besonders Scheitelpunkt, Öffnung und Breite.',formula:'<i>g</i>(<i>x</i>) = <i class="param-a">a</i> · <i>f</i>(<i>x</i>)',legend:'g(x) = a · f(x)',hints:['Vergleiche a = 0,5, a = 1 und a = 2.','Untersuche danach dieselben Werte mit einem Minuszeichen.','Vergleiche die Funktionswerte jeweils an derselben x-Stelle.']},
+    b:{name:'h',number:'02',title:'Wirkung von b untersuchen',instruction:'Verändere b und untersuche den Effekt auf die Parabel.',focus:'Achte darauf, wie sich die Parabel in x-Richtung verändert.',formula:'<i>h</i>(<i>x</i>) = <i>f</i>(<i class="param-b">b</i> · <i>x</i>)',legend:'h(x) = f(b · x)',hints:['Vergleiche b = 0,5, b = 1 und b = 2.','Vergleiche anschließend b = 1 und b = −1.','Untersuche, was bei b = 0 passiert.']},
+    c:{name:'i',number:'03',title:'Wirkung von c untersuchen',instruction:'Verändere c und untersuche die horizontale Verschiebung.',focus:'Achte darauf, wie sich der Scheitelpunkt nach links oder rechts bewegt.',formula:'<i>i</i>(<i>x</i>) = <i>f</i>(<i>x</i> − <i class="param-c">c</i>)',legend:'i(x) = f(x − c)',hints:['Vergleiche c = −2, c = 0 und c = 2.','Markiere bei Bedarf den Scheitelpunkt.','Formuliere eine Regel für positive und negative Werte von c.']},
+    d:{name:'j',number:'04',title:'Wirkung von d untersuchen',instruction:'Verändere d und untersuche die vertikale Verschiebung.',focus:'Achte darauf, wie sich der Scheitelpunkt nach oben oder unten bewegt.',formula:'<i>j</i>(<i>x</i>) = <i>f</i>(<i>x</i>) + <i class="param-d">d</i>',legend:'j(x) = f(x) + d',hints:['Vergleiche d = −2, d = 0 und d = 2.','Beobachte neben dem Scheitelpunkt auch die Form der Parabel.','Formuliere eine Regel für positive und negative Werte von d.']},
+    free:{name:'k',number:'ƒ',title:'Alle Parameter kombinieren',instruction:'Verändere jetzt alle vier Parameter und untersuche ihr Zusammenspiel.',focus:'Erzeuge verschiedene Parabeln und erkläre, welche Einstellungen ihre Lage und Form bestimmen.',formula:'<i>k</i>(<i>x</i>) = <i class="param-a">a</i> · <i>f</i>(<i class="param-b">b</i> · (<i>x</i> − <i class="param-c">c</i>)) + <i class="param-d">d</i>',legend:'k(x) = a · f(b · (x − c)) + d',hints:['Lege zuerst die Lage mit c und d fest.','Verändere dann die Form mit a und b.','Findest du unterschiedliche Einstellungen, die denselben Graphen erzeugen?']}
+  };
+  const ids=Object.keys(parameters), order=[...ids,'free'];
+  const wrap=$('graph-wrap'), status=$('engine-status');
+  let task='a', ready=false, ggb=null, applet=null, loadTimer;
+  let renderFrame=0, resizeFrame=0, focused=false, scrollBeforeFocus=0;
+  let dimensions={width:0,height:0};
+  let notes={};
+  const storageKey='ef-transformationen-minus-x2-observations-v1';
+  try {
+    const saved=JSON.parse(localStorage.getItem(storageKey)||'{}');
+    if (saved && typeof saved==='object' && !Array.isArray(saved)) notes=saved;
+  } catch (error) { /* Notes remain usable in the current session. */ }
+  function fmt(value,digits=2) { return value.toLocaleString('de-DE',{minimumFractionDigits:digits,maximumFractionDigits:digits}); }
+  function short(value) { return Number(value.toFixed(6)).toLocaleString('de-DE',{maximumFractionDigits:6}); }
+  ids.forEach(id => {
+    const p=parameters[id];
+    $('parameter-grid').insertAdjacentHTML('beforeend',`<div class="control" data-param="${id}" id="control-${id}"${id==='a' ? '' : ' hidden'}><div class="control-head"><label class="parameter-label" for="slider-${id}"><span class="letter">${id}</span>${p.label}</label><div class="number-edit"><input id="number-${id}" type="text" inputmode="decimal" value="${fmt(p.value)}" maxlength="10" aria-label="Wert für Parameter ${id}" aria-describedby="explain-${id}" autocomplete="off" spellcheck="false"></div></div><div class="range-row"><button class="step-button" type="button" data-adjust="${id}" data-direction="-1" aria-label="Parameter ${id} um ${fmt(p.step)} verringern">−</button><input id="slider-${id}" type="range" min="${p.min}" max="${p.max}" step="${p.step}" value="${p.value}" aria-label="Parameter ${id}" aria-describedby="explain-${id}"><button class="step-button" type="button" data-adjust="${id}" data-direction="1" aria-label="Parameter ${id} um ${fmt(p.step)} erhöhen">+</button></div><div class="parameter-limits" aria-hidden="true"><span>${short(p.min)}</span><span>${short(p.max)}</span></div><p class="explain" id="explain-${id}">${p.explain}</p></div>`);
+  });
+  function rawValues() { return Object.fromEntries(ids.map(id => [id,Number($('slider-'+id).value)])); }
+  function effectiveValues() {
+    const raw=rawValues(), p={a:1,b:1,c:0,d:0};
+    ids.forEach(id => { if (task===id || task==='free') p[id]=raw[id]; });
+    return p;
+  }
+  function curve(x,p=effectiveValues()) { return -p.a*Math.pow(p.b*(x-p.c),2)+p.d; }
+  function isConstant(p=effectiveValues()) { return Math.abs(p.a*p.b*p.b)<1e-12; }
+  function bounds() {
+    const p=effectiveValues(), width=Math.max(280,wrap.clientWidth), height=Math.max(200,wrap.clientHeight);
+    const left=Math.min(-4,p.c-2), right=Math.max(4,p.c+2);
+    const bottom=Math.min(-5,p.d-4), top=Math.max(5,p.d+2);
+    const unit=Math.max((right-left)/width,(top-bottom)/height);
+    const xCentre=(left+right)/2, yCentre=(bottom+top)/2;
+    return {left:xCentre-unit*width/2,right:xCentre+unit*width/2,bottom:yCentre-unit*height/2,top:yCentre+unit*height/2,step:1,labelStep:unit*Math.max(width,height)>23 ? 2 : 1};
+  }
+  function activeColor() { return task==='free' ? '#009650' : parameters[task].color; }
+  function numericFormula() {
+    const p=effectiveValues(), q=-p.a*p.b*p.b, name=tasks[task].name;
+    if (isConstant(p)) return `${name}(x) = ${short(p.d)}`;
+    const coefficient=q===-1 ? '−' : q===1 ? '' : (q<0 ? '−' : '')+short(Math.abs(q))+' · ';
+    const argument=p.c===0 ? 'x²' : `(x ${p.c<0 ? '+' : '−'} ${short(Math.abs(p.c))})²`;
+    return `${name}(x) = ${coefficient}${argument}${p.d===0 ? '' : ` ${p.d<0 ? '−' : '+'} ${short(Math.abs(p.d))}`}`;
+  }
+  function updateLabels() {
+    const raw=rawValues();
+    ids.forEach(id => {
+      const p=parameters[id], val=raw[id];
+      $('number-'+id).value=fmt(val);
+      $('slider-'+id).setAttribute('aria-valuetext',fmt(val));
+      $('control-'+id).style.setProperty('--fill',((val-p.min)/(p.max-p.min)*100)+'%');
+      document.querySelector(`[data-adjust="${id}"][data-direction="-1"]`).disabled=val<=p.min;
+      document.querySelector(`[data-adjust="${id}"][data-direction="1"]`).disabled=val>=p.max;
+    });
+    $('current-formula').textContent=numericFormula();
+    $('degenerate-note').hidden=!isConstant();
+    $('base-legend').hidden=!$('toggle-base').checked;
+    $('local-graph').setAttribute('aria-label',`${$('toggle-base').checked ? 'Ausgangsfunktion minus x Quadrat und ' : ''}transformierter Graph: ${numericFormula()}`);
+  }
+  function drawLocalGraph() {
+    const width=Math.max(280,wrap.clientWidth), height=Math.max(200,wrap.clientHeight), b=bounds(), p=effectiveValues();
+    const x=n => (n-b.left)/(b.right-b.left)*width, y=n => height-(n-b.bottom)/(b.top-b.bottom)*height;
+    const r=n => n.toFixed(2), color=activeColor();
+    const line=(x1,y1,x2,y2,stroke,weight=1) => `<line x1="${r(x(x1))}" y1="${r(y(y1))}" x2="${r(x(x2))}" y2="${r(y(y2))}" stroke="${stroke}" stroke-width="${weight}"/>`;
+    let svg=`<defs><clipPath id="plot-clip"><rect width="${width}" height="${height}"/></clipPath></defs><rect width="${width}" height="${height}" fill="white"/>`;
+    for(let n=Math.ceil(b.left/b.step)*b.step;n<b.right;n+=b.step) {
+      svg+=line(n,b.bottom,n,b.top,'#e5eef0');
+      if(n!==0 && n%b.labelStep===0 && x(n)>15 && x(n)<width-12) svg+=`<text x="${r(x(n))}" y="${r(y(0)+20)}" text-anchor="middle" fill="#536b76" font-size="13">${n<0 ? '−'+Math.abs(n) : n}</text>`;
+    }
+    for(let n=Math.ceil(b.bottom/b.step)*b.step;n<b.top;n+=b.step) {
+      svg+=line(b.left,n,b.right,n,'#e5eef0');
+      if(n!==0 && n%b.labelStep===0 && y(n)>16 && y(n)<height-10) svg+=`<text x="${r(x(0)-9)}" y="${r(y(n)+4)}" text-anchor="end" fill="#536b76" font-size="13">${n<0 ? '−'+Math.abs(n) : n}</text>`;
+    }
+    svg+=line(b.left,0,b.right,0,'#829ba5',1.3)+line(0,b.bottom,0,b.top,'#829ba5',1.3);
+    svg+=`<text x="${width-13}" y="${r(y(0)-9)}" font-size="14" fill="#536b76" font-style="italic">x</text><text x="${r(x(0)+10)}" y="18" font-size="14" fill="#536b76" font-style="italic">y</text><text x="${r(x(0)-10)}" y="${r(y(0)+18)}" font-size="12" fill="#536b76" text-anchor="end">0</text><g clip-path="url(#plot-clip)">`;
+    const path=fn => {
+      let d='';
+      for(let i=0;i<=640;i++) {const value=b.left+(b.right-b.left)*i/640; d+=`${i?'L':'M'}${r(x(value))},${r(y(fn(value)))}`;}
+      return d;
+    };
+    if($('toggle-base').checked) svg+=`<path id="local-base" d="${path(value=>-value*value)}" fill="none" stroke="#777e84" stroke-width="2.2" stroke-dasharray="6 5"/>`;
+    svg+=`<path id="local-model" d="${path(value=>curve(value,p))}" fill="none" stroke="${color}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>`;
+    if($('toggle-vertex').checked && !isConstant(p)) {
+      svg+=`<g id="local-vertex"><circle cx="${r(x(p.c))}" cy="${r(y(p.d))}" r="5" fill="${color}" stroke="white" stroke-width="2"/><text x="${r(x(p.c)+10)}" y="${r(y(p.d)-10)}" font-size="14" fill="${color}">S (${short(p.c)} | ${short(p.d)})</text></g>`;
+    }
+    svg+='</g>';
+    $('local-graph').setAttribute('viewBox',`0 0 ${width} ${height}`);
+    $('local-graph').innerHTML=svg;
+    $('axis-caption-step').textContent=b.step===1 ? 'Ein Kästchen = eine Einheit' : 'Ein Kästchen = zwei Einheiten';
+  }
+  function updateVisibility() {
+    if(!ready) return;
+    const p=effectiveValues();
+    ggb.setValue('activeTask',order.indexOf(task)+1);
+    ggb.setVisible('f',$('toggle-base').checked);
+    for(const id of order) ggb.setVisible(tasks[id].name,id===task);
+    ggb.setVisible('S',$('toggle-vertex').checked && !isConstant(p));
+    ggb.setCaption('S',`S (${short(p.c)} | ${short(p.d)})`);
+    ggb.setColor('S',...(task==='free' ? [0,150,80] : parameters[task].rgb));
+  }
+  function fitApplet() {
+    if(!ready) return;
+    const b=bounds();
+    ggb.setCoordSystem(b.left,b.right,b.bottom,b.top);
+    if(ggb.setAxisSteps) ggb.setAxisSteps(1,b.labelStep,b.labelStep);
+    $('axis-caption-step').textContent=b.step===1 ? 'Ein Kästchen = eine Einheit' : 'Ein Kästchen = zwei Einheiten';
+  }
+  function render() {
+    renderFrame=0;
+    if(!ready) {drawLocalGraph();return;}
+    try {
+      if(ggb.setRepaintingActive) ggb.setRepaintingActive(false);
+      const p=rawValues();
+      ids.forEach(id=>ggb.setValue(id.toUpperCase(),p[id]));
+      updateVisibility();fitApplet();
+    } catch(error) {useLocalGraph();}
+    finally {if(ggb && ggb.setRepaintingActive) ggb.setRepaintingActive(true);}
+  }
+  function requestRender() {updateLabels();if(!renderFrame) renderFrame=requestAnimationFrame(render);}
+  function setParameter(id,value) {
+    if(!Number.isFinite(value)) {$('number-'+id).value=fmt(Number($('slider-'+id).value));return;}
+    const p=parameters[id], snapped=p.min+Math.round((value-p.min)/p.step)*p.step;
+    $('slider-'+id).value=String(Math.min(p.max,Math.max(p.min,snapped)));
+    requestRender();
+  }
+  ids.forEach(id=>{
+    $('slider-'+id).addEventListener('input',requestRender);
+    const commit=()=>{const text=$('number-'+id).value.trim();setParameter(id,text==='' ? NaN : Number(text.replace(',','.')));};
+    $('number-'+id).addEventListener('change',commit);
+    $('number-'+id).addEventListener('keydown',event=>{if(event.key==='Enter'){commit();$('number-'+id).blur();}});
+    $('number-'+id).addEventListener('focus',()=>$('number-'+id).select());
+  });
+  document.querySelectorAll('[data-adjust]').forEach(button=>button.addEventListener('click',()=>{
+    const id=button.dataset.adjust;
+    setParameter(id,Number($('slider-'+id).value)+Number(button.dataset.direction)*parameters[id].step);
+  }));
+  ['toggle-base','toggle-vertex'].forEach(id=>$(id).addEventListener('change',requestRender));
+
+  function setTask(id,focusTab=false) {
+    if(!tasks[id]) return;
+    task=id;
+    const meta=tasks[id], index=order.indexOf(id);
+    document.documentElement.style.setProperty('--active-color',activeColor());
+    document.querySelectorAll('[data-task]').forEach(button=>{
+      const selected=button.dataset.task===id;
+      button.setAttribute('aria-selected',String(selected));button.tabIndex=selected ? 0 : -1;
+    });
+    $('task-panel').setAttribute('aria-labelledby','tab-'+id);
+    $('task-number').textContent=meta.number;$('controls-title').textContent=meta.title;
+    $('task-instruction').textContent=meta.instruction;$('task-focus').textContent=meta.focus;
+    $('formula').innerHTML=meta.formula;$('model-legend').textContent=meta.legend;
+    $('control-help').textContent=id==='free' ? 'Ziehe die Regler. Mit − / + oder im Zahlenfeld kannst du genauer einstellen.' : 'Ziehe den Regler. Mit − / + oder im Zahlenfeld kannst du genauer einstellen.';
+    ids.forEach(param=>$('control-'+param).hidden=id!=='free' && param!==id);
+    $('parameter-grid').classList.toggle('all-parameters',id==='free');
+    $('hint').open=false;$('hint-items').innerHTML=meta.hints.map(text=>`<li>${text}</li>`).join('');
+    $('observation').value=typeof notes[id]==='string' ? notes[id] : '';
+    $('previous').disabled=index===0;$('next').disabled=index===order.length-1;
+    $('next').textContent=id==='d' ? 'Freies Erkunden →' : 'Weiter →';
+    requestRender();
+    if(focusTab) $('tab-'+id).focus({preventScroll:true});
+  }
+  document.querySelectorAll('[data-task]').forEach(button=>button.addEventListener('click',()=>setTask(button.dataset.task)));
+  $('task-nav').addEventListener('keydown',event=>{
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+    event.preventDefault();
+    const current=order.indexOf(task);
+    const index=event.key==='Home' ? 0 : event.key==='End' ? order.length-1 : (current+(event.key==='ArrowRight'?1:-1)+order.length)%order.length;
+    setTask(order[index],true);
+  });
+  $('previous').addEventListener('click',()=>setTask(order[Math.max(0,order.indexOf(task)-1)]));
+  $('next').addEventListener('click',()=>setTask(order[Math.min(order.length-1,order.indexOf(task)+1)]));
+  $('reset').addEventListener('click',()=>{
+    ids.forEach(id=>{if(task===id || task==='free') $('slider-'+id).value=String(parameters[id].value);});
+    requestRender();
+  });
+  $('observation').addEventListener('input',()=>{
+    notes[task]=$('observation').value;
+    try {localStorage.setItem(storageKey,JSON.stringify(notes));$('notes-help').textContent='Deine Notizen sind auf diesem Gerät gespeichert.';}
+    catch(error) {$('notes-help').textContent='Deine Notizen bleiben während dieser Sitzung erhalten. Übertrage sie vor dem Schließen in dein Heft.';}
+  });
+  function resizeGraph() {
+    resizeFrame=0;
+    const width=Math.round(wrap.clientWidth),height=Math.round(wrap.clientHeight);
+    if(!width || !height) return;
+    if(width!==dimensions.width || height!==dimensions.height) {
+      dimensions={width,height};
+      if(ready) {try{ggb.setSize(width,height);fitApplet();}catch(error){useLocalGraph();}}
+    }
+    if(!ready) drawLocalGraph();
+  }
+  function requestResize() {if(!resizeFrame)resizeFrame=requestAnimationFrame(resizeGraph);}
+  if('ResizeObserver' in window) new ResizeObserver(requestResize).observe(wrap);
+  window.addEventListener('resize',requestResize);
+  if(window.visualViewport) window.visualViewport.addEventListener('resize',requestResize);
+  $('view-reset').addEventListener('click',()=>{if(ready)fitApplet();else drawLocalGraph();});
+  function toggleFocus() {
+    focused=!focused;
+    if(focused)scrollBeforeFocus=window.scrollY;
+    document.body.classList.toggle('graph-focused',focused);
+    $('expand-graph').setAttribute('aria-expanded',String(focused));
+    $('expand-label').textContent=focused?'Schließen':'Vergrößern';
+    $('expand-sr').textContent=focused?'Vergrößerte Grafik schließen':'Grafik vergrößern';
+    ['page-header','task-nav','controls','page-footer'].forEach(id=>$(id).inert=focused);
+    if(focused){$('graph-card').setAttribute('role','dialog');$('graph-card').setAttribute('aria-modal','true');}
+    else{$('graph-card').removeAttribute('role');$('graph-card').removeAttribute('aria-modal');window.scrollTo(0,scrollBeforeFocus);}
+    $('expand-graph').focus({preventScroll:true});requestResize();
+  }
+  $('expand-graph').addEventListener('click',toggleFocus);
+  document.addEventListener('keydown',event=>{
+    if(!focused)return;
+    if(event.key==='Escape')toggleFocus();
+    if(event.key==='Tab'){
+      const first=$('view-reset'),last=$('expand-graph');
+      if(event.shiftKey && document.activeElement===first){event.preventDefault();last.focus();}
+      else if(!event.shiftKey && document.activeElement===last){event.preventDefault();first.focus();}
+    }
+  });
+  function useLocalGraph() {
+    ready=false;clearTimeout(loadTimer);wrap.classList.remove('ggb-ready');
+    $('local-graph').removeAttribute('aria-hidden');status.textContent='Grafik bereit · auch offline';status.classList.add('ready');drawLocalGraph();
+  }
+  function setupApplet(api) {
+    ggb=api;
+    try {
+      if(ggb.setRepaintingActive)ggb.setRepaintingActive(false);
+      ggb.setPerspective('G');ggb.showAlgebraInput(false);ggb.showToolBar(false);ggb.showMenuBar(false);
+      const raw=rawValues();ids.forEach(id=>{ggb.setValue(id.toUpperCase(),raw[id]);ggb.setVisible(id.toUpperCase(),false);});
+      for(const name of ['f','g','h','i','j','k']) {ggb.setLabelVisible(name,false);if(ggb.setFixed)ggb.setFixed(name,true,false);}
+      ggb.setLineStyle('f',1);ggb.setLineThickness('f',3);
+      for(const id of order)ggb.setLineThickness(tasks[id].name,6);
+      // The marker depends on the active task and the same parameters as its parabola.
+      if(ggb.evalCommand(`activeTask=${order.indexOf(task)+1}`)===false)throw new Error('Cannot set active task');
+      ggb.setVisible('activeTask',false);
+      if(ggb.evalCommand('S=If(activeTask==3,(C,0),If(activeTask==4,(0,D),If(activeTask==5,(C,D),(0,0))))')===false)throw new Error('Cannot create dependent vertex marker');
+      ggb.setFixed('S',true,false);ggb.setPointSize('S',6);ggb.setLabelStyle('S',3);ggb.setLabelVisible('S',true);
+      ggb.setAxesVisible(true,true);ggb.setGridVisible(true);
+      if(ggb.setAxisLabels)ggb.setAxisLabels(1,'x','y','');
+      if(ggb.setGraphicsOptions){try{ggb.setGraphicsOptions(1,{bgColor:'#FFFFFF',gridColor:'#E5EEF0',axesColor:'#829BA5'});}catch(error){}}
+      if(ggb.exists && !ggb.exists('k'))throw new Error('Missing transformed functions');
+      dimensions={width:0,height:0};ready=true;clearTimeout(loadTimer);resizeGraph();updateVisibility();fitApplet();
+      wrap.classList.add('ggb-ready');$('local-graph').setAttribute('aria-hidden','true');status.textContent='Grafik bereit';status.classList.add('ready');
+    }catch(error){useLocalGraph();}
+    finally{if(ggb && ggb.setRepaintingActive)ggb.setRepaintingActive(true);}
+  }
+  function startApplet() {
+    if(typeof window.GGBApplet!=='function'){useLocalGraph();return;}
+    try {
+      applet=new window.GGBApplet({
+        id:'transformationenApplet',appName:'classic',ggbBase64:embeddedGgb,
+        width:Math.round(wrap.clientWidth),height:Math.round(wrap.clientHeight),
+        showMenuBar:false,showToolBar:false,showToolBarHelp:false,showAlgebraInput:false,
+        showResetIcon:false,showZoomButtons:false,showFullscreenButton:false,
+        showAnimationButton:false,showSuggestionButtons:false,showStartTooltip:false,
+        showKeyboardOnFocus:false,allowStyleBar:false,enableRightClick:false,
+        enableLabelDrags:false,enableShiftDragZoom:false,enableUndoRedo:false,
+        enableFileFeatures:false,enableCAS:false,enable3d:false,errorDialogsActive:false,
+        preventFocus:true,useBrowserForJS:false,disableJavaScript:true,
+        language:'de',country:'DE',borderColor:'#FFFFFF',rounding:'2',appletOnLoad:setupApplet
+      },true);
+      applet.inject('ggb-element');
+    }catch(error){useLocalGraph();}
+  }
+  // The mathematical construction is embedded; the local SVG is fully usable offline.
+  document.querySelector('.axis-caption > span').id='axis-caption-step';
+  setTask('a');drawLocalGraph();
+  if(navigator.onLine===false)useLocalGraph();
+  else{
+    const script=document.createElement('script');script.src='https://www.geogebra.org/apps/deployggb.js';script.async=true;
+    script.onload=startApplet;script.onerror=useLocalGraph;
+    loadTimer=setTimeout(()=>{if(!ready)useLocalGraph();},16000);document.head.appendChild(script);
+  }
+})();
+</script>
+</body>
+</html>

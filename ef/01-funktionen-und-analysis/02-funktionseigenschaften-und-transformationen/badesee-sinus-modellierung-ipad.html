@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#126c72">
+  <meta name="color-scheme" content="light">
+  <title>Badesee · Eine Sinusfunktion modellieren</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18333e;
+      --muted: #536b76;
+      --teal: #126c72;
+      --blue: #2563db;
+      --line: #dce8eb;
+      --bg: #f0f6f6;
+      --a: #a04c13;
+      --b: #6653b4;
+      --c: #2465b2;
+      --d: #11726b;
+      --graph-height: clamp(330px, calc(100vh - 300px), 560px);
+      --graph-height: clamp(330px, calc(100svh - 300px), 560px);
+      font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-text-size-adjust: 100%;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; color: var(--ink); background: var(--bg); }
+    button, input, summary { -webkit-tap-highlight-color: transparent; }
+    button, input { font: inherit; }
+    button, summary { touch-action: manipulation; }
+    button { cursor: pointer; }
+    button:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--blue); outline-offset: 3px;
+    }
+    .page {
+      max-width: 1480px; margin: 0 auto;
+      padding: 24px max(20px, env(safe-area-inset-right)) 32px max(20px, env(safe-area-inset-left));
+    }
+    .hero { position: relative; display: flex; gap: 24px; align-items: center; margin-bottom: 22px; }
+    .hero-copy { flex: 1; min-width: 0; }
+    .eyebrow { display: flex; align-items: center; gap: 9px; color: var(--teal); font-size: .75rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 7px; }
+    .eyebrow svg { width: 25px; height: 18px; }
+    h1 { font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.16; letter-spacing: -.035em; margin: 0 0 8px; }
+    .intro { max-width: 830px; color: var(--muted); margin: 0; font-size: .98rem; }
+    .lake { width: 180px; height: 98px; flex: 0 0 auto; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 356px; gap: 20px; align-items: start; }
+    .card { min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 8px 28px #214b5710; }
+    .graph-card { padding: 17px; position: sticky; top: 16px; }
+    .graph-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    h2 { font-size: 1.08rem; line-height: 1.3; letter-spacing: -.02em; margin: 0; }
+    .section-kicker { display: block; color: var(--muted); font-size: .76rem; margin-bottom: 3px; }
+    .graph-actions { display: flex; align-items: center; gap: 6px; }
+    .icon-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); min-height: 46px; min-width: 46px; padding: 8px 11px; font-size: .86rem; font-weight: 650; }
+    .icon-button svg { height: 19px; width: 19px; flex: 0 0 auto; }
+    .axis-caption { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; color: var(--muted); font-size: .8rem; margin: 8px 0; }
+    .engine-status { display: inline-flex; gap: 6px; align-items: center; font-size: .72rem; color: #617985; }
+    .engine-status::before { content: ""; height: 6px; width: 6px; background: #89a9b1; border-radius: 50%; }
+    .engine-status.ready::before { background: #21836b; }
+    .ggb-wrap { position: relative; width: 100%; height: var(--graph-height); min-height: 0; overflow: hidden; border: 1px solid #e3ecef; border-radius: 14px; background: white; }
+    #ggb-element, #local-graph { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #ggb-element { visibility: hidden; }
+    .ggb-wrap.ggb-ready #ggb-element { visibility: visible; }
+    .ggb-wrap.ggb-ready #local-graph { visibility: hidden; }
+    #local-graph { display: block; pointer-events: none; }
+    .legend { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 11px; }
+    .legend-items { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; color: var(--muted); font-size: .8rem; }
+    .legend-item { display: inline-flex; align-items: center; gap: 7px; }
+    .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #263d49; }
+    .curve-key { width: 22px; height: 0; border-top: 3px solid var(--blue); border-radius: 2px; }
+    .domain { color: var(--muted); font-size: .76rem; }
+    .graph-note { font-size: .77rem; line-height: 1.5; margin: 11px 0 0; color: var(--muted); }
+    .data-details { margin-top: 13px; border-top: 1px solid var(--line); }
+    summary { cursor: pointer; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 12px; list-style: none; font-size: .87rem; font-weight: 650; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 1.25rem; font-weight: 450; color: var(--teal); }
+    details[open] > summary::after { content: "−"; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: .82rem; font-variant-numeric: tabular-nums; margin: 4px 0 9px; }
+    .data-table th { color: var(--muted); font-weight: 650; font-size: .75rem; background: #f4f8f9; }
+    .data-table td, .data-table th { padding: 7px 9px; text-align: center; border-bottom: 1px solid #e7eff1; }
+    .data-table td:nth-child(2), .data-table th:nth-child(2) { border-right: 1px solid var(--line); }
+    .controls { padding: 20px; }
+    .controls-heading { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+    .step-tag { display: inline-grid; place-items: center; width: 29px; height: 29px; background: #e5f2f0; border-radius: 9px; color: var(--teal); font-size: .78rem; font-weight: 750; }
+    .formula { background: #f1f7f8; border: 1px solid #e0ecee; border-radius: 14px; padding: 13px 8px; text-align: center; margin-bottom: 7px; font: 1.22rem/1.5 "Cambria Math", "Times New Roman", serif; white-space: nowrap; }
+    .formula i { font-weight: 650; }
+    .param-a { color: var(--a); } .param-b { color: var(--b); } .param-c { color: var(--c); } .param-d { color: var(--d); }
+    .control-help { margin: 0 0 15px; color: var(--muted); font-size: .77rem; }
+    .parameter-grid { display: grid; gap: 10px; }
+    .control { --param-color: var(--a); --fill: 20%; padding: 12px; background: #fff; border: 1px solid var(--line); border-radius: 14px; }
+    .control[data-param="b"] { --param-color: var(--b); }
+    .control[data-param="c"] { --param-color: var(--c); }
+    .control[data-param="d"] { --param-color: var(--d); }
+    .control-head { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+    .parameter-label { display: flex; align-items: center; gap: 8px; font-size: .84rem; font-weight: 700; cursor: pointer; }
+    .letter { display: inline-grid; place-items: center; flex: 0 0 27px; height: 29px; width: 27px; background: #f2f6f7; color: var(--param-color); border-radius: 8px; font: italic 700 1.15rem/1 "Cambria Math", "Times New Roman", serif; }
+    .number-edit { display: flex; align-items: center; min-height: 44px; border: 1px solid #deeaec; background: #f8fbfb; border-radius: 9px; padding: 0 7px 0 2px; flex: 0 0 auto; }
+    .number-edit input { width: 62px; min-height: 42px; color: var(--param-color); background: transparent; border: 0; padding: 7px 3px; font-size: 16px; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; border-radius: 7px; }
+    .number-edit .unit { font-size: .75rem; color: var(--muted); padding-left: 4px; }
+    .number-edit:focus-within { box-shadow: 0 0 0 2px var(--param-color); }
+    .number-edit input:focus { outline: 0; }
+    .range-row { display: flex; align-items: center; gap: 8px; margin-top: 7px; }
+    .step-button { flex: 0 0 44px; min-width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 10px; background: #f8fbfb; color: var(--param-color); font-size: 1.45rem; line-height: 1; font-weight: 450; }
+    .step-button:disabled { color: #95a9b0; background: #f6f9fa; cursor: default; }
+    input[type="range"] { -webkit-appearance: none; appearance: none; min-width: 0; flex: 1; width: 100%; height: 44px; margin: 0; background: transparent; cursor: pointer; touch-action: pan-y; }
+    input[type="range"]::-webkit-slider-runnable-track { height: 6px; background: linear-gradient(to right, var(--param-color) 0%, var(--param-color) var(--fill), #dfebed var(--fill), #dfebed 100%); border-radius: 9px; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; margin-top: -11px; background: #fff; border: 4px solid var(--param-color); border-radius: 50%; box-shadow: 0 2px 6px #1d45532a; }
+    input[type="range"]::-moz-range-track { height: 6px; background: #dfebed; border-radius: 9px; }
+    input[type="range"]::-moz-range-progress { height: 6px; background: var(--param-color); border-radius: 9px; }
+    input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; background: #fff; border: 4px solid var(--param-color); border-radius: 50%; }
+    .explain { color: var(--muted); font-size: .76rem; line-height: 1.4; margin: 5px 0 0; }
+    .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0; }
+    .metric { background: #f2f7f8; border-radius: 11px; padding: 10px; }
+    .metric span { display: block; color: var(--muted); font-size: .71rem; }
+    .metric strong { display: block; font-size: .94rem; font-variant-numeric: tabular-nums; margin-top: 2px; }
+    .aux { margin-top: 12px; border-top: 1px solid var(--line); }
+    .toggle-grid { display: grid; gap: 7px; margin: 2px 0 10px; }
+    .toggle { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 11px; background: #fafcfc; cursor: pointer; -webkit-user-select: none; user-select: none; font-size: .83rem; }
+    .toggle input { width: 22px; height: 22px; margin: 0; accent-color: var(--teal); flex: 0 0 auto; }
+    .toggle:has(input:checked) { background: #eaf5f2; border-color: #aacfc7; }
+    .buttons { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
+    .action { min-height: 48px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; font-weight: 700; font-size: .9rem; color: var(--ink); background: #fff; }
+    .action.primary { background: var(--teal); color: white; border-color: var(--teal); box-shadow: 0 3px 9px #126c7224; }
+    .action:active, .icon-button:active, .step-button:not(:disabled):active { transform: translateY(1px); }
+    .quality { margin-top: 12px; padding: 13px; background: #eef6f3; border: 1px solid #cce3da; border-radius: 13px; }
+    .quality h3 { font-size: .87rem; margin: 0 0 10px; }
+    .quality-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 5px 0; font-size: .78rem; }
+    .quality-row strong { color: #1a6557; font-size: 1rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .quality p { color: var(--muted); font-size: .75rem; margin: 9px 0 0; }
+    .hint { margin-top: 13px; border-top: 1px solid var(--line); }
+    .hint ol { padding-left: 20px; margin: 0 0 9px; color: var(--muted); font-size: .81rem; line-height: 1.65; }
+    .hint li + li { margin-top: 5px; }
+    .reflection { margin: 14px 0 0; background: #f4f8fa; border-radius: 12px; color: var(--muted); font-size: .8rem; padding: 12px; }
+    .reflection strong { color: var(--ink); display: block; margin-bottom: 3px; font-size: .83rem; }
+    .footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin: 17px 3px 0; color: var(--muted); font-size: .75rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .graph-focused { overflow: hidden; }
+    .graph-focused::before { content: ""; position: fixed; inset: 0; background: #18333e70; z-index: 90; }
+    .graph-focused .graph-card { position: fixed; inset: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); z-index: 100; display: flex; flex-direction: column; box-shadow: 0 15px 50px #18333e30; }
+    .graph-focused .ggb-wrap { flex: 1; height: auto; min-height: 0; }
+    .graph-focused .data-details, .graph-focused .graph-note { display: none; }
+    .graph-focused .graph-header, .graph-focused .axis-caption, .graph-focused .legend { flex: 0 0 auto; }
+    @media (min-width: 1250px) { .layout { grid-template-columns: minmax(0, 1fr) 382px; } .controls { padding: 22px; } .graph-card { padding: 20px; } }
+    @media (max-width: 959px) {
+      .page { padding-top: 20px; }
+      .hero { margin-bottom: 17px; }
+      .lake { width: 120px; }
+      .layout { grid-template-columns: minmax(0, 1fr) 320px; gap: 14px; }
+      .graph-card { padding: 12px; }
+      .controls { padding: 15px; }
+      .formula { font-size: 1.1rem; }
+      .graph-action-text { display: none; }
+      .graph-focused .graph-action-text { display: inline; }
+    }
+    @media (max-width: 719px) {
+      :root { --graph-height: clamp(290px, 38vh, 400px); --graph-height: clamp(290px, 38svh, 400px); }
+      .layout { grid-template-columns: 1fr; gap: 16px; }
+      .graph-card { position: static; }
+      .controls { padding: 20px; }
+      .parameter-grid { grid-template-columns: 1fr 1fr; }
+      .formula { font-size: 1.4rem; }
+      .metrics { margin-bottom: 5px; }
+      .toggle-grid { grid-template-columns: repeat(3, 1fr); }
+      .buttons { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 599px) {
+      :root { --graph-height: 325px; }
+      .page { padding: 16px 10px 24px; }
+      .hero { gap: 8px; }
+      .lake { display: none; }
+      h1 { font-size: 1.9rem; }
+      .intro { font-size: .9rem; }
+      .card { border-radius: 17px; }
+      .graph-card { padding: 11px; }
+      .graph-action-text { display: none; }
+      .graph-focused .graph-action-text { display: inline; }
+      .graph-header { gap: 5px; }
+      .graph-actions { gap: 5px; }
+      .graph-header h2 { font-size: .97rem; }
+      .controls { padding: 16px; }
+      .parameter-grid { grid-template-columns: 1fr; }
+      .toggle-grid { grid-template-columns: 1fr; }
+      .formula { font-size: 1.24rem; }
+      .data-table td, .data-table th { padding: 7px 4px; }
+      .graph-focused .graph-card { padding: 11px; }
+    }
+    @media (max-height: 520px) and (min-width: 700px) {
+      :root { --graph-height: 290px; }
+      .graph-card { position: static; }
+      .hero { margin-bottom: 12px; }
+      .lake { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header class="hero" id="page-header">
+    <div class="hero-copy">
+      <div class="eyebrow"><svg viewBox="0 0 25 18" fill="none" aria-hidden="true"><path d="M1 5c4-8 7 8 11 0s7 8 12 0M1 13c4-8 7 8 11 0s7 8 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Mathematik · EF · Modellierung</div>
+      <h1>Ein Sommertag am Badesee</h1>
+      <p class="intro">Wie verändert sich die Wassertemperatur? Passe die Sinuskurve an die Messpunkte an und finde ein Modell für den Tagesverlauf.</p>
+    </div>
+    <svg class="lake" viewBox="0 0 210 110" fill="none" aria-hidden="true">
+      <rect x="1" y="1" width="208" height="108" rx="28" fill="#e0f0ee"/>
+      <circle cx="165" cy="28" r="14" fill="#e6b363"/>
+      <path d="M1 57c33-26 61-12 93-2 36 12 62-10 115-6v33H1Z" fill="#b8d8cf"/>
+      <path d="M1 75c38-16 61 12 98 0 40-14 65-13 110 0v6a28 28 0 0 1-28 28H29A28 28 0 0 1 1 81Z" fill="#8abebd"/>
+      <path d="M19 72c21-35 43-35 65 0s43 35 65 0 31-33 43-18" stroke="#126c72" stroke-width="3" stroke-linecap="round"/>
+      <path d="M45 92h27m59-2h30" stroke="#e5f5f2" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </header>
+  <main class="layout">
+    <section class="card graph-card" id="graph-card" aria-labelledby="graph-title">
+      <div class="graph-header">
+        <div><span class="section-kicker">Beobachten &amp; vergleichen</span><h2 id="graph-title">Deine Modellkurve</h2></div>
+        <div class="graph-actions">
+          <button class="icon-button" id="view-reset" type="button" aria-label="Grafikausschnitt zurücksetzen" title="Grafikausschnitt zurücksetzen"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 7M4 4v6h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="icon-button" id="expand-graph" type="button" aria-expanded="false" aria-controls="graph-card"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="graph-action-text" id="expand-label">Vergrößern</span><span class="sr-only" id="expand-sr">Grafik vergrößern</span></button>
+        </div>
+      </div>
+      <div class="axis-caption"><span>Wassertemperatur in °C</span><span class="engine-status" id="engine-status" role="status">Grafik wird vorbereitet …</span></div>
+      <div class="ggb-wrap" id="graph-wrap">
+        <svg id="local-graph" role="img" aria-label="Messpunkte und modellierte Sinuskurve für die Wassertemperatur zwischen 0 und 24 Uhr"></svg>
+        <div id="ggb-element" aria-label="GeoGebra-Grafik der Wassertemperatur"></div>
+      </div>
+      <div class="legend"><div class="legend-items"><span class="legend-item"><span class="dot"></span>Messpunkte</span><span class="legend-item"><span class="curve-key"></span>Dein Modell</span></div><span class="domain">Uhrzeit <i>t</i> in h · 0–24 Uhr</span></div>
+      <p class="graph-note" id="graph-note">Die Sinusfunktion vereinfacht den Temperaturverlauf. Sie muss nicht jeden Messpunkt genau treffen.</p>
+      <details class="data-details" id="data-details"><summary>Messwerte ansehen <span style="font-weight:400;color:var(--muted);margin-left:auto;font-size:.76rem">12 Messpunkte</span></summary>
+        <table class="data-table"><caption class="sr-only">Temperaturmessungen im Tagesverlauf</caption><thead><tr><th scope="col">Uhrzeit</th><th scope="col">Temperatur</th><th scope="col">Uhrzeit</th><th scope="col">Temperatur</th></tr></thead><tbody id="data-body"></tbody></table>
+      </details>
+    </section>
+    <aside class="card controls" id="controls" aria-labelledby="controls-title">
+      <div class="controls-heading"><span class="step-tag" aria-hidden="true">ƒ</span><h2 id="controls-title">Gestalte dein Modell</h2></div>
+      <div class="formula" aria-label="T von t gleich a mal Sinus von b mal Klammer t minus c plus d"><i>T</i>(<i>t</i>) = <i class="param-a">a</i> · sin(<i class="param-b">b</i> · (<i>t</i> − <i class="param-c">c</i>)) + <i class="param-d">d</i></div>
+      <p class="control-help">Ziehe die Regler. Mit − / + oder im Zahlenfeld kannst du genauer einstellen.</p>
+      <div class="parameter-grid">
+        <div class="control" data-param="a">
+          <div class="control-head"><label class="parameter-label" for="slider-a"><span class="letter">a</span>Amplitude</label><div class="number-edit"><input id="number-a" type="text" inputmode="decimal" value="1,00" maxlength="9" aria-label="Amplitude a in Grad Celsius" aria-describedby="explain-a" autocomplete="off" spellcheck="false"><span class="unit">°C</span></div></div>
+          <div class="range-row"><button class="step-button" type="button" data-adjust="a" data-direction="-1" aria-label="Amplitude um 0,05 Grad Celsius verringern">−</button><input id="slider-a" type="range" min="0" max="5" step="0.05" value="1" aria-label="Amplitude a" aria-describedby="explain-a"><button class="step-button" type="button" data-adjust="a" data-direction="1" aria-label="Amplitude um 0,05 Grad Celsius erhöhen">+</button></div>
+          <p class="explain" id="explain-a">Wie stark schwankt die Temperatur um die Mittellinie?</p>
+        </div>
+        <div class="control" data-param="b">
+          <div class="control-head"><label class="parameter-label" for="slider-b"><span class="letter">b</span>Zeitliche Streckung</label><div class="number-edit"><input id="number-b" type="text" inputmode="decimal" value="0,250" maxlength="9" aria-label="Parameter b für die zeitliche Streckung" aria-describedby="explain-b" autocomplete="off" spellcheck="false"></div></div>
+          <div class="range-row"><button class="step-button" type="button" data-adjust="b" data-direction="-1" aria-label="Parameter b um 0,005 verringern">−</button><input id="slider-b" type="range" min="0.12" max="0.55" step="0.005" value="0.25" aria-label="Parameter b" aria-describedby="explain-b"><button class="step-button" type="button" data-adjust="b" data-direction="1" aria-label="Parameter b um 0,005 erhöhen">+</button></div>
+          <p class="explain" id="explain-b">Die Periodendauer beträgt 2π / b. Größeres b → kürzere Periode.</p>
+        </div>
+        <div class="control" data-param="c">
+          <div class="control-head"><label class="parameter-label" for="slider-c"><span class="letter">c</span>Verschiebung</label><div class="number-edit"><input id="number-c" type="text" inputmode="decimal" value="0,00" maxlength="9" aria-label="Zeitliche Verschiebung c in Stunden" aria-describedby="explain-c" autocomplete="off" spellcheck="false"><span class="unit">h</span></div></div>
+          <div class="range-row"><button class="step-button" type="button" data-adjust="c" data-direction="-1" aria-label="Verschiebung um 0,25 Stunden verringern">−</button><input id="slider-c" type="range" min="0" max="24" step="0.25" value="0" aria-label="Zeitliche Verschiebung c" aria-describedby="explain-c"><button class="step-button" type="button" data-adjust="c" data-direction="1" aria-label="Verschiebung um 0,25 Stunden erhöhen">+</button></div>
+          <p class="explain" id="explain-c">Wann steigt und fällt die Temperatur? Verschiebe die Kurve in Zeitrichtung.</p>
+        </div>
+        <div class="control" data-param="d">
+          <div class="control-head"><label class="parameter-label" for="slider-d"><span class="letter">d</span>Mittellinie</label><div class="number-edit"><input id="number-d" type="text" inputmode="decimal" value="20,00" maxlength="9" aria-label="Mittellinie d in Grad Celsius" aria-describedby="explain-d" autocomplete="off" spellcheck="false"><span class="unit">°C</span></div></div>
+          <div class="range-row"><button class="step-button" type="button" data-adjust="d" data-direction="-1" aria-label="Mittellinie um 0,05 Grad Celsius verringern">−</button><input id="slider-d" type="range" min="15" max="24" step="0.05" value="20" aria-label="Mittellinie d" aria-describedby="explain-d"><button class="step-button" type="button" data-adjust="d" data-direction="1" aria-label="Mittellinie um 0,05 Grad Celsius erhöhen">+</button></div>
+          <p class="explain" id="explain-d">Um welche Temperatur schwankt dein Modell?</p>
+        </div>
+      </div>
+      <div class="metrics"><div class="metric"><span>Periodendauer</span><strong id="period">25,13 h</strong></div><div class="metric"><span>Temperaturspanne des Modells*</span><strong id="model-range">19,00–21,00 °C</strong></div></div>
+      <details class="aux" open><summary>Hilfslinien einblenden</summary><div class="toggle-grid">
+        <label class="toggle"><input id="toggle-mid" type="checkbox">Mittellinie</label>
+        <label class="toggle"><input id="toggle-extrema" type="checkbox">Maximum / Minimum*</label>
+        <label class="toggle"><input id="toggle-residuals" type="checkbox">Abweichungen</label>
+      </div></details>
+      <div class="buttons"><button id="quality-btn" class="action primary" type="button" aria-expanded="false" aria-controls="quality">Modellgüte prüfen</button><button id="reset" class="action" type="button">Modell zurücksetzen</button></div>
+      <div id="quality" class="quality" role="status" aria-live="polite" hidden><h3>Vergleich mit den Messdaten</h3><div class="quality-row"><span>Mittlere absolute Abweichung</span><strong id="quality-mean"></strong></div><div class="quality-row"><span>Größte Abweichung</span><strong id="quality-max"></strong></div><p>Je kleiner die Abweichungen, desto näher liegt deine Kurve an den Messpunkten.</p></div>
+      <details class="hint"><summary>Ein Tipp für deinen Start</summary><ol><li>Schätze aus dem höchsten und niedrigsten Messwert die Mittellinie und die Amplitude.</li><li>Untersuche die Periodendauer. Was wäre für einen Tagesverlauf sinnvoll?</li><li>Verschiebe die Kurve, bis der Zeitpunkt des Temperaturmaximums gut passt.</li></ol></details>
+      <p class="reflection"><strong>Begründe dein Modell</strong>Was bedeuten a, b, c und d am Badesee? Wo passt dein Modell gut – und wo hat es Grenzen?</p>
+      <p class="graph-note">* Temperaturspanne und Extremwertlinien beziehen sich auf die gesamte Sinusfunktion, auch außerhalb von 0–24 Uhr.</p>
+    </aside>
+  </main>
+  <footer class="footer" id="page-footer"><span>Ein Tagesverlauf · vier Parameter · dein Modell</span><span>Messwerte eines Sommertages</span></footer>
+</div>
+<noscript><p style="padding:20px">Bitte aktiviere JavaScript, um die Modellkurve mit den Reglern zu verändern.</p></noscript>
+<script>
+(() => {
+  'use strict';
+  const data = [[2,18.3],[4,17.4],[6,17.2],[8,17.5],[10,18.3],[12,20.2],[14,21.7],[16,22.5],[18,22.9],[20,22.5],[22,21.4],[24,19.8]];
+  const ids = ['a','b','c','d'];
+  const initial = { a:1, b:0.25, c:0, d:20 };
+  const $ = id => document.getElementById(id);
+  const sliders = Object.fromEntries(ids.map(id => [id, $('slider-' + id)]));
+  const numbers = Object.fromEntries(ids.map(id => [id, $('number-' + id)]));
+  const wrap = $('graph-wrap');
+  const status = $('engine-status');
+  let ggb = null;
+  let ready = false;
+  let applet = null;
+  let updateFrame = 0;
+  let resizeFrame = 0;
+  let dimensions = { width:0, height:0 };
+  let loadTimer;
+  let focused = false;
+  let savedScroll = 0;
+
+  function values() { return Object.fromEntries(ids.map(id => [id, Number(sliders[id].value)])); }
+  function fmt(value, digits=2) { return value.toLocaleString('de-DE', { minimumFractionDigits:digits, maximumFractionDigits:digits }); }
+  function model(t, p=values()) { return p.a * Math.sin(p.b * (t-p.c)) + p.d; }
+  function bounds(p=values()) {
+    const bottom = Math.min(15, Math.floor(p.d-p.a-1)) - 0.8;
+    return { left:-2.4, right:25.4, bottom, top:Math.max(25, Math.ceil(p.d+p.a+1)), axis:bottom+0.65 };
+  }
+  function visibility() { return { mid:$('toggle-mid').checked, extrema:$('toggle-extrema').checked, residuals:$('toggle-residuals').checked }; }
+
+  // SVG is an immediate, self-contained graph while GeoGebra loads or is offline.
+  // It uses exactly the same function, data and coordinate bounds as the applet.
+  function drawLocalGraph() {
+    const width = Math.max(280, wrap.clientWidth), height = Math.max(200, wrap.clientHeight);
+    const p = values(), v = visibility(), b = bounds(p);
+    const x = t => (t-b.left)/(b.right-b.left)*width;
+    const y = temp => height-(temp-b.bottom)/(b.top-b.bottom)*height;
+    const round = z => z.toFixed(2);
+    const line = (x1,y1,x2,y2,color,thickness=1,dash='') => `<line x1="${round(x(x1))}" y1="${round(y(y1))}" x2="${round(x(x2))}" y2="${round(y(y2))}" stroke="${color}" stroke-width="${thickness}"${dash ? ` stroke-dasharray="${dash}"` : ''}/>`;
+    let svg = `<defs><clipPath id="plot-clip"><rect x="0" y="0" width="${width}" height="${height}"/></clipPath></defs><rect width="${width}" height="${height}" fill="white"/>`;
+    for (let t=0; t<=24; t+=4) svg += line(t,b.axis,t,b.top,'#e5eef0');
+    const yStep = b.top-b.bottom > 14 ? 2 : 1;
+    for (let temp=Math.ceil(b.axis/yStep)*yStep; temp<b.top; temp+=yStep) {
+      svg += line(0,temp,25,temp,'#e5eef0');
+      svg += `<text x="${round(x(0)-9)}" y="${round(y(temp)+4)}" fill="#536b76" font-size="13" text-anchor="end">${temp}</text>`;
+    }
+    svg += line(0,b.axis,24.9,b.axis,'#829ba5',1.2) + line(0,b.axis,0,b.top-0.22,'#829ba5',1.2);
+    for (let t=0; t<=24; t+=4) {
+      svg += line(t,b.axis-0.06,t,b.axis+0.06,'#829ba5',1.2);
+      svg += `<text x="${round(x(t))}" y="${round(y(b.axis)+20)}" fill="#536b76" font-size="13" text-anchor="middle">${t}</text>`;
+    }
+    svg += '<g clip-path="url(#plot-clip)">';
+    if (v.mid) svg += line(0,p.d,24,p.d,'#11726b',1.8,'7 5');
+    if (v.extrema) for (const temp of [p.d-p.a,p.d+p.a]) svg += line(0,temp,24,temp,'#a76827',1.5,'4 5');
+    if (v.residuals) for (const [t,temp] of data) svg += line(t,temp,t,model(t,p),'#b97a33',2);
+    let path = '';
+    for (let i=0; i<=480; i++) { const t=i/20; path += `${i ? 'L' : 'M'}${round(x(t))},${round(y(model(t,p)))}`; }
+    svg += `<path id="local-model" d="${path}" fill="none" stroke="#2563db" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+    for (const [t,temp] of data) svg += `<circle class="measurement" cx="${round(x(t))}" cy="${round(y(temp))}" r="4.4" fill="#263d49" stroke="white" stroke-width="1.5"/>`;
+    svg += '</g>';
+    $('local-graph').setAttribute('viewBox', `0 0 ${width} ${height}`);
+    $('local-graph').innerHTML = svg;
+  }
+
+  function updateQuality() {
+    const p = values(), errors = data.map(([t,temp]) => Math.abs(temp-model(t,p)));
+    $('quality-mean').textContent = fmt(errors.reduce((sum,n) => sum+n,0)/errors.length) + ' °C';
+    $('quality-max').textContent = fmt(Math.max(...errors)) + ' °C';
+  }
+
+  function updateLabels() {
+    const p = values();
+    ids.forEach(id => {
+      const slider = sliders[id], digits = id==='b' ? 3 : 2;
+      numbers[id].value = fmt(p[id], digits);
+      numbers[id].setCustomValidity('');
+      const percent = (p[id]-Number(slider.min))/(Number(slider.max)-Number(slider.min))*100;
+      document.querySelector(`.control[data-param="${id}"]`).style.setProperty('--fill', percent+'%');
+      slider.setAttribute('aria-valuetext', fmt(p[id], digits) + (id==='c' ? ' Stunden' : id==='b' ? '' : ' Grad Celsius'));
+      document.querySelector(`[data-adjust="${id}"][data-direction="-1"]`).disabled = p[id]<=Number(slider.min);
+      document.querySelector(`[data-adjust="${id}"][data-direction="1"]`).disabled = p[id]>=Number(slider.max);
+    });
+    $('period').textContent = fmt(2*Math.PI/p.b) + ' h';
+    $('model-range').textContent = fmt(p.d-p.a) + '–' + fmt(p.d+p.a) + ' °C';
+    if (!$('quality').hidden) updateQuality();
+  }
+
+  function setAppletVisibility() {
+    if (!ready) return;
+    const v = visibility();
+    ggb.setVisible('midline',v.mid);
+    ggb.setVisible('maxline',v.extrema);
+    ggb.setVisible('minline',v.extrema);
+    data.forEach((_,i) => ggb.setVisible('r'+(i+1),v.residuals));
+    ggb.setVisible('modelGraph',true);
+  }
+
+  function fitApplet() {
+    if (!ready) return;
+    const b=bounds();
+    ggb.setValue('base',b.bottom);
+    ggb.setCoordSystem(b.left,b.right,b.bottom,b.top);
+  }
+
+  function render() {
+    updateFrame = 0;
+    if (!ready) { drawLocalGraph(); return; }
+    try {
+      if (ggb.setRepaintingActive) ggb.setRepaintingActive(false);
+      const p=values();
+      ids.forEach(id => ggb.setValue(id,p[id]));
+      setAppletVisibility();
+      fitApplet();
+    } catch (error) {
+      useLocalGraph();
+    } finally {
+      if (ggb && ggb.setRepaintingActive) ggb.setRepaintingActive(true);
+    }
+  }
+
+  function requestRender() {
+    updateLabels();
+    if (!updateFrame) updateFrame=requestAnimationFrame(render);
+  }
+
+  function setParameter(id,value) {
+    const slider=sliders[id];
+    if (!Number.isFinite(value)) { numbers[id].value=fmt(Number(slider.value),id==='b'?3:2); return; }
+    const min=Number(slider.min), max=Number(slider.max), step=Number(slider.step);
+    const snapped=min+Math.round((value-min)/step)*step;
+    slider.value=String(Math.min(max,Math.max(min,snapped)));
+    requestRender();
+  }
+
+  ids.forEach(id => {
+    sliders[id].addEventListener('input',requestRender);
+    const commit = () => {
+      const text=numbers[id].value.trim();
+      setParameter(id,text==='' ? NaN : Number(text.replace(',','.')));
+    };
+    numbers[id].addEventListener('change',commit);
+    numbers[id].addEventListener('keydown',event => { if (event.key==='Enter') { commit(); numbers[id].blur(); } });
+    numbers[id].addEventListener('focus',() => numbers[id].select());
+  });
+  document.querySelectorAll('[data-adjust]').forEach(button => button.addEventListener('click',() => {
+    const id=button.dataset.adjust;
+    setParameter(id,Number(sliders[id].value)+Number(button.dataset.direction)*Number(sliders[id].step));
+  }));
+  ['toggle-mid','toggle-extrema','toggle-residuals'].forEach(id => $(id).addEventListener('change',requestRender));
+  $('quality-btn').addEventListener('click',() => {
+    updateQuality();
+    $('quality').hidden=false;
+    $('quality-btn').setAttribute('aria-expanded','true');
+  });
+  $('reset').addEventListener('click',() => {
+    ids.forEach(id => sliders[id].value=String(initial[id]));
+    ['toggle-mid','toggle-extrema','toggle-residuals'].forEach(id => $(id).checked=false);
+    $('quality').hidden=true;
+    $('quality-btn').setAttribute('aria-expanded','false');
+    requestRender();
+  });
+  $('view-reset').addEventListener('click',() => { if (ready) fitApplet(); else drawLocalGraph(); });
+
+  function resizeGraph() {
+    resizeFrame=0;
+    const width=Math.round(wrap.clientWidth), height=Math.round(wrap.clientHeight);
+    if (!width || !height) return;
+    if (width!==dimensions.width || height!==dimensions.height) {
+      dimensions={width,height};
+      if (ready) {
+        try { ggb.setSize(width,height); fitApplet(); }
+        catch (error) { useLocalGraph(); }
+      }
+    }
+    if (!ready) drawLocalGraph();
+  }
+  function requestResize() { if (!resizeFrame) resizeFrame=requestAnimationFrame(resizeGraph); }
+  if ('ResizeObserver' in window) new ResizeObserver(requestResize).observe(wrap);
+  window.addEventListener('resize',requestResize);
+  if (window.visualViewport) window.visualViewport.addEventListener('resize',requestResize);
+
+  function toggleGraphFocus() {
+    focused=!focused;
+    if (focused) savedScroll=window.scrollY;
+    document.body.classList.toggle('graph-focused',focused);
+    $('expand-graph').setAttribute('aria-expanded',String(focused));
+    $('expand-label').textContent=focused ? 'Schließen' : 'Vergrößern';
+    $('expand-sr').textContent=focused ? 'Vergrößerte Grafik schließen' : 'Grafik vergrößern';
+    ['page-header','controls','page-footer'].forEach(id => { $(id).inert=focused; });
+    if (focused) {
+      $('graph-card').setAttribute('role','dialog');
+      $('graph-card').setAttribute('aria-modal','true');
+      $('expand-graph').focus({preventScroll:true});
+    } else {
+      $('graph-card').removeAttribute('role');
+      $('graph-card').removeAttribute('aria-modal');
+      window.scrollTo(0,savedScroll);
+      $('expand-graph').focus({preventScroll:true});
+    }
+    requestResize();
+  }
+  $('expand-graph').addEventListener('click',toggleGraphFocus);
+  document.addEventListener('keydown',event => {
+    if (!focused) return;
+    if (event.key==='Escape') toggleGraphFocus();
+    if (event.key==='Tab') {
+      const first=$('view-reset'), last=$('expand-graph');
+      if (event.shiftKey && document.activeElement===first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement===last) { event.preventDefault(); first.focus(); }
+    }
+  });
+
+  function cmd(command) {
+    if (ggb.evalCommand(command)===false) throw new Error('GeoGebra command failed');
+  }
+  function styleObject(name,color,thickness=2) {
+    ggb.setColor(name,...color);
+    ggb.setLabelVisible(name,false);
+    ggb.setLineThickness(name,thickness);
+    if (ggb.setFixed) ggb.setFixed(name,true,false);
+  }
+
+  function setupConstruction(api) {
+    ggb=api;
+    try {
+      if (ggb.setRepaintingActive) ggb.setRepaintingActive(false);
+      // G is the graphics-only perspective; hiding the input bar alone does not hide Algebra.
+      ggb.setPerspective('G');
+      ggb.showAlgebraInput(false);
+      ggb.showToolBar(false);
+      ggb.showMenuBar(false);
+      const p=values();
+      ids.forEach(id => { cmd(`${id}=${p[id]}`); ggb.setVisible(id,false); });
+      cmd(`base=${bounds(p).bottom}`);
+      ggb.setVisible('base',false);
+      cmd('f(x)=a*sin(b*(x-c))+d');
+      cmd('modelGraph=Function(f,0,24)');
+      ggb.setVisible('f',false);
+      styleObject('modelGraph',[37,99,219],7);
+      ggb.setVisible('modelGraph',true);
+      data.forEach(([t,temp],i) => {
+        const n=i+1;
+        cmd(`P${n}=(${t},${temp})`);
+        styleObject('P'+n,[38,61,73]);
+        ggb.setPointSize('P'+n,5);
+        cmd(`Q${n}=(${t},f(${t}))`);
+        cmd(`r${n}=Segment(P${n},Q${n})`);
+        ggb.setVisible('Q'+n,false);
+        ggb.setLabelVisible('Q'+n,false);
+        styleObject('r'+n,[185,122,51],3);
+        ggb.setVisible('r'+n,false);
+      });
+      cmd('midline=Segment((0,d),(24,d))');
+      cmd('maxline=Segment((0,d+a),(24,d+a))');
+      cmd('minline=Segment((0,d-a),(24,d-a))');
+      ['midline','maxline','minline'].forEach(name => {
+        styleObject(name,name==='midline' ? [17,114,107] : [167,104,39],3);
+        ggb.setLineStyle(name,1);
+        ggb.setVisible(name,false);
+      });
+      // A visible time axis above the lower edge replaces the off-screen y=0 axis.
+      cmd('timeAxis=Segment((0,base+0.65),(24.9,base+0.65))');
+      styleObject('timeAxis',[130,155,165],2);
+      for (let t=0; t<=24; t+=4) {
+        cmd(`tick${t}=Segment((${t},base+0.59),(${t},base+0.71))`);
+        styleObject('tick'+t,[130,155,165],2);
+        cmd(`timeLabel${t}=Text("${t}",(${t-0.15},base+0.07))`);
+        ggb.setColor('timeLabel'+t,83,107,118);
+        ggb.setFixed('timeLabel'+t,true,false);
+      }
+      ggb.setAxesVisible(false,true);
+      ggb.setGridVisible(true);
+      if (ggb.setAxisSteps) ggb.setAxisSteps(1,4,1);
+      if (ggb.setGraphicsOptions) {
+        try { ggb.setGraphicsOptions(1,{bgColor:'#FFFFFF',gridColor:'#E5EEF0',axesColor:'#829BA5'}); } catch (error) { /* Older applet: default grid remains available. */ }
+      }
+      if (ggb.exists && !ggb.exists('modelGraph')) throw new Error('Missing model graph');
+      if (ggb.isDefined && !ggb.isDefined('modelGraph')) throw new Error('Undefined model graph');
+      dimensions={width:0,height:0};
+      ready=true;
+      clearTimeout(loadTimer);
+      resizeGraph();
+      fitApplet();
+      setAppletVisibility();
+      wrap.classList.add('ggb-ready');
+      $('local-graph').setAttribute('aria-hidden','true');
+      status.textContent='Grafik bereit';
+      status.classList.add('ready');
+    } catch (error) {
+      useLocalGraph();
+    } finally {
+      if (ggb && ggb.setRepaintingActive) ggb.setRepaintingActive(true);
+    }
+  }
+
+  function useLocalGraph() {
+    ready=false;
+    clearTimeout(loadTimer);
+    wrap.classList.remove('ggb-ready');
+    $('local-graph').removeAttribute('aria-hidden');
+    status.textContent='Grafik bereit · auch offline';
+    status.classList.add('ready');
+    drawLocalGraph();
+  }
+
+  function startApplet() {
+    if (typeof window.GGBApplet!=='function') { useLocalGraph(); return; }
+    try {
+      applet=new window.GGBApplet({
+        id:'badeseeApplet', appName:'classic', perspective:'G',
+        width:Math.round(wrap.clientWidth), height:Math.round(wrap.clientHeight),
+        showMenuBar:false, showToolBar:false, showToolBarHelp:false, showAlgebraInput:false,
+        showResetIcon:false, showZoomButtons:false, showFullscreenButton:false,
+        showAnimationButton:false, showSuggestionButtons:false, showStartTooltip:false,
+        showKeyboardOnFocus:false, allowStyleBar:false,
+        enableRightClick:false, enableLabelDrags:false, enableShiftDragZoom:false,
+        enableUndoRedo:false, enableFileFeatures:false, enableCAS:false, enable3d:false,
+        errorDialogsActive:false, preventFocus:true, useBrowserForJS:false,
+        language:'de', country:'DE', borderColor:'#FFFFFF', rounding:'2',
+        appletOnLoad:setupConstruction
+      },true);
+      applet.inject('ggb-element');
+    } catch (error) { useLocalGraph(); }
+  }
+
+  for (let i=0; i<6; i++) {
+    const [t1,v1]=data[i], [t2,v2]=data[i+6];
+    $('data-body').insertAdjacentHTML('beforeend',`<tr><td>${t1}:00</td><td>${fmt(v1,1)} °C</td><td>${t2}:00</td><td>${fmt(v2,1)} °C</td></tr>`);
+  }
+  updateLabels();
+  drawLocalGraph();
+  if (navigator.onLine===false) useLocalGraph();
+  else {
+    // Loading GeoGebra never blocks the controls or the first visible model curve.
+    const script=document.createElement('script');
+    script.src='https://www.geogebra.org/apps/deployggb.js';
+    script.async=true;
+    script.onload=startApplet;
+    script.onerror=useLocalGraph;
+    loadTimer=setTimeout(() => { if (!ready) useLocalGraph(); },16000);
+    document.head.appendChild(script);
+  }
+})();
+</script>
+</body>
+</html>
