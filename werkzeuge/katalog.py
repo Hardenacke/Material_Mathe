@@ -20,6 +20,7 @@ HIDDEN_NAMES = {".gitkeep", "desktop.ini", "thumbs.db"}
 SPECIAL_TITLES = {
     "badesee-sinus-modellierung-ipad.html": "Badesee: Sinusfunktion modellieren (iPad)",
     "einfuehrung-transformationen-funktionen-ipad.html": "Einführung: Transformationen von Funktionen (iPad)",
+    "sinusfunktion-fassade-ipad.html": "Modellierung mit der Sinusfunktion: Wellenfassade (iPad)",
 }
 LEARNING_GAMES_DIR = ROOT / "lernspiele"
 SUPPORT_DIR_NAME = "unterstuetzung"

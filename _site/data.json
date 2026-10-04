@@ -5,7 +5,7 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 120,
+    "materialien": 121,
     "lernspiele": 74,
     "unterstuetzung": 12
   },
@@ -1518,6 +1518,13 @@
                   "typ": "HTML",
                   "kategorie": "HTML",
                   "url": "ef/01-funktionen-und-analysis/02-funktionseigenschaften-und-transformationen/einfuehrung-transformationen-funktionen-ipad.html"
+                },
+                {
+                  "titel": "Modellierung mit der Sinusfunktion: Wellenfassade (iPad)",
+                  "datei": "sinusfunktion-fassade-ipad.html",
+                  "typ": "HTML",
+                  "kategorie": "HTML",
+                  "url": "ef/01-funktionen-und-analysis/02-funktionseigenschaften-und-transformationen/sinusfunktion-fassade-ipad.html"
                 }
               ]
             },
