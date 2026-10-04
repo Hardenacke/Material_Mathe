@@ -17,6 +17,10 @@ DISPLAY_EXT = {
 }
 TECHNICAL_DIRS = {"assets", "css", "js", "images", "img", "fonts", "vendor", "lib"}
 HIDDEN_NAMES = {".gitkeep", "desktop.ini", "thumbs.db"}
+SPECIAL_TITLES = {
+    "badesee-sinus-modellierung-ipad.html": "Badesee: Sinusfunktion modellieren (iPad)",
+    "einfuehrung-transformationen-funktionen-ipad.html": "Einführung: Transformationen von Funktionen (iPad)",
+}
 LEARNING_GAMES_DIR = ROOT / "lernspiele"
 SUPPORT_DIR_NAME = "unterstuetzung"
 
@@ -111,6 +115,8 @@ LEARNING_GAME_TOPIC_BY_PATH = {
 
 
 def pretty_title(file: Path, context: str = "") -> str:
+    if file.name in SPECIAL_TITLES:
+        return SPECIAL_TITLES[file.name]
     if file.name.lower() == "wiederholung.pptx":
         return "Wiederholung"
     title = file.stem.replace("_", " ").replace("-", " ")
