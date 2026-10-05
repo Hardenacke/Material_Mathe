@@ -62,13 +62,13 @@ h1 span {color:var(--teal);}
 .task-overview {display:grid;grid-template-columns:minmax(220px,.7fr) minmax(0,2fr);align-items:center;gap:18px;padding:15px 20px;}
 .task-overview .controls-heading,.task-overview .task-instruction {margin:0;}
 .task-overview .task-instruction {padding:10px 13px;}
-.overview-actions {grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
-.overview-actions .secure-actions,.overview-actions .task-pager {margin:0;}
+.overview-actions {grid-column:1/-1;display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;}
+.overview-actions .task-pager {margin:0;}
 .overview-actions .task-pager {min-width:min(100%,250px);}
 .display-options {margin:0 0 12px;flex:0 0 auto;}
 .display-options .compare-options {margin:0 0 8px;}
 .display-options .legend {margin:0;}
-.transformation-formula {min-width:0;margin-top:14px;padding:14px 12px;border:1px solid #dce7df;border-top:3px solid var(--active-color);border-radius:14px;background:linear-gradient(130deg,#f5f9f1,#f3f8f8);flex:0 0 auto;}
+.transformation-formula {min-width:0;margin:0 0 12px;padding:14px 12px;border:1px solid #dce7df;border-top:3px solid var(--active-color);border-radius:14px;background:linear-gradient(130deg,#f5f9f1,#f3f8f8);flex:0 0 auto;}
 .transformation-formula .formula {margin:0;font-size:clamp(1rem,2vw,1.25rem);overflow-x:auto;}
 .interactive-stage {display:grid;grid-template-columns:minmax(0,1fr) var(--controls-width,296px);gap:10px;align-items:stretch;min-width:0;}
 .plot-pane {display:flex;flex-direction:column;min-width:0;min-height:0;}
@@ -201,7 +201,7 @@ details[open]>summary::after {content:"−";}
 .graph-focused .display-options {margin-bottom:9px;}
 .graph-focused .display-options .compare-options {margin:0 0 6px;}
 .graph-focused .display-options .legend {margin:0;}
-.graph-focused .transformation-formula {margin-top:9px;padding:8px 10px;}
+.graph-focused .transformation-formula {margin:0 0 9px;padding:8px 10px;}
 .graph-focused .graph-note {display:none;}
 .graph-focused .graph-header,.graph-focused .axis-caption,.graph-focused .legend,.graph-focused .facade-tools,.graph-focused .plot-equation,.graph-focused .degenerate-note {flex:0 0 auto;}
 @media (min-width:1300px) {.layout {grid-template-columns:minmax(0,1fr);} .controls {padding:24px;} .hero {padding:22px 28px;} .hero-art {flex-basis:252px;width:252px;height:178px;}}
@@ -330,9 +330,6 @@ h1 {font-size:clamp(1.6rem,2.5vw,2.16rem);margin-bottom:7px;}
 .comparison-button {min-width:0;min-height:44px;padding:7px 3px;border:1px solid #dce5dc;border-radius:9px;background:white;color:var(--active-color);font-size:.73rem;}
 .comparison-button[aria-pressed="true"] {border-color:var(--active-color);box-shadow:inset 0 0 0 1px var(--active-color);}
 .field-help {font-size:.74rem;line-height:1.6;color:var(--muted);margin:6px 0 9px;}
-.secure-actions {display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:12px;}
-.secure-actions .action {min-height:47px;}
-.task-save-status {font-size:.72rem;line-height:1.5;color:var(--teal);}
 :root.presentation-mode {font-size:19px;--controls-width:326px;--graph-height:clamp(400px,calc(100vh - 265px),680px);--graph-height:clamp(400px,calc(100svh - 265px),680px);}
 .presentation-mode .hero-art,.presentation-mode .intro,.presentation-mode .learning-card,.presentation-mode .lesson-routine {display:none;}
 .presentation-mode .hero {padding:12px 20px;}
@@ -387,7 +384,7 @@ h1 {font-size:clamp(1.6rem,2.5vw,2.16rem);margin-bottom:7px;}
   .report-actions .action {flex:1 1 150px;}
 }
 @media print {
-  .task-nav,.journey-label,.graph-actions,.range-row,.compare-options,.task-pager,#reset,.engine-status,.hint,.facade-tools,.lesson-tools,.lesson-routine,.comparison-shortcuts,.secure-actions {display:none!important;}
+  .task-nav,.journey-label,.graph-actions,.range-row,.compare-options,.task-pager,#reset,.engine-status,.hint,.facade-tools,.lesson-tools,.lesson-routine,.comparison-shortcuts {display:none!important;}
   .page {padding:0;} .layout {display:block;} .graph-card {position:static;break-inside:avoid;box-shadow:none;} .controls {margin-top:14px;break-inside:avoid;} .ggb-wrap {height:350px;} .hero-art,.footer {display:none;}
   .report-open .page {display:none!important;}
   .report-open {overflow:visible;background:white;}
@@ -475,7 +472,6 @@ SOFTWARE.
   <div class="phase-guidance"><p id="phase-prompt"></p><button type="button" class="action phase-action" id="phase-action">Zur Grafik ↓</button></div>
 </div>
 <div class="overview-actions">
-<div class="secure-actions"><button class="action primary" type="button" id="secure-task">Beispiel merken</button><span class="task-save-status" id="task-save-status" role="status"></span></div>
     <div class="task-pager">
 <button class="action" type="button" id="previous" disabled>← Zurück</button><button class="action primary" type="button" id="next">Weiter →</button>
 </div>
@@ -499,6 +495,7 @@ SOFTWARE.
 <span class="legend-item" id="base-legend"><span class="base-key"></span><span data-tex="f(x)=\sin(x)">f(x) = sin(x)</span></span><span class="legend-item"><span class="curve-key"></span><span id="model-legend">g(x) = a · f(x)</span></span><span class="legend-item" id="helper-legend" hidden><span class="helper-key"></span><span>Hilfslinien · H: Hochpunkt · T: Tiefpunkt</span></span>
 </div></div>
       </div>
+      <div class="transformation-formula" id="controls" aria-label="Transformationsformel"><div class="formula" id="formula"></div></div>
       <div class="interactive-stage" id="interactive-stage">
 <div class="plot-pane" id="plot-pane">
 <div class="facade-tools" id="facade-tools" hidden role="group" aria-label="Bildausschnitt der Fassade">
@@ -520,7 +517,6 @@ SOFTWARE.
       <button class="action" type="button" id="reset">Parameter zurücksetzen</button>
       </aside>
 </div>
-      <div class="transformation-formula" id="controls" aria-label="Transformationsformel"><div class="formula" id="formula"></div></div>
     </section>
 
   </main>
@@ -1152,11 +1148,6 @@ SOFTWARE.
     if(id==='facade')return {...raw};
     return {...{a:1,b:1,c:0,d:0},[id]:raw[id]};
   }
-  function recordMatches(id){
-    const record=records[id];if(!record)return false;
-    const p=valuesForTask(id);
-    return ids.every(key=>p[key]===record.values[key]);
-  }
   function saveWorkspace(){
     clearTimeout(workspaceSaveTimer);workspaceSaveTimer=0;
     const payload={version:1,task,phases,records,presentation,radianMode:true,...currentGroups(),basePreferences:{...basePreferences,[task==='facade'?'facade':'studies']:$('toggle-base').checked},helpers:$('toggle-helpers').checked,photo:$('toggle-photo').checked,photoView};
@@ -1207,9 +1198,6 @@ SOFTWARE.
       const done=Boolean(records[id]),button=$('tab-'+id);button.classList.toggle('task-complete',done);
       button.setAttribute('aria-label',`${tasks[id].title}, Aufgabe ${order.indexOf(id)+1}${done?', Beispiel gemerkt':''}`);
     }
-    const done=recordMatches(task);
-    $('secure-task').textContent=records[task]?'Beispiel aktualisieren':'Beispiel merken';
-    $('task-save-status').textContent=done?'✓ Beispiel gemerkt':records[task]?'Das gemerkte Beispiel bleibt erhalten.':'';
     document.querySelectorAll('[data-compare-value]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.compareValue)===Number($('slider-'+task)?.value))));
   }
   function goToWorkField(id){
@@ -1218,10 +1206,6 @@ SOFTWARE.
   }
   document.querySelectorAll('[data-phase]').forEach(button=>button.addEventListener('click',()=>{phases[task]=button.dataset.phase;refreshPhase();saveWorkspace();}));
   $('phase-action').addEventListener('click',()=>goToWorkField('slider-'+(task==='facade'?'d':task)));
-  $('secure-task').addEventListener('click',()=>{
-    records[task]={values:effectiveValues()};
-    saveWorkspace();updateClassroomProgress();
-  });
   function applyPresentation(){
     document.documentElement.classList.toggle('presentation-mode',presentation);document.body.classList.toggle('presentation-mode',presentation);
     $('presentation-toggle').setAttribute('aria-pressed',String(presentation));$('presentation-toggle').textContent=presentation?'Zur Arbeitsansicht':'Beameransicht';requestResize();
