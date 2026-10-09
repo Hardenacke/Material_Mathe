@@ -11,6 +11,7 @@ Dieses Repository bündelt die vorbereitete Mathematik-Ordnerstruktur, alle Wied
 - **105 Themenordner** als Ablage für Lernpfade, Arbeitsblätter, Simulationen und weitere Materialien
 - **Lernspiele** als auswählbare Materialkategorie, veröffentlicht aus `lernspiele/`
 - **Question Shells** als bereichsweite Unterstützung unter `*/unterstuetzung/`
+- **Fächerübergreifende Methoden** unter `methoden/`, getrennt von der fachlichen Mathematik-Sollstruktur
 - **Drei Erklärvideos zu Wurzeln** für Klasse 9 unter Unterstützung: Quadratzahlen, Intervallschachtelung und Heron-Verfahren; mit Manim gerendert und mit Übungen ergänzt
 - `struktur.json` als fachliches Strukturregister
 - `dokumentation/ABITURVORGABEN_SEKII.md` für die Sek-II-Ausrichtung
@@ -60,6 +61,8 @@ klasse-8/
 `assets`, `css`, `js`, `images`, `fonts` und ähnliche technische Unterordner werden mit veröffentlicht, aber nicht als eigenständige Materialkarten angezeigt.
 
 Unterstützte sichtbare Materialtypen sind u. a. HTML, PDF, PowerPoint, Word, Excel, CSV, Markdown, LaTeX, ZIP, Bilder, Audio und Video.
+
+Fächerübergreifende Methodenmaterialien liegen unter `methoden/sek-i/` oder `methoden/sek-ii/`. Diese Ablage wird beim Website-Build veröffentlicht und auf der Startseite als eigener Methodenblock angezeigt, zählt aber nicht zu den 9 Mathematik-Bereichen, 33 Inhaltsfeldern und 105 Themen der fachlichen Sollstruktur.
 
 Lernspiele liegen gesammelt unter `lernspiele/`, damit ihre gemeinsame JavaScript-/CSS-Basis und Offline-Dateien erhalten bleiben. `werkzeuge/katalog.py` ordnet sie anhand von `lernspiele/data.json` fachlich den passenden vorhandenen Inhaltsfeldern und Themen zu und markiert sie auf der Website als Kategorie `Lernspiel`.
 

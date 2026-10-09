@@ -4,6 +4,12 @@ Stand: 12.09.2026
 
 > **Wichtig:** Die Jahrgangszuordnung in Sek I ist eine vorbereitende Organisationsstruktur. Die verbindlichen KLP-Inhaltsfelder bleiben Arithmetik/Algebra, Funktionen, Geometrie und Stochastik; die konkrete Reihenfolge ist mit dem schulinternen Lehrplan abzugleichen.
 
+## Fächerübergreifende Methoden
+
+- `methoden/sek-i/` – Methodenmaterialien für die Sekundarstufe I
+- `methoden/sek-ii/` – Methodenmaterialien für die Sekundarstufe II
+  - `praesentationen/` – Lernpfad „Präsentieren lernen (EF)“ mit H5P-Begleitmaterial
+
 ## Klasse 5
 
 - `klasse-5/01-arithmetik-algebra/` – **Arithmetik/Algebra**

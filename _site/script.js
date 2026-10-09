@@ -82,6 +82,57 @@ function catalogTotals(areas) {
   );
 }
 
+function methodStageFileCount(stage) {
+  return (stage.materialien || []).length
+    + (stage.themen || []).reduce((sum, topic) => sum + (topic.materialien || []).length, 0);
+}
+
+function methodFileCount(stages) {
+  return (stages || []).reduce((sum, stage) => sum + methodStageFileCount(stage), 0);
+}
+
+function methodTopicText(topic) {
+  return `${topic.titel} ${materialText(topic.materialien)}`;
+}
+
+function methodStageText(stage) {
+  return `${stage.titel} ${materialText(stage.materialien)} ${(stage.themen || []).map(methodTopicText).join(" ")}`;
+}
+
+function methodOwnMatchesQuery(methoden, query) {
+  if (!query) return true;
+  return normalize(`${methoden?.titel || ""} ${methoden?.beschreibung || ""}`).includes(normalize(query));
+}
+
+function methodStageOwnMatchesQuery(stage, query) {
+  if (!query) return true;
+  return normalize(stage.titel).includes(normalize(query));
+}
+
+function methodTopicMatchesQuery(topic, query) {
+  if (!query) return true;
+  return normalize(methodTopicText(topic)).includes(normalize(query));
+}
+
+function filteredMethodStages(methoden, query) {
+  if (!methoden || !Array.isArray(methoden.stufen)) return [];
+  if (!query || methodOwnMatchesQuery(methoden, query)) {
+    return methoden.stufen.filter((stage) => methodStageFileCount(stage) > 0);
+  }
+
+  return methoden.stufen
+    .map((stage) => {
+      const stageMatch = methodStageOwnMatchesQuery(stage, query);
+      const materialQuery = stageMatch ? "" : query;
+      return {
+        ...stage,
+        materialien: filterMaterials(stage.materialien, materialQuery),
+        themen: (stage.themen || []).filter((topic) => stageMatch || methodTopicMatchesQuery(topic, query))
+      };
+    })
+    .filter((stage) => methodStageOwnMatchesQuery(stage, query) || stage.materialien.length || stage.themen.length);
+}
+
 function materialText(materials) {
   return (materials || [])
     .map((material) => `${material.titel} ${material.typ} ${material.datei} ${material.beschreibung || ""} ${(material.kompetenzen || []).join(" ")}`)
@@ -233,14 +284,84 @@ function renderBreadcrumb(area, field) {
   return breadcrumb;
 }
 
+function renderMethods(query, stages = filteredMethodStages(catalogData.methoden, query)) {
+  if (!catalogData.methoden || !stages.length) return null;
+
+  const theme = { accent: "#0f766e", accentDark: "#115e59", accentSoft: "#ccfbf1", onAccent: "#ffffff" };
+  const section = document.createElement("section");
+  section.className = "method-section";
+  section.appendChild(createText("p", "step-label", "Fächerübergreifend"));
+  section.appendChild(createText("h2", "", catalogData.methoden.titel || "Methoden"));
+  section.appendChild(createText("p", "view-copy", catalogData.methoden.beschreibung || "Methodenmaterialien für Sekundarstufe I und II."));
+
+  const list = document.createElement("div");
+  list.className = "method-list";
+
+  for (const stage of stages) {
+    const stagePanel = document.createElement("article");
+    stagePanel.className = "method-stage";
+    applyTheme(stagePanel, theme);
+
+    const stageHeader = document.createElement("div");
+    stageHeader.className = "method-stage-header";
+    stageHeader.appendChild(createText("h3", "", stage.titel));
+    stageHeader.appendChild(createText("span", "card-meta", plural(methodStageFileCount(stage), "Datei", "Dateien")));
+    stagePanel.appendChild(stageHeader);
+
+    const stageFiles = filterMaterials(stage.materialien, methodStageOwnMatchesQuery(stage, query) ? "" : query);
+    if (stageFiles.length) {
+      const files = document.createElement("div");
+      files.className = "file-list compact";
+      for (const material of stageFiles) {
+        files.appendChild(renderMaterialLink(material, theme));
+      }
+      stagePanel.appendChild(files);
+    }
+
+    if ((stage.themen || []).length) {
+      const topicList = document.createElement("div");
+      topicList.className = "method-topic-list";
+      for (const topic of stage.themen) {
+        const topicBlock = document.createElement("div");
+        topicBlock.className = "method-topic";
+        topicBlock.appendChild(createText("h4", "method-topic-title", topic.titel));
+        const topicFiles = filterMaterials(topic.materialien, methodTopicMatchesQuery(topic, query) ? "" : query);
+        if (topicFiles.length) {
+          const files = document.createElement("div");
+          files.className = "file-list compact";
+          for (const material of topicFiles) {
+            files.appendChild(renderMaterialLink(material, theme));
+          }
+          topicBlock.appendChild(files);
+        } else {
+          topicBlock.appendChild(createText("p", "empty-topic", "Noch keine Dateien zu diesem Methodenthema abgelegt."));
+        }
+        topicList.appendChild(topicBlock);
+      }
+      stagePanel.appendChild(topicList);
+    }
+
+    if (!stageFiles.length && !(stage.themen || []).length) {
+      stagePanel.appendChild(createText("p", "empty-topic", "Noch keine Methodenmaterialien abgelegt."));
+    }
+
+    list.appendChild(stagePanel);
+  }
+
+  section.appendChild(list);
+  return section;
+}
+
 function renderHome(query) {
   const areas = catalogData.bereiche.filter((area) => areaMatchesQuery(area, query));
+  const methodStages = filteredMethodStages(catalogData.methoden, query);
+  const methodFiles = methodFileCount(methodStages);
   const totals = catalogTotals(areas);
 
   catalogRoot.replaceChildren();
   setSummary(query
-    ? `${areas.length} passende Bereiche · ${plural(totals.fields, "Inhaltsfeld", "Inhaltsfelder")}`
-    : `${catalogData.statistik.bereiche} Bereiche · ${catalogData.statistik.inhaltsfelder} Inhaltsfelder · ${catalogData.statistik.themen} Themen · ${catalogData.statistik.materialien} Materialien`
+    ? `${areas.length} passende Bereiche · ${plural(totals.fields, "Inhaltsfeld", "Inhaltsfelder")}${methodFiles ? ` · ${plural(methodFiles, "Methodenmaterial", "Methodenmaterialien")}` : ""}`
+    : `${catalogData.statistik.bereiche} Bereiche · ${catalogData.statistik.inhaltsfelder} Inhaltsfelder · ${catalogData.statistik.themen} Themen · ${catalogData.statistik.materialien} Materialien · ${plural(catalogData.statistik.methodenmaterialien || 0, "Methodenmaterial", "Methodenmaterialien")}`
   );
 
   const header = document.createElement("section");
@@ -250,29 +371,36 @@ function renderHome(query) {
   header.appendChild(createText("p", "view-copy", "Wähle zuerst den Bereich aus. Danach erscheinen die Inhaltsfelder dieses Bereichs mit Themen und Materialien."));
   catalogRoot.appendChild(header);
 
-  if (!areas.length) {
+  if (!areas.length && !methodFiles) {
     catalogRoot.appendChild(createText("p", "empty-state", "Keine passenden Klassen oder Kurse gefunden."));
     return;
   }
 
-  const grid = document.createElement("div");
-  grid.className = "class-grid";
+  if (areas.length) {
+    const grid = document.createElement("div");
+    grid.className = "class-grid";
 
-  for (const area of areas) {
-    const totalsForArea = areaTotals(area);
-    const button = createButton("class-card", "", () => navigate(area.id));
-    button.appendChild(createText("span", "card-kicker", "Bereich"));
-    button.appendChild(createText("span", "class-title", area.kurztitel || area.titel));
-    button.appendChild(createText("span", "card-description", area.titel === area.kurztitel ? area.stufe : `${area.titel} · ${area.stufe}`));
-    button.appendChild(createText(
-      "span",
-      "card-meta",
-      `${plural(area.inhaltsfelder.length, "Inhaltsfeld", "Inhaltsfelder")} · ${plural(totalsForArea.topics, "Thema", "Themen")} · ${plural(totalsForArea.files, "Datei", "Dateien")}`
-    ));
-    grid.appendChild(button);
+    for (const area of areas) {
+      const totalsForArea = areaTotals(area);
+      const button = createButton("class-card", "", () => navigate(area.id));
+      button.appendChild(createText("span", "card-kicker", "Bereich"));
+      button.appendChild(createText("span", "class-title", area.kurztitel || area.titel));
+      button.appendChild(createText("span", "card-description", area.titel === area.kurztitel ? area.stufe : `${area.titel} · ${area.stufe}`));
+      button.appendChild(createText(
+        "span",
+        "card-meta",
+        `${plural(area.inhaltsfelder.length, "Inhaltsfeld", "Inhaltsfelder")} · ${plural(totalsForArea.topics, "Thema", "Themen")} · ${plural(totalsForArea.files, "Datei", "Dateien")}`
+      ));
+      grid.appendChild(button);
+    }
+
+    catalogRoot.appendChild(grid);
   }
 
-  catalogRoot.appendChild(grid);
+  const methodSection = renderMethods(query, methodStages);
+  if (methodSection) {
+    catalogRoot.appendChild(methodSection);
+  }
 }
 
 function renderFieldPicker(area, fields, selectedField) {

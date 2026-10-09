@@ -23,7 +23,17 @@ SPECIAL_TITLES = {
     "sinusfunktion-fassade-ipad.html": "Modellierung mit der Sinusfunktion: Wellenfassade (iPad)",
 }
 LEARNING_GAMES_DIR = ROOT / "lernspiele"
+METHODS_DIR = ROOT / "methoden"
 SUPPORT_DIR_NAME = "unterstuetzung"
+
+METHOD_STAGE_TITLES = {
+    "sek-i": "Sekundarstufe I",
+    "sek-ii": "Sekundarstufe II",
+}
+
+METHOD_TOPIC_TITLES = {
+    "praesentationen": "Präsentationen",
+}
 
 SI_DOMAIN_FIELDS = {
     "arithmetik-algebra": "01-arithmetik-algebra",
@@ -136,7 +146,7 @@ def is_display_material(file: Path) -> bool:
 
 
 def material_sort_key(material: dict) -> tuple:
-    type_order = {"Unterstützung": 0, "Lernspiel": 1, "HTML": 2, "PPTX": 3}
+    type_order = {"Unterstützung": 0, "Lernspiel": 1, "Lernpfad": 1, "HTML": 2, "PPTX": 3}
     return (type_order.get(material.get("typ"), 50), material.get("titel", "").lower())
 
 
@@ -187,6 +197,80 @@ def support_materials_in(area_dir: Path) -> list[dict]:
         elif material["datei"].startswith("question_shells_"):
             material["beschreibung"] = "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
     return sort_materials(materials)
+
+
+def method_folder_title(folder: Path, titles: dict[str, str]) -> str:
+    if folder.name in titles:
+        return titles[folder.name]
+    return " ".join(folder.name.replace("_", "-").split("-")).title()
+
+
+def method_materials_in(topic_dir: Path) -> list[dict]:
+    materials = materials_in(topic_dir)
+    rel = topic_dir.relative_to(METHODS_DIR).as_posix()
+    for material in materials:
+        if rel == "sek-ii/praesentationen" and material["datei"].lower() == "index.html":
+            material["titel"] = "Präsentieren lernen (EF)"
+            material["typ"] = "Lernpfad"
+            material["kategorie"] = "Lernpfad"
+            material["beschreibung"] = (
+                "Fünf digitale Module für Expertengruppen: Situationsanalyse, "
+                "Argumentation, Sprache und Aufbau, Medieneinsatz und Performanz."
+            )
+    return sort_materials(materials)
+
+
+def visible_method_dirs(folder: Path) -> list[Path]:
+    if not folder.exists():
+        return []
+    return sorted(
+        child for child in folder.iterdir()
+        if child.is_dir() and not child.name.startswith(".") and child.name != "__pycache__"
+    )
+
+
+def methods_catalog() -> dict:
+    methoden = {
+        "titel": "Methoden",
+        "beschreibung": "Fächerübergreifende Methodenmaterialien für Sekundarstufe I und II.",
+        "stufen": [],
+    }
+    if not METHODS_DIR.exists():
+        return methoden
+
+    for stage_dir in visible_method_dirs(METHODS_DIR):
+        stage = {
+            "id": stage_dir.name,
+            "titel": method_folder_title(stage_dir, METHOD_STAGE_TITLES),
+            "materialien": materials_in(stage_dir),
+            "themen": [],
+        }
+        for topic_dir in visible_method_dirs(stage_dir):
+            stage["themen"].append({
+                "id": topic_dir.name,
+                "titel": method_folder_title(topic_dir, METHOD_TOPIC_TITLES),
+                "materialien": method_materials_in(topic_dir),
+            })
+        methoden["stufen"].append(stage)
+    return methoden
+
+
+def method_material_count(methoden: dict) -> int:
+    total = 0
+    for stage in methoden.get("stufen", []):
+        total += len(stage.get("materialien", []))
+        for topic in stage.get("themen", []):
+            total += len(topic.get("materialien", []))
+    return total
+
+
+def method_categories(methoden: dict) -> set[str]:
+    categories = set()
+    for stage in methoden.get("stufen", []):
+        categories.update(material["kategorie"] for material in stage.get("materialien", []))
+        for topic in stage.get("themen", []):
+            categories.update(material["kategorie"] for material in topic.get("materialien", []))
+    return categories
 
 
 def learning_game_destination(game_path: Path) -> tuple[str, str, str] | None:
@@ -263,6 +347,8 @@ def catalog_categories(areas: list[dict]) -> list[str]:
 def build_catalog() -> dict:
     areas = []
     games_by_destination = learning_games_by_destination()
+    methoden = methods_catalog()
+    total_method_materials = method_material_count(methoden)
     total_fields = total_topics = total_materials = total_learning_games = total_support = 0
     for area in STRUCT["bereiche"]:
         out_area = {k: area[k] for k in ("id", "titel", "stufe")}
@@ -296,6 +382,8 @@ def build_catalog() -> dict:
                 total_learning_games += sum(1 for material in mats if material["typ"] == "Lernspiel")
             out_area["inhaltsfelder"].append(out_field)
         areas.append(out_area)
+    categories = set(catalog_categories(areas))
+    categories.update(method_categories(methoden))
     return {
         "projekt": STRUCT.get("projekt", "Mathematik NRW"),
         "stand": STRUCT.get("stand", date.today().isoformat()),
@@ -306,9 +394,11 @@ def build_catalog() -> dict:
             "materialien": total_materials,
             "lernspiele": total_learning_games,
             "unterstuetzung": total_support,
+            "methodenmaterialien": total_method_materials,
         },
-        "kategorien": catalog_categories(areas),
+        "kategorien": sorted(categories, key=lambda value: (value != "Lernspiel", value.lower())),
         "bereiche": areas,
+        "methoden": methoden,
     }
 
 

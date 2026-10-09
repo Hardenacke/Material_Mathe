@@ -7,11 +7,13 @@
     "themen": 105,
     "materialien": 121,
     "lernspiele": 74,
-    "unterstuetzung": 12
+    "unterstuetzung": 12,
+    "methodenmaterialien": 1
   },
   "kategorien": [
     "Lernspiel",
     "HTML",
+    "Lernpfad",
     "PPTX",
     "Unterstützung"
   ],
@@ -2338,5 +2340,38 @@
         }
       ]
     }
-  ]
+  ],
+  "methoden": {
+    "titel": "Methoden",
+    "beschreibung": "Fächerübergreifende Methodenmaterialien für Sekundarstufe I und II.",
+    "stufen": [
+      {
+        "id": "sek-i",
+        "titel": "Sekundarstufe I",
+        "materialien": [],
+        "themen": []
+      },
+      {
+        "id": "sek-ii",
+        "titel": "Sekundarstufe II",
+        "materialien": [],
+        "themen": [
+          {
+            "id": "praesentationen",
+            "titel": "Präsentationen",
+            "materialien": [
+              {
+                "titel": "Präsentieren lernen (EF)",
+                "datei": "index.html",
+                "typ": "Lernpfad",
+                "kategorie": "Lernpfad",
+                "url": "methoden/sek-ii/praesentationen/index.html",
+                "beschreibung": "Fünf digitale Module für Expertengruppen: Situationsanalyse, Argumentation, Sprache und Aufbau, Medieneinsatz und Performanz."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
