@@ -427,6 +427,10 @@ h1 {
   background: var(--amber);
 }
 
+.extra-tasks-section::before {
+  background: var(--violet);
+}
+
 .method-section {
   display: grid;
   gap: 14px;
@@ -684,6 +688,21 @@ h1 {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 6px;
+}
+
+.support-list .file-link {
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+}
+
+.support-list .file-meta {
+  justify-content: flex-start;
+}
+
+.support-list .badge.soft {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .badge {

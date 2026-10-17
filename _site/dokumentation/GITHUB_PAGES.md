@@ -18,5 +18,7 @@
 ## Neue Materialien
 Eine Datei wird automatisch erkannt, wenn sie in einem Inhaltsfeld- oder Themenordner liegt und eine unterstützte Endung besitzt. HTML-Lernpfade können lokale Unterordner wie `assets`, `css`, `js`, `images` oder `fonts` verwenden; diese werden mitkopiert, aber nicht als eigenständiges Material gelistet.
 
+Jahrgangsbezogene Zusatzaufgaben werden aus dem jeweiligen Bereichsordner unter `zusatzaufgaben/` eingelesen und auf der Klassen- oder Kursseite unter **Zusatzaufgaben** angezeigt. HTML-Aufgaben im Unterordner `fermi-aufgaben/` erhalten das Label **Fermi-Aufgabe**. Gemeinsame Q1/Q2-Aufgaben unter `gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/` werden im Grundkurs und im Leistungskurs verlinkt; ihre Quelldateien liegen nur einmal vor. `statistik.fermi_aufgaben` zählt unterschiedliche Aufgaben, die übrigen Materialzahlen zählen die Zuordnungen je Bereich. Übersichtsseiten `index.html` und Begleitdokumentation werden mit veröffentlicht, aber nicht als zusätzliche Aufgabe gelistet. Prompting-Hinweise und die Markdown-Beispielsammlung liegen unter `gemeinsam/vorlagen/` und erscheinen nicht im Schülerkatalog.
+
 ## Lokal
 `START_LOKAL.bat` starten. Der Browser öffnet die lokale Seite und der Watcher baut nach Änderungen automatisch neu.

@@ -3,6 +3,7 @@
 from __future__ import annotations
 from pathlib import Path
 from datetime import date
+from html.parser import HTMLParser
 import json
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,6 +26,7 @@ SPECIAL_TITLES = {
 LEARNING_GAMES_DIR = ROOT / "lernspiele"
 METHODS_DIR = ROOT / "methoden"
 SUPPORT_DIR_NAME = "unterstuetzung"
+EXTRA_TASKS_DIR_NAME = "zusatzaufgaben"
 
 METHOD_STAGE_TITLES = {
     "sek-i": "Sekundarstufe I",
@@ -199,6 +201,52 @@ def support_materials_in(area_dir: Path) -> list[dict]:
     return sort_materials(materials)
 
 
+class MaterialInfoParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.in_heading = False
+        self.heading = []
+        self.description = ""
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "h1":
+            self.in_heading = True
+        elif tag == "meta":
+            attrs = dict(attrs)
+            if attrs.get("name") == "description":
+                self.description = attrs.get("content", "")
+
+    def handle_endtag(self, tag):
+        if tag == "h1":
+            self.in_heading = False
+
+    def handle_data(self, data):
+        if self.in_heading:
+            self.heading.append(data)
+
+
+def extra_tasks_in(area_dir: Path) -> list[dict]:
+    extra_dirs = [area_dir / EXTRA_TASKS_DIR_NAME]
+    if area_dir.name in {"q1-q2-grundkurs", "q1-q2-leistungskurs"}:
+        extra_dirs.append(ROOT / "gemeinsam" / EXTRA_TASKS_DIR_NAME / "fermi-aufgaben" / "q1-q2")
+    result = []
+    for extra_dir in extra_dirs:
+        for material in materials_in(extra_dir, recursive=True):
+            file = ROOT / material["url"]
+            if "fermi-aufgaben" in file.relative_to(ROOT).parts[:-1]:
+                if file.suffix.lower() not in {".html", ".htm"} or file.name.lower() == "index.html":
+                    continue
+                info = MaterialInfoParser()
+                info.feed(file.read_text(encoding="utf-8"))
+                material["titel"] = " ".join("".join(info.heading).split()) or material["titel"]
+                material["typ"] = "Fermi-Aufgabe"
+                if info.description:
+                    material["beschreibung"] = info.description
+            material["kategorie"] = "Zusatzaufgaben"
+            result.append(material)
+    return sort_materials(result)
+
+
 def method_folder_title(folder: Path, titles: dict[str, str]) -> str:
     if folder.name in titles:
         return titles[folder.name]
@@ -337,6 +385,7 @@ def catalog_categories(areas: list[dict]) -> list[str]:
     categories = set()
     for area in areas:
         categories.update(material["kategorie"] for material in area.get("unterstuetzung", []))
+        categories.update(material["kategorie"] for material in area.get("zusatzaufgaben", []))
         for field in area["inhaltsfelder"]:
             categories.update(material["kategorie"] for material in field["materialien"])
             for topic in field["themen"]:
@@ -350,6 +399,7 @@ def build_catalog() -> dict:
     methoden = methods_catalog()
     total_method_materials = method_material_count(methoden)
     total_fields = total_topics = total_materials = total_learning_games = total_support = 0
+    total_extra_tasks = 0
     for area in STRUCT["bereiche"]:
         out_area = {k: area[k] for k in ("id", "titel", "stufe")}
         out_area["kurztitel"] = (
@@ -358,9 +408,12 @@ def build_catalog() -> dict:
             .replace("Qualifikationsphase – Leistungskurs (Q1/Q2)", "Q1/Q2 LK")
         )
         out_area["unterstuetzung"] = support_materials_in(ROOT / area["id"])
+        out_area["zusatzaufgaben"] = extra_tasks_in(ROOT / area["id"])
         out_area["inhaltsfelder"] = []
         total_support += len(out_area["unterstuetzung"])
         total_materials += len(out_area["unterstuetzung"])
+        total_extra_tasks += len(out_area["zusatzaufgaben"])
+        total_materials += len(out_area["zusatzaufgaben"])
         for field in area["inhaltsfelder"]:
             field_dir = ROOT / area["id"] / field["id"]
             out_field = {"id": field["id"], "titel": field["titel"]}
@@ -394,6 +447,11 @@ def build_catalog() -> dict:
             "materialien": total_materials,
             "lernspiele": total_learning_games,
             "unterstuetzung": total_support,
+            "zusatzaufgaben": total_extra_tasks,
+            "fermi_aufgaben": len({
+                material["url"] for area in areas for material in area["zusatzaufgaben"]
+                if material["typ"] == "Fermi-Aufgabe"
+            }),
             "methodenmaterialien": total_method_materials,
         },
         "kategorien": sorted(categories, key=lambda value: (value != "Lernspiel", value.lower())),

@@ -5,9 +5,11 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 121,
+    "materialien": 183,
     "lernspiele": 74,
     "unterstuetzung": 12,
+    "zusatzaufgaben": 62,
+    "fermi_aufgaben": 56,
     "methodenmaterialien": 1
   },
   "kategorien": [
@@ -15,7 +17,8 @@
     "HTML",
     "Lernpfad",
     "PPTX",
-    "Unterstützung"
+    "Unterstützung",
+    "Zusatzaufgaben"
   ],
   "bereiche": [
     {
@@ -31,6 +34,72 @@
           "kategorie": "Unterstützung",
           "url": "klasse-5/unterstuetzung/question_shells_klasse-5.html",
           "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
+      "zusatzaufgaben": [
+        {
+          "titel": "Geburtstagsmonate in den fünften Klassen",
+          "datei": "klasse-5-04-geburtstagsmonate-in-den-funften-klassen.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-04-geburtstagsmonate-in-den-funften-klassen.html",
+          "beschreibung": "Klasse 5 · Stochastik"
+        },
+        {
+          "titel": "Limonade für das Schulfest",
+          "datei": "klasse-5-02-limonade-fur-das-schulfest.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-02-limonade-fur-das-schulfest.html",
+          "beschreibung": "Klasse 5 · Funktionen"
+        },
+        {
+          "titel": "Papierquadrate für den Klassenraum",
+          "datei": "klasse-5-03-papierquadrate-fur-den-klassenraum.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-03-papierquadrate-fur-den-klassenraum.html",
+          "beschreibung": "Klasse 5 · Geometrie"
+        },
+        {
+          "titel": "Pausensnack für die Jahrgangsstufe",
+          "datei": "klasse-5-01-pausensnack-fur-die-jahrgangsstufe.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-01-pausensnack-fur-die-jahrgangsstufe.html",
+          "beschreibung": "Klasse 5 · Arithmetik/Algebra"
+        },
+        {
+          "titel": "Wie lang ist eine Reihe aus allen Buntstiften der Klasse 5b?",
+          "datei": "klasse-5-stifte.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-stifte.html",
+          "beschreibung": "Klasse 5 · Größen und Messen · Längen"
+        },
+        {
+          "titel": "Wie viele 30-cm-Luftballons passen in Raum 351?",
+          "datei": "klasse-5-ballons.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-ballons.html",
+          "beschreibung": "Klasse 5 · Größen und Messen · Körper und Volumen"
+        },
+        {
+          "titel": "Wie viele 7,5-cm-Haftnotizen bedecken die Tafel in Raum 351?",
+          "datei": "klasse-5-tafel.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-tafel.html",
+          "beschreibung": "Klasse 5 · Geometrie · Flächen"
+        },
+        {
+          "titel": "Wie viele A4-Blätter verbraucht die Klasse 5b in einer Schulwoche?",
+          "datei": "klasse-5-papier.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-papier.html",
+          "beschreibung": "Klasse 5 · Zahlen und Größen · Größen und Messen"
         }
       ],
       "inhaltsfelder": [
@@ -285,6 +354,72 @@
           "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
         }
       ],
+      "zusatzaufgaben": [
+        {
+          "titel": "Material für eine Aufbewahrungsbox",
+          "datei": "klasse-6-07-material-fur-eine-aufbewahrungsbox.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-07-material-fur-eine-aufbewahrungsbox.html",
+          "beschreibung": "Klasse 6 · Geometrie"
+        },
+        {
+          "titel": "Obstportionen für die Klassenfahrt",
+          "datei": "klasse-6-05-obstportionen-fur-die-klassenfahrt.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-05-obstportionen-fur-die-klassenfahrt.html",
+          "beschreibung": "Klasse 6 · Arithmetik/Algebra"
+        },
+        {
+          "titel": "Wasserhahn und Kanister",
+          "datei": "klasse-6-06-wasserhahn-und-kanister.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-06-wasserhahn-und-kanister.html",
+          "beschreibung": "Klasse 6 · Funktionen"
+        },
+        {
+          "titel": "Wie lange läutet die Schulglocke am Rivius Gymnasium in einer Fünf-Tage-Woche?",
+          "datei": "klasse-6-glocke.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-glocke.html",
+          "beschreibung": "Klasse 6 · Daten und Größen · Zeit"
+        },
+        {
+          "titel": "Wie oft blinzelt eine sechste Klasse in einer 45-minütigen Mathestunde?",
+          "datei": "klasse-6-blinzeln.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-blinzeln.html",
+          "beschreibung": "Klasse 6 · Daten und Zufall · Stochastik"
+        },
+        {
+          "titel": "Wie viel Wasser trinken 28 Sechstklässler:innen an einem Schultag?",
+          "datei": "klasse-6-wasser.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-wasser.html",
+          "beschreibung": "Klasse 6 · Zahlen und Größen · Größen und Messen"
+        },
+        {
+          "titel": "Wie viele Kreidestücke werden in einem Tafelraum pro Schulwoche verbraucht?",
+          "datei": "klasse-6-kreide.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-kreide.html",
+          "beschreibung": "Klasse 6 · Arithmetik · Größen und Daten"
+        },
+        {
+          "titel": "Zweimal ziehen beim Schulfest",
+          "datei": "klasse-6-08-zweimal-ziehen-beim-schulfest.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-08-zweimal-ziehen-beim-schulfest.html",
+          "beschreibung": "Klasse 6 · Stochastik"
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-arithmetik-algebra",
@@ -521,6 +656,72 @@
           "kategorie": "Unterstützung",
           "url": "klasse-7/unterstuetzung/question_shells_klasse-7.html",
           "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
+      "zusatzaufgaben": [
+        {
+          "titel": "Schulhofplan im passenden Maßstab",
+          "datei": "klasse-7-11-schulhofplan-im-passenden-mastab.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-11-schulhofplan-im-passenden-mastab.html",
+          "beschreibung": "Klasse 7 · Geometrie"
+        },
+        {
+          "titel": "Schulweg in Abhängigkeit von der Gehzeit",
+          "datei": "klasse-7-10-schulweg-in-abhangigkeit-von-der-gehzeit.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-10-schulweg-in-abhangigkeit-von-der-gehzeit.html",
+          "beschreibung": "Klasse 7 · Funktionen"
+        },
+        {
+          "titel": "Temperaturänderung im Schulgarten",
+          "datei": "klasse-7-09-temperaturanderung-im-schulgarten.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-09-temperaturanderung-im-schulgarten.html",
+          "beschreibung": "Klasse 7 · Arithmetik/Algebra"
+        },
+        {
+          "titel": "Wie oft fällt die Münze auf Kopf?",
+          "datei": "klasse-7-12-wie-oft-fallt-die-munze-auf-kopf.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-12-wie-oft-fallt-die-munze-auf-kopf.html",
+          "beschreibung": "Klasse 7 · Stochastik"
+        },
+        {
+          "titel": "Wie viel Geschenkpapier brauchen die Mathematikbücher einer Klasse 7?",
+          "datei": "klasse-7-buecher.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-buecher.html",
+          "beschreibung": "Klasse 7 · Geometrie · Flächen"
+        },
+        {
+          "titel": "Wie viele 30-cm-Quadrate bedecken den Boden der Sporthalle?",
+          "datei": "klasse-7-halle.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-halle.html",
+          "beschreibung": "Klasse 7 · Geometrie · Flächen und Maßstab"
+        },
+        {
+          "titel": "Wie viele Autos stehen in einem 3-km-Stau auf der B54 bei Attendorn?",
+          "datei": "klasse-7-stau.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-stau.html",
+          "beschreibung": "Klasse 7 · Größen und Messen · proportionale Zuordnungen"
+        },
+        {
+          "titel": "Wie viele Brötchen braucht ein Frühstück für 28 Personen?",
+          "datei": "klasse-7-fruehstueck.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-fruehstueck.html",
+          "beschreibung": "Klasse 7 · Arithmetik · Größen und Proportionalität"
         }
       ],
       "inhaltsfelder": [
@@ -784,6 +985,72 @@
           "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
         }
       ],
+      "zusatzaufgaben": [
+        {
+          "titel": "Abkürzung über den Schulhof",
+          "datei": "klasse-8-15-abkurzung-uber-den-schulhof.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-15-abkurzung-uber-den-schulhof.html",
+          "beschreibung": "Klasse 8 · Geometrie"
+        },
+        {
+          "titel": "Füllstand eines Regenwassertanks",
+          "datei": "klasse-8-14-fullstand-eines-regenwassertanks.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-14-fullstand-eines-regenwassertanks.html",
+          "beschreibung": "Klasse 8 · Funktionen"
+        },
+        {
+          "titel": "Kosten zweier Druckangebote",
+          "datei": "klasse-8-13-kosten-zweier-druckangebote.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-13-kosten-zweier-druckangebote.html",
+          "beschreibung": "Klasse 8 · Arithmetik/Algebra"
+        },
+        {
+          "titel": "Wie lange läuft ein Wasserhahn für 28 Becher à 250 ml?",
+          "datei": "klasse-8-hahn.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-hahn.html",
+          "beschreibung": "Klasse 8 · Funktionen · proportionale Zusammenhänge"
+        },
+        {
+          "titel": "Wie viele belegte Brötchen verkauft der Pausenverkauf in einer 20-Minuten-Pause?",
+          "datei": "klasse-8-verkauf.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-verkauf.html",
+          "beschreibung": "Klasse 8 · Daten und Zufall · Prozentrechnung"
+        },
+        {
+          "titel": "Wie viele Lampenstunden entstehen in einem Klassenraum pro Schulwoche?",
+          "datei": "klasse-8-licht.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-licht.html",
+          "beschreibung": "Klasse 8 · Funktionen · proportionale Zusammenhänge"
+        },
+        {
+          "titel": "Wie viele Liter Regen fallen bei 10 mm Niederschlag auf den Schulhof?",
+          "datei": "klasse-8-regen.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-regen.html",
+          "beschreibung": "Klasse 8 · Geometrie · Flächen und Größen"
+        },
+        {
+          "titel": "Zwei Auswahlen aus der Materialkiste",
+          "datei": "klasse-8-16-zwei-auswahlen-aus-der-materialkiste.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-16-zwei-auswahlen-aus-der-materialkiste.html",
+          "beschreibung": "Klasse 8 · Stochastik"
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-arithmetik-algebra",
@@ -1020,6 +1287,72 @@
           "beschreibung": "Quadratzahlen, Intervallschachtelung und Heron-Verfahren: drei Erklärvideos mit Übungen zu Quadratwurzeln."
         }
       ],
+      "zusatzaufgaben": [
+        {
+          "titel": "Bogen über dem Schultor",
+          "datei": "klasse-9-18-bogen-uber-dem-schultor.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-18-bogen-uber-dem-schultor.html",
+          "beschreibung": "Klasse 9 · Funktionen"
+        },
+        {
+          "titel": "Diagonale und irrationale Länge",
+          "datei": "klasse-9-17-diagonale-und-irrationale-lange.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-17-diagonale-und-irrationale-lange.html",
+          "beschreibung": "Klasse 9 · Arithmetik/Algebra"
+        },
+        {
+          "titel": "Fehlzeiten und erwartete versäumte Unterrichtsstunden",
+          "datei": "klasse-9-20-fehlzeiten-und-erwartete-vertretungsstunden.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-20-fehlzeiten-und-erwartete-vertretungsstunden.html",
+          "beschreibung": "Klasse 9 · Stochastik"
+        },
+        {
+          "titel": "Höhe eines Fahnenmasts durch Schatten",
+          "datei": "klasse-9-19-hohe-eines-fahnenmasts-durch-schatten.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-19-hohe-eines-fahnenmasts-durch-schatten.html",
+          "beschreibung": "Klasse 9 · Geometrie"
+        },
+        {
+          "titel": "Wie viele 10-Liter-Eimer Farbe braucht ein 60-m-Schulflur?",
+          "datei": "klasse-9-farbe.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-farbe.html",
+          "beschreibung": "Klasse 9 · Geometrie · Flächen und Größen"
+        },
+        {
+          "titel": "Wie viele 330-ml-Dosen füllen den leeren Raum 351?",
+          "datei": "klasse-9-dosen.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-dosen.html",
+          "beschreibung": "Klasse 9 · Geometrie · Körper und Volumen"
+        },
+        {
+          "titel": "Wie viele 50-Sitzplatz-Busse braucht der Jahrgang 10 für einen Ausflug?",
+          "datei": "klasse-9-bus.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-bus.html",
+          "beschreibung": "Klasse 9 · Funktionen · proportionale Modelle"
+        },
+        {
+          "titel": "Wie viele Kilometer gehen 28 Lernende zwischen Unterrichtsräumen in einer Schulwoche?",
+          "datei": "klasse-9-wege.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-wege.html",
+          "beschreibung": "Klasse 9 · Funktionen · lineare Modelle"
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-arithmetik-algebra",
@@ -1235,6 +1568,72 @@
           "kategorie": "Unterstützung",
           "url": "klasse-10/unterstuetzung/question_shells_klasse-10.html",
           "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
+      "zusatzaufgaben": [
+        {
+          "titel": "Bei wie vielen Gästen liegt die Chance auf gleiche Geburtstage über 50 %?",
+          "datei": "klasse-10-geburtstag.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-geburtstag.html",
+          "beschreibung": "Klasse 10 · Daten und Wahrscheinlichkeiten · Stochastik"
+        },
+        {
+          "titel": "Höhe des Kirchturms vom Schulhof aus",
+          "datei": "klasse-10-23-hohe-des-kirchturms-vom-schulhof-aus.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-23-hohe-des-kirchturms-vom-schulhof-aus.html",
+          "beschreibung": "Klasse 10 · Geometrie"
+        },
+        {
+          "titel": "Tageslänge als periodischer Verlauf",
+          "datei": "klasse-10-22-tageslange-als-periodischer-verlauf.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-22-tageslange-als-periodischer-verlauf.html",
+          "beschreibung": "Klasse 10 · Funktionen"
+        },
+        {
+          "titel": "Trefferquote beim Freiwurf",
+          "datei": "klasse-10-24-trefferquote-beim-freiwurf.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-24-trefferquote-beim-freiwurf.html",
+          "beschreibung": "Klasse 10 · Stochastik"
+        },
+        {
+          "titel": "Verdopplung bei einer Informationskette",
+          "datei": "klasse-10-21-verdopplung-bei-einer-informationskette.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-21-verdopplung-bei-einer-informationskette.html",
+          "beschreibung": "Klasse 10 · Arithmetik/Algebra"
+        },
+        {
+          "titel": "Wie lange dauert es, alle 10 000 vierstelligen Zahlencodes zu testen?",
+          "datei": "klasse-10-pin.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-pin.html",
+          "beschreibung": "Klasse 10 · Arithmetik · Kombinatorik und Potenzen"
+        },
+        {
+          "titel": "Wie viele A4-Blätter spart eine Jahrgangsstufe durch doppelseitigen Druck pro Halbjahr?",
+          "datei": "klasse-10-drucker.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-drucker.html",
+          "beschreibung": "Klasse 10 · Arithmetik · Prozentrechnung und lineare Modelle"
+        },
+        {
+          "titel": "Wie viele Zehntklässler:innen erhalten eine Nachricht in 30 Minuten?",
+          "datei": "klasse-10-nachricht.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-nachricht.html",
+          "beschreibung": "Klasse 10 · Exponentielles Wachstum"
         }
       ],
       "inhaltsfelder": [
@@ -1470,6 +1869,24 @@
           "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
         }
       ],
+      "zusatzaufgaben": [
+        {
+          "titel": "Kreuzende Wege im Schulgebäude",
+          "datei": "einfuhrungsphase-ef-26-kreuzende-wege-im-schulgebaude.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "ef/zusatzaufgaben/fermi-aufgaben/einfuhrungsphase-ef-26-kreuzende-wege-im-schulgebaude.html",
+          "beschreibung": "EF · Analytische Geometrie/Lineare Algebra"
+        },
+        {
+          "titel": "Änderungsrate beim Anstieg zur Schule",
+          "datei": "einfuhrungsphase-ef-25-anderungsrate-beim-anstieg-zur-schule.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "ef/zusatzaufgaben/fermi-aufgaben/einfuhrungsphase-ef-25-anderungsrate-beim-anstieg-zur-schule.html",
+          "beschreibung": "EF · Funktionen und Analysis"
+        }
+      ],
       "inhaltsfelder": [
         {
           "id": "01-funktionen-und-analysis",
@@ -1702,6 +2119,56 @@
           "kategorie": "Unterstützung",
           "url": "q1-q2-grundkurs/unterstuetzung/question_shells_q2.html",
           "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
+      "zusatzaufgaben": [
+        {
+          "titel": "Gesamtzahl der Besucherinnen und Besucher",
+          "datei": "qualifikationsphase-2-q2-30-gesamtzahl-der-besucherinnen-und-besucher.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-30-gesamtzahl-der-besucherinnen-und-besucher.html",
+          "beschreibung": "Q2 · Funktionen und Analysis"
+        },
+        {
+          "titel": "Lichtkegel eines Projektors",
+          "datei": "qualifikationsphase-2-q2-31-lichtkegel-eines-projektors.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-31-lichtkegel-eines-projektors.html",
+          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra"
+        },
+        {
+          "titel": "Optimale Beetfläche am Zaun",
+          "datei": "qualifikationsphase-1-q1-27-optimale-beetflache-am-zaun.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-27-optimale-beetflache-am-zaun.html",
+          "beschreibung": "Q1 · Funktionen und Analysis"
+        },
+        {
+          "titel": "Sichtlinien im Veranstaltungsraum",
+          "datei": "qualifikationsphase-1-q1-28-sichtlinien-im-veranstaltungsraum.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-28-sichtlinien-im-veranstaltungsraum.html",
+          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra"
+        },
+        {
+          "titel": "Wie viele Lernende nutzen den Bus?",
+          "datei": "qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
+          "beschreibung": "Q1 · Stochastik"
+        },
+        {
+          "titel": "Zuverlässigkeit eines digitalen Abstimmungssystems",
+          "datei": "qualifikationsphase-2-q2-32-zuverlassigkeit-eines-digitalen-abstimmungssystems.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-32-zuverlassigkeit-eines-digitalen-abstimmungssystems.html",
+          "beschreibung": "Q2 · Stochastik"
         }
       ],
       "inhaltsfelder": [
@@ -2002,6 +2469,56 @@
           "kategorie": "Unterstützung",
           "url": "q1-q2-leistungskurs/unterstuetzung/question_shells_q2.html",
           "beschreibung": "Jahrgangsbezogene Question Shells zum Erstellen passender Aufgabenformate."
+        }
+      ],
+      "zusatzaufgaben": [
+        {
+          "titel": "Gesamtzahl der Besucherinnen und Besucher",
+          "datei": "qualifikationsphase-2-q2-30-gesamtzahl-der-besucherinnen-und-besucher.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-30-gesamtzahl-der-besucherinnen-und-besucher.html",
+          "beschreibung": "Q2 · Funktionen und Analysis"
+        },
+        {
+          "titel": "Lichtkegel eines Projektors",
+          "datei": "qualifikationsphase-2-q2-31-lichtkegel-eines-projektors.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-31-lichtkegel-eines-projektors.html",
+          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra"
+        },
+        {
+          "titel": "Optimale Beetfläche am Zaun",
+          "datei": "qualifikationsphase-1-q1-27-optimale-beetflache-am-zaun.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-27-optimale-beetflache-am-zaun.html",
+          "beschreibung": "Q1 · Funktionen und Analysis"
+        },
+        {
+          "titel": "Sichtlinien im Veranstaltungsraum",
+          "datei": "qualifikationsphase-1-q1-28-sichtlinien-im-veranstaltungsraum.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-28-sichtlinien-im-veranstaltungsraum.html",
+          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra"
+        },
+        {
+          "titel": "Wie viele Lernende nutzen den Bus?",
+          "datei": "qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
+          "beschreibung": "Q1 · Stochastik"
+        },
+        {
+          "titel": "Zuverlässigkeit eines digitalen Abstimmungssystems",
+          "datei": "qualifikationsphase-2-q2-32-zuverlassigkeit-eines-digitalen-abstimmungssystems.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-32-zuverlassigkeit-eines-digitalen-abstimmungssystems.html",
+          "beschreibung": "Q2 · Stochastik"
         }
       ],
       "inhaltsfelder": [

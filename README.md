@@ -68,6 +68,10 @@ Lernspiele liegen gesammelt unter `lernspiele/`, damit ihre gemeinsame JavaScrip
 
 Jahrgangsbezogene Question-Shell-Dateien liegen im jeweiligen Bereichsordner unter `unterstuetzung/`. Sie werden auf der Website unter der Inhaltsfeldauswahl angezeigt und sind bewusst keinem einzelnen Themenfeld zugeordnet.
 
+Zusatzaufgaben liegen im jeweiligen Bereichsordner unter `zusatzaufgaben/` und erscheinen auf der Klassen- oder Kursseite als eigene Kategorie **Zusatzaufgaben** mit dem Label **Fermi-Aufgabe**. Für Klasse 5 bis 10 liegen je acht Aufgaben unter `klasse-N/zusatzaufgaben/fermi-aufgaben/`, für die EF zwei unter `ef/zusatzaufgaben/fermi-aufgaben/`. Sechs gemeinsame Q1/Q2-Aufgaben liegen einmalig unter `gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/` und werden sowohl im Grundkurs als auch im Leistungskurs verlinkt. Damit enthält die Sammlung 56 unterschiedliche HTML-Aufgaben und 62 Zuordnungen zu Klassen und Kursen. `statistik.fermi_aufgaben` zählt unterschiedliche Aufgaben, `statistik.zusatzaufgaben` und die Materialzahlen zählen die Zuordnungen. Die jeweilige `index.html` dient als Aufgabenübersicht und wird nicht zusätzlich als Material gezählt. Die Aufgaben unterstützen lokale Browsernotizen und Drucken; Übersichts- und Aufgabenlinks funktionieren auch direkt in GitHub Pages.
+
+Die [Fachprompt-Vorlage für weitere Fermi-Aufgaben](gemeinsam/vorlagen/Prompt_Fermi-Aufgaben_Mathematik.md) ist für Lehrkräfte unter `gemeinsam/vorlagen/` abgelegt und um Hinweise aus der [ergänzenden Markdown-Sammlung mit 30 Aufgabenbeispielen](gemeinsam/vorlagen/fermi-aufgaben/Fermi-Aufgaben_Mathematik.md) erweitert. Beide Dokumente werden nicht als Schüleraufgaben im Katalog angezeigt.
+
 ## Fachliche Grundlage
 
 - **Sekundarstufe I (Gymnasium G9):** Kernlehrplan Mathematik 2019; Inhaltsfelder Arithmetik/Algebra, Funktionen, Geometrie, Stochastik.

@@ -64,7 +64,7 @@ function areaTotals(area) {
       topics: total.topics + field.themen.length,
       files: total.files + field.materialien.length + field.themen.reduce((sum, topic) => sum + topic.materialien.length, 0)
     }),
-    { topics: 0, files: (area.unterstuetzung || []).length }
+    { topics: 0, files: (area.unterstuetzung || []).length + (area.zusatzaufgaben || []).length }
   );
 }
 
@@ -135,7 +135,7 @@ function filteredMethodStages(methoden, query) {
 
 function materialText(materials) {
   return (materials || [])
-    .map((material) => `${material.titel} ${material.typ} ${material.datei} ${material.beschreibung || ""} ${(material.kompetenzen || []).join(" ")}`)
+    .map((material) => `${material.titel} ${material.typ} ${material.kategorie || ""} ${material.datei} ${material.beschreibung || ""} ${(material.kompetenzen || []).join(" ")}`)
     .join(" ");
 }
 
@@ -173,7 +173,7 @@ function fieldText(field) {
 }
 
 function areaText(area) {
-  return `${area.titel} ${area.kurztitel || ""} ${area.stufe} ${materialText(area.unterstuetzung)} ${area.inhaltsfelder.map(fieldText).join(" ")}`;
+  return `${area.titel} ${area.kurztitel || ""} ${area.stufe} ${materialText(area.unterstuetzung)} ${materialText(area.zusatzaufgaben)} ${area.inhaltsfelder.map(fieldText).join(" ")}`;
 }
 
 function parseHash() {
@@ -435,16 +435,28 @@ function renderFieldPicker(area, fields, selectedField) {
 }
 
 function renderAreaSupport(area, query) {
+  return renderAreaMaterials(area, query, "unterstuetzung", "Unterstützung",
+    "Erklärvideos und Vorlagen zum Lernen und Erstellen von Aufgaben.",
+    { accent: "#eab308", accentDark: "#634d00", accentSoft: "#fff7cc", onAccent: "#19191f" });
+}
+
+function renderAreaExtraTasks(area, query) {
+  return renderAreaMaterials(area, query, "zusatzaufgaben", "Zusatzaufgaben",
+    "Zusätzliche Aufgaben zum Schätzen, Modellieren und Begründen. Fermi-Aufgaben sind entsprechend gekennzeichnet.",
+    { accent: "#9333ea", accentDark: "#5b1b92", accentSoft: "#f4e8ff", onAccent: "#ffffff" });
+}
+
+function renderAreaMaterials(area, query, key, title, description, theme) {
   const materialQuery = areaOwnMatchesQuery(area, query) ? "" : query;
-  const materials = filterMaterials(area.unterstuetzung, materialQuery);
+  const materials = filterMaterials(area[key], materialQuery);
   if (!materials.length) return null;
 
-  const theme = { accent: "#eab308", accentDark: "#634d00", accentSoft: "#fff7cc", onAccent: "#19191f" };
   const section = document.createElement("section");
   section.className = "support-section";
+  if (key === "zusatzaufgaben") section.classList.add("extra-tasks-section");
   section.appendChild(createText("p", "step-label", "Kategorie"));
-  section.appendChild(createText("h2", "", "Unterstützung"));
-  section.appendChild(createText("p", "view-copy", "Erklärvideos und Vorlagen zum Lernen und Erstellen von Aufgaben."));
+  section.appendChild(createText("h2", "", title));
+  section.appendChild(createText("p", "view-copy", description));
 
   const list = document.createElement("div");
   list.className = "support-list";
@@ -628,12 +640,19 @@ function renderAreaPage(area, query) {
   header.className = "view-header";
   header.appendChild(createText("p", "step-label", "Ausgewählter Bereich"));
   header.appendChild(createText("h2", "", area.titel));
-  header.appendChild(createText("p", "view-copy", "Wähle ein Inhaltsfeld aus. Darunter werden Themen und zugehörige Dateien angezeigt."));
+  header.appendChild(createText("p", "view-copy", "Wähle ein Inhaltsfeld aus. Darunter findest du Themen, Materialien und weitere Kategorien für diesen Jahrgang."));
   catalogRoot.appendChild(header);
 
+  const extraTasksSection = renderAreaExtraTasks(area, query);
+  const supportSection = renderAreaSupport(area, query);
+
   if (!fields.length) {
-    catalogRoot.appendChild(createText("p", "empty-state", "Keine passenden Inhaltsfelder gefunden."));
-    const supportSection = renderAreaSupport(area, query);
+    if (!extraTasksSection && !supportSection) {
+      catalogRoot.appendChild(createText("p", "empty-state", "Keine passenden Inhaltsfelder oder Materialien gefunden."));
+    }
+    if (extraTasksSection) {
+      catalogRoot.appendChild(extraTasksSection);
+    }
     if (supportSection) {
       catalogRoot.appendChild(supportSection);
     }
@@ -641,8 +660,6 @@ function renderAreaPage(area, query) {
   }
 
   catalogRoot.appendChild(renderFieldPicker(area, fields, visibleSelectedField));
-
-  const supportSection = renderAreaSupport(area, query);
 
   if (visibleSelectedField) {
     catalogRoot.appendChild(renderFieldDetail(visibleSelectedField, query));
@@ -661,6 +678,9 @@ function renderAreaPage(area, query) {
     catalogRoot.appendChild(empty);
   }
 
+  if (extraTasksSection) {
+    catalogRoot.appendChild(extraTasksSection);
+  }
   if (supportSection) {
     catalogRoot.appendChild(supportSection);
   }
