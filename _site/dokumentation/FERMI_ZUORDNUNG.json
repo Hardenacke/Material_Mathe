@@ -1,0 +1,1806 @@
+{
+  "beschreibung": "Fachliche Zuordnung der Fermi-Aufgaben. Inhaltsfeld-IDs entsprechen struktur.json; Q1/Q2-Aufgaben werden in Grund- und Leistungskurs angeboten.",
+  "quelle_bildimpulse": "Fermi-Aufgaben_Mathematik_HTML_mit_Bildimpulsen (1).zip",
+  "aufgaben": {
+    "ef/zusatzaufgaben/fermi-aufgaben/01-funktionen-und-analysis/EF.1.html": {
+      "jahrgang": "EF",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "EF.1.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "299d7f7e603c23ade0897515ebfb0bc1c7fbbfccba4a2a55d50fc0ac8a60873f",
+      "sha256_html": "bba0540c298179ed67bf7161002adba43134634dddd3017a253ecd13b1f1e0f6",
+      "originaltitel": "EF.1 – Funktionen und Analysis – Rudertraining auf dem Biggesee",
+      "titel": "Rudertraining auf dem Biggesee"
+    },
+    "ef/zusatzaufgaben/fermi-aufgaben/01-funktionen-und-analysis/EF.1b.html": {
+      "jahrgang": "EF",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "EF.1b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "11f6ba1422a6bb8f5d228937f761c9f798dbb81bea8dd4a94b64dae3a1a5753c",
+      "sha256_html": "f257a7c46218c972a0c0f2a5fdc69abce87d0ceb250442ddbcee452f188bddea",
+      "originaltitel": "EF.1b – Funktionen und Analysis – mittlere und momentane Änderungsrate – Temperaturverlauf im Schulgarten",
+      "titel": "Temperaturverlauf im Schulgarten"
+    },
+    "ef/zusatzaufgaben/fermi-aufgaben/01-funktionen-und-analysis/EF.3c.html": {
+      "jahrgang": "EF",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "EF.3c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "591d10c2cef5c064726c5c33463739b62f507c60acbb1412b62a55ca612687c7",
+      "sha256_html": "e8d3981ed3d67894fbc74879ca4ecebb2a2312998e9c91619ebf25dc2a33d59e",
+      "originaltitel": "EF.3c – Funktionen und Analysis – Leistung der Solaranlage am Schulgebäude",
+      "titel": "Leistung der Solaranlage am Schulgebäude"
+    },
+    "ef/zusatzaufgaben/fermi-aufgaben/02-analytische-geometrie-und-lineare-algebra/EF.2.html": {
+      "jahrgang": "EF",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "EF.2.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "4dd102c78a38fc227a4be0899fce8b8226216588ca6f38001f91f98e6c1d9320",
+      "sha256_html": "22f9fbbac0adc4623e078f85baa26eed75bb897089fb9f6def6c55a50630af2a",
+      "originaltitel": "EF.2 – Analytische Geometrie/Lineare Algebra – Seilkamera in der Sporthalle",
+      "titel": "Seilkamera in der Sporthalle"
+    },
+    "ef/zusatzaufgaben/fermi-aufgaben/02-analytische-geometrie-und-lineare-algebra/EF.2b.html": {
+      "jahrgang": "EF",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "EF.2b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "1b184e1006e79739a31e58827b7362011632617a5486a3df57b94ee3145ade83",
+      "sha256_html": "2a5df2de32d851555dfdec82c45a3685da29b91ed045d290e742194337e7b608",
+      "originaltitel": "EF.2b – Analytische Geometrie/Lineare Algebra – Geraden und Ebenen – Drohnenspur über dem Biggedamm",
+      "titel": "Drohnenspur über dem Biggedamm"
+    },
+    "ef/zusatzaufgaben/fermi-aufgaben/02-analytische-geometrie-und-lineare-algebra/EF.4c.html": {
+      "jahrgang": "EF",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "EF.4c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "c9bcd0d1f9466afe7cb531f71b2b85ee91d9cd848c36a69ed94c6e94b21236ec",
+      "sha256_html": "f73c4bc7d695391fe481aa080114b43818a27286982bfcdf243fa43838ff0cb4",
+      "originaltitel": "EF.4c – Analytische Geometrie/Lineare Algebra – Kamerafahrt über der Aula-Bühne",
+      "titel": "Kamerafahrt über der Aula-Bühne"
+    },
+    "ef/zusatzaufgaben/fermi-aufgaben/einfuhrungsphase-ef-25-anderungsrate-beim-anstieg-zur-schule.html": {
+      "jahrgang": "EF",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "originaltitel": "Änderungsrate beim Anstieg zur Schule",
+      "titel": "Änderungsrate beim Anstieg zur Schule"
+    },
+    "ef/zusatzaufgaben/fermi-aufgaben/einfuhrungsphase-ef-26-kreuzende-wege-im-schulgebaude.html": {
+      "jahrgang": "EF",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "originaltitel": "Kreuzende Wege im Schulgebäude",
+      "titel": "Kreuzende Wege im Schulgebäude"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.1.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.1.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "e83a1bf12130aea05959751cfa1801971e7d7e7fb0e67e167f9e8a5ce2d51133",
+      "sha256_html": "5bcbc927c5f3248b723f291c666aaf3d0ff95c143034daca6d195a562942a604",
+      "originaltitel": "Q1.1 – Funktionen und Analysis – Solarmodule auf dem Schuldach",
+      "titel": "Solarmodule auf dem Schuldach"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.1b.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.1b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "65b89705a54e4ca7ef9301e0d306ce0755deaa59735577beec5c15f6214c6386",
+      "sha256_html": "88db1941c56cffa0c8b7d40a00fef76db3cac63fb2e3cc8e7f78eafa0a421f87",
+      "originaltitel": "Q1.1b – Funktionen und Analysis – Optimierung – Regenbeet am Haupteingang",
+      "titel": "Regenbeet am Haupteingang"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.4c.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.4c.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "303c1435bfe52208e08eb2de82270847e1da985db1bc219feeefad5ae2859dc5",
+      "sha256_html": "35a391618f6b406ec0b4b62f9ddb7fbdb1e2cb3aaffcb755a63ddaafc3cc6942",
+      "originaltitel": "Q1.4c – Analysis – Bogensteg an der Waldenburger Bucht",
+      "titel": "Bogensteg an der Waldenburger Bucht"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.6c.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.6c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "49d96b5a4ea76186b41e9f21ce52a23e6248c58ef8670ea69cbb39ec59b00391",
+      "sha256_html": "ddbba435759d4a83aaeb67cbc270f059d4539e4b4f66de02fbbeaf3a958846e0",
+      "originaltitel": "Q1.6c – Funktionen und Analysis – Regenrückhalt auf dem Schulgebäude",
+      "titel": "Regenrückhalt auf dem Schulgebäude"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.2.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.2.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "c5af16a05571fe4161ab2fae61632fdcf1b576544cb7651b1c2ebc5b9125aab1",
+      "sha256_html": "fe5d249f5e8a11a1d66c49e364da51e4ef54b6c4d4b7bd8385b416a1a37fa341",
+      "originaltitel": "Q1.2 – Analytische Geometrie/Lineare Algebra – Abstand zweier Kameraseile",
+      "titel": "Abstand zweier Kameraseile"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.2b.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.2b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "18bf637a592b3716ca92fa0cfe9b74274a832463b5f170fc62a77ac58c38a32b",
+      "sha256_html": "6a8eb1dd0e9f0271dfe8e6b22c863e674285013e35afdec23b88eedefeb19035",
+      "originaltitel": "Q1.2b – Analytische Geometrie/Lineare Algebra – Geraden im Raum – Sicherheitsabstand der Bühnenseile auf Burg Schnellenberg",
+      "titel": "Sicherheitsabstand der Bühnenseile auf Burg Schnellenberg"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.5c.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.5c.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "cbe51c0f3c29ab395f65e98833dc2598e88728abb60d9dc6e17a5eaab90eb153",
+      "sha256_html": "767cd09752da7859a83a6993597ea7905bfbe7f4162947ba15b023719382d59b",
+      "originaltitel": "Q1.5c – Analytische Geometrie – Beleuchtung der Minigolfbahn",
+      "titel": "Beleuchtung der Minigolfbahn"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.7c.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.7c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "fa66152d1dfcdd3afbcc1517e7ed9d6d97bce185b4b9cfa1743a23e0438b4622",
+      "sha256_html": "712ee818142b808b4327442988f3f2c0f2180a6e820f0af53624c5290c12ad18",
+      "originaltitel": "Q1.7c – Analytische Geometrie/Lineare Algebra – Kameraflüge am Radioteleskop Effelsberg",
+      "titel": "Kameraflüge am Radioteleskop Effelsberg"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/03-stochastik/Q1.3.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "03-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.3.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "cea84fcb6fc2cbe39f9436b12b587c58ad2a31738f7eccf9a82d7249f9430ba1",
+      "sha256_html": "fbadcab766b58b4fe5ec87758bc95ca9b3032974b5ae229055d52763ef54bd4b",
+      "originaltitel": "Q1.3 – Stochastik – Busnutzung an der Schule",
+      "titel": "Busnutzung an der Schule"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/03-stochastik/Q1.3b.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "03-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.3b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "3da22e81985c1a6b23442ae03c34554923137104ce13c7c0e037ac71c65ffb41",
+      "sha256_html": "17b9c8de0266913aafedfc39f04024698b67948685ab206771ee98adfb9f7df9",
+      "originaltitel": "Q1.3b – Stochastik – Stichproben und Hochrechnung – Trinkwasserstationen an der Waldenburger Bucht",
+      "titel": "Trinkwasserstationen an der Waldenburger Bucht"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/03-stochastik/Q1.8c.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "03-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q1.8c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "6e4a625c4be2bd212021baeab90059bc56e46bb456ac96717c130bd5425feb7f",
+      "sha256_html": "dba81aeb666a52a104f68d0bf0a8ce7ee5bf16668d626da466928a8fcede2539",
+      "originaltitel": "Q1.8c – Stochastik – Heizenergie und Außentemperatur",
+      "titel": "Heizenergie und Außentemperatur"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.1.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q2.1.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "9442246035b805bd0bc256b2bbba45b63bf6c9d43322f5d2c6fa138993b574fe",
+      "sha256_html": "3ffe9ab5b390ea61dc971331f5135eb6b52c46d38188d2758446653c4b015b9a",
+      "originaltitel": "Q2.1 – Funktionen und Analysis – Gästeankunft beim Schulfest",
+      "titel": "Gästeankunft beim Schulfest"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.1b.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q2.1b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "c86986e176e6f07321cb34fe94fc0675de9ded146b1c8dc329a0315ca18acdc1",
+      "sha256_html": "a03a7cbc38546fd4e1e30d1bb2a58ae4651926c481faadd05576b6c5dd85abff",
+      "originaltitel": "Q2.1b – Funktionen und Analysis – Integral als Gesamtmenge – Regenwasser für die Zisterne der Schule",
+      "titel": "Regenwasser für die Zisterne der Schule"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.4c.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q2.4c.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "5abf723c1ac19a303e2d8edb7c5b0bf2a2f1cb47fb419a7099c5c6eb2d4cb94c",
+      "sha256_html": "d900aef9e3b2b0821c226e884bb58e74c113800bc4108a7d3557c211cfc66f0b",
+      "originaltitel": "Q2.4c – Analysis – Wasserabgabe an der Biggetalsperre",
+      "titel": "Wasserabgabe an der Biggetalsperre"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.5c.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q2.5c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "3f9801bf2697ea6c5f52389453e747ce6117e6ed7683e91e2df6700a0b0519a1",
+      "sha256_html": "b9bd9c39a49ed400a10990e8f976a700a63b43cef589c92a15c474ddce1fbf83",
+      "originaltitel": "Q2.5c – Funktionen und Analysis – Waffelstand beim Sommerfest",
+      "titel": "Waffelstand beim Sommerfest"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/02-analytische-geometrie-und-lineare-algebra/Q2.2.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q2.2.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "f3eef4512a1169dea95dcea5292f5457dc8cf759213418d84ca3f98597e2f9a5",
+      "sha256_html": "891b4d5ecb1704cf10a77031ad2151d507c78eb2eb38910cd9459fd63e164464",
+      "originaltitel": "Q2.2 – Analytische Geometrie/Lineare Algebra – Projektor und Leinwand in der Aula",
+      "titel": "Projektor und Leinwand in der Aula"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/02-analytische-geometrie-und-lineare-algebra/Q2.2b.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q2.2b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "311d5059221b3d61a3cf76656850eb5361b9ad8feaba0f0e0897bc852ac0d152",
+      "sha256_html": "4c6021fc1a2bcb5d545d29b62283d3e6e33a375aaa40952b7759505787687afb",
+      "originaltitel": "Q2.2b – Analytische Geometrie/Lineare Algebra – Gerade und Ebene – Scheinwerferstrahl über dem Biggesee",
+      "titel": "Scheinwerferstrahl über dem Biggesee"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/02-analytische-geometrie-und-lineare-algebra/Q2.6c.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q2.6c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "4789094b94d267241dae7d5905d35068ee07a9a6b993453ee6b21c45b1663ebf",
+      "sha256_html": "8969c5844423575fe1f9f216b86e66f192158d502763961acfe69fec38e4b99e",
+      "originaltitel": "Q2.6c – Analytische Geometrie/Lineare Algebra – Sonnensegel am Biggesee",
+      "titel": "Sonnensegel am Biggesee"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/03-stochastik/Q2.3.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "03-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q2.3.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "ace2776346356784185c48c588e5ca3f9c5e2e0bf9b55aab63afb2397c00cf53",
+      "sha256_html": "fd700e9643b6ba7c34f505d0488a5d4783569c66ba3bdfaea0525a7244632d2b",
+      "originaltitel": "Q2.3 – Stochastik – Zuverlässigkeit einer digitalen Abstimmung",
+      "titel": "Zuverlässigkeit einer digitalen Abstimmung"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/03-stochastik/Q2.3b.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "03-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q2.3b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "563e02062a29ba60647b7112db5feb2baec18d91de0abb1644c05c1c7fafc045",
+      "sha256_html": "6a7fc0102d23e52d8cd1d39415ba889a01295fff5b3752d455b7b7a67bab4b06",
+      "originaltitel": "Q2.3b – Stochastik – Fehlerwahrscheinlichkeit und Erwartungswert – Ersatzakkus für den Lichterweg der Stadt",
+      "titel": "Ersatzakkus für den Lichterweg der Stadt"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/03-stochastik/Q2.7c.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "03-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "Q2.7c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "c9e9613a5ab76c3c6651119b5d49baa4fa0069cef3eaea950f3a44bb9501a407",
+      "sha256_html": "8f284cf96e3d4bc71470f159a038928c2fb5bfde1487f97478be498c581e9e16",
+      "originaltitel": "Q2.7c – Stochastik – Musikerkennung beim Schulkonzert",
+      "titel": "Musikerkennung beim Schulkonzert"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-27-optimale-beetflache-am-zaun.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "originaltitel": "Optimale Beetfläche am Zaun",
+      "titel": "Optimale Beetfläche am Zaun"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-28-sichtlinien-im-veranstaltungsraum.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "originaltitel": "Sichtlinien im Veranstaltungsraum",
+      "titel": "Sichtlinien im Veranstaltungsraum"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html": {
+      "jahrgang": "Q1",
+      "inhaltsfelder": [
+        "03-stochastik"
+      ],
+      "originaltitel": "Wie viele Lernende nutzen den Bus?",
+      "titel": "Busnutzung im Jahrgang"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-30-gesamtzahl-der-besucherinnen-und-besucher.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "01-funktionen-und-analysis"
+      ],
+      "originaltitel": "Gesamtzahl der Besucherinnen und Besucher",
+      "titel": "Besucherzahlen beim Schulfest"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-31-lichtkegel-eines-projektors.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "02-analytische-geometrie-und-lineare-algebra"
+      ],
+      "originaltitel": "Lichtkegel eines Projektors",
+      "titel": "Lichtkegel eines Projektors"
+    },
+    "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-32-zuverlassigkeit-eines-digitalen-abstimmungssystems.html": {
+      "jahrgang": "Q2",
+      "inhaltsfelder": [
+        "03-stochastik"
+      ],
+      "originaltitel": "Zuverlässigkeit eines digitalen Abstimmungssystems",
+      "titel": "Zuverlässigkeit eines digitalen Abstimmungssystems"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/10.1.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.1.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "03a67060d218f132a2dee0101cc1d34166323804bf013beaae5eb8a7702dc59f",
+      "sha256_html": "970ffa128f125da8ebfbee5b462181d8cb6d5a25247b4e9f8bd1f02b879723ef",
+      "originaltitel": "10.1 – Arithmetik/Algebra – Eine Einladung wird weitergeleitet",
+      "titel": "Eine Einladung wird weitergeleitet"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/10.1b.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.1b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "6fe12ea875e2bd35561ba9128953a247b3a893ac6b5aac4cb4a8fa3be6a31174",
+      "sha256_html": "03d0067951c3699ff66496db588a476006343a9f9eff0182cc386a7eb96eeb1b",
+      "originaltitel": "10.1b – Arithmetik/Algebra – Potenzen und exponentielles Wachstum – Batteriewechsel an der Messstation Waldenburger Bucht",
+      "titel": "Batteriewechsel an der Messstation Waldenburger Bucht"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/10.6c.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.6c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "41887e4290c88580894beaf62927e7812270f8edfdcf9e723004fdc768932293",
+      "sha256_html": "4ad9a548fb53ca9be337dd24a914f94658216d0366083d2da94b0a8b19c59388",
+      "originaltitel": "10.6c – Arithmetik/Algebra – Der Konzertclip des Rivius-Gymnasiums",
+      "titel": "Der Konzertclip des Rivius-Gymnasiums"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/02-funktionen/10.2.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.2.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "ab7d8460e08dcd3c9d47c0b6e7525e3852854dde0989aac87fe0e374365bb197",
+      "sha256_html": "b6ad1bb544ad3a217f03d0806f12c1f2d3c4204f81075b861ae31b660f58e989",
+      "originaltitel": "10.2 – Funktionen – Tageslicht im Jahresverlauf",
+      "titel": "Tageslicht im Jahresverlauf"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/02-funktionen/10.2b.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.2b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "ed86e0af746deb2a61a011c35c03484f2bafd47245e25397cc1a833a0f41c148",
+      "sha256_html": "68e1f7e56c85ccaefa33b6f7c6421565296bb3080f5e3eef672338f0fb722f94",
+      "originaltitel": "10.2b – Funktionen – periodische Funktionen – Licht- und Wasserzeiten am Alten Markt",
+      "titel": "Licht- und Wasserzeiten am Alten Markt"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/02-funktionen/10.7c.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.7c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "de686fd4c1513dfc064dbf97a1ab74aeb0cb327ddaaa2fd52be40777477b966e",
+      "sha256_html": "17157746c56ff80f60f684637ddb774b8eb5c0eaa3c35181f9cbcc536d1b94e8",
+      "originaltitel": "10.7c – Funktionen – Lichtfolgen im Bühnenprogramm",
+      "titel": "Lichtfolgen im Bühnenprogramm"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/03-geometrie/10.3.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.3.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "f94cc52b6971a634952969320c63d263d24ba3c5eb633bec522cfc1a89917add",
+      "sha256_html": "cd8f7edcb2743e9e7d83bc5fcf6b7ed07f5b5b033070ab3f2a3a6896c4c0f1a2",
+      "originaltitel": "10.3 – Geometrie – Höhe des Kirchturms vom Marktplatz aus",
+      "titel": "Höhe des Kirchturms vom Marktplatz aus"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/03-geometrie/10.3b.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.3b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "f298d77fce08cd5238b048b90bdbeb983dc5503e2aca0b664532963f187d339c",
+      "sha256_html": "beee46ac615a6bf79ee8ed13e0f6db88f12615c0675c6f40ea0884efe3bc5730",
+      "originaltitel": "10.3b – Geometrie – Trigonometrie – Sichtlinie für eine Rettungsübung am Biggedamm",
+      "titel": "Sichtlinie für eine Rettungsübung am Biggedamm"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/03-geometrie/10.8c.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.8c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "1950f47faf957bc3e0a2bd9d583ec1479b7eeb64e978f3f603f0c23821b00625",
+      "sha256_html": "ff8bb8e96e51a883986126c8de7fdfc20912e79ddd623ef4de3ee29b55993003",
+      "originaltitel": "10.8c – Geometrie – Banner über dem Burghof",
+      "titel": "Banner über dem Burghof"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/04-stochastik/10.4.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.4.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "d66944fefcb5d9e8a6178c101f8a9d44c8a8065fa01d25154e55774b5b3ac2e0",
+      "sha256_html": "d702bb838549fa622186099d8bdb7cbe17285a7790a07c887e13835e7d14af56",
+      "originaltitel": "10.4 – Stochastik – Freiwürfe beim Sportfest",
+      "titel": "Freiwürfe beim Sportfest"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/04-stochastik/10.4b.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.4b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "e41750853ff3206b3642de75acdd69d50970af1e8410ebd8d761cff33664ba4f",
+      "sha256_html": "d8d2eaf9ce81b7dfb72397728092d96744e8a35c5a56ac5a443657bcc6338e64",
+      "originaltitel": "10.4b – Stochastik – Binomialmodell – Ersatzlampen für den Lichterweg am Biggesee",
+      "titel": "Ersatzlampen für den Lichterweg am Biggesee"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/04-stochastik/10.9c.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "10.9c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "c278ff946007887feaac9ba6f0ed92b0d79de4ad54925a67dcda07fac6554ba9",
+      "sha256_html": "cacabc4b44d50cbe0c1044f3b7aa765cbb823068c6a65c8858e4b8fee4c8ea5d",
+      "originaltitel": "10.9c – Stochastik – Wildblumensamen am Haupteingang",
+      "titel": "Wildblumensamen am Haupteingang"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-21-verdopplung-bei-einer-informationskette.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Verdopplung bei einer Informationskette",
+      "titel": "Verdopplung bei einer Informationskette"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-22-tageslange-als-periodischer-verlauf.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Tageslänge als periodischer Verlauf",
+      "titel": "Tageslänge als periodischer Verlauf"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-23-hohe-des-kirchturms-vom-schulhof-aus.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Höhe des Kirchturms vom Schulhof aus",
+      "titel": "Höhe des Kirchturms vom Schulhof aus"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-24-trefferquote-beim-freiwurf.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "originaltitel": "Trefferquote beim Freiwurf",
+      "titel": "Trefferquote beim Freiwurf"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-drucker.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Wie viele A4-Blätter spart eine Jahrgangsstufe durch doppelseitigen Druck pro Halbjahr?",
+      "titel": "Papier sparen durch doppelseitigen Druck"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-geburtstag.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "originaltitel": "Bei wie vielen Gästen liegt die Chance auf gleiche Geburtstage über 50 %?",
+      "titel": "Gleiche Geburtstage auf einer Feier"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-nachricht.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Wie viele Zehntklässler:innen erhalten eine Nachricht in 30 Minuten?",
+      "titel": "Eine Nachricht verbreitet sich im Jahrgang"
+    },
+    "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-pin.html": {
+      "jahrgang": "Klasse 10",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Wie lange dauert es, alle 10 000 vierstelligen Zahlencodes zu testen?",
+      "titel": "Alle vierstelligen Zahlencodes testen"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/5.1.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.1.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "ae75cbc9cb697d889fb4182e531f4f91f400da6e46ddc0b5c1494ff942721ef6",
+      "sha256_html": "7f56f78e3af87a53237fbbe2849113ce1d21944804f2eb7a7a1302cb5b68b9e8",
+      "originaltitel": "5.1 – Arithmetik/Algebra – Samen für den Blühstreifen",
+      "titel": "Samen für den Blühstreifen"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/5.1b.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.1b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "3ee3b1a2f144f653e0d54be1ab999f18b655df313119605ac679a6a7951a404c",
+      "sha256_html": "23b2b868a54bf03b845a9f1c27d06ced430b9453bb00167cc80645cc42b757d1",
+      "originaltitel": "5.1b – Arithmetik/Algebra – natürliche Zahlen und Rechenoperationen – Material für den Biggesee-Aktionstag",
+      "titel": "Material für den Biggesee-Aktionstag"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/5.6c.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.6c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "74f45688ad2a6a52e9894ccfec8cd2e5756fbabe0705b4e6a33e2a5776dbc35e",
+      "sha256_html": "ce55fcf50915bdce041c162104162c926fc38ea6fdcd0a7f37e8234d217f0f54",
+      "originaltitel": "5.6c – Arithmetik/Algebra – Wegmarkierungen im Repetal",
+      "titel": "Wegmarkierungen im Repetal"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/02-funktionen/5.2.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.2.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "eb795b55e731ba96520a3fc5d4ecd42b3cc0bab67b8e6f187f2373c6e9407f0d",
+      "sha256_html": "61eee9d16a9df1079f4aef559209df320cfea811947766429b7d01cd4e298ad1",
+      "originaltitel": "5.2 – Funktionen – Apfelschorle für das Schulfest",
+      "titel": "Apfelschorle für das Schulfest"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/02-funktionen/5.2b.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.2b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "9cf6787e601b245294f9d3e94586dd93d2b82b52b127ede46a9429600a2ed35d",
+      "sha256_html": "0bd789c6d21fc4d359be89cd8600a2930d3f75c3d289eb69f4b917e2147c37bb",
+      "originaltitel": "5.2b – Funktionen – proportionale Zuordnungen – Farbe für das Wandbild in Raum 351",
+      "titel": "Farbe für das Wandbild in Raum 351"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/02-funktionen/5.7c.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.7c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "04e335a09a66e06bd8a20f128fe9dc04fd81f9863a2f9fb0a46d136bd21c22ec",
+      "sha256_html": "3956dddf89fa50e53524317fe521acbc10c3e61d392589df88e6ea92b829d36f",
+      "originaltitel": "5.7c – Funktionen – Fruchtpunsch vor der Aula",
+      "titel": "Fruchtpunsch vor der Aula"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/03-geometrie/5.3.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.3.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "fe76b5942cb6436d8cdf43daf096699d52646068e545668979d897f4d8209419",
+      "sha256_html": "a13eee471c8e239df903e628c598471df27da33dfa69078096ec51a986aa4dc5",
+      "originaltitel": "5.3 – Geometrie – Quadratische Karten für die Pinnwand",
+      "titel": "Quadratische Karten für die Pinnwand"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/03-geometrie/5.3b.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.3b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "8479c110dfdfb58e82a4421ffa95d889b6c247a5ed180789b8530020e3b00283",
+      "sha256_html": "272663e68cb07c52361debeacfdd0c4441d2a39f0c990689507f8bbbb3b7568b",
+      "originaltitel": "5.3b – Geometrie – Flächeninhalt und Zerlegen – Sitzfläche beim Vorlesetag auf Burg Schnellenberg",
+      "titel": "Sitzfläche beim Vorlesetag auf Burg Schnellenberg"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/03-geometrie/5.5c.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.5c.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "0f3485b8e749050b944ff5f613e2d8e05a55044dfac544a93fb636ef3f9a2ba1",
+      "sha256_html": "d649f87432bd0ee086dc6e57b8616e076082f2a69e1b965b0adc9f04ef162299",
+      "originaltitel": "5.5c – Geometrie – Sitzplätze bei der Einschulung am Rivius-Gymnasium",
+      "titel": "Sitzplätze bei der Einschulung am Rivius-Gymnasium"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/03-geometrie/5.8c.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.8c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "ec8aee4108a422b7c190c0b52b304cb36d098cd3aeec2f6294507b62b56da412",
+      "sha256_html": "374b926cfc4d516f0d39e115ef90c60d10e33aff4bdeb404b0e4708e10b10cfc",
+      "originaltitel": "5.8c – Geometrie – Pflasterweg am Kräuterbeet",
+      "titel": "Pflasterweg am Kräuterbeet"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/04-stochastik/5.4.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.4.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "a2b80bced4a31bdf6097d8519161b5e03f54fba55c40350b4a758b7cbdbad0de",
+      "sha256_html": "f86b7a3f6e6f66b4617516f46356f9428131d097ae796f43671feb64b1de4726",
+      "originaltitel": "5.4 – Daten und Häufigkeiten – Geburtstage in Jahrgang 5",
+      "titel": "Geburtstage in Jahrgang 5"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/04-stochastik/5.4b.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.4b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "c648f9b2fcadec3ed3726100db08a0ce810f3b7b516936ce1fcbc4701aa27c16",
+      "sha256_html": "24ba43eb03f248f9b55ac13869691f8782e35c8ee29b7f4f9b494f036017bc2b",
+      "originaltitel": "5.4b – Daten und Häufigkeiten – Sitzplätze für die lange Pause",
+      "titel": "Sitzplätze für die lange Pause"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/04-stochastik/5.9c.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "5.9c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "2adab8a6472b5b1a7ae28658ccf99d8266a6e91ae25051399aab21d4bdfe25f2",
+      "sha256_html": "d81849c1fe777a778117add3946919dcba84d49ff64bd5c201ff00d332ebf1ed",
+      "originaltitel": "5.9c – Daten und Häufigkeiten – Büchertausch am Tag der offenen Tür",
+      "titel": "Büchertausch am Tag der offenen Tür"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-01-pausensnack-fur-die-jahrgangsstufe.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Pausensnack für die Jahrgangsstufe",
+      "titel": "Pausensnack für die Jahrgangsstufe"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-02-limonade-fur-das-schulfest.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Limonade für das Schulfest",
+      "titel": "Limonade für das Schulfest"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-03-papierquadrate-fur-den-klassenraum.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Papierquadrate für den Klassenraum",
+      "titel": "Papierquadrate für den Klassenraum"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-04-geburtstagsmonate-in-den-funften-klassen.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "originaltitel": "Geburtstagsmonate in den fünften Klassen",
+      "titel": "Geburtstagsmonate in den fünften Klassen"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-ballons.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Wie viele 30-cm-Luftballons passen in Raum 351?",
+      "titel": "Luftballons für Raum 351"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-papier.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Wie viele A4-Blätter verbraucht die Klasse 5b in einer Schulwoche?",
+      "titel": "Papierverbrauch einer Schulklasse"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-stifte.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Wie lang ist eine Reihe aus allen Buntstiften der Klasse 5b?",
+      "titel": "Eine Reihe aus Buntstiften"
+    },
+    "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-tafel.html": {
+      "jahrgang": "Klasse 5",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Wie viele 7,5-cm-Haftnotizen bedecken die Tafel in Raum 351?",
+      "titel": "Haftnotizen auf der Tafel"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/6.1.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.1.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "373e8bd2f971426765876b0230531cda5e1d877db9e7843949de41b828d56178",
+      "sha256_html": "0f0fc14afe1fa7c9d5b2303b38baccf68ca1bf36caddd9accb9095dd72ed17bd",
+      "originaltitel": "6.1 – Arithmetik/Algebra – Äpfel für die Tagesfahrt",
+      "titel": "Äpfel für die Tagesfahrt"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/6.1b.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.1b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "3439a002c594c055e9923263da77ee68221c9bf0e44eff1e791c3ea7960bdc26",
+      "sha256_html": "801f59c5281d38f78ac4d01f119b2698efb13d7594e56b26a360f3b758cdb693",
+      "originaltitel": "6.1b – Arithmetik/Algebra – Brüche und Anteile – Snackbeutel für die Wanderung zur Atta-Höhle",
+      "titel": "Snackbeutel für die Wanderung zur Atta-Höhle"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/6.6c.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.6c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "32218b27eecb732ba0e540d44c3322b5d6c456f12dec2a303d45d4daf1d80a81",
+      "sha256_html": "c53e38c9bc7c328efd0eb9a04763cbb8e447b00bed6d402c2432c93c698a5cc6",
+      "originaltitel": "6.6c – Arithmetik/Algebra – Trinkvorräte für die Biggesee-Wanderung",
+      "titel": "Trinkvorräte für die Biggesee-Wanderung"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/02-funktionen/6.2.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.2.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "c6fd173346f89ed938098af8c485e3706732a06adc4d3a6f9299a764ac97eba3",
+      "sha256_html": "94e06a0f4c9b9459d325a1389662bf33a76e0ff76e50d9587ce1276ea7519c79",
+      "originaltitel": "6.2 – Funktionen – Gießkannen im Schulgarten",
+      "titel": "Gießkannen im Schulgarten"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/02-funktionen/6.2b.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.2b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "621eda271d197ca7d84a6753762dcdb6698e07900753ddb827f537362d82fc20",
+      "sha256_html": "5ce61bec23966514ece3f110e41d45e9adbcc11d6b6200a3c53040447c75a7b2",
+      "originaltitel": "6.2b – Funktionen – proportionale Zusammenhänge – Wasser für die Kräuterbeete am Rivius-Gymnasium",
+      "titel": "Wasser für die Kräuterbeete am Rivius-Gymnasium"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/02-funktionen/6.7c.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.7c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "d97656046bcf94b3f8001bb2a2cc331ede66b6209882a95b1a97a75fcf560f1c",
+      "sha256_html": "3743009fdc1ec078ee8aa56eff559d209962f335f1c807a93bbc89106fa3f472",
+      "originaltitel": "6.7c – Funktionen – Wasserstation am Repetalweg",
+      "titel": "Wasserstation am Repetalweg"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/03-geometrie/6.3.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.3.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "716d083ec951600314d353e4585c53dfe011a309d3c34e744c9477cc7cdc81b7",
+      "sha256_html": "7e4ff58ef477ee6a4b16beeff40a2ffb2d78a107ef7b3fe7a72aceeec030360c",
+      "originaltitel": "6.3 – Geometrie – Bälle in der Sportgerätebox",
+      "titel": "Bälle in der Sportgerätebox"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/03-geometrie/6.3b.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.3b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "876fecbcd2a68101c9a2d767c1f5653c36358cde36d0f912b1e0ebe3f8730990",
+      "sha256_html": "e31c667c022e6f653592bb12580e2fca8a894b1d328ae17d8161aa63742f3170",
+      "originaltitel": "6.3b – Geometrie – Volumen und Rauminhalt – Transportkisten für die Ausstellung im Südsauerlandmuseum",
+      "titel": "Transportkisten für die Ausstellung im Südsauerlandmuseum"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/03-geometrie/6.5c.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.5c.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "ab4e0b0aef1c705cbf630c10dccc875a73275d6a34e69dbcfa21276176731649",
+      "sha256_html": "79d8bcfb05fae2b24634d66c12ba250119f2b550749d83b496d20ed3e66d0452",
+      "originaltitel": "6.5c – Geometrie – Ballausstellung in der Sporthalle",
+      "titel": "Ballausstellung in der Sporthalle"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/03-geometrie/6.8c.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.8c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "2320277b4e1393b2ab272a7cf4be0d62d38565cf906a13db8780701e27781938",
+      "sha256_html": "76bdec3aa114638b613955ac1fe3574e872302c4beeaf99957d2fe947121b6fe",
+      "originaltitel": "6.8c – Geometrie – Pflanzkübel für den Schulgarten",
+      "titel": "Pflanzkübel für den Schulgarten"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/04-stochastik/6.4.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.4.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "c38f46a7b6c22ecab30a33b93b95355bce0a932b4d37f04112a9277bea43295f",
+      "sha256_html": "d8820166c9ad15cd0d62dfff4136d7374f26835df4b3b9d07734f2d9806bc827",
+      "originaltitel": "6.4 – Stochastik – Zwei Lose beim Schulfest",
+      "titel": "Zwei Lose beim Schulfest"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/04-stochastik/6.4b.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.4b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "647dc90b74b1f45ee50b35983d4f25c253328d3f4a66973c6749409e1de70e92",
+      "sha256_html": "d38c60eba0dfb9974a6e6f65f489ef3a524231a65dda9c27cfed8003e58a497a",
+      "originaltitel": "6.4b – Stochastik – mehrstufiger Zufall – Regeln für das Glücksfisch-Spiel am Stadtfest",
+      "titel": "Regeln für das Glücksfisch-Spiel am Stadtfest"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/04-stochastik/6.9c.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "6.9c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "b8049b0103159d45fa7d67a433a7a92e73a0efce0b92fc31acb5b50875d3c6f5",
+      "sha256_html": "e4e305a889e1427796b890fe3f3a21f39f91a58eef26dd275e25834da66ade0a",
+      "originaltitel": "6.9c – Stochastik – Farbkarten-Spiel beim Sommerfest",
+      "titel": "Farbkarten-Spiel beim Sommerfest"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-05-obstportionen-fur-die-klassenfahrt.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Obstportionen für die Klassenfahrt",
+      "titel": "Obstportionen für die Klassenfahrt"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-06-wasserhahn-und-kanister.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Wasserhahn und Kanister",
+      "titel": "Wasserhahn und Kanister"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-07-material-fur-eine-aufbewahrungsbox.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Material für eine Aufbewahrungsbox",
+      "titel": "Material für eine Aufbewahrungsbox"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-08-zweimal-ziehen-beim-schulfest.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "originaltitel": "Zweimal ziehen beim Schulfest",
+      "titel": "Zweimal ziehen beim Schulfest"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-blinzeln.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "originaltitel": "Wie oft blinzelt eine sechste Klasse in einer 45-minütigen Mathestunde?",
+      "titel": "Blinzeln in einer Mathestunde"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-glocke.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Wie lange läutet die Schulglocke am Rivius Gymnasium in einer Fünf-Tage-Woche?",
+      "titel": "Die Schulglocke: Läutzeit in einer Woche"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-kreide.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Wie viele Kreidestücke werden in einem Tafelraum pro Schulwoche verbraucht?",
+      "titel": "Kreide für eine Schulwoche"
+    },
+    "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-wasser.html": {
+      "jahrgang": "Klasse 6",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Wie viel Wasser trinken 28 Sechstklässler:innen an einem Schultag?",
+      "titel": "Trinkwasser für einen Schultag"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/7.1.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.1.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "8f3c38a23e2a55fd9931e370d4cd92605f10ee525470bc2e7ed95d46a96a0f9c",
+      "sha256_html": "a605f33fc8a9ec4fb2823a0af4f3a8656e6ddb70e100f6f3becbbdb982f846b8",
+      "originaltitel": "7.1 – Arithmetik/Algebra – Temperaturbilanz im Schulgarten",
+      "titel": "Temperaturbilanz im Schulgarten"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/7.1b.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.1b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "1552a2bae1891ff355dc1c0d4dee3bb639df8855fa4fb6f4024779cb5592f473",
+      "sha256_html": "50f1c073ff5c18ade37e8052046a1b85dc3cf835e2d54c2e33b70f8687d26015",
+      "originaltitel": "7.1b – Arithmetik/Algebra – rationale Zahlen und Terme – Höhenprofil der Repetal-Wanderung",
+      "titel": "Höhenprofil der Repetal-Wanderung"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/7.6c.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.6c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "fdf54f06c3d58f7e0d2296a23ee9a084bd0c544a4689cb1e8af9c6ec0605b46b",
+      "sha256_html": "9bf1f6d426af46809990aacfa96ccf44416a8c441a78688502b495483550476e",
+      "originaltitel": "7.6c – Arithmetik/Algebra – Höhenprofil im Repetal",
+      "titel": "Höhenprofil im Repetal"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/02-funktionen/7.2.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.2.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "068f4d2c0ad9d00f1e3fd766d3879f89a1fba255748e86b29720b36139ba2f5f",
+      "sha256_html": "14c0e48e21a3ed68b684df88c7f35235be6cd3b8676b4ddccc57864f266b4b8c",
+      "originaltitel": "7.2 – Funktionen – Der Weg vom Bahnhof zur Schule",
+      "titel": "Der Weg vom Bahnhof zur Schule"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/02-funktionen/7.2b.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.2b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "b104125360c17f32b03fa3709d40148439588068e6ff8e7c50766473cfd3b9f4",
+      "sha256_html": "9fbc904edfe1e4a531ca4b9c26b941a1a19cf4ee6d850e0e0f68dabedf631960",
+      "originaltitel": "7.2b – Funktionen – lineare Zuordnungen – Staffelstart am Biggedamm",
+      "titel": "Staffelstart am Biggedamm"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/02-funktionen/7.7c.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.7c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "16fc47de4a9768f60638b2a2caa543e11d6f0e4306dd4537ac33d0897d84f044",
+      "sha256_html": "e24c372d9221e07f538de8ee7d11ea44499baa47c59f11fe49b1e452ed20b936",
+      "originaltitel": "7.7c – Funktionen – Pendel-Shuttle vom Bahnhof Attendorn",
+      "titel": "Pendel-Shuttle vom Bahnhof Attendorn"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/03-geometrie/7.3.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.3.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "83d18c3d29d103a2e24c85e217caea86fbde2bb42d22ede1af0cba8d75f65dd0",
+      "sha256_html": "9ac1e51a76a9a79cdd078bb7f843df055a7510bacea824be638131f88b789208",
+      "originaltitel": "7.3 – Geometrie – Sitz- und Spielfläche auf dem Schulhof",
+      "titel": "Sitz- und Spielfläche auf dem Schulhof"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/03-geometrie/7.3b.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.3b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "e23a2869471ddf791494928887c662ef4748c3309c1a93aa7489ba692def126a",
+      "sha256_html": "17af21ef8766c9831657ba7a555cc12dc7f9e250893401dc1c555a6df63cbedf",
+      "originaltitel": "7.3b – Geometrie – Maßstab und Winkel – Spielstationen im Innenhof von Burg Schnellenberg",
+      "titel": "Spielstationen im Innenhof von Burg Schnellenberg"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/03-geometrie/7.8c.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.8c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "198da6ce6653693e563bd59c4e1f4237e776bb3363d0e63743e58f6ed98ed1a0",
+      "sha256_html": "c49bca723e1584b8dc21fedd6dbafd7a5e6e105e0d4e6797fe85f3cef4611ffa",
+      "originaltitel": "7.8c – Geometrie – Orientierungslauf an Burg Schnellenberg",
+      "titel": "Orientierungslauf an Burg Schnellenberg"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/04-stochastik/7.4.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.4.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "df8ac2d6016d3f1f06cf444b5282148e07f4e5d04cd7fd4c3d9e69e41676b78b",
+      "sha256_html": "d763bbfc821152e6ea14512db521822f2b519dc5b6a218e7dc4f7e7218d9b263",
+      "originaltitel": "7.4 – Stochastik – Vogelbesuche am Wintermorgen",
+      "titel": "Vogelbesuche am Wintermorgen"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/04-stochastik/7.4b.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.4b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "e28ec543336010fcba3b76453575a2e4c27fada3c73681c388dde9356d1e3eed",
+      "sha256_html": "ad55f008c59f958fcde0ea80ad167eb3c7ea4eaf760a88f4ba5d6c6120249d25",
+      "originaltitel": "7.4b – Stochastik – relative Häufigkeit – Mehrwegbecher für den Stand an der Atta-Höhle",
+      "titel": "Mehrwegbecher für den Stand an der Atta-Höhle"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/04-stochastik/7.5c.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.5c.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "433c8ee2bede20a1547c05487686f2a61a7f8e1e34152abf3b1df3d1f5b4e23f",
+      "sha256_html": "a9635cd416be481609177f0715d4e6e2cc036fa0b79e0ca355428d6465700ad6",
+      "originaltitel": "7.5c – Stochastik – Fahrradverkehr am Haupteingang",
+      "titel": "Fahrradverkehr am Haupteingang"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/04-stochastik/7.9c.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "7.9c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "6765c3350d8170281a69c53ac0ac6f0d1a0bc761d86469837b04ad93691a52cc",
+      "sha256_html": "ee468b2f786b852359393dc1b854ef481597e993ca9a677308f3a1526c3f4567",
+      "originaltitel": "7.9c – Stochastik – Essensreste in der Mensa",
+      "titel": "Essensreste in der Mensa"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-09-temperaturanderung-im-schulgarten.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Temperaturänderung im Schulgarten",
+      "titel": "Temperaturänderung im Schulgarten"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-10-schulweg-in-abhangigkeit-von-der-gehzeit.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Schulweg in Abhängigkeit von der Gehzeit",
+      "titel": "Schulweg in Abhängigkeit von der Gehzeit"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-11-schulhofplan-im-passenden-mastab.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Schulhofplan im passenden Maßstab",
+      "titel": "Schulhofplan im passenden Maßstab"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-12-wie-oft-fallt-die-munze-auf-kopf.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "originaltitel": "Wie oft fällt die Münze auf Kopf?",
+      "titel": "Kopf oder Zahl: Münzwürfe schätzen"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-buecher.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Wie viel Geschenkpapier brauchen die Mathematikbücher einer Klasse 7?",
+      "titel": "Geschenkpapier für Mathematikbücher"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-fruehstueck.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Wie viele Brötchen braucht ein Frühstück für 28 Personen?",
+      "titel": "Brötchen für ein Klassenfrühstück"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-halle.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Wie viele 30-cm-Quadrate bedecken den Boden der Sporthalle?",
+      "titel": "Quadrate für den Sporthallenboden"
+    },
+    "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-stau.html": {
+      "jahrgang": "Klasse 7",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Wie viele Autos stehen in einem 3-km-Stau auf der B54 bei Attendorn?",
+      "titel": "Autos im Stau auf der B54"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/8.1.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.1.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "5c5bfac022ea37e2786f400330ae527c84c4c0f8be2076af052ea540d1a860ca",
+      "sha256_html": "de9b59e31a78a70ed6cea9c19018ac23a773ecad3518b2063dc94c2eff27f909",
+      "originaltitel": "8.1 – Arithmetik/Algebra – Fahrradstellplätze am Rivius-Gymnasium",
+      "titel": "Fahrradstellplätze am Rivius-Gymnasium"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/8.1b.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.1b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "dea576a7aff320caea320a450d04ca5dd723baa6d8bf55b12db43725db3f2a52",
+      "sha256_html": "68a584c61abd0049ef2c4d5e88560fe0cbabaa5e4f98617683e8d5a684c15f1c",
+      "originaltitel": "8.1b – Arithmetik/Algebra – Gleichungen und Gleichungssysteme – Busse für die Exkursion zum Biggesee",
+      "titel": "Busse für die Exkursion zum Biggesee"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/8.6c.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.6c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "f55cde8d8d45ec0372e8e366f58bd4ac847c64b8d519834f8790198297821cc6",
+      "sha256_html": "f684de6c13a9860e435345a75849cc4030d4a23fde2522eea0323bba84e10197",
+      "originaltitel": "8.6c – Arithmetik/Algebra – Sitzmodule für die Ausstellung in der Aula",
+      "titel": "Sitzmodule für die Ausstellung in der Aula"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/02-funktionen/8.2.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.2.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "b66274e6ae7fcb5c12752c770775f7c7a979d63e48d17d8d302a31b59bb548b3",
+      "sha256_html": "3cac3bfb15d41696fa21e1a821d147bda626a666e2e67090cf92e3f49dacd48b",
+      "originaltitel": "8.2 – Funktionen – Zwei Angebote für den Kopierer",
+      "titel": "Zwei Angebote für den Kopierer"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/02-funktionen/8.2b.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.2b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "d03412e712c88b9dcf5a9b6c76fbf8e444e213454d0e377c74f2efaf824ae790",
+      "sha256_html": "124248d2b8bf1bfd278db45623d89d93ee83922192e964a00279d2c665eaea96",
+      "originaltitel": "8.2b – Funktionen – lineare Kostenmodelle – Fahrradmiete für den Biggesee-Ausflug",
+      "titel": "Fahrradmiete für den Biggesee-Ausflug"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/02-funktionen/8.5c.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.5c.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "3d0108c651f9861158fe9fe5f73288e986c61119130655aa3c60ba3ebf187ccb",
+      "sha256_html": "aab4e521753afe15c7241ff950edc044d3de0b9fd3de3e5e3019b92a1b1b98db",
+      "originaltitel": "8.5c – Funktionen – Lichterparcours am Rivius-Gymnasium",
+      "titel": "Lichterparcours am Rivius-Gymnasium"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/02-funktionen/8.7c.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.7c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "9ded540d360f0b3e278e5a027665042a44d9f1e8c36ba4ee014708552383f15a",
+      "sha256_html": "807d2595d62865ff4814c8796e520bccbe0f58e90d526b732b2526e09ec3085f",
+      "originaltitel": "8.7c – Funktionen – Häckseln der Zweige im Schulgarten",
+      "titel": "Häckseln der Zweige im Schulgarten"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/03-geometrie/8.3.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.3.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "e4e95565f74593e89491da11edfb6097567bb313f25f05080949f466ecf86ff0",
+      "sha256_html": "cc01897b2d28cda05a7651e1e2ed7f237d18644d05aba32548f0a44ac612bfa8",
+      "originaltitel": "8.3 – Geometrie – Abkürzung über den Schulhof",
+      "titel": "Abkürzung über das Basketballfeld"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/03-geometrie/8.3b.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.3b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "5ca87bd8651ce9816634eb2b09d443281209716b0e96b842ae77e6fe635325de",
+      "sha256_html": "8e0b3b96b9518e4571692f8391dbcf798b6513006fd75e7e0a34cd7c3c15acc9",
+      "originaltitel": "8.3b – Geometrie – Satz des Pythagoras – Barrierefreier Zugang zur Bühne auf dem Schulhof",
+      "titel": "Barrierefreier Zugang zur Bühne auf dem Schulhof"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/03-geometrie/8.8c.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.8c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "a184433b331ddf061c51b1975d105ff5cb0b9c9fc6ca0d3e2d5b1329352fb4a0",
+      "sha256_html": "2c1da52e56d5e8652320633383edaec12089bc0dad8f1e1409779e6a90663001",
+      "originaltitel": "8.8c – Geometrie – Verspannung für die Aula-Bühne",
+      "titel": "Verspannung für die Aula-Bühne"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/04-stochastik/8.4.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.4.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "7e38b00666ffd29ea29dabf3fcde13a32742d4e81cffd64a45d5172ce4cd1f38",
+      "sha256_html": "339b333a7b3a6d888efb18fd3e0667703e28e19fa5de8d6e307c08d4e73818af",
+      "originaltitel": "8.4 – Stochastik – Das zweistufige Spiel am Schulfest",
+      "titel": "Das zweistufige Spiel am Schulfest"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/04-stochastik/8.4b.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.4b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "510eb2301921a30b052fe30847d44ae16112f09d692e821a073177ad1f036a6d",
+      "sha256_html": "1e2538ae9520aec7651c3dc42698ca8dc86fb6ca5e266d2a1020804cadd2d09b",
+      "originaltitel": "8.4b – Stochastik – Baumdiagramme – Gewinnregeln für das Biggesee-Losspiel",
+      "titel": "Gewinnregeln für das Biggesee-Losspiel"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/04-stochastik/8.9c.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "8.9c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "b5a9a9ce0323aa78d05cf53c84e2f96dfedb22376e59a85234e523ce0ca0894b",
+      "sha256_html": "dab94cf43eeb3f5fb0fb1e995e6f04e854fb1eff8e98aafc97104fc4f2e80deb",
+      "originaltitel": "8.9c – Stochastik – Doppelte Gewinnchance beim Schulfest",
+      "titel": "Doppelte Gewinnchance beim Schulfest"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-13-kosten-zweier-druckangebote.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Kosten zweier Druckangebote",
+      "titel": "Kosten zweier Druckangebote"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-14-fullstand-eines-regenwassertanks.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Füllstand eines Regenwassertanks",
+      "titel": "Füllstand eines Regenwassertanks"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-15-abkurzung-uber-den-schulhof.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Abkürzung über den Schulhof",
+      "titel": "Abkürzung über den Schulhof"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-16-zwei-auswahlen-aus-der-materialkiste.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "originaltitel": "Zwei Auswahlen aus der Materialkiste",
+      "titel": "Zweimal ziehen aus der Materialkiste"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-hahn.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Wie lange läuft ein Wasserhahn für 28 Becher à 250 ml?",
+      "titel": "Wasserhahn und Trinkbecher"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-licht.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Wie viele Lampenstunden entstehen in einem Klassenraum pro Schulwoche?",
+      "titel": "Lampenstunden im Klassenraum"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-regen.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Wie viele Liter Regen fallen bei 10 mm Niederschlag auf den Schulhof?",
+      "titel": "Regenwasser auf dem Schulhof"
+    },
+    "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-verkauf.html": {
+      "jahrgang": "Klasse 8",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "originaltitel": "Wie viele belegte Brötchen verkauft der Pausenverkauf in einer 20-Minuten-Pause?",
+      "titel": "Brötchenverkauf in der großen Pause"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/9.1.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.1.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "bb040d68056e417eda2a9502d847caa8d45814ce4ab642451f037ae12c92034a",
+      "sha256_html": "6232a241363b87e8545a4bae29c3f9b5a451fb763c5fad2ed2209dbb774d3fb8",
+      "originaltitel": "9.1 – Arithmetik/Algebra – Diagonale der Bühnenfläche",
+      "titel": "Diagonale der Bühnenfläche"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/9.1b.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.1b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "97e753b5a2c56eb4e237002dc2f0edff11934bad2f22ee1594eb0274783eeb59",
+      "sha256_html": "b2812d313cb6d61a38d5d15272a12729b8a51d80512464c785f0c4442fe6c578",
+      "originaltitel": "9.1b – Arithmetik/Algebra – reelle Zahlen und Wurzeln – Quadratische Pflanzfläche an der Atta-Höhle",
+      "titel": "Quadratische Pflanzfläche an der Atta-Höhle"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/9.6c.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.6c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "94fabb06e59fe7e100101fcb73217db50cde301600ba9c265a0ddadb80c32d13",
+      "sha256_html": "79d055a1ec481b45d3f2cb67459bfb6b478a4b1c485dfe211f880c3a2a352704",
+      "originaltitel": "9.6c – Arithmetik/Algebra – Akustikplatten in der Aula",
+      "titel": "Akustikplatten in der Aula"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/02-funktionen/9.2.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.2.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "d09fc3254c1d0e7331ec4f4660e841c1459981821538b6ff59f61c3d91c1c3d3",
+      "sha256_html": "c84d47aadee6a12fb145911c80dbb286110182f6417873a6026457154b8c4948",
+      "originaltitel": "9.2 – Funktionen – Ein parabelförmiger Eingangsbereich",
+      "titel": "Ein parabelförmiger Eingangsbereich"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/02-funktionen/9.2b.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.2b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "fe156ad1abba170df6d111476ce0b0a450fefb09dffd77fd8110f5322b544a2f",
+      "sha256_html": "8a6daeb80bc2b3654842825b286152a7163de33b4f863da9a9c506eaf84dabad",
+      "originaltitel": "9.2b – Funktionen – quadratische Modelle – Wasserbogen für das Stadtfest in Attendorn",
+      "titel": "Wasserbogen für das Stadtfest in Attendorn"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/02-funktionen/9.7c.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.7c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "f7563f277407214ecfb612094f873dacb60006c3eff4ca7576dc48b743b6fe80",
+      "sha256_html": "b931ed27a5ea462e0b520710839a347758fe211e8c8cca6b65da3eee7ce6cf43",
+      "originaltitel": "9.7c – Funktionen – Torbogen für Burg Schnellenberg",
+      "titel": "Torbogen für Burg Schnellenberg"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/03-geometrie/9.3.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.3.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "2812998ad217d8d9d633fc67d5a9a6397348e923d010ded10a7a6985c94df3a6",
+      "sha256_html": "e98b3f9b9d6454faa589ac32f93295eb83409eb5d2514f55533d840b56f8d33b",
+      "originaltitel": "9.3 – Geometrie – Höhe des Hauptgebäudes",
+      "titel": "Höhe des Hauptgebäudes"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/03-geometrie/9.3b.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.3b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "9d4fe79a86b41158ad9e8d5d44622bafbc5daa61360ec705368083e3e0db22dc",
+      "sha256_html": "e5cfd8ee8500f8442ab1383d1dfd4020ebe9d2792753c2cc2d1c3f084e1ba3a2",
+      "originaltitel": "9.3b – Geometrie – Ähnlichkeit – Maßstabsmodell von Burg Schnellenberg",
+      "titel": "Maßstabsmodell von Burg Schnellenberg"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/03-geometrie/9.5c.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.5c.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "774073750c25b81edbc8b7cea59209ae356c24160e4b545bf24af7ada84cac30",
+      "sha256_html": "3543b56894222488baa0bdcc90fa7abe2d92b8ec1ebc19fc677834c4cc19e973",
+      "originaltitel": "9.5c – Geometrie – Regenwasserspeicher im Schulgarten",
+      "titel": "Regenwasserspeicher im Schulgarten"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/03-geometrie/9.8c.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.8c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "d109f90ee58d062f69698181567d82a040e3f6135d007fffc30917645016560e",
+      "sha256_html": "4e63d2b68e035cb6500963cd497cadba44abb80283f6295041b157e49fcc176a",
+      "originaltitel": "9.8c – Geometrie – Waffeltüten für das Schulfest",
+      "titel": "Waffeltüten für das Schulfest"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/04-stochastik/9.4.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.4.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "5636686c6df67805417c4f30279a9cfc99bddca0f62a27d091f7194abdb595dc",
+      "sha256_html": "a06d11c36acab93f839591e073f55a8caceeaf8d1ae34678c8f0da28de1b9d1f",
+      "originaltitel": "9.4 – Stochastik – Glücksrad für den Förderverein",
+      "titel": "Glücksrad für den Förderverein"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/04-stochastik/9.4b.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.4b.html",
+      "bildtyp": "JPEG",
+      "sha256_archiv": "9fca6efab4ab5527dae30c160a57c7478c349602ed7196d812d4719456a37d0b",
+      "sha256_html": "a80637901a913f8ec26aaf6154d416902c3ff246e2526d048e4e233a56b1904c",
+      "originaltitel": "9.4b – Stochastik – Wahrscheinlichkeit und Erwartungswert – Eintrittspreis für das Benefizspiel am Biggesee",
+      "titel": "Eintrittspreis für das Benefizspiel am Biggesee"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/04-stochastik/9.9c.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "bildimpuls": true,
+      "originaldatei": "9.9c.html",
+      "bildtyp": "SVG",
+      "sha256_archiv": "17280d5687158e1ab4da13aaffba596a7412cef37ba6d83e48b298219d671c3d",
+      "sha256_html": "e4bb1f2f1d3f4f6d9e8db5cc85c18370c1e225aa2f5f4e1e0544a71c40c91ef1",
+      "originaltitel": "9.9c – Stochastik – Zelt oder Regenplan an der Waldenburger Bucht",
+      "titel": "Zelt oder Regenplan an der Waldenburger Bucht"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-17-diagonale-und-irrationale-lange.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "01-arithmetik-algebra"
+      ],
+      "originaltitel": "Diagonale und irrationale Länge",
+      "titel": "Diagonale und irrationale Länge"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-18-bogen-uber-dem-schultor.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Bogen über dem Schultor",
+      "titel": "Bogen über dem Schultor"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-19-hohe-eines-fahnenmasts-durch-schatten.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Höhe eines Fahnenmasts durch Schatten",
+      "titel": "Höhe eines Fahnenmasts durch Schatten"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-20-fehlzeiten-und-erwartete-vertretungsstunden.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "04-stochastik"
+      ],
+      "originaltitel": "Fehlzeiten und erwartete versäumte Unterrichtsstunden",
+      "titel": "Fehlzeiten und versäumte Unterrichtsstunden"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-bus.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Wie viele 50-Sitzplatz-Busse braucht der Jahrgang 10 für einen Ausflug?",
+      "titel": "Busse für einen Jahrgangsausflug"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-dosen.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Wie viele 330-ml-Dosen füllen den leeren Raum 351?",
+      "titel": "Getränkedosen in Raum 351"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-farbe.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "03-geometrie"
+      ],
+      "originaltitel": "Wie viele 10-Liter-Eimer Farbe braucht ein 60-m-Schulflur?",
+      "titel": "Farbe für den Schulflur"
+    },
+    "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-wege.html": {
+      "jahrgang": "Klasse 9",
+      "inhaltsfelder": [
+        "02-funktionen"
+      ],
+      "originaltitel": "Wie viele Kilometer gehen 28 Lernende zwischen Unterrichtsräumen in einer Schulwoche?",
+      "titel": "Wege zwischen den Unterrichtsräumen"
+    }
+  }
+}

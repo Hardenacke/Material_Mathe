@@ -1,7 +1,7 @@
 # Fermi-Aufgaben · Q1/Q2
 
-6 Aufgaben aus den bereitgestellten HTML-Sammlungen. Die Aufgabenübersicht verlinkt alle Aufgaben dieses Bereichs und die Mathematiksammlung. Die einzelnen HTML-Aufgaben erscheinen unter „Zusatzaufgaben“ mit dem Label „Fermi-Aufgabe“.
+27 Aufgaben, nach Themenbereichen sortiert. Die HTML-Übersicht verlinkt alle Aufgaben dieses Bereichs.
 
-Diese Q1/Q2-Grundlagen werden aus einer gemeinsamen Quelle sowohl im Grundkurs als auch im Leistungskurs angeboten.
+Die Aufgaben aus dem bereitgestellten ZIP liegen direkt in den Unterordnern der jeweiligen Inhaltsfelder. Für Q1/Q2 gibt es zusätzlich die Jahrgangsordner `q1/` und `q2/`. Bilder sind direkt in den HTML-Seiten eingebettet; zusätzliche Bilddateien werden nicht benötigt.
 
-Browsernotizen gehören zur jeweiligen Aufgabe. Bestehende Dateinamen und Notizkennungen bleiben bei Aktualisierungen erhalten. Übersicht und README werden nicht als zusätzliche Aufgaben gezählt.
+Die älteren Aufgaben im Stammordner behalten ihre bisherigen Dateipfade und Browsernotizen. Alle Aufgaben erscheinen im Katalog unter **Zusatzaufgaben** des zugeordneten Themenbereichs. Die Zuordnung ist in `dokumentation/FERMI_ZUORDNUNG.json` dokumentiert.

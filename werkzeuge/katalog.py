@@ -27,6 +27,7 @@ LEARNING_GAMES_DIR = ROOT / "lernspiele"
 METHODS_DIR = ROOT / "methoden"
 SUPPORT_DIR_NAME = "unterstuetzung"
 EXTRA_TASKS_DIR_NAME = "zusatzaufgaben"
+FERMI_ASSIGNMENTS_FILE = ROOT / "dokumentation" / "FERMI_ZUORDNUNG.json"
 
 METHOD_STAGE_TITLES = {
     "sek-i": "Sekundarstufe I",
@@ -226,6 +227,8 @@ class MaterialInfoParser(HTMLParser):
 
 
 def extra_tasks_in(area_dir: Path) -> list[dict]:
+    assignments = json.loads(FERMI_ASSIGNMENTS_FILE.read_text(encoding="utf-8"))["aufgaben"]
+    fields = {field["id"] for area in STRUCT["bereiche"] if area["id"] == area_dir.name for field in area["inhaltsfelder"]}
     extra_dirs = [area_dir / EXTRA_TASKS_DIR_NAME]
     if area_dir.name in {"q1-q2-grundkurs", "q1-q2-leistungskurs"}:
         extra_dirs.append(ROOT / "gemeinsam" / EXTRA_TASKS_DIR_NAME / "fermi-aufgaben" / "q1-q2")
@@ -242,6 +245,19 @@ def extra_tasks_in(area_dir: Path) -> list[dict]:
                 material["typ"] = "Fermi-Aufgabe"
                 if info.description:
                     material["beschreibung"] = info.description
+                assignment = assignments.get(material["url"])
+                if not assignment or not assignment.get("inhaltsfelder"):
+                    raise ValueError(f'Fachliche Zuordnung fehlt für Fermi-Aufgabe: {material["url"]}')
+                if not set(assignment["inhaltsfelder"]).issubset(fields):
+                    raise ValueError(f'Ungültiges Inhaltsfeld für {area_dir.name}: {material["url"]}')
+                title = str(assignment.get("titel", "")).strip()
+                if not title or title != material["titel"]:
+                    raise ValueError(f'Aufgabenname fehlt oder stimmt nicht mit der HTML-Überschrift überein: {material["url"]}')
+                material["titel"] = title
+                material["inhaltsfelder"] = assignment["inhaltsfelder"]
+                material["jahrgang"] = assignment["jahrgang"]
+                if assignment.get("bildimpuls"):
+                    material["bildimpuls"] = True
             material["kategorie"] = "Zusatzaufgaben"
             result.append(material)
     return sort_materials(result)

@@ -2,7 +2,7 @@
 """Baut die veröffentlichbare GitHub-Pages-Ausgabe nach _site/."""
 from __future__ import annotations
 from pathlib import Path
-import json, os, shutil, stat, sys
+import json, os, re, shutil, stat, sys
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
@@ -28,12 +28,28 @@ def remove_readonly(func, path: str, _exc_info):
     func(path)
 
 
+def add_material_navigation():
+    """Ergänzt Rückwege nur in erzeugten HTML-Dateien, nie in Materialquellen."""
+    # Übersichten und Folgeseiten brauchen ebenfalls den Rückweg.
+    for page in sorted(OUT.rglob("*")):
+        if page == OUT / "index.html" or page.suffix.lower() not in {".html", ".htm"} or not page.is_file():
+            continue
+        relative_script = os.path.relpath(OUT / "material-navigation.js", page.parent).replace(os.sep, "/")
+        script = f'<script src="{relative_script}" defer data-sammlung-navigation></script>'
+        content = page.read_text(encoding="utf-8")
+        if "data-sammlung-navigation" in content:
+            continue
+        closing_body = list(re.finditer(r"</body\s*>", content, flags=re.IGNORECASE))
+        position = closing_body[-1].start() if closing_body else len(content)
+        page.write_text(content[:position] + script + "\n" + content[position:], encoding="utf-8")
+
+
 def main():
     if OUT.exists():
         shutil.rmtree(OUT, onerror=remove_readonly)
     OUT.mkdir(parents=True)
 
-    for name in ["index.html", "style.css", "script.js", "favicon.svg"]:
+    for name in ["index.html", "style.css", "script.js", "material-navigation.js", "favicon.svg"]:
         shutil.copy2(ROOT / name, OUT / name)
 
     for area in STRUCT["bereiche"]:
@@ -44,6 +60,7 @@ def main():
     copy_dir("dokumentation")
 
     data = write_catalog(ROOT / "data.json")
+    add_material_navigation()
     shutil.copy2(ROOT / "data.json", OUT / "data.json")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
     s = data["statistik"]

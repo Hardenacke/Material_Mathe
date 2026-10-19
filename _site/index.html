@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#17171c">
-  <meta name="description" content="Mathematik-Materialsammlung mit zweistufiger Auswahl sowie fächerübergreifenden Methodenmaterialien.">
+  <meta name="description" content="Mathematik entdecken: Kurs, Themenbereich und Materialart auswählen. Lernpfade, Lernspiele, Wiederholung und Zusatzaufgaben übersichtlich finden.">
   <title>Mathematiksammlung</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
@@ -17,7 +17,7 @@
     <div class="hero-inner">
       <p class="eyebrow">Mathematik · Materialsammlung</p>
       <h1>Mathematiksammlung</h1>
-      <p class="intro">Wähle zuerst eine Klasse oder einen Kurs aus. Fächerübergreifende Methoden findest du unterhalb der Fachbereiche.</p>
+      <p class="intro">Dein nächster Lernschritt beginnt hier. Wähle deinen Kurs und entdecke passende Themen und Materialien.</p>
       <label class="search-wrap" for="search">
         <span class="sr-only">Materialien durchsuchen</span>
         <input id="search" type="search" placeholder="Klasse, Kurs, Inhaltsfeld, Thema, Methode oder Material suchen ..." autocomplete="off">
@@ -27,13 +27,15 @@
 
   <main class="page-shell">
     <div id="summary" class="summary" aria-live="polite"></div>
-    <div id="catalog" class="catalog" aria-live="polite">
+    <div id="catalog" class="catalog" tabindex="-1">
       <p class="loading">Verzeichnis wird geladen ...</p>
     </div>
   </main>
 
+  <noscript><p class="empty-state">Bitte aktiviere JavaScript, um Kurse, Themenbereiche und Materialien auszuwählen.</p></noscript>
+
   <footer class="footer">
-    <p>Die Übersicht wird automatisch aus der Mathematik-Ordnerstruktur und dem Methodenordner erzeugt.</p>
+    <p>Entdecken · Verstehen · Üben</p>
   </footer>
 </body>
 </html>

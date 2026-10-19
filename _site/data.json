@@ -5,11 +5,11 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 183,
+    "materialien": 308,
     "lernspiele": 74,
     "unterstuetzung": 12,
-    "zusatzaufgaben": 62,
-    "fermi_aufgaben": 56,
+    "zusatzaufgaben": 187,
+    "fermi_aufgaben": 160,
     "methodenmaterialien": 1
   },
   "kategorien": [
@@ -38,12 +38,105 @@
       ],
       "zusatzaufgaben": [
         {
+          "titel": "Apfelschorle für das Schulfest",
+          "datei": "5.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/02-funktionen/5.2.html",
+          "beschreibung": "Klasse 5 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Büchertausch am Tag der offenen Tür",
+          "datei": "5.9c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/04-stochastik/5.9c.html",
+          "beschreibung": "Klasse 5 · Daten und Häufigkeiten · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Eine Reihe aus Buntstiften",
+          "datei": "klasse-5-stifte.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-stifte.html",
+          "beschreibung": "Klasse 5 · Größen und Messen · Längen",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 5"
+        },
+        {
+          "titel": "Farbe für das Wandbild in Raum 351",
+          "datei": "5.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/02-funktionen/5.2b.html",
+          "beschreibung": "Klasse 5 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Fruchtpunsch vor der Aula",
+          "datei": "5.7c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/02-funktionen/5.7c.html",
+          "beschreibung": "Klasse 5 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Geburtstage in Jahrgang 5",
+          "datei": "5.4.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/04-stochastik/5.4.html",
+          "beschreibung": "Klasse 5 · Daten und Häufigkeiten · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
+        },
+        {
           "titel": "Geburtstagsmonate in den fünften Klassen",
           "datei": "klasse-5-04-geburtstagsmonate-in-den-funften-klassen.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-04-geburtstagsmonate-in-den-funften-klassen.html",
-          "beschreibung": "Klasse 5 · Stochastik"
+          "beschreibung": "Klasse 5 · Stochastik",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 5"
+        },
+        {
+          "titel": "Haftnotizen auf der Tafel",
+          "datei": "klasse-5-tafel.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-tafel.html",
+          "beschreibung": "Klasse 5 · Geometrie · Flächen",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 5"
         },
         {
           "titel": "Limonade für das Schulfest",
@@ -51,7 +144,36 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-02-limonade-fur-das-schulfest.html",
-          "beschreibung": "Klasse 5 · Funktionen"
+          "beschreibung": "Klasse 5 · Funktionen",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 5"
+        },
+        {
+          "titel": "Luftballons für Raum 351",
+          "datei": "klasse-5-ballons.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-ballons.html",
+          "beschreibung": "Klasse 5 · Größen und Messen · Körper und Volumen",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 5"
+        },
+        {
+          "titel": "Material für den Biggesee-Aktionstag",
+          "datei": "5.1b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/5.1b.html",
+          "beschreibung": "Klasse 5 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
         },
         {
           "titel": "Papierquadrate für den Klassenraum",
@@ -59,7 +181,23 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-03-papierquadrate-fur-den-klassenraum.html",
-          "beschreibung": "Klasse 5 · Geometrie"
+          "beschreibung": "Klasse 5 · Geometrie",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 5"
+        },
+        {
+          "titel": "Papierverbrauch einer Schulklasse",
+          "datei": "klasse-5-papier.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-papier.html",
+          "beschreibung": "Klasse 5 · Zahlen und Größen · Größen und Messen",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 5"
         },
         {
           "titel": "Pausensnack für die Jahrgangsstufe",
@@ -67,39 +205,102 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-01-pausensnack-fur-die-jahrgangsstufe.html",
-          "beschreibung": "Klasse 5 · Arithmetik/Algebra"
+          "beschreibung": "Klasse 5 · Arithmetik/Algebra",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 5"
         },
         {
-          "titel": "Wie lang ist eine Reihe aus allen Buntstiften der Klasse 5b?",
-          "datei": "klasse-5-stifte.html",
+          "titel": "Pflasterweg am Kräuterbeet",
+          "datei": "5.8c.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-stifte.html",
-          "beschreibung": "Klasse 5 · Größen und Messen · Längen"
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/03-geometrie/5.8c.html",
+          "beschreibung": "Klasse 5 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
         },
         {
-          "titel": "Wie viele 30-cm-Luftballons passen in Raum 351?",
-          "datei": "klasse-5-ballons.html",
+          "titel": "Quadratische Karten für die Pinnwand",
+          "datei": "5.3.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-ballons.html",
-          "beschreibung": "Klasse 5 · Größen und Messen · Körper und Volumen"
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/03-geometrie/5.3.html",
+          "beschreibung": "Klasse 5 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
         },
         {
-          "titel": "Wie viele 7,5-cm-Haftnotizen bedecken die Tafel in Raum 351?",
-          "datei": "klasse-5-tafel.html",
+          "titel": "Samen für den Blühstreifen",
+          "datei": "5.1.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-tafel.html",
-          "beschreibung": "Klasse 5 · Geometrie · Flächen"
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/5.1.html",
+          "beschreibung": "Klasse 5 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
         },
         {
-          "titel": "Wie viele A4-Blätter verbraucht die Klasse 5b in einer Schulwoche?",
-          "datei": "klasse-5-papier.html",
+          "titel": "Sitzfläche beim Vorlesetag auf Burg Schnellenberg",
+          "datei": "5.3b.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-papier.html",
-          "beschreibung": "Klasse 5 · Zahlen und Größen · Größen und Messen"
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/03-geometrie/5.3b.html",
+          "beschreibung": "Klasse 5 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Sitzplätze bei der Einschulung am Rivius-Gymnasium",
+          "datei": "5.5c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/03-geometrie/5.5c.html",
+          "beschreibung": "Klasse 5 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Sitzplätze für die lange Pause",
+          "datei": "5.4b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/04-stochastik/5.4b.html",
+          "beschreibung": "Klasse 5 · Daten und Häufigkeiten · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Wegmarkierungen im Repetal",
+          "datei": "5.6c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-5/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/5.6c.html",
+          "beschreibung": "Klasse 5 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 5",
+          "bildimpuls": true
         }
       ],
       "inhaltsfelder": [
@@ -356,12 +557,104 @@
       ],
       "zusatzaufgaben": [
         {
+          "titel": "Ballausstellung in der Sporthalle",
+          "datei": "6.5c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/03-geometrie/6.5c.html",
+          "beschreibung": "Klasse 6 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Blinzeln in einer Mathestunde",
+          "datei": "klasse-6-blinzeln.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-blinzeln.html",
+          "beschreibung": "Klasse 6 · Daten und Zufall · Stochastik",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 6"
+        },
+        {
+          "titel": "Bälle in der Sportgerätebox",
+          "datei": "6.3.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/03-geometrie/6.3.html",
+          "beschreibung": "Klasse 6 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Die Schulglocke: Läutzeit in einer Woche",
+          "datei": "klasse-6-glocke.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-glocke.html",
+          "beschreibung": "Klasse 6 · Daten und Größen · Zeit",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 6"
+        },
+        {
+          "titel": "Farbkarten-Spiel beim Sommerfest",
+          "datei": "6.9c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/04-stochastik/6.9c.html",
+          "beschreibung": "Klasse 6 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Gießkannen im Schulgarten",
+          "datei": "6.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/02-funktionen/6.2.html",
+          "beschreibung": "Klasse 6 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Kreide für eine Schulwoche",
+          "datei": "klasse-6-kreide.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-kreide.html",
+          "beschreibung": "Klasse 6 · Arithmetik · Größen und Daten",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 6"
+        },
+        {
           "titel": "Material für eine Aufbewahrungsbox",
           "datei": "klasse-6-07-material-fur-eine-aufbewahrungsbox.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-07-material-fur-eine-aufbewahrungsbox.html",
-          "beschreibung": "Klasse 6 · Geometrie"
+          "beschreibung": "Klasse 6 · Geometrie",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 6"
         },
         {
           "titel": "Obstportionen für die Klassenfahrt",
@@ -369,7 +662,101 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-05-obstportionen-fur-die-klassenfahrt.html",
-          "beschreibung": "Klasse 6 · Arithmetik/Algebra"
+          "beschreibung": "Klasse 6 · Arithmetik/Algebra",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 6"
+        },
+        {
+          "titel": "Pflanzkübel für den Schulgarten",
+          "datei": "6.8c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/03-geometrie/6.8c.html",
+          "beschreibung": "Klasse 6 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Regeln für das Glücksfisch-Spiel am Stadtfest",
+          "datei": "6.4b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/04-stochastik/6.4b.html",
+          "beschreibung": "Klasse 6 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Snackbeutel für die Wanderung zur Atta-Höhle",
+          "datei": "6.1b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/6.1b.html",
+          "beschreibung": "Klasse 6 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Transportkisten für die Ausstellung im Südsauerlandmuseum",
+          "datei": "6.3b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/03-geometrie/6.3b.html",
+          "beschreibung": "Klasse 6 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Trinkvorräte für die Biggesee-Wanderung",
+          "datei": "6.6c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/6.6c.html",
+          "beschreibung": "Klasse 6 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Trinkwasser für einen Schultag",
+          "datei": "klasse-6-wasser.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-wasser.html",
+          "beschreibung": "Klasse 6 · Zahlen und Größen · Größen und Messen",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 6"
+        },
+        {
+          "titel": "Wasser für die Kräuterbeete am Rivius-Gymnasium",
+          "datei": "6.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/02-funktionen/6.2b.html",
+          "beschreibung": "Klasse 6 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
         },
         {
           "titel": "Wasserhahn und Kanister",
@@ -377,39 +764,37 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-06-wasserhahn-und-kanister.html",
-          "beschreibung": "Klasse 6 · Funktionen"
+          "beschreibung": "Klasse 6 · Funktionen",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 6"
         },
         {
-          "titel": "Wie lange läutet die Schulglocke am Rivius Gymnasium in einer Fünf-Tage-Woche?",
-          "datei": "klasse-6-glocke.html",
+          "titel": "Wasserstation am Repetalweg",
+          "datei": "6.7c.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-glocke.html",
-          "beschreibung": "Klasse 6 · Daten und Größen · Zeit"
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/02-funktionen/6.7c.html",
+          "beschreibung": "Klasse 6 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
         },
         {
-          "titel": "Wie oft blinzelt eine sechste Klasse in einer 45-minütigen Mathestunde?",
-          "datei": "klasse-6-blinzeln.html",
+          "titel": "Zwei Lose beim Schulfest",
+          "datei": "6.4.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-blinzeln.html",
-          "beschreibung": "Klasse 6 · Daten und Zufall · Stochastik"
-        },
-        {
-          "titel": "Wie viel Wasser trinken 28 Sechstklässler:innen an einem Schultag?",
-          "datei": "klasse-6-wasser.html",
-          "typ": "Fermi-Aufgabe",
-          "kategorie": "Zusatzaufgaben",
-          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-wasser.html",
-          "beschreibung": "Klasse 6 · Zahlen und Größen · Größen und Messen"
-        },
-        {
-          "titel": "Wie viele Kreidestücke werden in einem Tafelraum pro Schulwoche verbraucht?",
-          "datei": "klasse-6-kreide.html",
-          "typ": "Fermi-Aufgabe",
-          "kategorie": "Zusatzaufgaben",
-          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-kreide.html",
-          "beschreibung": "Klasse 6 · Arithmetik · Größen und Daten"
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/04-stochastik/6.4.html",
+          "beschreibung": "Klasse 6 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
         },
         {
           "titel": "Zweimal ziehen beim Schulfest",
@@ -417,7 +802,24 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/klasse-6-08-zweimal-ziehen-beim-schulfest.html",
-          "beschreibung": "Klasse 6 · Stochastik"
+          "beschreibung": "Klasse 6 · Stochastik",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 6"
+        },
+        {
+          "titel": "Äpfel für die Tagesfahrt",
+          "datei": "6.1.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-6/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/6.1.html",
+          "beschreibung": "Klasse 6 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 6",
+          "bildimpuls": true
         }
       ],
       "inhaltsfelder": [
@@ -660,12 +1062,180 @@
       ],
       "zusatzaufgaben": [
         {
+          "titel": "Autos im Stau auf der B54",
+          "datei": "klasse-7-stau.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-stau.html",
+          "beschreibung": "Klasse 7 · Größen und Messen · proportionale Zuordnungen",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 7"
+        },
+        {
+          "titel": "Brötchen für ein Klassenfrühstück",
+          "datei": "klasse-7-fruehstueck.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-fruehstueck.html",
+          "beschreibung": "Klasse 7 · Arithmetik · Größen und Proportionalität",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 7"
+        },
+        {
+          "titel": "Der Weg vom Bahnhof zur Schule",
+          "datei": "7.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/02-funktionen/7.2.html",
+          "beschreibung": "Klasse 7 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Essensreste in der Mensa",
+          "datei": "7.9c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/04-stochastik/7.9c.html",
+          "beschreibung": "Klasse 7 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Fahrradverkehr am Haupteingang",
+          "datei": "7.5c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/04-stochastik/7.5c.html",
+          "beschreibung": "Klasse 7 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Geschenkpapier für Mathematikbücher",
+          "datei": "klasse-7-buecher.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-buecher.html",
+          "beschreibung": "Klasse 7 · Geometrie · Flächen",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 7"
+        },
+        {
+          "titel": "Höhenprofil der Repetal-Wanderung",
+          "datei": "7.1b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/7.1b.html",
+          "beschreibung": "Klasse 7 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Höhenprofil im Repetal",
+          "datei": "7.6c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/7.6c.html",
+          "beschreibung": "Klasse 7 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Kopf oder Zahl: Münzwürfe schätzen",
+          "datei": "klasse-7-12-wie-oft-fallt-die-munze-auf-kopf.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-12-wie-oft-fallt-die-munze-auf-kopf.html",
+          "beschreibung": "Klasse 7 · Stochastik",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 7"
+        },
+        {
+          "titel": "Mehrwegbecher für den Stand an der Atta-Höhle",
+          "datei": "7.4b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/04-stochastik/7.4b.html",
+          "beschreibung": "Klasse 7 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Orientierungslauf an Burg Schnellenberg",
+          "datei": "7.8c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/03-geometrie/7.8c.html",
+          "beschreibung": "Klasse 7 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Pendel-Shuttle vom Bahnhof Attendorn",
+          "datei": "7.7c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/02-funktionen/7.7c.html",
+          "beschreibung": "Klasse 7 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Quadrate für den Sporthallenboden",
+          "datei": "klasse-7-halle.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-halle.html",
+          "beschreibung": "Klasse 7 · Geometrie · Flächen und Maßstab",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 7"
+        },
+        {
           "titel": "Schulhofplan im passenden Maßstab",
           "datei": "klasse-7-11-schulhofplan-im-passenden-mastab.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-11-schulhofplan-im-passenden-mastab.html",
-          "beschreibung": "Klasse 7 · Geometrie"
+          "beschreibung": "Klasse 7 · Geometrie",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 7"
         },
         {
           "titel": "Schulweg in Abhängigkeit von der Gehzeit",
@@ -673,7 +1243,63 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-10-schulweg-in-abhangigkeit-von-der-gehzeit.html",
-          "beschreibung": "Klasse 7 · Funktionen"
+          "beschreibung": "Klasse 7 · Funktionen",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 7"
+        },
+        {
+          "titel": "Sitz- und Spielfläche auf dem Schulhof",
+          "datei": "7.3.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/03-geometrie/7.3.html",
+          "beschreibung": "Klasse 7 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Spielstationen im Innenhof von Burg Schnellenberg",
+          "datei": "7.3b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/03-geometrie/7.3b.html",
+          "beschreibung": "Klasse 7 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Staffelstart am Biggedamm",
+          "datei": "7.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/02-funktionen/7.2b.html",
+          "beschreibung": "Klasse 7 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Temperaturbilanz im Schulgarten",
+          "datei": "7.1.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/7.1.html",
+          "beschreibung": "Klasse 7 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
         },
         {
           "titel": "Temperaturänderung im Schulgarten",
@@ -681,47 +1307,24 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-09-temperaturanderung-im-schulgarten.html",
-          "beschreibung": "Klasse 7 · Arithmetik/Algebra"
+          "beschreibung": "Klasse 7 · Arithmetik/Algebra",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 7"
         },
         {
-          "titel": "Wie oft fällt die Münze auf Kopf?",
-          "datei": "klasse-7-12-wie-oft-fallt-die-munze-auf-kopf.html",
+          "titel": "Vogelbesuche am Wintermorgen",
+          "datei": "7.4.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-12-wie-oft-fallt-die-munze-auf-kopf.html",
-          "beschreibung": "Klasse 7 · Stochastik"
-        },
-        {
-          "titel": "Wie viel Geschenkpapier brauchen die Mathematikbücher einer Klasse 7?",
-          "datei": "klasse-7-buecher.html",
-          "typ": "Fermi-Aufgabe",
-          "kategorie": "Zusatzaufgaben",
-          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-buecher.html",
-          "beschreibung": "Klasse 7 · Geometrie · Flächen"
-        },
-        {
-          "titel": "Wie viele 30-cm-Quadrate bedecken den Boden der Sporthalle?",
-          "datei": "klasse-7-halle.html",
-          "typ": "Fermi-Aufgabe",
-          "kategorie": "Zusatzaufgaben",
-          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-halle.html",
-          "beschreibung": "Klasse 7 · Geometrie · Flächen und Maßstab"
-        },
-        {
-          "titel": "Wie viele Autos stehen in einem 3-km-Stau auf der B54 bei Attendorn?",
-          "datei": "klasse-7-stau.html",
-          "typ": "Fermi-Aufgabe",
-          "kategorie": "Zusatzaufgaben",
-          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-stau.html",
-          "beschreibung": "Klasse 7 · Größen und Messen · proportionale Zuordnungen"
-        },
-        {
-          "titel": "Wie viele Brötchen braucht ein Frühstück für 28 Personen?",
-          "datei": "klasse-7-fruehstueck.html",
-          "typ": "Fermi-Aufgabe",
-          "kategorie": "Zusatzaufgaben",
-          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/klasse-7-fruehstueck.html",
-          "beschreibung": "Klasse 7 · Arithmetik · Größen und Proportionalität"
+          "url": "klasse-7/zusatzaufgaben/fermi-aufgaben/04-stochastik/7.4.html",
+          "beschreibung": "Klasse 7 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 7",
+          "bildimpuls": true
         }
       ],
       "inhaltsfelder": [
@@ -987,12 +1590,119 @@
       ],
       "zusatzaufgaben": [
         {
+          "titel": "Abkürzung über das Basketballfeld",
+          "datei": "8.3.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/03-geometrie/8.3.html",
+          "beschreibung": "Klasse 8 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
           "titel": "Abkürzung über den Schulhof",
           "datei": "klasse-8-15-abkurzung-uber-den-schulhof.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-15-abkurzung-uber-den-schulhof.html",
-          "beschreibung": "Klasse 8 · Geometrie"
+          "beschreibung": "Klasse 8 · Geometrie",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 8"
+        },
+        {
+          "titel": "Barrierefreier Zugang zur Bühne auf dem Schulhof",
+          "datei": "8.3b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/03-geometrie/8.3b.html",
+          "beschreibung": "Klasse 8 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Brötchenverkauf in der großen Pause",
+          "datei": "klasse-8-verkauf.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-verkauf.html",
+          "beschreibung": "Klasse 8 · Daten und Zufall · Prozentrechnung",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 8"
+        },
+        {
+          "titel": "Busse für die Exkursion zum Biggesee",
+          "datei": "8.1b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/8.1b.html",
+          "beschreibung": "Klasse 8 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Das zweistufige Spiel am Schulfest",
+          "datei": "8.4.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/04-stochastik/8.4.html",
+          "beschreibung": "Klasse 8 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Doppelte Gewinnchance beim Schulfest",
+          "datei": "8.9c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/04-stochastik/8.9c.html",
+          "beschreibung": "Klasse 8 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Fahrradmiete für den Biggesee-Ausflug",
+          "datei": "8.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/02-funktionen/8.2b.html",
+          "beschreibung": "Klasse 8 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Fahrradstellplätze am Rivius-Gymnasium",
+          "datei": "8.1.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/8.1.html",
+          "beschreibung": "Klasse 8 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
         },
         {
           "titel": "Füllstand eines Regenwassertanks",
@@ -1000,7 +1710,37 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-14-fullstand-eines-regenwassertanks.html",
-          "beschreibung": "Klasse 8 · Funktionen"
+          "beschreibung": "Klasse 8 · Funktionen",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 8"
+        },
+        {
+          "titel": "Gewinnregeln für das Biggesee-Losspiel",
+          "datei": "8.4b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/04-stochastik/8.4b.html",
+          "beschreibung": "Klasse 8 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Häckseln der Zweige im Schulgarten",
+          "datei": "8.7c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/02-funktionen/8.7c.html",
+          "beschreibung": "Klasse 8 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
         },
         {
           "titel": "Kosten zweier Druckangebote",
@@ -1008,47 +1748,111 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-13-kosten-zweier-druckangebote.html",
-          "beschreibung": "Klasse 8 · Arithmetik/Algebra"
+          "beschreibung": "Klasse 8 · Arithmetik/Algebra",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 8"
         },
         {
-          "titel": "Wie lange läuft ein Wasserhahn für 28 Becher à 250 ml?",
-          "datei": "klasse-8-hahn.html",
-          "typ": "Fermi-Aufgabe",
-          "kategorie": "Zusatzaufgaben",
-          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-hahn.html",
-          "beschreibung": "Klasse 8 · Funktionen · proportionale Zusammenhänge"
-        },
-        {
-          "titel": "Wie viele belegte Brötchen verkauft der Pausenverkauf in einer 20-Minuten-Pause?",
-          "datei": "klasse-8-verkauf.html",
-          "typ": "Fermi-Aufgabe",
-          "kategorie": "Zusatzaufgaben",
-          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-verkauf.html",
-          "beschreibung": "Klasse 8 · Daten und Zufall · Prozentrechnung"
-        },
-        {
-          "titel": "Wie viele Lampenstunden entstehen in einem Klassenraum pro Schulwoche?",
+          "titel": "Lampenstunden im Klassenraum",
           "datei": "klasse-8-licht.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-licht.html",
-          "beschreibung": "Klasse 8 · Funktionen · proportionale Zusammenhänge"
+          "beschreibung": "Klasse 8 · Funktionen · proportionale Zusammenhänge",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 8"
         },
         {
-          "titel": "Wie viele Liter Regen fallen bei 10 mm Niederschlag auf den Schulhof?",
+          "titel": "Lichterparcours am Rivius-Gymnasium",
+          "datei": "8.5c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/02-funktionen/8.5c.html",
+          "beschreibung": "Klasse 8 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Regenwasser auf dem Schulhof",
           "datei": "klasse-8-regen.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-regen.html",
-          "beschreibung": "Klasse 8 · Geometrie · Flächen und Größen"
+          "beschreibung": "Klasse 8 · Geometrie · Flächen und Größen",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 8"
         },
         {
-          "titel": "Zwei Auswahlen aus der Materialkiste",
+          "titel": "Sitzmodule für die Ausstellung in der Aula",
+          "datei": "8.6c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/8.6c.html",
+          "beschreibung": "Klasse 8 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Verspannung für die Aula-Bühne",
+          "datei": "8.8c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/03-geometrie/8.8c.html",
+          "beschreibung": "Klasse 8 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Wasserhahn und Trinkbecher",
+          "datei": "klasse-8-hahn.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-hahn.html",
+          "beschreibung": "Klasse 8 · Funktionen · proportionale Zusammenhänge",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 8"
+        },
+        {
+          "titel": "Zwei Angebote für den Kopierer",
+          "datei": "8.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/02-funktionen/8.2.html",
+          "beschreibung": "Klasse 8 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 8",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Zweimal ziehen aus der Materialkiste",
           "datei": "klasse-8-16-zwei-auswahlen-aus-der-materialkiste.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-8/zusatzaufgaben/fermi-aufgaben/klasse-8-16-zwei-auswahlen-aus-der-materialkiste.html",
-          "beschreibung": "Klasse 8 · Stochastik"
+          "beschreibung": "Klasse 8 · Stochastik",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 8"
         }
       ],
       "inhaltsfelder": [
@@ -1289,12 +2093,54 @@
       ],
       "zusatzaufgaben": [
         {
+          "titel": "Akustikplatten in der Aula",
+          "datei": "9.6c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/9.6c.html",
+          "beschreibung": "Klasse 9 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
+        },
+        {
           "titel": "Bogen über dem Schultor",
           "datei": "klasse-9-18-bogen-uber-dem-schultor.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-18-bogen-uber-dem-schultor.html",
-          "beschreibung": "Klasse 9 · Funktionen"
+          "beschreibung": "Klasse 9 · Funktionen",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 9"
+        },
+        {
+          "titel": "Busse für einen Jahrgangsausflug",
+          "datei": "klasse-9-bus.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-bus.html",
+          "beschreibung": "Klasse 9 · Funktionen · proportionale Modelle",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 9"
+        },
+        {
+          "titel": "Diagonale der Bühnenfläche",
+          "datei": "9.1.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/9.1.html",
+          "beschreibung": "Klasse 9 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
         },
         {
           "titel": "Diagonale und irrationale Länge",
@@ -1302,15 +2148,99 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-17-diagonale-und-irrationale-lange.html",
-          "beschreibung": "Klasse 9 · Arithmetik/Algebra"
+          "beschreibung": "Klasse 9 · Arithmetik/Algebra",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 9"
         },
         {
-          "titel": "Fehlzeiten und erwartete versäumte Unterrichtsstunden",
+          "titel": "Ein parabelförmiger Eingangsbereich",
+          "datei": "9.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/02-funktionen/9.2.html",
+          "beschreibung": "Klasse 9 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Eintrittspreis für das Benefizspiel am Biggesee",
+          "datei": "9.4b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/04-stochastik/9.4b.html",
+          "beschreibung": "Klasse 9 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Farbe für den Schulflur",
+          "datei": "klasse-9-farbe.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-farbe.html",
+          "beschreibung": "Klasse 9 · Geometrie · Flächen und Größen",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 9"
+        },
+        {
+          "titel": "Fehlzeiten und versäumte Unterrichtsstunden",
           "datei": "klasse-9-20-fehlzeiten-und-erwartete-vertretungsstunden.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-20-fehlzeiten-und-erwartete-vertretungsstunden.html",
-          "beschreibung": "Klasse 9 · Stochastik"
+          "beschreibung": "Klasse 9 · Stochastik",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 9"
+        },
+        {
+          "titel": "Getränkedosen in Raum 351",
+          "datei": "klasse-9-dosen.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-dosen.html",
+          "beschreibung": "Klasse 9 · Geometrie · Körper und Volumen",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 9"
+        },
+        {
+          "titel": "Glücksrad für den Förderverein",
+          "datei": "9.4.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/04-stochastik/9.4.html",
+          "beschreibung": "Klasse 9 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Höhe des Hauptgebäudes",
+          "datei": "9.3.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/03-geometrie/9.3.html",
+          "beschreibung": "Klasse 9 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
         },
         {
           "titel": "Höhe eines Fahnenmasts durch Schatten",
@@ -1318,39 +2248,114 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-19-hohe-eines-fahnenmasts-durch-schatten.html",
-          "beschreibung": "Klasse 9 · Geometrie"
+          "beschreibung": "Klasse 9 · Geometrie",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 9"
         },
         {
-          "titel": "Wie viele 10-Liter-Eimer Farbe braucht ein 60-m-Schulflur?",
-          "datei": "klasse-9-farbe.html",
+          "titel": "Maßstabsmodell von Burg Schnellenberg",
+          "datei": "9.3b.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-farbe.html",
-          "beschreibung": "Klasse 9 · Geometrie · Flächen und Größen"
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/03-geometrie/9.3b.html",
+          "beschreibung": "Klasse 9 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
         },
         {
-          "titel": "Wie viele 330-ml-Dosen füllen den leeren Raum 351?",
-          "datei": "klasse-9-dosen.html",
+          "titel": "Quadratische Pflanzfläche an der Atta-Höhle",
+          "datei": "9.1b.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-dosen.html",
-          "beschreibung": "Klasse 9 · Geometrie · Körper und Volumen"
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/9.1b.html",
+          "beschreibung": "Klasse 9 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
         },
         {
-          "titel": "Wie viele 50-Sitzplatz-Busse braucht der Jahrgang 10 für einen Ausflug?",
-          "datei": "klasse-9-bus.html",
+          "titel": "Regenwasserspeicher im Schulgarten",
+          "datei": "9.5c.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-bus.html",
-          "beschreibung": "Klasse 9 · Funktionen · proportionale Modelle"
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/03-geometrie/9.5c.html",
+          "beschreibung": "Klasse 9 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
         },
         {
-          "titel": "Wie viele Kilometer gehen 28 Lernende zwischen Unterrichtsräumen in einer Schulwoche?",
+          "titel": "Torbogen für Burg Schnellenberg",
+          "datei": "9.7c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/02-funktionen/9.7c.html",
+          "beschreibung": "Klasse 9 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Waffeltüten für das Schulfest",
+          "datei": "9.8c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/03-geometrie/9.8c.html",
+          "beschreibung": "Klasse 9 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Wasserbogen für das Stadtfest in Attendorn",
+          "datei": "9.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/02-funktionen/9.2b.html",
+          "beschreibung": "Klasse 9 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Wege zwischen den Unterrichtsräumen",
           "datei": "klasse-9-wege.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/klasse-9-wege.html",
-          "beschreibung": "Klasse 9 · Funktionen · lineare Modelle"
+          "beschreibung": "Klasse 9 · Funktionen · lineare Modelle",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 9"
+        },
+        {
+          "titel": "Zelt oder Regenplan an der Waldenburger Bucht",
+          "datei": "9.9c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-9/zusatzaufgaben/fermi-aufgaben/04-stochastik/9.9c.html",
+          "beschreibung": "Klasse 9 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 9",
+          "bildimpuls": true
         }
       ],
       "inhaltsfelder": [
@@ -1572,12 +2577,131 @@
       ],
       "zusatzaufgaben": [
         {
-          "titel": "Bei wie vielen Gästen liegt die Chance auf gleiche Geburtstage über 50 %?",
+          "titel": "Alle vierstelligen Zahlencodes testen",
+          "datei": "klasse-10-pin.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-pin.html",
+          "beschreibung": "Klasse 10 · Arithmetik · Kombinatorik und Potenzen",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 10"
+        },
+        {
+          "titel": "Banner über dem Burghof",
+          "datei": "10.8c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/03-geometrie/10.8c.html",
+          "beschreibung": "Klasse 10 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Batteriewechsel an der Messstation Waldenburger Bucht",
+          "datei": "10.1b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/10.1b.html",
+          "beschreibung": "Klasse 10 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Der Konzertclip des Rivius-Gymnasiums",
+          "datei": "10.6c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/10.6c.html",
+          "beschreibung": "Klasse 10 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Eine Einladung wird weitergeleitet",
+          "datei": "10.1.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/01-arithmetik-algebra/10.1.html",
+          "beschreibung": "Klasse 10 · Arithmetik/Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Eine Nachricht verbreitet sich im Jahrgang",
+          "datei": "klasse-10-nachricht.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-nachricht.html",
+          "beschreibung": "Klasse 10 · Exponentielles Wachstum",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 10"
+        },
+        {
+          "titel": "Ersatzlampen für den Lichterweg am Biggesee",
+          "datei": "10.4b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/04-stochastik/10.4b.html",
+          "beschreibung": "Klasse 10 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Freiwürfe beim Sportfest",
+          "datei": "10.4.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/04-stochastik/10.4.html",
+          "beschreibung": "Klasse 10 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Gleiche Geburtstage auf einer Feier",
           "datei": "klasse-10-geburtstag.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-geburtstag.html",
-          "beschreibung": "Klasse 10 · Daten und Wahrscheinlichkeiten · Stochastik"
+          "beschreibung": "Klasse 10 · Daten und Wahrscheinlichkeiten · Stochastik",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 10"
+        },
+        {
+          "titel": "Höhe des Kirchturms vom Marktplatz aus",
+          "datei": "10.3.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/03-geometrie/10.3.html",
+          "beschreibung": "Klasse 10 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
         },
         {
           "titel": "Höhe des Kirchturms vom Schulhof aus",
@@ -1585,7 +2709,75 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-23-hohe-des-kirchturms-vom-schulhof-aus.html",
-          "beschreibung": "Klasse 10 · Geometrie"
+          "beschreibung": "Klasse 10 · Geometrie",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 10"
+        },
+        {
+          "titel": "Licht- und Wasserzeiten am Alten Markt",
+          "datei": "10.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/02-funktionen/10.2b.html",
+          "beschreibung": "Klasse 10 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Lichtfolgen im Bühnenprogramm",
+          "datei": "10.7c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/02-funktionen/10.7c.html",
+          "beschreibung": "Klasse 10 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Papier sparen durch doppelseitigen Druck",
+          "datei": "klasse-10-drucker.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-drucker.html",
+          "beschreibung": "Klasse 10 · Arithmetik · Prozentrechnung und lineare Modelle",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 10"
+        },
+        {
+          "titel": "Sichtlinie für eine Rettungsübung am Biggedamm",
+          "datei": "10.3b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/03-geometrie/10.3b.html",
+          "beschreibung": "Klasse 10 · Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-geometrie"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Tageslicht im Jahresverlauf",
+          "datei": "10.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/02-funktionen/10.2.html",
+          "beschreibung": "Klasse 10 · Funktionen · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
         },
         {
           "titel": "Tageslänge als periodischer Verlauf",
@@ -1593,7 +2785,11 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-22-tageslange-als-periodischer-verlauf.html",
-          "beschreibung": "Klasse 10 · Funktionen"
+          "beschreibung": "Klasse 10 · Funktionen",
+          "inhaltsfelder": [
+            "02-funktionen"
+          ],
+          "jahrgang": "Klasse 10"
         },
         {
           "titel": "Trefferquote beim Freiwurf",
@@ -1601,7 +2797,11 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-24-trefferquote-beim-freiwurf.html",
-          "beschreibung": "Klasse 10 · Stochastik"
+          "beschreibung": "Klasse 10 · Stochastik",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 10"
         },
         {
           "titel": "Verdopplung bei einer Informationskette",
@@ -1609,31 +2809,24 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-21-verdopplung-bei-einer-informationskette.html",
-          "beschreibung": "Klasse 10 · Arithmetik/Algebra"
+          "beschreibung": "Klasse 10 · Arithmetik/Algebra",
+          "inhaltsfelder": [
+            "01-arithmetik-algebra"
+          ],
+          "jahrgang": "Klasse 10"
         },
         {
-          "titel": "Wie lange dauert es, alle 10 000 vierstelligen Zahlencodes zu testen?",
-          "datei": "klasse-10-pin.html",
+          "titel": "Wildblumensamen am Haupteingang",
+          "datei": "10.9c.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-pin.html",
-          "beschreibung": "Klasse 10 · Arithmetik · Kombinatorik und Potenzen"
-        },
-        {
-          "titel": "Wie viele A4-Blätter spart eine Jahrgangsstufe durch doppelseitigen Druck pro Halbjahr?",
-          "datei": "klasse-10-drucker.html",
-          "typ": "Fermi-Aufgabe",
-          "kategorie": "Zusatzaufgaben",
-          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-drucker.html",
-          "beschreibung": "Klasse 10 · Arithmetik · Prozentrechnung und lineare Modelle"
-        },
-        {
-          "titel": "Wie viele Zehntklässler:innen erhalten eine Nachricht in 30 Minuten?",
-          "datei": "klasse-10-nachricht.html",
-          "typ": "Fermi-Aufgabe",
-          "kategorie": "Zusatzaufgaben",
-          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/klasse-10-nachricht.html",
-          "beschreibung": "Klasse 10 · Exponentielles Wachstum"
+          "url": "klasse-10/zusatzaufgaben/fermi-aufgaben/04-stochastik/10.9c.html",
+          "beschreibung": "Klasse 10 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "04-stochastik"
+          ],
+          "jahrgang": "Klasse 10",
+          "bildimpuls": true
         }
       ],
       "inhaltsfelder": [
@@ -1871,12 +3064,94 @@
       ],
       "zusatzaufgaben": [
         {
+          "titel": "Drohnenspur über dem Biggedamm",
+          "datei": "EF.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "ef/zusatzaufgaben/fermi-aufgaben/02-analytische-geometrie-und-lineare-algebra/EF.2b.html",
+          "beschreibung": "EF · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "EF",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Kamerafahrt über der Aula-Bühne",
+          "datei": "EF.4c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "ef/zusatzaufgaben/fermi-aufgaben/02-analytische-geometrie-und-lineare-algebra/EF.4c.html",
+          "beschreibung": "EF · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "EF",
+          "bildimpuls": true
+        },
+        {
           "titel": "Kreuzende Wege im Schulgebäude",
           "datei": "einfuhrungsphase-ef-26-kreuzende-wege-im-schulgebaude.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "ef/zusatzaufgaben/fermi-aufgaben/einfuhrungsphase-ef-26-kreuzende-wege-im-schulgebaude.html",
-          "beschreibung": "EF · Analytische Geometrie/Lineare Algebra"
+          "beschreibung": "EF · Analytische Geometrie/Lineare Algebra",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "EF"
+        },
+        {
+          "titel": "Leistung der Solaranlage am Schulgebäude",
+          "datei": "EF.3c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "ef/zusatzaufgaben/fermi-aufgaben/01-funktionen-und-analysis/EF.3c.html",
+          "beschreibung": "EF · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "EF",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Rudertraining auf dem Biggesee",
+          "datei": "EF.1.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "ef/zusatzaufgaben/fermi-aufgaben/01-funktionen-und-analysis/EF.1.html",
+          "beschreibung": "EF · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "EF",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Seilkamera in der Sporthalle",
+          "datei": "EF.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "ef/zusatzaufgaben/fermi-aufgaben/02-analytische-geometrie-und-lineare-algebra/EF.2.html",
+          "beschreibung": "EF · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "EF",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Temperaturverlauf im Schulgarten",
+          "datei": "EF.1b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "ef/zusatzaufgaben/fermi-aufgaben/01-funktionen-und-analysis/EF.1b.html",
+          "beschreibung": "EF · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "EF",
+          "bildimpuls": true
         },
         {
           "titel": "Änderungsrate beim Anstieg zur Schule",
@@ -1884,7 +3159,11 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "ef/zusatzaufgaben/fermi-aufgaben/einfuhrungsphase-ef-25-anderungsrate-beim-anstieg-zur-schule.html",
-          "beschreibung": "EF · Funktionen und Analysis"
+          "beschreibung": "EF · Funktionen und Analysis",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "EF"
         }
       ],
       "inhaltsfelder": [
@@ -2123,12 +3402,132 @@
       ],
       "zusatzaufgaben": [
         {
-          "titel": "Gesamtzahl der Besucherinnen und Besucher",
+          "titel": "Abstand zweier Kameraseile",
+          "datei": "Q1.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.2.html",
+          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Beleuchtung der Minigolfbahn",
+          "datei": "Q1.5c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.5c.html",
+          "beschreibung": "Q1 · Analytische Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Besucherzahlen beim Schulfest",
           "datei": "qualifikationsphase-2-q2-30-gesamtzahl-der-besucherinnen-und-besucher.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-30-gesamtzahl-der-besucherinnen-und-besucher.html",
-          "beschreibung": "Q2 · Funktionen und Analysis"
+          "beschreibung": "Q2 · Funktionen und Analysis",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q2"
+        },
+        {
+          "titel": "Bogensteg an der Waldenburger Bucht",
+          "datei": "Q1.4c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.4c.html",
+          "beschreibung": "Q1 · Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Busnutzung an der Schule",
+          "datei": "Q1.3.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/03-stochastik/Q1.3.html",
+          "beschreibung": "Q1 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Busnutzung im Jahrgang",
+          "datei": "qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
+          "beschreibung": "Q1 · Stochastik",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q1"
+        },
+        {
+          "titel": "Ersatzakkus für den Lichterweg der Stadt",
+          "datei": "Q2.3b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/03-stochastik/Q2.3b.html",
+          "beschreibung": "Q2 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Gästeankunft beim Schulfest",
+          "datei": "Q2.1.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.1.html",
+          "beschreibung": "Q2 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Heizenergie und Außentemperatur",
+          "datei": "Q1.8c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/03-stochastik/Q1.8c.html",
+          "beschreibung": "Q1 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Kameraflüge am Radioteleskop Effelsberg",
+          "datei": "Q1.7c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.7c.html",
+          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
         },
         {
           "titel": "Lichtkegel eines Projektors",
@@ -2136,7 +3535,24 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-31-lichtkegel-eines-projektors.html",
-          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra"
+          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q2"
+        },
+        {
+          "titel": "Musikerkennung beim Schulkonzert",
+          "datei": "Q2.7c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/03-stochastik/Q2.7c.html",
+          "beschreibung": "Q2 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
         },
         {
           "titel": "Optimale Beetfläche am Zaun",
@@ -2144,7 +3560,89 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-27-optimale-beetflache-am-zaun.html",
-          "beschreibung": "Q1 · Funktionen und Analysis"
+          "beschreibung": "Q1 · Funktionen und Analysis",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q1"
+        },
+        {
+          "titel": "Projektor und Leinwand in der Aula",
+          "datei": "Q2.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/02-analytische-geometrie-und-lineare-algebra/Q2.2.html",
+          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Regenbeet am Haupteingang",
+          "datei": "Q1.1b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.1b.html",
+          "beschreibung": "Q1 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Regenrückhalt auf dem Schulgebäude",
+          "datei": "Q1.6c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.6c.html",
+          "beschreibung": "Q1 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Regenwasser für die Zisterne der Schule",
+          "datei": "Q2.1b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.1b.html",
+          "beschreibung": "Q2 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Scheinwerferstrahl über dem Biggesee",
+          "datei": "Q2.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/02-analytische-geometrie-und-lineare-algebra/Q2.2b.html",
+          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Sicherheitsabstand der Bühnenseile auf Burg Schnellenberg",
+          "datei": "Q1.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.2b.html",
+          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
         },
         {
           "titel": "Sichtlinien im Veranstaltungsraum",
@@ -2152,15 +3650,89 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-28-sichtlinien-im-veranstaltungsraum.html",
-          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra"
+          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q1"
         },
         {
-          "titel": "Wie viele Lernende nutzen den Bus?",
-          "datei": "qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
+          "titel": "Solarmodule auf dem Schuldach",
+          "datei": "Q1.1.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
-          "beschreibung": "Q1 · Stochastik"
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.1.html",
+          "beschreibung": "Q1 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Sonnensegel am Biggesee",
+          "datei": "Q2.6c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/02-analytische-geometrie-und-lineare-algebra/Q2.6c.html",
+          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Trinkwasserstationen an der Waldenburger Bucht",
+          "datei": "Q1.3b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/03-stochastik/Q1.3b.html",
+          "beschreibung": "Q1 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Waffelstand beim Sommerfest",
+          "datei": "Q2.5c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.5c.html",
+          "beschreibung": "Q2 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Wasserabgabe an der Biggetalsperre",
+          "datei": "Q2.4c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.4c.html",
+          "beschreibung": "Q2 · Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Zuverlässigkeit einer digitalen Abstimmung",
+          "datei": "Q2.3.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/03-stochastik/Q2.3.html",
+          "beschreibung": "Q2 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
         },
         {
           "titel": "Zuverlässigkeit eines digitalen Abstimmungssystems",
@@ -2168,7 +3740,11 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-32-zuverlassigkeit-eines-digitalen-abstimmungssystems.html",
-          "beschreibung": "Q2 · Stochastik"
+          "beschreibung": "Q2 · Stochastik",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q2"
         }
       ],
       "inhaltsfelder": [
@@ -2473,12 +4049,132 @@
       ],
       "zusatzaufgaben": [
         {
-          "titel": "Gesamtzahl der Besucherinnen und Besucher",
+          "titel": "Abstand zweier Kameraseile",
+          "datei": "Q1.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.2.html",
+          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Beleuchtung der Minigolfbahn",
+          "datei": "Q1.5c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.5c.html",
+          "beschreibung": "Q1 · Analytische Geometrie · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Besucherzahlen beim Schulfest",
           "datei": "qualifikationsphase-2-q2-30-gesamtzahl-der-besucherinnen-und-besucher.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-30-gesamtzahl-der-besucherinnen-und-besucher.html",
-          "beschreibung": "Q2 · Funktionen und Analysis"
+          "beschreibung": "Q2 · Funktionen und Analysis",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q2"
+        },
+        {
+          "titel": "Bogensteg an der Waldenburger Bucht",
+          "datei": "Q1.4c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.4c.html",
+          "beschreibung": "Q1 · Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Busnutzung an der Schule",
+          "datei": "Q1.3.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/03-stochastik/Q1.3.html",
+          "beschreibung": "Q1 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Busnutzung im Jahrgang",
+          "datei": "qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
+          "beschreibung": "Q1 · Stochastik",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q1"
+        },
+        {
+          "titel": "Ersatzakkus für den Lichterweg der Stadt",
+          "datei": "Q2.3b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/03-stochastik/Q2.3b.html",
+          "beschreibung": "Q2 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Gästeankunft beim Schulfest",
+          "datei": "Q2.1.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.1.html",
+          "beschreibung": "Q2 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Heizenergie und Außentemperatur",
+          "datei": "Q1.8c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/03-stochastik/Q1.8c.html",
+          "beschreibung": "Q1 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Kameraflüge am Radioteleskop Effelsberg",
+          "datei": "Q1.7c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.7c.html",
+          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
         },
         {
           "titel": "Lichtkegel eines Projektors",
@@ -2486,7 +4182,24 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-31-lichtkegel-eines-projektors.html",
-          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra"
+          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q2"
+        },
+        {
+          "titel": "Musikerkennung beim Schulkonzert",
+          "datei": "Q2.7c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/03-stochastik/Q2.7c.html",
+          "beschreibung": "Q2 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
         },
         {
           "titel": "Optimale Beetfläche am Zaun",
@@ -2494,7 +4207,89 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-27-optimale-beetflache-am-zaun.html",
-          "beschreibung": "Q1 · Funktionen und Analysis"
+          "beschreibung": "Q1 · Funktionen und Analysis",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q1"
+        },
+        {
+          "titel": "Projektor und Leinwand in der Aula",
+          "datei": "Q2.2.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/02-analytische-geometrie-und-lineare-algebra/Q2.2.html",
+          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Regenbeet am Haupteingang",
+          "datei": "Q1.1b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.1b.html",
+          "beschreibung": "Q1 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Regenrückhalt auf dem Schulgebäude",
+          "datei": "Q1.6c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.6c.html",
+          "beschreibung": "Q1 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Regenwasser für die Zisterne der Schule",
+          "datei": "Q2.1b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.1b.html",
+          "beschreibung": "Q2 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Scheinwerferstrahl über dem Biggesee",
+          "datei": "Q2.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/02-analytische-geometrie-und-lineare-algebra/Q2.2b.html",
+          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Sicherheitsabstand der Bühnenseile auf Burg Schnellenberg",
+          "datei": "Q1.2b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/02-analytische-geometrie-und-lineare-algebra/Q1.2b.html",
+          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
         },
         {
           "titel": "Sichtlinien im Veranstaltungsraum",
@@ -2502,15 +4297,89 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-28-sichtlinien-im-veranstaltungsraum.html",
-          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra"
+          "beschreibung": "Q1 · Analytische Geometrie/Lineare Algebra",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q1"
         },
         {
-          "titel": "Wie viele Lernende nutzen den Bus?",
-          "datei": "qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
+          "titel": "Solarmodule auf dem Schuldach",
+          "datei": "Q1.1.html",
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
-          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-1-q1-29-wie-viele-lernende-nutzen-den-bus.html",
-          "beschreibung": "Q1 · Stochastik"
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/01-funktionen-und-analysis/Q1.1.html",
+          "beschreibung": "Q1 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Sonnensegel am Biggesee",
+          "datei": "Q2.6c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/02-analytische-geometrie-und-lineare-algebra/Q2.6c.html",
+          "beschreibung": "Q2 · Analytische Geometrie/Lineare Algebra · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "02-analytische-geometrie-und-lineare-algebra"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Trinkwasserstationen an der Waldenburger Bucht",
+          "datei": "Q1.3b.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q1/03-stochastik/Q1.3b.html",
+          "beschreibung": "Q1 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q1",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Waffelstand beim Sommerfest",
+          "datei": "Q2.5c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.5c.html",
+          "beschreibung": "Q2 · Funktionen und Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Wasserabgabe an der Biggetalsperre",
+          "datei": "Q2.4c.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/01-funktionen-und-analysis/Q2.4c.html",
+          "beschreibung": "Q2 · Analysis · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "01-funktionen-und-analysis"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
+        },
+        {
+          "titel": "Zuverlässigkeit einer digitalen Abstimmung",
+          "datei": "Q2.3.html",
+          "typ": "Fermi-Aufgabe",
+          "kategorie": "Zusatzaufgaben",
+          "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/q2/03-stochastik/Q2.3.html",
+          "beschreibung": "Q2 · Stochastik · Fermi-Aufgabe mit Bildimpuls",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q2",
+          "bildimpuls": true
         },
         {
           "titel": "Zuverlässigkeit eines digitalen Abstimmungssystems",
@@ -2518,7 +4387,11 @@
           "typ": "Fermi-Aufgabe",
           "kategorie": "Zusatzaufgaben",
           "url": "gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/qualifikationsphase-2-q2-32-zuverlassigkeit-eines-digitalen-abstimmungssystems.html",
-          "beschreibung": "Q2 · Stochastik"
+          "beschreibung": "Q2 · Stochastik",
+          "inhaltsfelder": [
+            "03-stochastik"
+          ],
+          "jahrgang": "Q2"
         }
       ],
       "inhaltsfelder": [

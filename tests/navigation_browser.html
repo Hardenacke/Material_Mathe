@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<title>Navigationstest</title>
+<pre id="results">RUNNING</pre>
+<iframe id="site" src="/material-mathe/index.html" width="1024" height="900"></iframe>
+<script>
+(async () => {
+  const frame = document.getElementById("site");
+  const output = document.getElementById("results");
+  const errors = [];
+  let checks = 0;
+  const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  function assert(condition, message) {
+    checks++;
+    if (!condition) throw new Error(message);
+  }
+  async function until(check) {
+    for (let i = 0; i < 200; i++) {
+      if (check()) return;
+      await pause(25);
+    }
+    throw new Error("Zeitüberschreitung: " + check.toString());
+  }
+  const doc = () => frame.contentDocument;
+  async function visit(hash) {
+    if (frame.contentWindow.location.hash === hash) return;
+    const previous = doc().querySelector(".navigation-panel");
+    frame.contentWindow.location.hash = hash;
+    try {
+      await until(() => doc().querySelector(".navigation-panel") !== previous);
+    } catch (error) {
+      throw new Error(`${hash}, aktuelle Adresse: ${frame.contentWindow.location.href}, Fehler: ${errors.join(", ")}: ${error.message}`);
+    }
+  }
+  async function click(selector) {
+    const link = doc().querySelector(selector);
+    assert(link, "Link fehlt: " + selector);
+    const previous = doc().querySelector(".navigation-panel");
+    link.click();
+    assert(link.classList.contains("is-activated"), "Klickfeedback fehlt");
+    await until(() => doc().querySelector(".navigation-panel") !== previous);
+  }
+  try {
+    await until(() => doc().querySelectorAll(".class-card").length === 9);
+    frame.contentWindow.addEventListener("error", (event) => errors.push(event.message));
+    const data = await (await fetch("/material-mathe/data.json")).json();
+    assert(doc().querySelectorAll(".file-link").length === 0, "Materialien auf der Kurswahl");
+    await click('.class-card[href="#/klasse-5"]');
+    assert(doc().querySelector("#view-title").textContent === "Klasse 5", "Kursseite fehlt");
+    assert(doc().querySelectorAll(".file-link").length === 0, "Materialien auf der Themenwahl");
+    await click('.topic-button[href="#/klasse-5/01-arithmetik-algebra"]');
+    assert(doc().querySelectorAll(".file-link").length === 0, "Materialien auf der Materialartenwahl");
+    assert(doc().querySelector('.journey [aria-current="step"]').textContent.includes("3"), "Schrittanzeige falsch");
+    assert(doc().activeElement.id === "view-title", "Fokus folgt dem Seitenwechsel nicht");
+    await click('.topic-button[href$="/lernspiele"]');
+    assert(doc().querySelectorAll(".file-link").length === 3, "Lernspiele nicht getrennt");
+    await click(".back-button");
+    assert(doc().querySelectorAll(".file-link").length === 0, "Zurück zeigt falsche Ebene");
+    frame.contentWindow.history.back();
+    await until(() => doc().querySelectorAll(".file-link").length === 3);
+    frame.contentWindow.history.forward();
+    await until(() => doc().querySelectorAll(".file-link").length === 0);
+
+    // Jede vorhandene Materialzuordnung muss über eine eigene Kategorie erreichbar bleiben.
+    const expected = new Set();
+    const seen = new Set();
+    for (const area of data.bereiche) {
+      for (const material of [...area.unterstuetzung, ...area.zusatzaufgaben]) expected.add(material.url);
+      for (const field of area.inhaltsfelder) {
+        for (const material of [...field.materialien, ...field.themen.flatMap((topic) => topic.materialien)]) expected.add(material.url);
+        const fieldHash = `#/${area.id}/${field.id}`;
+        if (frame.contentWindow.location.hash !== fieldHash) await visit(fieldHash);
+        const categories = [...doc().querySelectorAll(".topic-button")].map((link) => link.hash);
+        assert(categories.length > 0, "Keine Materialarten: " + fieldHash);
+        const matchingTasks = area.zusatzaufgaben.filter((task) => task.inhaltsfelder.includes(field.id));
+        assert(categories.some((hash) => hash.endsWith("/zusatzaufgaben")) === (matchingTasks.length > 0), "Zusatzaufgaben-Button passt nicht zum Themenbereich: " + fieldHash);
+        for (const category of categories) {
+          await visit(category);
+          const files = [...doc().querySelectorAll(".file-link")];
+          assert(files.length > 0, "Leere Kategorie: " + category);
+          assert(doc().querySelector(".back-button").hash === fieldHash, "Falscher Rückweg: " + category);
+          if (category.endsWith("/zusatzaufgaben")) {
+            const actual = files.map((link) => decodeURI(link.pathname).replace(/^\/material-mathe\//, "")).sort();
+            const expectedTasks = matchingTasks.map((task) => task.url).sort();
+            assert(JSON.stringify(actual) === JSON.stringify(expectedTasks), "Themenfremde oder fehlende Zusatzaufgaben: " + category);
+          }
+          files.forEach((link) => seen.add(decodeURI(link.pathname).replace(/^\/material-mathe\//, "")));
+        }
+      }
+    }
+    assert([...expected].every((url) => seen.has(url)), "Nicht erreichbare Materialien: " + [...expected].filter((url) => !seen.has(url)));
+    await visit("#/q1-q2-grundkurs/01-funktionen-und-analysis/pruefungsvorbereitung");
+    assert(doc().querySelectorAll(".file-link").length > 0, "Prüfungsvorbereitung fehlt");
+    assert([...doc().querySelectorAll(".file-link")].every((item) => /abi_/i.test(item.pathname)), "Falsche Prüfungsmaterialien");
+
+    await visit("#/?q=Heron");
+    assert(doc().querySelectorAll(".class-card").length === 1, "Globale Suche fehlerhaft");
+    await click(".class-card");
+    assert(doc().querySelector("#search").value === "Heron", "Suchbegriff verloren");
+    await click('.topic-button[href*="/unterstuetzung"]');
+    assert(doc().querySelectorAll(".file-link").length === 1, "Kursmaterialsuche fehlerhaft");
+    await visit("#/?q=Samen%20f%C3%BCr%20den%20Bl%C3%BChstreifen");
+    assert(doc().querySelectorAll(".class-card").length === 1, "Neue Bildimpuls-Aufgabe nicht durchsuchbar");
+    await click(".class-card");
+    await click('.topic-button[href*="/01-arithmetik-algebra"]');
+    await click('.topic-button[href*="/zusatzaufgaben"]');
+    assert(doc().querySelectorAll(".file-link").length === 1, "Themensuche findet falsche Bildimpuls-Aufgabe");
+    assert(doc().querySelector(".file-link").pathname.endsWith("/01-arithmetik-algebra/5.1.html"), "Falsche Bildimpuls-Aufgabe gefunden");
+    await visit("#/klasse-5/01-arithmetik-algebra/lernspiele?q=UNAUFFINDBAR");
+    assert(doc().querySelector(".empty-state"), "Leerer Suchzustand fehlt");
+    doc().querySelector(".clear-search").click();
+    assert(doc().querySelectorAll(".file-link").length === 3, "Suchreset fehlerhaft");
+    const hashBeforeSkip = frame.contentWindow.location.hash;
+    doc().querySelector(".skip-link").click();
+    assert(frame.contentWindow.location.hash === hashBeforeSkip, "Sprunglink verändert Route");
+
+    for (const invalid of ["#/unbekannt", "#/klasse-5/falsch", "#/klasse-5/01-arithmetik-algebra/falsch", "#/%E0%A4%A", "#/methoden/falsch"]) {
+      await visit(invalid);
+      assert(doc().querySelector("#view-title").textContent === "Seite nicht gefunden", "Ungültige Route nicht behandelt: " + invalid);
+    }
+    await visit("#/methoden");
+    assert(doc().querySelectorAll(".file-link").length === 0, "Methodenmaterialien zu früh sichtbar");
+    await click('.topic-button[href="#/methoden/sek-ii"]');
+    await click('.topic-button[href="#/methoden/sek-ii/praesentationen"]');
+    assert(doc().querySelectorAll(".file-link").length === 1, "Methoden-Lernpfad fehlt");
+
+    // Prüft die tatsächliche Inhaltsbreite, auch auf schmalen Smartphones.
+    for (const width of [320, 390, 768, 1024]) {
+      frame.width = width;
+      await pause(30);
+      for (const hash of ["#/", "#/q1-q2-leistungskurs", "#/q1-q2-leistungskurs/02-analytische-geometrie-und-lineare-algebra", "#/klasse-5/01-arithmetik-algebra/lernspiele"]) {
+        await visit(hash);
+        assert(doc().documentElement.scrollWidth <= doc().documentElement.clientWidth, `Horizontaler Überlauf bei ${width}px: ${hash}, Inhalt ${doc().documentElement.scrollWidth}px`);
+      }
+    }
+    frame.width = 1024;
+
+    // Reale Materialseiten müssen auch unter einem Pages-Unterpfad zurückführen.
+    await visit("#/klasse-5/01-arithmetik-algebra/lernspiele?q=Rechenwege");
+    const materialLink = doc().querySelector(".file-link");
+    assert(materialLink && materialLink.search.includes("sammlung="), "Rückweg fehlt im Materiallink");
+    frame.src = materialLink.href;
+    await until(() => doc().getElementById("sammlung-navigation"));
+    const toolbar = doc().getElementById("sammlung-navigation").shadowRoot;
+    assert(toolbar.querySelector("a").hash === "#/klasse-5/01-arithmetik-algebra/lernspiele?q=Rechenwege", "Materialrückweg falsch");
+    assert(toolbar.querySelector("a").pathname === "/material-mathe/index.html", "Pages-Unterpfad verloren");
+    frame.src = toolbar.querySelector("a").href;
+    await until(() => doc().querySelector(".file-link"));
+    assert(doc().querySelector("#search").value === "Rechenwege", "Suchzustand beim Materialrückweg verloren");
+
+    // Ein Folgeseitenlink behält denselben Rückweg.
+    frame.src = "/material-mathe/klasse-5/zusatzaufgaben/fermi-aufgaben/klasse-5-stifte.html?sammlung=" + encodeURIComponent("#/klasse-5/kursmaterial/zusatzaufgaben");
+    await until(() => doc().getElementById("sammlung-navigation"));
+    const nextTask = [...doc().querySelectorAll("a[href]")].find((link) => link.pathname.endsWith(".html") && link.pathname.includes("fermi-aufgaben"));
+    assert(nextTask, "Fermi-Folgeseite fehlt");
+    nextTask.click();
+    await until(() => doc().getElementById("sammlung-navigation") && frame.contentWindow.location.href === nextTask.href);
+    assert(doc().getElementById("sammlung-navigation").shadowRoot.querySelector("a").hash === "#/klasse-5/kursmaterial/zusatzaufgaben", "Rückweg auf Folgeseite verloren");
+
+    // Alle gelieferten HTML-Aufgaben müssen als eigene Seiten mit geladenem Bild öffnen.
+    const pictured = new Map();
+    for (const area of data.bereiche) {
+      for (const task of area.zusatzaufgaben.filter((task) => task.bildimpuls)) {
+        if (!pictured.has(task.url)) pictured.set(task.url, { area, task });
+      }
+    }
+    assert(pictured.size === 104, "Nicht alle 104 Bildimpuls-Aufgaben importiert");
+    frame.width = 320;
+    let lastReturn = "";
+    for (const { area, task } of pictured.values()) {
+      const returnRoute = `#/${area.id}/${task.inhaltsfelder[0]}/zusatzaufgaben`;
+      const destination = new URL("/material-mathe/" + task.url, location.href);
+      destination.searchParams.set("sammlung", returnRoute);
+      frame.src = destination.href;
+      await until(() => frame.contentWindow.location.pathname === destination.pathname
+        && doc().querySelector("img")?.complete && doc().querySelector("img")?.naturalWidth > 0
+        && doc().getElementById("sammlung-navigation"));
+      assert(doc().querySelectorAll("img").length === 1, "Bildimpuls fehlt: " + task.url);
+      assert(doc().querySelector("h1").textContent === task.titel, "Aufgabenname auf der HTML-Seite weicht vom Katalog ab: " + task.url);
+      assert(doc().title === task.titel + " · Fermi-Aufgaben Mathe", "Aufgabenname im Browser-Tab weicht ab: " + task.url);
+      assert(doc().getElementById("sammlung-navigation").shadowRoot.querySelector("a").hash === returnRoute, "Aufgabenrückweg falsch: " + task.url);
+      assert(doc().documentElement.scrollWidth <= doc().documentElement.clientWidth, "Bildimpuls auf Smartphone zu breit: " + task.url);
+      lastReturn = doc().getElementById("sammlung-navigation").shadowRoot.querySelector("a").href;
+    }
+    frame.src = lastReturn;
+    await until(() => doc().querySelector(".file-link"));
+    assert(doc().querySelector("#view-title").textContent === "Zusatzaufgaben", "Aufgabe führt nicht zur Zusatzaufgabenauswahl zurück");
+    assert(errors.length === 0, "JavaScript-Fehler: " + errors.join(", "));
+    output.textContent = `PASS: ${checks} Prüfungen; ${seen.size} unterschiedliche Mathematik-Materialien erreichbar; Methoden und Rückwege geprüft.`;
+  } catch (error) {
+    output.textContent = `FAIL nach ${checks} Prüfungen: ${error.stack}`;
+  }
+})();
+</script>
+</html>

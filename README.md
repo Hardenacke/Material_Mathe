@@ -62,13 +62,21 @@ klasse-8/
 
 Unterstützte sichtbare Materialtypen sind u. a. HTML, PDF, PowerPoint, Word, Excel, CSV, Markdown, LaTeX, ZIP, Bilder, Audio und Video.
 
-Fächerübergreifende Methodenmaterialien liegen unter `methoden/sek-i/` oder `methoden/sek-ii/`. Diese Ablage wird beim Website-Build veröffentlicht und auf der Startseite als eigener Methodenblock angezeigt, zählt aber nicht zu den 9 Mathematik-Bereichen, 33 Inhaltsfeldern und 105 Themen der fachlichen Sollstruktur.
+Die Website führt über vier eigene Ansichten zum Material: **Klasse/Kurs → Themenbereich → Materialart → Materialauswahl**. Jede Ansicht hat eine verlinkbare Adresse; Navigationspfad, Schrittanzeige und Zurück-Buttons führen zu den vorherigen Ebenen. Suchbegriffe bleiben bei Seitenwechseln und Browser-Zurück erhalten. Auswahlkarten bestätigen einen Klick kurz mit ihrer Themenfarbe und einer kleinen Bewegung; die Einstellung für reduzierte Bewegung wird berücksichtigt.
+
+Fächerübergreifende Methodenmaterialien liegen unter `methoden/sek-i/` oder `methoden/sek-ii/`. Der Methoden-Einstieg auf der Startseite führt über Schulstufe und Methodenthema zu den Materialien. Die Ablage zählt nicht zu den 9 Mathematik-Bereichen, 33 Inhaltsfeldern und 105 Themen der fachlichen Sollstruktur.
 
 Lernspiele liegen gesammelt unter `lernspiele/`, damit ihre gemeinsame JavaScript-/CSS-Basis und Offline-Dateien erhalten bleiben. `werkzeuge/katalog.py` ordnet sie anhand von `lernspiele/data.json` fachlich den passenden vorhandenen Inhaltsfeldern und Themen zu und markiert sie auf der Website als Kategorie `Lernspiel`.
 
-Jahrgangsbezogene Question-Shell-Dateien liegen im jeweiligen Bereichsordner unter `unterstuetzung/`. Sie werden auf der Website unter der Inhaltsfeldauswahl angezeigt und sind bewusst keinem einzelnen Themenfeld zugeordnet.
+Jahrgangsbezogene Question-Shell-Dateien liegen im jeweiligen Bereichsordner unter `unterstuetzung/`. Sie sind über die eigene Kategorie **Unterstützung** für den ganzen Kurs erreichbar. Unter **Zusatzaufgaben** eines Themenbereichs erscheinen ausschließlich die diesem Inhaltsfeld zugeordneten Fermi-Aufgaben. Eine zusätzliche kursweite Übersicht bietet alle Zusatzaufgaben des Jahrgangs an.
 
-Zusatzaufgaben liegen im jeweiligen Bereichsordner unter `zusatzaufgaben/` und erscheinen auf der Klassen- oder Kursseite als eigene Kategorie **Zusatzaufgaben** mit dem Label **Fermi-Aufgabe**. Für Klasse 5 bis 10 liegen je acht Aufgaben unter `klasse-N/zusatzaufgaben/fermi-aufgaben/`, für die EF zwei unter `ef/zusatzaufgaben/fermi-aufgaben/`. Sechs gemeinsame Q1/Q2-Aufgaben liegen einmalig unter `gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/` und werden sowohl im Grundkurs als auch im Leistungskurs verlinkt. Damit enthält die Sammlung 56 unterschiedliche HTML-Aufgaben und 62 Zuordnungen zu Klassen und Kursen. `statistik.fermi_aufgaben` zählt unterschiedliche Aufgaben, `statistik.zusatzaufgaben` und die Materialzahlen zählen die Zuordnungen. Die jeweilige `index.html` dient als Aufgabenübersicht und wird nicht zusätzlich als Material gezählt. Die Aufgaben unterstützen lokale Browsernotizen und Drucken; Übersichts- und Aufgabenlinks funktionieren auch direkt in GitHub Pages.
+Der Build ergänzt HTML-Materialien und ihre Folgeseiten um `material-navigation.js`. Bei Aufrufen aus der Sammlung zeigt es **Zurück zur Materialauswahl** und **Klassen und Kurse**; direkt geöffnete Materialien behalten ihre eigene Ansicht. Die ursprünglichen Materialdateien werden dabei nicht verändert.
+
+Zusatzaufgaben liegen im jeweiligen Bereichsordner unter `zusatzaufgaben/` und erscheinen unter **Zusatzaufgaben** mit dem Label **Fermi-Aufgabe**. Die 104 Aufgaben aus dem erweiterten ZIP sind auch im Dateisystem nach Themenbereichen abgelegt, zum Beispiel unter `klasse-5/zusatzaufgaben/fermi-aufgaben/03-geometrie/`. Q1/Q2-Aufgaben erhalten zusätzlich Jahrgangsordner `q1/` und `q2/`. Die 32 zuvor eingebundenen Aufgaben sind darin bereits enthalten; es werden nur 72 Aufgaben ergänzt. Alle JPEG- und SVG-Bildimpulse sind direkt in den HTML-Dateien eingebettet. [FERMI_ZUORDNUNG.json](dokumentation/FERMI_ZUORDNUNG.json) ordnet alle Aufgaben den Inhaltsfeldern der unveränderten Sollstruktur zu. [FERMI_BILDIMPULSE.md](dokumentation/FERMI_BILDIMPULSE.md) dokumentiert die Aufgaben, Ablage und Herkunft.
+
+Alle 160 Fermi-Aufgaben besitzen eindeutige, aussagekräftige Namen. Der Name steht einheitlich im Katalog, in den direkten Übersichten, als Seitenüberschrift und im Browser-Tab. Jahrgang und Themenbereich werden davon getrennt angezeigt. Die Namen sind in `FERMI_ZUORDNUNG.json` unter `titel` dokumentiert; der Katalog-Build prüft die Übereinstimmung mit der HTML-Überschrift. Dateipfade, Aufgabenstellungen, Bildimpulse und Notizkennungen bleiben bei der Titelüberarbeitung erhalten.
+
+Klasse 5 bis 9 erhalten je 21 Aufgaben, Klasse 10 erhält 20, die EF acht. 27 gemeinsame Q1/Q2-Aufgaben liegen einmalig unter `gemeinsam/zusatzaufgaben/fermi-aufgaben/q1-q2/` und werden sowohl im Grundkurs als auch im Leistungskurs verlinkt. Damit enthält die Sammlung 160 unterschiedliche HTML-Aufgaben und 187 Zuordnungen zu Klassen und Kursen. `statistik.fermi_aufgaben` zählt unterschiedliche Aufgaben, `statistik.zusatzaufgaben` und die Materialzahlen zählen die Zuordnungen. Die älteren 56 Aufgaben behalten ihre Dateipfade und Browsernotiz-Kennungen. Die direkten Aufgabenübersichten sind nach Themenbereich und für Q1/Q2 zusätzlich nach Jahrgang gegliedert. Ein Klick auf eine Aufgabe öffnet ihre eigene HTML-Seite mit einem Rückweg zur Materialauswahl.
 
 Die [Fachprompt-Vorlage für weitere Fermi-Aufgaben](gemeinsam/vorlagen/Prompt_Fermi-Aufgaben_Mathematik.md) ist für Lehrkräfte unter `gemeinsam/vorlagen/` abgelegt und um Hinweise aus der [ergänzenden Markdown-Sammlung mit 30 Aufgabenbeispielen](gemeinsam/vorlagen/fermi-aufgaben/Fermi-Aufgaben_Mathematik.md) erweitert. Beide Dokumente werden nicht als Schüleraufgaben im Katalog angezeigt.
 
@@ -93,6 +101,7 @@ Gemeinsames Design:
 | Datei | Zweck |
 |---|---|
 | `index.html`, `style.css`, `script.js` | Oberfläche der Materialseite |
+| `material-navigation.js` | Rücknavigation auf erzeugten HTML-Materialseiten |
 | `struktur.json` | fachliche Sollstruktur |
 | `data.json` | automatisch erzeugter Materialkatalog für lokale/Quellprüfung |
 | `werkzeuge/katalog.py` | erkennt vorhandene Materialien |
