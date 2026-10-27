@@ -16,10 +16,11 @@ class CompetitionPublicationTests(unittest.TestCase):
         for name in ["app.js", "config.js", "style.css", "vendor/katex/katex.min.js",
                      "vendor/katex/katex.min.css", "vendor/katex/LICENSE", "assets/parabel-scheitel.svg"]:
             self.assertTrue((site / "wettkaempfe" / name).is_file(), name)
-        for name in [".local", "werkzeuge", "fragenpools", "backend", "node_modules"]:
+        for name in [".local", "werkzeuge", "fragenpools", "backend", "node_modules", "ergebnisse"]:
             self.assertFalse((site / name).exists(), name)
             self.assertFalse((site / "wettkaempfe" / name).exists(), name)
         self.assertFalse(any(site.rglob(".dev.vars")))
+        self.assertFalse(any(site.rglob("ergebnisse")))
         self.assertFalse(any(site.rglob("*-codes.csv")))
         self.assertFalse(any(site.rglob("quadratische-funktionen-9-demo.json")))
         public_config = (site / "wettkaempfe/config.js").read_text(encoding="utf-8")
@@ -42,6 +43,12 @@ class CompetitionPublicationTests(unittest.TestCase):
             with zipfile.ZipFile(archive, "w") as z:
                 z.writestr(module.PREFIX + "backend/fragenpools/eigen.json", '{"demo": true}')
             module.prepare(archive)
+            portal = module.TARGET / "public"
+            self.assertTrue((portal / "index.html").is_file())
+            self.assertTrue((portal / "favicon.svg").is_file())
+            self.assertIn("globalThis.location.origin", (portal / "config.js").read_text(encoding="utf-8"))
+            self.assertFalse((portal / "fragenpools").exists())
+            self.assertFalse((portal / "verwaltung").exists())
             pool = module.TARGET / "fragenpools/eigen.json"
             pool.write_text('{"demo": false}', encoding="utf-8")
             module.prepare(archive)
@@ -53,6 +60,7 @@ class CompetitionPublicationTests(unittest.TestCase):
             package = module.package_backend()
             with zipfile.ZipFile(package) as z:
                 self.assertIn("Material_Mathe_Wettkampf_API/fragenpools/eigen.json", z.namelist())
+                self.assertIn("Material_Mathe_Wettkampf_API/public/index.html", z.namelist())
                 self.assertFalse(any("/verwaltung/" in name or name.endswith(".dev.vars") for name in z.namelist()))
             with zipfile.ZipFile(archive, "w") as z:
                 z.writestr(module.PREFIX + "backend/../../outside.json", "{}")

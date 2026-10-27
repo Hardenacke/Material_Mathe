@@ -2,6 +2,8 @@ import definitions from '../generated/definitions.mjs';
 import {availability, periodFor} from './zeitraum.mjs';
 import {definitionFingerprint, fingerprint} from './fingerabdruck.mjs';
 import {HttpError, json, errorResponse, readJSON, exact, slug, bearer, sha256, equalSecret, call} from './http.mjs';
+import {wurzelwerk} from './wurzelwerk.mjs';
+export {QuizRoom} from './wurzelwerk.mjs';
 export {GroupAccess} from './group-access.mjs';
 export {RoomState} from './room-state.mjs';
 export {ArchiveWriter} from './archive-writer.mjs';
@@ -55,7 +57,7 @@ async function admin(request, env, groupId) {
         person.alias.trim().length < 1 || person.alias.length > 40 || /[\x00-\x1f\x7f]/.test(person.alias) ||
         !/^[a-f0-9]{64}$/.test(person.codeHash) || codes.has(person.codeHash) || typeof person.enabled !== 'boolean' ||
         !Array.isArray(person.competitions) || person.competitions.length > 50 || new Set(person.competitions).size !== person.competitions.length ||
-        person.competitions.some(id => !slug(id) || !definitions.competitions.some(c => c.id === id && c.groupId === groupId)))
+        person.competitions.some(id => !slug(id) || ![...definitions.competitions, wurzelwerk].some(c => c.id === id && c.groupId === groupId)))
       throw new HttpError(400, 'PARTICIPANT', 'Ungültiger oder doppelter Zugang.');
     ids.add(person.id); codes.add(person.codeHash);
   }
@@ -67,6 +69,29 @@ async function route(request, env) {
   const adminMatch = url.pathname.match(/^\/admin\/v1\/groups\/([a-z0-9-]+)\/participants$/);
   if (adminMatch && request.method === 'POST' && slug(adminMatch[1])) return admin(request, env, adminMatch[1]);
   if (!['GET', 'POST'].includes(request.method)) throw new HttpError(405, 'METHOD', 'Methode nicht erlaubt.');
+  if (url.pathname.startsWith('/api/v1/quizzes/wurzelwerk')) {
+    const match = url.pathname.match(/^\/api\/v1\/quizzes\/wurzelwerk(?:\/attempts(?:\/([a-f0-9-]{36})\/(answer|next))?)?$/);
+    if (!match) throw new HttpError(404, 'ROUTE', 'Quizadresse nicht gefunden.');
+    const {response, actor} = await authenticate(request, env, wurzelwerk.groupId);
+    if (response) return response;
+    checkMembership(actor, wurzelwerk);
+    const op = request.method === 'GET' && url.pathname === '/api/v1/quizzes/wurzelwerk' ? 'state' :
+      request.method === 'POST' && url.pathname.endsWith('/attempts') ? 'start' :
+      request.method === 'POST' && match[1] && uuid(match[1]) ? match[2] : null;
+    if (!op) throw new HttpError(405, 'METHOD', 'Methode passt nicht zur Quizadresse.');
+    let payload = {}, requestId = null;
+    if (op !== 'state') {
+      requestId = request.headers.get('Idempotency-Key');
+      if (!uuid(requestId)) throw new HttpError(400, 'IDEMPOTENCY', 'UUID als Anfragekennung erforderlich.');
+      payload = await readJSON(request);
+      exact(payload, op === 'answer' ? ['questionId', 'answer'] : []);
+      if (op === 'answer' && !uuid(payload.questionId)) throw new HttpError(400, 'QUESTION', 'Ungültige Aufgabenkennung.');
+    }
+    return call(env.QUIZ_ROOM, 'mathematik/' + wurzelwerk.id + '/v1/gesamt', {
+      op, actor, attemptId: match[1], payload, requestId,
+      hash: await fingerprint({op, attemptId: match[1] || null, payload})
+    });
+  }
   if (url.pathname === '/api/v1/catalog' && request.method === 'GET') {
     const groupId = url.searchParams.get('groupId');
     if (!slug(groupId)) throw new HttpError(400, 'GROUP', 'Bitte eine gültige Lerngruppe angeben.');
@@ -127,7 +152,8 @@ export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin');
     const allowed = (env.ALLOWED_ORIGINS || '').split(',').map(value => value.trim());
-    if (origin && !allowed.includes(origin)) return errorResponse(new HttpError(403, 'ORIGIN', 'Herkunft nicht freigegeben.'));
+    if (origin && origin !== new URL(request.url).origin && !allowed.includes(origin))
+      return errorResponse(new HttpError(403, 'ORIGIN', 'Herkunft nicht freigegeben.'));
     let result;
     if (request.method === 'OPTIONS') result = new Response(null, {status: 204});
     else try { result = await route(request, env); } catch (error) { result = errorResponse(error); }

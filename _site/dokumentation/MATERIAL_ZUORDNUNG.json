@@ -126,6 +126,15 @@
       "titel": "Quadratische Ergänzung – drei Erklärvideos",
       "typ": "Video",
       "beschreibung": "Flächenidee, Beispielrechnung und Übung: von der Normalform zur Scheitelpunktform; mit H5P-Hypervideo zum Herunterladen."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "thema": "01-reelle-zahlen-und-wurzeln",
+      "url": "klasse-9/01-arithmetik-algebra/01-reelle-zahlen-und-wurzeln/quiz/wurzelwerk/index.html",
+      "titel": "Wurzelwerk – Reelle Zahlen und Wurzeln",
+      "typ": "Quiz",
+      "beschreibung": "Quadratwurzeln, Wurzelgesetze und Zahlenstrahl: Training auf drei Stufen und Cloudflare-Wettbewerb mit gemeinsamer Rangliste."
     }
   ]
 }

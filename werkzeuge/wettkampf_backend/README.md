@@ -16,6 +16,12 @@ beschreiben den ursprünglichen Lieferstand. Diese Adapter sind hier ergänzt.
 
 Voraussetzungen: Node.js 24 oder neuer, für die Bereitstellung ein Cloudflare-Konto.
 
+Die Vorbereitung kopiert zusätzlich das öffentliche Portal nach `public/`.
+Cloudflare liefert diese Assets und die API gemeinsam unter der Worker-Adresse aus;
+das Portal nutzt dabei seine eigene Herkunft als API-Adresse. Nur `/api/*`,
+`/admin/*` und `/health` werden vorrangig vom Worker bearbeitet. Fragenpools,
+Verwaltungsdateien und Secrets gehören niemals nach `public/`.
+
 ```text
 npm ci
 npm run check
@@ -24,8 +30,8 @@ npm run test:integration
 npm run deploy:check
 ```
 
-`deploy:check` bündelt den Worker lokal, ohne ihn zu veröffentlichen. Die drei
-Beispielwettbewerbe bleiben `draft`. Für den Produktivbetrieb eine passende Gruppe,
+`deploy:check` bündelt den Worker lokal, ohne ihn zu veröffentlichen. Der Import
+erhält den Status bereits bearbeiteter Wettbewerbe. Für den Produktivbetrieb eine passende Gruppe,
 fachlich geprüfte Aufgaben, einen Termin beziehungsweise Wertungsmodus und den
 Status `published` in der betreffenden Wettbewerbsdatei festlegen.
 
@@ -50,8 +56,16 @@ npm run deploy
 ```
 
 `ADMIN_TOKEN` ist ein zufälliger Base64url-Wert mit mindestens 32 Zeichen, getrennt
-von den Schülercodes. Das GitHub-Token darf ausschließlich das private Ergebnisrepository
-beschreiben. `wrangler.jsonc` enthält dessen Namen, Zweig und erlaubte Portal-Ursprünge.
+von den Schülercodes. Das GitHub-Token erhält ausschließlich für **Material_Mathe**
+die Berechtigung **Contents: Read and write**. Als Archivziel sind
+`Hardenacke/Material_Mathe`, Branch `main`, `ARCHIVE_PREFIX: "ergebnisse"` und
+`ARCHIVE_ALLOW_PUBLIC: "true"` vorbereitet. Ohne diese ausdrückliche Freigabe werden
+öffentliche Repositories abgewiesen. Der Writer darf ausschließlich die vorgesehenen
+Ergebnis-JSON-Dateien lesen und schreiben; Löschen und fremde Dateien sind gesperrt.
+Die öffentliche Ausgabe verwendet eine Positivliste für Raum- und Ranglistendaten.
+Ältere offene Aufträge wechseln ebenfalls in den neuen Ergebnisordner. Nach Änderungen
+die Implementierung mit `npm.cmd run deploy` erneut bereitstellen.
+`wrangler.jsonc` enthält außerdem die erlaubten Portal-Ursprünge.
 Keine Tokens, Klartextcodes, personenbezogenen Listen oder `.dev.vars` einchecken.
 
 Neue Themen über `npm run neu -- ...` anlegen; die Anleitung aus dem ZIP steht in

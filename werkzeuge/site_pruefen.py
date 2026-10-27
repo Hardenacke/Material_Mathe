@@ -27,6 +27,8 @@ if (ROOT/"wettkaempfe").exists():
             errors.append(f"Private oder technische Backend-Ablage in _site: {private}")
     for pattern in [".dev.vars", "*-codes.csv", "quadratische-funktionen-9-demo.json"]:
         if any((ROOT/"_site").rglob(pattern)): errors.append(f"Private Wettbewerbsdatei in _site: {pattern}")
+if any(path.is_dir() for path in (ROOT/"_site").rglob("ergebnisse")):
+    errors.append("Wettbewerbsergebnisse gehören ins GitHub-Archiv, nicht in _site.")
 
 def check_material(mat):
     if not (ROOT/mat["url"]).exists(): errors.append(f"Materialpfad fehlt: {mat['url']}")

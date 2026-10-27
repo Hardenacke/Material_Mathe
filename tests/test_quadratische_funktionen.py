@@ -32,7 +32,7 @@ class QuadraticMaterialTests(unittest.TestCase):
     def test_each_registered_material_is_catalogued_once_in_correct_topic(self):
         data = katalog.build_catalog()
         assignments = json.loads(katalog.MATERIAL_ASSIGNMENTS_FILE.read_text(encoding="utf-8"))["materialien"]
-        self.assertEqual(len(assignments), 14)
+        self.assertEqual(sum(entry["typ"] != "Quiz" for entry in assignments), 14)
         found = {}
         counts = Counter()
         for area in data["bereiche"]:

@@ -4,23 +4,31 @@
   "main": "src/worker.mjs",
   "compatibility_date": "2026-10-27",
   "workers_dev": true,
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*", "/admin/*", "/health"]
+  },
   "observability": { "enabled": false },
   "rules": [{ "type": "Text", "globs": ["**/*.sql"], "fallthrough": true }],
   "durable_objects": {
     "bindings": [
       { "name": "GROUP_ACCESS", "class_name": "GroupAccess" },
       { "name": "ROOM_STATE", "class_name": "RoomState" },
-      { "name": "ARCHIVE_WRITER", "class_name": "ArchiveWriter" }
+      { "name": "ARCHIVE_WRITER", "class_name": "ArchiveWriter" },
+      { "name": "QUIZ_ROOM", "class_name": "QuizRoom" }
     ]
   },
   "migrations": [
-    { "tag": "v1", "new_sqlite_classes": ["GroupAccess", "RoomState", "ArchiveWriter"] }
+    { "tag": "v1", "new_sqlite_classes": ["GroupAccess", "RoomState", "ArchiveWriter"] },
+    { "tag": "v2-wurzelwerk", "new_sqlite_classes": ["QuizRoom"] }
   ],
   "vars": {
     "ALLOWED_ORIGINS": "https://hardenacke.github.io,http://127.0.0.1:8000,http://localhost:8000",
-    "ARCHIVE_REPOSITORY": "Hardenacke/Material_Mathe_Ergebnisse",
+    "ARCHIVE_REPOSITORY": "Hardenacke/Material_Mathe",
+    "ARCHIVE_ALLOW_PUBLIC": "true",
     "ARCHIVE_BRANCH": "main",
-    "ARCHIVE_PREFIX": "architektur-v1",
+    "ARCHIVE_PREFIX": "ergebnisse",
     "DETAIL_RETENTION_DAYS": "90"
   }
 }

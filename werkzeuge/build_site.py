@@ -10,7 +10,7 @@ sys.path.insert(0, str(ROOT / "werkzeuge"))
 from katalog import write_catalog  # noqa: E402
 
 STRUCT = json.loads((ROOT / "struktur.json").read_text(encoding="utf-8"))
-EXCLUDE_DIRS = {"privat", "entwuerfe", ".git", ".github", "_site", "__pycache__", "tests", "werkzeuge"}
+EXCLUDE_DIRS = {"privat", "entwuerfe", "ergebnisse", ".git", ".github", "_site", "__pycache__", "tests", "werkzeuge"}
 
 
 def ignore(_dir: str, names: list[str]) -> set[str]:

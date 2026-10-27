@@ -8,6 +8,7 @@ let navigationTimer = null;
 
 const methodTheme = { accent: "#0f766e", accentDark: "#115e59", accentSoft: "#ccfbf1" };
 const materialKinds = [
+  { id: "quiz", title: "Quiz", icon: "?", description: "Wissen testen, Wurzeln üben und im Wettbewerb antreten." },
   { id: "lernpfade", title: "Lernpfade", icon: "↗", description: "Schritt für Schritt neue Zusammenhänge entdecken." },
   { id: "simulationen", title: "Simulationen", icon: "◉", description: "Ausprobieren, verändern und Zusammenhänge beobachten." },
   { id: "pruefungsvorbereitung", title: "Prüfungsvorbereitung", icon: "✓", description: "Gezielt für Klassenarbeiten und Prüfungen üben." },
@@ -79,6 +80,7 @@ function fieldExtraEntries(area, field) {
 function materialKind(material) {
   const category = normalize(`${material.kategorie || ""} ${material.typ || ""}`);
   const name = normalize(`${material.titel} ${material.datei}`);
+  if (category.split(/\s+/).includes("quiz")) return "quiz";
   if (/prufung|abitur|klausur/.test(category) || /abi_|abitur|prufungsvorbereitung/.test(name)) return "pruefungsvorbereitung";
   if (/lernpfad/.test(category)) return "lernpfade";
   if (/simulation/.test(`${category} ${name}`)) return "simulationen";
@@ -276,9 +278,12 @@ function baseCrumbs(area, field) {
 }
 
 function areaGroups(area) {
-  return ["zusatzaufgaben", "unterstuetzung"].map((id) => ({
+  const groups = ["zusatzaufgaben", "unterstuetzung"].map((id) => ({
     ...materialKinds.find((kind) => kind.id === id), entries: sharedEntries(area, id)
-  })).filter((group) => group.entries.length);
+  }));
+  groups.push({...materialKinds.find((kind) => kind.id === "quiz"),
+    entries: area.inhaltsfelder.flatMap(fieldEntries).filter(({material}) => materialKind(material) === "quiz")});
+  return groups.filter((group) => group.entries.length);
 }
 
 function groupMatches(group, query) {
@@ -308,7 +313,7 @@ function renderArea(area, query) {
 
 function fieldGroups(area, field) {
   const entries = [...fieldEntries(field), ...fieldExtraEntries(area, field)];
-  const shared = areaGroups(area).filter((group) => group.id !== "zusatzaufgaben");
+  const shared = areaGroups(area).filter((group) => !["zusatzaufgaben", "quiz"].includes(group.id));
   return materialKinds.map((kind) => ({
     ...kind,
     entries: [...entries.filter(({ material }) => materialKind(material) === kind.id), ...(shared.find((group) => group.id === kind.id)?.entries || [])]

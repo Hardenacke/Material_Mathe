@@ -5,7 +5,7 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 322,
+    "materialien": 323,
     "lernspiele": 74,
     "unterstuetzung": 12,
     "zusatzaufgaben": 187,
@@ -17,6 +17,7 @@
     "HTML",
     "Lernpfad",
     "PPTX",
+    "Quiz",
     "Unterstützung",
     "Video",
     "Zusatzaufgaben"
@@ -2376,7 +2377,16 @@
             {
               "id": "01-reelle-zahlen-und-wurzeln",
               "titel": "Reelle Zahlen, Quadratwurzeln und Irrationalität",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "Wurzelwerk – Reelle Zahlen und Wurzeln",
+                  "datei": "index.html",
+                  "typ": "Quiz",
+                  "kategorie": "Quiz",
+                  "url": "klasse-9/01-arithmetik-algebra/01-reelle-zahlen-und-wurzeln/quiz/wurzelwerk/index.html",
+                  "beschreibung": "Quadratwurzeln, Wurzelgesetze und Zahlenstrahl: Training auf drei Stufen und Cloudflare-Wettbewerb mit gemeinsamer Rangliste."
+                }
+              ]
             },
             {
               "id": "02-potenzen-und-potenzgesetze",

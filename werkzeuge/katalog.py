@@ -199,7 +199,7 @@ def assigned_materials_by_destination() -> tuple[dict[tuple[str, str, str], list
         file = ROOT / url
         if scope not in scopes or not file.resolve().is_relative_to(ROOT) or not is_display_material(file):
             raise ValueError(f"Material oder fachliche Zuordnung ungültig: {url}")
-        if url in urls or not entry.get("titel") or entry.get("typ") not in {"Lernpfad", "Video", "HTML", "PDF"}:
+        if url in urls or not entry.get("titel") or entry.get("typ") not in {"Lernpfad", "Quiz", "Video", "HTML", "PDF"}:
             raise ValueError(f"Doppelte oder unvollständige Materialzuordnung: {url}")
         if any(part in {"privat", "entwuerfe", ".local", "werkzeuge"} for part in file.relative_to(ROOT).parts):
             raise ValueError(f"Nicht öffentliche Materialzuordnung: {url}")
