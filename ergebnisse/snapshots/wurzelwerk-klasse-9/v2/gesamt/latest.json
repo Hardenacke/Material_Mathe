@@ -4,9 +4,9 @@
   "version": 2,
   "periodId": "gesamt",
   "instanceId": "c1ab92ee-d27d-444e-ad26-8873dd35ede3",
-  "revision": 1,
+  "revision": 2,
   "final": false,
-  "generatedAt": 1793135237388,
+  "generatedAt": 1793135856061,
   "leaderboard": [
     {
       "rank": 1,
@@ -14,6 +14,13 @@
       "score": 1778,
       "maxPoints": 1800,
       "endedAt": 1793135237388
+    },
+    {
+      "rank": 2,
+      "alias": "Karl 9a",
+      "score": 756,
+      "maxPoints": 1800,
+      "endedAt": 1793135856061
     }
   ]
 }
