@@ -1,0 +1,9 @@
+node_modules/
+.wrangler/
+.deploy-check/
+.dev.vars
+.env*
+!.env.example
+generated/
+verwaltung/
+*.log

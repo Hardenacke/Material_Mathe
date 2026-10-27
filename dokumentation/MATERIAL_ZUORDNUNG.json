@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "materialien": [
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "01-quadratische-funktionen",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/index.html",
+      "titel": "Quadratische Funktionen – zwölf interaktive Lernpfade",
+      "typ": "Lernpfad",
+      "beschreibung": "Die gesamte Lernpfadreihe: von der Normalparabel und ihren Parametern bis zu Nullstellen, Modellierung und Optimierung."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "01-quadratische-funktionen",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/01_Einstieg_Funktionsdiagnose.html",
+      "titel": "01 · Einstieg und Funktionsdiagnose",
+      "typ": "Lernpfad",
+      "beschreibung": "Quadratische Zuordnungen an Term, Tabelle und Graph erkennen und unterscheiden."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "01-quadratische-funktionen",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/02_Normalparabel_Entdecken.html",
+      "titel": "02 · Die Normalparabel entdecken",
+      "typ": "Lernpfad",
+      "beschreibung": "Symmetrie, Scheitelpunkt und typische Punkte in mehreren Darstellungen beschreiben."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "01-quadratische-funktionen",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/03_Parameterlabor_Streckung_Spiegelung.html",
+      "titel": "03 · Streckung und Spiegelung untersuchen",
+      "typ": "Lernpfad",
+      "beschreibung": "Öffnungsrichtung und Breite der Parabel deuten."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "01-quadratische-funktionen",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/04_Scheitelpunktform_verschieben.html",
+      "titel": "04 · Die Scheitelpunktform verschieben",
+      "typ": "Lernpfad",
+      "beschreibung": "Waagerechte und senkrechte Verschiebungen deuten."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "01-quadratische-funktionen",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/05_Parameter_aus_Graph.html",
+      "titel": "05 · Den Parameter aus einem Graphen bestimmen",
+      "typ": "Lernpfad",
+      "beschreibung": "Den Streckfaktor aus Scheitelpunkt und einem weiteren Punkt bestimmen."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "01-quadratische-funktionen",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/06_Normalform_in_Scheitelpunktform.html",
+      "titel": "06 · Von der Normalform zur Scheitelpunktform",
+      "typ": "Lernpfad",
+      "beschreibung": "Durch quadratische Ergänzung in Scheitelpunktform umformen."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "02-nullstellen-und-modellierung",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/07_Faktorisierte_Form_Nullstellen.html",
+      "titel": "07 · Nullstellen aus der faktorisierten Form lesen",
+      "typ": "Lernpfad",
+      "beschreibung": "Nullstellen mit der Nullproduktregel bestimmen."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "thema": "03-quadratische-gleichungen",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/08_Quadratische_Gleichungen_loesen.html",
+      "titel": "08 · Quadratische Gleichungen lösen",
+      "typ": "Lernpfad",
+      "beschreibung": "Quadratische Gleichungen mit passenden Verfahren lösen."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "02-nullstellen-und-modellierung",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/09_Termformen_geplant_nutzen.html",
+      "titel": "09 · Termformen passend auswählen",
+      "typ": "Lernpfad",
+      "beschreibung": "Die Termform passend zur gesuchten Information wählen."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "02-nullstellen-und-modellierung",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/10_Brueckenbogen_modellieren.html",
+      "titel": "10 · Einen Brückenbogen modellieren",
+      "typ": "Lernpfad",
+      "beschreibung": "Einen Brückenbogen mathematisch modellieren."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "02-nullstellen-und-modellierung",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/11_Extremwertlabor_Flaeche.html",
+      "titel": "11 · Eine Fläche optimieren",
+      "typ": "Lernpfad",
+      "beschreibung": "Das Maximum einer quadratischen Flächenfunktion begründen."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "02-nullstellen-und-modellierung",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/12_Transfer_Lernstandscheck.html",
+      "titel": "12 · Transfer und Lernstandscheck",
+      "typ": "Lernpfad",
+      "beschreibung": "Darstellungen und Verfahren selbstständig verbinden."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "thema": "01-quadratische-funktionen",
+      "url": "klasse-9/02-funktionen/01-quadratische-funktionen/quadratische-ergaenzung-videos.html",
+      "titel": "Quadratische Ergänzung – drei Erklärvideos",
+      "typ": "Video",
+      "beschreibung": "Flächenidee, Beispielrechnung und Übung: von der Normalform zur Scheitelpunktform; mit H5P-Hypervideo zum Herunterladen."
+    }
+  ]
+}

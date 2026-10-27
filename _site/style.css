@@ -123,6 +123,29 @@ a {
   z-index: 1;
 }
 
+.competition-entry {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  color: #fff;
+  background: rgba(109, 40, 217, 0.35);
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.competition-entry:hover { background: rgba(109, 40, 217, 0.65); }
+.competition-entry:focus-visible { outline: 3px solid #eab308; outline-offset: 4px; }
+@media (max-width: 600px) {
+  .competition-entry { position: static; display: flex; width: fit-content; margin: 0 0 14px; }
+}
+
 .eyebrow {
   display: inline-flex;
   min-height: 28px;

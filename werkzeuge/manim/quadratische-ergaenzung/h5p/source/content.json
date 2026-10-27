@@ -1,0 +1,401 @@
+{
+  "interactiveVideo": {
+    "video": {
+      "files": [
+        {
+          "path": "videos/02_Beispiel_x2_4x_3.mp4",
+          "mime": "video/mp4",
+          "copyright": {
+            "license": "U"
+          }
+        }
+      ],
+      "startScreenOptions": {
+        "title": "Beispielrechnung: f(x) = x² + 4x + 3",
+        "hideStartTitle": false,
+        "shortStartDescription": "Quadratisch ergänzen und den Scheitelpunkt ablesen."
+      },
+      "textTracks": {
+        "videoTrack": [],
+        "defaultTrackLabel": ""
+      }
+    },
+    "assets": {
+      "interactions": [
+        {
+          "duration": {
+            "from": 3.35,
+            "to": 6.2
+          },
+          "pause": true,
+          "displayType": "poster",
+          "buttonOnMobile": true,
+          "adaptivity": {
+            "correct": {
+              "allowOptOut": false,
+              "message": "Richtig! Schau dir den nächsten Rechenschritt an."
+            },
+            "wrong": {
+              "allowOptOut": true,
+              "message": "Prüfe deine Rechnung. Du kannst die Video-Erklärung fortsetzen."
+            },
+            "requireCompletion": true
+          },
+          "label": "<p>Kontrollfrage 1: Hälfte bestimmen</p>",
+          "x": 10,
+          "y": 10,
+          "width": 80,
+          "height": 80,
+          "libraryTitle": "Fill in the Blanks",
+          "visuals": {
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": true
+          },
+          "action": {
+            "library": "H5P.Blanks 1.14",
+            "params": {
+              "text": "Setze den fehlenden Zahlenwert ein und prüfe deine Eingabe.",
+              "questions": [
+                "<p>Berechne die Hälfte des x-Koeffizienten: 4 : 2 = *2*.</p>"
+              ],
+              "overallFeedback": [
+                {
+                  "from": 0,
+                  "to": 0,
+                  "feedback": "Noch nicht richtig. Rechne den Schritt noch einmal."
+                },
+                {
+                  "from": 100,
+                  "to": 100,
+                  "feedback": "Die Hälfte des Koeffizienten vor x ist 2."
+                }
+              ],
+              "showSolutions": "Lösung anzeigen",
+              "tryAgain": "Noch einmal",
+              "checkAnswer": "Antwort prüfen",
+              "submitAnswer": "Antwort absenden",
+              "notFilledOut": "Bitte setze zuerst den Zahlenwert ein.",
+              "answerIsCorrect": "„:ans“ ist richtig.",
+              "answerIsWrong": "„:ans“ ist noch nicht richtig.",
+              "answeredCorrectly": "Richtig beantwortet",
+              "answeredIncorrectly": "Noch nicht richtig",
+              "solutionLabel": "Lösung:",
+              "inputLabel": "Eingabefeld @num von @total",
+              "inputHasTipLabel": "Hinweis verfügbar",
+              "tipLabel": "Hinweis",
+              "behaviour": {
+                "enableRetry": true,
+                "allowRetryIfCorrect": true,
+                "enableSolutionsButton": true,
+                "enableCheckButton": true,
+                "autoCheck": false,
+                "caseSensitive": true,
+                "showSolutionsRequiresInput": true,
+                "separateLines": false,
+                "confirmCheckDialog": false,
+                "confirmRetryDialog": false,
+                "acceptSpellingErrors": false
+              },
+              "confirmCheck": {
+                "header": "Antwort prüfen?",
+                "body": "Möchtest du deine Eingabe prüfen?",
+                "cancelLabel": "Zurück",
+                "confirmLabel": "Prüfen"
+              },
+              "confirmRetry": {
+                "header": "Noch einmal versuchen?",
+                "body": "Deine Eingabe wird zurückgesetzt.",
+                "cancelLabel": "Abbrechen",
+                "confirmLabel": "Wiederholen"
+              },
+              "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+              "a11yCheck": "Antwort prüfen. Die Eingabe wird als richtig oder falsch markiert.",
+              "a11yShowSolution": "Die richtige Eingabe anzeigen.",
+              "a11yRetry": "Eingabe zurücksetzen und erneut versuchen.",
+              "a11yCheckingModeHeader": "Antwort prüfen"
+            },
+            "subContentId": "88b3dd09-6766-588a-b175-486c27db151c",
+            "metadata": {
+              "contentType": "Fill in the Blanks",
+              "license": "U",
+              "title": "Hälfte bestimmen",
+              "authors": [],
+              "changes": [],
+              "extraTitle": "Hälfte bestimmen"
+            }
+          }
+        },
+        {
+          "duration": {
+            "from": 8.55,
+            "to": 10.9
+          },
+          "pause": true,
+          "displayType": "poster",
+          "buttonOnMobile": true,
+          "adaptivity": {
+            "correct": {
+              "allowOptOut": false,
+              "message": "Richtig! Schau dir den nächsten Rechenschritt an."
+            },
+            "wrong": {
+              "allowOptOut": true,
+              "message": "Prüfe deine Rechnung. Du kannst die Video-Erklärung fortsetzen."
+            },
+            "requireCompletion": true
+          },
+          "label": "<p>Kontrollfrage 2: Hälfte quadrieren</p>",
+          "x": 10,
+          "y": 10,
+          "width": 80,
+          "height": 80,
+          "libraryTitle": "Fill in the Blanks",
+          "visuals": {
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": true
+          },
+          "action": {
+            "library": "H5P.Blanks 1.14",
+            "params": {
+              "text": "Setze den fehlenden Zahlenwert ein und prüfe deine Eingabe.",
+              "questions": [
+                "<p>Quadriere die Hälfte: 2² = *4*.</p>"
+              ],
+              "overallFeedback": [
+                {
+                  "from": 0,
+                  "to": 0,
+                  "feedback": "Noch nicht richtig. Rechne den Schritt noch einmal."
+                },
+                {
+                  "from": 100,
+                  "to": 100,
+                  "feedback": "2² = 4. Diese Zahl ergänzt das vollständige Quadrat."
+                }
+              ],
+              "showSolutions": "Lösung anzeigen",
+              "tryAgain": "Noch einmal",
+              "checkAnswer": "Antwort prüfen",
+              "submitAnswer": "Antwort absenden",
+              "notFilledOut": "Bitte setze zuerst den Zahlenwert ein.",
+              "answerIsCorrect": "„:ans“ ist richtig.",
+              "answerIsWrong": "„:ans“ ist noch nicht richtig.",
+              "answeredCorrectly": "Richtig beantwortet",
+              "answeredIncorrectly": "Noch nicht richtig",
+              "solutionLabel": "Lösung:",
+              "inputLabel": "Eingabefeld @num von @total",
+              "inputHasTipLabel": "Hinweis verfügbar",
+              "tipLabel": "Hinweis",
+              "behaviour": {
+                "enableRetry": true,
+                "allowRetryIfCorrect": true,
+                "enableSolutionsButton": true,
+                "enableCheckButton": true,
+                "autoCheck": false,
+                "caseSensitive": true,
+                "showSolutionsRequiresInput": true,
+                "separateLines": false,
+                "confirmCheckDialog": false,
+                "confirmRetryDialog": false,
+                "acceptSpellingErrors": false
+              },
+              "confirmCheck": {
+                "header": "Antwort prüfen?",
+                "body": "Möchtest du deine Eingabe prüfen?",
+                "cancelLabel": "Zurück",
+                "confirmLabel": "Prüfen"
+              },
+              "confirmRetry": {
+                "header": "Noch einmal versuchen?",
+                "body": "Deine Eingabe wird zurückgesetzt.",
+                "cancelLabel": "Abbrechen",
+                "confirmLabel": "Wiederholen"
+              },
+              "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+              "a11yCheck": "Antwort prüfen. Die Eingabe wird als richtig oder falsch markiert.",
+              "a11yShowSolution": "Die richtige Eingabe anzeigen.",
+              "a11yRetry": "Eingabe zurücksetzen und erneut versuchen.",
+              "a11yCheckingModeHeader": "Antwort prüfen"
+            },
+            "subContentId": "9ecf7575-b01a-550e-af9b-d20b79e44a35",
+            "metadata": {
+              "contentType": "Fill in the Blanks",
+              "license": "U",
+              "title": "Hälfte quadrieren",
+              "authors": [],
+              "changes": [],
+              "extraTitle": "Hälfte quadrieren"
+            }
+          }
+        },
+        {
+          "duration": {
+            "from": 14.0,
+            "to": 15.55
+          },
+          "pause": true,
+          "displayType": "poster",
+          "buttonOnMobile": true,
+          "adaptivity": {
+            "correct": {
+              "allowOptOut": false,
+              "message": "Richtig! Schau dir den nächsten Rechenschritt an."
+            },
+            "wrong": {
+              "allowOptOut": true,
+              "message": "Prüfe deine Rechnung. Du kannst die Video-Erklärung fortsetzen."
+            },
+            "requireCompletion": true
+          },
+          "label": "<p>Kontrollfrage 3: Konstante berechnen</p>",
+          "x": 10,
+          "y": 10,
+          "width": 80,
+          "height": 80,
+          "libraryTitle": "Fill in the Blanks",
+          "visuals": {
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": true
+          },
+          "action": {
+            "library": "H5P.Blanks 1.14",
+            "params": {
+              "text": "Setze den fehlenden Zahlenwert ein und prüfe deine Eingabe.",
+              "questions": [
+                "<p>Berechne den verbleibenden konstanten Term: -4 + 3 = *-1*.</p>"
+              ],
+              "overallFeedback": [
+                {
+                  "from": 0,
+                  "to": 0,
+                  "feedback": "Noch nicht richtig. Rechne den Schritt noch einmal."
+                },
+                {
+                  "from": 100,
+                  "to": 100,
+                  "feedback": "-4 + 3 = -1. Der Restterm außerhalb des Quadrats ist -1."
+                }
+              ],
+              "showSolutions": "Lösung anzeigen",
+              "tryAgain": "Noch einmal",
+              "checkAnswer": "Antwort prüfen",
+              "submitAnswer": "Antwort absenden",
+              "notFilledOut": "Bitte setze zuerst den Zahlenwert ein.",
+              "answerIsCorrect": "„:ans“ ist richtig.",
+              "answerIsWrong": "„:ans“ ist noch nicht richtig.",
+              "answeredCorrectly": "Richtig beantwortet",
+              "answeredIncorrectly": "Noch nicht richtig",
+              "solutionLabel": "Lösung:",
+              "inputLabel": "Eingabefeld @num von @total",
+              "inputHasTipLabel": "Hinweis verfügbar",
+              "tipLabel": "Hinweis",
+              "behaviour": {
+                "enableRetry": true,
+                "allowRetryIfCorrect": true,
+                "enableSolutionsButton": true,
+                "enableCheckButton": true,
+                "autoCheck": false,
+                "caseSensitive": true,
+                "showSolutionsRequiresInput": true,
+                "separateLines": false,
+                "confirmCheckDialog": false,
+                "confirmRetryDialog": false,
+                "acceptSpellingErrors": false
+              },
+              "confirmCheck": {
+                "header": "Antwort prüfen?",
+                "body": "Möchtest du deine Eingabe prüfen?",
+                "cancelLabel": "Zurück",
+                "confirmLabel": "Prüfen"
+              },
+              "confirmRetry": {
+                "header": "Noch einmal versuchen?",
+                "body": "Deine Eingabe wird zurückgesetzt.",
+                "cancelLabel": "Abbrechen",
+                "confirmLabel": "Wiederholen"
+              },
+              "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+              "a11yCheck": "Antwort prüfen. Die Eingabe wird als richtig oder falsch markiert.",
+              "a11yShowSolution": "Die richtige Eingabe anzeigen.",
+              "a11yRetry": "Eingabe zurücksetzen und erneut versuchen.",
+              "a11yCheckingModeHeader": "Antwort prüfen"
+            },
+            "subContentId": "3c3c862e-3a52-5f5f-92cd-1a03a15e3678",
+            "metadata": {
+              "contentType": "Fill in the Blanks",
+              "license": "U",
+              "title": "Konstante berechnen",
+              "authors": [],
+              "changes": [],
+              "extraTitle": "Konstante berechnen"
+            }
+          }
+        }
+      ]
+    },
+    "bookmarks": [],
+    "endscreens": [],
+    "summary": {
+      "task": {
+        "library": "H5P.Summary 1.10",
+        "params": {
+          "intro": "<p>Wähle die fachlich richtige Zusammenfassung.</p>",
+          "summaries": [
+            {
+              "subContentId": "a486ce68-c16d-5ff0-84b3-4adf0347c05f",
+              "tip": "Halbiere den Koeffizienten vor x, quadriere die Hälfte und gleiche aus.",
+              "summary": [
+                "<p>Ich halbiere 4 zu 2, quadriere zu 4 und gleiche mit -4 aus.</p>\n",
+                "<p>Ich addiere nur 4; der Termwert bleibt auch ohne Ausgleich gleich.</p>\n"
+              ]
+            }
+          ],
+          "overallFeedback": [
+            {
+              "from": 0,
+              "to": 100,
+              "feedback": "Merksatz: halbieren, quadrieren, ausgleichen."
+            }
+          ],
+          "solvedLabel": "Richtig gelöst:",
+          "scoreLabel": "Falsche Auswahl:",
+          "resultLabel": "Dein Ergebnis",
+          "labelCorrect": "Richtig.",
+          "labelIncorrect": "Noch nicht richtig. Versuche es erneut.",
+          "alternativeIncorrectLabel": "Falsch",
+          "labelCorrectAnswers": "Richtige Aussagen:",
+          "tipButtonLabel": "Hinweis anzeigen",
+          "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+          "progressText": "Fortschritt: :num von :total"
+        },
+        "subContentId": "0be6ad79-8009-5ec5-822f-6f522af7bc73",
+        "metadata": {
+          "contentType": "Summary",
+          "license": "U",
+          "title": "Merksatz zur quadratischen Ergänzung",
+          "authors": [],
+          "changes": [],
+          "extraTitle": "Merksatz zur quadratischen Ergänzung"
+        }
+      },
+      "displayAt": 0.8
+    },
+    "override": {
+      "autoplay": false,
+      "loop": false,
+      "showBookmarksmenuOnLoad": false,
+      "showRewind10": true,
+      "preventSkippingMode": "forward",
+      "deactivateSound": false
+    }
+  },
+  "subContentId": "f72f6536-0d43-59de-8bdd-f428a0bef8a4",
+  "metadata": {
+    "contentType": "Interactive Video",
+    "license": "U",
+    "title": "Quadratische Ergänzung – Beispielrechnung mit Kontrollfragen",
+    "authors": [],
+    "changes": [],
+    "extraTitle": "Quadratische Ergänzung – Beispielrechnung mit Kontrollfragen"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "herkunft": "Materialpaket_Quadratische_Funktionen_Klasse_9_NRW.zip",
+  "uebernahme": "Bereits gerenderte Videos unveraendert uebernommen",
+  "videos": [
+    {
+      "datei": "01_Flaechenidee.mp4",
+      "dauer": "00:00:17.70",
+      "sha256": "0c0a610c8d028fd227462ea5c648e93f1bbd5ea642e27362255352f7b9ac4d89",
+      "poster": "01_Flaechenidee.jpg",
+      "vollstaendig_decodiert": true
+    },
+    {
+      "datei": "02_Beispiel_x2_4x_3.mp4",
+      "dauer": "00:00:23.60",
+      "sha256": "4578eec6a4bc023a30f0957db4c10f787e824ee6cba99b9311c227ffb9020cad",
+      "poster": "02_Beispiel_x2_4x_3.jpg",
+      "vollstaendig_decodiert": true
+    },
+    {
+      "datei": "03_Uebung_x2_8x_5.mp4",
+      "dauer": "00:00:16.17",
+      "sha256": "dfb0193789e6d6b83eec983727e85709b38f5978cca9710bd0c42e6cdd6f41af",
+      "poster": "03_Uebung_x2_8x_5.jpg",
+      "vollstaendig_decodiert": true
+    }
+  ]
+}

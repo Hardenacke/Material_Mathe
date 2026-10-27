@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mathe-wettkampf-api",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-10-27",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "rules": [{ "type": "Text", "globs": ["**/*.sql"], "fallthrough": true }],
+  "durable_objects": {
+    "bindings": [
+      { "name": "GROUP_ACCESS", "class_name": "GroupAccess" },
+      { "name": "ROOM_STATE", "class_name": "RoomState" },
+      { "name": "ARCHIVE_WRITER", "class_name": "ArchiveWriter" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["GroupAccess", "RoomState", "ArchiveWriter"] }
+  ],
+  "vars": {
+    "ALLOWED_ORIGINS": "https://hardenacke.github.io,http://127.0.0.1:8000,http://localhost:8000",
+    "ARCHIVE_REPOSITORY": "Hardenacke/Material_Mathe_Ergebnisse",
+    "ARCHIVE_BRANCH": "main",
+    "ARCHIVE_PREFIX": "architektur-v1",
+    "DETAIL_RETENTION_DAYS": "90"
+  }
+}

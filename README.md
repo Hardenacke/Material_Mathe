@@ -10,6 +10,8 @@ Dieses Repository bündelt die vorbereitete Mathematik-Ordnerstruktur, alle Wied
 - **33 Inhaltsfelder** mit je einer editierbaren `wiederholung.pptx`
 - **105 Themenordner** als Ablage für Lernpfade, Arbeitsblätter, Simulationen und weitere Materialien
 - **Lernspiele** als auswählbare Materialkategorie, veröffentlicht aus `lernspiele/`
+- **Quadratische Funktionen für Klasse 9:** zwölf interaktive Lernpfade, zwölf H5P-Quizze und drei Erklärvideos zur quadratischen Ergänzung; [Ablage und Prüfung](dokumentation/QUADRATISCHE_FUNKTIONEN.md)
+- **Mathe-Wettbewerbe** mit Portal unter `wettkaempfe/` und vorbereitetem separatem Cloudflare-Backend; Einrichtung: [WETTBEWERBE.md](dokumentation/WETTBEWERBE.md)
 - **Question Shells** als bereichsweite Unterstützung unter `*/unterstuetzung/`
 - **Fächerübergreifende Methoden** unter `methoden/`, getrennt von der fachlichen Mathematik-Sollstruktur
 - **Drei Erklärvideos zu Wurzeln** für Klasse 9 unter Unterstützung: Quadratzahlen, Intervallschachtelung und Heron-Verfahren; mit Manim gerendert und mit Übungen ergänzt
@@ -103,6 +105,7 @@ Gemeinsames Design:
 | `index.html`, `style.css`, `script.js` | Oberfläche der Materialseite |
 | `material-navigation.js` | Rücknavigation auf erzeugten HTML-Materialseiten |
 | `struktur.json` | fachliche Sollstruktur |
+| `dokumentation/MATERIAL_ZUORDNUNG.json` | gezielte Themenzuordnung zusammengehöriger Materialien ohne Dateikopien |
 | `data.json` | automatisch erzeugter Materialkatalog für lokale/Quellprüfung |
 | `werkzeuge/katalog.py` | erkennt vorhandene Materialien |
 | `werkzeuge/build_site.py` | baut die veröffentlichbare Ausgabe `_site` |

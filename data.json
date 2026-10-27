@@ -5,7 +5,7 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 308,
+    "materialien": 322,
     "lernspiele": 74,
     "unterstuetzung": 12,
     "zusatzaufgaben": 187,
@@ -18,6 +18,7 @@
     "Lernpfad",
     "PPTX",
     "Unterstützung",
+    "Video",
     "Zusatzaufgaben"
   ],
   "bereiche": [
@@ -2402,6 +2403,14 @@
               "titel": "Quadratische Gleichungen und Lösungsverfahren",
               "materialien": [
                 {
+                  "titel": "08 · Quadratische Gleichungen lösen",
+                  "datei": "08_Quadratische_Gleichungen_loesen.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/08_Quadratische_Gleichungen_loesen.html",
+                  "beschreibung": "Quadratische Gleichungen mit passenden Verfahren lösen."
+                },
+                {
                   "titel": "Quadratische Werkstatt",
                   "datei": "quadratisch.html",
                   "typ": "Lernspiel",
@@ -2437,6 +2446,54 @@
               "titel": "Quadratische Funktionen; Normalparabel, Transformationen, Eigenschaften",
               "materialien": [
                 {
+                  "titel": "01 · Einstieg und Funktionsdiagnose",
+                  "datei": "01_Einstieg_Funktionsdiagnose.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/01_Einstieg_Funktionsdiagnose.html",
+                  "beschreibung": "Quadratische Zuordnungen an Term, Tabelle und Graph erkennen und unterscheiden."
+                },
+                {
+                  "titel": "02 · Die Normalparabel entdecken",
+                  "datei": "02_Normalparabel_Entdecken.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/02_Normalparabel_Entdecken.html",
+                  "beschreibung": "Symmetrie, Scheitelpunkt und typische Punkte in mehreren Darstellungen beschreiben."
+                },
+                {
+                  "titel": "03 · Streckung und Spiegelung untersuchen",
+                  "datei": "03_Parameterlabor_Streckung_Spiegelung.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/03_Parameterlabor_Streckung_Spiegelung.html",
+                  "beschreibung": "Öffnungsrichtung und Breite der Parabel deuten."
+                },
+                {
+                  "titel": "04 · Die Scheitelpunktform verschieben",
+                  "datei": "04_Scheitelpunktform_verschieben.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/04_Scheitelpunktform_verschieben.html",
+                  "beschreibung": "Waagerechte und senkrechte Verschiebungen deuten."
+                },
+                {
+                  "titel": "05 · Den Parameter aus einem Graphen bestimmen",
+                  "datei": "05_Parameter_aus_Graph.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/05_Parameter_aus_Graph.html",
+                  "beschreibung": "Den Streckfaktor aus Scheitelpunkt und einem weiteren Punkt bestimmen."
+                },
+                {
+                  "titel": "06 · Von der Normalform zur Scheitelpunktform",
+                  "datei": "06_Normalform_in_Scheitelpunktform.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/06_Normalform_in_Scheitelpunktform.html",
+                  "beschreibung": "Durch quadratische Ergänzung in Scheitelpunktform umformen."
+                },
+                {
                   "titel": "Parabel-Werkstatt",
                   "datei": "parabel.html",
                   "typ": "Lernspiel",
@@ -2449,13 +2506,70 @@
                     "Nullstellen",
                     "Darstellungen verbinden"
                   ]
+                },
+                {
+                  "titel": "Quadratische Funktionen – zwölf interaktive Lernpfade",
+                  "datei": "index.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/index.html",
+                  "beschreibung": "Die gesamte Lernpfadreihe: von der Normalparabel und ihren Parametern bis zu Nullstellen, Modellierung und Optimierung."
+                },
+                {
+                  "titel": "Quadratische Ergänzung – drei Erklärvideos",
+                  "datei": "quadratische-ergaenzung-videos.html",
+                  "typ": "Video",
+                  "kategorie": "Video",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/quadratische-ergaenzung-videos.html",
+                  "beschreibung": "Flächenidee, Beispielrechnung und Übung: von der Normalform zur Scheitelpunktform; mit H5P-Hypervideo zum Herunterladen."
                 }
               ]
             },
             {
               "id": "02-nullstellen-und-modellierung",
               "titel": "Nullstellen, Scheitelpunkt und Anwendungen quadratischer Funktionen",
-              "materialien": []
+              "materialien": [
+                {
+                  "titel": "07 · Nullstellen aus der faktorisierten Form lesen",
+                  "datei": "07_Faktorisierte_Form_Nullstellen.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/07_Faktorisierte_Form_Nullstellen.html",
+                  "beschreibung": "Nullstellen mit der Nullproduktregel bestimmen."
+                },
+                {
+                  "titel": "09 · Termformen passend auswählen",
+                  "datei": "09_Termformen_geplant_nutzen.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/09_Termformen_geplant_nutzen.html",
+                  "beschreibung": "Die Termform passend zur gesuchten Information wählen."
+                },
+                {
+                  "titel": "10 · Einen Brückenbogen modellieren",
+                  "datei": "10_Brueckenbogen_modellieren.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/10_Brueckenbogen_modellieren.html",
+                  "beschreibung": "Einen Brückenbogen mathematisch modellieren."
+                },
+                {
+                  "titel": "11 · Eine Fläche optimieren",
+                  "datei": "11_Extremwertlabor_Flaeche.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/11_Extremwertlabor_Flaeche.html",
+                  "beschreibung": "Das Maximum einer quadratischen Flächenfunktion begründen."
+                },
+                {
+                  "titel": "12 · Transfer und Lernstandscheck",
+                  "datei": "12_Transfer_Lernstandscheck.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/12_Transfer_Lernstandscheck.html",
+                  "beschreibung": "Darstellungen und Verfahren selbstständig verbinden."
+                }
+              ]
             }
           ]
         },

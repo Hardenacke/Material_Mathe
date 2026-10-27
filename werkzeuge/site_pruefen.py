@@ -19,6 +19,14 @@ if any((ROOT/area.get("id","")/"unterstuetzung").exists() for area in data.get("
 if any((ROOT/area.get("id","")/"zusatzaufgaben").exists() for area in data.get("bereiche",[])) and s.get("zusatzaufgaben",0) < 1: errors.append("Zusatzaufgaben vorhanden, aber nicht im Katalog sichtbar.")
 if (ROOT/"methoden").exists() and not (ROOT/"_site"/"methoden").exists(): errors.append("Methodenordner fehlt in _site.")
 if (ROOT/"methoden").exists() and s.get("methodenmaterialien",0) < 1: errors.append("Methodenordner vorhanden, aber keine Methodenmaterialien im Katalog sichtbar.")
+if (ROOT/"wettkaempfe").exists():
+    for name in ["index.html", "app.js", "style.css", "config.js", "vendor/katex/katex.min.js", "vendor/katex/katex.min.css"]:
+        if not (ROOT/"_site/wettkaempfe"/name).is_file(): errors.append(f"Wettbewerbsportal unvollständig: {name}")
+    for private in [".local", "werkzeuge", "backend", "node_modules", "fragenpools"]:
+        if (ROOT/"_site"/private).exists() or (ROOT/"_site/wettkaempfe"/private).exists():
+            errors.append(f"Private oder technische Backend-Ablage in _site: {private}")
+    for pattern in [".dev.vars", "*-codes.csv", "quadratische-funktionen-9-demo.json"]:
+        if any((ROOT/"_site").rglob(pattern)): errors.append(f"Private Wettbewerbsdatei in _site: {pattern}")
 
 def check_material(mat):
     if not (ROOT/mat["url"]).exists(): errors.append(f"Materialpfad fehlt: {mat['url']}")

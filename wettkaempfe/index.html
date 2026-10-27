@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#201a35">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Mathematikwettbewerbe für deine Lerngruppe: Aufgaben lösen, Punkte sammeln und deinen Bestwert verbessern.">
+  <title>Mathe-Wettbewerbe</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="vendor/katex/katex.min.js" defer></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Wettbewerb</a>
+  <header class="hero">
+    <nav><a href="../index.html">← Mathematiksammlung</a><span>Gemeinsam weiterdenken</span></nav>
+    <div class="hero-content"><p class="eyebrow">Mathematik · Wettbewerbe</p>
+      <h1>Dein Kopf.<br>Dein nächster Bestwert.</h1>
+      <p>Knacke Matheaufgaben, sammle Punkte und tritt mit deiner Lerngruppe an.</p>
+      <div class="tags"><span>3 Leben</span><span>Zeitbonus</span><span>Dein Bestwert zählt</span></div>
+    </div>
+    <div class="hero-symbol" aria-hidden="true">x²<span>+</span></div>
+  </header>
+  <main id="main" tabindex="-1">
+    <p id="notice" class="notice" role="status" aria-live="polite" hidden></p>
+    <section id="login-panel" class="panel login-panel" aria-labelledby="login-title">
+      <div><p class="eyebrow">Bereit für die nächste Runde?</p><h2 id="login-title">Mit deiner Lerngruppe starten</h2>
+        <p>Die Gruppenkennung und deinen persönlichen Code erhältst du von deiner Lehrkraft.</p>
+        <p class="muted">Dein Spielstand bleibt gespeichert. Nach einer Unterbrechung kannst du dich wieder anmelden und weitermachen.</p></div>
+      <form id="login-form">
+        <label for="group">Lerngruppe</label><input id="group" name="group" required maxlength="64" pattern="[a-z0-9]+(-[a-z0-9]+)*" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off" placeholder="z. B. klasse-9a">
+        <label for="code">Persönlicher Code</label><input id="code" name="code" type="password" required minlength="32" maxlength="128" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off">
+        <button id="login-button" type="submit">Wettbewerbe öffnen <span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+    <section id="session" class="session" hidden><p>Angemeldet als <strong id="alias"></strong></p><button id="logout" class="quiet">Abmelden</button></section>
+    <section id="catalog-panel" hidden aria-labelledby="catalog-title"><div class="section-heading"><div><p class="eyebrow">Deine Auswahl</p><h2 id="catalog-title">Wähle deinen Wettbewerb</h2></div><button id="refresh-catalog" class="quiet">Aktualisieren</button></div><div id="competitions" class="competition-grid"></div></section>
+    <section id="competition-panel" hidden aria-labelledby="competition-title">
+      <div class="section-heading"><div><p id="mode" class="eyebrow"></p><h2 id="competition-title" tabindex="-1"></h2><p id="rules" class="muted"></p></div><button id="back" class="quiet">← Alle Wettbewerbe</button></div>
+      <div class="play-layout">
+        <section class="panel game-panel" aria-label="Dein Versuch"><div class="scorebar"><div><span>Punkte</span><strong id="score">0</strong></div><div><span>Leben</span><strong id="lives">3</strong></div><div><span>Fortschritt</span><strong id="progress">0 / 12</strong></div></div>
+          <div id="timer-wrap" class="timer-wrap" hidden><div><span>Zeit für diese Frage</span><strong id="timer" role="timer" aria-live="off"></strong></div><progress id="time-progress" max="60" value="60" aria-label="Verbleibende Zeit"></progress></div>
+          <div id="game" aria-live="polite"></div>
+        </section>
+        <aside class="panel leaderboard-panel" aria-labelledby="leaderboard-title"><p class="eyebrow">Diese Wertung</p><h3 id="leaderboard-title">Die Bestwerte</h3><p id="period" class="muted"></p><div class="personal-best"><span>Dein Bestwert</span><strong id="personal-best">—</strong></div><p class="muted">Es zählt dein bester beendeter Versuch. Gleiche Punktzahlen teilen sich einen Platz.</p><ol id="leaderboard" class="leaderboard"></ol><p id="board-empty" class="muted">Noch kein beendeter Versuch.</p><p id="archive-notice" class="muted" hidden>Die Ergebnisse sind gespeichert. Die Sicherung wird nachgeholt.</p></aside>
+      </div>
+    </section>
+    <section id="formats" class="formats" aria-label="Wettbewerbsformen"><article><span>01</span><h3>Klassenwettbewerb</h3><p>Ein gemeinsamer Termin. Zeige, was in dir steckt.</p></article><article><span>02</span><h3>Dauerwertung</h3><p>Starte erneut und verbessere deinen persönlichen Bestwert.</p></article><article><span>03</span><h3>Monatswertung</h3><p>Ein neuer Monat, eine neue Chance. Jeder Monat zählt für sich.</p></article></section>
+    <noscript><p class="panel">Bitte aktiviere JavaScript für die Wettbewerbe.</p></noscript>
+  </main>
+  <footer>Mathematik entdecken · Zusammen knobeln · Weiterkommen</footer>
+</body>
+</html>

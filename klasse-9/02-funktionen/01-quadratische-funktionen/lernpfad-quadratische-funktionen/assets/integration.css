@@ -1,0 +1,15 @@
+/* Kleine Ansichten: Spalten dürfen schrumpfen, Tabellen bleiben innen scrollbar. */
+.columns > *, .split > *, .course-entry > *, .course-copy { min-width: 0; }
+.topnav { flex-wrap: wrap; }
+.topnav > a { max-width: 100%; }
+.progress-wrap { max-width: 100%; flex-wrap: wrap; }
+.progress { flex-shrink: 0; }
+.hero h1, .course-copy h3 { overflow-wrap: anywhere; }
+.h5p-download { white-space: normal; }
+.mark-done { min-height: 44px; }
+@media (max-width: 900px) {
+  .columns { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 500px) {
+  .split { grid-template-columns: minmax(0, 1fr); }
+}

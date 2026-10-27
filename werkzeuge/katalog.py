@@ -28,6 +28,7 @@ METHODS_DIR = ROOT / "methoden"
 SUPPORT_DIR_NAME = "unterstuetzung"
 EXTRA_TASKS_DIR_NAME = "zusatzaufgaben"
 FERMI_ASSIGNMENTS_FILE = ROOT / "dokumentation" / "FERMI_ZUORDNUNG.json"
+MATERIAL_ASSIGNMENTS_FILE = ROOT / "dokumentation" / "MATERIAL_ZUORDNUNG.json"
 
 METHOD_STAGE_TITLES = {
     "sek-i": "Sekundarstufe I",
@@ -157,13 +158,15 @@ def sort_materials(materials: list[dict]) -> list[dict]:
     return sorted(materials, key=material_sort_key)
 
 
-def materials_in(folder: Path, recursive: bool = False) -> list[dict]:
+def materials_in(folder: Path, recursive: bool = False, exclude_urls: set[str] | None = None) -> list[dict]:
     if not folder.exists():
         return []
     candidates = folder.rglob("*") if recursive else folder.iterdir()
     result = []
     for file in candidates:
         if not is_display_material(file):
+            continue
+        if exclude_urls and file.relative_to(ROOT).as_posix() in exclude_urls:
             continue
         result.append({
             "titel": pretty_title(file),
@@ -173,6 +176,39 @@ def materials_in(folder: Path, recursive: bool = False) -> list[dict]:
             "url": file.relative_to(ROOT).as_posix(),
         })
     return sort_materials(result)
+
+
+def assigned_materials_by_destination() -> tuple[dict[tuple[str, str, str], list[dict]], set[str]]:
+    """Ordnet zusammengehörige Materialien ohne Kopien dem passenden Thema zu."""
+    if not MATERIAL_ASSIGNMENTS_FILE.exists():
+        return {}, set()
+    data = json.loads(MATERIAL_ASSIGNMENTS_FILE.read_text(encoding="utf-8"))
+    if data.get("schemaVersion") != 1 or not isinstance(data.get("materialien"), list):
+        raise ValueError("Ungültiges Format in MATERIAL_ZUORDNUNG.json")
+    scopes = set()
+    for area in STRUCT["bereiche"]:
+        for field in area["inhaltsfelder"]:
+            scopes.add((area["id"], field["id"], ""))
+            scopes.update((area["id"], field["id"], topic["id"]) for topic in field["themen"])
+    assigned, urls = {}, set()
+    for entry in data["materialien"]:
+        scope = (entry.get("bereich"), entry.get("inhaltsfeld"), entry.get("thema", ""))
+        url = entry.get("url", "")
+        if not isinstance(url, str) or not url or Path(url).is_absolute() or "\\" in url or ".." in Path(url).parts or Path(url).as_posix() != url:
+            raise ValueError(f"Ungültiger Materialpfad: {url}")
+        file = ROOT / url
+        if scope not in scopes or not file.resolve().is_relative_to(ROOT) or not is_display_material(file):
+            raise ValueError(f"Material oder fachliche Zuordnung ungültig: {url}")
+        if url in urls or not entry.get("titel") or entry.get("typ") not in {"Lernpfad", "Video", "HTML", "PDF"}:
+            raise ValueError(f"Doppelte oder unvollständige Materialzuordnung: {url}")
+        if any(part in {"privat", "entwuerfe", ".local", "werkzeuge"} for part in file.relative_to(ROOT).parts):
+            raise ValueError(f"Nicht öffentliche Materialzuordnung: {url}")
+        urls.add(url)
+        assigned.setdefault(scope, []).append({
+            "titel": entry["titel"], "datei": file.name, "typ": entry["typ"], "kategorie": entry["typ"],
+            "url": url, "beschreibung": entry.get("beschreibung", ""),
+        })
+    return assigned, urls
 
 
 def support_title(file: Path) -> str:
@@ -412,6 +448,7 @@ def catalog_categories(areas: list[dict]) -> list[str]:
 def build_catalog() -> dict:
     areas = []
     games_by_destination = learning_games_by_destination()
+    assigned, assigned_urls = assigned_materials_by_destination()
     methoden = methods_catalog()
     total_method_materials = method_material_count(methoden)
     total_fields = total_topics = total_materials = total_learning_games = total_support = 0
@@ -433,7 +470,8 @@ def build_catalog() -> dict:
         for field in area["inhaltsfelder"]:
             field_dir = ROOT / area["id"] / field["id"]
             out_field = {"id": field["id"], "titel": field["titel"]}
-            out_field["materialien"] = materials_in(field_dir)
+            out_field["materialien"] = materials_in(field_dir, exclude_urls=assigned_urls)
+            out_field["materialien"].extend(assigned.get((area["id"], field["id"], ""), []))
             out_field["materialien"].extend(games_by_destination.get((area["id"], field["id"], ""), []))
             out_field["materialien"] = sort_materials(out_field["materialien"])
             out_field["themen"] = []
@@ -442,7 +480,8 @@ def build_catalog() -> dict:
             total_learning_games += sum(1 for material in out_field["materialien"] if material["typ"] == "Lernspiel")
             for topic in field["themen"]:
                 topic_dir = field_dir / topic["id"]
-                mats = materials_in(topic_dir, recursive=True)
+                mats = materials_in(topic_dir, recursive=True, exclude_urls=assigned_urls)
+                mats.extend(assigned.get((area["id"], field["id"], topic["id"]), []))
                 mats.extend(games_by_destination.get((area["id"], field["id"], topic["id"]), []))
                 mats = sort_materials(mats)
                 out_field["themen"].append({"id": topic["id"], "titel": topic["titel"], "materialien": mats})
