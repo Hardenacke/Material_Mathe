@@ -54,10 +54,16 @@ document.querySelectorAll("[data-topic]").forEach(function(b){b.addEventListener
 document.querySelectorAll("[data-level]").forEach(function(b){b.addEventListener("click",function(){level=Number(b.dataset.level);document.querySelectorAll("[data-level]").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))})})});
 id("startTraining").addEventListener("click",function(){start("training")});id("startCompetition").addEventListener("click",function(){start("competition")});id("backToSetup").addEventListener("click",home);id("submitAnswer").addEventListener("click",submit);id("nextQuestion").addEventListener("click",next);
 // Wird beim Import innerhalb der bestehenden Quizfunktion eingefügt.
-var cloud = {base:'https://mathe-wettkampf-api.physik-wettkampf-api.workers.dev',code:'',alias:'',connected:false,busy:false,pending:null,generation:0};
+var cloud = {base:'https://mathe-wettkampf-api.physik-wettkampf-api.workers.dev',token:'',alias:'',connected:false,busy:false,pending:null,generation:0};
+var profileKey='wurzelwerk-profile-v1';
+function newToken(){return Array.from(crypto.getRandomValues(new Uint8Array(32)),function(value){return value.toString(16).padStart(2,'0')}).join('')}
+function rememberProfile(){try{localStorage.setItem(profileKey,JSON.stringify({token:cloud.token,alias:cloud.alias}))}catch(error){/* Teilnahme bleibt im aktuellen Tab möglich. */}}
+try{var savedProfile=JSON.parse(localStorage.getItem(profileKey)||'null');if(savedProfile&&/^[A-Za-z0-9_-]{32,128}$/.test(savedProfile.token)){cloud.token=savedProfile.token;cloud.alias=typeof savedProfile.alias==='string'?savedProfile.alias:''}}catch(error){/* Neues Browserprofil anlegen. */}
+if(!cloud.token)cloud.token=newToken();
+id('competitionAlias').value=cloud.alias;
 function connection(text, ok){id('connectionStatus').textContent=text;id('connectionStatus').dataset.connected=String(ok);id('startCompetition').disabled=!ok;cloud.connected=ok}
 async function cloudRequest(path,body){
-  var options={headers:{Authorization:'Bearer '+cloud.code},signal:AbortSignal.timeout(15000)};
+  var options={headers:{Authorization:'Bearer '+cloud.token},signal:AbortSignal.timeout(15000)};
   if(body!==undefined){
     cloud.generation++;
     if(!cloud.pending||cloud.pending.path!==path)cloud.pending={path:path,body:body,key:crypto.randomUUID()};
@@ -76,16 +82,22 @@ async function refreshCloud(){
   if(data.current&&session&&session.mode==='competition'&&data.current.id===session.remote.id){session=remoteSession(data.current);showTask()}
   return data;
 }
-async function connectCloud(){
-  if(cloud.busy)return;var code=id('competitionCode').value.trim();if(code)cloud.code=code;
-  if(!/^[A-Za-z0-9_-]{32,128}$/.test(cloud.code)){connection('Bitte deinen persönlichen Wettbewerbscode eingeben.',false);return}
-  cloud.busy=true;id('connectCompetition').disabled=true;connection('Verbindung zu Cloudflare wird geprüft …',false);
-  try{await refreshCloud();id('competitionCode').value=''}catch(error){connection(error.message,false)}
-  finally{cloud.busy=false;id('connectCompetition').disabled=false;id('nextQuestion').disabled=false}
+async function connectCloud(alias){
+  if(cloud.busy)return;
+  cloud.busy=true;connection('Verbindung zu Cloudflare wird aufgebaut …',false);
+  try{
+    var response=await fetch(cloud.base+'/api/v1/quizzes/wurzelwerk/join',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({token:cloud.token,alias:typeof alias==='string'?alias:''}),signal:AbortSignal.timeout(15000)});
+    var data=await response.json();if(!response.ok)throw new Error(data.error&&data.error.message||'Verbindung derzeit nicht möglich.');
+    cloud.alias=data.alias;rememberProfile();id('competitionAlias').placeholder=data.alias;await refreshCloud();
+  }catch(error){connection(error.message+' Die Verbindung wird automatisch erneut versucht.',false)}
+  finally{cloud.busy=false;id('nextQuestion').disabled=false}
 }
 async function start(mode){
   if(mode==='training'){startLocal(mode);return}
-  if(!cloud.connected||cloud.busy){toast('Bitte zuerst die Cloudflare-Verbindung prüfen.');return}
+  if(cloud.busy)return;
+  await connectCloud(id('competitionAlias').value.trim());
+  if(!cloud.connected)return;
   cloud.busy=true;id('startCompetition').disabled=true;
   try{
     var data=await cloudRequest('/attempts',{});session=remoteSession(data.attempt);
@@ -103,8 +115,9 @@ function remoteFeedback(){
 }
 function showTask(){renderTask();if(session.mode==='competition'&&session.answered)remoteFeedback()}
 async function submit(){
-  if(!session||session.answered||cloud.busy)return;
+  if(!session||session.answered)return;
   if(session.mode==='training'){trainingSubmit();return}
+  if(cloud.busy)return;
   if(!cloud.connected){toast('Bitte die Verbindung wiederherstellen.');return}
   var answer;
   if(task.type==='line')answer=Number(id('marker').getAttribute('aria-valuenow'));
@@ -118,8 +131,9 @@ async function submit(){
   finally{cloud.busy=false;id('nextQuestion').disabled=false}
 }
 async function next(){
-  if(!session||!session.answered||cloud.busy)return;
+  if(!session||!session.answered)return;
   if(session.mode==='training'){trainingNext();return}
+  if(cloud.busy)return;
   if(session.remote.phase==='finished'){results();return}
   cloud.busy=true;id('nextQuestion').disabled=true;
   try{var data=await cloudRequest('/attempts/'+session.remote.id+'/next',{});session=remoteSession(data.attempt);showTask()}
@@ -132,13 +146,16 @@ function results(){
   el.innerHTML='<article class="results"><div class="result-hero"><p class="hero-label">'+(online?'Wettbewerb abgeschlossen':'Trainingsrunde geschafft')+'</p><h2>Stark gespielt!</h2><p>'+session.attempted+' Aufgaben bearbeitet.</p></div><div class="stats"><div class="stat"><span class="stat-label">Punkte</span><span class="stat-value">'+session.score+'</span></div><div class="stat"><span class="stat-label">Richtig gelöst</span><span class="stat-value">'+session.correct+' / '+session.limit+'</span></div><div class="stat"><span class="stat-label">Trefferquote</span><span class="stat-value">'+Math.round(session.correct/session.limit*100)+' %</span></div></div><div class="save"><p>'+(online?'Dein Ergebnis wurde von Cloudflare bewertet und als '+esc(cloud.alias)+' gespeichert. Dein bester Versuch zählt für die gemeinsame Rangliste.':'Trainiere weiter in deinem Tempo. Trainingsergebnisse gehen nicht in die Wettbewerbsrangliste ein.')+'</p></div><div class="result-actions"><button class="primary" id="playAgain">Noch eine Runde</button><button class="secondary" id="resultsHome">Zur Auswahl</button></div></article>';
   id('playAgain').addEventListener('click',function(){start(session.mode)});id('resultsHome').addEventListener('click',home);window.scrollTo({top:0,behavior:'smooth'});
 }
-id('connectCompetition').addEventListener('click',connectCloud);
-id('competitionCode').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();connectCloud()}});
+id('competitionAlias').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();start('competition')}});
+id('newPlayer').addEventListener('click',function(){
+  if(cloud.busy)return;home();cloud.generation++;cloud.token=newToken();cloud.alias='';cloud.pending=null;
+  id('competitionAlias').value='';rememberProfile();connectCloud('');
+});
 window.addEventListener('offline',function(){connection('Offline · Training bleibt verfügbar.',false);if(session&&session.mode==='competition')id('submitAnswer').disabled=true});
-window.addEventListener('online',function(){if(cloud.code)connectCloud()});
+window.addEventListener('online',function(){connectCloud('')});
 document.addEventListener('visibilitychange',function(){if(!document.hidden&&cloud.connected&&!cloud.busy)refreshCloud().catch(function(){connection('Verbindung unterbrochen. Bitte erneut verbinden.',false)})});
-setInterval(function(){if(!document.hidden&&cloud.connected&&!cloud.busy)refreshCloud().catch(function(){connection('Verbindung unterbrochen. Bitte erneut verbinden.',false)})},10000);
-fetch(cloud.base+'/health',{signal:AbortSignal.timeout(10000)}).then(function(response){if(!cloud.code)connection(response.ok?'Cloudflare erreichbar · Wettbewerbscode eingeben.':'Cloudflare derzeit nicht erreichbar.',false)}).catch(function(){if(!cloud.code)connection('Cloudflare derzeit nicht erreichbar. Training bleibt verfügbar.',false)});
+setInterval(function(){if(!document.hidden&&!cloud.busy){if(cloud.connected)refreshCloud().catch(function(){connection('Verbindung unterbrochen. Wiederverbindung läuft automatisch.',false)});else connectCloud('')}},10000);
+connectCloud('');
 
 loadRecords();drawBoard();if(!window.katex)id("mathWarning").classList.add("show");renderMath(document);
 }());

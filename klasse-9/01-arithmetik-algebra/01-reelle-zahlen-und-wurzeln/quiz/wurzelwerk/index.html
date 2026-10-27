@@ -79,7 +79,7 @@ main{padding-bottom:48px}.warning{display:none;margin:0 0 14px;padding:12px 14px
     <div class="start-row"><button class="primary" id="startTraining" type="button">Training starten <span aria-hidden="true">→</span></button><p class="small">Eine Runde umfasst <span data-tex="10"></span> Aufgaben. Nach jeder Antwort bekommst du eine Erklärung.</p></div>
   </div>
   <div id="competitionControls" hidden>
-    <div class="block"><label for="competitionCode">Persönlicher Wettbewerbscode</label><input id="competitionCode" type="password" maxlength="128" autocomplete="off" spellcheck="false" class="name-input"><button id="connectCompetition" class="secondary" type="button">Mit Cloudflare verbinden</button><p id="connectionStatus" role="status" aria-live="polite">Verbindung wird geprüft …</p></div><div class="callout"><div class="callout-icon">✦</div><p><strong>Die Wurzel-Arena wartet.</strong><br>Eine gemischte Challenge mit <span data-tex="12"></span> Aufgaben auf hohem Niveau. Für jede Aufgabe zählt dein mathematischer Lösungsweg – auf dem Zahlenstrahl auch die Genauigkeit.</p></div>
+    <div class="block"><label for="competitionAlias">Dein Pseudonym (optional)</label><input id="competitionAlias" type="text" maxlength="24" autocomplete="off" spellcheck="false" class="name-input" placeholder="Zum Beispiel Wurzelfuchs"><p class="small">Ohne Eingabe erhältst du automatisch ein Pseudonym.</p><button id="newPlayer" class="secondary" type="button">Andere Person</button><p id="connectionStatus" role="status" aria-live="polite">Verbindung wird geprüft …</p></div><div class="callout"><div class="callout-icon">✦</div><p><strong>Die Wurzel-Arena wartet.</strong><br>Eine gemischte Challenge mit <span data-tex="12"></span> Aufgaben auf hohem Niveau. Für jede Aufgabe zählt dein mathematischer Lösungsweg – auf dem Zahlenstrahl auch die Genauigkeit.</p></div>
     <div class="block"><p class="block-label"><span class="block-number" data-tex="3"></span>So läuft der Wettbewerb</p><div class="choices">
       <div class="choice"><span class="choice-title"><span class="choice-icon" data-tex="\sqrt{x}"></span>Drei Disziplinen</span><span class="choice-desc">Wurzeln ziehen, Gesetze anwenden und Wurzeln einordnen</span></div>
       <div class="choice"><span class="choice-title"><span class="choice-icon">★</span>Faire Punkte</span><span class="choice-desc">Richtige Ergebnisse bringen Punkte; Schätzungen werden nach Genauigkeit gewertet</span></div>
@@ -107,7 +107,7 @@ main{padding-bottom:48px}.warning{display:none;margin:0 0 14px;padding:12px 14px
   <div class="board-body">
     <div class="table-wrap"><table class="board-table"><thead><tr><th>Pl.</th><th>Pseudonym</th><th>Klasse</th><th>Punkte</th><th>Datum</th></tr></thead><tbody id="leaderboardBody"></tbody></table></div>
     <div class="empty" id="leaderboardEmpty" hidden><strong>Noch keine Ergebnisse</strong>Starte den Wettbewerb und sichere dir den ersten Platz.</div>
-    <p class="storage-note">Gemeinsame Rangliste auf Cloudflare. Zur Anzeige im Wettbewerbsmodus verbinden.</p>
+    <p class="storage-note">Gemeinsame Rangliste auf Cloudflare. Dein Bestwert wird automatisch gespeichert.</p>
     <p class="storage-note storage-state" id="storageState" hidden>Die gemeinsame Rangliste benötigt eine Verbindung zu Cloudflare.</p>
   </div>
 </aside>

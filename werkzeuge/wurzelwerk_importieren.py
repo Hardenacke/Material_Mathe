@@ -38,11 +38,11 @@ def import_quiz(source):
     html = html.replace('<header class="header">', '<a href="../../../../../index.html#/klasse-9/01-arithmetik-algebra/quiz">← Zur Quiz-Auswahl</a><header class="header">')
     html = html.replace('Bitte öffne die Datei mit einer Internetverbindung und lade die Seite erneut.', 'Bitte lade die Seite erneut.')
     html = html.replace('<div class="callout"><div class="callout-icon">✦</div>',
-        '<div class="block"><label for="competitionCode">Persönlicher Wettbewerbscode</label><input id="competitionCode" type="password" maxlength="128" autocomplete="off" spellcheck="false" class="name-input"><button id="connectCompetition" class="secondary" type="button">Mit Cloudflare verbinden</button><p id="connectionStatus" role="status" aria-live="polite">Verbindung wird geprüft …</p></div><div class="callout"><div class="callout-icon">✦</div>')
+        '<div class="block"><label for="competitionAlias">Dein Pseudonym (optional)</label><input id="competitionAlias" type="text" maxlength="24" autocomplete="off" spellcheck="false" class="name-input" placeholder="Zum Beispiel Wurzelfuchs"><p class="small">Ohne Eingabe erhältst du automatisch ein Pseudonym.</p><button id="newPlayer" class="secondary" type="button">Andere Person</button><p id="connectionStatus" role="status" aria-live="polite">Verbindung wird geprüft …</p></div><div class="callout"><div class="callout-icon">✦</div>')
     html = html.replace('id="startCompetition" type="button"', 'id="startCompetition" type="button" disabled')
     html = html.replace('Ohne Zeitlimit. Am Ende kannst du dein Ergebnis in die Rangliste eintragen.', 'Ohne Zeitlimit. Cloudflare bewertet und speichert deinen Bestwert automatisch.')
     html = html.replace('<th>Name</th>', '<th>Pseudonym</th>').replace('Die zehn stärksten gespeicherten Ergebnisse', 'Die zehn stärksten Bestwerte deiner Wettbewerbsgruppe')
-    html = html.replace('Einträge werden auf diesem Gerät in diesem Browser gespeichert.', 'Gemeinsame Rangliste auf Cloudflare. Zur Anzeige im Wettbewerbsmodus verbinden.')
+    html = html.replace('Einträge werden auf diesem Gerät in diesem Browser gespeichert.', 'Gemeinsame Rangliste auf Cloudflare. Dein Bestwert wird automatisch gespeichert.')
     html = html.replace('Dieser Browser erlaubt keine lokale Speicherung. Einträge bleiben nur bis zum Schließen der Seite verfügbar.', 'Die gemeinsame Rangliste benötigt eine Verbindung zu Cloudflare.')
     (target / 'index.html').write_text(html.rstrip() + '\n', encoding='utf-8')
     assignment = ROOT / 'dokumentation/MATERIAL_ZUORDNUNG.json'

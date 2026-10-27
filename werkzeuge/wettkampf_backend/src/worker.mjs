@@ -70,10 +70,32 @@ async function route(request, env) {
   if (adminMatch && request.method === 'POST' && slug(adminMatch[1])) return admin(request, env, adminMatch[1]);
   if (!['GET', 'POST'].includes(request.method)) throw new HttpError(405, 'METHOD', 'Methode nicht erlaubt.');
   if (url.pathname.startsWith('/api/v1/quizzes/wurzelwerk')) {
+    const room = value => call(env.QUIZ_ROOM,'mathematik/'+wurzelwerk.id+'/v1/gesamt',value);
+    if (url.pathname === '/api/v1/quizzes/wurzelwerk/public' && request.method === 'GET') return room({op:'public'});
+    if (url.pathname === '/api/v1/quizzes/wurzelwerk/join' && request.method === 'POST') {
+      const payload=await readJSON(request);exact(payload,['token','alias']);
+      if (typeof payload.token !== 'string' || !/^[A-Za-z0-9_-]{32,128}$/.test(payload.token) || typeof payload.alias !== 'string' ||
+          payload.alias.trim().length>24 || /[\x00-\x1f\x7f]/.test(payload.alias))
+        throw new HttpError(400,'GUEST','Bitte ein Pseudonym mit höchstens 24 Zeichen verwenden.');
+      const response=await room({op:'guest-join',secretHash:await sha256(payload.token),alias:payload.alias.trim(),
+        rateKey:await sha256(request.headers.get('CF-Connecting-IP') || 'local')});
+      const result=await response.json();
+      return json(result,result.error?429:200);
+    }
     const match = url.pathname.match(/^\/api\/v1\/quizzes\/wurzelwerk(?:\/attempts(?:\/([a-f0-9-]{36})\/(answer|next))?)?$/);
     if (!match) throw new HttpError(404, 'ROUTE', 'Quizadresse nicht gefunden.');
-    const {response, actor} = await authenticate(request, env, wurzelwerk.groupId);
-    if (response) return response;
+    const token=bearer(request);
+    let actor;
+    if (token) {
+      const response=await room({op:'guest-auth',secretHash:await sha256(token)}),result=await response.json();
+      if (result.error) return json(result,429);
+      actor=result.guest;
+    }
+    if (!actor) {
+      const legacy=await authenticate(request,env,wurzelwerk.groupId);
+      if (legacy.response) return legacy.response;
+      actor=legacy.actor;
+    }
     checkMembership(actor, wurzelwerk);
     const op = request.method === 'GET' && url.pathname === '/api/v1/quizzes/wurzelwerk' ? 'state' :
       request.method === 'POST' && url.pathname.endsWith('/attempts') ? 'start' :

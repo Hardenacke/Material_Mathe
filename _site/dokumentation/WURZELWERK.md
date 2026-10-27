@@ -12,15 +12,17 @@ Quelle im Repository:
 
 [Wurzelwerk auf Cloudflare öffnen](https://mathe-wettkampf-api.physik-wettkampf-api.workers.dev/klasse-9/01-arithmetik-algebra/01-reelle-zahlen-und-wurzeln/quiz/wurzelwerk/)
 
-Im Reiter **Wettbewerb** einen persönlichen Code eingeben und **Mit Cloudflare verbinden**
-auswählen. Der Start wird nach erfolgreicher Anmeldung freigegeben. Der Verbindungsstatus
-zeigt das zugeordnete Pseudonym. Codes bleiben nur im Arbeitsspeicher; nach Neuladen
-erneut verbinden und den vorhandenen Versuch fortsetzen.
+Im Reiter **Wettbewerb** direkt **Wettbewerb starten** auswählen. Ein Pseudonym kann
+optional eingetragen werden; sonst wird automatisch eines vergeben. Die Verbindung
+zu Cloudflare entsteht automatisch. Lernende benötigen weder einen Zugangscode
+noch ein Benutzerkonto.
 
-Zwei Testzugänge liegen in der privaten Datei
-`.local/wettkaempfe/Material_Mathe_Wettkampf_API/verwaltung/wurzelwerk-klasse-9-*-codes.csv`.
-Ein lesbarer lokaler Einstieg steht in `.local/wettkaempfe/WURZELWERK_STARTEN.md`.
-Gruppe und Wettbewerbskennung lauten `wurzelwerk-klasse-9`.
+Eine zufällige Browserkennung wird automatisch lokal gespeichert. So bleiben
+Wiederaufnahme und persönliche Bestwerte im selben Browser zugeordnet. Ein anderer
+Browser oder das Löschen der Browserdaten erzeugt eine neue Zuordnung. Auf gemeinsam
+genutzten Geräten legt **Andere Person** eine neue Zuordnung an und erhält die
+bisherigen Ergebnisse. Bestehende, früher eingerichtete Zugänge bleiben im Backend nutzbar.
+Wettbewerbskennung: `wurzelwerk-klasse-9`.
 
 Die Runde umfasst zwölf Aufgaben auf Stufe 3: je vier zum Ziehen von Quadratwurzeln,
 zu Wurzelgesetzen und zum Zahlenstrahl. Wie in der Vorlage gibt es kein Zeitlimit.
@@ -30,8 +32,8 @@ Bestwert; die Rangliste wird zwischen Geräten geteilt.
 
 Cloudflare erzeugt und speichert jede Aufgabe. Der Browser erhält die aktuelle
 Aufgabe ohne Lösungsfelder; Auswertung und Erklärung kommen nach der Antwort vom
-Server. Manipulierte Punktestände werden nicht angenommen. Persönliche Codes,
-Zugehörigkeit, ein aktiver Versuch je Person, transaktionale Speicherung und
+Server. Manipulierte Punktestände werden nicht angenommen. Automatisch eingerichtete
+Browserprofile, ein aktiver Versuch je Profil, transaktionale Speicherung und
 Idempotenzbelege schützen vor fremden Zugriffen und doppelten Wertungen.
 
 Der SQLite-Durable-Object-Raum `QuizRoom` wird mit Migration `v2-wurzelwerk` ergänzt.
@@ -65,14 +67,17 @@ Den Import vor erneuten eigenen Änderungen an der generierten Quizdatei bewusst
 
 ## Prüfung am 27. Oktober 2026
 
-- 38 Regeltests und 16 Integrationstests bestanden, einschließlich Serverbewertung,
+- 38 Regeltests und 17 Integrationstests bestanden, einschließlich codefreier Teilnahme, Serverbewertung,
   fremder Versuche, manipulierter Nutzdaten und idempotenter Antworten.
 - Training in allen neun Kombinationen aus Thema und Schwierigkeitsstufe geprüft.
 - Vollständiger Wettbewerb mit zwölf richtigen Antworten und 1.200 Punkten,
   Wiederaufnahme und Offline/Online-Wechsel im Edge-Browser geprüft.
+- Codefreie Teilnahme mit optionalem Pseudonym, automatischer Wiederverbindung,
+  Start ohne Namenseingabe und Wechsel über **Andere Person** im Browser geprüft.
 - 320, 390, 768 und 1024 Pixel ohne horizontalen Überlauf; kein JavaScript-Fehler.
 - Pages-Vorschau: Klasse 9 → Quiz → Wurzelwerk, Materiallabel und lokale Formeln geprüft.
 - Gesamte Materialnavigation: 974 Prüfungen bestanden.
 - Website- und Strukturprüfung: 9 Bereiche, 33 Inhaltsfelder, 105 Themen, 323 Materialien.
 
-Die Online-Prüfung und Screenshots liegen unter `.local/wettkaempfe/wurzelwerk-*`.
+Die Online-Prüfung und Screenshots liegen unter `.local/wettkaempfe/wurzelwerk-*`;
+`wurzelwerk_codefrei_browser.py` dokumentiert die Teilnahme ohne Code.

@@ -38,7 +38,9 @@ export class QuizRoom extends DurableObject {
       CREATE UNIQUE INDEX IF NOT EXISTS one_quiz_active ON quiz_attempts(person) WHERE phase='active';
       CREATE TABLE IF NOT EXISTS quiz_best(person TEXT PRIMARY KEY,alias TEXT NOT NULL,score INTEGER NOT NULL,ended INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS quiz_receipts(person TEXT NOT NULL,key TEXT NOT NULL,hash TEXT NOT NULL,reply TEXT NOT NULL,expires INTEGER NOT NULL,PRIMARY KEY(person,key));
-      CREATE TABLE IF NOT EXISTS quiz_outbox(revision INTEGER PRIMARY KEY,snapshot TEXT NOT NULL,due INTEGER NOT NULL);`);
+      CREATE TABLE IF NOT EXISTS quiz_outbox(revision INTEGER PRIMARY KEY,snapshot TEXT NOT NULL,due INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS quiz_guests(id TEXT PRIMARY KEY,secret_hash TEXT NOT NULL UNIQUE,alias TEXT NOT NULL);
+      CREATE TABLE IF NOT EXISTS quiz_rate(key TEXT PRIMARY KEY,count INTEGER NOT NULL,expires INTEGER NOT NULL);`);
     this.sql.exec('INSERT OR IGNORE INTO quiz_meta VALUES (?,?)', 'instance', crypto.randomUUID());
     this.sql.exec('INSERT OR IGNORE INTO quiz_meta VALUES (?,?)', 'revision', '0');
   }
@@ -50,8 +52,42 @@ export class QuizRoom extends DurableObject {
       return {rank, alias: row.alias, score: row.score, maxPoints: 1200, endedAt: row.ended};
     });
   }
+  rate(key, limit, duration) {
+    this.sql.exec('DELETE FROM quiz_rate WHERE expires<=?', Date.now());
+    this.sql.exec('INSERT INTO quiz_rate VALUES (?,1,?) ON CONFLICT(key) DO UPDATE SET count=count+1', key, Date.now()+duration);
+    return first(this.sql.exec('SELECT count FROM quiz_rate WHERE key=?',key)).count <= limit;
+  }
+  queueSnapshot() {
+    const revision = Number(first(this.sql.exec("SELECT value FROM quiz_meta WHERE key='revision'")).value) + 1;
+    this.sql.exec("UPDATE quiz_meta SET value=? WHERE key='revision'", String(revision));
+    const snapshot = {subject:'mathematik',competitionId:wurzelwerk.id,version:1,periodId:'gesamt',
+      instanceId:first(this.sql.exec("SELECT value FROM quiz_meta WHERE key='instance'")).value,
+      revision,final:false,generatedAt:Date.now(),leaderboard:this.board()};
+    this.sql.exec('INSERT INTO quiz_outbox VALUES (?,?,?)',revision,JSON.stringify(snapshot),Date.now());
+  }
   execute(input) {
     const {op, actor, attemptId, payload, requestId, hash} = input;
+    if (op === 'public') return {leaderboard:this.board(),grade:'9'};
+    if (op === 'guest-join' || op === 'guest-auth') {
+      let guest=first(this.sql.exec('SELECT id,alias FROM quiz_guests WHERE secret_hash=?',input.secretHash));
+      if (op === 'guest-auth') {
+        if (!guest) return {guest:null};
+        if (!this.rate('person/'+guest.id,120,60000)) return {error:{code:'RATE',message:'Bitte kurz warten und erneut versuchen.'}};
+        return {guest:{...guest,memberships:[wurzelwerk.id]}};
+      }
+      if (!guest) {
+        if (!this.rate('join/'+input.rateKey,120,600000)) return {error:{code:'RATE',message:'Bitte kurz warten und erneut versuchen.'}};
+        guest={id:'guest-'+crypto.randomUUID(),alias:input.alias || 'Wurzel '+crypto.getRandomValues(new Uint32Array(1))[0].toString().slice(0,6)};
+        this.sql.exec('INSERT INTO quiz_guests VALUES (?,?,?)',guest.id,input.secretHash,guest.alias);
+      } else if (input.alias && input.alias !== guest.alias) {
+        guest.alias=input.alias;
+        this.sql.exec('UPDATE quiz_guests SET alias=? WHERE id=?',guest.alias,guest.id);
+        if (first(this.sql.exec('SELECT person FROM quiz_best WHERE person=?',guest.id))) {
+          this.sql.exec('UPDATE quiz_best SET alias=? WHERE person=?',guest.alias,guest.id);this.queueSnapshot();
+        }
+      }
+      return {alias:guest.alias};
+    }
     const active = () => {
       const row = first(this.sql.exec("SELECT state FROM quiz_attempts WHERE person=? AND phase='active'", actor.id));
       return row ? JSON.parse(row.state) : null;
@@ -86,12 +122,7 @@ export class QuizRoom extends DurableObject {
             const old = first(this.sql.exec('SELECT score FROM quiz_best WHERE person=?', actor.id));
             if (!old || attempt.score > old.score) this.sql.exec(`INSERT INTO quiz_best VALUES (?,?,?,?)
               ON CONFLICT(person) DO UPDATE SET alias=excluded.alias,score=excluded.score,ended=excluded.ended`, actor.id, actor.alias, attempt.score, Date.now());
-            const revision = Number(first(this.sql.exec("SELECT value FROM quiz_meta WHERE key='revision'")).value) + 1;
-            this.sql.exec("UPDATE quiz_meta SET value=? WHERE key='revision'", String(revision));
-            const snapshot = {subject: 'mathematik', competitionId: wurzelwerk.id, version: 1, periodId: 'gesamt',
-              instanceId: first(this.sql.exec("SELECT value FROM quiz_meta WHERE key='instance'")).value,
-              revision, final: false, generatedAt: Date.now(), leaderboard: this.board()};
-            this.sql.exec('INSERT INTO quiz_outbox VALUES (?,?,?)', revision, JSON.stringify(snapshot), Date.now());
+            this.queueSnapshot();
           }
         }
       } else if (op === 'next') {

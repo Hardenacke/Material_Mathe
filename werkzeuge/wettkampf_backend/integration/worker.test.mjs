@@ -364,3 +364,29 @@ test('Wurzelwerk bindet persönliche Codes, persistiert Aufgaben und verhindert 
   const jobs=await sql.exec('SELECT * FROM quiz_outbox');assert.equal(jobs.length,1);
   assert.equal(JSON.parse(jobs[0].snapshot).competitionId,'wurzelwerk-klasse-9');
 });
+
+test('Wurzelwerk erlaubt Teilnahme ohne Zugangscode, merkt das Browserprofil und schützt fremde Versuche', async()=>{
+  const quiz='/api/v1/quizzes/wurzelwerk', token=randomBytes(32).toString('base64url'), other=randomBytes(32).toString('base64url');
+  const join=(value,alias='')=>send(quiz+'/join',{method:'POST',headers:{Authorization:''},body:{token:value,alias}});
+  const publicBoard=await send(quiz+'/public',{headers:{Authorization:''}});
+  assert.equal(publicBoard.status,200);assert.equal(Object.hasOwn(publicBoard.data,'current'),false);
+  assert.equal((await join(token,'Codefrei')).status,200);
+  let started=await send(quiz+'/attempts',{method:'POST',code:token,body:{}});
+  assert.equal(started.status,200);let attempt=started.data.attempt;
+  await join(token,'Codefrei');
+  assert.equal((await send(quiz,{code:token})).data.current.id,attempt.id);
+  const joined=await join(other);assert.equal(joined.status,200);assert.ok(joined.data.alias.startsWith('Wurzel '));
+  assert.equal((await send(quiz+'/attempts/'+attempt.id+'/answer',{method:'POST',code:other,body:{questionId:attempt.question.id,answer:0}})).status,403);
+  assert.equal((await join(token,'x'.repeat(25))).status,400);
+  const sql=await mf.unsafeGetDurableObjectStorage('test-worker','QuizRoom',{name:'mathematik/wurzelwerk-klasse-9/v1/gesamt'});
+  for(let index=0;index<12;index++){
+    const [row]=await sql.exec('SELECT state FROM quiz_attempts WHERE id=?',attempt.id),task=JSON.parse(row.state).task;
+    const result=await send(quiz+'/attempts/'+attempt.id+'/answer',{method:'POST',code:token,body:{questionId:task.id,answer:task.kind==='extract'?{a:task.a,b:task.b}:task.answer}});
+    assert.equal(result.status,200);attempt=result.data.attempt;
+    if(index<11)attempt=(await send(quiz+'/attempts/'+attempt.id+'/next',{method:'POST',code:token,body:{}})).data.attempt;
+  }
+  assert.equal(attempt.score,1200);assert.equal(attempt.phase,'finished');
+  const board=(await send(quiz+'/public',{headers:{Authorization:''}})).data.leaderboard;
+  assert.ok(board.some(row=>row.alias==='Codefrei'&&row.score===1200));
+  assert.equal(JSON.stringify(board).includes(token),false);
+});
