@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Lokale Vorschau: baut bei Dateiänderungen neu und liefert _site auf Port 8000 aus."""
 from __future__ import annotations
+from functools import partial
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 from threading import Thread
-import os, subprocess, sys, time, webbrowser
+import subprocess, sys, time, webbrowser
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
@@ -39,8 +40,8 @@ def watcher():
 
 def main():
     build()
-    os.chdir(OUT)
-    server = ThreadingHTTPServer(("127.0.0.1", 8000), SimpleHTTPRequestHandler)
+    handler = partial(SimpleHTTPRequestHandler, directory=str(OUT))
+    server = ThreadingHTTPServer(("127.0.0.1", 8000), handler)
     Thread(target=watcher, daemon=True).start()
     url = "http://127.0.0.1:8000/"
     print(f"Lokale Vorschau: {url}  (Beenden mit Strg+C)")
