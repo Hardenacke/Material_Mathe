@@ -1,0 +1,19 @@
+{
+  "subject": "mathematik",
+  "competitionId": "beispiel-quadratische-funktionen",
+  "version": 1,
+  "periodId": "gesamt",
+  "instanceId": "932baba3-ac70-4054-b950-200ca9237155",
+  "revision": 1,
+  "final": false,
+  "generatedAt": 1793128116284,
+  "leaderboard": [
+    {
+      "rank": 1,
+      "alias": "Mathe 02",
+      "score": 11909,
+      "maxPoints": 12000,
+      "endedAt": 1793128116284
+    }
+  ]
+}
