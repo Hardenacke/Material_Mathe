@@ -4,9 +4,9 @@
   "version": 1,
   "periodId": "gesamt",
   "instanceId": "f4ad8ae3-dac1-4d46-8d25-72ef10121d89",
-  "revision": 1,
+  "revision": 2,
   "final": false,
-  "generatedAt": 1793132017558,
+  "generatedAt": 1793133066578,
   "leaderboard": [
     {
       "rank": 1,
@@ -14,6 +14,13 @@
       "score": 1200,
       "maxPoints": 1200,
       "endedAt": 1793132017558
+    },
+    {
+      "rank": 1,
+      "alias": "Codefrei-Test",
+      "score": 1200,
+      "maxPoints": 1200,
+      "endedAt": 1793133066578
     }
   ]
 }
