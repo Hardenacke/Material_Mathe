@@ -1,0 +1,19 @@
+{
+  "subject": "mathematik",
+  "competitionId": "wurzelwerk-klasse-9",
+  "version": 1,
+  "periodId": "gesamt",
+  "instanceId": "f4ad8ae3-dac1-4d46-8d25-72ef10121d89",
+  "revision": 1,
+  "final": false,
+  "generatedAt": 1793132017558,
+  "leaderboard": [
+    {
+      "rank": 1,
+      "alias": "Mathe 02",
+      "score": 1200,
+      "maxPoints": 1200,
+      "endedAt": 1793132017558
+    }
+  ]
+}
