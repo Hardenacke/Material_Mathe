@@ -1,0 +1,26 @@
+{
+  "subject": "mathematik",
+  "competitionId": "mathematik-quadratische-funktionen-monat",
+  "version": 1,
+  "periodId": "2026-10",
+  "instanceId": "cc5d0a88-fc07-49b2-9532-cedb45e088ef",
+  "revision": 2,
+  "final": false,
+  "generatedAt": 1793125575454,
+  "leaderboard": [
+    {
+      "rank": 1,
+      "alias": "Mathe 02",
+      "score": 986,
+      "maxPoints": 12000,
+      "endedAt": 1793123926210
+    },
+    {
+      "rank": 2,
+      "alias": "Mathe 01",
+      "score": 985,
+      "maxPoints": 12000,
+      "endedAt": 1793125575438
+    }
+  ]
+}
