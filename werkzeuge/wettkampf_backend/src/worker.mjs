@@ -70,7 +70,7 @@ async function route(request, env) {
   if (adminMatch && request.method === 'POST' && slug(adminMatch[1])) return admin(request, env, adminMatch[1]);
   if (!['GET', 'POST'].includes(request.method)) throw new HttpError(405, 'METHOD', 'Methode nicht erlaubt.');
   if (url.pathname.startsWith('/api/v1/quizzes/wurzelwerk')) {
-    const room = value => call(env.QUIZ_ROOM,'mathematik/'+wurzelwerk.id+'/v1/gesamt',value);
+    const room = value => call(env.QUIZ_ROOM,'mathematik/'+wurzelwerk.id+'/v'+wurzelwerk.version+'/gesamt',{...value,version:wurzelwerk.version});
     if (url.pathname === '/api/v1/quizzes/wurzelwerk/public' && request.method === 'GET') return room({op:'public'});
     if (url.pathname === '/api/v1/quizzes/wurzelwerk/join' && request.method === 'POST') {
       const payload=await readJSON(request);exact(payload,['token','alias']);
@@ -109,7 +109,7 @@ async function route(request, env) {
       exact(payload, op === 'answer' ? ['questionId', 'answer'] : []);
       if (op === 'answer' && !uuid(payload.questionId)) throw new HttpError(400, 'QUESTION', 'Ungültige Aufgabenkennung.');
     }
-    return call(env.QUIZ_ROOM, 'mathematik/' + wurzelwerk.id + '/v1/gesamt', {
+    return room({
       op, actor, attemptId: match[1], payload, requestId,
       hash: await fingerprint({op, attemptId: match[1] || null, payload})
     });

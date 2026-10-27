@@ -1,161 +1,110 @@
-
-(function(){
-"use strict";
-var KEY="wurzelwerk_leaderboard_v1", TYPES=["roots","laws","line"];
-var selectedMode="training",topic="mix",level=1,session=null,task=null,records=[],storageOK=true,toastTimer=null;
-function id(x){return document.getElementById(x)}
-function choose(a){return a[Math.floor(Math.random()*a.length)]}
-function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
-function clamp(x,a,b){return Math.min(b,Math.max(a,x))}
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]})}
-function mathHTML(tex,cls){return '<span'+(cls?' class="'+esc(cls)+'"':'')+' data-tex="'+esc(tex)+'"></span>'}
-function ntex(n,d){var o={useGrouping:false,maximumFractionDigits:d==null?0:d};if(d!=null)o.minimumFractionDigits=d;return Number(n).toLocaleString("de-DE",o).replace(",", "{,}")}
-function dateShow(s){return /^\d{4}-\d{2}-\d{2}$/.test(s||"")?s.slice(8,10)+"."+s.slice(5,7)+"."+s.slice(0,4):""}
-function dateTex(s){return "\\text{"+dateShow(s)+"}"}
-function today(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-function renderMath(box){if(!window.katex)return;var nodes=[];if(box&&box.matches&&box.matches("[data-tex]"))nodes.push(box);if(box&&box.querySelectorAll)nodes=nodes.concat(Array.prototype.slice.call(box.querySelectorAll("[data-tex]")));nodes.forEach(function(el){var t=el.getAttribute("data-tex");if(el.getAttribute("data-rendered-tex")===t)return;try{window.katex.render(t,el,{throwOnError:true,strict:"error",trust:false,output:"htmlAndMathml",displayMode:el.getAttribute("data-display")==="true"});el.setAttribute("data-rendered-tex",t)}catch(e){el.textContent="Formel nicht verfügbar";el.setAttribute("data-tex-error","true")}})}
-function toast(s){var el=id("toast");el.textContent=s;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove("show")},2400)}
-function loadRecords(){records=[]}
-function sorted(){return records.slice().sort(function(a,b){return Number(b.score)-Number(a.score)||String(a.date).localeCompare(String(b.date))||String(a.name).localeCompare(String(b.name),"de")})}
-function drawBoard(){var body=id("leaderboardBody");body.innerHTML="";var arr=sorted().slice(0,10);id("leaderboardEmpty").hidden=arr.length>0;arr.forEach(function(r,i){var tr=document.createElement("tr"),td1=document.createElement("td"),rank=document.createElement("span");rank.className="rank";rank.dataset.tex=ntex(r.rank||i+1);td1.appendChild(rank);var td2=document.createElement("td");td2.textContent=r.name;var td3=document.createElement("td");td3.textContent=r.className;var td4=document.createElement("td"),sc=document.createElement("span");sc.dataset.tex=ntex(r.score);td4.appendChild(sc);var td5=document.createElement("td"),dt=document.createElement("span");dt.dataset.tex=dateTex(r.date);td5.appendChild(dt);tr.append(td1,td2,td3,td4,td5);body.appendChild(tr)});renderMath(body);id("storageState").hidden=storageOK}
-function rootTask(l){var a=rand(l===1?1:(l===2?8:20),l===1?15:(l===2?32:50)),s=a*a;return{type:"roots",level:l,answer:a,expression:"\\sqrt{"+s+"}",title:"Ziehe die Wurzel.",help:"Gib die nicht-negative Zahl an, deren Quadrat dem Wert unter der Wurzel entspricht.",explanation:"\\sqrt{"+s+"}="+a}}
-function extractTask(l){var aa=l===1?[2,3,4,5,6]:(l===2?[3,4,5,6,7,8,9,10]:[6,7,8,9,10,11,12,13,14,15,16,17,18]),bb=l===1?[2,3,5]:(l===2?[2,3,5,7,11]:[2,3,5,7,11,13,17,19]),a=choose(aa),b=choose(bb),s=a*a*b;return{type:"laws",kind:"extract",level:l,a:a,b:b,expression:"\\sqrt{"+s+"}",title:"Vereinfache vollständig.",help:"Trage den Faktor vor der Wurzel und die Zahl unter der Wurzel getrennt ein.",explanation:"\\sqrt{"+s+"}=\\sqrt{"+(a*a)+"\\cdot "+b+"}="+a+"\\sqrt{"+b+"}"}}
-function productTask(l){var d=choose(l===2?[2,3,5,7]:[2,3,5,7,11,13]),x=rand(2,l===2?5:9),y=rand(2,l===2?6:11),a=d*x*x,b=d*y*y,z=d*x*y;return{type:"laws",kind:"product",level:l,answer:z,expression:"\\sqrt{"+a+"}\\cdot\\sqrt{"+b+"}",title:"Wende das Produktgesetz an.",help:"Fasse die Wurzeln zusammen und vereinfache das Ergebnis vollständig.",explanation:"\\sqrt{"+a+"}\\cdot\\sqrt{"+b+"}=\\sqrt{"+a+"\\cdot "+b+"}=\\sqrt{"+(a*b)+"}="+z}}
-function quotientTask(l){var d=choose(l===2?[2,3,5,7,10,11]:[2,3,5,7,11,13,17]),k=rand(l===2?3:5,l===2?10:18),top=d*k*k;return{type:"laws",kind:"quotient",level:l,answer:k,expression:"\\frac{\\sqrt{"+top+"}}{\\sqrt{"+d+"}}",title:"Wende das Quotientengesetz an.",help:"Fasse die Wurzeln zusammen und vereinfache das Ergebnis vollständig.",explanation:"\\frac{\\sqrt{"+top+"}}{\\sqrt{"+d+"}}=\\sqrt{\\frac{"+top+"}{"+d+"}}=\\sqrt{"+(k*k)+"}="+k}}
-function lawTask(l){if(l===1)return extractTask(l);var r=Math.random();return r<.44?extractTask(l):(r<.72?productTask(l):quotientTask(l))}
-function lineTask(l){var lo=l===1?2:(l===2?20:40),hi=l===1?20:(l===2?60:120),c=[];for(var n=lo;n<=hi;n++)if(!Number.isInteger(Math.sqrt(n)))c.push(n);var a=choose(c);return{type:"line",level:l,n:a,answer:Math.sqrt(a),max:l===1?5:(l===2?8:12),expression:"\\sqrt{"+a+"}",title:"Wo liegt diese Wurzel?",help:"Ziehe die Marke an die Stelle, an der du den Wert auf dem Zahlenstrahl vermutest."}}
-function makeTask(t,l){return t==="roots"?rootTask(l):(t==="laws"?lawTask(l):lineTask(l))}
-function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),v=b[i];b[i]=b[j];b[j]=v}return b}
-function build(mode,t,l){var list=[];if(mode==="competition"){for(var j=0;j<4;j++)list=list.concat(TYPES);list=shuffle(list)}else if(t==="mix")list=shuffle(["roots","roots","roots","roots","laws","laws","laws","line","line","line"]);else for(var i=0;i<10;i++)list.push(t);return{mode:mode,topic:t,level:l,types:list,limit:list.length,index:0,score:0,correct:0,attempted:0,answered:false,stored:false}}
-function typeName(t,k){return t==="roots"?"Quadratwurzel":(t==="line"?"Zahlenstrahl":(k==="extract"?"Wurzel vereinfachen":(k==="product"?"Produktgesetz":"Quotientengesetz")))}
-function parse(v){var s=String(v).trim().replace(/\s+/g,"").replace(",",".");if(!s||!/^[+-]?(?:\d+\.?\d*|\.\d+)$/.test(s))return null;var n=Number(s);return Number.isFinite(n)?n:null}
-function bindPreview(input,out,d){function update(){var n=parse(input.value);out.dataset.tex=n==null?"\\text{Eingabe}":ntex(n,d);renderMath(out)}input.addEventListener("input",update);update()}
-function oneInput(){return'<div class="answer-single"><div class="input-group"><label for="answerMain">Dein Ergebnis</label><input class="answer-input" id="answerMain" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"><div class="input-preview"><span>Eingegeben:</span><span id="previewMain" data-tex="\\text{Eingabe}"></span></div></div></div>'}
-function pairInputs(){return'<div class="law-pair"><div class="input-group"><label for="answerA">Faktor vor der Wurzel</label><input class="answer-input" id="answerA" type="text" inputmode="decimal" autocomplete="off"><div class="input-preview"><span>Eingabe:</span><span id="previewA" data-tex="\\text{Eingabe}"></span></div></div><span class="sep" aria-hidden="true">·</span><div class="input-group"><label for="answerB">Zahl unter der Wurzel</label><input class="answer-input" id="answerB" type="text" inputmode="decimal" autocomplete="off"><div class="input-preview"><span>Eingabe:</span><span id="previewB" data-tex="\\text{Eingabe}"></span></div></div><div class="law-preview" id="lawPreview" data-tex="\\sqrt{\\phantom{x}}"></div></div>'}
-function numberline(t){var marks="";for(var i=0;i<=t.max;i++){var pc=i/t.max*100,cl="tick-label"+(i===0?" first":"")+(i===t.max?" last":"");marks+='<span class="tick" style="left:'+pc+'%" aria-hidden="true"></span><span class="'+cl+'" style="left:'+pc+'%">'+mathHTML(ntex(i))+"</span>"}return'<div class="line-card"><div class="line-note"><span>Tippe oder ziehe die Marke</span><span>Auch mit den Pfeiltasten</span></div><div class="line-track" id="lineTrack" aria-label="Interaktiver Zahlenstrahl"><div class="axis"></div>'+marks+'<button type="button" class="marker" id="marker" role="slider" aria-label="Geschätzte Position" aria-valuemin="0" aria-valuemax="'+t.max+'" aria-valuenow="0"><span data-tex="0"></span></button></div><div class="line-readout"><span>Deine Position:</span><span id="lineReadout" data-tex="0"></span></div></div>'}
-function attachLine(t){var track=id("lineTrack"),marker=id("marker"),drag=false,val=0;function upd(v){val=clamp(v,0,t.max);marker.style.left=(val/t.max*100)+"%";marker.setAttribute("aria-valuenow",val.toFixed(2));marker.setAttribute("aria-valuetext",val.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}));marker.dataset.tex=ntex(val,2);id("lineReadout").dataset.tex=ntex(val,2);renderMath(marker);renderMath(id("lineReadout"))}function set(x){var r=track.getBoundingClientRect();if(r.width)upd(Math.round(clamp((x-r.left)/r.width,0,1)*t.max*100)/100)}track.addEventListener("pointerdown",function(e){if(session.answered)return;e.preventDefault();drag=true;track.setPointerCapture(e.pointerId);set(e.clientX)});track.addEventListener("pointermove",function(e){if(drag&&!session.answered)set(e.clientX)});track.addEventListener("pointerup",function(){drag=false});track.addEventListener("pointercancel",function(){drag=false});marker.addEventListener("keydown",function(e){var d=e.shiftKey ? 0.01 : 0.1;if(e.key==="ArrowRight"||e.key==="ArrowUp"){e.preventDefault();upd(val+d)}else if(e.key==="ArrowLeft"||e.key==="ArrowDown"){e.preventDefault();upd(val-d)}else if(e.key==="Home"){e.preventDefault();upd(0)}else if(e.key==="End"){e.preventDefault();upd(t.max)}});upd(0)}
-function startLocal(mode){if(!window.katex){id("mathWarning").classList.add("show");return}var lev=mode==="competition"?3:level;session=build(mode,topic,lev);id("setupScreen").hidden=true;id("resultsScreen").hidden=true;id("gameScreen").hidden=false;id("gameModeChip").innerHTML=mode==="competition"?"Wettbewerb · Challenge":"Training · Stufe "+mathHTML(ntex(lev));showTask();window.scrollTo({top:0,behavior:"smooth"})}
-function renderTask(){task=session.mode==="competition"?session.remote.question:makeTask(session.types[session.index],session.level);session.answered=session.mode==="competition"?session.remote.answered:false;id("feedback").hidden=true;id("feedback").className="feedback";id("submitAnswer").hidden=false;id("nextQuestion").hidden=true;id("submitAnswer").disabled=false;id("progressCount").innerHTML=mathHTML(ntex(session.index+1))+" / "+mathHTML(ntex(session.limit));id("progressFill").style.width=(session.index/session.limit*100)+"%";id("scoreValue").innerHTML=mathHTML(ntex(session.score));id("questionType").textContent=typeName(task.type,task.kind);id("questionKicker").innerHTML=session.mode==="competition"?"Challenge":"Stufe "+mathHTML(ntex(session.level));id("questionTitle").textContent=task.title;id("questionHelp").textContent=task.help;id("expression").innerHTML=mathHTML(task.expression);var area=id("answerArea");
-if(task.type==="roots"||task.kind==="product"||task.kind==="quotient"){area.innerHTML=oneInput();bindPreview(id("answerMain"),id("previewMain"));id("answerMain").addEventListener("keydown",function(e){if(e.key==="Enter")submit()})}
-else if(task.kind==="extract"){area.innerHTML=pairInputs();bindPreview(id("answerA"),id("previewA"));bindPreview(id("answerB"),id("previewB"));function preview(){var a=parse(id("answerA").value),b=parse(id("answerB").value);id("lawPreview").dataset.tex=a==null||b==null?"\\sqrt{\\phantom{x}}":ntex(a)+"\\sqrt{"+ntex(b)+"}";renderMath(id("lawPreview"))}id("answerA").addEventListener("input",preview);id("answerB").addEventListener("input",preview);[id("answerA"),id("answerB")].forEach(function(x){x.addEventListener("keydown",function(e){if(e.key==="Enter")submit()})})}
-else{area.innerHTML=numberline(task);attachLine(task)}
-renderMath(id("gameScreen"));if(task.type!=="line")setTimeout(function(){var q=area.querySelector("input");if(q)q.focus({preventScroll:true})},30)}
-function linePoints(err,tol){return err<=tol?100:(err<=2*tol?70:(err<=4*tol?40:0))}
-function trainingSubmit(){if(!session||session.answered)return;var pts=0,ok=false,title="",msg="",eq=task.explanation||"";
-if(task.type==="line"){var guess=Number(id("marker").getAttribute("aria-valuenow")),err=Math.abs(guess-task.answer),tol=session.level===1 ? 0.42 : (session.level===2 ? 0.29 : 0.19);pts=linePoints(err,tol);ok=err<=tol;title=pts===100?"Sehr gut eingeordnet!":(pts?"Gute Annäherung":"Noch nicht ganz");msg=pts===100?"Deine Marke liegt sehr nah am Näherungswert.":(pts?"Du bekommst Teilpunkte für deine Annäherung.":"Achte auf den Abstand zu den benachbarten ganzen Zahlen.");eq="\\sqrt{"+task.n+"}\\approx "+ntex(task.answer,2);id("marker").disabled=true}
-else if(task.kind==="extract"){var a=parse(id("answerA").value),b=parse(id("answerB").value);if(a==null||b==null){toast("Bitte trage beide Zahlen ein.");(a==null?id("answerA"):id("answerB")).focus();return}ok=a===task.a&&b===task.b;pts=ok?100:0;title=ok?"Richtig vereinfacht!":"Da steckt noch ein Quadrat drin.";msg=ok?"Du hast den quadratischen Faktor aus der Wurzel herausgezogen.":"Suche unter der Wurzel einen möglichst großen quadratischen Faktor."}
-else{var answer=parse(id("answerMain").value);if(answer==null){toast("Gib zuerst ein Ergebnis ein.");id("answerMain").focus();return}ok=answer===task.answer;pts=ok?100:0;title=ok?"Genau richtig!":"Das war noch nicht die passende Zahl.";msg=task.type==="roots"?(ok?"Deine Zahl ergibt beim Quadrieren genau den Wert unter der Wurzel.":"Prüfe, welche Quadratzahl zur Zahl unter der Wurzel passt."):(ok?"Du hast die Wurzeln passend zusammengefasst.":"Prüfe den Zwischenschritt mit dem passenden Wurzelgesetz.")}
-session.answered=true;session.attempted++;session.score+=pts;if(ok)session.correct++;id("scoreValue").innerHTML=mathHTML(ntex(session.score));id("submitAnswer").hidden=true;id("nextQuestion").hidden=false;id("actionHint").innerHTML=pts?"Punkte für diese Aufgabe: "+mathHTML(ntex(pts)):"Lies den Rechenschritt und probiere es in der nächsten Aufgabe erneut.";var fb=id("feedback");fb.className="feedback "+(pts===100?"good":(pts?"partial":"bad"));fb.innerHTML="<strong><span aria-hidden=\"true\">"+(pts===100?"✓":(pts?"≈":"↻"))+"</span>"+esc(title)+"</strong><p>"+esc(msg)+"</p><div class=\"equation\" data-tex=\""+esc(eq)+"\"></div>";fb.hidden=false;id("answerArea").querySelectorAll("input").forEach(function(x){x.disabled=true;x.setAttribute("aria-invalid",ok?"false":"true")});renderMath(fb);renderMath(id("gameScreen"))}
-function trainingNext(){if(!session||!session.answered)return;session.index++;if(session.index>=session.limit){results();return}showTask();window.scrollTo({top:0,behavior:"smooth"})}
-function home(){id("resultsScreen").hidden=true;id("gameScreen").hidden=true;id("setupScreen").hidden=false;session=null;drawBoard();window.scrollTo({top:0,behavior:"smooth"})}
-function switchMode(m){selectedMode=m;id("trainingTab").setAttribute("aria-pressed",String(m==="training"));id("competitionTab").setAttribute("aria-pressed",String(m==="competition"));id("trainingControls").hidden=m!=="training";id("competitionControls").hidden=m!=="competition";id("setupTitle").textContent=m==="training"?"Dein Trainingsplan":"Bereit für die Wurzel-Arena?";id("setupDescription").textContent=m==="training"?"Wähle einen Bereich und starte auf dem Niveau, das zu dir passt.":"Stelle dich einer gemischten Runde und sichere dir einen Platz in der Rangliste.";id("setupTag").textContent=m==="training"?"Üben · ohne Druck":"Messen · eintragen"}
-id("trainingTab").addEventListener("click",function(){switchMode("training")});id("competitionTab").addEventListener("click",function(){switchMode("competition")});
-document.querySelectorAll("[data-topic]").forEach(function(b){b.addEventListener("click",function(){topic=b.dataset.topic;document.querySelectorAll("[data-topic]").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))})})});
-document.querySelectorAll("[data-level]").forEach(function(b){b.addEventListener("click",function(){level=Number(b.dataset.level);document.querySelectorAll("[data-level]").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))})})});
-id("startTraining").addEventListener("click",function(){start("training")});id("startCompetition").addEventListener("click",function(){start("competition")});id("backToSetup").addEventListener("click",home);id("submitAnswer").addEventListener("click",submit);id("nextQuestion").addEventListener("click",next);
-// Wird beim Import innerhalb der bestehenden Quizfunktion eingefügt.
-var cloud = {base:'https://mathe-wettkampf-api.physik-wettkampf-api.workers.dev',token:'',alias:'',connected:false,busy:false,pending:null,generation:0};
-var profileKey='wurzelwerk-profile-v1';
-function newToken(){return Array.from(crypto.getRandomValues(new Uint8Array(32)),function(value){return value.toString(16).padStart(2,'0')}).join('')}
-function rememberProfile(){try{localStorage.setItem(profileKey,JSON.stringify({token:cloud.token,alias:cloud.alias}))}catch(error){/* Teilnahme bleibt im aktuellen Tab möglich. */}}
-try{var savedProfile=JSON.parse(localStorage.getItem(profileKey)||'null');if(savedProfile&&/^[A-Za-z0-9_-]{32,128}$/.test(savedProfile.token)){cloud.token=savedProfile.token;cloud.alias=typeof savedProfile.alias==='string'?savedProfile.alias:''}}catch(error){/* Neues Browserprofil anlegen. */}
-if(!cloud.token)cloud.token=newToken();
-id('competitionAlias').value=cloud.alias;
-function connection(text, ok){id('connectionStatus').textContent=text;id('connectionStatus').dataset.connected=String(ok);id('startCompetition').disabled=!ok;cloud.connected=ok}
-async function cloudRequest(path,body){
-  var options={headers:{Authorization:'Bearer '+cloud.token},signal:AbortSignal.timeout(15000)};
-  if(body!==undefined){
-    cloud.generation++;
-    if(!cloud.pending||cloud.pending.path!==path)cloud.pending={path:path,body:body,key:crypto.randomUUID()};
-    options.method='POST';options.headers['Content-Type']='application/json';options.headers['Idempotency-Key']=cloud.pending.key;options.body=JSON.stringify(cloud.pending.body);
-  }
-  var response=await fetch(cloud.base+'/api/v1/quizzes/wurzelwerk'+path,options),data=await response.json();
-  if(!response.ok)throw new Error(data.error&&data.error.message||'Der Wettbewerb ist gerade nicht erreichbar.');
-  if(body!==undefined)cloud.pending=null;
-  return data;
+import {makeTask,build,linePoints} from './rules.mjs';
+const API='https://mathe-wettkampf-api.physik-wettkampf-api.workers.dev/api/v1/quizzes/wurzelwerk';
+const root=document.getElementById('view'),PROFILE='wurzelwerk-profile-v1',DRAFT='wurzelwerk-draft-v2';
+const state={topic:'mix',level:2,mode:'training',attempt:null,local:null,board:[],connected:false,busy:false,pending:null,generation:0,clock:Date.now(),received:performance.now(),questionKey:'',activeInput:'answer',timeoutId:null};
+const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const number=value=>Number(value).toLocaleString('de-DE');
+const math=tex=>window.katex?window.katex.renderToString(tex,{trust:false,throwOnError:false}):esc(tex);
+const token=()=>Array.from(crypto.getRandomValues(new Uint8Array(32)),x=>x.toString(16).padStart(2,'0')).join('');
+let profile={token:token(),alias:''},draft={id:'',a:'',b:''},messageTimer;
+try{const saved=JSON.parse(localStorage.getItem(PROFILE));if(saved&&/^[a-zA-Z0-9_-]{32,128}$/.test(saved.token))profile=saved}catch{}
+try{draft=JSON.parse(sessionStorage.getItem(DRAFT))||draft}catch{}
+const remember=()=>{try{localStorage.setItem(PROFILE,JSON.stringify(profile))}catch{}};
+function notify(text){const box=document.getElementById('message');box.textContent=text;box.hidden=false;clearTimeout(messageTimer);messageTimer=setTimeout(()=>box.hidden=true,6000)}
+function clock(){return state.clock+performance.now()-state.received}
+function time(ms){const seconds=Math.max(0,Math.floor(ms/1000));return Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0')}
+function route(){return location.hash.replace(/^#\/?/,'')||'start'}
+function go(path){if(route()===path)render();else location.hash='/'+path}
+function head(back,label,step=''){return `<nav class="step-nav"><a class="back" href="#/${back}">← ${label}</a><span class="step-count">${step}</span></nav>`}
+function online(){return `<p class="status ${state.connected?'online':''}" id="connectionStatus">${state.connected?'Online · Wettbewerb bereit':'Verbindung wird aufgebaut …'}</p>`}
+function status(){const el=document.getElementById('connectionStatus');if(el){el.classList.toggle('online',state.connected);el.textContent=state.connected?'Online · Wettbewerb bereit':'Verbindung unterbrochen · Wir versuchen es erneut.'}const button=root.querySelector('[data-play="competition"]');if(button)button.disabled=state.busy||!state.connected}
+function setBusy(value){state.busy=value;root.querySelectorAll('[data-play],#checkAnswer,#nextTask,#newPlayer').forEach(button=>button.disabled=value||(!state.connected&&(button.dataset.play==='competition'||state.mode==='competition'&&['checkAnswer','nextTask'].includes(button.id))));root.querySelectorAll('.answer-input,#numberRange,[data-key],#nextInput').forEach(input=>input.disabled=value||Boolean(current()?.answered))}
+async function request(path,body){
+  const options={headers:{Authorization:'Bearer '+profile.token},signal:AbortSignal.timeout(15000)};
+  if(body!==undefined){state.generation++;if(!state.pending||state.pending.path!==path)state.pending={path,body,key:crypto.randomUUID()};Object.assign(options,{method:'POST',body:JSON.stringify(state.pending.body)});Object.assign(options.headers,{'Content-Type':'application/json','Idempotency-Key':state.pending.key})}
+  const response=await fetch(API+path,options),data=await response.json();
+  if(!response.ok)throw new Error(data.error?.message||'Die Verbindung ist gerade unterbrochen.');
+  if(body!==undefined)state.pending=null;if(data.serverNow){state.clock=data.serverNow;state.received=performance.now()}return data;
 }
-function remoteSession(value){return{mode:'competition',level:3,limit:12,index:value.index,score:value.score,correct:value.correct,attempted:value.attempted,answered:value.answered,stored:value.phase==='finished',remote:value}}
-async function refreshCloud(){
-  var generation=cloud.generation,data=await cloudRequest('');if(generation!==cloud.generation)return data;cloud.alias=data.alias;
-  records=data.leaderboard.map(function(row){return{rank:row.rank,name:row.alias,className:'9',score:row.score,date:new Date(row.endedAt).toISOString().slice(0,10)}});drawBoard();
-  connection('Cloudflare verbunden · '+data.alias,true);
-  if(data.current&&session&&session.mode==='competition'&&data.current.id===session.remote.id){session=remoteSession(data.current);showTask()}
-  return data;
+async function sync(){
+  const generation=state.generation,data=await request('');if(generation!==state.generation)return;
+  state.connected=true;state.board=data.leaderboard;profile.alias=data.alias;remember();
+  if(data.current){state.attempt=data.current;if(route()==='aufgabe'&&(state.mode==='competition'||!state.local)){state.mode='competition';renderQuestion()}}
+  setBusy(state.busy);status();if(route()==='rangliste')render();
 }
-async function connectCloud(alias){
-  if(cloud.busy)return;
-  cloud.busy=true;connection('Verbindung zu Cloudflare wird aufgebaut …',false);
-  try{
-    var response=await fetch(cloud.base+'/api/v1/quizzes/wurzelwerk/join',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({token:cloud.token,alias:typeof alias==='string'?alias:''}),signal:AbortSignal.timeout(15000)});
-    var data=await response.json();if(!response.ok)throw new Error(data.error&&data.error.message||'Verbindung derzeit nicht möglich.');
-    cloud.alias=data.alias;rememberProfile();id('competitionAlias').placeholder=data.alias;await refreshCloud();
-  }catch(error){connection(error.message+' Die Verbindung wird automatisch erneut versucht.',false)}
-  finally{cloud.busy=false;id('nextQuestion').disabled=false}
+async function connect(alias=''){
+  const response=await fetch(API+'/join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:profile.token,alias}),signal:AbortSignal.timeout(15000)}),data=await response.json();
+  if(!response.ok)throw new Error(data.error?.message||'Der Wettbewerb ist noch nicht erreichbar.');profile.alias=data.alias;remember();await sync();
 }
 async function start(mode){
-  if(mode==='training'){startLocal(mode);return}
-  if(cloud.busy)return;
-  await connectCloud(id('competitionAlias').value.trim());
-  if(!cloud.connected)return;
-  cloud.busy=true;id('startCompetition').disabled=true;
-  try{
-    var data=await cloudRequest('/attempts',{});session=remoteSession(data.attempt);
-    id('setupScreen').hidden=true;id('resultsScreen').hidden=true;id('gameScreen').hidden=false;
-    id('gameModeChip').textContent='Wettbewerb · Cloudflare';showTask();window.scrollTo({top:0,behavior:'smooth'});
-  }catch(error){connection(error.message,false)}finally{cloud.busy=false;id('startCompetition').disabled=!cloud.connected;id('nextQuestion').disabled=false}
+  if(state.busy)return;state.mode=mode;
+  if(mode==='training'){const game=build('training',state.topic,state.level);state.local={...game,id:crypto.randomUUID(),phase:'active',basePoints:0,timeBonus:0,startedAt:Date.now(),task:{...makeTask(game.types[0],state.level),id:crypto.randomUUID()}};state.questionKey='';go('aufgabe');return}
+  setBusy(true);try{await connect(document.getElementById('competitionAlias')?.value.trim()||'');state.attempt=(await request('/attempts',{})).attempt;state.questionKey='';go('aufgabe')}catch(error){state.connected=false;notify(error.message)}finally{setBusy(false);status()}
 }
-function remoteFeedback(){
-  var feedback=session.remote.feedback;if(!feedback)return;
-  id('submitAnswer').hidden=true;id('nextQuestion').hidden=false;id('actionHint').textContent='Von Cloudflare bewertet: '+feedback.points+' Punkte';
-  id('nextQuestion').disabled=cloud.busy;
-  var box=id('feedback');box.hidden=false;box.className='feedback '+(feedback.points===100?'good':feedback.points?'partial':'bad');
-  box.innerHTML='<strong>'+esc(feedback.correct?'Richtig gelöst!':feedback.points?'Gute Annäherung':'Noch nicht ganz')+'</strong><div class="equation" data-tex="'+esc(feedback.explanation)+'"></div>';
-  id('answerArea').querySelectorAll('input,button').forEach(function(input){input.disabled=true});renderMath(box);
-}
-function showTask(){renderTask();if(session.mode==='competition'&&session.answered)remoteFeedback()}
-async function submit(){
-  if(!session||session.answered)return;
-  if(session.mode==='training'){trainingSubmit();return}
-  if(cloud.busy)return;
-  if(!cloud.connected){toast('Bitte die Verbindung wiederherstellen.');return}
-  var answer;
-  if(task.type==='line')answer=Number(id('marker').getAttribute('aria-valuenow'));
-  else if(task.kind==='extract'){answer={a:parse(id('answerA').value),b:parse(id('answerB').value)};if(answer.a===null||answer.b===null){toast('Bitte beide Zahlen eingeben.');return}}
-  else{answer=parse(id('answerMain').value);if(answer===null){toast('Bitte eine Zahl eingeben.');return}}
-  cloud.busy=true;id('submitAnswer').disabled=true;
-  try{
-    var data=await cloudRequest('/attempts/'+session.remote.id+'/answer',{questionId:task.id,answer:answer});
-    session=remoteSession(data.attempt);showTask();await refreshCloud();
-  }catch(error){toast(error.message);connection('Verbindung unterbrochen. Stelle sie zur Wiederaufnahme erneut her.',false);id('submitAnswer').disabled=false}
-  finally{cloud.busy=false;id('nextQuestion').disabled=false}
+function current(){return state.mode==='competition'?state.attempt:state.local}
+function question(){const game=current();return state.mode==='competition'?game?.question:game?.task}
+function readNumber(value){const text=String(value).trim().replace(',','.');return /^[+]?(?:\d+\.?\d*|\.\d+)$/.test(text)&&Number.isFinite(Number(text))?Number(text):null}
+function saveDraft(){try{sessionStorage.setItem(DRAFT,JSON.stringify(draft))}catch{}}
+function taskAnswer(){const q=question();if(q.kind==='extract'){const a=readNumber(draft.a),b=readNumber(draft.b);if(a===null||b===null)throw new Error('Trage zuerst den Faktor und dann den Rest ein.');return {a,b}}const value=readNumber(draft.a);if(value===null)throw new Error('Gib zuerst eine Zahl ein.');if(q.type==='line'&&(value<0||value>q.max))throw new Error('Wähle eine Zahl zwischen 0 und '+q.max+'.');return value}
+async function submit(timedOut=false){
+  const game=current();if(!game||game.answered||state.busy)return;
+  let answer;try{answer=timedOut?null:taskAnswer()}catch(error){notify(error.message);document.getElementById(state.activeInput)?.focus();return}
+  if(state.mode==='training'){
+    const q=question(),points=q.type==='line'?linePoints(Math.abs(answer-q.answer),state.level===1?.42:state.level===2?.29:.19):q.kind==='extract'?(answer.a===q.a&&answer.b===q.b?100:0):answer===q.answer?100:0;
+    game.score+=points;game.correct+=points===100?1:0;game.attempted++;game.answered=true;game.feedback={points,basePoints:points,timeBonus:0,correct:points===100,explanation:q.explanation||`\\sqrt{${q.n}}\\approx ${q.answer.toFixed(2).replace('.', '{,}')}`};if(game.attempted===game.limit){game.phase='finished';game.endedAt=Date.now()}renderQuestion();return;
+  }
+  if(!state.connected)return;setBusy(true);
+  try{state.attempt=(await request('/attempts/'+game.id+'/answer',{questionId:question().id,answer})).attempt;renderQuestion();await sync()}catch(error){state.connected=false;notify(error.message+' Deine Eingabe bleibt erhalten.')}finally{setBusy(false);status()}
 }
 async function next(){
-  if(!session||!session.answered)return;
-  if(session.mode==='training'){trainingNext();return}
-  if(cloud.busy)return;
-  if(session.remote.phase==='finished'){results();return}
-  cloud.busy=true;id('nextQuestion').disabled=true;
-  try{var data=await cloudRequest('/attempts/'+session.remote.id+'/next',{});session=remoteSession(data.attempt);showTask()}
-  catch(error){toast(error.message);connection('Verbindung unterbrochen. Bitte erneut verbinden.',false)}
-  finally{cloud.busy=false;id('nextQuestion').disabled=false}
+  const game=current();if(!game?.answered||state.busy)return;if(game.phase==='finished'){go('ergebnis');return}
+  if(state.mode==='training'){game.index++;game.task={...makeTask(game.types[game.index],state.level),id:crypto.randomUUID()};game.answered=false;game.feedback=null;state.questionKey='';renderQuestion();return}
+  setBusy(true);try{state.attempt=(await request('/attempts/'+game.id+'/next',{})).attempt;state.questionKey='';renderQuestion()}catch(error){state.connected=false;notify(error.message)}finally{setBusy(false);status()}
 }
-function results(){
-  id('gameScreen').hidden=true;var el=id('resultsScreen');el.hidden=false;
-  var online=session.mode==='competition';
-  el.innerHTML='<article class="results"><div class="result-hero"><p class="hero-label">'+(online?'Wettbewerb abgeschlossen':'Trainingsrunde geschafft')+'</p><h2>Stark gespielt!</h2><p>'+session.attempted+' Aufgaben bearbeitet.</p></div><div class="stats"><div class="stat"><span class="stat-label">Punkte</span><span class="stat-value">'+session.score+'</span></div><div class="stat"><span class="stat-label">Richtig gelöst</span><span class="stat-value">'+session.correct+' / '+session.limit+'</span></div><div class="stat"><span class="stat-label">Trefferquote</span><span class="stat-value">'+Math.round(session.correct/session.limit*100)+' %</span></div></div><div class="save"><p>'+(online?'Dein Ergebnis wurde von Cloudflare bewertet und als '+esc(cloud.alias)+' gespeichert. Dein bester Versuch zählt für die gemeinsame Rangliste.':'Trainiere weiter in deinem Tempo. Trainingsergebnisse gehen nicht in die Wettbewerbsrangliste ein.')+'</p></div><div class="result-actions"><button class="primary" id="playAgain">Noch eine Runde</button><button class="secondary" id="resultsHome">Zur Auswahl</button></div></article>';
-  id('playAgain').addEventListener('click',function(){start(session.mode)});id('resultsHome').addEventListener('click',home);window.scrollTo({top:0,behavior:'smooth'});
+function field(id,label,value){return `<div class="answer-field"><label for="${id}">${label}</label><input class="answer-input" id="${id}" type="text" inputmode="none" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="12" value="${esc(value)}"></div>`}
+function renderQuestion(){
+  if(route()!=='aufgabe')return;const game=current(),q=question();if(!game||!q){root.innerHTML='<p class="loading">Dein Spielstand wird geladen …</p>';return}
+  const key=game.id+'/'+q.id+'/'+game.answered;if(key===state.questionKey){tick();return}state.questionKey=key;state.timeoutId=null;
+  if(draft.id!==q.id){draft={id:q.id,a:'',b:''};saveDraft()}state.activeInput=q.kind==='extract'?'factor':'answer';
+  const pair=q.kind==='extract',competition=state.mode==='competition',feedback=game.feedback;
+  root.innerHTML=`<div class="play-top"><a class="back" href="#/${competition?'wettbewerb':'training/stufe'}">← Auswahl</a><span class="step-count">Aufgabe ${game.index+1} von ${game.limit}</span><strong class="score">${number(game.score)} Punkte</strong></div><div class="progress" aria-label="Fortschritt"><span style="width:${game.attempted/game.limit*100}%"></span></div>
+  ${competition?'<div class="time-row"><div class="time-card" id="questionClock"><span>Zeit für die Aufgabe</span><strong id="remaining" role="timer" aria-live="off"></strong></div><div class="time-card"><span>Rundenzeit</span><strong id="roundTime" role="timer" aria-live="off"></strong></div></div>':'<p class="eyebrow">Training · Ohne Zeitdruck</p>'}
+  <section class="panel task-card"><p class="eyebrow">${q.type==='roots'?'Quadratwurzel':q.type==='line'?'Zahlenstrahl':'Wurzelgesetz'}${competition?' · Mittelschwer':''}</p><h1>${esc(q.title)}</h1><p class="task-help">${esc(q.help)}</p><div class="expression">${math(q.expression)}</div>
+  ${q.type==='line'?`<div class="range-wrap"><input id="numberRange" type="range" min="0" max="${q.max}" step=".01" value="${readNumber(draft.a)||0}" aria-label="Geschätzte Position auf dem Zahlenstrahl"><div class="range-labels"><span>0</span><span>${q.max}</span></div></div>`:''}
+  <div class="answer-row">${pair?field('factor','1. Faktor',draft.a)+'<span class="radical" aria-hidden="true">√</span>'+field('radicand','2. Rest unter der Wurzel',draft.b):field('answer',q.type==='line'?'Deine Schätzung':'Dein Ergebnis',draft.a)}</div>
+  ${!game.answered?`<div class="keypad" aria-label="Zifferntastatur">${['7','8','9','4','5','6','1','2','3',',','0','⌫'].map(value=>`<button type="button" data-key="${value}" ${value==='⌫'?'aria-label="Letzte Ziffer löschen"':value===','?'aria-label="Komma"':''} class="${value==='⌫'||value===','?'function':''}">${value}</button>`).join('')}</div>${pair?'<button type="button" class="input-next" id="nextInput">Zum Rest unter der Wurzel →</button>':''}<div class="task-actions"><button class="primary" id="checkAnswer">Antwort prüfen →</button></div>`:
+  `<div class="feedback ${feedback.correct?'good':feedback.points?'':'bad'}" id="feedback" role="status"><strong>${feedback.timedOut?'Die Zeit ist abgelaufen.':feedback.correct?'Richtig gelöst!':feedback.points?'Gute Annäherung.':'Noch nicht ganz.'}</strong><div class="explanation">${math(feedback.explanation)}</div><p>${feedback.basePoints??feedback.points} Grundpunkte${feedback.timeBonus?' + '+feedback.timeBonus+' Zeitbonus':''}</p></div><div class="task-actions"><button class="primary" id="nextTask">${game.phase==='finished'?'Ergebnis ansehen':'Nächste Aufgabe'} →</button></div>`}</section>`;
+  for(const input of root.querySelectorAll('.answer-input')){
+    input.disabled=game.answered;input.addEventListener('focus',()=>state.activeInput=input.id);
+    input.addEventListener('input',()=>{draft[input.id==='radicand'?'b':'a']=input.value;saveDraft();const range=document.getElementById('numberRange');if(range&&readNumber(input.value)!==null)range.value=readNumber(input.value)});
+    input.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();if(input.id==='factor')document.getElementById('radicand').focus();else submit()}});
+  }
+  const range=document.getElementById('numberRange');if(range){range.disabled=game.answered;range.addEventListener('input',()=>{draft.a=Number(range.value).toFixed(2).replace('.',',');document.getElementById('answer').value=draft.a;saveDraft()})}
+  root.querySelectorAll('[data-key]').forEach(button=>{button.addEventListener('pointerdown',event=>event.preventDefault());button.addEventListener('click',()=>{const input=document.getElementById(state.activeInput);if(!input||input.disabled)return;const value=button.dataset.key,start=input.selectionStart??input.value.length,end=input.selectionEnd??start;let position=start;if(value==='⌫'){position=start===end?Math.max(0,start-1):start;input.value=input.value.slice(0,position)+input.value.slice(end)}else{const rest=input.value.slice(0,start)+input.value.slice(end);if(rest.length>=12||value===','&&/[,.]/.test(rest))return;input.value=input.value.slice(0,start)+value+input.value.slice(end);position=start+1}input.dispatchEvent(new Event('input'));input.focus({preventScroll:true});input.setSelectionRange(position,position)})});
+  document.getElementById('nextInput')?.addEventListener('click',()=>document.getElementById('radicand').focus());document.getElementById('checkAnswer')?.addEventListener('click',()=>submit());document.getElementById('nextTask')?.addEventListener('click',next);
+  setBusy(state.busy);if(!game.answered)document.getElementById(state.activeInput)?.focus({preventScroll:true});tick();
 }
-id('competitionAlias').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();start('competition')}});
-id('newPlayer').addEventListener('click',function(){
-  if(cloud.busy)return;home();cloud.generation++;cloud.token=newToken();cloud.alias='';cloud.pending=null;
-  id('competitionAlias').value='';rememberProfile();connectCloud('');
-});
-window.addEventListener('offline',function(){connection('Offline · Training bleibt verfügbar.',false);if(session&&session.mode==='competition')id('submitAnswer').disabled=true});
-window.addEventListener('online',function(){connectCloud('')});
-document.addEventListener('visibilitychange',function(){if(!document.hidden&&cloud.connected&&!cloud.busy)refreshCloud().catch(function(){connection('Verbindung unterbrochen. Bitte erneut verbinden.',false)})});
-setInterval(function(){if(!document.hidden&&!cloud.busy){if(cloud.connected)refreshCloud().catch(function(){connection('Verbindung unterbrochen. Wiederverbindung läuft automatisch.',false)});else connectCloud('')}},10000);
-connectCloud('');
-
-loadRecords();drawBoard();if(!window.katex)id("mathWarning").classList.add("show");renderMath(document);
-}());
+function tick(){
+  if(route()!=='aufgabe'||state.mode!=='competition'||!state.attempt)return;const game=state.attempt,remaining=Math.max(0,Math.ceil((game.deadline-clock())/1000));
+  const display=document.getElementById('remaining');if(display)display.textContent=game.answered?'Erledigt':remaining+' s';document.getElementById('questionClock')?.classList.toggle('urgent',remaining<=10&&!game.answered);
+  const elapsed=document.getElementById('roundTime');if(elapsed)elapsed.textContent=time((game.endedAt||clock())-game.startedAt);
+  if(!game.answered&&remaining===0&&state.connected&&!state.busy&&state.timeoutId!==game.question.id){state.timeoutId=game.question.id;submit(true)}
+}
+function render(){
+  state.questionKey='';const path=route();if(path==='aufgabe'){renderQuestion();return}
+  if(path==='start')root.innerHTML=`<p class="eyebrow">Wurzeln verstehen. Sicher rechnen.</p><h1>Was möchtest<br>du heute machen?</h1><p class="intro">Wähle deinen Weg. Du siehst immer nur das, was du gerade brauchst.</p><div class="cards"><a class="mode-card" href="#/training/thema"><span class="mode-icon">√</span><strong>In Ruhe üben</strong><p>Wähle dein Thema und deine Stufe. Ohne Timer, mit Erklärungen.</p><span class="arrow">Training wählen →</span></a><a class="mode-card competition" href="#/wettbewerb"><span class="mode-icon">↗</span><strong>Wettbewerb spielen</strong><p>Zwölf mittelschwere Aufgaben. Sichere Antworten und Tempo bringen Punkte.</p><span class="arrow">Zur Wettbewerbsrunde →</span></a></div><div class="bottom-nav"><a class="quiet-link" href="#/rangliste">Rangliste ansehen →</a><span class="hint">Ohne Anmeldung und ohne Code.</span></div>`;
+  else if(path==='training/thema')root.innerHTML=head('start','Start','Training · 1 von 2')+'<p class="eyebrow">Training</p><h1>Was möchtest du üben?</h1><p class="intro">Ein Thema oder eine gemischte Runde – du entscheidest.</p><div class="cards">'+[['mix','Gemischte Runde','Alle drei Themen im Wechsel.'],['roots','Quadratwurzeln','Quadratzahlen erkennen und Wurzeln ziehen.'],['laws','Wurzelgesetze','Vereinfachen, multiplizieren und teilen.'],['line','Zahlenstrahl','Wurzeln schätzen und einordnen.']].map(([id,title,description])=>`<button class="option" data-topic="${id}"><strong>${title}</strong><span>${description}</span></button>`).join('')+'</div>';
+  else if(path==='training/stufe')root.innerHTML=head('training/thema','Thema wählen','Training · 2 von 2')+'<p class="eyebrow">Training</p><h1>Welche Stufe passt zu dir?</h1><p class="intro">Zehn Aufgaben pro Runde. Du kannst danach jederzeit eine andere Stufe wählen.</p><div class="cards levels">'+[['Einstieg','Kleine Zahlen, klare Schritte.'],['Aufbau','Mittlere Zahlen und Wurzelgesetze.'],['Challenge','Größere Zahlen, anspruchsvollere Terme.']].map(([title,description],i)=>`<button class="option" data-level="${i+1}" aria-pressed="${state.level===i+1}"><strong>${i+1} · ${title}</strong><span>${description}</span></button>`).join('')+'</div><div class="actions"><button class="primary" data-play="training">Training starten →</button></div>';
+  else if(path==='wettbewerb')root.innerHTML=head('start','Start')+`<p class="eyebrow">Wettbewerb · Neue Zeitwertung</p><h1>Bereit für deine Runde?</h1><p class="intro">Rechne sicher und sammle Zeitbonus. Zwischen den Aufgaben kannst du die Erklärung in Ruhe lesen.</p><div class="panel"><div class="rules"><span>12 Aufgaben</span><span>Mittelschwer</span><span>60 Sekunden pro Aufgabe</span></div><label class="field-label" for="competitionAlias">Dein Pseudonym (optional)</label><input class="name-input" id="competitionAlias" maxlength="24" autocomplete="off" placeholder="Zum Beispiel Wurzelfuchs" value="${esc(profile.alias)}"><p class="hint">Ohne Eingabe erhältst du automatisch ein Pseudonym.</p><p class="hint">Richtig: 100 Punkte + bis zu 50 Zeitbonus. Annäherungen am Zahlenstrahl bringen Teilpunkte.</p><div class="actions"><button class="primary" data-play="competition" ${!state.connected?'disabled':''}>${state.attempt?.phase==='active'?'Runde fortsetzen':'Wettbewerb starten'} →</button></div>${online()}<button class="text-button" id="newPlayer">Andere Person auf diesem Gerät</button></div>`;
+  else if(path==='ergebnis'){
+    const game=current();if(!game){go('start');return}
+    root.innerHTML=head('start','Start')+`<section class="panel"><div class="result-title"><p class="eyebrow">${state.mode==='competition'?'Wettbewerb':'Training'} abgeschlossen</p><h1>Stark gemacht!</h1><p>Deine Runde ist geschafft.</p></div><div class="stats"><div class="stat"><span>Gesamtpunkte</span><strong>${number(game.score)}</strong></div><div class="stat"><span>Richtig gelöst</span><strong>${game.correct} / ${game.limit}</strong></div><div class="stat"><span>${state.mode==='competition'?'Zeitbonus':'Trefferquote'}</span><strong>${state.mode==='competition'?number(game.timeBonus):Math.round(game.correct/game.limit*100)+' %'}</strong></div></div><p class="hint">${state.mode==='competition'?`${game.basePoints} Grundpunkte und ${game.timeBonus} Zeitbonus. Dein Bestwert wird automatisch gespeichert.`:'Mit jeder Runde wirst du sicherer. Training zählt nicht zur Rangliste.'}</p><div class="actions"><button class="primary" data-play="${state.mode}">Noch eine Runde</button><a class="secondary" href="#/${state.mode==='competition'?'rangliste':'training/thema'}">${state.mode==='competition'?'Zur Rangliste':'Anderes Thema'}</a></div></section>`;
+  }else if(path==='rangliste')root.innerHTML=head('start','Start')+`<p class="eyebrow">Wettbewerb · Mittelschwer mit Zeitbonus</p><h1>Die besten Runden.</h1><p class="intro">Dein bester abgeschlossener Versuch zählt. Höchstens 1.800 Punkte pro Runde.</p><section class="panel">${state.board.length?'<table class="board-table"><thead><tr><th>Platz</th><th>Pseudonym</th><th>Punkte</th></tr></thead><tbody>'+state.board.slice(0,10).map(row=>`<tr><td>${row.rank}.</td><td>${esc(row.alias)}</td><td>${number(row.score)}</td></tr>`).join('')+'</tbody></table>':'<p class="empty">Die erste Runde wartet noch auf dich.</p>'}<p class="board-note">Diese Rangliste gehört zur neuen Zeitwertung. Frühere Runden bleiben getrennt gespeichert.</p></section><div class="actions"><a class="primary" href="#/wettbewerb">Selbst mitspielen →</a></div>`;
+  else{go('start');return}
+  root.querySelectorAll('[data-topic]').forEach(button=>button.addEventListener('click',()=>{state.topic=button.dataset.topic;go('training/stufe')}));root.querySelectorAll('[data-level]').forEach(button=>button.addEventListener('click',()=>{state.level=Number(button.dataset.level);render()}));root.querySelectorAll('[data-play]').forEach(button=>button.addEventListener('click',()=>start(button.dataset.play)));
+  document.getElementById('competitionAlias')?.addEventListener('keydown',event=>{if(event.key==='Enter')start('competition')});document.getElementById('newPlayer')?.addEventListener('click',async()=>{if(state.busy)return;state.generation++;profile={token:token(),alias:''};remember();state.pending=null;state.attempt=null;state.connected=false;render();try{await connect();render()}catch(error){notify(error.message)}});
+  status();
+}
+window.addEventListener('hashchange',()=>{render();const heading=root.querySelector('h1');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true})}window.scrollTo({top:0,behavior:'instant'})});
+window.addEventListener('offline',()=>{state.connected=false;setBusy(false);status();notify('Du bist offline. Die Wettbewerbszeit läuft auf dem Server weiter. Deine Eingabe bleibt erhalten.')});window.addEventListener('online',()=>connect().catch(()=>{}));document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!state.busy)connect().catch(()=>{})});
+setInterval(()=>{if(!document.hidden&&!state.busy)(state.connected?sync():connect()).catch(()=>{state.connected=false;status()})},10000);setInterval(tick,200);render();connect().catch(()=>{state.connected=false;status()});

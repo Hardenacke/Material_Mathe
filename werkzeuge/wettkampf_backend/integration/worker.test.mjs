@@ -337,13 +337,14 @@ test('Wurzelwerk bindet persönliche Codes, persistiert Aufgaben und verhindert 
   let attempt=starts[0].data.attempt;
   assert.equal(starts[0].status,200);assert.equal(starts[1].data.attempt.id,attempt.id);
   for(const field of ['answer','a','b','explanation'])assert.equal(Object.hasOwn(attempt.question,field),false);
-  await mf.unsafeEvictDurableObject('test-worker','QuizRoom',{name:'mathematik/wurzelwerk-klasse-9/v1/gesamt'});
+  await mf.unsafeEvictDurableObject('test-worker','QuizRoom',{name:'mathematik/wurzelwerk-klasse-9/v2/gesamt'});
   const restored=await send(quiz,{code:codes[10]});
   assert.deepEqual(restored.data.current.question,attempt.question);
+  assert.equal(restored.data.current.deadline,attempt.deadline);
   const route=quiz+'/attempts/'+attempt.id+'/answer';
   assert.equal((await send(route,{method:'POST',code:codes[11],body:{questionId:attempt.question.id,answer:0}})).status,403);
   assert.equal((await send(route,{method:'POST',code:codes[10],body:{questionId:attempt.question.id,answer:0,score:1200}})).status,400);
-  const sql=await mf.unsafeGetDurableObjectStorage('test-worker','QuizRoom',{name:'mathematik/wurzelwerk-klasse-9/v1/gesamt'});
+  const sql=await mf.unsafeGetDurableObjectStorage('test-worker','QuizRoom',{name:'mathematik/wurzelwerk-klasse-9/v2/gesamt'});
   for(let index=0;index<12;index++){
     const [row]=await sql.exec('SELECT state FROM quiz_attempts WHERE id=?',attempt.id);
     const task=JSON.parse(row.state).task;
@@ -351,15 +352,15 @@ test('Wurzelwerk bindet persönliche Codes, persistiert Aufgaben und verhindert 
     const key=randomUUID(), body={questionId:task.id,answer};
     const result=await send(route,{method:'POST',code:codes[10],body,key});
     assert.equal(result.status,200,JSON.stringify(result.data));
-    assert.deepEqual((await send(route,{method:'POST',code:codes[10],body,key})).data,result.data);
+    assert.deepEqual((await send(route,{method:'POST',code:codes[10],body,key})).data.attempt,result.data.attempt);
     assert.equal((await send(route,{method:'POST',code:codes[10],body:{...body,answer:0},key})).status,409);
     attempt=result.data.attempt;
-    assert.equal(attempt.score,100*(index+1));
+    assert.equal(attempt.basePoints,100*(index+1));assert.ok(attempt.score>=100*(index+1)&&attempt.score<=150*(index+1));
     if(index<11){const next=await send(quiz+'/attempts/'+attempt.id+'/next',{method:'POST',code:codes[10],body:{}});assert.equal(next.status,200);attempt=next.data.attempt}
   }
   assert.equal(attempt.phase,'finished');assert.equal(attempt.correct,12);
   const board=await send(quiz,{code:codes[11]});
-  assert.equal(board.data.leaderboard[0].score,1200);
+  assert.equal(board.data.leaderboard[0].score,attempt.score);assert.equal(board.data.leaderboard[0].maxPoints,1800);
   assert.deepEqual(Object.keys(board.data.leaderboard[0]).sort(),['alias','endedAt','maxPoints','rank','score']);
   const jobs=await sql.exec('SELECT * FROM quiz_outbox');assert.equal(jobs.length,1);
   assert.equal(JSON.parse(jobs[0].snapshot).competitionId,'wurzelwerk-klasse-9');
@@ -378,15 +379,39 @@ test('Wurzelwerk erlaubt Teilnahme ohne Zugangscode, merkt das Browserprofil und
   const joined=await join(other);assert.equal(joined.status,200);assert.ok(joined.data.alias.startsWith('Wurzel '));
   assert.equal((await send(quiz+'/attempts/'+attempt.id+'/answer',{method:'POST',code:other,body:{questionId:attempt.question.id,answer:0}})).status,403);
   assert.equal((await join(token,'x'.repeat(25))).status,400);
-  const sql=await mf.unsafeGetDurableObjectStorage('test-worker','QuizRoom',{name:'mathematik/wurzelwerk-klasse-9/v1/gesamt'});
+  const sql=await mf.unsafeGetDurableObjectStorage('test-worker','QuizRoom',{name:'mathematik/wurzelwerk-klasse-9/v2/gesamt'});
   for(let index=0;index<12;index++){
     const [row]=await sql.exec('SELECT state FROM quiz_attempts WHERE id=?',attempt.id),task=JSON.parse(row.state).task;
     const result=await send(quiz+'/attempts/'+attempt.id+'/answer',{method:'POST',code:token,body:{questionId:task.id,answer:task.kind==='extract'?{a:task.a,b:task.b}:task.answer}});
     assert.equal(result.status,200);attempt=result.data.attempt;
     if(index<11)attempt=(await send(quiz+'/attempts/'+attempt.id+'/next',{method:'POST',code:token,body:{}})).data.attempt;
   }
-  assert.equal(attempt.score,1200);assert.equal(attempt.phase,'finished');
+  assert.equal(attempt.basePoints,1200);assert.ok(attempt.score>1200&&attempt.score<=1800);assert.equal(attempt.phase,'finished');
   const board=(await send(quiz+'/public',{headers:{Authorization:''}})).data.leaderboard;
-  assert.ok(board.some(row=>row.alias==='Codefrei'&&row.score===1200));
+  assert.ok(board.some(row=>row.alias==='Codefrei'&&row.score===attempt.score));
   assert.equal(JSON.stringify(board).includes(token),false);
+});
+
+test('Wurzelwerk wertet Serverfristen, Zeitbonus und autonome Alarme ohne Doppelwertung',async()=>{
+  const quiz='/api/v1/quizzes/wurzelwerk',token=randomBytes(32).toString('base64url');
+  await send(quiz+'/join',{method:'POST',body:{token,alias:'Timer-Test'}});
+  let attempt=(await send(quiz+'/attempts',{method:'POST',code:token,body:{}})).data.attempt;
+  const sql=await mf.unsafeGetDurableObjectStorage('test-worker','QuizRoom',{name:'mathematik/wurzelwerk-klasse-9/v2/gesamt'});
+  async function change(openedAt,deadline){const [row]=await sql.exec('SELECT state FROM quiz_attempts WHERE id=?',attempt.id);const saved=JSON.parse(row.state);Object.assign(saved,{openedAt,deadline});await sql.exec('UPDATE quiz_attempts SET state=? WHERE id=?',JSON.stringify(saved),attempt.id);return saved}
+  let saved=await change(Date.now()-30000,Date.now()+30000);
+  const task=saved.task,answer=task.kind==='extract'?{a:task.a,b:task.b}:task.answer;
+  attempt=(await send(quiz+'/attempts/'+attempt.id+'/answer',{method:'POST',code:token,body:{questionId:task.id,answer}})).data.attempt;
+  assert.equal(attempt.feedback.basePoints,100);assert.ok(attempt.feedback.timeBonus>=23&&attempt.feedback.timeBonus<=25);
+  attempt=(await send(quiz+'/attempts/'+attempt.id+'/next',{method:'POST',code:token,body:{}})).data.attempt;
+  saved=await change(Date.now()-61000,Date.now()-1000);
+  const bad=await send(quiz+'/attempts/'+attempt.id+'/answer',{method:'POST',code:token,body:{questionId:randomUUID(),answer:0}});
+  assert.equal(bad.status,409);
+  let current=(await send(quiz,{code:token})).data.current;
+  assert.equal(current.feedback.timedOut,true);assert.equal(current.attempted,2);assert.equal(current.feedback.points,0);
+  attempt=(await send(quiz+'/attempts/'+attempt.id+'/next',{method:'POST',code:token,body:{}})).data.attempt;
+  await change(Date.now()-59500,Date.now()+500);await send(quiz,{code:token});
+  await mf.unsafeEvictDurableObject('test-worker','QuizRoom',{name:'mathematik/wurzelwerk-klasse-9/v2/gesamt'});
+  const limit=Date.now()+4000;
+  do{const [row]=await sql.exec('SELECT state FROM quiz_attempts WHERE id=?',attempt.id);current=JSON.parse(row.state);if(current.answered)break;await new Promise(resolve=>setTimeout(resolve,100))}while(Date.now()<limit);
+  assert.equal(current.answered,true);assert.equal(current.feedback.timedOut,true);assert.equal(current.attempted,3);
 });

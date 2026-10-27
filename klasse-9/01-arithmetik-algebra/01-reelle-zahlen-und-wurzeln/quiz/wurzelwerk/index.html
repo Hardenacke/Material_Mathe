@@ -1,121 +1,23 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#111827">
-<title>Wurzelwerk – Quiz für Klasse 9</title>
-<link rel="stylesheet" href="../../../../../wettkaempfe/vendor/katex/katex.min.css">
-<script src="../../../../../wettkaempfe/vendor/katex/katex.min.js" defer></script>
-<style>
-:root{--ink:#182230;--muted:#687589;--paper:#f5f7fb;--line:#e5eaf1;--navy:#111827;--lime:#d4f36a;--violet:#7c5cff;--violet-soft:#eeeaff;--teal:#16a994;--shadow:0 18px 48px rgba(19,31,48,.12);--radius:21px}
-*{box-sizing:border-box} [hidden]{display:none!important} html{min-width:320px;background:var(--paper)} body{margin:0;color:var(--ink);background:radial-gradient(ellipse at 8% 0%,rgba(212,243,106,.17),transparent 32rem),radial-gradient(ellipse at 95% 10%,rgba(124,92,255,.09),transparent 28rem),var(--paper);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input{font:inherit} button{cursor:pointer} button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible,[role=slider]:focus-visible{outline:3px solid #5a82ff;outline-offset:3px}
-.shell{width:min(1100px,calc(100% - 36px));margin:auto} .header{padding:22px 0 14px;display:flex;justify-content:space-between;align-items:center;gap:14px}
-.brand{display:flex;align-items:center;gap:11px}.brandmark{width:46px;height:46px;display:grid;place-items:center;border-radius:15px;background:var(--lime);color:var(--navy);box-shadow:0 8px 22px rgba(166,213,54,.28)}.brandmark .katex{font-size:1.3em}.eyebrow{font-size:.7rem;color:#8792a3;letter-spacing:.14em;text-transform:uppercase;font-weight:900}.brand h1{font-size:1.15rem;line-height:1.15;margin:1px 0 0;letter-spacing:-.04em}.brand p{font-size:.78rem;color:var(--muted);margin:3px 0 0}
-.header-badge{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(24,34,48,.1);border-radius:999px;background:#ffffffb8;font-size:.78rem;font-weight:850;color:#36445a;white-space:nowrap}.dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px #e1f7f3}
-.hero{position:relative;isolation:isolate;overflow:hidden;min-height:178px;margin:10px 0 20px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-radius:27px;color:#f8faff;background:linear-gradient(120deg,#111827 0%,#1e2a3d 65%,#263c43);box-shadow:var(--shadow)}
-.hero:before{content:"";position:absolute;z-index:-1;width:310px;height:310px;right:6%;top:-210px;border:1px solid #d4f36a55;border-radius:50%;box-shadow:0 0 0 30px #d4f36a0a,0 0 0 60px #d4f36a08}.hero:after{content:"";position:absolute;z-index:-1;width:130px;height:130px;right:18%;bottom:-100px;border-radius:50%;background:#7c5cff50}
-.hero-copy{max-width:670px}.hero-label{margin:0 0 8px;color:var(--lime);font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase}.hero h2{font-size:clamp(2rem,5vw,3.6rem);line-height:1;letter-spacing:-.065em;margin:0}.hero p{margin:13px 0 0;max-width:540px;color:#c6d0dd;font-size:.98rem}.hero-board-link{display:inline-flex;align-items:center;gap:6px;margin-top:13px;color:var(--lime);font-size:.82rem;font-weight:900;text-decoration:none;border-bottom:1px solid #d4f36a66}.hero-board-link:hover{border-bottom-color:var(--lime)}
-.hero-art{position:relative;flex:0 0 auto;width:132px;height:132px;display:grid;place-items:center;border:1px solid #d4f36a70;border-radius:32px;color:var(--lime);background:#ffffff08;transform:rotate(5deg)}.hero-art:after{content:"";position:absolute;inset:10px;border:1px dashed #d4f36a55;border-radius:24px}.hero-art .katex{font-size:3.2rem}
-main{padding-bottom:48px}.warning{display:none;margin:0 0 14px;padding:12px 14px;border-radius:12px;color:#8b3f28;background:#fff2e8;font-size:.82rem}.warning.show{display:block}
-.modebar{display:flex;gap:7px;width:max-content;padding:6px;margin-bottom:17px;border:1px solid var(--line);border-radius:15px;background:#ffffffb8}.modebar button{min-height:43px;padding:0 17px;border:0;border-radius:10px;background:transparent;color:#687589;font-weight:850}.modebar button[aria-pressed=true]{background:var(--navy);color:white;box-shadow:0 5px 12px #11182726}
-.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.8fr);gap:19px;align-items:start}.panel{border:1px solid #18223012;border-radius:var(--radius);background:white;box-shadow:0 10px 28px #121f310e}.setup{padding:clamp(19px,3vw,29px)}.heading{display:flex;justify-content:space-between;gap:12px}.heading h2{margin:0;font-size:1.5rem;line-height:1.15;letter-spacing:-.045em}.heading p{margin:7px 0 0;color:var(--muted);font-size:.92rem}.tag{flex:0 0 auto;height:max-content;padding:7px 10px;border-radius:999px;color:#5848c8;background:var(--violet-soft);font-size:.7rem;font-weight:900}
-.block{margin-top:23px}.block-label{display:flex;align-items:center;gap:8px;margin:0 0 10px;color:#58657a;font-size:.73rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.block-number{width:23px;height:23px;display:grid;place-items:center;border-radius:8px;background:var(--lime);color:var(--navy);font-size:.7rem}
-.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.choice{position:relative;min-height:87px;padding:13px;text-align:left;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);transition:.15s ease}.choice:hover{transform:translateY(-2px);border-color:#c9c0ff;box-shadow:0 8px 18px #3d307f14}.choice[aria-pressed=true]{border-color:var(--violet);background:#f8f6ff;box-shadow:inset 0 0 0 1px var(--violet)}.choice[aria-pressed=true]:after{content:"✓";position:absolute;top:9px;right:9px;width:21px;height:21px;display:grid;place-items:center;border-radius:50%;background:var(--violet);color:#fff;font-size:.75rem;font-weight:900}
-.choice-title{display:flex;align-items:center;gap:8px;font-weight:900;font-size:.9rem}.choice-icon{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;color:#5844c4;background:var(--violet-soft);font-size:1rem}.choice-desc{display:block;margin:7px 0 0;color:var(--muted);font-size:.76rem;line-height:1.35}
-.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.level{min-height:76px;padding:11px;text-align:left;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink)}.level[aria-pressed=true]{border-color:#9dc334;background:#f7fbe9;box-shadow:inset 0 0 0 1px #c6e45c}.level-name{display:flex;align-items:center;gap:6px;font-size:.82rem;font-weight:900}.level-name .katex{font-size:1em}.level-dot{width:8px;height:8px;border-radius:50%;background:#c8d0dc}.level[aria-pressed=true] .level-dot{background:#a6d536;box-shadow:0 0 0 3px #a6d5362b}.level-desc{display:block;margin-top:5px;color:var(--muted);font-size:.7rem;line-height:1.35}
-.primary{min-height:50px;padding:0 21px;border:0;border-radius:13px;background:var(--lime);color:#121a25;font-weight:950;box-shadow:0 8px 18px #a6d53640;transition:.15s ease}.primary:hover{transform:translateY(-2px);filter:saturate(1.08)}.primary:disabled{opacity:.55;cursor:not-allowed;transform:none}.secondary{min-height:43px;padding:0 14px;border:1px solid var(--line);border-radius:11px;background:#fff;color:#39465b;font-weight:800}.start-row{display:flex;align-items:center;gap:12px;margin-top:24px}.small{margin:0;color:var(--muted);font-size:.77rem}
-.callout{display:flex;gap:11px;margin-top:22px;padding:14px 15px;border:1px solid #eadfff;border-radius:14px;background:#faf8ff;color:#514782}.callout-icon{width:29px;height:29px;flex:0 0 auto;display:grid;place-items:center;border-radius:9px;background:#eeeaff;color:#5d48d2;font-weight:900}.callout p{margin:0;font-size:.83rem}.callout strong{color:#382d85}
-.board{position:sticky;top:16px;overflow:hidden;scroll-margin-top:16px}.board-head{padding:20px 20px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px}.board-head h2{margin:0;font-size:1.1rem;letter-spacing:-.03em}.board-head p{margin:5px 0 0;color:var(--muted);font-size:.76rem}.trophy{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#fff1d9;font-size:1.1rem}.board-body{padding:10px 15px 15px;overflow:hidden}.table-wrap{overflow-x:auto}.board-table{width:100%;border-collapse:collapse;font-size:.8rem}.board-table th{padding:8px 4px;text-align:left;color:#8a95a5;font-size:.64rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.board-table td{padding:10px 4px;border-top:1px solid #eef1f5;vertical-align:middle}.board-table th:first-child,.board-table td:first-child{width:34px}.board-table td:nth-child(4){color:#5142b6;font-weight:900;white-space:nowrap}.board-table td:nth-child(5){color:var(--muted);font-size:.7rem;white-space:nowrap}.rank{width:24px;height:24px;display:grid;place-items:center;border-radius:8px;background:#f0f3f7;color:#5f6d80;font-size:.7rem;font-weight:900}.empty{padding:18px 6px;text-align:center;color:var(--muted);font-size:.8rem}.empty strong{display:block;color:#344157;font-size:.88rem}.storage-note{margin:8px 0 0;color:#8a95a5;font-size:.68rem;line-height:1.4}.storage-state{color:#a34030;font-weight:800}
-.game{max-width:850px;margin:0 auto}.game-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.back{padding:8px 0;border:0;background:transparent;color:#69768a;font-weight:800}.chip{padding:7px 11px;border-radius:999px;background:var(--violet-soft);color:#5643bf;font-size:.72rem;font-weight:900}
-.progress{display:flex;align-items:center;gap:14px;margin-bottom:13px;padding:12px 15px;border:1px solid var(--line);border-radius:14px;background:#ffffffc9}.progress-main{min-width:0;flex:1}.progress-meta{display:flex;gap:6px;align-items:baseline;color:var(--muted);font-size:.77rem;font-weight:800}.progress-track{height:7px;margin-top:7px;overflow:hidden;border-radius:99px;background:#e9edf3}.progress-fill{height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--violet),#a38cff);transition:width .2s ease}.score{white-space:nowrap;color:#403590;font-weight:900}.question{padding:clamp(22px,4vw,36px);border-radius:23px;background:#fff;box-shadow:var(--shadow)}.overline{display:flex;justify-content:space-between;gap:10px;color:#7a8797;font-size:.69rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.type-label{display:flex;align-items:center;gap:7px}.type-dot{width:8px;height:8px;border-radius:50%;background:var(--violet)}.question h2{margin:12px 0 5px;font-size:clamp(1.35rem,3vw,1.95rem);line-height:1.15;letter-spacing:-.04em}.help{margin:0 0 22px;color:var(--muted)}.expression{min-height:105px;margin:0 0 20px;padding:19px;display:grid;place-items:center;border:1px solid #ece9ff;border-radius:17px;background:linear-gradient(135deg,#faf9ff,#f3f1ff);color:#342a86}.expression .katex{font-size:clamp(2rem,7vw,3.3rem)}.answer-area{margin-top:14px}.answer-single{max-width:450px;margin:auto}.input-group label{display:block;margin-bottom:6px;color:#435067;font-size:.77rem;font-weight:850}.answer-input,.name-input,.date-input{width:100%;min-height:50px;padding:9px 12px;border:1.5px solid #dce2ec;border-radius:12px;background:#fff;color:var(--ink);font-size:1rem;font-weight:750}.input-preview{min-height:24px;margin:4px 3px 0;display:flex;gap:6px;align-items:center;color:#7b8494;font-size:.7rem}.input-preview .katex{color:#38465c}
-.law-pair{max-width:600px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:9px;align-items:end}.law-pair .sep{align-self:center;padding-top:22px;color:#8d96a4;font-weight:850}.law-preview{grid-column:1/-1;text-align:center;min-height:29px;color:#5142b6}
-.line-card{max-width:650px;margin:auto;padding:13px 15px 9px;border:1px solid #e8e6f5;border-radius:16px;background:#fcfbff}.line-note{display:flex;justify-content:space-between;gap:8px;color:#69768a;font-size:.72rem;font-weight:750}.line-track{position:relative;height:85px;margin:12px 12px 0;touch-action:none;user-select:none;border-radius:9px;cursor:crosshair}.axis{position:absolute;top:23px;left:0;right:0;height:3px;border-radius:3px;background:#9ca7b6}.tick{position:absolute;top:18px;width:2px;height:13px;transform:translateX(-50%);background:#8793a3}.tick-label{position:absolute;top:41px;transform:translateX(-50%);color:#59667a;font-size:.67rem}.tick-label.first{transform:none}.tick-label.last{transform:translateX(-100%)}.marker{position:absolute;top:6px;left:0;width:36px;height:36px;padding:0;display:grid;place-items:center;transform:translateX(-50%);border:3px solid white;border-radius:50%;background:var(--lime);color:#151d28;box-shadow:0 3px 12px #11182733;font-weight:1000;cursor:grab;touch-action:none}.marker:active{cursor:grabbing}.marker:disabled{cursor:default}.line-readout{display:flex;justify-content:center;gap:7px;align-items:baseline;margin-top:5px;color:#667386;font-size:.76rem}.line-readout .katex{color:#42369e;font-weight:900}
-.feedback{margin-top:18px;padding:14px 16px;border:1px solid transparent;border-radius:13px;animation:appear .18s ease-out}.feedback strong{display:flex;gap:8px;align-items:center;margin-bottom:4px;font-size:.9rem}.feedback p{margin:0;color:#4e5b6e;font-size:.83rem}.feedback .equation{margin-top:8px;text-align:center;color:#342a86;font-size:1rem}.good{border-color:#bfe8df;background:#effaf7}.good strong{color:#0d806d}.partial{border-color:#f5dfb5;background:#fff9ec}.partial strong{color:#a86c11}.bad{border-color:#f0caca;background:#fff5f5}.bad strong{color:#b54040}.actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px}.actions .primary{min-width:165px}.hint{color:#8a95a5;font-size:.72rem}
-.results{padding:clamp(22px,4vw,38px);border-radius:23px;background:#fff;box-shadow:var(--shadow)}.result-hero{padding:22px;border-radius:18px;color:#fff;background:linear-gradient(120deg,#172238,#293754)}.result-hero .hero-label{margin:0 0 5px}.result-hero h2{margin:0;font-size:1.8rem;letter-spacing:-.05em}.result-hero p{margin:5px 0 0;color:#cad3df}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:16px 0 21px}.stat{padding:14px;border:1px solid var(--line);border-radius:14px;background:#fbfcfe}.stat-label{display:block;color:#7b8798;font-size:.68rem;font-weight:850;letter-spacing:.05em;text-transform:uppercase}.stat-value{display:block;margin-top:4px;color:#332983;font-size:1.25rem;font-weight:950}.stat-value .katex{font-size:1.15em}
-.save{margin-top:18px;padding:18px;border:1px solid #e6e2ff;border-radius:16px;background:#fbfaff}.save h3{margin:0;font-size:1rem}.save>p{margin:4px 0 13px;color:var(--muted);font-size:.78rem}.save-grid{display:grid;grid-template-columns:1fr .68fr .82fr;gap:9px;align-items:end}.save-grid label{display:block;margin-bottom:5px;color:#435067;font-size:.72rem;font-weight:850}.scorebox{min-height:50px;padding:9px 12px;display:flex;align-items:center;border:1.5px solid #dce2ec;border-radius:12px;background:#fff;color:#42369e;font-weight:900}.date-preview{margin:4px 3px 0;color:#6d7787;font-size:.69rem}.save-row,.result-actions{display:flex;align-items:center;gap:9px;margin-top:13px;flex-wrap:wrap}.save-row .primary{min-height:45px}.saved{color:#0f806e;font-size:.78rem;font-weight:800}
-.toast{position:fixed;z-index:20;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translate(-50%,18px);opacity:0;pointer-events:none;padding:11px 15px;border-radius:12px;background:#182230;color:white;box-shadow:var(--shadow);font-size:.8rem;font-weight:750;transition:.2s}.toast.show{transform:translate(-50%,0);opacity:1}
-@keyframes appear{from{transform:translateY(5px);opacity:0}to{transform:translateY(0);opacity:1}} @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
-@media(max-width:800px){.grid{grid-template-columns:1fr}.board{position:static;order:2}.hero{min-height:155px}.hero-art{width:108px;height:108px;border-radius:26px}.hero-art .katex{font-size:2.6rem}}
-@media(max-width:570px){.shell{width:calc(100% - 24px)}.header{padding:15px 0 10px}.brandmark{width:40px;height:40px;border-radius:12px}.brand h1{font-size:1.04rem}.brand p{font-size:.72rem}.header-badge{padding:7px 9px;font-size:.68rem}.hero{margin-top:7px;padding:22px 19px;border-radius:21px}.hero p{font-size:.87rem}.hero-art{width:71px;height:71px;border-radius:19px}.hero-art:after{inset:6px;border-radius:14px}.hero-art .katex{font-size:1.8rem}.modebar{width:100%}.modebar button{flex:1;padding:0 9px;font-size:.83rem}.setup{padding:19px 15px}.heading h2{font-size:1.33rem}.heading p{font-size:.85rem}.choices,.levels{grid-template-columns:1fr}.choice{min-height:77px}.level{min-height:63px}.start-row{align-items:stretch;flex-direction:column}.start-row .primary{width:100%}.progress{padding:10px 11px;gap:8px}.progress-meta{font-size:.7rem}.score{font-size:.8rem}.question{padding:21px 15px}.help{font-size:.88rem}.law-pair{gap:7px}.law-pair .sep{padding-top:22px}.line-card{padding:12px 9px 8px}.line-track{margin-left:14px;margin-right:14px}.tick-label .katex{font-size:.88em}.line-note{font-size:.65rem}.actions{align-items:stretch;flex-direction:column-reverse}.actions .primary{width:100%}.hint{text-align:center}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}.save-grid{grid-template-columns:1fr 1fr}.name-field{grid-column:1/-1}.save-row{align-items:stretch;flex-direction:column}.save-row .primary{width:100%}.saved{text-align:center}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#172437">
+  <title>Wurzelwerk · Quiz Klasse 9</title>
+  <link rel="stylesheet" href="../../../../../wettkaempfe/vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="../../../../../wettkaempfe/vendor/katex/katex.min.js" defer></script>
+  <script src="assets/wurzelwerk.js" type="module"></script>
 </head>
 <body>
-<div class="shell">
-<a href="../../../../../index.html#/klasse-9/01-arithmetik-algebra/quiz">← Zur Quiz-Auswahl</a><header class="header">
-  <div class="brand"><div class="brandmark" aria-hidden="true"><span data-tex="\sqrt{x}"></span></div><div><div class="eyebrow">Mathematik · Sekundarstufe I</div><h1>Wurzelwerk</h1><p>Das interaktive Wurzel-Quiz</p></div></div>
-  <div class="header-badge"><span class="dot"></span> Klasse <span data-tex="9"></span></div>
-</header>
-<main>
-<section class="hero" aria-labelledby="heroTitle">
-  <div class="hero-copy"><p class="hero-label">Wurzel-Quest</p><h2 id="heroTitle">Mach Wurzeln<br>zu deinem Gebiet.</h2><p>Ziehe Wurzeln, vereinfache Ausdrücke und platziere Zahlen mit Gefühl auf dem Zahlenstrahl.</p><a class="hero-board-link" href="#leaderboard">Rangliste ansehen <span aria-hidden="true">↓</span></a></div>
-  <div class="hero-art" aria-hidden="true"><span data-tex="\sqrt{\,?\,}"></span></div>
-</section>
-<div class="warning" id="mathWarning" role="status">Der mathematische Formelsatz konnte nicht geladen werden. Bitte lade die Seite erneut.</div>
-
-<div class="grid">
-<div id="quizContent">
-<div id="setupScreen">
-<nav class="modebar" aria-label="Quizmodus"><button id="trainingTab" aria-pressed="true" type="button">Training</button><button id="competitionTab" aria-pressed="false" type="button">Wettbewerb</button></nav>
-<section class="panel setup" aria-labelledby="setupTitle">
-  <div class="heading"><div><h2 id="setupTitle">Dein Trainingsplan</h2><p id="setupDescription">Wähle einen Bereich und starte auf dem Niveau, das zu dir passt.</p></div><span class="tag" id="setupTag">Üben · ohne Druck</span></div>
-  <div id="trainingControls">
-    <div class="block"><p class="block-label"><span class="block-number" data-tex="1"></span> Was möchtest du trainieren?</p>
-      <div class="choices" role="group" aria-label="Themenbereich auswählen">
-        <button class="choice" data-topic="mix" aria-pressed="true" type="button"><span class="choice-title"><span class="choice-icon">✦</span>Gemischte Runde</span><span class="choice-desc">Alle drei Aufgabentypen im Wechsel</span></button>
-        <button class="choice" data-topic="roots" aria-pressed="false" type="button"><span class="choice-title"><span class="choice-icon" data-tex="\sqrt{x}"></span>Quadratwurzeln ziehen</span><span class="choice-desc">Quadratzahlen erkennen und die Wurzel bestimmen</span></button>
-        <button class="choice" data-topic="laws" aria-pressed="false" type="button"><span class="choice-title"><span class="choice-icon">↗</span>Wurzelgesetze</span><span class="choice-desc">Ausdrücke zerlegen, zusammenfassen und vereinfachen</span></button>
-        <button class="choice" data-topic="line" aria-pressed="false" type="button"><span class="choice-title"><span class="choice-icon">↔</span>Zahlenstrahl</span><span class="choice-desc">Die Größe nicht-quadratischer Wurzeln einschätzen</span></button>
-      </div>
-    </div>
-    <div class="block"><p class="block-label"><span class="block-number" data-tex="2"></span>Wähle dein Niveau</p>
-      <div class="levels" role="group" aria-label="Schwierigkeitsstufe auswählen">
-        <button class="level" data-level="1" aria-pressed="true" type="button"><span class="level-name"><i class="level-dot"></i>Stufe <span data-tex="1"></span> · Einstieg</span><span class="level-desc">Kleine Zahlen, klare Schritte</span></button>
-        <button class="level" data-level="2" aria-pressed="false" type="button"><span class="level-name"><i class="level-dot"></i>Stufe <span data-tex="2"></span> · Aufbau</span><span class="level-desc">Größere Zahlen und mehrere Gesetze</span></button>
-        <button class="level" data-level="3" aria-pressed="false" type="button"><span class="level-name"><i class="level-dot"></i>Stufe <span data-tex="3"></span> · Challenge</span><span class="level-desc">Anspruchsvolle Terme und genaues Schätzen</span></button>
-      </div>
-    </div>
-    <div class="start-row"><button class="primary" id="startTraining" type="button">Training starten <span aria-hidden="true">→</span></button><p class="small">Eine Runde umfasst <span data-tex="10"></span> Aufgaben. Nach jeder Antwort bekommst du eine Erklärung.</p></div>
-  </div>
-  <div id="competitionControls" hidden>
-    <div class="block"><label for="competitionAlias">Dein Pseudonym (optional)</label><input id="competitionAlias" type="text" maxlength="24" autocomplete="off" spellcheck="false" class="name-input" placeholder="Zum Beispiel Wurzelfuchs"><p class="small">Ohne Eingabe erhältst du automatisch ein Pseudonym.</p><button id="newPlayer" class="secondary" type="button">Andere Person</button><p id="connectionStatus" role="status" aria-live="polite">Verbindung wird geprüft …</p></div><div class="callout"><div class="callout-icon">✦</div><p><strong>Die Wurzel-Arena wartet.</strong><br>Eine gemischte Challenge mit <span data-tex="12"></span> Aufgaben auf hohem Niveau. Für jede Aufgabe zählt dein mathematischer Lösungsweg – auf dem Zahlenstrahl auch die Genauigkeit.</p></div>
-    <div class="block"><p class="block-label"><span class="block-number" data-tex="3"></span>So läuft der Wettbewerb</p><div class="choices">
-      <div class="choice"><span class="choice-title"><span class="choice-icon" data-tex="\sqrt{x}"></span>Drei Disziplinen</span><span class="choice-desc">Wurzeln ziehen, Gesetze anwenden und Wurzeln einordnen</span></div>
-      <div class="choice"><span class="choice-title"><span class="choice-icon">★</span>Faire Punkte</span><span class="choice-desc">Richtige Ergebnisse bringen Punkte; Schätzungen werden nach Genauigkeit gewertet</span></div>
-    </div></div>
-    <div class="start-row"><button class="primary" id="startCompetition" type="button" disabled>Wettbewerb starten <span aria-hidden="true">→</span></button><p class="small">Ohne Zeitlimit. Cloudflare bewertet und speichert deinen Bestwert automatisch.</p></div>
-  </div>
-</section>
-</div>
-
-<section class="game" id="gameScreen" hidden aria-live="polite">
-  <div class="game-top"><button class="back" id="backToSetup" type="button">← Zur Auswahl</button><span class="chip" id="gameModeChip"></span></div>
-  <div class="progress"><div class="progress-main"><div class="progress-meta"><span>Aufgabe</span><span aria-hidden="true">·</span><span id="progressCount"></span></div><div class="progress-track" aria-label="Fortschritt"><div class="progress-fill" id="progressFill"></div></div></div><div class="score">Punkte <span id="scoreValue"></span></div></div>
-  <article class="question" aria-labelledby="questionTitle">
-    <div class="overline"><span class="type-label"><i class="type-dot"></i><span id="questionType"></span></span><span id="questionKicker"></span></div>
-    <h2 id="questionTitle"></h2><p class="help" id="questionHelp"></p><div class="expression" id="expression"></div>
-    <div class="answer-area" id="answerArea"></div><div class="feedback" id="feedback" hidden aria-live="polite"></div>
-    <div class="actions"><span class="hint" id="actionHint">Prüfe dein Ergebnis, bevor du es abschickst.</span><button class="primary" id="submitAnswer" type="button">Antwort prüfen</button><button class="primary" id="nextQuestion" type="button" hidden>Nächste Aufgabe →</button></div>
-  </article>
-</section>
-
-<section class="game" id="resultsScreen" hidden aria-live="polite"></section>
-</div>
-<aside class="panel board" id="leaderboard" aria-labelledby="boardTitle">
-  <div class="board-head"><div><h2 id="boardTitle">Wurzel-Rangliste</h2><p>Die zehn stärksten Bestwerte deiner Wettbewerbsgruppe</p></div><div class="trophy" aria-hidden="true">🏆</div></div>
-  <div class="board-body">
-    <div class="table-wrap"><table class="board-table"><thead><tr><th>Pl.</th><th>Pseudonym</th><th>Klasse</th><th>Punkte</th><th>Datum</th></tr></thead><tbody id="leaderboardBody"></tbody></table></div>
-    <div class="empty" id="leaderboardEmpty" hidden><strong>Noch keine Ergebnisse</strong>Starte den Wettbewerb und sichere dir den ersten Platz.</div>
-    <p class="storage-note">Gemeinsame Rangliste auf Cloudflare. Dein Bestwert wird automatisch gespeichert.</p>
-    <p class="storage-note storage-state" id="storageState" hidden>Die gemeinsame Rangliste benötigt eine Verbindung zu Cloudflare.</p>
-  </div>
-</aside>
-</div>
-
-</main></div>
-<div class="toast" id="toast" role="status"></div>
-
-<script src="assets/wurzelwerk.js" defer></script>
+  <a class="skip" href="#view">Zum Quiz</a>
+  <header class="app-header">
+    <a class="brand" href="#/start"><span class="brand-mark" aria-hidden="true">√</span><span>Wurzelwerk<small>Klasse 9 · Reelle Zahlen</small></span></a>
+    <a class="collection-link" href="../../../../../index.html#/klasse-9/01-arithmetik-algebra/quiz">Mathematiksammlung ↗</a>
+  </header>
+  <main id="view" tabindex="-1"><p class="loading">Das Quiz wird geladen …</p></main>
+  <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+  <noscript>Bitte aktiviere JavaScript, um das Quiz zu spielen.</noscript>
 </body>
 </html>

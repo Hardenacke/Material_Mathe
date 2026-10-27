@@ -14,6 +14,12 @@ Archive, SHA-Konflikte und alte ausstehende Archivaufträge in der Workers-Laufz
 `test/wurzelwerk.test.mjs` und der Wurzelwerk-Fall der Worker-Integration prüfen die
 Zahlenaufgaben, Teilpunkte, persönlichen Quiz-Zugänge und serverseitige Bewertung.
 Die Online-Browserprüfung für Wurzelwerk ist in `dokumentation/WURZELWERK.md` dokumentiert.
+`python tests/run_wurzelwerk_browser.py --timeout-test` prüft mit Playwright und Edge
+die getrennten Quizansichten, alle neun Trainingskombinationen, die Zifferntastatur,
+einen vollständigen Zeitwettbewerb, erhaltene Eingaben nach Neuladen und einen echten
+60-Sekunden-Zeitablauf. Der Test verwendet ein eigenes anonymes Browserprofil und
+schreibt dessen Testbestwert in die Wettbewerbsrangliste. Mit `--url URL` lässt
+sich die veröffentlichte Oberfläche prüfen; ohne URL läuft die lokale `_site`-Vorschau.
 Eine Portalprüfung gegen die echte lokale API ist mit
 `python tests/run_wettkampf_browser.py --url VORSCHAU-URL --codes PRIVATE-CSV`
 möglich; dafür werden Playwright und ein lokal vorhandener Edge-Browser verwendet.
