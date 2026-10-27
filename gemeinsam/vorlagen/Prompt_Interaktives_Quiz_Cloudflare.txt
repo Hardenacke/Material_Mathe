@@ -1,0 +1,71 @@
+Erstelle ein vollständig funktionsfähiges, leicht bedienbares Mathematikquiz nach folgendem Konzept. Implementiere die Anwendung als Dateien und prüfe sie im Browser. Liefere eine nutzbare Umsetzung einschließlich der Wettbewerbsanbindung.
+
+Rahmendaten:
+Quizname: [NAME]
+Jahrgang: [KLASSE]
+Thema: [THEMA]
+Teilgebiete: [TEILGEBIETE]
+Materialrepository und fachliche Ablage: [REPOSITORY / PFAD]
+Vorhandene Cloudflare-Anbindung: [WORKER / API-ADRESSE ODER KONFIGURATION]
+
+Verwende als fachliches Beispiel „Wurzelwerk“, Klasse 9, reelle Zahlen und Quadratwurzeln: Wurzeln ziehen, Wurzelgesetze anwenden und Wurzeln auf dem Zahlenstrahl schätzen. Bei einem anderen Thema überträgst du Aufbau und Bedienkonzept und passt Aufgaben, Eingabefelder und angemessene Zahlenbereiche daran an.
+
+1. Klare Ansichten und kurze Lernwege
+
+Teile die Oberfläche in eigene Ansichten mit verlinkbaren Adressen und funktionierender Zurück-Navigation auf. Eine Anwendung mit Hash-Routen ist ausreichend. Die Startseite enthält zwei große Auswahlkarten: „In Ruhe üben“ und „Wettbewerb spielen“. Ein kleinerer Link führt zur Rangliste.
+
+Das Training führt zunächst zur Themenauswahl, danach zur Schwierigkeitsstufe und anschließend zur Aufgabe. Der Wettbewerb erhält eine eigene Vorbereitungsansicht. Aufgaben, Rundenergebnis und Rangliste werden jeweils auf getrennten Seiten beziehungsweise Ansichten angezeigt. Während einer Aufgabe sind weder Rangliste noch umfangreiche Einstellungen sichtbar. Zeige dort nur Aufgabe, Eingabe, Fortschritt, Punkte und gegebenenfalls Timer. Pro Ansicht gibt es eine eindeutige Hauptaktion.
+
+2. Ruhige und wiedererkennbare Gestaltung
+
+Gestalte eine moderne, freundliche Lernoberfläche mit viel freiem Raum, klarer Schrift und kurzen Texten. Verwende einen sehr hellen Hintergrund (#f3f6f7), dunkles Marineblau (#172437), Limettengrün für Hauptaktionen (#d2f36b) und Violett für Hervorhebungen (#6747ce). Nutze weiße Karten, dezente Rahmen und abgerundete Ecken von ungefähr 14 bis 22 Pixeln. Beschränke den Hauptinhalt auf etwa 820 Pixel Breite. Auf großen Bildschirmen können Auswahlkarten nebeneinanderstehen, auf Smartphones untereinander.
+
+Der Kopfbereich bleibt kompakt: Quizname, Klasse, Thema und Rückweg zur Materialsammlung. Vermeide einen großen, wiederholten Hero-Bereich während des Spielens. Verwende eine lokal verfügbare Systemschrift und lokal eingebundene Mathematikdarstellung, beispielsweise KaTeX mit zugehörigen Fonts. Die Oberfläche muss ohne verpflichtende CDN-Abhängigkeiten funktionieren.
+
+3. Einfache Eingabe
+
+Zeige große, gut beschriftete Antwortfelder und eine Bildschirmtastatur mit Ziffern, Dezimalkomma und sichtbarer Löschtaste. Berücksichtige Cursorposition und markierten Text beim Einfügen und Löschen. Unterstütze zusätzlich eine echte Tastatur, Einfügen und Enter. Akzeptiere bei Dezimalzahlen Komma und Punkt. Schaltflächen benötigen ausreichend große Touchflächen von mindestens 44 Pixeln.
+
+Verlange keine manuelle LaTeX-Eingabe für einfache Zahlenergebnisse. Beim Vereinfachen einer Wurzel erhalten Faktor und Rest unter der Wurzel getrennte Felder. Eine Schaltfläche wechselt zum nächsten Feld. Für Schätzaufgaben gibt es einen Zahlenregler und ein synchronisiertes Zahlenfeld. Erhalte bereits eingegebene Werte bei automatischen Serverabfragen, Verbindungsunterbrechungen und Neuladen. Verhindere doppelte Aktionen während laufender Anfragen.
+
+4. Training ohne Zeitdruck
+
+Biete gezielte Themenrunden und eine gemischte Runde mit jeweils zehn Aufgaben an. Verwende drei Stufen: Einstieg, Aufbau und Challenge. Nach jeder Antwort erscheinen eine verständliche Rückmeldung und ein kurzer mathematischer Lösungsschritt. Die Lernenden öffnen die nächste Aufgabe selbst. Trainingsergebnisse werden nicht in die Wettbewerbsrangliste übernommen. Das Training benötigt keinen Timer und soll auch bei unterbrochener Wettbewerbsverbindung bedienbar bleiben.
+
+5. Zugänglicher Wettbewerb mit angemessenen Aufgaben
+
+Die Teilnahme benötigt weder Benutzerkonto noch Zugangscode. Ein Pseudonym ist optional; ohne Eingabe wird automatisch eines vergeben. Die Cloudflare-Verbindung entsteht selbstständig. Eine zufällige Browserkennung ermöglicht die Wiederaufnahme im selben Browser. Über „Andere Person“ kann auf gemeinsam genutzten Geräten ein neues Profil begonnen werden.
+
+Eine Runde enthält zwölf mittelschwere Aufgaben mit ausgewogener Verteilung der Teilgebiete. Die Zahlen müssen Kopfrechnen und die Eingabe auf einem Tablet innerhalb der Frist realistisch ermöglichen. Für das Wurzelbeispiel: vier Quadratwurzeln aus Quadratzahlen von 25 bis 400, vier Aufgaben zu Wurzelgesetzen und vier Schätzaufgaben. Verwende beim Vereinfachen Faktoren von 2 bis 6 und quadratfreie Reste aus 2, 3, 5 und 7; bei Produkten Radikanden bis 80 und bei Quotienten bis 180. Schätzaufgaben verwenden nichtquadratische Radikanden von 5 bis 60. Verteile die Wurzelgesetze auf zweimal Vereinfachen, einmal Produkt und einmal Quotient. Andere Themen erhalten entsprechend handliche Werte.
+
+6. Verständliche Zeitwertung
+
+Jede Wettbewerbsaufgabe hat 60 Sekunden Bearbeitungszeit. Zeige einen gut lesbaren Countdown und separat die gesamte Rundenzeit. Eine vollständig richtige Antwort gibt 100 Grundpunkte und bis zu 50 Zeitbonuspunkte. Berechne den Bonus anhand der Serverzeit nach folgender Regel:
+
+Zeitbonus = abrunden(50 × verbleibende Sekunden / 60).
+
+Begrenze ihn auf 0 bis 50 Punkte und vergib ihn nur bei vollständig richtigen Antworten innerhalb der Frist. Nach 30 Sekunden sind noch 25 Bonuspunkte möglich. Falsche oder zu spät eingegangene Antworten geben null Punkte. Beim Wurzel-Zahlenstrahl gibt es innerhalb eines Fehlers von 0,25 volle Grundpunkte, bis 0,5 Fehler 70 und bis 1,0 Fehler 40 Grundpunkte; größere Abweichungen geben null Punkte. Teilpunkte erhalten keinen Zeitbonus. Die zwölf Aufgaben ermöglichen theoretisch maximal 1.800 Punkte.
+
+Zeige Grundpunkte und Zeitbonus getrennt in der Rückmeldung und in der Ergebnisübersicht. Die nächste Aufgabenfrist beginnt erst beim Öffnen der nächsten Aufgabe. Die Erklärung zwischen den Aufgaben kann ohne Zeitdruck gelesen werden. Eine laufende Frist wird durch Neuladen, Tabwechsel oder einen Verbindungsverlust nicht zurückgesetzt. Training bleibt ohne Zeitwertung.
+
+7. Echte Cloudflare-Anbindung
+
+Verwende die bestehende Backendarchitektur, soweit vorhanden. Wettbewerbsaufgaben, Fristen, Antworten, Bewertung, Versuche und Bestwerte müssen serverseitig verarbeitet und dauerhaft gespeichert werden, beispielsweise mit Cloudflare Workers und SQLite-basierten Durable Objects. Der Browser erhält nur die aktuelle Aufgabe ohne vorweggenommene Lösungsfelder. Lösungen werden erst nach der Bewertung freigegeben. Vertraue weder einem vom Browser gelieferten Punktestand noch dessen Uhrzeit.
+
+Verwende transaktionale Spielzüge und eindeutige Anfragekennungen gegen doppelte Wertungen. Bewahre aktive Versuche bei Neustarts auf. Serveralarme müssen Zeitüberschreitungen auch ohne weitere Browseranfrage bearbeiten. Zeige einen echten Verbindungsstatus, behalte Eingaben bei Netzproblemen und verbinde automatisch erneut. Bei einem Serverausfall darf kein scheinbar echter Wettbewerb ausschließlich lokal weitergewertet werden.
+
+8. Ergebnis und Rangliste
+
+Die Ergebnisansicht zeigt Gesamtpunkte, richtige Antworten, Grundpunkte und Zeitbonus sowie klare Wege zu einer weiteren Runde, zur Auswahl und zur Rangliste. Speichere den persönlichen Bestwert statt einer Addition aller Versuche. Die separate Rangliste zeigt Platz, Pseudonym und Punkte der besten abgeschlossenen Versuche. Gleiche Punktzahlen teilen sich einen Platz.
+
+Eine neue Punkte- oder Zeitregel erhält eine eigene Wertungsversion und Rangliste. Frühere Ergebnisse werden erhalten und nicht mit der neuen Wertung vermischt. Cloudflare bleibt der Live-Speicher. Archiviere Ranglisten zusätzlich im vorgesehenen Ordner „ergebnisse/“ des Materialrepositories. Veröffentliche dabei ausschließlich notwendige Ranglistenfelder; keine Browserkennungen, Zugangsdaten oder Antwortprotokolle. Fehlgeschlagene Archivübertragungen müssen später nachgeholt werden können.
+
+9. Einbindung in die Materialsammlung
+
+Lege das Quiz im fachlich passenden Themenordner ab und registriere es als Materialart „Quiz“ der betreffenden Klasse. Binde es in GitHub Pages ein und ermögliche zusätzlich die Auslieferung über den vorhandenen Cloudflare-Worker. Bestehende Materialpfade und die fachliche Sollstruktur bleiben erhalten. Erzeuge Katalog und Website über die vorhandenen Werkzeuge. Behandle diese Promptvorlage als Lehrkraftmaterial; zeige keine Prompt- oder Entwicklungstexte in der Schüleroberfläche. Zugangsdaten gehören ausschließlich in bestehende Secret-Verwaltungen.
+
+10. Prüfen und ausliefern
+
+Prüfe Aufgaben und Lösungen, Punkteberechnung, Zeitbonus, Teilpunkte, echte Zeitüberschreitungen, doppelte Antworten und den Schutz fremder Versuche. Teste im Browser alle Ansichten, Trainingsstufen, Zahlentasten, Enter, Browser-Zurück, erhaltene Eingaben nach Neuladen und Serverabfragen, Wiederaufnahme, Netzunterbrechung und die gemeinsame Rangliste. Prüfe Bildschirmbreiten von 320, 390, 768 und 1024 Pixeln ohne horizontalen Überlauf und berücksichtige Tastaturbedienung, Beschriftungen und reduzierte Bewegung.
+
+Führe die projektspezifischen Build- und Strukturprüfungen aus. Beachte vorhandene AGENTS.md-Regeln und bereits erteilte Veröffentlichungsfreigaben. Stelle die geprüften Dateien, eine kurze Betriebsdokumentation und die tatsächlich verifizierte Quizadresse bereit. Beschreibe abschließend knapp, was umgesetzt und geprüft wurde und ob noch ein Veröffentlichungsschritt offen ist.

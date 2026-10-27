@@ -84,7 +84,51 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 
 @media print{.teacher-plan .table-wrap{overflow:visible}.teacher-plan table{min-width:0;font-size:8pt}.teacher-plan th,.teacher-plan td{padding:4px}.teacher-plan thead{display:table-header-group}.teacher-plan tr{break-inside:avoid}}
 
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}</style>
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+/* In-page H5P content fallback: usable without an LMS or external runtime. */
+.h5p-activity{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,26px);box-shadow:0 8px 25px rgba(23,42,58,.045)}
+.h5p-kicker{margin:0 0 6px!important;color:var(--blue-dark)!important;font-size:.82rem!important;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.h5p-activity h2{margin:0 0 12px;font-size:1.3rem;letter-spacing:-.02em}
+.h5p-question{margin:8px 0 16px;padding:14px 16px;border-radius:14px;background:#f6f9fc;color:#263e55;font-weight:700;line-height:1.65}
+.h5p-question p{margin:0}
+.h5p-options{display:grid;gap:10px;margin:0;padding:0;border:0}
+.h5p-options legend{font-weight:750;margin:0 0 9px;padding:0}
+.h5p-option{display:flex;align-items:flex-start;gap:12px;min-height:52px;padding:12px 14px;border:1.5px solid #cbd7e4;border-radius:14px;background:#fff;color:var(--ink);line-height:1.55;cursor:pointer;touch-action:manipulation}
+.h5p-option input{width:22px;height:22px;flex:0 0 22px;margin:2px 0 0;accent-color:var(--blue)}
+.h5p-option:focus-within{outline:3px solid #9bbcff;outline-offset:2px}
+.h5p-option.is-selected{border-color:var(--blue);background:#edf4ff}
+.h5p-option.is-correct{border-color:#69b78b;background:#effaf3}
+.h5p-option.is-wrong{border-color:#e59a90;background:#fff4f2}
+.h5p-answer-text p{margin:0}
+.h5p-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.h5p-feedback{min-height:28px;margin-top:12px;padding:10px 12px;border-radius:12px;line-height:1.55}
+.h5p-feedback:empty{padding:0;min-height:12px}
+.h5p-feedback.good{background:#effaf3;color:#087443}
+.h5p-feedback.bad{background:#fff4f2;color:#9b271e}
+.h5p-feedback.neutral{background:#f4f7fa;color:#405568}
+.h5p-feedback p{margin:4px 0}
+.h5p-note{margin:10px 0 0!important}
+.video-learning{margin:18px 0;padding:clamp(18px,3vw,26px);border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 8px 25px rgba(23,42,58,.045)}
+.video-learning h2{margin:0 0 8px;font-size:1.3rem}
+.video-learning>p{line-height:1.6;color:#405568}
+.video-learning details{margin-top:12px;background:#fbfcfe}
+.video-learning summary{min-height:44px;display:flex;align-items:center}
+.video-learning video{display:block;width:100%;height:auto;aspect-ratio:16/9;margin-top:10px;border-radius:14px;background:#101820}
+.video-checkpoint{margin-top:12px;padding:16px;border:2px solid #b8cffa;border-radius:16px;background:#f3f7ff}
+.video-checkpoint[hidden]{display:none!important}
+.video-checkpoint h3{margin:4px 0 8px}
+.video-checkpoint p{line-height:1.55}
+.video-checkpoint label{display:block;font-weight:750;margin:10px 0 6px}
+.video-checkpoint input{width:min(100%,240px);min-height:48px;padding:10px 12px;border:1.5px solid #aebdcd;border-radius:12px;font:inherit;background:#fff}
+.video-checkpoint input:focus{outline:3px solid #9bbcff;outline-offset:2px}
+.video-checkpoint .row{margin-top:10px}
+.video-checkpoint-status{min-height:24px;margin:10px 0 0!important;font-weight:750}
+.video-original-link{display:inline-flex;align-items:center;justify-content:center;min-height:46px;margin-top:12px;padding:10px 14px;border:1px solid #c8d7ec;border-radius:13px;background:#f3f7ff;color:#123fa5;font-weight:750;text-decoration:none}
+.video-original-link:focus-visible{outline:3px solid #9bbcff;outline-offset:2px}
+@media(max-width:600px){.h5p-option{padding:12px}.h5p-actions>*{flex:1 1 100%}.video-learning video{border-radius:10px}}
+@media print{.video-learning video{max-height:250px}.h5p-actions{display:none}}
+
+</style>
 <style data-sammlung-anpassung>
 /* Kleine Ansichten: Spalten dürfen schrumpfen, Tabellen bleiben innen scrollbar. */
 .columns > *, .split > *, .course-entry > *, .course-copy { min-width: 0; }
@@ -110,6 +154,91 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 <div class="columns"><div class="card"><h2>Modell</h2><div class="math display" data-tex="f(x)=a(x-8)^2+16"></div><p>Koordinaten und Funktionswerte sind in Metern angegeben.</p><div class="graph-card"><div class="graph" id="plot"></div></div></div>
 <div class="card"><h2>Parameter berechnen</h2><p>Setze den Randpunkt <span data-tex="A"></span> ein und löse nach <span data-tex="a"></span> auf.</p><label for="answer">Dein Wert für <span data-tex="a"></span></label><div class="input-line"><input id="answer" class="num-input" type="number" step="0.01" inputmode="decimal"><span id="preview" class="hint"></span></div>
 <button class="primary" data-action="check10">Modell prüfen</button><p id="feedback" class="feedback" aria-live="polite"></p><details><summary>Hinweis anzeigen</summary><p>Setze <span class="math" data-tex="x=0"></span> und <span class="math" data-tex="f(0)=0"></span> ein.</p></details></div></div></main>
+<section class="h5p-activity card" aria-labelledby="h5p-title-10-Brueckenbogen-modellieren">
+<p class="h5p-kicker">Interaktion im Lernpfad · H5P-Aufgabeninhalt</p>
+<h2 id="h5p-title-10-Brueckenbogen-modellieren">Brückenbogen modellieren</h2>
+<div class="h5p-question"><p>Ein Brückenbogen hat den Scheitelpunkt <span class="math" data-tex="S(8\mid 16)"></span> und liegt an den Enden <span class="math" data-tex="(0\mid 0)"></span> und <span class="math" data-tex="(16\mid 0)"></span>. Welcher Term passt?</p></div>
+<form class="h5p-form" novalidate>
+<fieldset class="h5p-options"><legend>Wähle eine Antwort aus.</legend>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="0" data-correct="true" aria-describedby="h5p-feedback-10-Brueckenbogen-modellieren"><span class="h5p-answer-text"><span class="math" data-tex="f(x)=-\frac{1}{4}(x-8)^2+16"></span></span><template class="h5p-answer-feedback">Richtig: Der Scheitelpunkt passt, und <span class="math" data-tex="f(0)=f(16)=0"></span>.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="1" data-correct="false" aria-describedby="h5p-feedback-10-Brueckenbogen-modellieren"><span class="h5p-answer-text"><span class="math" data-tex="f(x)=\frac{1}{4}(x-8)^2+16"></span></span><template class="h5p-answer-feedback">Der Bogen muss nach unten geöffnet sein.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="2" data-correct="false" aria-describedby="h5p-feedback-10-Brueckenbogen-modellieren"><span class="h5p-answer-text"><span class="math" data-tex="f(x)=-(x-8)^2+16"></span></span><template class="h5p-answer-feedback">Prüfe den Funktionswert am Randpunkt <span class="math" data-tex="x=0"></span>.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="3" data-correct="false" aria-describedby="h5p-feedback-10-Brueckenbogen-modellieren"><span class="h5p-answer-text"><span class="math" data-tex="f(x)=-\frac{1}{4}(x+8)^2+16"></span></span><template class="h5p-answer-feedback">Prüfe, ob die Symmetrieachse durch den Scheitelpunkt verläuft.</template></label>
+</fieldset>
+<div class="h5p-actions">
+<button class="primary" type="submit">Antwort prüfen</button>
+<button class="secondary" type="button" data-h5p-retry hidden>Noch einmal versuchen</button>
+<button class="quiet" type="button" data-h5p-solution hidden>Lösung anzeigen</button>
+</div>
+<div class="h5p-feedback" id="h5p-feedback-10-Brueckenbogen-modellieren" role="status" aria-live="polite"></div>
+</form>
+<p class="hint h5p-note">Dieser lokal spielbare Check verwendet dieselbe Frage, dieselben Antwortmöglichkeiten und Rückmeldungen wie die zugehörige H5P-Datei. Das Originalpaket für den Import in ein H5P-Lernsystem liegt am Seitenende.</p>
+</section>
+
 <section class="callout reflection-card" aria-labelledby="reflection-title"><h2 id="reflection-title">Begründung sichern</h2><p>Erkläre die Symmetrieannahme des Modells. Begründe, wie der Randpunkt mit <span data-tex="f(0)=0"></span> zur Bestimmung von <span data-tex="a"></span> beiträgt.</p><p class="hint">Schreibe zwei bis drei Sätze ins Heft. Nenne mindestens einen Rechenschritt und deute das Ergebnis. Die interaktive Rückmeldung ersetzt keine schriftliche Begründung.</p></section>
-<section class="h5p-panel"><div><h2>H5P-Vertiefung</h2><p>Die Zusatzaufgabe lässt sich in ein H5P-fähiges Lernsystem importieren.</p></div><a class="h5p-download" href="data:application/zip;base64,UEsDBBQAAAAIAHu1Wl0+sa+h4gAAADYCAAAIAAAAaDVwLmpzb26VkU1LAzEQhu/9FSHnIhStB29+UKqoKKgX8ZDdvN2OJjNLNouU0n/mzT/mJluwFFrayxzeeTJPklkOlNKRooO+UPoq/P6UX+BCKrDyYuEcIYD1MHHOcNWaKqMWfeYN8T0VwYRFiqfjp5OH1kW6nguVa6YOcGIs7A1qsAWXhKaj37umUstc86hyToxH47NhIhwvv9GI78esmU8JbwgNCXfQ2X+DeLMxzvlquNeQLnsnbQH3ertTMdqlOD1U8dyiienM0YqDX7H95UdZRue9pqsfeV/wBezLot5YkqZZSL7EDFZ/UEsDBBQAAAAIAHu1Wl1VVVkGDgQAAJMLAAAUAAAAY29udGVudC9jb250ZW50Lmpzb261Vttu2zgQfe9XEHqy0SS1F4uiMJoWdpNgA3QDw95FgdZdgJJGEtcU6fISxw78N/2GPPXNP7ZD6upLArTYvNgQ53DmzMyZke5fEBLkEDMaDMg9PuBjzDQNOVznNIXPUuZMpGhMKNeAgM2Ju/LNgjZMCjQEbxfvLpkgI7X9Ec1BhDIFQTJqSIz/0ygDZoAvrJgbMpt1pp03s1nOYtJ/3Z3NusSKmHAGqSFU+BuXwv0istMrgL0a5w77r1unZ+QTcIygyF+gcrKgWpv3b18t3gWeJRV6CUojyS8+tSJBNBi4M446Okw6d93z09ksUTS672/uf9907k7fdP/57aWL1PWO/J1IKgWRu2aUhfrYsIUeivgKIA5pNK/LWNzJpAbRsgUTFmWGpQNygaR3i+PZn1SJJp1e9zzBdLvnPZdpTQTdCmk+HHgOSvvG/29Ons74pxL2vf/VjF2iI6+J3GpNBI0yzNHgcwrbhyQRYIgGJv7vDE+fN60xyj0Br9gr1z4cBic2lHFOJlTEteDvnqV/e4p9+eyZnhAZkpgBma7yHIxigI3UWACrsKGHo34Lim+/28T8dOb4+9WPr0QflPMDnkcMX0oXrUQSJXO09FrRjcSDfq99lLR43FizBp/jxK2yHHhshROuG8lF1W8mgIwgxUfhzGe77L/WK/Lv64YwViaaD71ARtaYYm8OhVlKFEzhWZRlCrQNc2YOwCEWLW6hMrmcSm6d7hrUx+2DRk64StfA0gZt1GqYUtZC3kjsGuaSU+5apS1SbOAokI80BO6QfzCxBKYPfGqUF4yoqoEX6I5cqhRCwfSADITNya0UZGCkwShjJ4udGMNbyrh71bTDIJlk+yMNqaqQVYt24O0OHbmjgMY7a7cN56AbHkslRVpU2wGvcFKwFKRsToUqR6nBlXv8AIh9sTz+4Prta8IwVoUhWnJugFCrU1huv2e82Hy7d2/ciDx1XbjQjzoR8losrN8Vn5wVyNpifw3xwi1dVTMZ0H5/VUfbE+QZwfB18CVTMcHiEFVkTmSMiz3x5SI5VXMGe36nLYkeE+cOeIIrZeVJ2CRFRRFQAqxptOnnrJisEDJ6y6RVzYCBcMKonDQv6NJQ0dD1ABxAfBWOmc1q4RWn8TsItVf1yj+NJRN7+zVQuPxlPqw/Pdq29tTqCXyzTIGu+tWKGUmRMJV7TheMcpnuOSoBPuGjAGqNrBrbPncfGWNQEQiDn3ftdViQc0Pts6qp12Vvk2oqn+GkFSPxyD4LZewb++f2AYWDn434yijX6NDqJc04+RfMur73vp45KiLg9Xr5bP0HZrBbgdo8LqPu0600cUD3yQ1YkcZmcf9GqKiuCxYpzqXjjD2OH6c8DEPcGi23+6TLnJyvkvqLzX9QSwECFAMUAAAACAB7tVpdPrGvoeIAAAA2AgAACAAAAAAAAAAAAAAAgAEAAAAAaDVwLmpzb25QSwECFAMUAAAACAB7tVpdVVVZBg4EAACTCwAAFAAAAAAAAAAAAAAAgAEIAQAAY29udGVudC9jb250ZW50Lmpzb25QSwUGAAAAAAIAAgB4AAAASAUAAAAA" download="10_Brueckenbogen_modellieren.h5p">H5P-Aktivität herunterladen</a></section>
-<div class="page-controls"><a href="09_Termformen_geplant_nutzen.html">← Vorheriger Lernpfad</a><label class="mark-done"><input id="mark-done" type="checkbox"><span>Als bearbeitet markieren</span></label><a href="11_Extremwertlabor_Flaeche.html">Nächster Lernpfad →</a></div><p class="footer-note">Die Markierung wird, sofern der Browser lokalen Speicher erlaubt, auf diesem Gerät behalten. Sie zeigt den Arbeitsstand, keine Leistungsbewertung.</p></div></div><noscript>Diese interaktive Seite benötigt JavaScript. Die Dateien sind lokal enthalten.</noscript></body></html>
+<section class="h5p-panel"><div><h2>H5P-Originaldatei</h2><p>Das importierbare Paket mit derselben Lerncheck-Aufgabe steht hier zum Download bereit.</p></div><a class="h5p-download" href="data:application/zip;base64,UEsDBBQAAAAIAHu1Wl0+sa+h4gAAADYCAAAIAAAAaDVwLmpzb26VkU1LAzEQhu/9FSHnIhStB29+UKqoKKgX8ZDdvN2OJjNLNouU0n/mzT/mJluwFFrayxzeeTJPklkOlNKRooO+UPoq/P6UX+BCKrDyYuEcIYD1MHHOcNWaKqMWfeYN8T0VwYRFiqfjp5OH1kW6nguVa6YOcGIs7A1qsAWXhKaj37umUstc86hyToxH47NhIhwvv9GI78esmU8JbwgNCXfQ2X+DeLMxzvlquNeQLnsnbQH3ertTMdqlOD1U8dyiienM0YqDX7H95UdZRue9pqsfeV/wBezLot5YkqZZSL7EDFZ/UEsDBBQAAAAIAHu1Wl1VVVkGDgQAAJMLAAAUAAAAY29udGVudC9jb250ZW50Lmpzb261Vttu2zgQfe9XEHqy0SS1F4uiMJoWdpNgA3QDw95FgdZdgJJGEtcU6fISxw78N/2GPPXNP7ZD6upLArTYvNgQ53DmzMyZke5fEBLkEDMaDMg9PuBjzDQNOVznNIXPUuZMpGhMKNeAgM2Ju/LNgjZMCjQEbxfvLpkgI7X9Ec1BhDIFQTJqSIz/0ygDZoAvrJgbMpt1pp03s1nOYtJ/3Z3NusSKmHAGqSFU+BuXwv0istMrgL0a5w77r1unZ+QTcIygyF+gcrKgWpv3b18t3gWeJRV6CUojyS8+tSJBNBi4M446Okw6d93z09ksUTS672/uf9907k7fdP/57aWL1PWO/J1IKgWRu2aUhfrYsIUeivgKIA5pNK/LWNzJpAbRsgUTFmWGpQNygaR3i+PZn1SJJp1e9zzBdLvnPZdpTQTdCmk+HHgOSvvG/29Ons74pxL2vf/VjF2iI6+J3GpNBI0yzNHgcwrbhyQRYIgGJv7vDE+fN60xyj0Br9gr1z4cBic2lHFOJlTEteDvnqV/e4p9+eyZnhAZkpgBma7yHIxigI3UWACrsKGHo34Lim+/28T8dOb4+9WPr0QflPMDnkcMX0oXrUQSJXO09FrRjcSDfq99lLR43FizBp/jxK2yHHhshROuG8lF1W8mgIwgxUfhzGe77L/WK/Lv64YwViaaD71ARtaYYm8OhVlKFEzhWZRlCrQNc2YOwCEWLW6hMrmcSm6d7hrUx+2DRk64StfA0gZt1GqYUtZC3kjsGuaSU+5apS1SbOAokI80BO6QfzCxBKYPfGqUF4yoqoEX6I5cqhRCwfSADITNya0UZGCkwShjJ4udGMNbyrh71bTDIJlk+yMNqaqQVYt24O0OHbmjgMY7a7cN56AbHkslRVpU2wGvcFKwFKRsToUqR6nBlXv8AIh9sTz+4Prta8IwVoUhWnJugFCrU1huv2e82Hy7d2/ciDx1XbjQjzoR8losrN8Vn5wVyNpifw3xwi1dVTMZ0H5/VUfbE+QZwfB18CVTMcHiEFVkTmSMiz3x5SI5VXMGe36nLYkeE+cOeIIrZeVJ2CRFRRFQAqxptOnnrJisEDJ6y6RVzYCBcMKonDQv6NJQ0dD1ABxAfBWOmc1q4RWn8TsItVf1yj+NJRN7+zVQuPxlPqw/Pdq29tTqCXyzTIGu+tWKGUmRMJV7TheMcpnuOSoBPuGjAGqNrBrbPncfGWNQEQiDn3ftdViQc0Pts6qp12Vvk2oqn+GkFSPxyD4LZewb++f2AYWDn434yijX6NDqJc04+RfMur73vp45KiLg9Xr5bP0HZrBbgdo8LqPu0600cUD3yQ1YkcZmcf9GqKiuCxYpzqXjjD2OH6c8DEPcGi23+6TLnJyvkvqLzX9QSwECFAMUAAAACAB7tVpdPrGvoeIAAAA2AgAACAAAAAAAAAAAAAAAgAEAAAAAaDVwLmpzb25QSwECFAMUAAAACAB7tVpdVVVZBg4EAACTCwAAFAAAAAAAAAAAAAAAgAEIAQAAY29udGVudC9jb250ZW50Lmpzb25QSwUGAAAAAAIAAgB4AAAASAUAAAAA" download="10_Brueckenbogen_modellieren.h5p">H5P-Paket für ein Lernsystem laden</a></section>
+<div class="page-controls"><a href="09_Termformen_geplant_nutzen.html">← Vorheriger Lernpfad</a><label class="mark-done"><input id="mark-done" type="checkbox"><span>Als bearbeitet markieren</span></label><a href="11_Extremwertlabor_Flaeche.html">Nächster Lernpfad →</a></div><p class="footer-note">Die Markierung wird, sofern der Browser lokalen Speicher erlaubt, auf diesem Gerät behalten. Sie zeigt den Arbeitsstand, keine Leistungsbewertung.</p></div></div><noscript>Diese interaktive Seite benötigt JavaScript. Die Dateien sind lokal enthalten.</noscript><script>
+(function(){
+  "use strict";
+  function renderMath(root){
+    if(!window.katex)return;
+    root.querySelectorAll("[data-tex]").forEach(function(el){
+      if(el.querySelector(".katex"))return;
+      try{window.katex.render(el.dataset.tex,el,{throwOnError:false,strict:"ignore",output:"htmlAndMathml",displayMode:el.dataset.display==="true"||el.classList.contains("display")});}catch(_e){}
+    });
+  }
+  document.querySelectorAll(".h5p-activity").forEach(function(activity){
+    var form=activity.querySelector(".h5p-form"), fieldset=activity.querySelector("fieldset"), feedback=activity.querySelector(".h5p-feedback");
+    var check=form.querySelector('button[type="submit"]'), retry=form.querySelector("[data-h5p-retry]"), solution=form.querySelector("[data-h5p-solution]");
+    var radios=Array.from(form.querySelectorAll('input[name="h5p-choice"]'));
+    function clear(){
+      feedback.replaceChildren();feedback.className="h5p-feedback";
+      radios.forEach(function(input){input.checked=false;input.disabled=false;input.closest(".h5p-option").classList.remove("is-selected","is-correct","is-wrong");});
+      check.hidden=false;retry.hidden=true;solution.hidden=true;
+    }
+    radios.forEach(function(input){input.addEventListener("change",function(){radios.forEach(function(r){r.closest(".h5p-option").classList.toggle("is-selected",r.checked);});});});
+    form.addEventListener("submit",function(event){
+      event.preventDefault();var selected=radios.find(function(input){return input.checked;});
+      if(!selected){feedback.className="h5p-feedback neutral";feedback.textContent="Bitte wähle zuerst eine Antwort aus.";return;}
+      feedback.replaceChildren();feedback.className="h5p-feedback "+(selected.dataset.correct==="true"?"good":"bad");
+      var message=document.createElement("p");message.textContent=selected.dataset.correct==="true"?"Richtig!":"Noch nicht richtig.";feedback.appendChild(message);
+      var template=selected.closest("label").querySelector(".h5p-answer-feedback");
+      if(template&&template.content.childNodes.length)feedback.appendChild(template.content.cloneNode(true));
+      renderMath(feedback);
+      if(selected.dataset.correct==="true"){
+        selected.closest("label").classList.add("is-correct");radios.forEach(function(r){r.disabled=true;});check.hidden=true;retry.hidden=true;solution.hidden=true;
+      }else{
+        selected.closest("label").classList.add("is-wrong");retry.hidden=false;solution.hidden=false;
+      }
+    });
+    retry.addEventListener("click",function(){clear();var first=radios.find(function(r){return !r.disabled;});if(first)first.focus();});
+    solution.addEventListener("click",function(){
+      var correct=radios.find(function(r){return r.dataset.correct==="true";});if(!correct)return;
+      feedback.replaceChildren();feedback.className="h5p-feedback neutral";
+      var p=document.createElement("p");p.textContent="Die richtige Antwort lautet:";feedback.appendChild(p);
+      var answer=correct.closest("label").querySelector(".h5p-answer-text").cloneNode(true);feedback.appendChild(answer);renderMath(feedback);
+    });
+    form.addEventListener("reset",function(){window.setTimeout(clear,0);});
+  });
+
+  var video=document.getElementById("worked-example-video");
+  if(video){
+    var cfg=document.getElementById("video-checkpoint-data");
+    var points=JSON.parse(cfg.textContent), next=0, active=null, allowedTime=0;
+    var panel=document.getElementById("video-checkpoint-panel"), title=document.getElementById("video-checkpoint-title"), prompt=document.getElementById("video-checkpoint-prompt"), input=document.getElementById("video-checkpoint-answer"), status=document.getElementById("video-checkpoint-status");
+    var checkButton=document.getElementById("video-checkpoint-check"), resumeButton=document.getElementById("video-checkpoint-resume"), skipButton=document.getElementById("video-checkpoint-skip");
+    function showPoint(point){active=point;video.pause();panel.hidden=false;title.textContent=point.label;prompt.textContent=point.prompt.replace(/\*[^*]+\*/g,"_____");input.value="";input.disabled=false;status.textContent="";checkButton.hidden=false;resumeButton.hidden=true;skipButton.hidden=true;panel.scrollIntoView({block:"nearest",behavior:"smooth"});input.focus({preventScroll:true});}
+    function finishPoint(){panel.hidden=true;active=null;input.blur();var play=video.play();if(play&&play.catch)play.catch(function(){status.textContent="Tippe auf Wiedergabe, um das Video fortzusetzen.";});}
+    video.addEventListener("timeupdate",function(){if(active)return;var point=points[next];if(point&&video.currentTime>=point.at){next++;allowedTime=video.currentTime;showPoint(point);return;}allowedTime=Math.max(allowedTime,video.currentTime);});
+    video.addEventListener("seeking",function(){if(active&&video.currentTime>active.at+.5){video.currentTime=active.at;return;}if(!active&&next<points.length&&video.currentTime>allowedTime+.8){video.currentTime=allowedTime;}});
+    checkButton.addEventListener("click",function(){
+      if(!active)return;var raw=input.value.trim().replace(/[−–]/g,"-").replace(",",".");
+      var value=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw)?Number(raw):NaN;
+      if(Number.isFinite(value)&&Math.abs(value-active.answer)<1e-9){status.textContent=active.correctFeedback||"Richtig. Fahre mit dem Video fort.";status.className="video-checkpoint-status feedback good";input.disabled=true;checkButton.hidden=true;resumeButton.hidden=false;skipButton.hidden=true;}
+      else{status.textContent=active.wrongFeedback||"Noch nicht richtig. Prüfe deinen Rechenschritt oder setze das Video fort.";status.className="video-checkpoint-status feedback bad";skipButton.hidden=false;input.focus();}
+    });
+    resumeButton.addEventListener("click",finishPoint);skipButton.addEventListener("click",finishPoint);
+  }
+})();
+</script>
+</body></html>

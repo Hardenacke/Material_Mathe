@@ -84,7 +84,51 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 
 @media print{.teacher-plan .table-wrap{overflow:visible}.teacher-plan table{min-width:0;font-size:8pt}.teacher-plan th,.teacher-plan td{padding:4px}.teacher-plan thead{display:table-header-group}.teacher-plan tr{break-inside:avoid}}
 
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}</style>
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+/* In-page H5P content fallback: usable without an LMS or external runtime. */
+.h5p-activity{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,26px);box-shadow:0 8px 25px rgba(23,42,58,.045)}
+.h5p-kicker{margin:0 0 6px!important;color:var(--blue-dark)!important;font-size:.82rem!important;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.h5p-activity h2{margin:0 0 12px;font-size:1.3rem;letter-spacing:-.02em}
+.h5p-question{margin:8px 0 16px;padding:14px 16px;border-radius:14px;background:#f6f9fc;color:#263e55;font-weight:700;line-height:1.65}
+.h5p-question p{margin:0}
+.h5p-options{display:grid;gap:10px;margin:0;padding:0;border:0}
+.h5p-options legend{font-weight:750;margin:0 0 9px;padding:0}
+.h5p-option{display:flex;align-items:flex-start;gap:12px;min-height:52px;padding:12px 14px;border:1.5px solid #cbd7e4;border-radius:14px;background:#fff;color:var(--ink);line-height:1.55;cursor:pointer;touch-action:manipulation}
+.h5p-option input{width:22px;height:22px;flex:0 0 22px;margin:2px 0 0;accent-color:var(--blue)}
+.h5p-option:focus-within{outline:3px solid #9bbcff;outline-offset:2px}
+.h5p-option.is-selected{border-color:var(--blue);background:#edf4ff}
+.h5p-option.is-correct{border-color:#69b78b;background:#effaf3}
+.h5p-option.is-wrong{border-color:#e59a90;background:#fff4f2}
+.h5p-answer-text p{margin:0}
+.h5p-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.h5p-feedback{min-height:28px;margin-top:12px;padding:10px 12px;border-radius:12px;line-height:1.55}
+.h5p-feedback:empty{padding:0;min-height:12px}
+.h5p-feedback.good{background:#effaf3;color:#087443}
+.h5p-feedback.bad{background:#fff4f2;color:#9b271e}
+.h5p-feedback.neutral{background:#f4f7fa;color:#405568}
+.h5p-feedback p{margin:4px 0}
+.h5p-note{margin:10px 0 0!important}
+.video-learning{margin:18px 0;padding:clamp(18px,3vw,26px);border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 8px 25px rgba(23,42,58,.045)}
+.video-learning h2{margin:0 0 8px;font-size:1.3rem}
+.video-learning>p{line-height:1.6;color:#405568}
+.video-learning details{margin-top:12px;background:#fbfcfe}
+.video-learning summary{min-height:44px;display:flex;align-items:center}
+.video-learning video{display:block;width:100%;height:auto;aspect-ratio:16/9;margin-top:10px;border-radius:14px;background:#101820}
+.video-checkpoint{margin-top:12px;padding:16px;border:2px solid #b8cffa;border-radius:16px;background:#f3f7ff}
+.video-checkpoint[hidden]{display:none!important}
+.video-checkpoint h3{margin:4px 0 8px}
+.video-checkpoint p{line-height:1.55}
+.video-checkpoint label{display:block;font-weight:750;margin:10px 0 6px}
+.video-checkpoint input{width:min(100%,240px);min-height:48px;padding:10px 12px;border:1.5px solid #aebdcd;border-radius:12px;font:inherit;background:#fff}
+.video-checkpoint input:focus{outline:3px solid #9bbcff;outline-offset:2px}
+.video-checkpoint .row{margin-top:10px}
+.video-checkpoint-status{min-height:24px;margin:10px 0 0!important;font-weight:750}
+.video-original-link{display:inline-flex;align-items:center;justify-content:center;min-height:46px;margin-top:12px;padding:10px 14px;border:1px solid #c8d7ec;border-radius:13px;background:#f3f7ff;color:#123fa5;font-weight:750;text-decoration:none}
+.video-original-link:focus-visible{outline:3px solid #9bbcff;outline-offset:2px}
+@media(max-width:600px){.h5p-option{padding:12px}.h5p-actions>*{flex:1 1 100%}.video-learning video{border-radius:10px}}
+@media print{.video-learning video{max-height:250px}.h5p-actions{display:none}}
+
+</style>
 <style data-sammlung-anpassung>
 /* Kleine Ansichten: Spalten dürfen schrumpfen, Tabellen bleiben innen scrollbar. */
 .columns > *, .split > *, .course-entry > *, .course-copy { min-width: 0; }
@@ -114,6 +158,91 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 <p>Wohin verschiebt <span data-tex="h"></span> den Scheitelpunkt?</p><div class="choices" data-group="shift"><button class="choice" data-value="same">In dieselbe Richtung wie <span data-tex="h"></span></button><button class="choice" data-value="opp">In die entgegengesetzte Richtung</button></div>
 <button class="primary" data-action="check04">Aussage prüfen</button><p id="feedback" class="feedback" aria-live="polite"></p></div></div>
 <details><summary>Hinweis anzeigen</summary><p>Der Scheitelpunkt liegt bei <span class="math" data-tex="S(h|k)"></span>. Achte auf das Vorzeichen in der Klammer.</p></details></main>
+<section class="h5p-activity card" aria-labelledby="h5p-title-04-Scheitelpunktform-verschieben">
+<p class="h5p-kicker">Interaktion im Lernpfad · H5P-Aufgabeninhalt</p>
+<h2 id="h5p-title-04-Scheitelpunktform-verschieben">Scheitelpunkt aus der Scheitelpunktform</h2>
+<div class="h5p-question"><p>Wo liegt der Scheitelpunkt von <span class="math" data-tex="f(x)=(x-3)^2-2"></span>?</p></div>
+<form class="h5p-form" novalidate>
+<fieldset class="h5p-options"><legend>Wähle eine Antwort aus.</legend>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="0" data-correct="true" aria-describedby="h5p-feedback-04-Scheitelpunktform-verschieben"><span class="h5p-answer-text"><span class="math" data-tex="S(3\mid -2)"></span></span><template class="h5p-answer-feedback">Richtig: In der Scheitelpunktform ist <span class="math" data-tex="S(h\mid k)"></span>.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="1" data-correct="false" aria-describedby="h5p-feedback-04-Scheitelpunktform-verschieben"><span class="h5p-answer-text"><span class="math" data-tex="S(-3\mid 2)"></span></span><template class="h5p-answer-feedback">Achte auf die Vorzeichen in der Scheitelpunktform.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="2" data-correct="false" aria-describedby="h5p-feedback-04-Scheitelpunktform-verschieben"><span class="h5p-answer-text"><span class="math" data-tex="S(-2\mid 3)"></span></span><template class="h5p-answer-feedback">Die waagerechte und senkrechte Verschiebung sind vertauscht.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="3" data-correct="false" aria-describedby="h5p-feedback-04-Scheitelpunktform-verschieben"><span class="h5p-answer-text"><span class="math" data-tex="S(2\mid -3)"></span></span><template class="h5p-answer-feedback">Lies die Verschiebungen aus den Klammern und dem Summanden ab.</template></label>
+</fieldset>
+<div class="h5p-actions">
+<button class="primary" type="submit">Antwort prüfen</button>
+<button class="secondary" type="button" data-h5p-retry hidden>Noch einmal versuchen</button>
+<button class="quiet" type="button" data-h5p-solution hidden>Lösung anzeigen</button>
+</div>
+<div class="h5p-feedback" id="h5p-feedback-04-Scheitelpunktform-verschieben" role="status" aria-live="polite"></div>
+</form>
+<p class="hint h5p-note">Dieser lokal spielbare Check verwendet dieselbe Frage, dieselben Antwortmöglichkeiten und Rückmeldungen wie die zugehörige H5P-Datei. Das Originalpaket für den Import in ein H5P-Lernsystem liegt am Seitenende.</p>
+</section>
+
 <section class="callout reflection-card" aria-labelledby="reflection-title"><h2 id="reflection-title">Begründung sichern</h2><p>Begründe am Term <span data-tex="f(x)=(x-h)^2+k"></span>, warum der Scheitelpunkt <span data-tex="S(h|k)"></span> ist. Erkläre besonders die Wirkung des Vorzeichens in der Klammer.</p><p class="hint">Schreibe zwei bis drei Sätze ins Heft. Nenne mindestens einen Rechenschritt und deute das Ergebnis. Die interaktive Rückmeldung ersetzt keine schriftliche Begründung.</p></section>
-<section class="h5p-panel"><div><h2>H5P-Vertiefung</h2><p>Die Zusatzaufgabe lässt sich in ein H5P-fähiges Lernsystem importieren.</p></div><a class="h5p-download" href="data:application/zip;base64,UEsDBBQAAAAIAHu1Wl1FQB9M4wAAAEQCAAAIAAAAaDVwLmpzb26Vkc1LAzEQxe/9K0LORShaD95EERWVFj8upYfs5rU7mkyWfCCl9H93ky1YhZb2Mof33sxvklkPhJCRooG8EvK1bkARpk38FYVKQWh48UddOG/lMHcZxcuklqVRo9esIn6iyiu/yvL9eHL2nEykm8ZRvc20HsYpDX2LFqzBNSF06VlnCrEutYyqG2K8KFsId47j9TeCs/2YbebT+Q/4QI670MWvQbxrjIu+GR4k5GUfXapg3h/2Ikb7EOfHIqYJIeaekxFHv+L/l59EGV32mK7Oy71gK+i3VbtzJEkLn3k5M9j8AFBLAwQUAAAACAB7tVpds9MK7tkDAAAZCwAAFAAAAGNvbnRlbnQvY29udGVudC5qc29utVbJbtw4EL3nKwidbCDtxPatkQVyPMEY4zEMNyYBks4AlFSSOM2lw8Vtd+C/mW/Iybf+sRQpaunNwAySiw2yHovvsaqe+tszQhIBBaPJmHzDBS4LZmjG4ULQCj4pJZisMFhSbgABD8/9ka8OjGVKYiB5NX/zURHOoLKkAE0meQ3MAp87ObPkVkkynR6UB3eHrw/uRqeHf5+MTqbTw7evXszfJCEZlWYB2mCuz4FBwwMDFu6svwHPTw5Op1PBCjI6OcTT4WDA5EpryD3MagfdtmVzk8riPUCR0XzWqWvO1MqAHMSSG5bXllVjciG3NZRKC8KMJYFH3fCYeRpHHQ/MKpV9t5U4ifGH8P/h+RMCR1HhXoGhBP9XYYoCgVBXkoIB+aD0ElAzSML2KP652k4abae/RNs5KlpQbFdM5lU6WRCEzOLyAzZXXjPInKyIYRi8BW2pw037U1VGkaNfo/KSgWmKN9CDBUQhWEFJ/uBUCNAyyC9AkIkTgkofotl/1ol/v4TpVPhYlPMtljsCn2OKgYxSK4GRl4PbrcKN45fDrXLA48rZJQSdN6vHfCaAF41OL2uuV48lRoFJIGdQ4VL68NE6+y+dUf110RPGDs9naTCbM2dt416ptAulbcws4zMlxmWC2S1who9WDFC1WkwUd94Ke9Tl6rvxrUYlzljVo62+TyvKBsgrldcEtQjKfU8a5yeyg2N7XNIMuEf+zuQCmNnKabC54IzqDniO6chvuoJMMjMmY+lE8OCxVRZvufbjvXZHeksZ94Y/vAbJlKvHKqO6RbYlWoMPK7TjjAZarLnsEM7B9DwWWsmqeW0PfI9zgk9BYnFaVBykHhdtewuIdXG8eOfrHf3BdBhiFOfBCk0Fi9W/NcctfLT1s1d+RJ46Lv3Ve5NIdSHnLjjDRx8FsnRYX0tC48ZU7Uwm9Pj4vrttoyGPiHe3dnPBdEHwcYhulBPlvbsMz0UE1TMGG3kngxbd1Zxr4BvAHg0kXFlhRxG0E3C2780wZ81kZVDTW6ac7gcMpG+MNkn/PY6BlobpBmALEl5hV9jez0PHoX1X2HttrcLqWjG54a6JRuNTIu1+WQxjw6k1N/DVMQ2mrdfgzlzJkmkROJ0zylW1kSgCguCdAOqsags73J9TY65B5yAtfrWGdtiQ80MdVHXUu2cfkupfvsZJa0Zij59lqgiF/XP13X8TsRMLF200dWZBa07+Abvszr3tZo7KHHhnL5+c9kOcrL9AF76Ot27SbXtii+6TDtiSxmLx8EVoqS4bFhXOpeeMNS72U06zzP8Q6NNuko6afK5I/dnDD1BLAQIUAxQAAAAIAHu1Wl1FQB9M4wAAAEQCAAAIAAAAAAAAAAAAAACAAQAAAABoNXAuanNvblBLAQIUAxQAAAAIAHu1Wl2z0wru2QMAABkLAAAUAAAAAAAAAAAAAACAAQkBAABjb250ZW50L2NvbnRlbnQuanNvblBLBQYAAAAAAgACAHgAAAAUBQAAAAA=" download="04_Scheitelpunktform_verschieben.h5p">H5P-Aktivität herunterladen</a></section>
-<div class="page-controls"><a href="03_Parameterlabor_Streckung_Spiegelung.html">← Vorheriger Lernpfad</a><label class="mark-done"><input id="mark-done" type="checkbox"><span>Als bearbeitet markieren</span></label><a href="05_Parameter_aus_Graph.html">Nächster Lernpfad →</a></div><p class="footer-note">Die Markierung wird, sofern der Browser lokalen Speicher erlaubt, auf diesem Gerät behalten. Sie zeigt den Arbeitsstand, keine Leistungsbewertung.</p></div></div><noscript>Diese interaktive Seite benötigt JavaScript. Die Dateien sind lokal enthalten.</noscript></body></html>
+<section class="h5p-panel"><div><h2>H5P-Originaldatei</h2><p>Das importierbare Paket mit derselben Lerncheck-Aufgabe steht hier zum Download bereit.</p></div><a class="h5p-download" href="data:application/zip;base64,UEsDBBQAAAAIAHu1Wl1FQB9M4wAAAEQCAAAIAAAAaDVwLmpzb26Vkc1LAzEQxe/9K0LORShaD95EERWVFj8upYfs5rU7mkyWfCCl9H93ky1YhZb2Mof33sxvklkPhJCRooG8EvK1bkARpk38FYVKQWh48UddOG/lMHcZxcuklqVRo9esIn6iyiu/yvL9eHL2nEykm8ZRvc20HsYpDX2LFqzBNSF06VlnCrEutYyqG2K8KFsId47j9TeCs/2YbebT+Q/4QI670MWvQbxrjIu+GR4k5GUfXapg3h/2Ikb7EOfHIqYJIeaekxFHv+L/l59EGV32mK7Oy71gK+i3VbtzJEkLn3k5M9j8AFBLAwQUAAAACAB7tVpds9MK7tkDAAAZCwAAFAAAAGNvbnRlbnQvY29udGVudC5qc29utVbJbtw4EL3nKwidbCDtxPatkQVyPMEY4zEMNyYBks4AlFSSOM2lw8Vtd+C/mW/Iybf+sRQpaunNwAySiw2yHovvsaqe+tszQhIBBaPJmHzDBS4LZmjG4ULQCj4pJZisMFhSbgABD8/9ka8OjGVKYiB5NX/zURHOoLKkAE0meQ3MAp87ObPkVkkynR6UB3eHrw/uRqeHf5+MTqbTw7evXszfJCEZlWYB2mCuz4FBwwMDFu6svwHPTw5Op1PBCjI6OcTT4WDA5EpryD3MagfdtmVzk8riPUCR0XzWqWvO1MqAHMSSG5bXllVjciG3NZRKC8KMJYFH3fCYeRpHHQ/MKpV9t5U4ifGH8P/h+RMCR1HhXoGhBP9XYYoCgVBXkoIB+aD0ElAzSML2KP652k4abae/RNs5KlpQbFdM5lU6WRCEzOLyAzZXXjPInKyIYRi8BW2pw037U1VGkaNfo/KSgWmKN9CDBUQhWEFJ/uBUCNAyyC9AkIkTgkofotl/1ol/v4TpVPhYlPMtljsCn2OKgYxSK4GRl4PbrcKN45fDrXLA48rZJQSdN6vHfCaAF41OL2uuV48lRoFJIGdQ4VL68NE6+y+dUf110RPGDs9naTCbM2dt416ptAulbcws4zMlxmWC2S1who9WDFC1WkwUd94Ke9Tl6rvxrUYlzljVo62+TyvKBsgrldcEtQjKfU8a5yeyg2N7XNIMuEf+zuQCmNnKabC54IzqDniO6chvuoJMMjMmY+lE8OCxVRZvufbjvXZHeksZ94Y/vAbJlKvHKqO6RbYlWoMPK7TjjAZarLnsEM7B9DwWWsmqeW0PfI9zgk9BYnFaVBykHhdtewuIdXG8eOfrHf3BdBhiFOfBCk0Fi9W/NcctfLT1s1d+RJ46Lv3Ve5NIdSHnLjjDRx8FsnRYX0tC48ZU7Uwm9Pj4vrttoyGPiHe3dnPBdEHwcYhulBPlvbsMz0UE1TMGG3kngxbd1Zxr4BvAHg0kXFlhRxG0E3C2780wZ81kZVDTW6ac7gcMpG+MNkn/PY6BlobpBmALEl5hV9jez0PHoX1X2HttrcLqWjG54a6JRuNTIu1+WQxjw6k1N/DVMQ2mrdfgzlzJkmkROJ0zylW1kSgCguCdAOqsags73J9TY65B5yAtfrWGdtiQ80MdVHXUu2cfkupfvsZJa0Zij59lqgiF/XP13X8TsRMLF200dWZBa07+Abvszr3tZo7KHHhnL5+c9kOcrL9AF76Ot27SbXtii+6TDtiSxmLx8EVoqS4bFhXOpeeMNS72U06zzP8Q6NNuko6afK5I/dnDD1BLAQIUAxQAAAAIAHu1Wl1FQB9M4wAAAEQCAAAIAAAAAAAAAAAAAACAAQAAAABoNXAuanNvblBLAQIUAxQAAAAIAHu1Wl2z0wru2QMAABkLAAAUAAAAAAAAAAAAAACAAQkBAABjb250ZW50L2NvbnRlbnQuanNvblBLBQYAAAAAAgACAHgAAAAUBQAAAAA=" download="04_Scheitelpunktform_verschieben.h5p">H5P-Paket für ein Lernsystem laden</a></section>
+<div class="page-controls"><a href="03_Parameterlabor_Streckung_Spiegelung.html">← Vorheriger Lernpfad</a><label class="mark-done"><input id="mark-done" type="checkbox"><span>Als bearbeitet markieren</span></label><a href="05_Parameter_aus_Graph.html">Nächster Lernpfad →</a></div><p class="footer-note">Die Markierung wird, sofern der Browser lokalen Speicher erlaubt, auf diesem Gerät behalten. Sie zeigt den Arbeitsstand, keine Leistungsbewertung.</p></div></div><noscript>Diese interaktive Seite benötigt JavaScript. Die Dateien sind lokal enthalten.</noscript><script>
+(function(){
+  "use strict";
+  function renderMath(root){
+    if(!window.katex)return;
+    root.querySelectorAll("[data-tex]").forEach(function(el){
+      if(el.querySelector(".katex"))return;
+      try{window.katex.render(el.dataset.tex,el,{throwOnError:false,strict:"ignore",output:"htmlAndMathml",displayMode:el.dataset.display==="true"||el.classList.contains("display")});}catch(_e){}
+    });
+  }
+  document.querySelectorAll(".h5p-activity").forEach(function(activity){
+    var form=activity.querySelector(".h5p-form"), fieldset=activity.querySelector("fieldset"), feedback=activity.querySelector(".h5p-feedback");
+    var check=form.querySelector('button[type="submit"]'), retry=form.querySelector("[data-h5p-retry]"), solution=form.querySelector("[data-h5p-solution]");
+    var radios=Array.from(form.querySelectorAll('input[name="h5p-choice"]'));
+    function clear(){
+      feedback.replaceChildren();feedback.className="h5p-feedback";
+      radios.forEach(function(input){input.checked=false;input.disabled=false;input.closest(".h5p-option").classList.remove("is-selected","is-correct","is-wrong");});
+      check.hidden=false;retry.hidden=true;solution.hidden=true;
+    }
+    radios.forEach(function(input){input.addEventListener("change",function(){radios.forEach(function(r){r.closest(".h5p-option").classList.toggle("is-selected",r.checked);});});});
+    form.addEventListener("submit",function(event){
+      event.preventDefault();var selected=radios.find(function(input){return input.checked;});
+      if(!selected){feedback.className="h5p-feedback neutral";feedback.textContent="Bitte wähle zuerst eine Antwort aus.";return;}
+      feedback.replaceChildren();feedback.className="h5p-feedback "+(selected.dataset.correct==="true"?"good":"bad");
+      var message=document.createElement("p");message.textContent=selected.dataset.correct==="true"?"Richtig!":"Noch nicht richtig.";feedback.appendChild(message);
+      var template=selected.closest("label").querySelector(".h5p-answer-feedback");
+      if(template&&template.content.childNodes.length)feedback.appendChild(template.content.cloneNode(true));
+      renderMath(feedback);
+      if(selected.dataset.correct==="true"){
+        selected.closest("label").classList.add("is-correct");radios.forEach(function(r){r.disabled=true;});check.hidden=true;retry.hidden=true;solution.hidden=true;
+      }else{
+        selected.closest("label").classList.add("is-wrong");retry.hidden=false;solution.hidden=false;
+      }
+    });
+    retry.addEventListener("click",function(){clear();var first=radios.find(function(r){return !r.disabled;});if(first)first.focus();});
+    solution.addEventListener("click",function(){
+      var correct=radios.find(function(r){return r.dataset.correct==="true";});if(!correct)return;
+      feedback.replaceChildren();feedback.className="h5p-feedback neutral";
+      var p=document.createElement("p");p.textContent="Die richtige Antwort lautet:";feedback.appendChild(p);
+      var answer=correct.closest("label").querySelector(".h5p-answer-text").cloneNode(true);feedback.appendChild(answer);renderMath(feedback);
+    });
+    form.addEventListener("reset",function(){window.setTimeout(clear,0);});
+  });
+
+  var video=document.getElementById("worked-example-video");
+  if(video){
+    var cfg=document.getElementById("video-checkpoint-data");
+    var points=JSON.parse(cfg.textContent), next=0, active=null, allowedTime=0;
+    var panel=document.getElementById("video-checkpoint-panel"), title=document.getElementById("video-checkpoint-title"), prompt=document.getElementById("video-checkpoint-prompt"), input=document.getElementById("video-checkpoint-answer"), status=document.getElementById("video-checkpoint-status");
+    var checkButton=document.getElementById("video-checkpoint-check"), resumeButton=document.getElementById("video-checkpoint-resume"), skipButton=document.getElementById("video-checkpoint-skip");
+    function showPoint(point){active=point;video.pause();panel.hidden=false;title.textContent=point.label;prompt.textContent=point.prompt.replace(/\*[^*]+\*/g,"_____");input.value="";input.disabled=false;status.textContent="";checkButton.hidden=false;resumeButton.hidden=true;skipButton.hidden=true;panel.scrollIntoView({block:"nearest",behavior:"smooth"});input.focus({preventScroll:true});}
+    function finishPoint(){panel.hidden=true;active=null;input.blur();var play=video.play();if(play&&play.catch)play.catch(function(){status.textContent="Tippe auf Wiedergabe, um das Video fortzusetzen.";});}
+    video.addEventListener("timeupdate",function(){if(active)return;var point=points[next];if(point&&video.currentTime>=point.at){next++;allowedTime=video.currentTime;showPoint(point);return;}allowedTime=Math.max(allowedTime,video.currentTime);});
+    video.addEventListener("seeking",function(){if(active&&video.currentTime>active.at+.5){video.currentTime=active.at;return;}if(!active&&next<points.length&&video.currentTime>allowedTime+.8){video.currentTime=allowedTime;}});
+    checkButton.addEventListener("click",function(){
+      if(!active)return;var raw=input.value.trim().replace(/[−–]/g,"-").replace(",",".");
+      var value=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw)?Number(raw):NaN;
+      if(Number.isFinite(value)&&Math.abs(value-active.answer)<1e-9){status.textContent=active.correctFeedback||"Richtig. Fahre mit dem Video fort.";status.className="video-checkpoint-status feedback good";input.disabled=true;checkButton.hidden=true;resumeButton.hidden=false;skipButton.hidden=true;}
+      else{status.textContent=active.wrongFeedback||"Noch nicht richtig. Prüfe deinen Rechenschritt oder setze das Video fort.";status.className="video-checkpoint-status feedback bad";skipButton.hidden=false;input.focus();}
+    });
+    resumeButton.addEventListener("click",finishPoint);skipButton.addEventListener("click",finishPoint);
+  }
+})();
+</script>
+</body></html>

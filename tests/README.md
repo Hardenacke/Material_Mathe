@@ -27,5 +27,8 @@ möglich; dafür werden Playwright und ein lokal vorhandener Edge-Browser verwen
 `test_quadratische_funktionen.py` prüft die eindeutige Themenzuordnung der neuen
 Lernpfade, H5P-Downloads, das Hypervideo und die Veröffentlichungstrennung.
 `python tests/run_quadratische_funktionen_browser.py` prüft mit Playwright und Edge
-alle zwölf Lernpfade, Eingaben und Rückmeldungen, Regler, gespeicherten Arbeitsstand,
-lokales Öffnen und die drei Videos bei 320, 390, 768 und 1024 Pixeln.
+alle zwölf Lernpfade und ihre direkt spielbaren Lernchecks, Eingaben und
+Rückmeldungen, Regler, gespeicherten Arbeitsstand, lokales Öffnen, die drei
+Videos und die drei pausierenden Kontrollfragen im Beispielvideo bei
+320, 390, 768 und 1024 Pixeln. In der vorhandenen lokalen Umgebung kann
+`.local\manim-venv\Scripts\python.exe` als Python mit Playwright verwendet werden.

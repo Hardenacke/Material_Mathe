@@ -24,7 +24,7 @@ class Downloads(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
-        if tag == "a" and attrs.get("download", "").endswith(".h5p"):
+        if tag == "a" and "h5p-download" in attrs.get("class", "").split() and attrs.get("download", "").endswith(".h5p"):
             self.items.append((attrs["download"], attrs["href"]))
 
 

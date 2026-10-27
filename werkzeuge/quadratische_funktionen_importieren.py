@@ -47,6 +47,13 @@ def import_package(path: Path) -> None:
                 data = archive.read(entry)
                 if relative.name == "06_Normalform_in_Scheitelpunktform.html":
                     content = data.decode("utf-8")
+                    # Das neue Paket enthält die Videos direkt im Lernpfad. Sein
+                    # Kontrollfragen-Skript erwartet eine ID, die am Video fehlt.
+                    if 'id="video-checkpoint-data"' in content and 'id="worked-example-video"' not in content:
+                        video = '<video controls playsinline preload="metadata" aria-label="Beispielrechnung mit drei Zahlen-Kontrollfragen">'
+                        if content.count(video) != 1:
+                            raise ValueError("Das Beispielvideo im sechsten Lernpfad ist nicht eindeutig.")
+                        content = content.replace(video, video.replace("<video ", '<video id="worked-example-video" '))
                     marker = '<section class="callout reflection-card"'
                     addition = ('<section class="callout"><h2>Quadratische Ergänzung in drei Erklärvideos</h2>'
                                 '<p>Schau dir die Flächenidee, eine Beispielrechnung und eine weitere Übung an.</p>'
@@ -104,8 +111,9 @@ def import_package(path: Path) -> None:
                     "beschreibung": "Flächenidee, Beispielrechnung und Übung: von der Normalform zur Scheitelpunktform; mit H5P-Hypervideo zum Herunterladen."})
     registry = ROOT / "dokumentation/MATERIAL_ZUORDNUNG.json"
     data = json.loads(registry.read_text(encoding="utf-8")) if registry.exists() else {"schemaVersion": 1, "materialien": []}
-    current_urls = {entry["url"] for entry in entries}
-    data["materialien"] = [entry for entry in data["materialien"] if entry["url"] not in current_urls] + entries
+    replacements = {entry["url"]: entry for entry in entries}
+    data["materialien"] = [replacements.pop(entry["url"], entry) for entry in data["materialien"]]
+    data["materialien"].extend(replacements.values())
     write(registry, (json.dumps(data, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
 
     teacher_zip = TEACHER.parent / "Lehrkraftpaket_Quadratische_Funktionen.zip"

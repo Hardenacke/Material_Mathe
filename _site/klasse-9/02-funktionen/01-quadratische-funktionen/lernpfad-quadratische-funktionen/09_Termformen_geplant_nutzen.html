@@ -84,7 +84,51 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 
 @media print{.teacher-plan .table-wrap{overflow:visible}.teacher-plan table{min-width:0;font-size:8pt}.teacher-plan th,.teacher-plan td{padding:4px}.teacher-plan thead{display:table-header-group}.teacher-plan tr{break-inside:avoid}}
 
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}</style>
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+/* In-page H5P content fallback: usable without an LMS or external runtime. */
+.h5p-activity{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,26px);box-shadow:0 8px 25px rgba(23,42,58,.045)}
+.h5p-kicker{margin:0 0 6px!important;color:var(--blue-dark)!important;font-size:.82rem!important;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.h5p-activity h2{margin:0 0 12px;font-size:1.3rem;letter-spacing:-.02em}
+.h5p-question{margin:8px 0 16px;padding:14px 16px;border-radius:14px;background:#f6f9fc;color:#263e55;font-weight:700;line-height:1.65}
+.h5p-question p{margin:0}
+.h5p-options{display:grid;gap:10px;margin:0;padding:0;border:0}
+.h5p-options legend{font-weight:750;margin:0 0 9px;padding:0}
+.h5p-option{display:flex;align-items:flex-start;gap:12px;min-height:52px;padding:12px 14px;border:1.5px solid #cbd7e4;border-radius:14px;background:#fff;color:var(--ink);line-height:1.55;cursor:pointer;touch-action:manipulation}
+.h5p-option input{width:22px;height:22px;flex:0 0 22px;margin:2px 0 0;accent-color:var(--blue)}
+.h5p-option:focus-within{outline:3px solid #9bbcff;outline-offset:2px}
+.h5p-option.is-selected{border-color:var(--blue);background:#edf4ff}
+.h5p-option.is-correct{border-color:#69b78b;background:#effaf3}
+.h5p-option.is-wrong{border-color:#e59a90;background:#fff4f2}
+.h5p-answer-text p{margin:0}
+.h5p-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.h5p-feedback{min-height:28px;margin-top:12px;padding:10px 12px;border-radius:12px;line-height:1.55}
+.h5p-feedback:empty{padding:0;min-height:12px}
+.h5p-feedback.good{background:#effaf3;color:#087443}
+.h5p-feedback.bad{background:#fff4f2;color:#9b271e}
+.h5p-feedback.neutral{background:#f4f7fa;color:#405568}
+.h5p-feedback p{margin:4px 0}
+.h5p-note{margin:10px 0 0!important}
+.video-learning{margin:18px 0;padding:clamp(18px,3vw,26px);border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 8px 25px rgba(23,42,58,.045)}
+.video-learning h2{margin:0 0 8px;font-size:1.3rem}
+.video-learning>p{line-height:1.6;color:#405568}
+.video-learning details{margin-top:12px;background:#fbfcfe}
+.video-learning summary{min-height:44px;display:flex;align-items:center}
+.video-learning video{display:block;width:100%;height:auto;aspect-ratio:16/9;margin-top:10px;border-radius:14px;background:#101820}
+.video-checkpoint{margin-top:12px;padding:16px;border:2px solid #b8cffa;border-radius:16px;background:#f3f7ff}
+.video-checkpoint[hidden]{display:none!important}
+.video-checkpoint h3{margin:4px 0 8px}
+.video-checkpoint p{line-height:1.55}
+.video-checkpoint label{display:block;font-weight:750;margin:10px 0 6px}
+.video-checkpoint input{width:min(100%,240px);min-height:48px;padding:10px 12px;border:1.5px solid #aebdcd;border-radius:12px;font:inherit;background:#fff}
+.video-checkpoint input:focus{outline:3px solid #9bbcff;outline-offset:2px}
+.video-checkpoint .row{margin-top:10px}
+.video-checkpoint-status{min-height:24px;margin:10px 0 0!important;font-weight:750}
+.video-original-link{display:inline-flex;align-items:center;justify-content:center;min-height:46px;margin-top:12px;padding:10px 14px;border:1px solid #c8d7ec;border-radius:13px;background:#f3f7ff;color:#123fa5;font-weight:750;text-decoration:none}
+.video-original-link:focus-visible{outline:3px solid #9bbcff;outline-offset:2px}
+@media(max-width:600px){.h5p-option{padding:12px}.h5p-actions>*{flex:1 1 100%}.video-learning video{border-radius:10px}}
+@media print{.video-learning video{max-height:250px}.h5p-actions{display:none}}
+
+</style>
 <style data-sammlung-anpassung>
 /* Kleine Ansichten: Spalten dürfen schrumpfen, Tabellen bleiben innen scrollbar. */
 .columns > *, .split > *, .course-entry > *, .course-copy { min-width: 0; }
@@ -111,7 +155,92 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 <p>Du suchst die Nullstellen.</p><div class="choices" data-group="f2"><button class="choice" data-value="p"><span class="math" data-tex="a(x-x_1)(x-x_2)"></span></button><button class="choice" data-value="v"><span class="math" data-tex="a(x-h)^2+k"></span></button><button class="choice" data-value="n"><span class="math" data-tex="ax^2+bx+c"></span></button></div>
 <p>Du suchst den <span data-tex="y"></span>-Achsenabschnitt.</p><div class="choices" data-group="f3"><button class="choice" data-value="n"><span class="math" data-tex="ax^2+bx+c"></span></button><button class="choice" data-value="p"><span class="math" data-tex="a(x-x_1)(x-x_2)"></span></button><button class="choice" data-value="v"><span class="math" data-tex="a(x-h)^2+k"></span></button></div>
 <button class="primary" data-action="check09">Zuordnungen prüfen</button><p id="feedback" class="feedback" aria-live="polite"></p><div class="callout"><strong>Merke:</strong> Eine Termform ist nützlich, wenn ihre Parameter die gesuchte Eigenschaft direkt beschreiben.</div></main>
+<section class="h5p-activity card" aria-labelledby="h5p-title-09-Termformen-geplant-nutzen">
+<p class="h5p-kicker">Interaktion im Lernpfad · H5P-Aufgabeninhalt</p>
+<h2 id="h5p-title-09-Termformen-geplant-nutzen">Termform passend auswählen</h2>
+<div class="h5p-question"><p>Welche Termform zeigt die Nullstellen von <span class="math" data-tex="f(x)=x^2-2x-3"></span> am direktesten?</p></div>
+<form class="h5p-form" novalidate>
+<fieldset class="h5p-options"><legend>Wähle eine Antwort aus.</legend>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="0" data-correct="true" aria-describedby="h5p-feedback-09-Termformen-geplant-nutzen"><span class="h5p-answer-text"><span class="math" data-tex="f(x)=(x-3)(x+1)"></span></span><template class="h5p-answer-feedback">Richtig: Die Nullstellen lassen sich direkt aus den Faktoren ablesen.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="1" data-correct="false" aria-describedby="h5p-feedback-09-Termformen-geplant-nutzen"><span class="h5p-answer-text"><span class="math" data-tex="f(x)=x^2-2x-3"></span></span><template class="h5p-answer-feedback">Die Normalform zeigt besonders direkt den y-Achsenabschnitt.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="2" data-correct="false" aria-describedby="h5p-feedback-09-Termformen-geplant-nutzen"><span class="h5p-answer-text"><span class="math" data-tex="f(x)=(x-1)^2-4"></span></span><template class="h5p-answer-feedback">Die Scheitelpunktform zeigt besonders direkt den Scheitelpunkt.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="3" data-correct="false" aria-describedby="h5p-feedback-09-Termformen-geplant-nutzen"><span class="h5p-answer-text"><span class="math" data-tex="f(x)=2x-3"></span></span><template class="h5p-answer-feedback">Diese lineare Funktion ist nicht dieselbe Zuordnung.</template></label>
+</fieldset>
+<div class="h5p-actions">
+<button class="primary" type="submit">Antwort prüfen</button>
+<button class="secondary" type="button" data-h5p-retry hidden>Noch einmal versuchen</button>
+<button class="quiet" type="button" data-h5p-solution hidden>Lösung anzeigen</button>
+</div>
+<div class="h5p-feedback" id="h5p-feedback-09-Termformen-geplant-nutzen" role="status" aria-live="polite"></div>
+</form>
+<p class="hint h5p-note">Dieser lokal spielbare Check verwendet dieselbe Frage, dieselben Antwortmöglichkeiten und Rückmeldungen wie die zugehörige H5P-Datei. Das Originalpaket für den Import in ein H5P-Lernsystem liegt am Seitenende.</p>
+</section>
+
 <section class="callout reflection-card" aria-labelledby="reflection-title"><h2 id="reflection-title">Begründung sichern</h2><p>Nenne für jede gesuchte Eigenschaft die passende Termform. Erkläre jeweils, welche Information du direkt an den Parametern ablesen kannst.</p><p class="hint">Schreibe zwei bis drei Sätze ins Heft. Nenne mindestens einen Rechenschritt und deute das Ergebnis. Die interaktive Rückmeldung ersetzt keine schriftliche Begründung.</p></section>
-<section class="h5p-panel"><div><h2>H5P-Vertiefung</h2><p>Die Zusatzaufgabe lässt sich in ein H5P-fähiges Lernsystem importieren.</p></div><a class="h5p-download" href="data:application/zip;base64,UEsDBBQAAAAIAHu1Wl1vLtNi5AAAADgCAAAIAAAAaDVwLmpzb26Vkc1KQzEQRvd9ipB1EYrWhTtRREVFoboRF7k3X3tHksklP5RS+ja+iS9mkluwCJV2M4tvTuYkmfVICBkpGsgLIWfwdu68Fb0KAayFSmH5/dUZsBwX0iheJLWosMaQWUX8QI1XflXi2+nzyWMyka46R+2W6T2MUxr6Gn2eC24JIdPvuSnEutY6qu2I8aRsNdw4jpdLBGeHMVvm0/k3+ECOM3T22yDebUxrvhn/ayiXvXepgXm926uY7FOcHqp4SQixnDlacfAr/n75UZbJ+aDJ9aPuC7aBnq36nSVJmvviK8xo8wNQSwMEFAAAAAgAe7VaXfZEafvoAwAARQsAABQAAABjb250ZW50L2NvbnRlbnQuanNvbrVW227bOBB971cQeoqxTVt398noBUrToAG6QZDsokCaFqDEkcSaIl1eYsdB/qbf0Ke8+cc6pG70JVls0b7EEedw5sycmZFuHhGS1MA4TSbkBh/wkXFDMwHHNS3hQqmayxKNBRUGEHD72F/56sBYriQakhezVx9A5BWQf0DXhdI1WQIvLWEcyIkTwlgQAiS5UpJcXu4Ve4vRy8Xn5/vPF/t/Xl6OCK0RqmFq0SfI1y+ezl4lIQqVZg7aYJCPgVpDEA0WFtaH7rztoafR3uKP8Qj9hbsBliutIfdIqx30x5bPTCrZEQDLaD7tM2/uVMqAjGzJGc8ry8sJOdzIR1CDUGLQ3iZAqDOE4dkRnVql8R9fSQQ96UlhCKnsm60oSWu/Db+3jx9OOCrfrnSDWD+bb0gTVaQi0jIDoyRDMbpMfZbX+2le4W2ambyS3NpfnSbqOh5hqn/9rjzPsW05yjlzcmr/K9018K9O9TeqaYAILoFqIEeeOs4t4cYS6RvbT6kBkQG5cEoz6WT5v1PDv5/CwKor0FSILW47DB9bFxH5QqsaLc+i6FbhwfhZfFREPE6cXULYM2eru3xag2DIH6VykpGZXt0VaAXMnRxAiY+ShfTW2H/ql9q/xwNhlDqfpmH/HDhrm02XSjtX2raeZVumxLis5nYLnGHRWISq1PxcCefLP6Der74b5ESo9I03oK2+TkvKI+SJwjWDueBcEqymcUhxgGNTvKcZCI98x+UcuNnyabCl4IDqHniI7shbXUImuZmQiXR1WNITqyxGOfXNshYjvaJc+JUWh0EyxequzKjukJ1Ea/BYoR13NFC2tnVjeNihHXKulSybanvgEU6Hf/m04nSodnwGXLvGt4CoixPsjdd7mJdOaaOEsODXegnz1bdK4BEWbf3uiR+Rh643g3afE6mO5cyFZfDBW4EsHeprSWjc1lU3kwkdj6/7aBsN+SS8orrDOdeMYHGIbjInChdaWCbYSDXVUw4bfs+jFt3VnGvgM8AeDSRcUWJHEdASnB16M8xZM1kZVPSKK6eHAfNvDQGdk+H93Bo6GqYfgC1IqMIus72ehY4z+OWCvddpFZ5OFZcbOzXRVDJVp/3HRmyLp9acwVeHrwPT6RXFzJUsuK4Dp0NOhSo3HLWAkPBOAHVWdcLG5zP8yjgFnYO0+EEWr8OGnB/qkFVPvS97TGqofIWT1ozEPfssUywI+/fqOzYOfpQR5to1mjozp5UgX8Au+3uv+5mjMgfRr5cLp/0QJ+sV6M2nbdRNul1PbNF9cAN2pFEsEd4IHdVlw6LEufScUWN2P+U0y3BrRG43Sbc5eV8t9Ue3PwBQSwECFAMUAAAACAB7tVpdby7TYuQAAAA4AgAACAAAAAAAAAAAAAAAgAEAAAAAaDVwLmpzb25QSwECFAMUAAAACAB7tVpd9kRp++gDAABFCwAAFAAAAAAAAAAAAAAAgAEKAQAAY29udGVudC9jb250ZW50Lmpzb25QSwUGAAAAAAIAAgB4AAAAJAUAAAAA" download="09_Termformen_geplant_nutzen.h5p">H5P-Aktivität herunterladen</a></section>
-<div class="page-controls"><a href="08_Quadratische_Gleichungen_loesen.html">← Vorheriger Lernpfad</a><label class="mark-done"><input id="mark-done" type="checkbox"><span>Als bearbeitet markieren</span></label><a href="10_Brueckenbogen_modellieren.html">Nächster Lernpfad →</a></div><p class="footer-note">Die Markierung wird, sofern der Browser lokalen Speicher erlaubt, auf diesem Gerät behalten. Sie zeigt den Arbeitsstand, keine Leistungsbewertung.</p></div></div><noscript>Diese interaktive Seite benötigt JavaScript. Die Dateien sind lokal enthalten.</noscript><script src="../../../../material-navigation.js" defer data-sammlung-navigation></script>
+<section class="h5p-panel"><div><h2>H5P-Originaldatei</h2><p>Das importierbare Paket mit derselben Lerncheck-Aufgabe steht hier zum Download bereit.</p></div><a class="h5p-download" href="data:application/zip;base64,UEsDBBQAAAAIAHu1Wl1vLtNi5AAAADgCAAAIAAAAaDVwLmpzb26Vkc1KQzEQRvd9ipB1EYrWhTtRREVFoboRF7k3X3tHksklP5RS+ja+iS9mkluwCJV2M4tvTuYkmfVICBkpGsgLIWfwdu68Fb0KAayFSmH5/dUZsBwX0iheJLWosMaQWUX8QI1XflXi2+nzyWMyka46R+2W6T2MUxr6Gn2eC24JIdPvuSnEutY6qu2I8aRsNdw4jpdLBGeHMVvm0/k3+ECOM3T22yDebUxrvhn/ayiXvXepgXm926uY7FOcHqp4SQixnDlacfAr/n75UZbJ+aDJ9aPuC7aBnq36nSVJmvviK8xo8wNQSwMEFAAAAAgAe7VaXfZEafvoAwAARQsAABQAAABjb250ZW50L2NvbnRlbnQuanNvbrVW227bOBB971cQeoqxTVt398noBUrToAG6QZDsokCaFqDEkcSaIl1eYsdB/qbf0Ke8+cc6pG70JVls0b7EEedw5sycmZFuHhGS1MA4TSbkBh/wkXFDMwHHNS3hQqmayxKNBRUGEHD72F/56sBYriQakhezVx9A5BWQf0DXhdI1WQIvLWEcyIkTwlgQAiS5UpJcXu4Ve4vRy8Xn5/vPF/t/Xl6OCK0RqmFq0SfI1y+ezl4lIQqVZg7aYJCPgVpDEA0WFtaH7rztoafR3uKP8Qj9hbsBliutIfdIqx30x5bPTCrZEQDLaD7tM2/uVMqAjGzJGc8ry8sJOdzIR1CDUGLQ3iZAqDOE4dkRnVql8R9fSQQ96UlhCKnsm60oSWu/Db+3jx9OOCrfrnSDWD+bb0gTVaQi0jIDoyRDMbpMfZbX+2le4W2ambyS3NpfnSbqOh5hqn/9rjzPsW05yjlzcmr/K9018K9O9TeqaYAILoFqIEeeOs4t4cYS6RvbT6kBkQG5cEoz6WT5v1PDv5/CwKor0FSILW47DB9bFxH5QqsaLc+i6FbhwfhZfFREPE6cXULYM2eru3xag2DIH6VykpGZXt0VaAXMnRxAiY+ShfTW2H/ql9q/xwNhlDqfpmH/HDhrm02XSjtX2raeZVumxLis5nYLnGHRWISq1PxcCefLP6Der74b5ESo9I03oK2+TkvKI+SJwjWDueBcEqymcUhxgGNTvKcZCI98x+UcuNnyabCl4IDqHniI7shbXUImuZmQiXR1WNITqyxGOfXNshYjvaJc+JUWh0EyxequzKjukJ1Ea/BYoR13NFC2tnVjeNihHXKulSybanvgEU6Hf/m04nSodnwGXLvGt4CoixPsjdd7mJdOaaOEsODXegnz1bdK4BEWbf3uiR+Rh643g3afE6mO5cyFZfDBW4EsHeprSWjc1lU3kwkdj6/7aBsN+SS8orrDOdeMYHGIbjInChdaWCbYSDXVUw4bfs+jFt3VnGvgM8AeDSRcUWJHEdASnB16M8xZM1kZVPSKK6eHAfNvDQGdk+H93Bo6GqYfgC1IqMIus72ehY4z+OWCvddpFZ5OFZcbOzXRVDJVp/3HRmyLp9acwVeHrwPT6RXFzJUsuK4Dp0NOhSo3HLWAkPBOAHVWdcLG5zP8yjgFnYO0+EEWr8OGnB/qkFVPvS97TGqofIWT1ozEPfssUywI+/fqOzYOfpQR5to1mjozp5UgX8Au+3uv+5mjMgfRr5cLp/0QJ+sV6M2nbdRNul1PbNF9cAN2pFEsEd4IHdVlw6LEufScUWN2P+U0y3BrRG43Sbc5eV8t9Ue3PwBQSwECFAMUAAAACAB7tVpdby7TYuQAAAA4AgAACAAAAAAAAAAAAAAAgAEAAAAAaDVwLmpzb25QSwECFAMUAAAACAB7tVpd9kRp++gDAABFCwAAFAAAAAAAAAAAAAAAgAEKAQAAY29udGVudC9jb250ZW50Lmpzb25QSwUGAAAAAAIAAgB4AAAAJAUAAAAA" download="09_Termformen_geplant_nutzen.h5p">H5P-Paket für ein Lernsystem laden</a></section>
+<div class="page-controls"><a href="08_Quadratische_Gleichungen_loesen.html">← Vorheriger Lernpfad</a><label class="mark-done"><input id="mark-done" type="checkbox"><span>Als bearbeitet markieren</span></label><a href="10_Brueckenbogen_modellieren.html">Nächster Lernpfad →</a></div><p class="footer-note">Die Markierung wird, sofern der Browser lokalen Speicher erlaubt, auf diesem Gerät behalten. Sie zeigt den Arbeitsstand, keine Leistungsbewertung.</p></div></div><noscript>Diese interaktive Seite benötigt JavaScript. Die Dateien sind lokal enthalten.</noscript><script>
+(function(){
+  "use strict";
+  function renderMath(root){
+    if(!window.katex)return;
+    root.querySelectorAll("[data-tex]").forEach(function(el){
+      if(el.querySelector(".katex"))return;
+      try{window.katex.render(el.dataset.tex,el,{throwOnError:false,strict:"ignore",output:"htmlAndMathml",displayMode:el.dataset.display==="true"||el.classList.contains("display")});}catch(_e){}
+    });
+  }
+  document.querySelectorAll(".h5p-activity").forEach(function(activity){
+    var form=activity.querySelector(".h5p-form"), fieldset=activity.querySelector("fieldset"), feedback=activity.querySelector(".h5p-feedback");
+    var check=form.querySelector('button[type="submit"]'), retry=form.querySelector("[data-h5p-retry]"), solution=form.querySelector("[data-h5p-solution]");
+    var radios=Array.from(form.querySelectorAll('input[name="h5p-choice"]'));
+    function clear(){
+      feedback.replaceChildren();feedback.className="h5p-feedback";
+      radios.forEach(function(input){input.checked=false;input.disabled=false;input.closest(".h5p-option").classList.remove("is-selected","is-correct","is-wrong");});
+      check.hidden=false;retry.hidden=true;solution.hidden=true;
+    }
+    radios.forEach(function(input){input.addEventListener("change",function(){radios.forEach(function(r){r.closest(".h5p-option").classList.toggle("is-selected",r.checked);});});});
+    form.addEventListener("submit",function(event){
+      event.preventDefault();var selected=radios.find(function(input){return input.checked;});
+      if(!selected){feedback.className="h5p-feedback neutral";feedback.textContent="Bitte wähle zuerst eine Antwort aus.";return;}
+      feedback.replaceChildren();feedback.className="h5p-feedback "+(selected.dataset.correct==="true"?"good":"bad");
+      var message=document.createElement("p");message.textContent=selected.dataset.correct==="true"?"Richtig!":"Noch nicht richtig.";feedback.appendChild(message);
+      var template=selected.closest("label").querySelector(".h5p-answer-feedback");
+      if(template&&template.content.childNodes.length)feedback.appendChild(template.content.cloneNode(true));
+      renderMath(feedback);
+      if(selected.dataset.correct==="true"){
+        selected.closest("label").classList.add("is-correct");radios.forEach(function(r){r.disabled=true;});check.hidden=true;retry.hidden=true;solution.hidden=true;
+      }else{
+        selected.closest("label").classList.add("is-wrong");retry.hidden=false;solution.hidden=false;
+      }
+    });
+    retry.addEventListener("click",function(){clear();var first=radios.find(function(r){return !r.disabled;});if(first)first.focus();});
+    solution.addEventListener("click",function(){
+      var correct=radios.find(function(r){return r.dataset.correct==="true";});if(!correct)return;
+      feedback.replaceChildren();feedback.className="h5p-feedback neutral";
+      var p=document.createElement("p");p.textContent="Die richtige Antwort lautet:";feedback.appendChild(p);
+      var answer=correct.closest("label").querySelector(".h5p-answer-text").cloneNode(true);feedback.appendChild(answer);renderMath(feedback);
+    });
+    form.addEventListener("reset",function(){window.setTimeout(clear,0);});
+  });
+
+  var video=document.getElementById("worked-example-video");
+  if(video){
+    var cfg=document.getElementById("video-checkpoint-data");
+    var points=JSON.parse(cfg.textContent), next=0, active=null, allowedTime=0;
+    var panel=document.getElementById("video-checkpoint-panel"), title=document.getElementById("video-checkpoint-title"), prompt=document.getElementById("video-checkpoint-prompt"), input=document.getElementById("video-checkpoint-answer"), status=document.getElementById("video-checkpoint-status");
+    var checkButton=document.getElementById("video-checkpoint-check"), resumeButton=document.getElementById("video-checkpoint-resume"), skipButton=document.getElementById("video-checkpoint-skip");
+    function showPoint(point){active=point;video.pause();panel.hidden=false;title.textContent=point.label;prompt.textContent=point.prompt.replace(/\*[^*]+\*/g,"_____");input.value="";input.disabled=false;status.textContent="";checkButton.hidden=false;resumeButton.hidden=true;skipButton.hidden=true;panel.scrollIntoView({block:"nearest",behavior:"smooth"});input.focus({preventScroll:true});}
+    function finishPoint(){panel.hidden=true;active=null;input.blur();var play=video.play();if(play&&play.catch)play.catch(function(){status.textContent="Tippe auf Wiedergabe, um das Video fortzusetzen.";});}
+    video.addEventListener("timeupdate",function(){if(active)return;var point=points[next];if(point&&video.currentTime>=point.at){next++;allowedTime=video.currentTime;showPoint(point);return;}allowedTime=Math.max(allowedTime,video.currentTime);});
+    video.addEventListener("seeking",function(){if(active&&video.currentTime>active.at+.5){video.currentTime=active.at;return;}if(!active&&next<points.length&&video.currentTime>allowedTime+.8){video.currentTime=allowedTime;}});
+    checkButton.addEventListener("click",function(){
+      if(!active)return;var raw=input.value.trim().replace(/[−–]/g,"-").replace(",",".");
+      var value=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw)?Number(raw):NaN;
+      if(Number.isFinite(value)&&Math.abs(value-active.answer)<1e-9){status.textContent=active.correctFeedback||"Richtig. Fahre mit dem Video fort.";status.className="video-checkpoint-status feedback good";input.disabled=true;checkButton.hidden=true;resumeButton.hidden=false;skipButton.hidden=true;}
+      else{status.textContent=active.wrongFeedback||"Noch nicht richtig. Prüfe deinen Rechenschritt oder setze das Video fort.";status.className="video-checkpoint-status feedback bad";skipButton.hidden=false;input.focus();}
+    });
+    resumeButton.addEventListener("click",finishPoint);skipButton.addEventListener("click",finishPoint);
+  }
+})();
+</script>
+<script src="../../../../material-navigation.js" defer data-sammlung-navigation></script>
 </body></html>

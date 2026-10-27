@@ -84,7 +84,51 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 
 @media print{.teacher-plan .table-wrap{overflow:visible}.teacher-plan table{min-width:0;font-size:8pt}.teacher-plan th,.teacher-plan td{padding:4px}.teacher-plan thead{display:table-header-group}.teacher-plan tr{break-inside:avoid}}
 
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}</style>
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+/* In-page H5P content fallback: usable without an LMS or external runtime. */
+.h5p-activity{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,26px);box-shadow:0 8px 25px rgba(23,42,58,.045)}
+.h5p-kicker{margin:0 0 6px!important;color:var(--blue-dark)!important;font-size:.82rem!important;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.h5p-activity h2{margin:0 0 12px;font-size:1.3rem;letter-spacing:-.02em}
+.h5p-question{margin:8px 0 16px;padding:14px 16px;border-radius:14px;background:#f6f9fc;color:#263e55;font-weight:700;line-height:1.65}
+.h5p-question p{margin:0}
+.h5p-options{display:grid;gap:10px;margin:0;padding:0;border:0}
+.h5p-options legend{font-weight:750;margin:0 0 9px;padding:0}
+.h5p-option{display:flex;align-items:flex-start;gap:12px;min-height:52px;padding:12px 14px;border:1.5px solid #cbd7e4;border-radius:14px;background:#fff;color:var(--ink);line-height:1.55;cursor:pointer;touch-action:manipulation}
+.h5p-option input{width:22px;height:22px;flex:0 0 22px;margin:2px 0 0;accent-color:var(--blue)}
+.h5p-option:focus-within{outline:3px solid #9bbcff;outline-offset:2px}
+.h5p-option.is-selected{border-color:var(--blue);background:#edf4ff}
+.h5p-option.is-correct{border-color:#69b78b;background:#effaf3}
+.h5p-option.is-wrong{border-color:#e59a90;background:#fff4f2}
+.h5p-answer-text p{margin:0}
+.h5p-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.h5p-feedback{min-height:28px;margin-top:12px;padding:10px 12px;border-radius:12px;line-height:1.55}
+.h5p-feedback:empty{padding:0;min-height:12px}
+.h5p-feedback.good{background:#effaf3;color:#087443}
+.h5p-feedback.bad{background:#fff4f2;color:#9b271e}
+.h5p-feedback.neutral{background:#f4f7fa;color:#405568}
+.h5p-feedback p{margin:4px 0}
+.h5p-note{margin:10px 0 0!important}
+.video-learning{margin:18px 0;padding:clamp(18px,3vw,26px);border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 8px 25px rgba(23,42,58,.045)}
+.video-learning h2{margin:0 0 8px;font-size:1.3rem}
+.video-learning>p{line-height:1.6;color:#405568}
+.video-learning details{margin-top:12px;background:#fbfcfe}
+.video-learning summary{min-height:44px;display:flex;align-items:center}
+.video-learning video{display:block;width:100%;height:auto;aspect-ratio:16/9;margin-top:10px;border-radius:14px;background:#101820}
+.video-checkpoint{margin-top:12px;padding:16px;border:2px solid #b8cffa;border-radius:16px;background:#f3f7ff}
+.video-checkpoint[hidden]{display:none!important}
+.video-checkpoint h3{margin:4px 0 8px}
+.video-checkpoint p{line-height:1.55}
+.video-checkpoint label{display:block;font-weight:750;margin:10px 0 6px}
+.video-checkpoint input{width:min(100%,240px);min-height:48px;padding:10px 12px;border:1.5px solid #aebdcd;border-radius:12px;font:inherit;background:#fff}
+.video-checkpoint input:focus{outline:3px solid #9bbcff;outline-offset:2px}
+.video-checkpoint .row{margin-top:10px}
+.video-checkpoint-status{min-height:24px;margin:10px 0 0!important;font-weight:750}
+.video-original-link{display:inline-flex;align-items:center;justify-content:center;min-height:46px;margin-top:12px;padding:10px 14px;border:1px solid #c8d7ec;border-radius:13px;background:#f3f7ff;color:#123fa5;font-weight:750;text-decoration:none}
+.video-original-link:focus-visible{outline:3px solid #9bbcff;outline-offset:2px}
+@media(max-width:600px){.h5p-option{padding:12px}.h5p-actions>*{flex:1 1 100%}.video-learning video{border-radius:10px}}
+@media print{.video-learning video{max-height:250px}.h5p-actions{display:none}}
+
+</style>
 <style data-sammlung-anpassung>
 /* Kleine Ansichten: Spalten dürfen schrumpfen, Tabellen bleiben innen scrollbar. */
 .columns > *, .split > *, .course-entry > *, .course-copy { min-width: 0; }
@@ -113,7 +157,92 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 <p>Öffnungsrichtung?</p><div class="choices" data-group="dir"><button class="choice" data-value="up">Nach oben</button><button class="choice" data-value="down">Nach unten</button><button class="choice" data-value="flat">Waagerecht</button></div>
 <p>Wenn eine Parabel entsteht: Wie ist ihre Breite im Vergleich zur Normalparabel?</p><div class="choices" data-group="width"><button class="choice" data-value="narrow">Schmaler</button><button class="choice" data-value="same">Gleich breit</button><button class="choice" data-value="wide">Breiter</button></div>
 <button class="primary" data-action="check03">Beobachtung prüfen</button><p id="feedback" class="feedback" aria-live="polite"></p></div></div></main>
+<section class="h5p-activity card" aria-labelledby="h5p-title-03-Parameterlabor-Streckung-Spiegelung">
+<p class="h5p-kicker">Interaktion im Lernpfad · H5P-Aufgabeninhalt</p>
+<h2 id="h5p-title-03-Parameterlabor-Streckung-Spiegelung">Öffnung und Breite verändern</h2>
+<div class="h5p-question"><p>Wie verändert <span class="math" data-tex="a=-2"></span> den Graphen von <span class="math" data-tex="f(x)=ax^2"></span>?</p></div>
+<form class="h5p-form" novalidate>
+<fieldset class="h5p-options"><legend>Wähle eine Antwort aus.</legend>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="0" data-correct="true" aria-describedby="h5p-feedback-03-Parameterlabor-Streckung-Spiegelung"><span class="h5p-answer-text">Er ist nach unten geöffnet und schmaler als die Normalparabel.</span><template class="h5p-answer-feedback">Richtig: Das negative Vorzeichen spiegelt nach unten; der Betrag größer als eins macht den Graphen schmaler.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="1" data-correct="false" aria-describedby="h5p-feedback-03-Parameterlabor-Streckung-Spiegelung"><span class="h5p-answer-text">Er ist nach oben geöffnet und schmaler als die Normalparabel.</span><template class="h5p-answer-feedback">Das Vorzeichen von <span class="math" data-tex="a"></span> entscheidet über die Öffnungsrichtung.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="2" data-correct="false" aria-describedby="h5p-feedback-03-Parameterlabor-Streckung-Spiegelung"><span class="h5p-answer-text">Er ist nach unten geöffnet und breiter als die Normalparabel.</span><template class="h5p-answer-feedback">Vergleiche den Betrag von <span class="math" data-tex="a"></span> mit <span class="math" data-tex="1"></span>.</template></label>
+<label class="h5p-option"><input type="radio" name="h5p-choice" value="3" data-correct="false" aria-describedby="h5p-feedback-03-Parameterlabor-Streckung-Spiegelung"><span class="h5p-answer-text">Er ist eine Gerade.</span><template class="h5p-answer-feedback">Der quadratische Term bleibt erhalten.</template></label>
+</fieldset>
+<div class="h5p-actions">
+<button class="primary" type="submit">Antwort prüfen</button>
+<button class="secondary" type="button" data-h5p-retry hidden>Noch einmal versuchen</button>
+<button class="quiet" type="button" data-h5p-solution hidden>Lösung anzeigen</button>
+</div>
+<div class="h5p-feedback" id="h5p-feedback-03-Parameterlabor-Streckung-Spiegelung" role="status" aria-live="polite"></div>
+</form>
+<p class="hint h5p-note">Dieser lokal spielbare Check verwendet dieselbe Frage, dieselben Antwortmöglichkeiten und Rückmeldungen wie die zugehörige H5P-Datei. Das Originalpaket für den Import in ein H5P-Lernsystem liegt am Seitenende.</p>
+</section>
+
 <section class="callout reflection-card" aria-labelledby="reflection-title"><h2 id="reflection-title">Begründung sichern</h2><p>Erkläre getrennt, was das Vorzeichen und was der Betrag von <span data-tex="a"></span> am Graphen verändern. Nenne ein Beispiel aus deinem Reglerexperiment.</p><p class="hint">Schreibe zwei bis drei Sätze ins Heft. Nenne mindestens einen Rechenschritt und deute das Ergebnis. Die interaktive Rückmeldung ersetzt keine schriftliche Begründung.</p></section>
-<section class="h5p-panel"><div><h2>H5P-Vertiefung</h2><p>Die Zusatzaufgabe lässt sich in ein H5P-fähiges Lernsystem importieren.</p></div><a class="h5p-download" href="data:application/zip;base64,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" download="03_Parameterlabor_Streckung_Spiegelung.h5p">H5P-Aktivität herunterladen</a></section>
-<div class="page-controls"><a href="02_Normalparabel_Entdecken.html">← Vorheriger Lernpfad</a><label class="mark-done"><input id="mark-done" type="checkbox"><span>Als bearbeitet markieren</span></label><a href="04_Scheitelpunktform_verschieben.html">Nächster Lernpfad →</a></div><p class="footer-note">Die Markierung wird, sofern der Browser lokalen Speicher erlaubt, auf diesem Gerät behalten. Sie zeigt den Arbeitsstand, keine Leistungsbewertung.</p></div></div><noscript>Diese interaktive Seite benötigt JavaScript. Die Dateien sind lokal enthalten.</noscript><script src="../../../../material-navigation.js" defer data-sammlung-navigation></script>
+<section class="h5p-panel"><div><h2>H5P-Originaldatei</h2><p>Das importierbare Paket mit derselben Lerncheck-Aufgabe steht hier zum Download bereit.</p></div><a class="h5p-download" href="data:application/zip;base64,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" download="03_Parameterlabor_Streckung_Spiegelung.h5p">H5P-Paket für ein Lernsystem laden</a></section>
+<div class="page-controls"><a href="02_Normalparabel_Entdecken.html">← Vorheriger Lernpfad</a><label class="mark-done"><input id="mark-done" type="checkbox"><span>Als bearbeitet markieren</span></label><a href="04_Scheitelpunktform_verschieben.html">Nächster Lernpfad →</a></div><p class="footer-note">Die Markierung wird, sofern der Browser lokalen Speicher erlaubt, auf diesem Gerät behalten. Sie zeigt den Arbeitsstand, keine Leistungsbewertung.</p></div></div><noscript>Diese interaktive Seite benötigt JavaScript. Die Dateien sind lokal enthalten.</noscript><script>
+(function(){
+  "use strict";
+  function renderMath(root){
+    if(!window.katex)return;
+    root.querySelectorAll("[data-tex]").forEach(function(el){
+      if(el.querySelector(".katex"))return;
+      try{window.katex.render(el.dataset.tex,el,{throwOnError:false,strict:"ignore",output:"htmlAndMathml",displayMode:el.dataset.display==="true"||el.classList.contains("display")});}catch(_e){}
+    });
+  }
+  document.querySelectorAll(".h5p-activity").forEach(function(activity){
+    var form=activity.querySelector(".h5p-form"), fieldset=activity.querySelector("fieldset"), feedback=activity.querySelector(".h5p-feedback");
+    var check=form.querySelector('button[type="submit"]'), retry=form.querySelector("[data-h5p-retry]"), solution=form.querySelector("[data-h5p-solution]");
+    var radios=Array.from(form.querySelectorAll('input[name="h5p-choice"]'));
+    function clear(){
+      feedback.replaceChildren();feedback.className="h5p-feedback";
+      radios.forEach(function(input){input.checked=false;input.disabled=false;input.closest(".h5p-option").classList.remove("is-selected","is-correct","is-wrong");});
+      check.hidden=false;retry.hidden=true;solution.hidden=true;
+    }
+    radios.forEach(function(input){input.addEventListener("change",function(){radios.forEach(function(r){r.closest(".h5p-option").classList.toggle("is-selected",r.checked);});});});
+    form.addEventListener("submit",function(event){
+      event.preventDefault();var selected=radios.find(function(input){return input.checked;});
+      if(!selected){feedback.className="h5p-feedback neutral";feedback.textContent="Bitte wähle zuerst eine Antwort aus.";return;}
+      feedback.replaceChildren();feedback.className="h5p-feedback "+(selected.dataset.correct==="true"?"good":"bad");
+      var message=document.createElement("p");message.textContent=selected.dataset.correct==="true"?"Richtig!":"Noch nicht richtig.";feedback.appendChild(message);
+      var template=selected.closest("label").querySelector(".h5p-answer-feedback");
+      if(template&&template.content.childNodes.length)feedback.appendChild(template.content.cloneNode(true));
+      renderMath(feedback);
+      if(selected.dataset.correct==="true"){
+        selected.closest("label").classList.add("is-correct");radios.forEach(function(r){r.disabled=true;});check.hidden=true;retry.hidden=true;solution.hidden=true;
+      }else{
+        selected.closest("label").classList.add("is-wrong");retry.hidden=false;solution.hidden=false;
+      }
+    });
+    retry.addEventListener("click",function(){clear();var first=radios.find(function(r){return !r.disabled;});if(first)first.focus();});
+    solution.addEventListener("click",function(){
+      var correct=radios.find(function(r){return r.dataset.correct==="true";});if(!correct)return;
+      feedback.replaceChildren();feedback.className="h5p-feedback neutral";
+      var p=document.createElement("p");p.textContent="Die richtige Antwort lautet:";feedback.appendChild(p);
+      var answer=correct.closest("label").querySelector(".h5p-answer-text").cloneNode(true);feedback.appendChild(answer);renderMath(feedback);
+    });
+    form.addEventListener("reset",function(){window.setTimeout(clear,0);});
+  });
+
+  var video=document.getElementById("worked-example-video");
+  if(video){
+    var cfg=document.getElementById("video-checkpoint-data");
+    var points=JSON.parse(cfg.textContent), next=0, active=null, allowedTime=0;
+    var panel=document.getElementById("video-checkpoint-panel"), title=document.getElementById("video-checkpoint-title"), prompt=document.getElementById("video-checkpoint-prompt"), input=document.getElementById("video-checkpoint-answer"), status=document.getElementById("video-checkpoint-status");
+    var checkButton=document.getElementById("video-checkpoint-check"), resumeButton=document.getElementById("video-checkpoint-resume"), skipButton=document.getElementById("video-checkpoint-skip");
+    function showPoint(point){active=point;video.pause();panel.hidden=false;title.textContent=point.label;prompt.textContent=point.prompt.replace(/\*[^*]+\*/g,"_____");input.value="";input.disabled=false;status.textContent="";checkButton.hidden=false;resumeButton.hidden=true;skipButton.hidden=true;panel.scrollIntoView({block:"nearest",behavior:"smooth"});input.focus({preventScroll:true});}
+    function finishPoint(){panel.hidden=true;active=null;input.blur();var play=video.play();if(play&&play.catch)play.catch(function(){status.textContent="Tippe auf Wiedergabe, um das Video fortzusetzen.";});}
+    video.addEventListener("timeupdate",function(){if(active)return;var point=points[next];if(point&&video.currentTime>=point.at){next++;allowedTime=video.currentTime;showPoint(point);return;}allowedTime=Math.max(allowedTime,video.currentTime);});
+    video.addEventListener("seeking",function(){if(active&&video.currentTime>active.at+.5){video.currentTime=active.at;return;}if(!active&&next<points.length&&video.currentTime>allowedTime+.8){video.currentTime=allowedTime;}});
+    checkButton.addEventListener("click",function(){
+      if(!active)return;var raw=input.value.trim().replace(/[−–]/g,"-").replace(",",".");
+      var value=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw)?Number(raw):NaN;
+      if(Number.isFinite(value)&&Math.abs(value-active.answer)<1e-9){status.textContent=active.correctFeedback||"Richtig. Fahre mit dem Video fort.";status.className="video-checkpoint-status feedback good";input.disabled=true;checkButton.hidden=true;resumeButton.hidden=false;skipButton.hidden=true;}
+      else{status.textContent=active.wrongFeedback||"Noch nicht richtig. Prüfe deinen Rechenschritt oder setze das Video fort.";status.className="video-checkpoint-status feedback bad";skipButton.hidden=false;input.focus();}
+    });
+    resumeButton.addEventListener("click",finishPoint);skipButton.addEventListener("click",finishPoint);
+  }
+})();
+</script>
+<script src="../../../../material-navigation.js" defer data-sammlung-navigation></script>
 </body></html>

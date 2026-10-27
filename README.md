@@ -10,7 +10,7 @@ Dieses Repository bündelt die vorbereitete Mathematik-Ordnerstruktur, alle Wied
 - **33 Inhaltsfelder** mit je einer editierbaren `wiederholung.pptx`
 - **105 Themenordner** als Ablage für Lernpfade, Arbeitsblätter, Simulationen und weitere Materialien
 - **Lernspiele** als auswählbare Materialkategorie, veröffentlicht aus `lernspiele/`
-- **Quadratische Funktionen für Klasse 9:** zwölf interaktive Lernpfade, zwölf H5P-Quizze und drei Erklärvideos zur quadratischen Ergänzung; [Ablage und Prüfung](dokumentation/QUADRATISCHE_FUNKTIONEN.md)
+- **Quadratische Funktionen für Klasse 9:** zwölf interaktive Lernpfade mit direkt spielbaren Lernchecks, H5P-Downloads und drei eingebetteten Erklärvideos mit Kontrollfragen zur quadratischen Ergänzung; [Ablage und Prüfung](dokumentation/QUADRATISCHE_FUNKTIONEN.md)
 - **Mathe-Wettbewerbe** mit Portal unter `wettkaempfe/`, [gehostetem Beispielquiz](https://mathe-wettkampf-api.physik-wettkampf-api.workers.dev/?wettkampf=beispiel-quadratische-funktionen) auf Cloudflare und Ranglistenarchivierung in [`ergebnisse/`](ergebnisse/README.md) dieses Repositories; Einrichtung: [WETTBEWERBE.md](dokumentation/WETTBEWERBE.md)
 - **Wurzelwerk für Klasse 9** als Kategorie **Quiz**: klare Ansichten, große Zahlentasten, Training ohne Zeitdruck sowie mittelschwerer Cloudflare-Wettbewerb mit Timer, Zeitbonus und eigener Rangliste; [Einrichtung und Prüfung](dokumentation/WURZELWERK.md).
 - **Question Shells** als bereichsweite Unterstützung unter `*/unterstuetzung/`

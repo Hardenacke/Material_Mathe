@@ -78,6 +78,24 @@ def main():
                     page.locator("#" + name).fill(value)
                 page.locator(f'[data-action="check{lesson_id}"]').click()
                 expect(page.locator("#feedback")).to_have_class("feedback good")
+                # Die H5P-Frage muss ohne LMS direkt auf jeder Seite spielbar sein.
+                quiz = page.locator(".h5p-activity")
+                expect(quiz).to_have_count(1)
+                quiz.locator('button[type="submit"]').click()
+                expect(quiz.locator(".h5p-feedback")).to_contain_text("wähle zuerst")
+                quiz.locator('input[data-correct="false"]').first.check()
+                quiz.locator('button[type="submit"]').click()
+                expect(quiz.locator(".h5p-feedback")).to_have_class("h5p-feedback bad")
+                quiz.locator("[data-h5p-solution]").click()
+                expect(quiz.locator(".h5p-feedback")).to_contain_text("Die richtige Antwort lautet")
+                quiz.locator("[data-h5p-retry]").click()
+                expect(quiz.locator('input:checked')).to_have_count(0)
+                quiz.locator('input[data-correct="true"]').check()
+                quiz.locator('button[type="submit"]').click()
+                expect(quiz.locator(".h5p-feedback")).to_have_class("h5p-feedback good")
+                expect(quiz.locator('input:disabled')).to_have_count(4)
+                expect(quiz.locator('button[type="submit"]')).to_be_hidden()
+                assert page.locator(".katex-error").count() == 0
                 if lesson_id == "03":
                     page.locator("#a-slider").evaluate("node => {node.value=0; node.dispatchEvent(new Event('input'));}")
                     page.locator('.choices[data-group="dir"] .choice[data-value="flat"]').click()
@@ -91,6 +109,35 @@ def main():
                     page.locator("#mark-done").check()
                     page.reload()
                     expect(page.locator("#mark-done")).to_be_checked()
+                    expect(page.locator(".video-learning video")).to_have_count(3)
+                    video = page.locator("#worked-example-video")
+                    panel = page.locator("#video-checkpoint-panel")
+                    video.evaluate("v => {v.playbackRate=4; return v.play();}")
+                    for number in range(1, 4):
+                        expect(panel).to_be_visible()
+                        expect(page.locator("#video-checkpoint-title")).to_contain_text(f"Kontrollfrage {number}")
+                        assert video.evaluate("v => v.paused")
+                        page.locator("#video-checkpoint-answer").fill("0")
+                        page.locator("#video-checkpoint-check").click()
+                        expect(page.locator("#video-checkpoint-status")).to_have_class("video-checkpoint-status feedback bad")
+                        if number == 1:
+                            page.locator("#video-checkpoint-solution").click()
+                            expect(page.locator("#video-checkpoint-status")).to_contain_text("Lösung: 2")
+                            page.locator("#video-checkpoint-resume").click()
+                        elif number == 2:
+                            page.locator("#video-checkpoint-skip").click()
+                        else:
+                            page.locator("#video-checkpoint-answer").fill("−1,0")
+                            page.locator("#video-checkpoint-check").click()
+                            expect(page.locator("#video-checkpoint-status")).to_have_class("video-checkpoint-status feedback good")
+                            page.locator("#video-checkpoint-resume").click()
+                        expect(panel).to_be_hidden()
+                    video.evaluate("v => v.pause()")
+                    # Auch die beiden weiteren eingebetteten Clips müssen laden.
+                    for clip in page.locator(".video-learning video").all():
+                        clip.evaluate("v => {v.preload='metadata'; v.load();}")
+                        expect(clip).to_have_js_property("videoWidth", 1280)
+                        expect(clip).to_have_js_property("videoHeight", 720)
                 if lesson_id == "08":
                     for method, values in [("factor", ["-1", "2"]), ("pq", ["2", "3"])]:
                         page.locator(f'[data-method="{method}"]').click()
@@ -144,10 +191,14 @@ def main():
             page.locator("#k").fill("-1")
             page.locator('[data-action="check06"]').click()
             expect(page.locator("#feedback")).to_have_class("feedback good")
+            quiz = page.locator(".h5p-activity")
+            quiz.locator('input[data-correct="true"]').check()
+            quiz.locator('button[type="submit"]').click()
+            expect(quiz.locator(".h5p-feedback")).to_have_class("h5p-feedback good")
             assert not errors, errors
             assert not remote, remote
             browser.close()
-        print(json.dumps({"result": "PASS", "lessons": 12, "videos": videos, "viewports": [320, 390, 768, 1024],
+        print(json.dumps({"result": "PASS", "lessons": 12, "inline_quizzes": 12, "video_checkpoints": 3, "videos": videos, "viewports": [320, 390, 768, 1024],
                           "direct_file_open": True, "javascript_errors": errors, "external_requests": remote}, ensure_ascii=False))
     finally:
         server.shutdown()
