@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#3d7746"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Mathe-Quest"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="../../../../gemeinsam/quiz-sekii/assets/icon.svg" type="image/svg+xml"><title>Q2 · Abituratelier: Funktionen und Analysis</title>
+<link rel="stylesheet" href="../../../../gemeinsam/quiz-sekii/assets/vendor/katex/katex.min.css">
+<style>
+:root{--accent:#3d7746;--accent2:#203a27;--ink:#182238;--muted:#657187;--paper:#fff;--bg:#f4f6fb;--line:#e4e9f1;--good:#198754;--bad:#c63a45;--shadow:0 18px 48px rgba(24,34,56,.10)}
+*{box-sizing:border-box}.skip-link{position:absolute;left:12px;top:-60px;z-index:100;padding:10px 14px;border-radius:10px;background:#172437;color:#fff;font-weight:800}.skip-link:focus{top:10px}.construct-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:end;margin:10px 0}.construct-controls label{display:grid;gap:4px;font-weight:750;color:var(--muted)}.construct-controls input{min-height:46px;padding:8px 10px;border:1px solid #cfd6e2;border-radius:12px;background:#fff}.construct-controls button{min-height:44px;padding:8px}.construct-measure{min-height:28px;margin:8px 0;text-align:center;color:var(--muted);font-weight:750}.hint-panel{display:grid;gap:8px;margin:0 0 16px;padding:12px 14px;border:1px solid color-mix(in srgb,var(--accent) 24%,white);border-radius:16px;background:color-mix(in srgb,var(--accent) 5%,white)}.hint-panel button{justify-self:start;min-height:42px}.hint-text{margin:0;padding:9px 11px;border-radius:11px;background:#fff;color:var(--ink)}.progress-link{grid-column:1/-1;display:flex;align-items:center;justify-content:center;text-decoration:none}.feedback-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.feedback-actions button{min-height:44px}.skip-link:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,white);outline-offset:2px}html{font-size:calc(16px * var(--text-scale,1))}body{margin:0;color:var(--ink);background:radial-gradient(circle at 88% 4%,color-mix(in srgb,var(--accent) 17%,white),transparent 25rem),linear-gradient(135deg,#f4f7fc 0%,#f8f5ef 100%);font:1rem/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;min-height:46px;border:0;border-radius:14px;padding:12px 18px;font-weight:750;color:var(--ink);background:#eef1f6;transition:transform .16s,box-shadow .16s,background .16s}button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 18px rgba(24,34,56,.13)}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,white);outline-offset:2px}button:disabled{opacity:.48;cursor:not-allowed}.primary{background:var(--accent);color:#fff}.secondary{background:#fff;border:1px solid var(--line)}.quiet{background:transparent;color:var(--muted)}.app{max-width:820px;padding:22px 18px 48px;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.02em}.brandmark{width:44px;height:44px;border-radius:15px;background:var(--accent);display:grid;place-items:center;color:#fff;font-size:25px;box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 30%,transparent)}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.in-task .top-actions{display:flex;justify-content:flex-end}.in-task .top-actions #homeBtn,.in-task .top-actions #rankBtn{display:none}.text-size-control{min-width:44px;min-height:44px;padding:8px}.top-actions button{padding:9px 12px;min-height:40px;font-size:.9rem}.hero{position:relative;overflow:hidden;border-radius:30px;padding:clamp(24px,5vw,58px);color:#fff;background:linear-gradient(125deg,var(--accent),var(--accent2));box-shadow:var(--shadow);min-height:260px}.hero:after{content:"";position:absolute;width:310px;height:310px;border:42px solid rgba(255,255,255,.12);border-radius:50%;right:-55px;top:-135px;box-shadow:0 0 0 35px rgba(255,255,255,.06),0 0 0 75px rgba(255,255,255,.04)}body[data-field="funktionen"] .hero:after{border-radius:48% 52% 63% 37%;transform:rotate(-18deg);background:repeating-linear-gradient(0deg,transparent 0 28px,rgba(255,255,255,.08) 29px 31px)}body[data-field="geometrie"] .hero:after{border-radius:20px;transform:rotate(45deg);box-shadow:0 0 0 35px rgba(255,255,255,.06),0 0 0 75px rgba(255,255,255,.04)}body[data-field="stochastik"] .hero:after{border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22) 0 5px,transparent 6px) 0 0/32px 32px}body[data-field="arithmetik-algebra"] .hero:after{border-radius:28%;transform:rotate(15deg);background:repeating-linear-gradient(45deg,transparent 0 20px,rgba(255,255,255,.08) 21px 23px)}body[data-grade="5"] .hero{border-radius:28px 48px 28px 48px}body[data-grade="10"] .hero{border-radius:18px}.hero-content{position:relative;z-index:1;max-width:680px}.eyebrow{font-size:.83rem;text-transform:uppercase;letter-spacing:.15em;font-weight:800;opacity:.83}.hero h1{font-size:clamp(2rem,5vw,3.7rem);line-height:1.02;letter-spacing:-.045em;margin:.35em 0}.hero p{font-size:1.08rem;max-width:610px;opacity:.95}.hero p.focus{font-size:.97rem;line-height:1.45;max-width:660px;margin-top:18px;padding:11px 14px;background:rgba(0,0,0,.16);border:1px solid rgba(255,255,255,.22);border-radius:14px}.hero-icon{position:absolute;right:9%;bottom:8%;font-size:clamp(4rem,12vw,8rem);filter:drop-shadow(0 12px 12px rgba(0,0,0,.14));z-index:1}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}.rank-link{grid-column:1/-1;min-height:0!important;padding:0!important;border:0!important;box-shadow:none!important;background:transparent!important;display:flex;flex-direction:row;justify-content:center;align-items:center;gap:10px}.rank-link .glyph,.rank-link h2{display:none}.rank-link p{margin:0!important}.rank-link button{width:auto!important;margin:0!important;min-height:42px}.card{border:1px solid var(--line);background:var(--paper);border-radius:22px;padding:22px;box-shadow:0 7px 24px rgba(24,34,56,.05)}.mode-card{min-height:190px;display:flex;flex-direction:column;align-items:flex-start}.mode-card .glyph{font-size:2rem}.mode-card h2{font-size:1.2rem;margin:.4em 0 .15em}.mode-card p{color:var(--muted);margin:0 0 16px}.mode-card button{margin-top:auto;width:100%}.notice{border-radius:16px;background:#fff8e9;border:1px solid #f3dba6;padding:14px 16px;color:#664d18;margin-top:16px}.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:24px 0 14px}.section-head h2{margin:0;font-size:1.5rem;letter-spacing:-.03em}.section-head p{margin:4px 0;color:var(--muted)}.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.round-focus{display:grid;gap:6px;margin:10px 0 18px}.round-focus label{font-weight:800}.round-focus select{min-height:48px;padding:10px 12px;border:1px solid #cfd6e2;border-radius:12px;background:#fff}.round-focus p{margin:0;color:var(--muted);font-size:.9rem}.level{min-height:125px;text-align:left;background:white;border:1px solid var(--line);border-radius:18px;padding:17px}.level strong{display:block;font-size:1.05rem;margin-bottom:4px}.level span{color:var(--muted);font-size:.92rem}.game{max-width:820px;margin:0 auto}.game-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:10px 0 16px}.progress-wrap{flex:1}.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:.92rem;margin-bottom:6px}.progress{height:9px;background:#e9edf3;border-radius:99px;overflow:hidden}.progress>span{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .25s}.score{white-space:nowrap;font-weight:800;background:#fff;border:1px solid var(--line);border-radius:13px;padding:9px 12px}.question-card{padding:clamp(20px,4vw,34px);background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}.question-meta{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.88rem;margin-bottom:10px}.pill{background:color-mix(in srgb,var(--accent) 12%,white);color:var(--accent2);border-radius:99px;padding:5px 10px;font-weight:800}.question{font-size:clamp(1.15rem,2.5vw,1.5rem);font-weight:760;line-height:1.42;letter-spacing:-.015em;margin:8px 0 22px}.answers{display:grid;gap:10px}.answer-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f8f9fc;text-align:left;border:1px solid var(--line);min-height:54px}.answer-btn.selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,white);box-shadow:inset 0 0 0 1px var(--accent)}.answer-btn.correct{border-color:var(--good);background:#eefaf3}.answer-btn.wrong{border-color:var(--bad);background:#fff2f2}.answer-status{flex:0 0 auto;font-size:.82rem;font-weight:800;padding:4px 8px;border-radius:99px;background:#fff}.input-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.fraction-entry{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.fraction-entry label{display:grid;gap:5px;font-weight:750;color:var(--muted)}.fraction-entry .answer-input{width:110px;text-align:center}.fraction-bar{font-size:1.8rem;font-weight:850;color:var(--accent2);padding-top:18px}.answer-input{width:min(100%,320px);min-height:54px;padding:12px 15px;border:1px solid #cfd6e2;border-radius:14px;font-size:1.15rem;background:#fff}.answer-input.is-correct{border-color:var(--good);background:#f3fbf6;box-shadow:0 0 0 2px color-mix(in srgb,var(--good) 18%,transparent)}.answer-input.is-incorrect{border-color:var(--bad);background:#fff7f7;box-shadow:0 0 0 2px color-mix(in srgb,var(--bad) 15%,transparent)}.keypad{display:grid;grid-template-columns:repeat(4,minmax(44px,1fr));gap:7px;max-width:320px;margin-top:10px}.keypad button{min-height:48px;padding:8px;background:#eef1f6}.keypad button[data-key="clear"]{grid-column:span 2}.slider-input-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(95px,150px);gap:12px;align-items:center}.slider-input-row .answer-input{width:100%;text-align:center}.unit{color:var(--muted);font-weight:700}.slider-box{padding:18px 14px 8px;background:#f8f9fc;border:1px solid var(--line);border-radius:17px}.range-feedback{display:none;margin-top:14px;padding:9px 12px 10px;background:#fff;border:1px solid var(--line);border-radius:13px}.range-feedback.show{display:block}.range-track{position:relative;height:12px;margin:10px 8px 13px;border-radius:99px;background:#e8edf3}.range-band{position:absolute;left:var(--target-start,50%);width:var(--target-width,0%);top:0;bottom:0;min-width:2px;border-radius:99px;background:#ccebd8}.range-mark{position:absolute;top:-5px;width:3px;height:22px;border-radius:3px;transform:translateX(-50%)}.range-mark.user{left:var(--user-position,50%);z-index:2;background:var(--accent2)}.range-mark.target{left:var(--target-position,50%);z-index:1;width:4px;background:var(--good)}.range-legend{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.84rem;font-weight:700}.range-legend span{display:inline-flex;align-items:center;gap:6px}.range-legend i{display:inline-block;width:10px;height:10px;border-radius:50%}.legend-user{background:var(--accent2)}.legend-target{background:var(--good)}.range.is-correct{accent-color:var(--good)}.range.is-incorrect{accent-color:var(--bad)}.slider-labels{display:flex;justify-content:space-between;color:var(--muted);font-weight:700;font-size:.9rem}.range{width:100%;height:34px;accent-color:var(--accent);touch-action:pan-x}.live-value{font-size:1.2rem;font-weight:800;text-align:center;min-height:32px;color:var(--accent2)}.match-grid{display:grid;gap:10px}.match-grid.feedback-correct{padding:8px;border:1px solid #a8d9b9;border-radius:14px;background:#f3fbf6}.match-grid.feedback-incorrect{padding:8px;border:1px solid #e9b7ba;border-radius:14px;background:#fff7f7}.match-row{display:grid;grid-template-columns:1fr 1.2fr;gap:10px;align-items:center}.match-left{font-weight:700;background:#f6f8fb;padding:12px;border-radius:12px}.match-row select{min-height:48px;padding:8px 10px;border:1px solid #cfd6e2;border-radius:12px;background:white}.match-row.feedback-correct .match-left{background:#eefaf3;color:#155b34}.match-row.feedback-incorrect .match-left{background:#fff2f2;color:#822b31}.match-row select.is-correct{border-color:var(--good);background:#f3fbf6}.match-row select.is-incorrect{border-color:var(--bad);background:#fff7f7}.match-correction{grid-column:1/-1;color:#155b34;font-weight:750;font-size:.9rem;padding:3px 4px}.order-list{display:grid;gap:9px}.order-list.feedback-correct{padding:8px;border:1px solid #a8d9b9;border-radius:14px;background:#f3fbf6}.order-list.feedback-incorrect{padding:8px;border:1px solid #e9b7ba;border-radius:14px;background:#fff7f7}.order-item{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:6px;padding:8px 10px;background:#f6f8fb;border:1px solid var(--line);border-radius:13px}.order-item button{min-width:44px;padding:7px}.order-item.feedback-correct{border-color:#a8d9b9;background:#eefaf3}.order-item.feedback-incorrect{border-color:#e9b7ba;background:#fff2f2}.order-feedback-mark{font-size:.82rem;font-weight:800;color:#155b34}.order-item.feedback-incorrect .order-feedback-mark{color:#822b31}.construct-wrap{background:#f7f9fc;border:1px solid var(--line);border-radius:18px;padding:12px;max-width:430px;margin:auto}.construct-svg{width:100%;height:auto;touch-action:manipulation;cursor:crosshair}.construct-svg .gridline{stroke:#dce3ee;stroke-width:1}.construct-svg .axis{stroke:#8290a4;stroke-width:2}.construct-svg .anchor{fill:var(--accent2);stroke:#fff;stroke-width:2}.construct-svg .placed{fill:var(--accent);stroke:#fff;stroke-width:2}.construct-svg .cursor{fill:none;stroke:var(--bad);stroke-width:2;stroke-dasharray:3 2}.construct-svg .construct-shape{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.construct-svg .construct-shape.evaluated-correct{stroke:var(--good)}.construct-svg .construct-shape.evaluated-partial{stroke:#a66b00}.construct-svg .construct-shape.evaluated-incorrect{stroke:var(--bad)}.construct-svg .placed.is-correct{fill:var(--good)}.construct-svg .placed.is-incorrect{fill:var(--bad)}.construct-svg .construct-target{fill:#fff;stroke:var(--good);stroke-width:3;stroke-dasharray:3 2;opacity:.95}.construct-wrap.feedback-correct{border-color:#a8d9b9;background:#f3fbf6}.construct-wrap.feedback-partial{border-color:#efd99c;background:#fffaf0}.construct-wrap.feedback-incorrect{border-color:#e9b7ba;background:#fff7f7}.construct-svg:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.construct-svg text{font:12px system-ui;fill:#526179}.construct-tip{text-align:center;color:var(--muted);font-size:.9rem;margin:8px}.feedback{margin-top:16px;padding:15px 17px;border:1px solid transparent;border-radius:15px;display:none}.feedback.show{display:block;animation:feedback-in .24s ease-out both}.feedback.good{background:#eaf8ef;color:#155b34;border-color:#b9e4c8}.feedback.partial{background:#fff8e8;color:#664d18;border-color:#efd99c}.feedback.bad{background:#fff0f0;color:#822b31;border-color:#f1c6c8}.feedback.waiting{background:#f2f4fa;color:var(--ink);border-color:#dfe5ef}.feedback-heading{display:flex;align-items:center;gap:11px}.feedback-heading strong{display:block;margin:0;font-size:1.08rem}.feedback-icon{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border-radius:50%;background:color-mix(in srgb,currentColor 16%,white);color:inherit;font-size:1.05rem;font-weight:900}.feedback .solution{margin:8px 0 0;line-height:1.55}.input-feedback-note{grid-column:1/-1;margin:8px 0 0;padding:9px 12px;border-radius:12px;background:#fff0f0;color:#822b31;font-weight:750}@keyframes feedback-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}.action-row{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}.action-row button{min-width:130px}.helper{color:var(--muted);font-size:.92rem;margin-top:12px}.timer{color:#a63741;font-weight:900;font-variant-numeric:tabular-nums}.result{text-align:center;padding:34px}.result .big{font-size:2.8rem;font-weight:900;color:var(--accent2);margin:10px}.badge{display:inline-block;background:#fff5d7;color:#704d03;padding:9px 14px;border-radius:99px;font-weight:800}.leaderboard table{width:100%;border-collapse:collapse;margin-top:12px}.leaderboard th,.leaderboard td{text-align:left;padding:12px 8px;border-bottom:1px solid var(--line)}.leaderboard th{color:var(--muted);font-size:.88rem}.empty{color:var(--muted);padding:20px;text-align:center;background:#f8f9fb;border-radius:14px}.contest-form{display:grid;gap:12px;max-width:460px}.contest-form label{font-weight:750}.contest-form input{display:block;width:100%;padding:12px;border:1px solid #cfd6e2;border-radius:12px;margin-top:5px}.status{display:inline-flex;align-items:center;gap:7px;font-weight:750;font-size:.9rem}.dot{width:9px;height:9px;border-radius:50%;background:#b63a42}.dot.on{background:#18864c}.footer{color:var(--muted);text-align:center;font-size:.85rem;margin-top:25px}.hidden{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:760px){.cards{grid-template-columns:1fr}.rank-link{grid-column:auto;flex-wrap:wrap}.mode-card{min-height:0}.levels{grid-template-columns:1fr}.topbar{align-items:flex-start}.hero-icon{right:5%;bottom:5%;opacity:.2}.game-head{align-items:flex-start}.match-row{grid-template-columns:1fr}.score{font-size:.9rem}.action-row button{flex:1}.app{padding:14px 12px 32px}.top-actions button{font-size:.82rem}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.quest-briefing{display:grid;gap:15px;margin:18px 0;padding:clamp(17px,3vw,25px);border:1px solid color-mix(in srgb,var(--accent) 23%,white);border-radius:24px;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 8%,white),#fff 58%,color-mix(in srgb,var(--accent2) 6%,white));box-shadow:0 10px 28px #18223809}.quest-briefing-head{display:flex;justify-content:space-between;align-items:center;gap:16px}.quest-briefing-head h2{margin:2px 0 6px;font-size:clamp(1.25rem,3vw,1.65rem);line-height:1.2}.quest-briefing-head p:last-child{max-width:690px;margin:0;color:var(--muted)}.quest-kicker{margin:0 0 6px;color:var(--accent2);font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.quest-emblem{display:grid;place-items:center;flex:0 0 54px;width:54px;height:54px;border-radius:18px;background:var(--accent);color:white;font-size:1.65rem;box-shadow:0 7px 16px color-mix(in srgb,var(--accent) 25%,transparent)}.quest-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0;padding:0;list-style:none}.quest-steps li{display:flex;align-items:center;gap:9px;min-height:48px;padding:8px 10px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.82);font-size:.9rem;font-weight:750}.quest-steps b{display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;border-radius:9px;background:color-mix(in srgb,var(--accent) 12%,white);color:var(--accent2)}.quest-meta{display:flex;flex-wrap:wrap;gap:8px}.quest-chip{display:inline-flex;align-items:center;min-height:32px;padding:5px 10px;border:1px solid color-mix(in srgb,var(--accent) 18%,white);border-radius:99px;background:#fff;color:var(--accent2);font-size:.82rem;font-weight:800}@media(max-width:600px){.quest-briefing-head{align-items:flex-start}.quest-emblem{flex-basis:44px;width:44px;height:44px;border-radius:14px}.quest-steps{grid-template-columns:1fr;gap:6px}.quest-steps li{min-height:42px}}
+
+.construct-canvas{position:relative;width:min(100%,420px);aspect-ratio:1/1;margin:0 auto}.construct-canvas .construct-svg{display:block;width:100%;height:100%}.grid-labels{position:absolute;inset:0;pointer-events:none}.grid-labels span{position:absolute;transform:translate(-50%,-50%);min-width:18px;padding:0 2px;border-radius:4px;background:rgba(255,255,255,.86);font-size:.72rem;text-align:center;color:var(--ink)}.grid-labels .axis-x{left:93%;top:49%}.grid-labels .axis-y{left:51%;top:9%}.vector-entry{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:540px}.vector-entry label{display:grid;gap:6px;font-weight:750;color:var(--muted)}.vector-entry .answer-input{width:100%;text-align:center}.hero:after{transition:none}body[data-field="analysis"] .hero:after{border-radius:46% 54% 28% 72%;transform:rotate(-23deg);background:repeating-linear-gradient(0deg,transparent 0 24px,rgba(255,255,255,.11) 25px 27px)}body[data-field="geometrie"] .hero:after{border-radius:22px;transform:rotate(35deg);background:linear-gradient(45deg,transparent 42%,rgba(255,255,255,.15) 43% 46%,transparent 47%)}body[data-field="stochastik"] .hero:after{border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.24) 0 4px,transparent 5px) 0 0/30px 30px}body[data-grade="11"] .hero{border-radius:30px 30px 58px 30px}body[data-grade="12"] .hero{border-radius:48px 24px 48px 24px}body[data-grade="13"] .hero{border-radius:18px 40px 18px 40px}
+.hint-panel[hidden]{display:none}.round-feedback-panel{margin-top:20px;padding:clamp(18px,4vw,28px);border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 5%,white),white)}.feedback-intro{color:var(--muted)}.feedback-item{padding:14px;border:1px solid var(--line);border-radius:15px}.feedback-trend{color:var(--muted)}.feedback-practice{border-left:4px solid var(--bad)}.feedback-good{border-left:4px solid var(--good)}</style>
+<link rel="stylesheet" href="../../../../gemeinsam/quiz-sekii/assets/quiz-layout.css">
+</head>
+<body>
+<a class="skip-link" href="#view">Zum Quizinhalt springen</a>
+<div class="app">
+<header class="topbar"><div class="brand"><span class="brandmark">📈</span><span>Q2 · Abituratelier</span></div><div class="top-actions"><button class="quiet" id="homeBtn" aria-label="Zur Startseite">Start</button><button class="secondary" id="rankBtn">Quiz-Rangliste</button><button class="secondary text-size-control" id="fontDown" type="button" aria-label="Schrift verkleinern">A−</button><button class="secondary text-size-control" id="fontUp" type="button" aria-label="Schrift vergrößern">A+</button><span class="sr-only" id="fontScaleStatus" aria-live="polite"></span></div></header>
+<main id="view" tabindex="-1" aria-label="Quizbereich"></main><footer class="footer"><a href="../../../../index.html#/q1-q2-leistungskurs/01-funktionen-und-analysis/quiz">Zur Materialauswahl</a> · <a href="../../../../gemeinsam/quiz-sekii/assets/lernstand.html">Lernfortschritt und Profile</a> · Üben heißt ausprobieren. Fehler helfen beim Weiterdenken. · Funktionen und Analysis</footer>
+</div>
+<script src="../../../../gemeinsam/quiz-sekii/assets/vendor/katex/katex.min.js"></script><script src="../../../../gemeinsam/quiz-sekii/assets/vendor/katex/contrib/auto-render.min.js"></script><script src="../../../../gemeinsam/quiz-sekii/assets/cloudflare-config.js"></script>
+<script>
+'use strict';
+const QUIZ={"id": "q2-analysis-lk", "phase": "q2", "grade": 13, "gradeLabel": "Qualifikationsphase 2 (Q2)", "shortLabel": "Q2", "course": "lk", "courseLabel": "Leistungskurs", "className": "Q2 · LK", "fieldId": "analysis", "field": "Funktionen und Analysis", "icon": "📈", "brand": "Q2 · Abituratelier", "tagline": "Funktionsstudio", "focus": "Variable Änderungsraten und Rotationsvolumina.", "formats": "Zahleneingabe · Auswahl · Regler · Sortieren · Zuordnen · Konstruktion", "title": "Q2 · Abituratelier: Funktionen und Analysis", "motto": "Q2 · Abituratelier · Änderungen sichtbar machen und Zusammenhänge untersuchen"};
+const CLOUD=window.MATHE_QUIZ_CLOUD||{enabled:false,baseUrl:""};
+const $=s=>document.querySelector(s), view=$('#view');
+const state={mode:'',level:'aufbau',round:[],index:0,score:0,correct:0,streak:0,bestStreak:0,chosen:null,locked:false,points:[],cursor:{x:0,y:0},match:{},order:[],contest:null,timer:null,apiOnline:false,pendingRequestId:null,activeAnswerInput:'answer',roundStartedAt:0,roundClock:null,basePoints:0,timeBonus:0,roundFocusLabel:'Gemischte Runde',attemptsForQuestion:0,hintsShown:0,lastAnswer:null,lastPartial:0,roundStats:null,roundSaved:false,roundBaseline:{}};
+document.body.dataset.field=QUIZ.fieldId;document.body.dataset.grade=String(QUIZ.grade);
+function setRoute(name){const hash='#'+name;if(location.hash!==hash)history.pushState({quizScreen:name},'',hash);setTimeout(()=>{const target=view.querySelector('h1,h2,#prompt')||view;if(target){if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true})}},0)}
+function restoreRoute(){const route=location.hash.slice(1);if(route==='levels')levels();else if(route==='task'&&state.currentQuestion)showQuestion(state.currentQuestion);else if(route==='result'&&state.mode)finish();else if(route==='leaderboard')leaderboard();else if(route==='competition')contestForm();else home()}
+function tex(n,d=2){if(!Number.isFinite(Number(n)))return String(n);return Number(n).toLocaleString('de-DE',{maximumFractionDigits:d,useGrouping:false}).replace(',','{,}');}
+function math(n,d=2){return `\\(${tex(n,d)}\\)`;}
+function renderMath(root=document){root.querySelectorAll?.('[data-math]').forEach(el=>{el.textContent=`\\(${tex(el.dataset.math,0)}\\)`;el.removeAttribute('data-math')});try{renderMathInElement(root,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:true,strict:'error',trust:false,ignoredClasses:['katex','katex-display','no-math'],errorCallback:(m,e)=>console.error('KaTeX',m,e)});}catch(e){console.error(e)}}
+function h(text){return String(text)}
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+function makeAlias(){const first=['Mathefuchs','Zahlenpilot','Winkelprofi','Datenchecker','Rechenprofi','Kopfrechner'];const second=['Luchs','Komet','Fuchs','Falke','Otter','Stern'];return `${first[rand(0,first.length-1)]}-${second[rand(0,second.length-1)]}-${rand(10,99)}`}
+function getBrowserId(forceNew=false){try{if(forceNew)localStorage.removeItem('matheQuizBrowserId');let id=localStorage.getItem('matheQuizBrowserId');if(!id){id=crypto.randomUUID();localStorage.setItem('matheQuizBrowserId',id)}return id}catch{return crypto.randomUUID()}}
+function shuffle(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=rand(0,i);[x[i],x[j]]=[x[j],x[i]]}if(x.length>1&&x.every((v,i)=>v===a[i]))[x[0],x[1]]=[x[1],x[0]];return x}
+function parseMathNumber(raw){const s=String(raw).trim().replace(/\s+/g,'').replace(',','.');const m=s.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);if(m){const den=Number(m[2]);return den===0?NaN:Number(m[1])/den}return s===''?NaN:Number(s)}
+function keypadMarkup(){return `<div class="keypad" role="group" aria-label="Zahlentastatur">${['7','8','9','4','5','6','1','2','3','−','0',','].map(k=>`<button type="button" data-key="${k}" aria-label="${k===','?'Dezimalkomma':k}">${k}</button>`).join('')}<button type="button" data-key="backspace" aria-label="Letztes Zeichen löschen">⌫</button><button type="button" data-key="clear" aria-label="Eingabe vollständig löschen">Löschen</button></div>`}
+function bindKeypad(defaultId){const area=$('#answerArea');area.querySelectorAll('.answer-input').forEach(input=>{input.addEventListener('focus',()=>state.activeAnswerInput=input.id);input.addEventListener('pointerup',()=>state.activeAnswerInput=input.id)});area.querySelectorAll('[data-key]').forEach(button=>{button.addEventListener('pointerdown',e=>e.preventDefault());button.onclick=()=>{const input=document.getElementById(state.activeAnswerInput)||document.getElementById(defaultId);if(!input)return;input.focus();const start=input.selectionStart??input.value.length,end=input.selectionEnd??input.value.length,key=button.dataset.key;let next=start;if(key==='clear'){input.value='';next=0}else if(key==='backspace'){if(start!==end){input.setRangeText('',start,end,'end');next=start}else if(start>0){input.setRangeText('',start-1,start,'end');next=start-1}}else{const value=key==='−'?'-':key;input.setRangeText(value,start,end,'end');next=start+value.length}input.setSelectionRange(next,next);input.dispatchEvent(new Event('input',{bubbles:true}))}})}
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a||1}
+function nQ(prompt,answer,solution,tol=0.001,unit=''){return{kind:'number',prompt,answer,solution,tol,unit}}
+function fQ(prompt,num,den,solution){const g=gcd(num,den);return{kind:'fraction',prompt,answer:{num:num/g,den:den/g},solution}}
+function cQ(prompt,options,correct,solution){const shuffled=shuffle(options.map((text,index)=>({text,index})));return{kind:'choice',prompt,options:shuffled.map(x=>x.text),correct:shuffled.findIndex(x=>x.index===correct),solution}}
+function sQ(prompt,min,max,answer,solution,step=1,tol=0){return{kind:'slider',prompt,min,max,answer,solution,step,tol}}
+function mQ(prompt,pairs,solution){const shuffled=shuffle(pairs).map(pair=>{const options=shuffle(pair.options.map((text,index)=>({text,index})));return{left:pair.left,options:options.map(x=>x.text),correct:options.findIndex(x=>x.index===pair.correct)}});return{kind:'match',prompt,pairs:shuffled,solution}}
+function oQ(prompt,items,solution){return{kind:'order',prompt,items,solution}}
+function gQ(prompt,fixed,points,solution,pointLabel='Konstruktionspunkte',connectPoints=true){return{kind:'construct',prompt,fixed,points,solution,pointLabel,connectPoints}}
+function vectorQ(prompt,answer,solution,tol=0.001){return{kind:'vector',prompt,answer:[...answer],solution,tol}}
+function chooseN(n,k){if(k<0||k>n)return 0;k=Math.min(k,n-k);let value=1;for(let i=1;i<=k;i++)value=value*(n-k+i)/i;return Math.round(value)}
+const focusNames={
+ 'analysis':['Rechnen und Verfahren','Funktionen und Graphen deuten','Werte und Änderungsraten einordnen','Lösungswege strukturieren','Modelle und Darstellungen verbinden'],
+ 'geometrie':['Vektoren und Abstände berechnen','Darstellungen und Begriffe erkennen','Parameter und Winkel einordnen','Rechenwege im Raum strukturieren','Geometrische Situationen darstellen'],
+ 'stochastik':['Wahrscheinlichkeiten und Kennwerte berechnen','Modelle und Begriffe prüfen','Werte in Verteilungen einordnen','Statistische Lösungswege strukturieren','Ergebnisse und Aussagen deuten']
+};
+const trainingSkillLabels={
+ analysis:{
+  ef:['Ableitungen und Funktionswerte berechnen','Graphenmerkmale und Ableitungen deuten','Änderungsraten auf einer Skala einordnen','Eine Kurvendiskussion sinnvoll ordnen','Nullstellen im Koordinatensystem markieren'],
+  q1:{gk:['Produktregel und Ableitungswerte berechnen','Wachstum und Modellparameter erkennen','Extremstellen im Kontext einordnen','Optimierungsschritte sinnvoll ordnen','Nullstellen im Graphen darstellen'],lk:['Produkt- und Kettenregel anwenden','Ableitungsregeln verknüpfen','Extremwert einer Exponentialfunktion bestimmen','Funktionsscharen systematisch untersuchen','Extrempunkte im Graphen konstruieren']},
+  q2:{gk:['Nullstellen und Flächeninhalte im Abiturtransfer berechnen','Integral und orientierte Fläche unterscheiden','Bestandsänderungen auf einer Skala deuten','Schritte der Integralrechnung ordnen','Änderungsrate und Bestand zuordnen'],lk:['Integrale und Rotationsvolumen berechnen','Umkehrfunktionen und Symmetrie deuten','Integrale nichtkonstanter Änderungsraten berechnen','Integrationsschritte zum Rotationsvolumen ordnen','Integral- und Volumenformeln verknüpfen']}
+ },
+ geometrie:{
+  ef:['Vektoren und Abstände berechnen','Geraden und Lagebeziehungen erkennen','Punkte auf Geraden einordnen','Schnittpunkte systematisch bestimmen','Vektoren in der Ebene konstruieren'],
+  q1:{gk:['Skalarprodukte und Vektoren berechnen','Parameterform einer Ebene erkennen','Gerade-Ebene-Schnittparameter bestimmen','Ebenen aus Punkten aufbauen','Vektoren in einer Projektion darstellen'],lk:['Winkel zwischen Vektoren berechnen','Normalenform einer Ebene erkennen','Gerade-Ebene-Schnittparameter bestimmen','Ebenengleichung mit Kreuzprodukt aufstellen','Geraden in einer Projektion konstruieren']},
+  q2:{gk:['Dachflächen im Koordinatenmodell berechnen','Winkel und Lagebeziehungen erkennen','Winkelgrößen im Raum einordnen','Lineare Gleichungssysteme lösen','Raumbegriffe und Darstellungen zuordnen'],lk:['Abstände und Schnittpunkte berechnen','Lagebeziehungen im Raum prüfen','Schnittwinkel auf einer Skala einordnen','Raumgeometrie mit Gleichungssystemen lösen','Normalen, Ebenen und Spiegelungen verknüpfen']}
+ },
+ stochastik:{
+  ef:['Wahrscheinlichkeiten und Erwartungswerte berechnen','Stichproben und Zufallsmodelle beurteilen','Bedingte Wahrscheinlichkeiten einordnen','Eine Simulation sinnvoll planen','Zufallsgröße und Kennwert zuordnen'],
+  q1:{gk:['Binomialwahrscheinlichkeiten berechnen','Binomialmodelle erkennen','Erwartungswerte auf einer Skala einordnen','Eine Binomialaufgabe strukturieren','Kennwerte einer Verteilung zuordnen'],lk:['Kumulative Binomialwahrscheinlichkeiten berechnen','Gegenereignisse und Ereignisse erkennen','Varianz einer Binomialverteilung deuten','Mehrschrittige Wahrscheinlichkeitswege ordnen','Ereignisse und Verteilungskennwerte zuordnen']},
+  q2:{gk:['Binomialwahrscheinlichkeiten im Kontext berechnen','Stichproben und Kennwerte vergleichen','Erwartete Trefferzahlen einordnen','Eine Prognose im Kontext aufbauen','Ereignis und Gegenereignis zuordnen'],lk:['Konfidenzintervalle aus Stichproben bestimmen','Konfidenzintervalle richtig interpretieren','Normalverteilungen mit variierten Parametern nutzen','Ein Konfidenzintervall strukturieren','Binomial- und Normalmodell vergleichen']}
+ }
+};
+function specificSkillLabel(field,grade,pattern){const phase=QUIZ.phase,course=QUIZ.course||'common';const labels=trainingSkillLabels[field]?.[phase];return (labels?.[course]||labels?.common||labels||focusNames[field])[pattern]||focusNames[field][pattern]}
+const coaching={
+ analysis:[
+  {hints:['Leite jeden Summanden einzeln ab.','Setze den gefragten x-Wert erst in die Ableitungsfunktion ein.'],error:'Prüfe Potenzregel, Vorzeichen und das Einsetzen in die Ableitung.'},
+  {hints:['Lies zuerst, ob nach f, f′ oder f″ gefragt wird.','Nutze die passende Bedeutung von Steigung, Extremstelle oder Krümmung.'],error:'Unterscheide Funktion, Ableitung und zweite Ableitung.'},
+  {hints:['Lies Start- und Endwert der Skala.','Prüfe, ob die Antwort eine Änderungsrate, ein Bestand oder eine Fläche ist.'],error:'Prüfe Skala, Einheit und Bedeutung der gesuchten Größe.'},
+  {hints:['Notiere zuerst, was die Aufgabe verlangt.','Ordne dann Verfahren, Rechnung und Deutung in dieser Reihenfolge.'],error:'Prüfe, ob jeder Schritt zum nächsten passt und die Frage beantwortet.'},
+  {hints:['Markiere Achsen, Nullstellen und wichtige Punkte.','Prüfe, ob die Punkte zur Funktionsgleichung oder Bedingung passen.'],error:'Prüfe Koordinaten und Bedeutung der dargestellten Punkte.'}
+ ],
+ geometrie:[
+  {hints:['Schreibe x-, y- und z-Komponente getrennt auf.','Prüfe bei Längen die Wurzel aus der Summe der Quadrate.'],error:'Prüfe Komponenten, Vorzeichen und die passende Vektorregel.'},
+  {hints:['Achte darauf, ob ein Vektor eine Richtung oder einen Punkt beschreibt.','Vergleiche Richtungs- und Normalenvektoren gezielt.'],error:'Prüfe, welche Darstellung und welches Kriterium gefragt ist.'},
+  {hints:['Setze den Parameter in alle drei Koordinaten ein.','Nutze die Geraden- oder Ebenengleichung zum Gegenprüfen.'],error:'Prüfe den Parameter in jeder Koordinate und die Skala.'},
+  {hints:['Stelle zuerst die Gleichungen der Objekte gleich.','Löse das entstehende Gleichungssystem und deute die Lösungsmenge.'],error:'Prüfe Gleichsetzen, Rechenreihenfolge und Bedeutung der Lösung.'},
+  {hints:['Lies x- und y-Koordinaten direkt am Raster ab.','Vergleiche die markierten Punkte mit dem angegebenen Vektor.'],error:'Prüfe die Projektion und die Koordinaten am Raster.'}
+ ],
+ stochastik:[
+  {hints:['Schreibe zuerst auf, was die Zufallsgröße zählt.','Prüfe, ob du Wahrscheinlichkeit, Häufigkeit oder Erwartungswert berechnest.'],error:'Prüfe Ereignis, Grundmenge und eingesetzte Parameter.'},
+  {hints:['Lies die Modellbedingungen und die Situation gemeinsam.','Prüfe, ob Versuche unabhängig sind und p gleich bleibt.'],error:'Prüfe Modellannahmen und die Bedeutung der Parameter.'},
+  {hints:['Lies die Achse und die Parameter der Verteilung.','Prüfe, ob Mittelwert, Trefferzahl oder Wahrscheinlichkeit gesucht ist.'],error:'Prüfe Kennwert und Skaleneinheit.'},
+  {hints:['Bestimme n, p und das gesuchte Ereignis.','Wähle erst danach Formel, Gegenereignis oder Intervall.'],error:'Prüfe die Modellwahl und die Reihenfolge der Rechnung.'},
+  {hints:['Vergleiche die Wörter „und“, „oder“ und „unter der Bedingung“.','Beziehe eine Zahl immer auf die richtige Bezugsgruppe.'],error:'Prüfe, ob die Aussage zur Bedingung und zur Bezugsgruppe passt.'}
+ ]
+};
+function buildQuestion(field,phase,course,level,index,pattern,extension=false){
+ const k=pattern,boost=(level==='challenge'?2:level==='aufbau'?1:0)+(extension?1:0),lk=course==='lk';
+ const r=(a,b)=>rand(a,b+Math.min(boost,2));
+ if(field==='analysis'){
+  if(phase==='q1'&&lk){
+   if(k===0){const a=r(1,4);return nQ(`Für \\(h_a(x)=x^2e^{-${a}x}\\) mit \\(x>0\\): Bestimme die Stelle des lokalen Maximums.`,2/a,`Es gilt \\(h_a'(x)=xe^{-${a}x}(2-${a}x)\\). Die positive kritische Stelle ist \\(x=\\frac{2}{${a}}\\); dort liegt das lokale Maximum.`,0.005)}
+   if(k===1)return cQ('Welche Ableitungsregeln werden für \\(f(x)=e^{2x}(x^2+1)\\) benötigt?',['Produkt- und Kettenregel','Nur Potenzregel','Nur Summenregel'],0,'Die äußeren Faktoren werden mit der Produktregel abgeleitet; für \\(e^{2x}\\) kommt die Kettenregel hinzu.');
+   if(k===2){const a=r(1,4),answer=1/a;return sQ(`Für \\(f_a(x)=xe^{-${a}x}\\) mit \\(x\\geq0\\): Bei welchem x-Wert liegt das Maximum?`,0,2,answer,`Es gilt \\(f_a'(x)=e^{-${a}x}(1-${a}x)\\). Der Vorzeichenwechsel liegt bei \\(x=\\frac{1}{${a}}\\).`,0.01,0.01)}
+   if(k===3)return oQ('Ordne die Schritte zur Untersuchung einer Funktionenschar.',['Parameter zunächst festhalten','Nach der Variablen x ableiten','Kritische Stellen in Abhängigkeit vom Parameter bestimmen','Lage und Art der Extrempunkte deuten'],'Bei einer Funktionenschar wird nach x abgeleitet; danach werden kritische Stellen und ihre Abhängigkeit vom Parameter untersucht.');
+   return gQ('Konstruiere die Extrempunkte von \\(f(x)=x^3-3x\\).',[],[[-1,2],[1,-2]],'Aus \\(f\\prime(x)=3x^2-3\\) folgen die Stellen \\(x=-1\\) und \\(x=1\\). Einsetzen ergibt \\((-1|2)\\) und \\((1|-2)\\).','Extrempunkte',false);
+  }
+  if(phase==='q2'&&lk&&k===2){const a=r(2,5),b=r(3,6),answer=a*b*b/2;return nQ(`Die Zuflussrate eines Tanks beträgt \\(r(t)=${a}t\\) Liter pro Minute. Wie viele Liter fließen in den ersten \\(${b}\\) Minuten zu?`,answer,`Integriere die Rate: \\(\\int_0^{${b}} ${a}t\\,dt=[\\frac{${a}}{2}t^2]_0^{${b}}=${answer}\\) Liter.`)}
+  if(phase==='q2'&&lk&&k===4)return mQ('Ordne jede Situation der passenden Integraldarstellung zu.',[{left:'Zuflussrate \\(f(t)=2t\\) von 0 bis 3 Minuten',options:['\\(\\int_0^3 2t\\,dt=9\\) Liter','\\(2\\cdot3=6\\) Liter'],correct:0},{left:'Rotationskörper mit Radiusfunktion \\(f(x)\\)',options:['\\(V=\\pi\\int_a^b f(x)^2\\,dx\\)','\\(V=\\int_a^b f(x)\\,dx\\)'],correct:0}],'Eine veränderliche Rate wird integriert. Beim Rotationskörper wird die Querschnittsfläche \\(\\pi f(x)^2\\) integriert.');
+  if(phase==='ef'){
+   if(k===0){const a=r(1,2),b=r(2,5),x=r(1,3),value=3*a*x*x-b;return nQ(`Gegeben ist \\(f(x)=${a}x^3-${b}x\\). Bestimme \\(f'(${x})\\).`,value,`\\(f'(x)=${3*a}x^2-${b}\\), also \\(f'(${x})=${value}\\).`)}
+   if(k===1)return cQ("An einer Stelle gilt \\(f'(x)>0\\). Welche Aussage passt?", ['Der Graph steigt dort.','Der Graph fällt dort.','Dort muss ein Hochpunkt liegen.'],0,'Eine positive Ableitung bedeutet eine positive Tangentensteigung; der Graph steigt dort.')
+   if(k===2){const x=r(1,4),answer=2*x;return sQ(`Für \\(f(x)=x^2\\): Welche Tangentensteigung hat der Graph bei \\(x=${x}\\)?`,0,12,answer,"Es gilt \\(f'(x)=2x\\). Setze den x-Wert ein.",0.1,0.1)}
+   if(k===3)return oQ('Ordne die Schritte einer Untersuchung mit Ableitungen.', ['Ableitungsfunktion bilden','Kritische Stellen bestimmen','Vorzeichen von f′ prüfen','Monotonie beschreiben'], 'Die Ableitung liefert kritische Stellen; ihr Vorzeichen beschreibt die Monotonie.')
+   const a=r(1,3),b=r(1,3);return gQ(`Markiere die Nullstellen von \\(f(x)=(x-${a})(x+${b})\\) auf dem Koordinatenraster.`,[],[[a,0],[-b,0]],'Setze die Faktoren einzeln gleich null: Die Nullstellen liegen bei den x-Werten der beiden Lösungen.','Nullstellen',false)
+  }
+  if(phase==='q1'){
+   if(k===0){const a=r(1,2),b=r(2,4),x=1,answer=2*x*(x+b)+(x*x+a);return nQ(`Für \\(f(x)=(x^2+${a})(x+${b})\\): Bestimme \\(f'(${x})\\).`,answer,`Produktregel: \\(f'(x)=2x(x+${b})+(x^2+${a})\\). Einsetzen ergibt \\(${answer}\\).`)}
+   if(k===1)return cQ(lk?'Welche Regel brauchst du für \\(f(x)=e^{2x}(x^2+1)\\)?':'Welche Aussage passt zur Ableitung von \\(f(x)=e^{0{,}2x}\\)?',lk?['Produkt- und Kettenregel','Nur Potenzregel','Nur Summenregel']:['\\(f\'(x)=0{,}2e^{0{,}2x}\\)','\\(f\'(x)=e^{0{,}2x}\\)','\\(f\'(x)=0{,}2x\\)'],0,lk?'Ein Produkt aus zwei veränderlichen Faktoren benötigt die Produktregel; die Verkettung verlangt zusätzlich die Kettenregel.':'Bei \\(e^{ax}\\) bleibt die Exponentialfunktion erhalten und wird mit der inneren Ableitung multipliziert.')
+   if(k===2){const width=r(8,14)+2*boost,answer=width/2;return sQ(`Ein Rechteck hat einen festen Umfang von \\(${2*width}\\) m. Welche Seitenlänge x maximiert \\(A(x)=x(${width}-x)\\)?`,0,width,answer,'Leite die Flächenfunktion ab, prüfe den Definitionsbereich und deute die kritische Stelle.',0.1,0.1)}
+   if(k===3)return oQ('Ordne die Schritte eines Optimierungsproblems.', ['Nebenbedingung nutzen und Zielfunktion aufstellen','Definitionsbereich festlegen','Ableitung null setzen und Kandidaten prüfen','Ergebnis im Sachkontext deuten'], 'Zuerst wird eine Zielfunktion mit einem Variablenbereich gebildet; danach werden Kandidaten bestimmt und gedeutet.')
+   const a=r(1,3),b=r(1,3);return gQ(`Markiere die Nullstellen von \\(g(x)=(x-${a})(x+${b})\\).`,[],[[a,0],[-b,0]],'Die Nullstellen erhältst du, indem du jeden Faktor gleich null setzt.','Nullstellen',false)
+  }
+  if(k===0){if(lk){const a=r(1,3),b=r(2,5),volume=Math.PI*a*a*b,rounded=volume.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(',','{,}');return nQ(`Ein Rotationskörper entsteht durch Rotation von \\(f(x)=${a}\\) auf \\([0,${b}]\\) um die x-Achse. Berechne sein Volumen und runde auf zwei Dezimalstellen.`,volume,`\\(V=\\pi\\int_0^{${b}}${a*a}\\,dx=${a*a*b}\\pi\\approx${rounded}\\,\\mathrm{m}^3\\).`,0.02,'m³')}const a=[2,4,6][rand(0,2)],answer=a**4/4;return nQ(`Der Graph von \\(f(x)=x^3-${a*a}x\\) schließt im zweiten Quadranten mit der x-Achse eine Fläche ein. Berechne deren Inhalt.`,answer,`Die Nullstellen begrenzen die Fläche bei \\(x=-${a}\\) und \\(x=0\\). Daher gilt \\(A=\\int_{-${a}}^0(x^3-${a*a}x)\\,dx=\\frac{${a}^4}{4}=${answer}\\) Flächeneinheiten.`)}
+  if(k===1)return cQ(lk?'Welche Aussage zur Umkehrfunktion trifft zu?':'Was beschreibt ein bestimmtes Integral einer Änderungsrate?',lk?['Ihr Graph entsteht durch Spiegelung an \\(y=x\\).','Ihr Graph entsteht durch Spiegelung an der x-Achse.','Definitions- und Wertebereich bleiben immer gleich.']:['Die aufsummierte Änderung im betrachteten Intervall.','Immer nur die größte Änderungsrate.','Nur die Nullstellen der Funktion.'],0,lk?'Funktionsgraph und Umkehrgraph sind Spiegelbilder an der Winkelhalbierenden \\(y=x\\).':'Ein Integral über eine Änderungsrate beschreibt die Gesamtänderung im Intervall.')
+  if(k===2){const a=r(2,6),answer=a*5;return sQ(`Eine Größe wächst konstant mit \\(${a}\\) Einheiten pro Stunde. Wie stark hat sie sich nach \\(5\\) Stunden verändert?`,0,50,answer,'Bei konstanter Änderungsrate gilt Änderung = Rate mal Zeit.',0.1,0.2)}
+  if(k===3)return oQ(lk?'Ordne die Schritte zur Berechnung eines Rotationsvolumens.':'Ordne die Schritte zum Berechnen eines bestimmten Integrals.',lk?['Querschnittsfläche \\(\\pi f(x)^2\\) und Integrationsintervall festlegen','Stammfunktion bestimmen oder digitales Mathematikwerkzeug nutzen','Obere und untere Grenze auswerten: \\(F(b)-F(a)\\)','Volumen mit Einheit im Kontext deuten']:['Stammfunktion bestimmen','Obere und untere Grenze einsetzen','Funktionswerte subtrahieren','Ergebnis im Kontext mit Einheit deuten'],'Stelle zuerst das Integral über die Querschnittsfläche auf. Integriere dann und berechne \\(F(b)-F(a)\\); deute das Ergebnis mit Einheit.')
+  return mQ('Ordne die Begriffe passend zu.',[{left:'Ableitung',options:['lokale Änderungsrate','gesamte Änderung im Intervall'],correct:0},{left:'Bestimmtes Integral',options:['lokale Änderungsrate','gesamte Änderung im Intervall'],correct:1}],'Ableitung und Integral beschreiben lokale Änderung und aufsummierte Gesamtänderung.')
+ }
+ if(field==='geometrie'){
+  if(phase==='q1'&&lk){
+   if(k===0){const triple=rand(0,1)?[3,4,5]:[5,12,13],[a,b,c]=triple,angle=Math.acos(a/c)*180/Math.PI;return sQ(`Ein Modell verwendet die Richtungsvektoren \\(\\vec u=(${c}|0|0)\\) und \\(\\vec v=(${a}|${b}|0)\\). Bestimme den Schnittwinkel auf ein Grad genau.`,0,180,angle,`Nutze \\(\\cos\\alpha=\\frac{\\vec u\\cdot\\vec v}{|\\vec u||\\vec v|}=\\frac{${a}}{${c}}\\). Daraus folgt \\(\\alpha\\approx${angle.toFixed(1).replace('.',',')}^\\circ\\).`,1,0.6)}
+   if(k===1)return cQ('Welche Form nutzt einen Normalenvektor direkt zur Ebenenbeschreibung?',['Normalenform \\(\\vec n\\cdot(\\vec x-\\vec p)=0\\)','Nur ein einzelner Punkt ohne Richtung','Eine Geradengleichung mit einem Parameter'],0,'In der Normalenform steht der Normalenvektor senkrecht auf der Ebene.');
+   if(k===2){const a=r(-2,2),c=r(1,4),t=r(1,4),d=2*a+c+3*t;return sQ(`Eine Messsonde folgt der Geraden \\(\\vec x=(${a}|0|${c})+t(1|1|0)\\) und trifft die Ebene \\(2x+y+z=${d}\\). Bestimme den Parameter t am Schnittpunkt.`,0,8,t,`Setze \\(x=${a}+t, y=t, z=${c}\\) ein: \\(2(${a}+t)+t+${c}=${d}\\). Daraus folgt \\(t=${t}\\).`,0.1,0.1)}
+   if(k===3)return oQ('Ordne die Schritte zur Normalenform einer Ebene aus drei Punkten.',['Zwei Differenzvektoren aus den Punkten bilden','Kreuzprodukt als Normalenvektor berechnen','Einen Punkt und den Normalenvektor einsetzen','Normalengleichung aufschreiben und prüfen'],'Das Kreuzprodukt der Richtungsvektoren liefert einen Normalenvektor; mit einem Punkt entsteht die Normalenform.');
+   return gQ('Konstruiere die x-y-Projektion der Geraden \\(\\vec x=(1|0|1)+t(1|2|0)\\) für \\(t=0\\) und \\(t=1\\). Verbinde die Punkte.',[],[[1,0],[2,2]],'Für \\(t=0\\) liegt die Projektion bei \\((1|0)\\); für \\(t=1\\) bei \\((2|2)\\).','Geradenprojektion',true);
+  }
+  if(phase==='ef'){
+   if(k===0){const a=r(1,3),b=r(1,3),c=r(0,2);return vectorQ(`Bilde \\(\\vec u+\\vec v\\) für \\(\\vec u=(${a}|${b}|${c})\\) und \\(\\vec v=(${b}|${-a}|1)\\).`,[a+b,b-a,c+1],'Addiere die x-, y- und z-Komponenten jeweils einzeln.')}
+   if(k===1)return cQ('Welche Aussage zeigt, dass zwei Vektoren kollinear sind?',['Ein Vektor ist ein skalares Vielfaches des anderen.','Ihre Längen müssen verschieden sein.','Ihr Skalarprodukt ist immer null.'],0,'Kollineare Vektoren haben dieselbe oder die entgegengesetzte Richtung.')
+   if(k===2){const t=rand(1,3),px=1+2*t,py=t;return sQ(`Auf \\(g: \\vec x=(1|0|2)+t(2|1|0)\\) liegt der Punkt \\((${px}|${py}|2)\\). Bestimme den Parameter t.`,0,4,t,'Vergleiche die Koordinaten und setze den Parameter ein.',0.1,0.1)}
+   if(k===3)return oQ('Ordne die Schritte zum Schnitt zweier Geraden.', ['Geradengleichungen gleichsetzen','Koordinatengleichungen aufstellen','Gleichungssystem lösen','Lösung in beiden Geraden prüfen'], 'Gleichsetzen erzeugt ein Gleichungssystem; die Lösung muss beide Geraden erfüllen.')
+   const x=r(-3,3),y=r(-3,3);return gQ(`Markiere den Punkt \\(P(${x}|${y})\\) in der x-y-Projektion des Koordinatensystems.`,[],[[x,y]],'Lies zuerst die x-Koordinate waagerecht und dann die y-Koordinate senkrecht ab.','Projektionspunkt',false)
+  }
+  if(phase==='q1'){
+   if(k===0){const a=r(1,4),b=r(1,4),c=r(0,3),d=r(1,3),e=r(1,3);return nQ(`Berechne das Skalarprodukt von \\(\\vec u=(${a}|${b}|${c})\\) und \\(\\vec v=(${d}|${-e}|${a})\\).`,a*d-b*e+c*a,'Multipliziere die entsprechenden Komponenten und addiere die drei Produkte.')}
+   if(k===1)return cQ(lk?'Welche Form eignet sich, um mit einem Normalenvektor eine Ebene zu beschreiben?':'Welche Angabe gehört zur Parameterform einer Ebene?',lk?['Normalenform \\(\\vec n\\cdot(\\vec x-\\vec p)=0\\)','Nur ein einzelner Punkt ohne Richtung','Eine Geradengleichung mit einem Parameter']:['Ein Stützvektor und zwei unabhängige Richtungsvektoren.','Nur ein Normalenvektor.','Ein Punkt und eine Zahlengerade.'],0,'Eine Ebene in Parameterform wird durch einen Punkt und zwei unabhängige Richtungsvektoren festgelegt.')
+   if(k===2){const t=r(1,3);return sQ(`Die Gerade \\(\\vec x=(1|0|0)+t(1|1|1)\\) trifft die Ebene \\(x+y+z=${1+3*t}\\). Bestimme t.`,0,5,t,'Setze die Geradenkoordinaten in die Ebenengleichung ein.',0.1,0.1)}
+   if(k===3)return oQ('Ordne das Aufstellen einer Ebene durch drei Punkte.', ['Einen Punkt als Stützvektor wählen','Zwei Verbindungsvektoren bilden','Unabhängigkeit der Richtungsvektoren prüfen','Parameterform aufschreiben'], 'Zwei unabhängige Richtungsvektoren und ein Stützpunkt bestimmen die Ebene.')
+   const x=r(-3,3),y=r(-3,3);return gQ(`Markiere die x-y-Projektion des Vektors \\(\\vec v=(${x}|${y}|2)\\).`,[],[[x,y]],'In der x-y-Projektion werden die ersten beiden Komponenten abgetragen.','x-y-Projektion',false)
+  }
+  if(k===0){if(lk){const x=r(-1,2),y=r(-1,2),z=r(-1,2),d=r(3,6),numerator=Math.abs(x+y+z-d),ans=numerator/Math.sqrt(3),rounded=ans.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(',','{,}');return nQ(`Berechne den Abstand von \\(P(${x}|${y}|${z})\\) zur Ebene \\(E:x+y+z=${d}\\).`,ans,`\\(d(P,E)=\\frac{|${x}+${y}+${z}-${d}|}{\\sqrt{3}}=\\frac{${numerator}}{\\sqrt{3}}\\approx${rounded}\\).`,0.01)}const L=r(8,14),s=r(1,3),[d,h]=rand(0,1)?[3,4]:[5,12],height=Math.sqrt(d*d+h*h),area=(L-s)*height;return nQ(`Eine Dachfläche wird durch \\(A=(0|0|0)\\), \\(B=(0|${L}|0)\\), \\(C=(${d}|${L-s}|${h})\\) und \\(D=(${d}|${s}|${h})\\) modelliert. Berechne ihren Flächeninhalt.`,area,`Die parallelen Seiten haben die Längen \\(${L}\\) und \\(${L-2*s}\\). Die Trapezhöhe ist \\(\\sqrt{${d}^2+${h}^2}=${height}\\). Also \\(A=\\frac{${L}+${L-2*s}}{2}\\cdot${height}=${area}\\,\\mathrm{m}^2\\).`,0.01,'m²')}
+  if(k===1)return cQ(lk?'Wann ist eine Gerade mit Richtungsvektor \\(\\vec v\\) parallel zu einer Ebene mit Normalenvektor \\(\\vec n\\)?':'Wann stehen zwei Vektoren senkrecht aufeinander?',lk?['Wenn \\(\\vec v\\cdot\\vec n=0\\).','Wenn \\(\\vec v\\) ein Vielfaches von \\(\\vec n\\) ist.','Wenn beide Vektoren gleich lang sind.']:['Wenn ihr Skalarprodukt null ist.','Wenn ihre Längen gleich sind.','Wenn sie denselben Stützpunkt haben.'],0,lk?'Ein Richtungsvektor parallel zur Ebene steht senkrecht auf ihrem Normalenvektor.':'Orthogonalität lässt sich mit \\(\\vec u\\cdot\\vec v=0\\) prüfen.')
+  if(k===2){const [a,b,c]=rand(0,1)?[3,4,5]:[5,12,13];if(lk){const angle=Math.asin(b/c)*180/Math.PI;return sQ(`Eine Gerade mit \\(\\vec v=(${a}|0|${b})\\) trifft eine Ebene mit Normalenvektor \\(\\vec n=(0|0|1)\\). Bestimme den Winkel zwischen Gerade und Ebene.`,0,90,angle,`Es gilt \\(\\sin\\alpha=\\frac{|\\vec v\\cdot\\vec n|}{|\\vec v||\\vec n|}=\\frac{${b}}{${c}}\\), also \\(\\alpha\\approx${angle.toFixed(1).replace('.',',')}^\\circ\\).`,1,0.6)}const angle=Math.acos(a/c)*180/Math.PI;return sQ(`Bestimme den Winkel zwischen \\(\\vec u=(${c}|0|0)\\) und \\(\\vec v=(${a}|${b}|0)\\).`,0,180,angle,`\\(\\cos\\alpha=\\frac{${a}}{${c}}\\), daher ist \\(\\alpha\\approx${angle.toFixed(1).replace('.',',')}^\\circ\\).`,1,0.6)}
+  if(k===3)return oQ(lk?'Ordne die Schritte zum Abstand zweier windschiefer Geraden.':'Ordne die Schritte zum Lösen eines linearen Gleichungssystems.',lk?['Richtungsvektoren kreuzweise multiplizieren','Verbindungsvektor zwischen den Geraden bilden','Auf die gemeinsame Senkrechte projizieren','Abstand als Betrag der Projektion berechnen']:['Gleichungen des geometrischen Problems aufstellen','Variablen durch ein Verfahren eliminieren','Lösungsmenge bestimmen','Lösungsmenge geometrisch deuten'],'Bei windschiefen Geraden liefert das Kreuzprodukt eine Richtung der gemeinsamen Senkrechten; die Projektion des Verbindungsvektors ergibt den Abstand.');
+  return lk?mQ('Ordne die Lagebeziehung der passenden Bedingung zu.',[{left:'Gerade parallel zur Ebene',options:['Richtungsvektor senkrecht zum Normalenvektor','Richtungsvektor parallel zum Normalenvektor'],correct:0},{left:'Gerade senkrecht zur Ebene',options:['Richtungsvektor parallel zum Normalenvektor','Richtungsvektor senkrecht zum Normalenvektor'],correct:0},{left:'Parallele Ebenen',options:['Normalenvektoren sind Vielfache','Normalenvektoren stehen senkrecht'],correct:0}],'Die Lagebeziehungen lassen sich über Skalarprodukt und Vielfachheit der Normalenvektoren prüfen.'):mQ('Ordne die Raumdarstellung der passenden Information zu.',[{left:'Normalenvektor einer Ebene',options:['steht senkrecht auf der Ebene','liegt immer in der Ebene'],correct:0},{left:'Stützvektor einer Geraden',options:['gibt einen Punkt auf der Geraden an','gibt nur die Länge der Geraden an'],correct:0}],'Normalenvektoren stehen senkrecht auf Ebenen; Stützvektoren benennen Punkte.')
+ }
+ if(field==='stochastik'){
+  if(phase==='ef'){
+   if(k===0){if(extension)return fQ('In einer Urne liegen 3 rote und 5 blaue Kugeln. Gib die Wahrscheinlichkeit für Rot als gekürzten Bruch an.',3,8,'Günstige Fälle geteilt durch alle gleich wahrscheinlichen Fälle: \\(3/8\\).');const a=rand(1,3),b=rand(1,3);return nQ(`Eine Zufallsgröße nimmt \\(0,1,2\\) mit den Wahrscheinlichkeiten \\(${a}/8, ${8-a-b}/8, ${b}/8\\) an. Bestimme \\(E(X)\\).`,(8-a-b+2*b)/8,'Multipliziere jeden möglichen Wert mit seiner Wahrscheinlichkeit und addiere die Produkte.')}
+   if(k===1)return cQ('Eine Umfrage soll die Meinung aller Jugendlichen einer Stadt abbilden. Welche Stichprobe ist am geeignetsten?',['Zufällig ausgewählte Jugendliche aus verschiedenen Stadtteilen.','Nur die eigene Lerngruppe.','Nur Personen, die freiwillig auf einer Fanseite antworten.'],0,'Eine möglichst zufällige und vielfältige Stichprobe verringert systematische Verzerrungen.')
+   if(k===2){const b=r(2,7),a=rand(1,b),answer=a/b;return sQ(`Von \\(${b}\\) Personen mit Merkmal B haben \\(${a}\\) auch Merkmal A. Ordne \\(P(A|B)\\) ein.`,0,1,answer,'Bei einer bedingten Wahrscheinlichkeit ist nur die Teilgruppe mit B die Bezugsmenge.',0.01,0.04)}
+   if(k===3)return oQ('Ordne eine Simulation sinnvoll.', ['Zufallsmodell und Annahmen festlegen','Viele Wiederholungen durchführen','Ergebnisse zusammenfassen','Simulationsergebnis im Kontext beurteilen'],'Erst Modellannahmen festlegen, dann simulieren, auswerten und beurteilen.')
+   return mQ('Ordne den Begriff seiner Bedeutung zu.',[{left:'Zufallsgröße',options:['ordnet Ergebnissen Zahlenwerte zu','ist die Anzahl aller Versuche'],correct:0},{left:'Erwartungswert',options:['langfristiger Mittelwert','sicher eintretendes Ergebnis'],correct:0}],'Eine Zufallsgröße ordnet Ergebnisse Zahlen zu; der Erwartungswert beschreibt den langfristigen Mittelwert.')
+  }
+  let n=phase==='q1'?5:6,p=lk?0.2:0.5;
+  const binom=(nn,pp,k)=>chooseN(nn,k)*pp**k*(1-pp)**(nn-k);
+  if(phase==='q1'&&lk){
+   n=r(8,13);p=[0.2,0.3,0.4][rand(0,2)];
+   if(k===0){const prob=binom(n,p,0)+binom(n,p,1),pTex=p.toString().replace('.','{,}');return nQ(`In einer Stichprobe von \\(${n}\\) Bauteilen ist ein Teil mit Wahrscheinlichkeit \\(${pTex}\\) fehlerhaft. Bestimme die Wahrscheinlichkeit für höchstens ein fehlerhaftes Teil.`,prob,`Addiere \\(P(X=0)+P(X=1)=(1-p)^n+np(1-p)^{n-1}\\) mit \\(n=${n}\\) und \\(p=${pTex}\\).`,0.001)}
+   if(k===1)return cQ('Wie lässt sich \\(P(X\\geq1)\\) am einfachsten über das Gegenereignis bestimmen?',['\\(1-P(X=0)\\)','\\(P(X=0)\\)','\\(1-P(X=n)\\)'],0,'Das Gegenereignis zu mindestens einem Treffer ist kein Treffer: \\(P(X\\geq1)=1-P(X=0)\\).');
+   if(k===2){const variance=n*p*(1-p),pTex=p.toString().replace('.','{,}');return sQ(`Für die Fehlerzahl \\(X\\sim B(${n};${pTex})\\): Markiere die Varianz.`,0,Math.max(2,Math.ceil(variance*1.6)),variance,'Nutze \\(Var(X)=np(1-p)\\) und setze beide Parameter ein.',0.1,0.05)}
+   if(k===3)return oQ('Ordne die Schritte zur kumulativen Wahrscheinlichkeit \\(P(X\\leq1)\\).',['Ereignis und Parameter festlegen','Wahrscheinlichkeiten für 0 und 1 Treffer addieren','Binomialterme berechnen','Ergebnis als kumulative Wahrscheinlichkeit deuten'],'Für höchstens einen Treffer werden die Einzelwahrscheinlichkeiten bei null und einem Treffer addiert.');
+   return mQ('Ordne das Ereignis der passenden Darstellung zu.',[{left:'Mindestens ein Treffer',options:['\\(1-P(X=0)\\)','\\(P(X=0)\\)'],correct:0},{left:'Höchstens ein Treffer',options:['\\(P(X=0)+P(X=1)\\)','\\(1-P(X=0)\\)'],correct:0}],'„Mindestens ein Treffer“ nutzt das Gegenereignis; „höchstens ein Treffer“ umfasst null oder einen Treffer.');
+  }
+  if(phase==='q1'){
+   n=r(8,13);p=(lk?[0.2,0.3,0.4]:[0.2,0.4,0.5])[rand(0,2)];
+   if(k===0){const x=1,prob=binom(n,p,x),pTex=p.toString().replace('.','{,}');return nQ(`Bei \\(X\\sim B(${n};${pTex})\\): Bestimme die Wahrscheinlichkeit für genau einen Treffer.`,prob,'Setze die Werte in die Binomialformel ein: \\(P(X=1)=\\binom{n}{1}p(1-p)^{n-1}\\).',0.001)}
+   if(k===1)return cQ('Welche Voraussetzungen passen zu einem Binomialmodell?',['Feste Versuchszahl, zwei Ausgänge, unabhängige Versuche und gleiches p.','Unterschiedliche Trefferwahrscheinlichkeiten bei jedem Versuch.','Die Anzahl der Versuche ist unbegrenzt.'],0,'Ein Binomialmodell braucht eine feste Versuchszahl, zwei Ausgänge, Unabhängigkeit und ein konstantes p.')
+   if(k===2){const ans=n*p,pTex=p.toString().replace('.','{,}');return sQ(`Für \\(X\\sim B(${n};${pTex})\\): Markiere den Erwartungswert \\(E(X)\\).`,0,n,ans,'Für eine Binomialverteilung gilt \\(E(X)=np\\).',0.1,0.1)}
+   if(k===3)return oQ('Ordne die Schritte zur Binomialwahrscheinlichkeit.', ['n, p und das Ereignis bestimmen','Passende Binomialformel auswählen','Werte einsetzen und berechnen','Wahrscheinlichkeit im Kontext deuten'],'Zuerst werden Parameter und Ereignis festgelegt; anschließend wird gerechnet und gedeutet.')
+   return mQ('Ordne die Kennzahl einer Binomialverteilung zu.',[{left:'Erwartungswert',options:['\\(np\\)','\\(np(1-p)\\)'],correct:0},{left:'Varianz',options:['\\(np\\)','\\(np(1-p)\\)'],correct:1}],'Bei \\(X\\sim B(n;p)\\) gilt \\(E(X)=np\\) und \\(Var(X)=np(1-p)\\).')
+  }
+  if(phase==='q2'&&lk&&k===0){const sampleN=[80,100,120,150][rand(0,3)],sampleX=Math.round(sampleN*(0.2+0.01*rand(0,10))),phat=sampleX/sampleN,lower=phat-1.96*Math.sqrt(phat*(1-phat)/sampleN),answer=Math.round(lower*1000)/10;return nQ(`Bei einer Stichprobe mit \\(${sampleN}\\) Geräten sind \\(${sampleX}\\) fehlerhaft. Berechne die untere Grenze des näherungsweisen 95%-Konfidenzintervalls mit \\(\\hat p\\pm1{,}96\\sqrt{\\hat p(1-\\hat p)/n}\\). Runde auf eine Nachkommastelle in Prozent.`,answer,`Es gilt \\(\\hat p=${sampleX}/${sampleN}\\). Die untere Grenze ist \\(\\hat p-1{,}96\\sqrt{\\hat p(1-\\hat p)/n}\\approx${answer.toString().replace('.', '{,}')}\\,\\%\\).`,0.06,'%')}
+  if(phase==='q2'&&lk&&k===2){const mu=40+5*rand(0,8),sigma=3+rand(0,5),answer=mu+2*sigma;return sQ(`Für \\(X\\sim\\mathcal N(\\mu=${mu};\\sigma=${sigma})\\): Markiere die obere Grenze des zentralen 95%-Bereichs nach der 2σ-Regel.`,mu-2*sigma,mu+3*sigma,answer,'Für die obere Grenze addierst du zwei Standardabweichungen zum Mittelwert: \\(\\mu+2\\sigma\\).',0.1,0.05)}
+  if(!lk){
+   if(k===0){if(phase==='q2'){const sampleN=r(18,24),pValue=[0.08,0.1,0.12,0.15][rand(0,3)],threshold=r(2,4),prob=Array.from({length:threshold},(_,i)=>binom(sampleN,pValue,i)).reduce((sum,value)=>sum+value,0),pTex=pValue.toString().replace('.','{,}');return nQ(`In einem Paketzentrum haben \\(${Math.round(pValue*100)}\\) Prozent der Sendungen Ziel B. Für \\(${sampleN}\\) zufällig ausgewählte Pakete gilt \\(X\\sim B(${sampleN};${pTex})\\). Bestimme die Wahrscheinlichkeit, dass weniger als \\(${threshold}\\) Pakete Ziel B haben.`,prob,`Addiere die Binomialwahrscheinlichkeiten für \\(0,1,\\ldots,${threshold-1}\\) Treffer: \\(P(X<${threshold})=\\sum_{i=0}^{${threshold-1}}\\binom{${sampleN}}{i}(${pTex})^i(1-${pTex})^{${sampleN}-i}\\).`,0.002)}const pTex=p.toString().replace('.','{,}');return nQ(`Bei \\(X\\sim B(${n};${pTex})\\): Wie groß ist \\(P(X=0)\\)?`,(1-p)**n,'Nutze das Gegenereignis „kein Treffer“: \\(P(X=0)=(1-p)^n\\).',0.001)}
+   if(k===1&&phase==='q2'){const target=[330,500,750][rand(0,2)],offset=rand(2,4),spreadA=(10+rand(0,6))/10,spreadB=(20+rand(0,8))/10;return cQ(`Zwei Abfüllmaschinen sollen Flaschen mit jeweils \\(${target}\\) ml füllen. Stichprobe A: Mittelwert \\(${target}\\) ml, Standardabweichung \\(${spreadA.toString().replace('.', '{,}')}\\) ml. Stichprobe B: Mittelwert \\(${target+offset}\\) ml, Standardabweichung \\(${spreadB.toString().replace('.', '{,}')}\\) ml. Welche Maschine arbeitet nach Mittelwertnähe und Streuung besser?`,['Maschine A','Maschine B','Beide gleich gut'],0,'Vergleiche beide Kennwerte: A liegt im Mittel genau beim Sollwert und streut weniger.')}
+   if(k===1)return cQ('Eine Maschine produziert unabhängig Teile mit konstanter Fehlerwahrscheinlichkeit p. Welches Modell passt zur Fehlerzahl unter n Teilen?',['Binomialverteilung','Stets Normalverteilung','Gleichverteilung'],0,'Feste Zahl unabhängiger Versuche mit zwei Ausgängen passt zum Binomialmodell.')
+   if(k===2){if(phase==='q2'){n=r(30,50);p=[0.08,0.1,0.12,0.15][rand(0,3)]}const ans=n*p,pTex=p.toString().replace('.','{,}');return sQ(`Für \\(X\\sim B(${n};${pTex})\\): Wo liegt die erwartete Trefferzahl?`,0,n,ans,'Der Erwartungswert ist \\(np\\).',0.1,0.1)}
+   if(k===3)return oQ('Ordne eine Modellierungsaufgabe.', ['Zufallsgröße festlegen','Binomialannahmen prüfen','Gesuchte Wahrscheinlichkeit berechnen','Ergebnis mit Blick auf die Situation deuten'],'Die Modellannahmen müssen vor der Berechnung zur Situation passen.')
+   return mQ('Ordne Ereignis und Gegenereignis.',[{left:'Mindestens ein Treffer',options:['Kein Treffer','Alle Versuche treffen'],correct:1},{left:'Kein Treffer',options:['Mindestens ein Treffer','Alle Versuche treffen'],correct:0}],'„Mindestens ein Treffer“ ist das Gegenereignis zu „kein Treffer“.')
+  }
+  if(k===0){const mu=40+5*rand(0,8),sigma=3+rand(0,5),answer=mu-sigma;return nQ(`Bei \\(X\\sim\\mathcal{N}(\\mu=${mu};\\sigma=${sigma})\\) liegen ungefähr 68 Prozent im Bereich \\([\\mu-\\sigma,\\mu+\\sigma]\\). Bestimme die Untergrenze.`,answer,'Ziehe eine Standardabweichung vom Mittelwert ab: \\(\\mu-\\sigma\\).')}
+  if(k===1)return cQ('Was bedeutet ein 95%-Konfidenzintervall für einen unbekannten Anteil p?', ['Das Verfahren erfasst bei vielen Stichproben den wahren Anteil in etwa 95 Prozent der Fälle.','Der feste wahre Anteil liegt mit 95 Prozent Wahrscheinlichkeit in genau diesem bereits berechneten Intervall.','95 Prozent aller Einzelwerte liegen immer im Intervall.'],0,'Das Konfidenzniveau beschreibt die Trefferquote des Verfahrens bei wiederholten Stichproben.')
+  if(k===2){const mu=40+5*rand(0,8),sigma=3+rand(0,5),answer=mu+2*sigma;return sQ(`Markiere die obere Grenze des 2σ-Bereichs für \\(X\\sim\\mathcal{N}(\\mu=${mu};\\sigma=${sigma})\\).`,mu-2*sigma,mu+3*sigma,answer,'Die obere Grenze ist \\(\\mu+2\\sigma\\).',0.1,0.1)}
+  if(k===3)return oQ('Ordne die Schritte für ein approximatives Konfidenzintervall.', ['Stichprobenanteil und Umfang bestimmen','Standardfehler berechnen','Intervallgrenzen bilden','Aussage und Unsicherheit im Kontext deuten'],'Das Intervall wird aus Stichprobenanteil, Standardfehler und gewähltem Verfahren aufgebaut; danach wird es interpretiert.')
+  if(extension){const err=0.1,required=Math.ceil(0.25/(err/2)**2);return nQ('Für ein approximatives 95%-Konfidenzintervall soll die halbe Intervalllänge höchstens 0,1 sein. Nutze konservativ \\(p=0{,}5\\). Wie groß muss n mindestens sein?',required,'Mit \\(2\\sqrt{p(1-p)/n}\\leq0{,}1\\) und \\(p=0{,}5\\) folgt \\(n\\geq100\\).',0)}
+  return mQ('Ordne die Verteilung zur typischen Eigenschaft.',[{left:'Binomialverteilung',options:['diskrete Trefferzahl','stetige Messgröße'],correct:0},{left:'Normalverteilung',options:['diskrete Trefferzahl','stetige Messgröße'],correct:1}],'Binomialverteilungen modellieren diskrete Trefferzahlen; Normalverteilungen beschreiben stetige Größen.')
+  }
+ return cQ('Zu diesem Inhaltsfeld ist kein passendes Aufgabenformat hinterlegt.',['Zur Auswahl zurückkehren'],0,'Öffne ein anderes Quizformat.')
+}
+function question(field,grade,level,index,forcedPattern=null,forceExtension=null){const pattern=forcedPattern===null?index%5:forcedPattern,extension=forceExtension===null?index>=5:forceExtension;const q=buildQuestion(field,QUIZ.phase,QUIZ.course,level,index,pattern,extension);const guide=coaching[field][pattern];q.skillId=`${field}-${QUIZ.phase}-${QUIZ.course||'common'}-${pattern}`;q.skillLabel=specificSkillLabel(field,grade,pattern);q.competencyFocus=QUIZ.focus;q.hints=guide.hints;q.errorGuide=guide.error;q.patternIndex=pattern;q.level=level;if((QUIZ.phase==='q1'||QUIZ.phase==='q2')&&(pattern===0||pattern===2))q.abiTransfer=true;return q}
+function profileStore(){
+ const profileKey='matheQuizProfiles',activeKey='matheQuizActiveProfile';
+ try{
+  let profiles=JSON.parse(localStorage.getItem(profileKey)||'[]');
+  if(!Array.isArray(profiles)||!profiles.length){
+   profiles=[{id:'p-'+Math.random().toString(36).slice(2,8),label:'Lernprofil 1'}];
+   localStorage.setItem(profileKey,JSON.stringify(profiles));
+  }
+  let active=localStorage.getItem(activeKey);
+  if(!profiles.some(p=>p.id===active)){active=profiles[0].id;localStorage.setItem(activeKey,active)}
+  return {profiles,active};
+ }catch{return {profiles:[{id:'local',label:'Dieses Gerät'}],active:'local'}}
+}
+function progressKey(){return 'matheQuizProgress:'+profileStore().active+':'+QUIZ.id}
+function readProgress(){
+ const empty={schema:1,quizId:QUIZ.id,grade:QUIZ.grade,gradeLabel:QUIZ.gradeLabel,phase:QUIZ.phase,course:QUIZ.course,field:QUIZ.field,skills:{},rounds:[]};
+ try{const saved=JSON.parse(localStorage.getItem(progressKey())||'null');return saved?.schema===1?{...empty,...saved}:empty}catch{return empty}
+}
+function writeProgress(data){try{localStorage.setItem(progressKey(),JSON.stringify(data));return true}catch{return false}}
+function recordTrainingTask(q,partial,attempts){
+ const data=readProgress(),skill=data.skills[q.skillId]||{label:q.skillLabel,competencyFocus:q.competencyFocus,completed:0,attempts:0,firstTryCorrect:0,recentScores:[],mastery:0};
+ skill.label=q.skillLabel;skill.competencyFocus=q.competencyFocus;
+ skill.completed++;skill.attempts+=attempts;skill.firstTryCorrect+=Number(attempts===1&&partial===1);
+ skill.recentScores=[...(skill.recentScores||[]),partial].slice(-12);
+ skill.mastery=skill.recentScores.reduce((a,b)=>a+b,0)/skill.recentScores.length;
+ skill.lastCompleted=new Date().toISOString();data.skills[q.skillId]=skill;
+ writeProgress(data);
+ state.roundStats?.answers.push({skillId:q.skillId,skillLabel:q.skillLabel,patternIndex:q.patternIndex,kind:q.kind,prompt:q.prompt,nextStep:q.hints?.[0]||q.errorGuide||'',partial,attempts,hints:state.hintsShown});
+ state.roundStats.hints+=state.hintsShown;
+}
+function saveTrainingRound(){
+ if(state.mode!=='training'||!state.roundStats)return;
+ const data=readProgress(),answers=state.roundStats.answers;
+ if(!answers.length)return;
+ const firstTry=answers.filter(x=>x.attempts===1&&x.partial===1).length;
+ data.rounds=[...(data.rounds||[]),{at:new Date().toISOString(),level:state.level,focus:state.roundFocusLabel,score:state.score,correct:state.correct,total:answers.length,firstTryCorrect:firstTry,hintsShown:state.roundStats.hints}].slice(-100);
+ writeProgress(data);
+}
+function saveLocalLeaderboard(){
+ if(state.mode!=='training'||!state.roundStats?.answers.length)return;
+ const store=profileStore(),profile=store.profiles.find(item=>item.id===store.active),key='matheQuizLocalLeaderboard:'+QUIZ.id;
+ let entries=[];
+ try{entries=JSON.parse(localStorage.getItem(key)||'[]')}catch{}
+ if(!Array.isArray(entries))entries=[];
+ const entry={profileId:store.active,name:profile?.label||'Lernprofil',score:state.score,correct:state.correct,total:10,level:levelName(state.level),date:new Date().toISOString()};
+ const existing=entries.findIndex(item=>item.profileId===store.active);
+ if(existing<0)entries.push(entry);else if(state.score>=Number(entries[existing].score||0))entries[existing]=entry;
+ entries.sort((a,b)=>Number(b.score||0)-Number(a.score||0)||Number(b.correct||0)-Number(a.correct||0)||String(a.date||'').localeCompare(String(b.date||'')));
+ try{localStorage.setItem(key,JSON.stringify(entries.slice(0,50)))}catch{}
+}
+function adaptivePatterns(){
+ const data=readProgress(),patterns=[0,1,2,3,4];
+ const ranked=patterns.map(i=>({i,mastery:data.skills[QUIZ.fieldId+'-'+QUIZ.phase+'-'+(QUIZ.course||'common')+'-'+i]?.mastery}));
+ if(ranked.every(x=>x.mastery===undefined))return shuffle(patterns);
+ ranked.sort((a,b)=>(a.mastery??0.55)-(b.mastery??0.55));
+ if(ranked.every(x=>x.mastery!==undefined&&x.mastery>=0.82))return shuffle(patterns);
+ const weak=ranked.slice(0,Math.min(3,ranked.length)).map(x=>x.i);
+ return Array.from({length:5},(_,i)=>weak[i%weak.length]);
+}
+function focusSelectMarkup(){return `<div class="round-focus"><label for="roundFocus">Übungsfokus</label><select id="roundFocus"><option value="mixed">Gemischte Runde · alle Aufgabenfamilien</option>${focusNames[QUIZ.fieldId].map((x,i)=>`<option value="${i}">${specificSkillLabel(QUIZ.fieldId,QUIZ.grade,i)}</option>`).join('')}</select><p>In einer Fokusrunde übst du zehn Aufgaben aus einer ausgewählten Aufgabenfamilie.</p></div>`}
+function safeTex(root){renderMath(root)}
+function motivationPanel(){
+ const progress=readProgress(),rounds=Array.isArray(progress.rounds)?progress.rounds:[],last=rounds.length?rounds[rounds.length-1]:null;
+ const total=last?Math.max(1,Math.min(10,Math.round(Number(last.total)||10))):10;
+ const correct=last?Math.max(0,Math.min(total,Math.round(Number(last.correct)||0))):0;
+ const first=rounds.length===0,qp=QUIZ.phase==='q1'||QUIZ.phase==='q2';
+ const title=first?'Deine erste Mathe-Mission':'Du knüpfst an deinen Fortschritt an';
+ const detail=first?'Fang auf dem Level an, das sich heute richtig anfühlt. Du bestimmst das Tempo und kannst bei jeder Aufgabe einen Tipp holen.':`In deiner letzten Runde hast du ${correct} von ${total} Aufgaben vollständig gelöst. Heute kannst du gezielt anknüpfen oder einen anderen Schwerpunkt ausprobieren.`;
+ const transfer=qp?'<span class="quest-chip">4 Abitur-Transfers in der gemischten Runde</span>':'<span class="quest-chip">3 Level zur Wahl</span>';
+ const roundsText=rounds.length?`<span class="quest-chip">${rounds.length} ${rounds.length===1?'Runde':'Runden'} gemeistert</span>`:'';
+ return `<section class="quest-briefing" aria-labelledby="questTitle"><div class="quest-briefing-head"><div><p class="quest-kicker">${QUIZ.icon} ${QUIZ.className} · DEIN FOKUS</p><h2 id="questTitle">${title}</h2><p>${detail}</p></div><span class="quest-emblem" aria-hidden="true">${QUIZ.icon}</span></div><ol class="quest-steps" aria-label="So läuft deine Trainingsrunde"><li><b>1</b><span>Level selbst wählen</span></li><li><b>2</b><span>In Ruhe knobeln</span></li><li><b>3</b><span>Fortschritt entdecken</span></li></ol><div class="quest-meta"><span class="quest-chip">10 Aufgaben</span><span class="quest-chip">ohne Zeitdruck</span>${transfer}${roundsText}</div></section>`
+}
+function home(){setRoute('home');clearInterval(state.timer);clearInterval(state.roundClock);document.body.classList.remove('in-task');state.mode='';state.apiOnline=false;view.innerHTML=`<section class="hero"><div class="hero-content"><div class="eyebrow">Mathematik · ${QUIZ.gradeLabel} · ${QUIZ.courseLabel}</div><h1>${QUIZ.title}</h1><p>${QUIZ.motto}</p><p><strong>${QUIZ.field}</strong> · ${QUIZ.tagline}</p><p class="focus"><strong>Schwerpunkt:</strong> ${QUIZ.focus}</p></div><div class="hero-icon" aria-hidden="true">${QUIZ.icon}</div></section>${motivationPanel()}<section class="cards"><article class="card mode-card"><div class="glyph">🧠</div><h2>In Ruhe üben</h2><p>Wähle dein Level und löse zehn Aufgaben mit hilfreichem Feedback.</p><button class="primary" id="trainStart">Training starten</button></article><article class="card mode-card"><div class="glyph">🏆</div><h2>Wettbewerb spielen</h2><p>Zwölf Aufgaben, gemeinsamer Punktestand und Rangliste.</p><button class="primary" id="contestStart" disabled>${CLOUD.enabled&&CLOUD.baseUrl?'Verbindung wird geprüft …':'Bald verfügbar'}</button></article><article class="card mode-card rank-link"><div class="glyph">📊</div><h2>Quiz-Rangliste</h2><p>Sieh die Trainingsbestwerte auf diesem Gerät und die gemeinsame Wettbewerbsrangliste dieses Quiz.</p><button class="secondary" id="rankOpen">Rangliste dieses Quiz ansehen</button></article></section><div class="notice"><span class="status"><i class="dot ${CLOUD.enabled&&CLOUD.baseUrl?'':'off'}" id="workerDot"></i><span id="workerStatus">${CLOUD.enabled&&CLOUD.baseUrl?'Verbindung wird geprüft':'Wettbewerbsserver noch nicht aktiviert'}</span></span><br>Training und Lernfortschritt bleiben auf diesem Gerät. Der Wettbewerb wird online bewertet; seine Rangliste gehört nur zu diesem Quiz.</div>`;safeTex(view);$('#trainStart').onclick=levels;$('#contestStart').onclick=contestForm;$('#rankOpen').onclick=leaderboard;if(CLOUD.enabled&&CLOUD.baseUrl){api('/api/v1/status').then(data=>{if(!$('#contestStart'))return;if(data.ok!==true)throw new Error('Healthcheck fehlgeschlagen');state.apiOnline=true;$('#contestStart').disabled=false;$('#contestStart').textContent='Wettbewerb öffnen';$('#workerStatus').textContent='Cloudflare verbunden';$('#workerDot').classList.add('on');resumeCompetition()}).catch(()=>{if(!$('#contestStart'))return;$('#contestStart').textContent='Server nicht erreichbar';$('#workerStatus').textContent='Server nicht erreichbar';$('#workerDot').classList.remove('on')})}}
+async function resumeCompetition(){try{const saved=JSON.parse(localStorage.getItem(`matheQuizRound:${QUIZ.id}`)||'null');if(!saved?.browserId)return;const d=await api(`/api/v1/competition/resume?quizId=${encodeURIComponent(QUIZ.id)}&browserId=${encodeURIComponent(saved.browserId)}&roundId=${encodeURIComponent(saved.roundId)}`);if(!d.roundId)return;state.mode='competition';state.contest={roundId:d.roundId,browserId:saved.browserId,studentName:saved.name||makeAlias(),className:QUIZ.className};state.index=Number(d.index)||0;state.score=Number(d.totalPoints)||0;state.correct=Number(d.correctCount)||0;state.basePoints=Number(d.basePoints)||0;state.timeBonus=Number(d.timeBonus)||0;state.roundStartedAt=Date.parse(d.roundStartedAt)||Date.now();if(d.finished){finish();return}if(!d.question?.id)return;state.round=[d.question];showQuestion(d.question)}catch{}}
+function levels(){setRoute('levels');document.body.classList.remove('in-task');state.mode='';view.innerHTML=`<section class="card"><div class="section-head"><div><h2>Wähle dein Tempo</h2><p>Wähle den Einstieg, der heute passt. Im Training gibt es keinen Zeitdruck und Tipps sind Teil des Lernens.</p></div><span class="pill">${QUIZ.icon} ${QUIZ.field}</span></div>${focusSelectMarkup()}<div class="levels"><button class="level" data-level="einstieg"><strong>🌱 Einstieg</strong><span>Ein klarer Start mit überschaubaren Zahlen. Übe die Grundlagen und hol dir bei Bedarf einen Tipp.</span></button><button class="level" data-level="aufbau"><strong>⚡ Aufbau</strong><span>Verbinde Regeln und Darstellungen Schritt für Schritt.</span></button><button class="level" data-level="challenge"><strong>🚀 Challenge</strong><span>Wende dein Wissen auf neue Zahlen und mehrschrittige Situationen an.</span></button></div><div class="action-row"><button class="secondary" id="backHome">Zurück</button></div></section>`;view.querySelectorAll('[data-level]').forEach(b=>b.onclick=()=>startTraining(b.dataset.level));$('#backHome').onclick=home;}
+function startTraining(level,forcedFocus=null){
+ const focus=forcedFocus===null?($('#roundFocus')?.value||'mixed'):String(forcedFocus);
+ state.mode='training';state.level=level;state.score=0;state.correct=0;state.streak=0;state.bestStreak=0;state.index=0;
+ state.roundFocusLabel=focus==='mixed'?'Gemischte Runde':specificSkillLabel(QUIZ.fieldId,QUIZ.grade,Number(focus));
+ const priorSkills=readProgress().skills||{};state.roundBaseline=Object.fromEntries([0,1,2,3,4].map(pattern=>{const skill=priorSkills[QUIZ.fieldId+'-'+QUIZ.phase+'-'+(QUIZ.course||'common')+'-'+pattern];return[pattern,{sampleCount:Array.isArray(skill?.recentScores)?skill.recentScores.length:0,mastery:typeof skill?.mastery==='number'&&Number.isFinite(skill.mastery)?skill.mastery:null}]}));
+ const patterns=focus==='mixed'?[0,1,2,3,4,...adaptivePatterns()]:Array(10).fill(Number(focus));
+ state.round=shuffle(patterns.map((pattern,i)=>question(QUIZ.fieldId,QUIZ.grade,level,i,pattern,focus==='mixed'?i>=5:i%2===1)));
+ state.roundStats={answers:[],hints:0};state.roundSaved=false;
+ showQuestion();
+}
+function showQuestion(q){if(!q)q=state.round[state.index];if(!q)return;setRoute('task');document.body.classList.add('in-task');state.locked=false;state.chosen=null;state.points=[];state.cursor={x:0,y:0};state.match={};state.order=q.items?shuffle(q.items):[];state.attemptsForQuestion=0;state.hintsShown=0;state.lastAnswer=null;state.lastPartial=0;
+ const total=state.mode==='competition'?12:10;const progress=(state.index/total)*100;state.currentQuestion=q;view.innerHTML=`<section class="game"><div class="game-head"><div class="progress-wrap"><div class="progress-label"><span>Aufgabe <span data-math="${state.index+1}"></span> von <span data-math="${total}"></span></span>${state.mode==='competition'?`<span class="timer" aria-live="off">Aufgabe <span id="timerText">--</span> · Runde <span id="totalTimerText">0:00</span></span>`:''}</div><div class="progress"><span style="width:${progress}%"></span></div></div><div class="score" id="scoreDisplay">Punkte <span data-math="${state.score}"></span></div></div><article class="question-card"><div class="question-meta"><span class="pill">${QUIZ.icon} ${QUIZ.field}</span><span class="pill" id="abiBadge" hidden>Abitur-Transfer · Zahlenwerte variiert</span><span>${state.mode==='competition'?'Wettbewerb':levelName(state.level)}</span>${state.mode==='training'?`<span class="pill">${state.roundFocusLabel}</span>`:''}</div><div class="question" id="prompt"></div><div class="hint-panel" id="hintPanel"><button type="button" class="secondary" id="hintButton">Tipp anzeigen</button><p class="hint-text" id="hintText" hidden aria-live="polite"></p></div><div id="answerArea" class="answers"></div><div id="feedback" class="feedback" role="status" aria-live="polite"></div><div class="action-row"><button class="secondary" id="quit">Beenden</button><button class="primary" id="check">Antwort prüfen</button><div class="feedback-actions"><button type="button" class="secondary hidden" id="retry">Antwort überarbeiten</button><button type="button" class="quiet hidden" id="showSolution">Lösungsweg ansehen</button><button type="button" class="primary hidden" id="next">Weiter</button></div></div></article><div class="helper">Ein guter Lösungsweg zählt. Lies die Rückmeldung, bevor du weitergehst.</div></section>`;
+ const abiBadge=$('#abiBadge');abiBadge.hidden=!q.abiTransfer;const prompt=$('#prompt');prompt.textContent=q.prompt;renderMath(prompt);renderAnswer(q);$('#quit').onclick=home;$('#check').onclick=()=>check(q);$('#next').onclick=next;$('#hintButton').onclick=()=>showHint(q);$('#retry').onclick=()=>resetFeedbackForRetry(q);$('#showSolution').onclick=()=>finishTrainingAnswer(q,state.lastAnswer,state.lastPartial);if(state.mode==='competition')$('#hintPanel').hidden=true;
+ if(state.mode==='competition'){startTimer(q.expiresAt);startRoundClock()}
+ renderMath(view);
+}
+function levelName(l){return l==='einstieg'?'Einstieg':l==='challenge'?'Challenge':'Aufbau'}
+function renderAnswer(q){
+ const area=$('#answerArea');
+ if(q.kind==='number'){
+  area.innerHTML=`<label class="sr-only" for="answer">Zahl eingeben</label><div class="input-row"><input class="answer-input" id="answer" inputmode="decimal" autocomplete="off" placeholder="Dein Ergebnis"><span class="unit">${q.unit||''}</span></div><div class="helper">Dezimalkomma oder Dezimalpunkt ist möglich.</div>${keypadMarkup()}`;
+  $('#answer').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();check(q)}};
+  bindKeypad('answer');
+ } else if(q.kind==='vector'){
+  area.innerHTML=`<div class="vector-entry" role="group" aria-label="Vektor-Komponenten">${['x','y','z'].map((axis,i)=>`<label><span>Komponente <span data-math="${axis}"></span></span><input class="answer-input" id="vector${i}" inputmode="decimal" autocomplete="off" aria-label="${axis}-Komponente"></label>`).join('')}</div><div class="helper">Gib die drei Komponenten getrennt ein.</div>${keypadMarkup()}`;
+  area.querySelectorAll('.answer-input').forEach(input=>input.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();check(q)}});bindKeypad('vector0');
+ } else if(q.kind==='fraction'){
+  area.innerHTML=`<div class="fraction-entry"><label><span>Zähler</span><input class="answer-input" id="fractionNum" inputmode="numeric" aria-label="Zähler"></label><span class="fraction-bar" aria-hidden="true">/</span><label><span>Nenner</span><input class="answer-input" id="fractionDen" inputmode="numeric" aria-label="Nenner"></label></div><div class="helper">Gib einen gleichwertigen Bruch ein. Kürzen ist möglich.</div>${keypadMarkup()}`;
+  $('#fractionNum').onkeydown=$('#fractionDen').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();check(q)}};
+  bindKeypad('fractionNum');
+ } else if(q.kind==='choice'){
+  area.innerHTML=q.options.map((o,i)=>`<button type="button" class="answer-btn" data-i="${i}" aria-pressed="false"><span class="answer-option">${o}</span></button>`).join('');
+  area.querySelectorAll('.answer-btn').forEach(b=>b.onclick=()=>{if(state.locked)return;area.querySelectorAll('.answer-btn').forEach(x=>{x.classList.remove('selected');x.setAttribute('aria-pressed','false')});b.classList.add('selected');b.setAttribute('aria-pressed','true');state.chosen=Number(b.dataset.i)});
+  safeTex(area);
+ } else if(q.kind==='slider'){
+  const initial=(q.min+q.max)/2;
+  area.innerHTML=`<div class="slider-box"><div class="slider-labels"><span>${math(q.min,0)}</span><span>${math(q.max,0)}</span></div><div class="slider-input-row"><input class="range" id="range" type="range" min="${q.min}" max="${q.max}" step="${q.step}" value="${initial}" aria-label="Position auf dem Zahlenstrahl"><label class="sr-only" for="rangeNumber">Markierter Zahlenwert</label><input class="answer-input" id="rangeNumber" inputmode="decimal" autocomplete="off" aria-describedby="liveValue" value="${String(initial).replace('.',',')}"></div><div class="range-feedback" id="rangeFeedback" role="img" aria-hidden="true"><div class="range-track" aria-hidden="true"><span class="range-band"></span><span class="range-mark target"></span><span class="range-mark user"></span></div><div class="range-legend"><span><i class="legend-user" aria-hidden="true"></i>Deine Markierung</span><span><i class="legend-target" aria-hidden="true"></i>Zielwert und Toleranz</span></div></div><div class="live-value" id="liveValue" aria-live="polite"></div>${keypadMarkup()}</div>`;
+  const r=$('#range'),entry=$('#rangeNumber'),v=$('#liveValue');
+  const display=()=>{v.textContent='Deine Markierung: '+String(r.value).replace('.',',')};
+  const setFromRange=()=>{entry.value=String(r.value).replace('.',',');display()};
+  r.oninput=setFromRange;
+  entry.oninput=()=>{const n=parseMathNumber(entry.value);if(Number.isFinite(n)&&n>=q.min&&n<=q.max){r.value=String(n);display()}};
+  entry.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();check(q)}};
+  bindKeypad('rangeNumber');
+  display();
+ } else if(q.kind==='match'){
+  area.innerHTML=`<div class="match-grid">${q.pairs.map((p,i)=>`<div class="match-row"><div class="match-left">${p.left}</div><select data-match="${i}" aria-label="Zuordnung für ${p.left}"><option value="">Zuordnung wählen …</option>${p.options.map((o,j)=>`<option value="${j}">${o}</option>`).join('')}</select></div>`).join('')}</div>`;
+  safeTex(area);
+  area.querySelectorAll('select').forEach(s=>s.onchange=()=>state.match[s.dataset.match]=s.value);
+ } else if(q.kind==='order'){
+  area.innerHTML=`<div class="order-list">${state.order.map((x,i)=>`<div class="order-item" data-pos="${i}"><span class="order-text">${x}</span><button type="button" aria-label="Schritt ${i+1} nach oben verschieben" data-move="-1" data-i="${i}">↑</button><button type="button" aria-label="Schritt ${i+1} nach unten verschieben" data-move="1" data-i="${i}">↓</button></div>`).join('')}</div>`;
+  safeTex(area);
+  area.querySelectorAll('[data-move]').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.i),direction=Number(b.dataset.move),j=i+direction;if(j<0||j>=state.order.length)return;[state.order[i],state.order[j]]=[state.order[j],state.order[i]];renderAnswer(q);area.querySelector(`.order-item[data-pos="${j}"] [data-move="${direction}"]`)?.focus()});
+ } else if(q.kind==='construct'){
+  area.innerHTML=`<div class="construct-wrap"><div class="construct-canvas"><svg class="construct-svg" id="grid" viewBox="0 0 300 300" role="application" tabindex="0" aria-describedby="constructInstructions constructAnnouncement" aria-label="Konstruktionsraster. Klicke auf einen Rasterpunkt oder bewege den Fokus mit den Pfeiltasten und setze Punkte mit Enter."></svg><div class="grid-labels" id="gridLabels" aria-hidden="true"></div></div><div class="construct-tip" id="constructInstructions"><span class="construct-label">${q.pointLabel||'Konstruktionspunkte'}</span>: <span data-math="${state.points.length}"></span> · Rasterpunkt antippen oder Koordinaten eingeben</div><div class="construct-measure" id="constructMeasure" aria-live="polite">Abstand erscheint nach dem Setzen von zwei Punkten.</div><p class="sr-only" id="constructAnnouncement" role="status" aria-live="polite" aria-atomic="true">Noch keine Punkte gesetzt.</p><div class="construct-controls"><label>x-Koordinate<input id="coordX" type="number" min="-5" max="5" step="1" inputmode="numeric"></label><label>y-Koordinate<input id="coordY" type="number" min="-5" max="5" step="1" inputmode="numeric"></label><button type="button" class="primary" id="addPoint">Punkt setzen</button><button type="button" class="secondary" id="undo">Letzten Punkt entfernen</button><button type="button" class="secondary" id="clearPoints">Alle Punkte entfernen</button></div></div>`;
+  drawGrid(q);
+  const addPoint=()=>{const xText=$('#coordX').value,yText=$('#coordY').value;if(xText===''||yText===''){$('#coordX').setAttribute('aria-invalid',String(xText===''));$('#coordY').setAttribute('aria-invalid',String(yText===''));return}const x=Number(xText),y=Number(yText);if(!Number.isInteger(x)||!Number.isInteger(y)||x< -5||x>5||y< -5||y>5){$('#coordX').setAttribute('aria-invalid','true');$('#coordY').setAttribute('aria-invalid','true');return}$('#coordX').removeAttribute('aria-invalid');$('#coordY').removeAttribute('aria-invalid');if(state.locked)return;state.cursor={x,y};state.points.push([x,y]);$('#coordX').value='';$('#coordY').value='';drawGrid(q);$('#coordX').focus()};
+  $('#addPoint').onclick=addPoint;
+  $('#coordX').onkeydown=$('#coordY').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addPoint()}};
+  $('#undo').onclick=()=>{if(state.locked)return;state.points.pop();drawGrid(q)};
+  $('#clearPoints').onclick=()=>{if(state.locked)return;state.points=[];drawGrid(q)};
+ }
+}
+function drawGrid(q,revealFeedback=false){
+ const svg=$('#grid');
+ if(!svg)return;
+ const tip=$('.construct-tip');
+ if(tip){tip.innerHTML=`<span class="construct-label">${q.pointLabel||'Konstruktionspunkte'}</span>: <span>${math(state.points.length,0)}</span> · Pfeiltasten bewegen, Enter setzt einen Punkt`;renderMath(tip)}
+ let out='';
+ for(let i=-5;i<=5;i++){
+  const p=150+i*24;
+  out+=`<line class="gridline" x1="${p}" y1="30" x2="${p}" y2="270"/><line class="gridline" x1="30" y1="${p}" x2="270" y2="${p}"/>`;
+  
+ }
+ out+='<line class="axis" x1="30" y1="150" x2="270" y2="150"/><line class="axis" x1="150" y1="30" x2="150" y2="270"/>';
+ const required=Number(q.requiredPoints??q.points?.length??0),sequence=[...(q.fixed||[]),...state.points],xy=sequence.map(([x,y])=>`${150+x*24},${150-y*24}`);
+ const close=state.points.length===required&&xy.length>1?` ${xy[0]}`:'';
+ if(q.connectPoints!==false&&xy.length>1)out+=`<polyline class="construct-shape${revealFeedback?` evaluated-${state.feedbackStatus?.replace('feedback-','')||'incorrect'}`:''}" points="${xy.join(' ')}${q.closeShape&&state.points.length===required?` ${xy[0]}`:''}"/>`;
+ for(const [x,y] of (q.fixed||[]))out+=`<circle class="anchor" cx="${150+x*24}" cy="${150-y*24}" r="7"/>`;
+ const targets=Array.isArray(q.points)?q.points:[];
+ let remaining=[...targets];
+ const pointMatches=state.points.map(p=>{const j=remaining.findIndex(t=>Math.hypot(t[0]-p[0],t[1]-p[1])<=0.35);if(j<0)return false;remaining.splice(j,1);return true});
+ if(revealFeedback)for(const [x,y] of targets)out+=`<circle class="construct-target" cx="${150+x*24}" cy="${150-y*24}" r="10"/>`;
+ state.points.forEach(([x,y],i)=>{const cls=revealFeedback&&targets.length?pointMatches[i]?' is-correct':' is-incorrect':'';out+=`<circle class="placed${cls}" cx="${150+x*24}" cy="${150-y*24}" r="8"/>`});
+ const c=state.cursor||{x:0,y:0};
+ out+=`<circle class="cursor" cx="${150+c.x*24}" cy="${150-c.y*24}" r="10"/>`;
+ svg.innerHTML=out;
+ const labels=$('#gridLabels');if(labels){labels.replaceChildren();for(let i=-5;i<=5;i++){if(i!==0){const xLabel=document.createElement('span');xLabel.dataset.math=String(i);xLabel.style.left=((150+i*24)/3)+'%';xLabel.style.top='56%';labels.append(xLabel);const yLabel=document.createElement('span');yLabel.dataset.math=String(i);yLabel.style.left='46.7%';yLabel.style.top=((154-i*24)/3)+'%';labels.append(yLabel)}}const xAxis=document.createElement('span');xAxis.dataset.math='x';xAxis.className='axis-label axis-x';labels.append(xAxis);const yAxis=document.createElement('span');yAxis.dataset.math='y';yAxis.className='axis-label axis-y';labels.append(yAxis);renderMath(labels)}
+ const announcement=$('#constructAnnouncement');if(announcement){const signature=state.points.map(([x,y],i)=>i+':'+x+':'+y).join('|');if(announcement.dataset.signature!==signature){announcement.dataset.signature=signature;announcement.textContent=state.points.length?'Gesetzte Punkte: '+state.points.map(([x,y],i)=>`Punkt ${i+1} bei x ${x} und y ${y}`).join('; '):'Noch keine Punkte gesetzt.'}}
+ const measure=$('#constructMeasure');if(measure){if(sequence.length>1){const [a,b]=sequence.slice(-2),distance=Math.hypot(b[0]-a[0],b[1]-a[1]);measure.innerHTML='Abstand der letzten zwei Punkte: '+math(distance,2)+' Kästchen';renderMath(measure)}else measure.textContent='Abstand erscheint nach dem Setzen von zwei Punkten.'}
+ const addButton=$('#addPoint');if(addButton)addButton.disabled=state.points.length>=required;
+ if(revealFeedback)svg.setAttribute('aria-label','Konstruktion ausgewertet. Grüne Punkte liegen am Ziel, rote Punkte weichen ab und grüne Umrandungen zeigen fehlende Zielpunkte.');
+ const place=(x,y)=>{if(state.locked||state.points.length>=required)return;state.points.push([x,y]);drawGrid(q)};
+ svg.onclick=e=>{if(state.locked)return;const r=svg.getBoundingClientRect(),sx=300/r.width,sy=300/r.height,x=Math.max(-5,Math.min(5,Math.round(((e.clientX-r.left)*sx-150)/24))),y=Math.max(-5,Math.min(5,Math.round((150-(e.clientY-r.top)*sy)/24)));state.cursor={x,y};place(x,y)};
+ svg.onkeydown=e=>{if(state.locked)return;const d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,1],ArrowDown:[0,-1]}[e.key];if(d){e.preventDefault();state.cursor={x:Math.max(-5,Math.min(5,state.cursor.x+d[0])),y:Math.max(-5,Math.min(5,state.cursor.y+d[1]))};drawGrid(q)}else if(e.key==='Enter'||e.key===' '){e.preventDefault();place(state.cursor.x,state.cursor.y)}};
+}
+function getAnswer(q){if(q.kind==='number')return parseMathNumber($('#answer')?.value??'');if(q.kind==='vector')return [0,1,2].map(i=>parseMathNumber($('#vector'+i)?.value??''));if(q.kind==='fraction')return{num:parseMathNumber($('#fractionNum')?.value??''),den:parseMathNumber($('#fractionDen')?.value??'')};if(q.kind==='choice')return state.chosen;if(q.kind==='slider'){const n=parseMathNumber($('#rangeNumber')?.value??'');return Number.isFinite(n)&&n>=q.min&&n<=q.max?n:NaN}if(q.kind==='match')return {...state.match};if(q.kind==='order')return [...state.order];if(q.kind==='construct')return [...state.points];}
+function evaluate(q,a){if(q.kind==='number'||q.kind==='slider')return Number.isFinite(a)&&Math.abs(a-q.answer)<=(q.tol??0.001);if(q.kind==='vector')return Array.isArray(a)&&a.length===3?a.reduce((s,v,i)=>s+Number(Number.isFinite(v)&&Math.abs(v-q.answer[i])<=(q.tol??0.001)),0)/3:0;if(q.kind==='fraction')return Number.isFinite(a.num)&&Number.isFinite(a.den)&&a.den!==0&&Math.abs(a.num/a.den-q.answer.num/q.answer.den)<1e-9;if(q.kind==='choice')return a===q.correct;if(q.kind==='match')return q.pairs.every((p,i)=>String(a[i])===String(p.correct));if(q.kind==='order')return a.length===q.items.length&&a.every((x,i)=>x===q.items[i]);if(q.kind==='construct'){let remaining=[...(q.points||[])],hits=0;for(const p of a){const j=remaining.findIndex(t=>Math.hypot(t[0]-p[0],t[1]-p[1])<=0.35);if(j>=0){hits++;remaining.splice(j,1)}}return hits/(q.points||[]).length;}return false}
+function setAnswerControlsDisabled(disabled){$('#answerArea')?.querySelectorAll('input,select,button').forEach(control=>{control.disabled=disabled})}
+function fillFeedback(fb,type,icon,title,message){
+ fb.className=`feedback show ${type}`;
+ fb.innerHTML='<div class="feedback-heading"><span class="feedback-icon" aria-hidden="true"></span><strong></strong></div><div class="solution"></div>';
+ $('.feedback-icon',fb).textContent=icon;
+ $('strong',fb).textContent=title;
+ $('.solution',fb).textContent=message||'';
+ renderMath(fb);
+}
+function markAnswer(q,a,partial,reveal=true){
+ const resultClass=partial===1?'feedback-correct':partial>0?'feedback-partial':'feedback-incorrect';
+ state.feedbackStatus=resultClass;
+ const area=$('#answerArea');
+ if(!area)return;
+ const markField=(element,correct)=>{if(!element)return;element.classList.add(correct?'is-correct':'is-incorrect');element.setAttribute('aria-invalid',String(!correct))};
+ if(q.kind==='number')markField($('#answer'),partial===1);if(q.kind==='vector'&&Array.isArray(a))a.forEach((value,i)=>{if(state.mode==='training')markField($('#vector'+i),Number.isFinite(value)&&Math.abs(value-q.answer[i])<=(q.tol??0.001));else if(partial===1)markField($('#vector'+i),true)});
+ if(q.kind==='fraction'){markField($('#fractionNum'),partial===1);markField($('#fractionDen'),partial===1)}
+ if(q.kind==='slider'){
+  markField($('#rangeNumber'),partial===1);markField($('#range'),partial===1);
+  const visual=$('#rangeFeedback'),min=Number(q.min),max=Number(q.max),target=Number(q.answer),value=Number(a);
+  if(reveal&&state.mode==='training'&&visual&&Number.isFinite(target)&&Number.isFinite(value)&&max>min){
+   const pct=n=>Math.max(0,Math.min(100,(n-min)/(max-min)*100)),tolerance=Math.max(0,Number(q.tol??0.001));
+   const start=pct(target-tolerance),end=pct(target+tolerance);
+   visual.style.setProperty('--user-position',pct(value)+'%');visual.style.setProperty('--target-position',pct(target)+'%');
+   visual.style.setProperty('--target-start',start+'%');visual.style.setProperty('--target-width',Math.max(0,end-start)+'%');
+   visual.setAttribute('aria-hidden','false');visual.setAttribute('aria-label','Zahlenstrahl: Deine Markierung '+String(value).replace('.',',')+', Zielwert '+String(target).replace('.',','));
+   visual.classList.add('show');
+  }
+ }
+ if(q.kind==='choice'){
+  const canReveal=reveal&&state.mode==='training'&&Number.isInteger(q.correct);
+  area.querySelectorAll('.answer-btn').forEach(button=>{
+   const index=Number(button.dataset.i),selected=index===a,isTarget=canReveal&&index===q.correct;
+   if(isTarget)button.classList.add('correct');
+   if(selected){
+    const correct=canReveal?isTarget:partial===1;
+    button.classList.add(correct?'correct':'wrong');button.setAttribute('aria-pressed','true');
+    const badge=document.createElement('span');badge.className='answer-status';badge.textContent=correct?'Deine richtige Antwort':'Deine Auswahl';button.append(badge);
+   }else if(isTarget){
+    const badge=document.createElement('span');badge.className='answer-status';badge.textContent='Richtige Antwort';button.append(badge);
+   }
+   button.disabled=true;
+  });
+  if(a===null){const note=document.createElement('p');note.className='input-feedback-note';note.textContent='Keine Auswahl abgegeben.';area.append(note)}
+ }
+ if(q.kind==='match'){
+  const canReveal=reveal&&state.mode==='training'&&Array.isArray(q.pairs),grid=$('.match-grid',area);
+  if(grid&&!canReveal)grid.classList.add(resultClass);
+  area.querySelectorAll('.match-row').forEach((row,i)=>{
+   const select=$('select',row),pair=q.pairs[i];
+   if(!canReveal||!Number.isInteger(pair?.correct))return;
+   const correct=String(a?.[i])===String(pair.correct);row.classList.add(correct?'feedback-correct':'feedback-incorrect');
+   if(select){select.classList.add(correct?'is-correct':'is-incorrect');select.setAttribute('aria-invalid',String(!correct))}
+   if(!correct&&pair.options?.[pair.correct]!==undefined){const correction=document.createElement('span');correction.className='match-correction';correction.textContent='Richtige Zuordnung: '+pair.options[pair.correct];row.append(correction)}
+  });
+ }
+ if(q.kind==='order'){
+  const list=$('.order-list',area),canReveal=reveal&&state.mode==='training'&&Array.isArray(q.items);
+  if(list){
+   if(!canReveal){list.classList.add(resultClass);list.setAttribute('aria-label',partial===1?'Sortierung richtig.':'Die Sortierung wurde als Ganzes bewertet.')}
+   else list.querySelectorAll('.order-item').forEach((row,i)=>{const correct=String(state.order[i])===String(q.items[i]);row.classList.add(correct?'feedback-correct':'feedback-incorrect');const badge=document.createElement('span');badge.className='order-feedback-mark';badge.textContent=correct?'✓ Richtig platziert':'↕ Andere Position';$('.order-text',row).insertAdjacentElement('afterend',badge)});
+  }
+ }
+ if(q.kind==='construct'){
+  const wrap=$('.construct-wrap',area),canReveal=reveal&&state.mode==='training'&&Array.isArray(q.points)&&q.points.length>0;
+  if(wrap)wrap.classList.add(resultClass);
+  drawGrid(q,canReveal);
+ }
+}
+function showAnswerFeedback(fb,partial,message){
+ const type=partial===1?'good':partial>0?'partial':'bad';
+ const icon=partial===1?'✓':partial>0?'◐':'↺';
+ const milestone=state.mode==='training'&&state.attemptsForQuestion===1?({3:'Drei richtige Aufgaben in Folge – dein Plan trägt!',5:'Fünf richtige Aufgaben in Folge – stark drangeblieben!',10:'Zehn richtige Aufgaben in Folge – starke Runde!'})[state.streak]:null;const title=partial===1?(state.attemptsForQuestion>1?'Richtig verbessert!':milestone||'Richtig! Das sitzt.'):partial>0?'Teilweise richtig – guter Ansatz!':(state.mode==='training'&&state.attemptsForQuestion<2?'Noch nicht – du hast noch einen Versuch.':'Noch nicht – schau dir den Lösungsweg an.');
+ fillFeedback(fb,type,icon,title,message);
+}
+function showHint(q){
+ if(state.mode!=='training'||state.locked)return;
+ const hints=q.hints||[];
+ if(state.hintsShown>=hints.length)return;
+ state.hintsShown++;
+ const box=$('#hintText');box.textContent=hints[state.hintsShown-1];box.hidden=false;
+ const button=$('#hintButton');
+ button.textContent=state.hintsShown<hints.length?'Noch ein Tipp':'Alle Tipps angezeigt';
+ if(state.hintsShown>=hints.length)button.disabled=true;
+}
+function explainFirstTry(q,a,partial){
+ let detail='';
+ if(q.kind==='choice'&&Number.isInteger(a))detail='Du hast „'+q.options[a]+'“ ausgewählt. Prüfe noch einmal genau, welcher Begriff oder welche Aussage zur Frage passt. ';
+ else if(q.kind==='number'&&Number.isFinite(a)){const direction=a<q.answer?'niedriger':'höher';detail='Dein Ergebnis ist noch '+direction+' als gesucht. Prüfe den ersten Rechenschritt. '}
+ else if(q.kind==='vector'&&Array.isArray(a)){const missing=q.answer.findIndex((v,i)=>!Number.isFinite(a[i])||Math.abs(v-a[i])>(q.tol??0.001));detail='Prüfe zuerst die '+['x-','y-','z-'][Math.max(0,missing)]+'Komponente und vergleiche Vorzeichen und Rechenregel. '}
+ else if(q.kind==='slider'&&Number.isFinite(a)){const direction=a<q.answer?'weiter nach rechts':'weiter nach links';detail='Deine Markierung liegt noch neben dem Ziel. Verschiebe sie '+direction+' und prüfe die Skala. '}
+ else if(q.kind==='fraction'&&Number.isFinite(a.num)&&Number.isFinite(a.den)&&a.den!==0){const direction=a.num/a.den<q.answer.num/q.answer.den?'kleiner':'größer';detail='Dein Bruchwert ist noch '+direction+' als gesucht. Prüfe, ob Zähler und Nenner richtig eingesetzt sind. '}
+ else if(q.kind==='match'){const i=q.pairs.findIndex((pair,index)=>String(a[index])!==String(pair.correct));detail=i>=0?'Prüfe noch einmal die Zuordnung bei „'+q.pairs[i].left+'“. ':'Prüfe die Zuordnungen einzeln; mindestens eine passt noch nicht. '}
+ else if(q.kind==='order'){const i=a.findIndex((step,index)=>step!==q.items[index]);detail=i>=0?'An dieser Stelle passt der Schritt „'+q.items[i]+'“ noch nicht in deine Reihenfolge. ':'Prüfe, ob jeder Schritt logisch auf den vorherigen folgt. '}
+ else if(q.kind==='construct')detail='Passende Punkte: '+math(Math.round(partial*(q.points||[]).length),0)+' von '+math((q.points||[]).length,0)+'. Prüfe Koordinaten und Vorzeichen. ';
+ return detail+(q.errorGuide||'Prüfe deine Überlegung noch einmal.')+' Nutze bei Bedarf einen Tipp und versuche es erneut.';
+}
+function resetFeedbackForRetry(q){
+ const area=$('#answerArea');
+ area.classList.remove('feedback-correct','feedback-partial','feedback-incorrect');
+ area.querySelectorAll('.answer-status,.order-feedback-mark,.match-correction,.input-feedback-note').forEach(el=>el.remove());
+ area.querySelectorAll('.is-correct,.is-incorrect,[aria-invalid]').forEach(el=>{el.classList.remove('is-correct','is-incorrect');el.removeAttribute('aria-invalid')});
+ area.querySelectorAll('.feedback-correct,.feedback-partial,.feedback-incorrect').forEach(el=>el.classList.remove('feedback-correct','feedback-partial','feedback-incorrect'));
+ area.querySelectorAll('.answer-btn').forEach(btn=>{btn.classList.remove('selected','correct','wrong');btn.setAttribute('aria-pressed','false')});
+ if(q.kind==='number')$('#answer').value='';if(q.kind==='vector')[0,1,2].forEach(i=>{const input=$('#vector'+i);if(input)input.value=''})
+ if(q.kind==='fraction'){$('#fractionNum').value='';$('#fractionDen').value=''}
+ if(q.kind==='choice')state.chosen=null;
+ if(q.kind==='slider'){$('#rangeFeedback').classList.remove('show');$('#rangeFeedback').setAttribute('aria-hidden','true')}
+ if(q.kind==='construct')drawGrid(q,false);
+ $('#feedback').className='feedback';
+ setAnswerControlsDisabled(false);state.locked=false;
+ $('#check').classList.remove('hidden');$('#retry').classList.add('hidden');$('#showSolution').classList.add('hidden');
+ $('#check').focus();
+}
+function finalizeTrainingAnswer(q,a,partial){
+ const points=Math.round(partial*100);
+ state.score+=points;
+ if(partial===1){state.correct++;state.streak++;state.bestStreak=Math.max(state.bestStreak,state.streak)}else state.streak=0;
+ recordTrainingTask(q,partial,state.attemptsForQuestion);
+ const score=$('#scoreDisplay');
+ if(score){score.innerHTML=`Punkte <span data-math="${state.score}"></span> · Serie <span data-math="${state.streak}"></span>`;renderMath(score)}
+ markAnswer(q,a,partial);
+ showAnswerFeedback($('#feedback'),partial,q.solution);
+ $('#check').classList.add('hidden');$('#retry').classList.add('hidden');$('#showSolution').classList.add('hidden');
+ $('#next').classList.remove('hidden');$('#next').focus();
+}
+function finishTrainingAnswer(q,a,partial){
+ if(state.mode!=='training'||!state.locked)return;
+ state.attemptsForQuestion=Math.max(1,state.attemptsForQuestion);
+ finalizeTrainingAnswer(q,a,partial);
+}
+function check(q){
+ if(state.locked)return;
+ const a=getAnswer(q);
+ if(q.kind==='number'&&!Number.isFinite(a)){$('#answer').focus();return}
+ if(q.kind==='vector'&&(!Array.isArray(a)||a.length!==3||a.some(value=>!Number.isFinite(value)))){$('#vector0').focus();return}
+ if(q.kind==='slider'&&!Number.isFinite(a)){$('#rangeNumber').focus();return}
+ if(q.kind==='fraction'&&(!Number.isFinite(a.num)||!Number.isFinite(a.den)||a.den===0)){(Number.isFinite(a.num)?$('#fractionDen'):$('#fractionNum')).focus();return}
+ if(q.kind==='choice'&&a===null)return;
+ if(q.kind==='match'&&Object.keys(a).length!==q.pairs.length)return;
+ state.locked=true;setAnswerControlsDisabled(true);
+ if(state.mode==='competition'){fillFeedback($('#feedback'),'waiting','…','Antwort wird geprüft …','');submitContestAnswer(q,a);return}
+ const raw=evaluate(q,a),partial=typeof raw==='number'&&Number.isFinite(raw)?Math.max(0,Math.min(1,raw)):(raw?1:0);
+ state.attemptsForQuestion++;state.lastAnswer=a;state.lastPartial=partial;
+ if(partial===1||state.attemptsForQuestion>=2){finalizeTrainingAnswer(q,a,partial);return}
+ markAnswer(q,a,partial,false);
+ showAnswerFeedback($('#feedback'),partial,explainFirstTry(q,a,partial));
+ $('#check').classList.add('hidden');$('#retry').classList.remove('hidden');$('#showSolution').classList.remove('hidden');$('#retry').focus();
+}
+function next(){state.index++;if(state.index>=state.round.length){finish();return}showQuestion()}
+const feedbackFormatNames={number:'Zahl eingeben',fraction:'Bruch eingeben',choice:'Antwort auswählen',slider:'Zahlenstrahl-Regler',match:'Begriffe zuordnen',order:'Rechenschritte sortieren',construct:'Punkte im Raster setzen',vector:'Vektorkomponenten eingeben'};
+function feedbackCopy(){
+ if(QUIZ.grade<=6)return{title:'Dein Mathe-Kompass',intro:'Das ist keine Note. Hier siehst du, was in dieser Runde geklappt hat und was du als Nächstes üben kannst. Bei einer Aufgabe ist es erst ein kleiner Hinweis.',good:'Das klappt schon gut',practice:'Hier hilft dir eine Extra-Runde',none:'Alle Aufgabentypen aus dieser Runde hast du vollständig gelöst. Für eine neue Herausforderung kannst du ein anderes Level wählen.'};
+ if(QUIZ.grade<=8)return{title:'Dein Übungs-Check',intro:'Das Feedback zeigt nur diese Runde, keine Gesamtnote. Bei einem einzelnen Beispiel ist es erst ein erster Eindruck.',good:'Das lief schon sicher',practice:'Das lohnt sich als Nächstes zu üben',none:'Alle Aufgabentypen aus dieser Runde hast du vollständig gelöst. Für den nächsten Schritt kannst du ein anderes Level wählen.'};
+ return{title:'Dein Trainingsfeedback',intro:'Diese Rückmeldung bezieht sich auf die aktuelle Runde und ist keine Gesamtnote. Einzelne Beispiele sind eine erste Orientierung.',good:'Sicher gelöste Aufgabentypen',practice:'Gezielte Wiederholung',none:'Alle Aufgabentypen aus dieser Runde hast du vollständig gelöst. Für eine neue Herausforderung kannst du ein anderes Level wählen.'};
+}
+function appendMathCount(parent,value){const node=document.createElement('span');node.dataset.math=String(value);parent.append(node)}
+function feedbackGroups(){
+ const groups=new Map();
+ for(const answer of state.roundStats?.answers||[]){
+  const key=answer.skillId||String(answer.patternIndex),group=groups.get(key)||{label:answer.skillLabel||'Aufgabentyp',patternIndex:answer.patternIndex,kinds:new Set(),answers:[],example:answer.prompt,nextStep:answer.nextStep};
+  group.kinds.add(answer.kind);group.answers.push(answer);groups.set(key,group);
+ }
+ return [...groups.values()].map(group=>{group.complete=group.answers.filter(item=>item.partial===1).length;group.firstTry=group.answers.filter(item=>item.partial===1&&item.attempts===1).length;group.currentMastery=group.answers.reduce((sum,item)=>sum+Number(item.partial||0),0)/group.answers.length;const prior=state.roundBaseline?.[group.patternIndex]||{sampleCount:0,mastery:null};group.historyCount=prior.sampleCount;group.historyMastery=prior.mastery;group.kinds=[...group.kinds].map(kind=>feedbackFormatNames[kind]||'Aufgabe bearbeiten');return group})
+}
+function appendFeedbackTrend(parent,group){
+ if(group.historyCount<3||!Number.isFinite(group.historyMastery))return;
+ const change=group.currentMastery-group.historyMastery,copy=QUIZ.grade<=6?{up:'Diesmal lief es sicherer.',same:'Das lief ähnlich wie bei deinen letzten Aufgaben.',down:'Diesmal war es noch knifflig. Eine Fokusrunde hilft beim Weiterüben.'}:{up:'In dieser Runde warst du sicherer.',same:'Dein Ergebnis ist ähnlich wie bei deinen letzten Übungsaufgaben.',down:'Diese Runde war noch unsicherer. Eine Fokusrunde hilft beim Weiterüben.'};
+ const message=change>=0.12?copy.up:change<=-0.12?copy.down:copy.same,p=document.createElement('p');p.className='feedback-trend';p.append(document.createTextNode('Vergleich mit den letzten '));appendMathCount(p,group.historyCount);p.append(document.createTextNode(' Aufgaben: '+message));parent.append(p)
+}
+function createFeedbackItem(group,isPractice){
+ const item=document.createElement('article');item.className='feedback-item '+(isPractice?'feedback-practice':'feedback-good');
+ const heading=document.createElement('div');heading.className='feedback-item-heading';const title=document.createElement('h3');title.textContent=group.label;const badge=document.createElement('span');badge.className='feedback-badge';badge.textContent=isPractice?'Noch üben':group.firstTry===group.answers.length?'Sicher gelöst':'Am Ende gelöst';heading.append(title,badge);item.append(heading);
+ const format=document.createElement('p');format.className='feedback-format';format.textContent='Aufgabenformat: '+group.kinds.join(' · ')+'.';item.append(format);
+ const stats=document.createElement('p');stats.className='feedback-stats';stats.append(document.createTextNode('Vollständig richtig: '));appendMathCount(stats,group.complete);stats.append(document.createTextNode(' von '));appendMathCount(stats,group.answers.length);stats.append(document.createTextNode(' · im ersten Versuch: '));appendMathCount(stats,group.firstTry);stats.append(document.createTextNode(' von '));appendMathCount(stats,group.answers.length);item.append(stats);appendFeedbackTrend(item,group);
+ if(isPractice){
+  const details=document.createElement('details');details.className='feedback-details';const summary=document.createElement('summary');summary.textContent='Beispiel und Tipp ansehen';const example=document.createElement('p');example.textContent='Beispiel aus deiner Runde: '+String(group.example||'');const tip=document.createElement('p');tip.textContent='Nächster Schritt: '+String(group.nextStep||'Lies die Aufgabe noch einmal und markiere, was gesucht ist.');details.append(summary,example,tip);item.append(details);
+  const button=document.createElement('button');button.type='button';button.className='secondary feedback-practice-button';button.textContent='Diese Aufgaben gezielt üben';button.setAttribute('aria-label','Gezielt weiterüben: '+group.label);button.onclick=()=>startTraining(state.level,group.patternIndex);item.append(button);
+ }
+ return item;
+}
+function renderTrainingFeedback(){
+ const root=$('#roundFeedback'),answers=state.roundStats?.answers||[];if(!root||!answers.length)return;
+ const copy=feedbackCopy(),groups=feedbackGroups(),good=groups.filter(group=>group.complete===group.answers.length),practice=groups.filter(group=>group.complete<group.answers.length).sort((a,b)=>a.complete/a.answers.length-b.complete/b.answers.length||b.answers.length-a.answers.length);
+ const panel=document.createElement('section');panel.className='round-feedback-panel';panel.setAttribute('aria-labelledby','trainingFeedbackTitle');const title=document.createElement('h2');title.id='trainingFeedbackTitle';title.textContent=copy.title;const intro=document.createElement('p');intro.className='feedback-intro';intro.textContent=copy.intro;panel.append(title,intro);
+ if(good.length){const section=document.createElement('section');section.className='feedback-section';const heading=document.createElement('h3');heading.textContent=copy.good;const list=document.createElement('div');list.className='feedback-list';good.forEach(group=>list.append(createFeedbackItem(group,false)));section.append(heading,list);panel.append(section)}
+ if(practice.length){const section=document.createElement('section');section.className='feedback-section';const heading=document.createElement('h3');heading.textContent=copy.practice;const list=document.createElement('div');list.className='feedback-list';practice.forEach(group=>list.append(createFeedbackItem(group,true)));section.append(heading,list);panel.append(section)}
+ if(!practice.length){const message=document.createElement('p');message.className='feedback-all-clear';message.textContent=copy.none;panel.append(message)}
+ root.replaceChildren(panel);safeTex(panel)
+}
+function finish(){
+ if(state.mode==='training'&&!state.roundSaved){saveTrainingRound();saveLocalLeaderboard();state.roundSaved=true}
+ setRoute('result');clearInterval(state.timer);clearInterval(state.roundClock);
+ if(state.mode==='competition'){try{localStorage.removeItem('matheQuizRound:'+QUIZ.id)}catch{}}
+ document.body.classList.remove('in-task');
+ const isTraining=state.mode==='training',total=isTraining?10:12,elapsed=state.roundStartedAt?Math.floor((Date.now()-state.roundStartedAt)/1000):0,mins=Math.floor(elapsed/60),secs=elapsed%60;
+ view.innerHTML='<section class="card result"><div class="badge">'+(state.correct===total?'🌟 Starke Runde!':'🎉 Runde geschafft!')+'</div><h1>Dein Ergebnis</h1><div class="big"><span data-math="'+state.score+'"></span> Punkte</div><p><span data-math="'+state.correct+'"></span> von <span data-math="'+total+'"></span> Aufgaben richtig.</p>'+(isTraining?'<p>Beste Serie: <strong><span data-math="'+state.bestStreak+'"></span> richtig hintereinander</strong>.</p>':'<p>Grundpunkte: <strong><span data-math="'+state.basePoints+'"></span></strong> · Zeitbonus: <strong><span data-math="'+state.timeBonus+'"></span></strong></p><p>Rundenzeit: <strong>'+mins+':'+String(secs).padStart(2,'0')+' min</strong></p>')+'<p>'+(state.mode==='competition'?'Dein Ergebnis wurde an den Wettbewerbsserver übermittelt.':'Dein Lernfortschritt wurde lokal gespeichert.')+'</p>'+(isTraining?'<div id="roundFeedback"></div>':'')+'<div class="action-row"><button class="secondary" id="again">Noch eine Runde</button><button class="primary" id="resultRank">Quiz-Rangliste</button><button class="secondary" id="resultHome">Zur Auswahl</button></div></section>';
+ safeTex(view);if(isTraining)renderTrainingFeedback();$('#again').onclick=state.mode==='training'?()=>levels():contestForm;$('#resultRank').onclick=leaderboard;$('#resultHome').onclick=home
+}
+function contestForm(){if(!CLOUD.enabled||!CLOUD.baseUrl||!state.apiOnline){home();return}setRoute('competition');document.body.classList.remove('in-task');state.mode='competition';view.innerHTML=`<section class="card"><h2>Wettbewerb vorbereiten</h2><p>Kein Konto nötig. Ein Name oder Pseudonym ist freiwillig und auf der Rangliste sichtbar. Verwende dort keinen vollen Namen. Ohne Eingabe erhältst du einen automatisch erzeugten Namen. Gespielt wird in ${QUIZ.gradeLabel}.</p><form class="contest-form" id="contestForm"><label>Name oder Pseudonym (optional)<input name="name" maxlength="24" autocomplete="nickname"></label><button class="primary" type="submit">Wettbewerbsrunde starten</button></form><button class="secondary" id="otherPerson" type="button">Andere Person an diesem Gerät</button><p class="helper">Zwölf Aufgaben. Die Bearbeitungszeit startet für jede Aufgabe serverseitig. Eine laufende Runde kann im selben Browser fortgesetzt werden.</p></section>`;safeTex(view);$('#otherPerson').onclick=()=>{try{localStorage.removeItem(`matheQuizRound:${QUIZ.id}`)}catch{}getBrowserId(true);$('#contestForm').elements.name.value='';$('#contestForm').elements.name.focus()};$('#contestForm').onsubmit=async e=>{e.preventDefault();const fd=new FormData(e.currentTarget),name=String(fd.get('name')||'').trim().slice(0,24)||makeAlias(),browserId=getBrowserId();try{const data=await api('/api/v1/competition/start',{method:'POST',body:JSON.stringify({quizId:QUIZ.id,name,className:QUIZ.className,browserId})});if(!data.roundId||!data.question?.id||!Number.isFinite(Date.parse(data.question?.expiresAt)))throw new Error('Unvollständige Wettbewerbsdaten');state.contest={roundId:data.roundId,studentName:name,className:QUIZ.className,browserId};state.round=[data.question];state.index=Number(data.index)||0;state.score=Number(data.totalPoints)||0;state.correct=Number(data.correctCount)||0;state.basePoints=Number(data.basePoints)||0;state.timeBonus=Number(data.timeBonus)||0;state.roundStartedAt=Date.parse(data.roundStartedAt)||Date.now();state.pendingRequestId=null;try{localStorage.setItem(`matheQuizRound:${QUIZ.id}`,JSON.stringify({roundId:data.roundId,browserId,name}))}catch{}showQuestion(data.question)}catch(err){alert('Der Wettbewerbsserver ist gerade nicht erreichbar. Deine Runde wurde nicht lokal gewertet.')}}}
+async function submitContestAnswer(q,a){
+ clearInterval(state.timer);
+ setAnswerControlsDisabled(true);
+ state.pendingRequestId=state.pendingRequestId||crypto.randomUUID();
+ try{
+  const result=await api('/api/v1/competition/answer',{method:'POST',body:JSON.stringify({quizId:QUIZ.id,roundId:state.contest.roundId,questionId:q.id,answer:a,requestId:state.pendingRequestId,browserId:state.contest.browserId})});
+  state.pendingRequestId=null;
+  state.score=result.totalPoints;
+  state.correct=result.correctCount;
+  state.basePoints=Number.isFinite(Number(result.basePointsTotal))?Number(result.basePointsTotal):state.basePoints+Number(result.basePoints||0);
+  state.timeBonus=Number.isFinite(Number(result.timeBonusTotal))?Number(result.timeBonusTotal):state.timeBonus+Number(result.timeBonus||0);
+  const partial=result.isCorrect?1:0;
+  markAnswer(q,a,partial);
+  const points=Number.isFinite(Number(result.basePoints))?` Punkte: ${result.basePoints} Grundpunkte + ${result.timeBonus||0} Zeitbonus.`:'';
+  const fb=$('#feedback');
+  fillFeedback(fb,partial===1?'good':'bad',partial===1?'✓':a===null?'⌛':'↺',partial===1?'Richtig! Punkte gesichert.':a===null?'Zeit abgelaufen – weiter geht’s.':'Noch nicht – die Runde geht weiter.',(result.feedback||'Die Wertung wurde vom Server geprüft.')+points);
+  $('#check').classList.add('hidden');
+  const nextBtn=$('#next');
+  nextBtn.classList.remove('hidden');
+  nextBtn.onclick=async()=>{
+   if(result.finished){try{localStorage.removeItem(`matheQuizRound:${QUIZ.id}`)}catch{}finish();return}
+   try{
+    const d=await api('/api/v1/competition/next',{method:'POST',body:JSON.stringify({quizId:QUIZ.id,roundId:state.contest.roundId,browserId:state.contest.browserId,questionId:q.id})});
+    if(!d.question?.id||!Number.isFinite(Date.parse(d.question?.expiresAt)))throw new Error('Unvollständige Wettbewerbsdaten');
+    state.index++;state.pendingRequestId=null;showQuestion(d.question);
+   }catch(err){alert('Die nächste Aufgabe konnte nicht geladen werden.')}
+  };
+  if(result.finished)nextBtn.textContent='Ergebnis ansehen';else nextBtn.focus();
+ }catch(err){
+  state.locked=false;
+  setAnswerControlsDisabled(false);
+  const checkButton=$('#check');
+  if(checkButton){checkButton.disabled=false;checkButton.textContent='Erneut versuchen'}
+  const fb=$('#feedback');
+  if(fb)fillFeedback(fb,'waiting','↻','Verbindung unterbrochen.','Deine Eingabe ist noch da. Tippe auf „Erneut versuchen“.');
+  alert('Antwort konnte nicht geprüft werden. Deine Eingabe bleibt erhalten. Bitte erneut versuchen.');
+ }
+}
+function startTimer(expiresAt){clearInterval(state.timer);const deadline=Date.parse(expiresAt);if(!Number.isFinite(deadline)){state.locked=true;submitContestAnswer(state.currentQuestion,null);return}const tick=()=>{const left=Math.max(0,Math.ceil((deadline-Date.now())/1000));const el=$('#timerText');if(el){el.textContent=`\\(${left}\\) s`;renderMath(el)}if(left===0){clearInterval(state.timer);$('#check').disabled=true;state.locked=true;setAnswerControlsDisabled(true);submitContestAnswer(state.currentQuestion,null)}};tick();state.timer=setInterval(tick,250)}
+function startRoundClock(){clearInterval(state.roundClock);if(!state.roundStartedAt)state.roundStartedAt=Date.now();const tick=()=>{const el=$('#totalTimerText');if(!el)return;const s=Math.floor((Date.now()-state.roundStartedAt)/1000);el.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`};tick();state.roundClock=setInterval(tick,1000)}
+async function api(path,options={}){const r=await fetch(CLOUD.baseUrl.replace(/\/$/,'')+path,{...options,headers:{'Content-Type':'application/json',...(options.headers||{})}});if(!r.ok)throw new Error('API '+r.status);return r.json()}
+function leaderboard(){location.href='rangliste.html'}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function applyTextScale(value,save=true){const scale=Math.max(1,Math.min(1.3,Math.round(Number(value)*10)/10||1));document.documentElement.style.setProperty('--text-scale',String(scale));if(save){try{localStorage.setItem('matheQuizTextScale',String(scale))}catch{}}const down=$('#fontDown'),up=$('#fontUp'),status=$('#fontScaleStatus');if(down)down.disabled=scale<=1;if(up)up.disabled=scale>=1.3;if(status)status.textContent=scale<=1?'Standardschriftgröße':scale<1.2?'Schrift etwas größer':'Schrift deutlich größer';return scale}
+function storedTextScale(){try{return Number(localStorage.getItem('matheQuizTextScale'))||1}catch{return 1}}
+applyTextScale(storedTextScale(),false);$('#fontDown').onclick=()=>applyTextScale(storedTextScale()-0.1);$('#fontUp').onclick=()=>applyTextScale(storedTextScale()+0.1);
+$('#homeBtn').onclick=home;$('#rankBtn').onclick=leaderboard;window.addEventListener('popstate',restoreRoute);window.addEventListener('hashchange',restoreRoute);if(location.hash)restoreRoute();else home();
+</script>
+<script>if("serviceWorker" in navigator&&location.protocol!=="file:"){navigator.serviceWorker.register("./sw.js").then(reg=>navigator.serviceWorker.ready.then(()=>{const worker=navigator.serviceWorker.controller||reg.active;if(worker)worker.postMessage({type:"CACHE_URLS",urls:["index.html", "rangliste.html", "manifest.webmanifest", "../../../../gemeinsam/quiz-sekii/assets/cloudflare-config.js", "../../../../gemeinsam/quiz-sekii/assets/quiz-layout.css", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/katex.min.css", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/katex.min.js", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/contrib/auto-render.min.js", "../../../../gemeinsam/quiz-sekii/assets/icon.svg", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_AMS-Regular.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Caligraphic-Bold.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Caligraphic-Regular.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Fraktur-Bold.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Fraktur-Regular.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Main-Bold.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Main-BoldItalic.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Main-Italic.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Main-Regular.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Math-BoldItalic.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Math-Italic.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_SansSerif-Bold.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_SansSerif-Italic.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_SansSerif-Regular.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Script-Regular.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Size1-Regular.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Size2-Regular.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Size3-Regular.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Size4-Regular.woff2", "../../../../gemeinsam/quiz-sekii/assets/vendor/katex/fonts/KaTeX_Typewriter-Regular.woff2"].map(path=>new URL(path,location.href).href)})})).catch(()=>{})}</script></body></html>

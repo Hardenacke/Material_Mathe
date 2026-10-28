@@ -1,5 +1,17 @@
 # Tests
 
+`test_quiz_sekii.py` prüft die 15 Sek-II-Quizwelten samt EF/Q1/Q2- und GK/LK-Zuordnung,
+lokalen Ressourcen und getrennten Ranglisten. `run_quiz_sekii_browser.py` prüft
+alle 45 Trainingskombinationen und vollständige lokale Wettbewerbe; mit
+`--flows-only --geometry-flow` zusätzlich den Ablauf mit serverbewerteten Vektoren.
+Der Online-Aufruf mit `--url URL --smoke` liest die veröffentlichten Seiten.
+Einrichtung: [QUIZ_SEKII.md](../dokumentation/QUIZ_SEKII.md).
+
+`test_quiz_seki.py` prüft die 24 Quizzuordnungen, gemeinsame lokale Ressourcen,
+Folgeseiten, Quiz- und Klassenfilter sämtlicher Ranglisten und die Trennung vom Backend. `tests/run_quiz_seki_browser.py` prüft
+die Oberflächen gegen den lokalen Cloudflare-Worker; Einrichtung und genaue
+Prüfungen stehen in [QUIZ_SEKI.md](../dokumentation/QUIZ_SEKI.md).
+
 Nach Änderungen zuerst `python werkzeuge/build_site.py`, danach `python werkzeuge/site_pruefen.py`, `python werkzeuge/struktur_pruefen.py` und `python -m unittest discover -s tests` ausführen.
 
 `test_build_output.py` prüft die Ausgabebereinigung mit schreibgeschützten

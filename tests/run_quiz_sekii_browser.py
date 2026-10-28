@@ -1,0 +1,174 @@
+"""Prüft alle 15 Sek-II-Quizoberflächen gegen den lokalen Cloudflare-Worker."""
+import argparse
+import json
+import math
+import re
+from pathlib import Path
+from playwright.sync_api import sync_playwright, expect
+
+ROOT = Path(__file__).resolve().parents[1]
+QUIZZES = json.loads((ROOT / 'dokumentation/QUIZ_SEKII_ZUORDNUNG.json').read_text(encoding='utf-8'))['quizze']
+
+
+from run_quiz_seki_browser import fill_answer as fill_training_answer
+
+
+def fill_answer(page, question, training=True):
+    if question['kind'] == 'vector':
+        for i, value in enumerate(question['answer'] if training else [3, -1, 1]):
+            page.locator('#vector' + str(i)).fill(str(value).replace('.', ','))
+        return
+    if training:
+        return fill_training_answer(page, question)
+    # The full local competition uses EF Analysis, solved from its public prompts.
+    question = dict(question)
+    kind = question['kind']
+    geometry = page.evaluate('QUIZ.fieldId') == 'geometrie'
+    if kind == 'number':
+        numbers = [int(n) for n in re.findall(r'\d+', question['prompt'])]
+        a, _, b, x = numbers
+        question['answer'] = 3 * a * x * x - b
+    elif kind == 'choice':
+        question['correct'] = next(i for i, option in enumerate(question['options']) if ('skalares' if geometry else 'steigt') in option)
+    elif kind == 'slider':
+        question['answer'] = 2 if geometry else 6
+    elif kind == 'order':
+        question['items'] = (['Geradengleichungen gleichsetzen', 'Koordinatengleichungen aufstellen', 'Gleichungssystem lösen', 'Lösung prüfen']
+                             if geometry else ['Ableitungsfunktion bilden', 'Kritische Stellen bestimmen', 'Vorzeichen von f′ prüfen', 'Monotonie beschreiben'])
+    elif kind == 'construct':
+        question['points'] = [[2, 1]] if geometry else [[2, 0], [-1, 0]]
+    else:
+        raise AssertionError(kind)
+    fill_training_answer(page, question)
+
+
+def verify_overview(page, base):
+    page.goto(base + '/', wait_until='networkidle')
+    expect(page.locator('.quiz-card')).to_have_count(15)
+    for width in [320, 768, 1024]:
+        page.set_viewport_size({'width': width, 'height': 1024})
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), ('overview', width)
+    for phase, course, count in [('q1', 'gk', 3), ('q1', 'lk', 3), ('q2', 'gk', 3), ('q2', 'lk', 3), ('ef', 'common', 3)]:
+        page.locator('#phase').select_option(phase)
+        page.locator('#course').select_option(course)
+        expect(page.locator('.quiz-card:visible')).to_have_count(count)
+    page.locator('#field').select_option('analysis')
+    expect(page.locator('.quiz-card:visible')).to_have_count(1)
+    page.set_viewport_size({'width': 768, 'height': 1024})
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--url', default='http://127.0.0.1:8789')
+    parser.add_argument('--smoke', action='store_true', help='Nur Verbindungen und Startseiten prüfen; keine Wettbewerbsrunde spielen.')
+    parser.add_argument('--flows-only', action='store_true', help='Nur die vollständigen lokalen Trainings- und Wettbewerbsabläufe prüfen.')
+    parser.add_argument('--geometry-flow', action='store_true', help='Die lokale Wettbewerbsrunde mit EF-Vektoren und Geometrie spielen.')
+    args = parser.parse_args()
+    base = args.url.rstrip('/')
+    if not args.smoke and not base.startswith(('http://127.0.0.1:', 'http://localhost:')):
+        parser.error('Vollständige Testläufe verwenden ausschließlich einen lokalen Worker. Für Onlineprüfungen --smoke wählen.')
+    output = ROOT / '.local/sekii-quiz/screenshots'
+    output.mkdir(parents=True, exist_ok=True)
+    errors = []
+    with sync_playwright() as p:
+        browser = p.chromium.launch(channel='msedge', headless=True)
+        context = browser.new_context(viewport={'width': 768, 'height': 1024}, reduced_motion='reduce')
+        page = context.new_page()
+        page.set_default_timeout(15000)
+        page.on('pageerror', lambda error: errors.append(str(error)))
+        kinds = set()
+        verify_overview(page, base)
+        for item in ([] if args.flows_only else QUIZZES):
+            url = base + '/' + item['url']
+            page.goto(url, wait_until='networkidle')
+            expect(page.locator('#contestStart')).to_be_enabled()
+            expect(page.locator('#workerStatus')).to_have_text('Cloudflare verbunden')
+            for width in [320, 768]:
+                page.set_viewport_size({'width': width, 'height': 1024})
+                assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (item['quizId'], width, 'home')
+            page.set_viewport_size({'width': 768, 'height': 1024})
+            if item['phase'] == 'ef':
+                page.screenshot(path=str(output / (item['quizId'] + '-start.png')), full_page=True)
+            if args.smoke:
+                page.goto(base + '/' + item['rangliste'], wait_until='networkidle')
+                expect(page.locator('#cloudStatus')).not_to_contain_text('nicht aktiviert')
+                continue
+            for level in ['einstieg', 'aufbau', 'challenge']:
+                page.locator('#trainStart').click()
+                page.locator(f'[data-level="{level}"]').click()
+                expect(page.locator('#check')).to_be_visible()
+                question = page.evaluate('state.currentQuestion')
+                kinds.add(question['kind'])
+                fill_answer(page, question)
+                page.locator('#check').click()
+                expect(page.locator('#feedback')).to_have_class(re.compile(r'good'))
+                for width in [320, 768]:
+                    page.set_viewport_size({'width': width, 'height': 1024})
+                    if not page.evaluate('document.documentElement.scrollWidth <= innerWidth'):
+                        page.screenshot(path=str(output / 'overflow.png'), full_page=True)
+                        print(page.evaluate('Array.from(document.querySelectorAll("body *")).filter(e=>e.getBoundingClientRect().right>innerWidth+1).map(e=>({tag:e.tagName,id:e.id,cls:e.className,width:e.getBoundingClientRect().width})).slice(-12)'), flush=True)
+                        raise AssertionError((item['quizId'], width, level))
+                page.set_viewport_size({'width': 768, 'height': 1024})
+                page.locator('#quit').click()
+                expect(page.locator('#contestStart')).to_be_enabled()
+        if not args.flows_only:
+            print('PASS: 15 Sek-II-Quizverbindungen, getrennte Ranglisten, 320/768 Pixel' + ('' if args.smoke else ', 45 Trainingskombinationen: ' + ', '.join(sorted(kinds))), flush=True)
+        if not args.smoke:
+            item = next(item for item in QUIZZES if item['quizId'] == ('ef-geometrie' if args.geometry_flow else 'ef-analysis'))
+            url = base + '/' + item['url']
+            page.goto(url, wait_until='networkidle')
+            page.locator('#trainStart').click()
+            page.locator('[data-level="einstieg"]').click()
+            for i in range(10):
+                fill_answer(page, page.evaluate('state.currentQuestion'))
+                page.locator('#check').click()
+                expect(page.locator('#feedback')).to_have_class(re.compile(r'good'))
+                page.locator('#next').click()
+            expect(page.get_by_role('heading', name='Dein Ergebnis')).to_be_visible()
+            page.locator('#resultRank').click()
+            expect(page.locator('#localList')).to_contain_text('Lernprofil')
+            page.goto(base + '/gemeinsam/quiz-sekii/assets/lernstand.html', wait_until='networkidle')
+            assert page.evaluate('document.querySelectorAll("tbody tr").length > 0')
+            page.goto(url, wait_until='networkidle')
+            page.evaluate('navigator.serviceWorker.ready')
+            context.set_offline(True)
+            page.reload(wait_until='domcontentloaded')
+            page.locator('#trainStart').click()
+            page.locator('[data-level="einstieg"]').click()
+            fill_answer(page, page.evaluate('state.currentQuestion'))
+            page.locator('#check').click()
+            expect(page.locator('#feedback')).to_have_class(re.compile(r'good'))
+            context.set_offline(False)
+            page.goto(url, wait_until='networkidle')
+            expect(page.locator('#contestStart')).to_be_enabled()
+            page.locator('#contestStart').click()
+            page.locator('input[name="name"]').fill('Lokale Browserprüfung')
+            page.locator('#contestForm button[type="submit"]').click()
+            expect(page.locator('#check')).to_be_visible()
+            first = page.evaluate('state.currentQuestion')
+            page.reload(wait_until='networkidle')
+            expect(page.locator('#check')).to_be_visible()
+            assert page.evaluate('state.currentQuestion.id') == first['id']
+            assert page.evaluate('state.currentQuestion.expiresAt') == first['expiresAt']
+            for i in range(12):
+                expect(page.locator('#check')).to_be_visible()
+                expect(page.locator('#check')).to_be_enabled()
+                question = page.evaluate('state.currentQuestion')
+                assert 'answer' not in question and 'correct' not in question
+                fill_answer(page, question, training=False)
+                page.locator('#check').click()
+                expect(page.locator('#feedback')).to_have_class(re.compile(r'good'))
+                page.locator('#next').click()
+            expect(page.get_by_role('heading', name='Dein Ergebnis')).to_be_visible()
+            assert page.evaluate('state.score') >= 1200
+            page.screenshot(path=str(output / 'wettbewerb-ergebnis.png'), full_page=True)
+            page.locator('#resultRank').click()
+            expect(page.locator('#cloudList')).to_contain_text('Lokale Browserprüfung')
+            print('PASS: Trainingsrunde, lokale Rangliste, Lernstand, Offline-Training, Wettbewerbsrunde mit Wiederaufnahme und Cloud-Rangliste', flush=True)
+        assert not errors, errors
+        context.close()
+        browser.close()
+
+
+if __name__ == '__main__':
+    main()

@@ -5,7 +5,7 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 323,
+    "materialien": 362,
     "lernspiele": 74,
     "unterstuetzung": 12,
     "zusatzaufgaben": 187,
@@ -316,6 +316,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-5/01-arithmetik-algebra/wiederholung.pptx"
+            },
+            {
+              "titel": "Die Zahlen-Crew: Arithmetik & Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-5/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+              "beschreibung": "Zahlen vergleichen und ordnen, sicher addieren, sinnvoll runden und Ergebnisse am Zahlenstrahl prüfen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -396,6 +404,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-5/02-funktionen/wiederholung.pptx"
+            },
+            {
+              "titel": "Die Zahlen-Crew: Funktionen",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-5/02-funktionen/quiz/mathe-quest/index.html",
+              "beschreibung": "Zahlenfolgen fortsetzen und Regeln mit Startwert und Zuwachs beschreiben. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -436,6 +452,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-5/03-geometrie/wiederholung.pptx"
+            },
+            {
+              "titel": "Die Zahlen-Crew: Geometrie",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-5/03-geometrie/quiz/mathe-quest/index.html",
+              "beschreibung": "Grundformen erkennen, Strecken und Rechtecke beschreiben sowie erste Figuren im Raster konstruieren. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -510,6 +534,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-5/04-stochastik/wiederholung.pptx"
+            },
+            {
+              "titel": "Die Zahlen-Crew: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-5/04-stochastik/quiz/mathe-quest/index.html",
+              "beschreibung": "Daten sammeln, Häufigkeiten zusammenfassen und einfache Darstellungen lesen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -835,6 +867,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-6/01-arithmetik-algebra/wiederholung.pptx"
+            },
+            {
+              "titel": "Das Ideen-Labor: Arithmetik & Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-6/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+              "beschreibung": "Brüche als Zahlen und Anteile verstehen, gleichwertige Brüche erkennen und Brüche mit Dezimalzahlen verbinden. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -915,6 +955,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-6/02-funktionen/wiederholung.pptx"
+            },
+            {
+              "titel": "Das Ideen-Labor: Funktionen",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-6/02-funktionen/quiz/mathe-quest/index.html",
+              "beschreibung": "Proportionale Zuordnungen in Termen, Tabellen und Graphen wiedererkennen und Werte berechnen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -955,6 +1003,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-6/03-geometrie/wiederholung.pptx"
+            },
+            {
+              "titel": "Das Ideen-Labor: Geometrie",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-6/03-geometrie/quiz/mathe-quest/index.html",
+              "beschreibung": "Flächeninhalt und Volumen berechnen, Quader und ihre Netze erkennen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -1015,6 +1071,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-6/04-stochastik/wiederholung.pptx"
+            },
+            {
+              "titel": "Das Ideen-Labor: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-6/04-stochastik/quiz/mathe-quest/index.html",
+              "beschreibung": "Daten mit Mittelwert, Median und Spannweite beschreiben und Kenngrößen vergleichen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -1340,6 +1404,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-7/01-arithmetik-algebra/wiederholung.pptx"
+            },
+            {
+              "titel": "Mathe-Expedition: Arithmetik & Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-7/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+              "beschreibung": "Mit rationalen Zahlen und Vorzeichen rechnen, Zahlen auf der Zahlengeraden ordnen und Variablen deuten. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -1443,6 +1515,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-7/02-funktionen/wiederholung.pptx"
+            },
+            {
+              "titel": "Mathe-Expedition: Funktionen",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-7/02-funktionen/quiz/mathe-quest/index.html",
+              "beschreibung": "Proportionale Zuordnungen mit Tabelle, Graph und Rechenregel darstellen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -1498,6 +1578,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-7/03-geometrie/wiederholung.pptx"
+            },
+            {
+              "titel": "Mathe-Expedition: Geometrie",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-7/03-geometrie/quiz/mathe-quest/index.html",
+              "beschreibung": "Winkelbeziehungen und Dreiecke untersuchen und Punkte an der x-Achse spiegeln. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -1543,6 +1631,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-7/04-stochastik/wiederholung.pptx"
+            },
+            {
+              "titel": "Mathe-Expedition: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-7/04-stochastik/quiz/mathe-quest/index.html",
+              "beschreibung": "Relative Häufigkeiten berechnen und als Schätzung für Wahrscheinlichkeiten nutzen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -1868,6 +1964,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-8/01-arithmetik-algebra/wiederholung.pptx"
+            },
+            {
+              "titel": "Die Rätsel-Arena: Arithmetik & Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-8/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+              "beschreibung": "Terme einsetzen, lineare Gleichungen durch Äquivalenzumformungen lösen und Lösungen prüfen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -1958,6 +2062,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-8/02-funktionen/wiederholung.pptx"
+            },
+            {
+              "titel": "Die Rätsel-Arena: Funktionen",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-8/02-funktionen/quiz/mathe-quest/index.html",
+              "beschreibung": "Lineare Funktionen über Steigung, y-Achsenabschnitt, Wertetabelle und Sachkontext beschreiben. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -1998,6 +2110,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-8/03-geometrie/wiederholung.pptx"
+            },
+            {
+              "titel": "Die Rätsel-Arena: Geometrie",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-8/03-geometrie/quiz/mathe-quest/index.html",
+              "beschreibung": "Winkelregeln anwenden, Dreiecke klassifizieren und Figuren nach Maßangaben konstruieren. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -2038,6 +2158,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-8/04-stochastik/wiederholung.pptx"
+            },
+            {
+              "titel": "Die Rätsel-Arena: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-8/04-stochastik/quiz/mathe-quest/index.html",
+              "beschreibung": "Einfache Zufallsexperimente, Ergebnisräume und Pfade bei mehrstufigen Versuchen untersuchen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -2371,6 +2499,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-9/01-arithmetik-algebra/M 9 Irrationale Zahlen & Wurzeln.pptx"
+            },
+            {
+              "titel": "Level Up Mathematik: Arithmetik & Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-9/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+              "beschreibung": "Quadrate und Wurzeln, irrationale Zahlen und die Nullproduktregel anwenden. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -2448,6 +2584,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-9/02-funktionen/wiederholung.pptx"
+            },
+            {
+              "titel": "Level Up Mathematik: Funktionen",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-9/02-funktionen/quiz/mathe-quest/index.html",
+              "beschreibung": "Quadratische Funktionen und ihre Funktionswerte, Scheitelpunkte und Darstellungsformen untersuchen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -2607,6 +2751,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-9/03-geometrie/wiederholung.pptx"
+            },
+            {
+              "titel": "Level Up Mathematik: Geometrie",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-9/03-geometrie/quiz/mathe-quest/index.html",
+              "beschreibung": "Satz des Pythagoras, Ähnlichkeit und Streckfaktoren auf Dreiecke anwenden. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -2652,6 +2804,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-9/04-stochastik/wiederholung.pptx"
+            },
+            {
+              "titel": "Level Up Mathematik: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-9/04-stochastik/quiz/mathe-quest/index.html",
+              "beschreibung": "Anteile, bedingte Wahrscheinlichkeiten und Wirkungen verzerrter Diagramme beurteilen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -2964,6 +3124,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-10/01-arithmetik-algebra/wiederholung.pptx"
+            },
+            {
+              "titel": "Mathe-Champions: Arithmetik & Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-10/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+              "beschreibung": "Reelle Zahlen, Wurzeln und Potenzen nutzen sowie einfache Exponentialgleichungen lösen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -3004,6 +3172,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-10/02-funktionen/wiederholung.pptx"
+            },
+            {
+              "titel": "Mathe-Champions: Funktionen",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-10/02-funktionen/quiz/mathe-quest/index.html",
+              "beschreibung": "Amplitude und Periode periodischer Funktionen erkennen und Größen in Schwingungen deuten. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -3064,6 +3240,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-10/03-geometrie/wiederholung.pptx"
+            },
+            {
+              "titel": "Mathe-Champions: Geometrie",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-10/03-geometrie/quiz/mathe-quest/index.html",
+              "beschreibung": "Kreisflächen berechnen und Seitenverhältnisse in rechtwinkligen Dreiecken nutzen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -3129,6 +3313,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "klasse-10/04-stochastik/wiederholung.pptx"
+            },
+            {
+              "titel": "Mathe-Champions: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "klasse-10/04-stochastik/quiz/mathe-quest/index.html",
+              "beschreibung": "Bedingte Wahrscheinlichkeiten und Unabhängigkeit unterscheiden und Aussagen zu Daten bewerten. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -3301,6 +3493,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "ef/01-funktionen-und-analysis/wiederholung.pptx"
+            },
+            {
+              "titel": "EF · Mathe-Labor: Funktionen und Analysis",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "ef/01-funktionen-und-analysis/quiz/mathe-quest/index.html",
+              "beschreibung": "Funktionen, Transformationen, Ableitungen, Änderungsraten und Kurvendiskussion verbinden. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -3407,6 +3607,14 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "ef/02-analytische-geometrie-und-lineare-algebra/wiederholung.pptx"
+            },
+            {
+              "titel": "EF · Mathe-Labor: Analytische Geometrie und Lineare Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "ef/02-analytische-geometrie-und-lineare-algebra/quiz/mathe-quest/index.html",
+              "beschreibung": "Punkte, Vektoren, Geraden und Lagebeziehungen im zwei- und dreidimensionalen Raum darstellen. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -3465,7 +3673,16 @@
         {
           "id": "03-stochastik",
           "titel": "Stochastik",
-          "materialien": [],
+          "materialien": [
+            {
+              "titel": "EF · Mathe-Labor: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "ef/03-stochastik/quiz/mathe-quest/index.html",
+              "beschreibung": "Stichproben, mehrstufige Zufallsexperimente und diskrete Zufallsgrößen modellieren. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+            }
+          ],
           "themen": [
             {
               "id": "01-mehrstufige-zufallsexperimente",
@@ -3882,6 +4099,22 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "q1-q2-grundkurs/01-funktionen-und-analysis/wiederholung.pptx"
+            },
+            {
+              "titel": "Q1 · Analysewerkstatt: Funktionen und Analysis",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-grundkurs/01-funktionen-und-analysis/quiz/mathe-quest-q1/index.html",
+              "beschreibung": "Produktregel, Optimierung und Exponentialmodelle. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+            },
+            {
+              "titel": "Q2 · Abituratelier: Funktionen und Analysis",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-grundkurs/01-funktionen-und-analysis/quiz/mathe-quest-q2/index.html",
+              "beschreibung": "Integrale, Flächenbilanz und Bestandsänderungen. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -4001,6 +4234,22 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "q1-q2-grundkurs/02-analytische-geometrie-und-lineare-algebra/wiederholung.pptx"
+            },
+            {
+              "titel": "Q1 · Analysewerkstatt: Analytische Geometrie und Lineare Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-grundkurs/02-analytische-geometrie-und-lineare-algebra/quiz/mathe-quest-q1/index.html",
+              "beschreibung": "Skalarprodukt, Parameterform und Gerade-Ebene-Schnitt. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+            },
+            {
+              "titel": "Q2 · Abituratelier: Analytische Geometrie und Lineare Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-grundkurs/02-analytische-geometrie-und-lineare-algebra/quiz/mathe-quest-q2/index.html",
+              "beschreibung": "Lagebeziehungen, Winkel und grundlegende Abstände. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -4081,6 +4330,22 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "q1-q2-grundkurs/03-stochastik/wiederholung.pptx"
+            },
+            {
+              "titel": "Q1 · Analysewerkstatt: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-grundkurs/03-stochastik/quiz/mathe-quest-q1/index.html",
+              "beschreibung": "Binomialmodell, Einzelwahrscheinlichkeiten und Kennwerte. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+            },
+            {
+              "titel": "Q2 · Abituratelier: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-grundkurs/03-stochastik/quiz/mathe-quest-q2/index.html",
+              "beschreibung": "Binomialmodelle und Kontextdeutung. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -4529,6 +4794,22 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "q1-q2-leistungskurs/01-funktionen-und-analysis/wiederholung.pptx"
+            },
+            {
+              "titel": "Q1 · Analysewerkstatt: Funktionen und Analysis",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-leistungskurs/01-funktionen-und-analysis/quiz/mathe-quest-q1/index.html",
+              "beschreibung": "Produkt- und Kettenregel, Funktionenscharen und Extremwertanalyse. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+            },
+            {
+              "titel": "Q2 · Abituratelier: Funktionen und Analysis",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-leistungskurs/01-funktionen-und-analysis/quiz/mathe-quest-q2/index.html",
+              "beschreibung": "Variable Änderungsraten und Rotationsvolumina. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -4647,6 +4928,22 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "q1-q2-leistungskurs/02-analytische-geometrie-und-lineare-algebra/wiederholung.pptx"
+            },
+            {
+              "titel": "Q1 · Analysewerkstatt: Analytische Geometrie und Lineare Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-leistungskurs/02-analytische-geometrie-und-lineare-algebra/quiz/mathe-quest-q1/index.html",
+              "beschreibung": "Vektorwinkel, Normalenform, Kreuzprodukt und Geradenprojektion. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+            },
+            {
+              "titel": "Q2 · Abituratelier: Analytische Geometrie und Lineare Algebra",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-leistungskurs/02-analytische-geometrie-und-lineare-algebra/quiz/mathe-quest-q2/index.html",
+              "beschreibung": "Raumabstände, Schnittwinkel und windschiefe Geraden. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [
@@ -4747,6 +5044,22 @@
               "typ": "PPTX",
               "kategorie": "PPTX",
               "url": "q1-q2-leistungskurs/03-stochastik/wiederholung.pptx"
+            },
+            {
+              "titel": "Q1 · Analysewerkstatt: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-leistungskurs/03-stochastik/quiz/mathe-quest-q1/index.html",
+              "beschreibung": "Kumulative Binomialwahrscheinlichkeiten, Gegenereignisse und Varianz. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+            },
+            {
+              "titel": "Q2 · Abituratelier: Stochastik",
+              "datei": "index.html",
+              "typ": "Quiz",
+              "kategorie": "Quiz",
+              "url": "q1-q2-leistungskurs/03-stochastik/quiz/mathe-quest-q2/index.html",
+              "beschreibung": "Normalverteilung, Prognose- und Konfidenzintervalle sowie Stichprobenumfang. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
             }
           ],
           "themen": [

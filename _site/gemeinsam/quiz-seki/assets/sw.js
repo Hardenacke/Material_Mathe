@@ -1,0 +1,1 @@
+importScripts("./offline-worker.js");

@@ -37,6 +37,9 @@ class QuadraticMaterialTests(unittest.TestCase):
         counts = Counter()
         for area in data["bereiche"]:
             for field in area["inhaltsfelder"]:
+                for material in field["materialien"]:
+                    counts[material["url"]] += 1
+                    found[material["url"]] = ((area["id"], field["id"], ""), material)
                 for topic in field["themen"]:
                     for material in topic["materialien"]:
                         counts[material["url"]] += 1
@@ -44,7 +47,7 @@ class QuadraticMaterialTests(unittest.TestCase):
         for entry in assignments:
             self.assertEqual(counts[entry["url"]], 1, entry["url"])
             scope, material = found[entry["url"]]
-            self.assertEqual(scope, (entry["bereich"], entry["inhaltsfeld"], entry["thema"]))
+            self.assertEqual(scope, (entry["bereich"], entry["inhaltsfeld"], entry.get("thema", "")))
             self.assertEqual(material["typ"], entry["typ"])
         self.assertEqual((data["statistik"]["bereiche"], data["statistik"]["inhaltsfelder"], data["statistik"]["themen"]), (9, 33, 105))
 

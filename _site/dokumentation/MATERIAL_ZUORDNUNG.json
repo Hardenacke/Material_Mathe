@@ -135,6 +135,318 @@
       "titel": "Wurzelwerk – Reelle Zahlen und Wurzeln",
       "typ": "Quiz",
       "beschreibung": "Wurzeln auf drei Stufen üben oder mit mittelschweren Aufgaben, Timer und Zeitbonus im Cloudflare-Wettbewerb antreten."
+    },
+    {
+      "bereich": "klasse-5",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-5/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "titel": "Die Zahlen-Crew: Arithmetik & Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Zahlen vergleichen und ordnen, sicher addieren, sinnvoll runden und Ergebnisse am Zahlenstrahl prüfen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-5",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-5/02-funktionen/quiz/mathe-quest/index.html",
+      "titel": "Die Zahlen-Crew: Funktionen",
+      "typ": "Quiz",
+      "beschreibung": "Zahlenfolgen fortsetzen und Regeln mit Startwert und Zuwachs beschreiben. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-5",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-5/03-geometrie/quiz/mathe-quest/index.html",
+      "titel": "Die Zahlen-Crew: Geometrie",
+      "typ": "Quiz",
+      "beschreibung": "Grundformen erkennen, Strecken und Rechtecke beschreiben sowie erste Figuren im Raster konstruieren. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-5",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-5/04-stochastik/quiz/mathe-quest/index.html",
+      "titel": "Die Zahlen-Crew: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Daten sammeln, Häufigkeiten zusammenfassen und einfache Darstellungen lesen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-6",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-6/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "titel": "Das Ideen-Labor: Arithmetik & Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Brüche als Zahlen und Anteile verstehen, gleichwertige Brüche erkennen und Brüche mit Dezimalzahlen verbinden. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-6",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-6/02-funktionen/quiz/mathe-quest/index.html",
+      "titel": "Das Ideen-Labor: Funktionen",
+      "typ": "Quiz",
+      "beschreibung": "Proportionale Zuordnungen in Termen, Tabellen und Graphen wiedererkennen und Werte berechnen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-6",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-6/03-geometrie/quiz/mathe-quest/index.html",
+      "titel": "Das Ideen-Labor: Geometrie",
+      "typ": "Quiz",
+      "beschreibung": "Flächeninhalt und Volumen berechnen, Quader und ihre Netze erkennen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-6",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-6/04-stochastik/quiz/mathe-quest/index.html",
+      "titel": "Das Ideen-Labor: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Daten mit Mittelwert, Median und Spannweite beschreiben und Kenngrößen vergleichen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-7",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-7/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "titel": "Mathe-Expedition: Arithmetik & Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Mit rationalen Zahlen und Vorzeichen rechnen, Zahlen auf der Zahlengeraden ordnen und Variablen deuten. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-7",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-7/02-funktionen/quiz/mathe-quest/index.html",
+      "titel": "Mathe-Expedition: Funktionen",
+      "typ": "Quiz",
+      "beschreibung": "Proportionale Zuordnungen mit Tabelle, Graph und Rechenregel darstellen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-7",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-7/03-geometrie/quiz/mathe-quest/index.html",
+      "titel": "Mathe-Expedition: Geometrie",
+      "typ": "Quiz",
+      "beschreibung": "Winkelbeziehungen und Dreiecke untersuchen und Punkte an der x-Achse spiegeln. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-7",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-7/04-stochastik/quiz/mathe-quest/index.html",
+      "titel": "Mathe-Expedition: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Relative Häufigkeiten berechnen und als Schätzung für Wahrscheinlichkeiten nutzen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-8",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-8/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "titel": "Die Rätsel-Arena: Arithmetik & Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Terme einsetzen, lineare Gleichungen durch Äquivalenzumformungen lösen und Lösungen prüfen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-8",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-8/02-funktionen/quiz/mathe-quest/index.html",
+      "titel": "Die Rätsel-Arena: Funktionen",
+      "typ": "Quiz",
+      "beschreibung": "Lineare Funktionen über Steigung, y-Achsenabschnitt, Wertetabelle und Sachkontext beschreiben. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-8",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-8/03-geometrie/quiz/mathe-quest/index.html",
+      "titel": "Die Rätsel-Arena: Geometrie",
+      "typ": "Quiz",
+      "beschreibung": "Winkelregeln anwenden, Dreiecke klassifizieren und Figuren nach Maßangaben konstruieren. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-8",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-8/04-stochastik/quiz/mathe-quest/index.html",
+      "titel": "Die Rätsel-Arena: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Einfache Zufallsexperimente, Ergebnisräume und Pfade bei mehrstufigen Versuchen untersuchen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-9/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "titel": "Level Up Mathematik: Arithmetik & Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Quadrate und Wurzeln, irrationale Zahlen und die Nullproduktregel anwenden. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-9/02-funktionen/quiz/mathe-quest/index.html",
+      "titel": "Level Up Mathematik: Funktionen",
+      "typ": "Quiz",
+      "beschreibung": "Quadratische Funktionen und ihre Funktionswerte, Scheitelpunkte und Darstellungsformen untersuchen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-9/03-geometrie/quiz/mathe-quest/index.html",
+      "titel": "Level Up Mathematik: Geometrie",
+      "typ": "Quiz",
+      "beschreibung": "Satz des Pythagoras, Ähnlichkeit und Streckfaktoren auf Dreiecke anwenden. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-9",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-9/04-stochastik/quiz/mathe-quest/index.html",
+      "titel": "Level Up Mathematik: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Anteile, bedingte Wahrscheinlichkeiten und Wirkungen verzerrter Diagramme beurteilen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-10",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-10/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "titel": "Mathe-Champions: Arithmetik & Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Reelle Zahlen, Wurzeln und Potenzen nutzen sowie einfache Exponentialgleichungen lösen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-10",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-10/02-funktionen/quiz/mathe-quest/index.html",
+      "titel": "Mathe-Champions: Funktionen",
+      "typ": "Quiz",
+      "beschreibung": "Amplitude und Periode periodischer Funktionen erkennen und Größen in Schwingungen deuten. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-10",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-10/03-geometrie/quiz/mathe-quest/index.html",
+      "titel": "Mathe-Champions: Geometrie",
+      "typ": "Quiz",
+      "beschreibung": "Kreisflächen berechnen und Seitenverhältnisse in rechtwinkligen Dreiecken nutzen. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "klasse-10",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-10/04-stochastik/quiz/mathe-quest/index.html",
+      "titel": "Mathe-Champions: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Bedingte Wahrscheinlichkeiten und Unabhängigkeit unterscheiden und Aussagen zu Daten bewerten. Training auf drei Stufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "ef",
+      "inhaltsfeld": "01-funktionen-und-analysis",
+      "url": "ef/01-funktionen-und-analysis/quiz/mathe-quest/index.html",
+      "titel": "EF · Mathe-Labor: Funktionen und Analysis",
+      "typ": "Quiz",
+      "beschreibung": "Funktionen, Transformationen, Ableitungen, Änderungsraten und Kurvendiskussion verbinden. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "ef",
+      "inhaltsfeld": "02-analytische-geometrie-und-lineare-algebra",
+      "url": "ef/02-analytische-geometrie-und-lineare-algebra/quiz/mathe-quest/index.html",
+      "titel": "EF · Mathe-Labor: Analytische Geometrie und Lineare Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Punkte, Vektoren, Geraden und Lagebeziehungen im zwei- und dreidimensionalen Raum darstellen. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "ef",
+      "inhaltsfeld": "03-stochastik",
+      "url": "ef/03-stochastik/quiz/mathe-quest/index.html",
+      "titel": "EF · Mathe-Labor: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Stichproben, mehrstufige Zufallsexperimente und diskrete Zufallsgrößen modellieren. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-grundkurs",
+      "inhaltsfeld": "01-funktionen-und-analysis",
+      "url": "q1-q2-grundkurs/01-funktionen-und-analysis/quiz/mathe-quest-q1/index.html",
+      "titel": "Q1 · Analysewerkstatt: Funktionen und Analysis",
+      "typ": "Quiz",
+      "beschreibung": "Produktregel, Optimierung und Exponentialmodelle. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-leistungskurs",
+      "inhaltsfeld": "01-funktionen-und-analysis",
+      "url": "q1-q2-leistungskurs/01-funktionen-und-analysis/quiz/mathe-quest-q1/index.html",
+      "titel": "Q1 · Analysewerkstatt: Funktionen und Analysis",
+      "typ": "Quiz",
+      "beschreibung": "Produkt- und Kettenregel, Funktionenscharen und Extremwertanalyse. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-grundkurs",
+      "inhaltsfeld": "02-analytische-geometrie-und-lineare-algebra",
+      "url": "q1-q2-grundkurs/02-analytische-geometrie-und-lineare-algebra/quiz/mathe-quest-q1/index.html",
+      "titel": "Q1 · Analysewerkstatt: Analytische Geometrie und Lineare Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Skalarprodukt, Parameterform und Gerade-Ebene-Schnitt. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-leistungskurs",
+      "inhaltsfeld": "02-analytische-geometrie-und-lineare-algebra",
+      "url": "q1-q2-leistungskurs/02-analytische-geometrie-und-lineare-algebra/quiz/mathe-quest-q1/index.html",
+      "titel": "Q1 · Analysewerkstatt: Analytische Geometrie und Lineare Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Vektorwinkel, Normalenform, Kreuzprodukt und Geradenprojektion. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-grundkurs",
+      "inhaltsfeld": "03-stochastik",
+      "url": "q1-q2-grundkurs/03-stochastik/quiz/mathe-quest-q1/index.html",
+      "titel": "Q1 · Analysewerkstatt: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Binomialmodell, Einzelwahrscheinlichkeiten und Kennwerte. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-leistungskurs",
+      "inhaltsfeld": "03-stochastik",
+      "url": "q1-q2-leistungskurs/03-stochastik/quiz/mathe-quest-q1/index.html",
+      "titel": "Q1 · Analysewerkstatt: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Kumulative Binomialwahrscheinlichkeiten, Gegenereignisse und Varianz. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-grundkurs",
+      "inhaltsfeld": "01-funktionen-und-analysis",
+      "url": "q1-q2-grundkurs/01-funktionen-und-analysis/quiz/mathe-quest-q2/index.html",
+      "titel": "Q2 · Abituratelier: Funktionen und Analysis",
+      "typ": "Quiz",
+      "beschreibung": "Integrale, Flächenbilanz und Bestandsänderungen. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-leistungskurs",
+      "inhaltsfeld": "01-funktionen-und-analysis",
+      "url": "q1-q2-leistungskurs/01-funktionen-und-analysis/quiz/mathe-quest-q2/index.html",
+      "titel": "Q2 · Abituratelier: Funktionen und Analysis",
+      "typ": "Quiz",
+      "beschreibung": "Variable Änderungsraten und Rotationsvolumina. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-grundkurs",
+      "inhaltsfeld": "02-analytische-geometrie-und-lineare-algebra",
+      "url": "q1-q2-grundkurs/02-analytische-geometrie-und-lineare-algebra/quiz/mathe-quest-q2/index.html",
+      "titel": "Q2 · Abituratelier: Analytische Geometrie und Lineare Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Lagebeziehungen, Winkel und grundlegende Abstände. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-leistungskurs",
+      "inhaltsfeld": "02-analytische-geometrie-und-lineare-algebra",
+      "url": "q1-q2-leistungskurs/02-analytische-geometrie-und-lineare-algebra/quiz/mathe-quest-q2/index.html",
+      "titel": "Q2 · Abituratelier: Analytische Geometrie und Lineare Algebra",
+      "typ": "Quiz",
+      "beschreibung": "Raumabstände, Schnittwinkel und windschiefe Geraden. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-grundkurs",
+      "inhaltsfeld": "03-stochastik",
+      "url": "q1-q2-grundkurs/03-stochastik/quiz/mathe-quest-q2/index.html",
+      "titel": "Q2 · Abituratelier: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Binomialmodelle und Kontextdeutung. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
+    },
+    {
+      "bereich": "q1-q2-leistungskurs",
+      "inhaltsfeld": "03-stochastik",
+      "url": "q1-q2-leistungskurs/03-stochastik/quiz/mathe-quest-q2/index.html",
+      "titel": "Q2 · Abituratelier: Stochastik",
+      "typ": "Quiz",
+      "beschreibung": "Normalverteilung, Prognose- und Konfidenzintervalle sowie Stichprobenumfang. Drei Trainingsstufen und Online-Wettbewerb mit eigener Rangliste."
     }
   ]
 }

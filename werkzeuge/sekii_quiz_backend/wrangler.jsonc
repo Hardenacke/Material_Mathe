@@ -1,0 +1,42 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mathematik-sekii-quiz",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-10-27",
+  "workers_dev": true,
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "ROUNDS",
+        "class_name": "CompetitionRound"
+      }
+    ]
+  },
+  "exports": {
+    "CompetitionRound": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "mathematik-sekii-leaderboard",
+      "database_id": "bd7421d9-e8bd-499e-95d4-9f932a74686e",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "ALLOWED_ORIGINS": "https://hardenacke.github.io,http://127.0.0.1:8000,http://localhost:8000,http://127.0.0.1:8788,http://localhost:8788,http://127.0.0.1:8789,http://localhost:8789"
+  },
+  "observability": {
+    "enabled": false
+  }
+}

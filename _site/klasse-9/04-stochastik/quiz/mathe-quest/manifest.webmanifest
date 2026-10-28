@@ -1,0 +1,19 @@
+{
+  "name": "Level Up Mathematik: Stochastik · Klasse 9",
+  "short_name": "Mathe-Quest",
+  "description": "Interaktive Mathematik-Quizze für die Sekundarstufe I.",
+  "lang": "de",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f5fa",
+  "theme_color": "#182238",
+  "icons": [
+    {
+      "src": "../../../../gemeinsam/quiz-seki/assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

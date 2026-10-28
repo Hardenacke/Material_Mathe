@@ -1,0 +1,6 @@
+/* Keep option text and answer feedback readable on narrow screens. */
+.answer-btn { flex-wrap: wrap; }
+.answer-option { min-width: 0; overflow-wrap: anywhere; }
+.answer-status { max-width: 100%; white-space: normal; }
+.question-meta { flex-wrap: wrap; }
+.match-row > select { min-width: 0; max-width: 100%; }

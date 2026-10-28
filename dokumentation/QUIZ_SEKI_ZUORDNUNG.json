@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "quizze": [
+    {
+      "quizId": "5-arithmetik-algebra",
+      "klasse": 5,
+      "bereich": "klasse-5",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-5/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-5/01-arithmetik-algebra/quiz/mathe-quest/rangliste.html",
+      "titel": "Die Zahlen-Crew: Arithmetik & Algebra",
+      "schwerpunkt": "Zahlen vergleichen und ordnen, sicher addieren, sinnvoll runden und Ergebnisse am Zahlenstrahl prüfen."
+    },
+    {
+      "quizId": "5-funktionen",
+      "klasse": 5,
+      "bereich": "klasse-5",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-5/02-funktionen/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-5/02-funktionen/quiz/mathe-quest/rangliste.html",
+      "titel": "Die Zahlen-Crew: Funktionen",
+      "schwerpunkt": "Zahlenfolgen fortsetzen und Regeln mit Startwert und Zuwachs beschreiben."
+    },
+    {
+      "quizId": "5-geometrie",
+      "klasse": 5,
+      "bereich": "klasse-5",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-5/03-geometrie/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-5/03-geometrie/quiz/mathe-quest/rangliste.html",
+      "titel": "Die Zahlen-Crew: Geometrie",
+      "schwerpunkt": "Grundformen erkennen, Strecken und Rechtecke beschreiben sowie erste Figuren im Raster konstruieren."
+    },
+    {
+      "quizId": "5-stochastik",
+      "klasse": 5,
+      "bereich": "klasse-5",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-5/04-stochastik/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-5/04-stochastik/quiz/mathe-quest/rangliste.html",
+      "titel": "Die Zahlen-Crew: Stochastik",
+      "schwerpunkt": "Daten sammeln, Häufigkeiten zusammenfassen und einfache Darstellungen lesen."
+    },
+    {
+      "quizId": "6-arithmetik-algebra",
+      "klasse": 6,
+      "bereich": "klasse-6",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-6/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-6/01-arithmetik-algebra/quiz/mathe-quest/rangliste.html",
+      "titel": "Das Ideen-Labor: Arithmetik & Algebra",
+      "schwerpunkt": "Brüche als Zahlen und Anteile verstehen, gleichwertige Brüche erkennen und Brüche mit Dezimalzahlen verbinden."
+    },
+    {
+      "quizId": "6-funktionen",
+      "klasse": 6,
+      "bereich": "klasse-6",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-6/02-funktionen/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-6/02-funktionen/quiz/mathe-quest/rangliste.html",
+      "titel": "Das Ideen-Labor: Funktionen",
+      "schwerpunkt": "Proportionale Zuordnungen in Termen, Tabellen und Graphen wiedererkennen und Werte berechnen."
+    },
+    {
+      "quizId": "6-geometrie",
+      "klasse": 6,
+      "bereich": "klasse-6",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-6/03-geometrie/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-6/03-geometrie/quiz/mathe-quest/rangliste.html",
+      "titel": "Das Ideen-Labor: Geometrie",
+      "schwerpunkt": "Flächeninhalt und Volumen berechnen, Quader und ihre Netze erkennen."
+    },
+    {
+      "quizId": "6-stochastik",
+      "klasse": 6,
+      "bereich": "klasse-6",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-6/04-stochastik/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-6/04-stochastik/quiz/mathe-quest/rangliste.html",
+      "titel": "Das Ideen-Labor: Stochastik",
+      "schwerpunkt": "Daten mit Mittelwert, Median und Spannweite beschreiben und Kenngrößen vergleichen."
+    },
+    {
+      "quizId": "7-arithmetik-algebra",
+      "klasse": 7,
+      "bereich": "klasse-7",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-7/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-7/01-arithmetik-algebra/quiz/mathe-quest/rangliste.html",
+      "titel": "Mathe-Expedition: Arithmetik & Algebra",
+      "schwerpunkt": "Mit rationalen Zahlen und Vorzeichen rechnen, Zahlen auf der Zahlengeraden ordnen und Variablen deuten."
+    },
+    {
+      "quizId": "7-funktionen",
+      "klasse": 7,
+      "bereich": "klasse-7",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-7/02-funktionen/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-7/02-funktionen/quiz/mathe-quest/rangliste.html",
+      "titel": "Mathe-Expedition: Funktionen",
+      "schwerpunkt": "Proportionale Zuordnungen mit Tabelle, Graph und Rechenregel darstellen."
+    },
+    {
+      "quizId": "7-geometrie",
+      "klasse": 7,
+      "bereich": "klasse-7",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-7/03-geometrie/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-7/03-geometrie/quiz/mathe-quest/rangliste.html",
+      "titel": "Mathe-Expedition: Geometrie",
+      "schwerpunkt": "Winkelbeziehungen und Dreiecke untersuchen und Punkte an der x-Achse spiegeln."
+    },
+    {
+      "quizId": "7-stochastik",
+      "klasse": 7,
+      "bereich": "klasse-7",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-7/04-stochastik/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-7/04-stochastik/quiz/mathe-quest/rangliste.html",
+      "titel": "Mathe-Expedition: Stochastik",
+      "schwerpunkt": "Relative Häufigkeiten berechnen und als Schätzung für Wahrscheinlichkeiten nutzen."
+    },
+    {
+      "quizId": "8-arithmetik-algebra",
+      "klasse": 8,
+      "bereich": "klasse-8",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-8/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-8/01-arithmetik-algebra/quiz/mathe-quest/rangliste.html",
+      "titel": "Die Rätsel-Arena: Arithmetik & Algebra",
+      "schwerpunkt": "Terme einsetzen, lineare Gleichungen durch Äquivalenzumformungen lösen und Lösungen prüfen."
+    },
+    {
+      "quizId": "8-funktionen",
+      "klasse": 8,
+      "bereich": "klasse-8",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-8/02-funktionen/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-8/02-funktionen/quiz/mathe-quest/rangliste.html",
+      "titel": "Die Rätsel-Arena: Funktionen",
+      "schwerpunkt": "Lineare Funktionen über Steigung, y-Achsenabschnitt, Wertetabelle und Sachkontext beschreiben."
+    },
+    {
+      "quizId": "8-geometrie",
+      "klasse": 8,
+      "bereich": "klasse-8",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-8/03-geometrie/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-8/03-geometrie/quiz/mathe-quest/rangliste.html",
+      "titel": "Die Rätsel-Arena: Geometrie",
+      "schwerpunkt": "Winkelregeln anwenden, Dreiecke klassifizieren und Figuren nach Maßangaben konstruieren."
+    },
+    {
+      "quizId": "8-stochastik",
+      "klasse": 8,
+      "bereich": "klasse-8",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-8/04-stochastik/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-8/04-stochastik/quiz/mathe-quest/rangliste.html",
+      "titel": "Die Rätsel-Arena: Stochastik",
+      "schwerpunkt": "Einfache Zufallsexperimente, Ergebnisräume und Pfade bei mehrstufigen Versuchen untersuchen."
+    },
+    {
+      "quizId": "9-arithmetik-algebra",
+      "klasse": 9,
+      "bereich": "klasse-9",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-9/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-9/01-arithmetik-algebra/quiz/mathe-quest/rangliste.html",
+      "titel": "Level Up Mathematik: Arithmetik & Algebra",
+      "schwerpunkt": "Quadrate und Wurzeln, irrationale Zahlen und die Nullproduktregel anwenden."
+    },
+    {
+      "quizId": "9-funktionen",
+      "klasse": 9,
+      "bereich": "klasse-9",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-9/02-funktionen/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-9/02-funktionen/quiz/mathe-quest/rangliste.html",
+      "titel": "Level Up Mathematik: Funktionen",
+      "schwerpunkt": "Quadratische Funktionen und ihre Funktionswerte, Scheitelpunkte und Darstellungsformen untersuchen."
+    },
+    {
+      "quizId": "9-geometrie",
+      "klasse": 9,
+      "bereich": "klasse-9",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-9/03-geometrie/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-9/03-geometrie/quiz/mathe-quest/rangliste.html",
+      "titel": "Level Up Mathematik: Geometrie",
+      "schwerpunkt": "Satz des Pythagoras, Ähnlichkeit und Streckfaktoren auf Dreiecke anwenden."
+    },
+    {
+      "quizId": "9-stochastik",
+      "klasse": 9,
+      "bereich": "klasse-9",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-9/04-stochastik/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-9/04-stochastik/quiz/mathe-quest/rangliste.html",
+      "titel": "Level Up Mathematik: Stochastik",
+      "schwerpunkt": "Anteile, bedingte Wahrscheinlichkeiten und Wirkungen verzerrter Diagramme beurteilen."
+    },
+    {
+      "quizId": "10-arithmetik-algebra",
+      "klasse": 10,
+      "bereich": "klasse-10",
+      "inhaltsfeld": "01-arithmetik-algebra",
+      "url": "klasse-10/01-arithmetik-algebra/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-10/01-arithmetik-algebra/quiz/mathe-quest/rangliste.html",
+      "titel": "Mathe-Champions: Arithmetik & Algebra",
+      "schwerpunkt": "Reelle Zahlen, Wurzeln und Potenzen nutzen sowie einfache Exponentialgleichungen lösen."
+    },
+    {
+      "quizId": "10-funktionen",
+      "klasse": 10,
+      "bereich": "klasse-10",
+      "inhaltsfeld": "02-funktionen",
+      "url": "klasse-10/02-funktionen/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-10/02-funktionen/quiz/mathe-quest/rangliste.html",
+      "titel": "Mathe-Champions: Funktionen",
+      "schwerpunkt": "Amplitude und Periode periodischer Funktionen erkennen und Größen in Schwingungen deuten."
+    },
+    {
+      "quizId": "10-geometrie",
+      "klasse": 10,
+      "bereich": "klasse-10",
+      "inhaltsfeld": "03-geometrie",
+      "url": "klasse-10/03-geometrie/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-10/03-geometrie/quiz/mathe-quest/rangliste.html",
+      "titel": "Mathe-Champions: Geometrie",
+      "schwerpunkt": "Kreisflächen berechnen und Seitenverhältnisse in rechtwinkligen Dreiecken nutzen."
+    },
+    {
+      "quizId": "10-stochastik",
+      "klasse": 10,
+      "bereich": "klasse-10",
+      "inhaltsfeld": "04-stochastik",
+      "url": "klasse-10/04-stochastik/quiz/mathe-quest/index.html",
+      "rangliste": "klasse-10/04-stochastik/quiz/mathe-quest/rangliste.html",
+      "titel": "Mathe-Champions: Stochastik",
+      "schwerpunkt": "Bedingte Wahrscheinlichkeiten und Unabhängigkeit unterscheiden und Aussagen zu Daten bewerten."
+    }
+  ]
+}
