@@ -5,6 +5,12 @@ in SQLite-basierten Durable Objects. D1 speichert die Bestwerte getrennt nach
 Quizkennung, Browserprofil und Wertungsversion. EF, Q1, Q2, GK, LK und die drei
 Inhaltsfelder haben voneinander getrennte Quizkennungen und Ranglisten.
 
+`src/aufgaben-varianten.js` erzeugt die Zahlenvarianten mit passenden Lösungen
+und Zeitbudgets. Die Vorbereitung kopiert dieselben Regeln für das Offline-Training
+in die öffentlichen Assets. Sie muss nach Regeländerungen vor dem Website-Build
+ausgeführt werden. Neue Runden verwenden `sek2-v2` mit 1 bis 5 Minuten je Aufgabe;
+laufende `sek2-v1`-Runden und deren Ranglisten bleiben erhalten.
+
 Vorbereitung im Repository-Stamm:
 
 ```text

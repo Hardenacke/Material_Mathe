@@ -8,6 +8,9 @@ TARGET = ROOT / '.local/sekii-quiz/worker'
 
 
 def prepare():
+    # One rules source for online competition and offline training.
+    shutil.copy2(ROOT / 'werkzeuge/sekii_quiz_backend/src/aufgaben-varianten.js',
+                 ROOT / 'gemeinsam/quiz-sekii/assets/aufgaben-varianten.js')
     TARGET.mkdir(parents=True, exist_ok=True)
     shutil.copytree(ROOT / 'werkzeuge/sekii_quiz_backend', TARGET, dirs_exist_ok=True,
                     ignore=shutil.ignore_patterns('node_modules', '.wrangler', '.deploy-check',

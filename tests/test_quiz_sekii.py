@@ -51,6 +51,17 @@ class QuizSekIITests(unittest.TestCase):
                 self.assertEqual(json.loads(match[2]), item['klasse'])
                 self.assertIn("/api/v1/leaderboard?quizId='+encodeURIComponent(quizId)+'&class='+encodeURIComponent(className)", page)
                 self.assertIn("key='matheQuizLocalLeaderboard:'+quizId", page)
+                self.assertIn('id="scoreVersion"', page)
+                self.assertIn("+'&scoreVersion='+encodeURIComponent(requested)", page)
+
+    def test_training_and_worker_use_the_same_variant_rules(self):
+        source = ROOT / 'werkzeuge/sekii_quiz_backend/src/aufgaben-varianten.js'
+        public = ROOT / 'gemeinsam/quiz-sekii/assets/aufgaben-varianten.js'
+        self.assertEqual(source.read_bytes(), public.read_bytes())
+        for item in QUIZZES:
+            page = (ROOT / item['url']).read_text(encoding='utf-8')
+            self.assertIn('src="../../../../gemeinsam/quiz-sekii/assets/aufgaben-varianten.js"', page)
+            self.assertIn('MatheSekIIVarianten.makeVariant(QUIZ.id,pattern,{level,extension})', page)
 
     def test_quiz_and_ranking_links_exist_with_shared_local_formula_renderer(self):
         pages = [ROOT / item[key] for item in QUIZZES for key in ['url', 'rangliste']]

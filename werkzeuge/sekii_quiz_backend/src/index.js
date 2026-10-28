@@ -1,6 +1,8 @@
-const SCORE_VERSION = "sek2-v1";
+import './aufgaben-varianten.js';
+const {makeVariant, timeForTask, casGuidance} = globalThis.MatheSekIIVarianten;
+const SCORE_VERSION = "sek2-v2";
+const SCORE_VERSIONS = new Set(['sek2-v1', SCORE_VERSION]);
 const ROUND_LENGTH = 12;
-const TASK_LIMIT_MS = 60_000;
 const ALLOWED_FIELDS = new Set(["analysis", "geometrie", "stochastik"]);
 
 const json = (body, status = 200, headers = {}) => new Response(JSON.stringify(body), {
@@ -78,7 +80,7 @@ function labelAbiTask(quizId, index, task) {
   if (parsed && parsed.phase !== "ef" && (index % 5 === 0 || index % 5 === 2)) task.prompt = "Abiturtransfer · Zahlenwerte variiert. " + task.prompt;
   return task;
 }
-function makeTask(quizId, index) {
+function makeBaseTask(quizId, index) {
   const parsed = parseQuizId(quizId), { phase, field, course } = parsed;
   const slot = index % 5, r = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
   const lk = course === "lk";
@@ -196,8 +198,15 @@ function makeTask(quizId, index) {
   if (slot === 3) return order("Ordne die Schritte eines approximativen Konfidenzintervalls.", ["Stichprobenanteil und Umfang bestimmen", "Standardfehler berechnen", "Intervallgrenzen bilden", "Aussage und Unsicherheit deuten"], ["Stichprobenanteil und Umfang bestimmen", "Standardfehler berechnen", "Intervallgrenzen bilden", "Aussage und Unsicherheit deuten"], "Das Intervall wird aus Stichprobenanteil, Umfang und dem gewählten Verfahren aufgebaut.");
   return match("Ordne die Verteilung zur typischen Größe.", [{ left: "Binomialverteilung", options: ["diskrete Trefferzahl", "stetige Messgröße"], correct: 0 }, { left: "Normalverteilung", options: ["diskrete Trefferzahl", "stetige Messgröße"], correct: 1 }], "Binomialverteilungen modellieren diskrete Trefferzahlen; Normalverteilungen beschreiben stetige Größen.");
 }
+function makeTask(quizId, index, options = {}) {
+  let task = makeVariant(quizId, index % 5, options) || makeBaseTask(quizId, index);
+  if (task.kind === 'match') task = {...task, ...match(task.prompt, task.pairs, task.solution)};
+  task.timeLimitSeconds = timeForTask(task);
+  return task;
+}
+
 function publicTask(task, expiresAt) {
-  const allowed = ["id", "kind", "prompt", "options", "min", "max", "step", "unit", "fixed"];
+  const allowed = ["id", "kind", "prompt", "options", "min", "max", "step", "unit", "fixed", "pointLabel", "connectPoints"];
   const result = {};
   for (const key of allowed) if (task[key] !== undefined) result[key] = task[key];
   if (task.kind === "order" && Array.isArray(task.items)) {
@@ -213,6 +222,8 @@ function publicTask(task, expiresAt) {
   if (task.pairs) result.pairs = task.pairs.map(({ left, options }) => ({ left, options }));
   if (task.kind === "construct") result.requiredPoints = task.points.length;
   result.expiresAt = expiresAt;
+  result.timeLimitSeconds = task.timeLimitSeconds || 60;
+  result.casGuidance = casGuidance(task);
   return result;
 }
 
@@ -268,8 +279,9 @@ export function scoreAnswer(task, value, now, deadline) {
   const quality = now >= deadline ? 0 : evaluateAnswer(task, value);
   const full = quality === 1;
   const basePoints = Math.round(100 * quality);
-  const remainingSeconds = Math.min(60, Math.max(0, Math.ceil((deadline - now) / 1000)));
-  const timeBonus = full ? Math.floor(50 * remainingSeconds / 60) : 0;
+  const budgetSeconds = task.timeLimitSeconds || 60;
+  const remainingSeconds = Math.min(budgetSeconds, Math.max(0, Math.ceil((deadline - now) / 1000)));
+  const timeBonus = full ? Math.floor(50 * remainingSeconds / budgetSeconds) : 0;
   return { quality, isCorrect: full, basePoints, timeBonus, remainingSeconds };
 }
 
@@ -284,7 +296,7 @@ async function saveBestScore(env, round) {
       best_points = MAX(leaderboard.best_points, excluded.best_points),
       best_date = CASE WHEN excluded.best_points > leaderboard.best_points THEN excluded.best_date ELSE leaderboard.best_date END,
       score_version = excluded.score_version`)
-    .bind(round.quizId, round.browserId, round.name, round.className, round.totalPoints, now, SCORE_VERSION)
+    .bind(round.quizId, round.browserId, round.name, round.className, round.totalPoints, now, round.scoreVersion || 'sek2-v1')
     .run();
 }
 
@@ -366,18 +378,20 @@ export default {
         const quizId = url.searchParams.get("quizId");
         const parsed = parseQuizId(quizId);
         const className = url.searchParams.get("class");
+        const scoreVersion = url.searchParams.get('scoreVersion') || SCORE_VERSION;
+        if (!SCORE_VERSIONS.has(scoreVersion)) return json({error: 'Wertung nicht gefunden.'}, 400, headers);
         if (!parsed || className !== parsed.className) return json({ error: "Ungültige Ranglistenabfrage." }, 400, headers);
         // quiz_id includes the grade and field, isolating all 24 quiz leaderboards.
         const result = await env.DB.prepare(`SELECT pseudonym AS name, class_name AS className, best_points AS points, best_date AS date
           FROM leaderboard WHERE quiz_id = ? AND class_name = ? AND score_version = ? ORDER BY best_points DESC, best_date ASC LIMIT 50`)
-          .bind(quizId, className, SCORE_VERSION).all();
+          .bind(quizId, className, scoreVersion).all();
         let priorPoints = null, priorRank = 0;
         const entries = (result.results || []).map((row, i) => {
           const rank = row.points === priorPoints ? priorRank : i + 1;
           priorPoints = row.points; priorRank = rank;
           return { name: row.name, className: row.className, points: row.points, date: row.date.slice(0, 10), rank };
         });
-        return json({ entries, scoreVersion: SCORE_VERSION }, 200, headers);
+        return json({ entries, scoreVersion }, 200, headers);
       }
       return json({ error: "Route nicht gefunden." }, 404, headers);
     } catch (error) {
@@ -410,7 +424,7 @@ export class CompetitionRound {
     if (!task || this.round.status !== "active") return null;
     if (!task.deadline) {
       task.openedAt = Date.now();
-      task.deadline = task.openedAt + TASK_LIMIT_MS;
+      task.deadline = task.openedAt + (task.timeLimitSeconds || 60) * 1000;
       await this.ctx.storage.setAlarm(task.deadline);
       await this.persist();
     }
@@ -431,7 +445,7 @@ export class CompetitionRound {
       correctCount: this.round.correctCount,
       feedback: task.feedback || "Die Wertung wurde serverseitig geprüft.",
       finished: !!isFinal,
-      scoreVersion: SCORE_VERSION,
+      scoreVersion: this.round.scoreVersion || 'sek2-v1',
     };
   }
 
@@ -504,16 +518,26 @@ export class CompetitionRound {
       return this.resume(body);
     }
     await this.saveCompletedBest();
+    const tasks = [], prompts = new Set();
+    for (let i = 0; i < ROUND_LENGTH; i++) {
+      let task;
+      for (let attempt = 0; attempt < 12; attempt++) {
+        task = labelAbiTask(body.quizId, i, makeTask(body.quizId, i));
+        if (!prompts.has(task.prompt) || ['choice', 'order', 'match'].includes(task.kind)) break;
+      }
+      prompts.add(task.prompt);
+      tasks.push({...task, id: crypto.randomUUID()});
+    }
     this.round = {
       roundId: crypto.randomUUID(), quizId: body.quizId, grade: parsed.grade, field: parsed.field,
       browserId: body.browserId, name: safeName(body.name), className: parsed.className,
       startedAt: Date.now(), index: 0, status: "active", totalPoints: 0,
       basePoints: 0, timeBonus: 0, correctCount: 0, scoreVersion: SCORE_VERSION,
-      tasks: Array.from({ length: ROUND_LENGTH }, (_, i) => ({ ...labelAbiTask(body.quizId, i, makeTask(body.quizId, i)), id: crypto.randomUUID() })),
+      tasks,
       requests: {},
     };
     const question = await this.beginCurrentTask();
-    return json({ roundId: this.round.roundId, roundStartedAt: new Date(this.round.startedAt).toISOString(), question });
+    return json({ roundId: this.round.roundId, scoreVersion: this.round.scoreVersion, roundStartedAt: new Date(this.round.startedAt).toISOString(), question });
   }
 
   async resume(body) {
@@ -522,7 +546,7 @@ export class CompetitionRound {
     }
     if (this.round.status === "completed") {
       await this.saveCompletedBest();
-      return json({ roundId: this.round.roundId, roundStartedAt: new Date(this.round.startedAt).toISOString(),
+      return json({ roundId: this.round.roundId, scoreVersion: this.round.scoreVersion || 'sek2-v1', roundStartedAt: new Date(this.round.startedAt).toISOString(),
         index: ROUND_LENGTH - 1, totalPoints: this.round.totalPoints, correctCount: this.round.correctCount,
         basePoints: this.round.basePoints, timeBonus: this.round.timeBonus, finished: true });
     }
@@ -534,7 +558,7 @@ export class CompetitionRound {
     }
     const question = await this.beginCurrentTask();
     return json({
-      roundId: this.round.roundId, roundStartedAt: new Date(this.round.startedAt).toISOString(),
+      roundId: this.round.roundId, scoreVersion: this.round.scoreVersion || 'sek2-v1', roundStartedAt: new Date(this.round.startedAt).toISOString(),
       index: this.round.index, totalPoints: this.round.totalPoints, correctCount: this.round.correctCount,
       basePoints: this.round.basePoints, timeBonus: this.round.timeBonus, question,
     });

@@ -4,8 +4,25 @@
 lokalen Ressourcen und getrennten Ranglisten. `run_quiz_sekii_browser.py` prüft
 alle 45 Trainingskombinationen und vollständige lokale Wettbewerbe; mit
 `--flows-only --geometry-flow` zusätzlich den Ablauf mit serverbewerteten Vektoren.
+`--flows-only --extrema-flow` prüft variable Extremwertaufgaben mit fünf Minuten,
+angezeigtem Zeitbudget und unveränderter Frist nach Neuladen. Die Regeltests unter
+`werkzeuge/sekii_quiz_backend/test/` prüfen Zahlenvarianten und Lösungen mit
+unabhängigen numerischen Verfahren sowie den anteiligen Zeitbonus.
 Der Online-Aufruf mit `--url URL --smoke` liest die veröffentlichten Seiten.
 Einrichtung: [QUIZ_SEKII.md](../dokumentation/QUIZ_SEKII.md).
+
+`python tests/run_quiz_sekii_ipad.py` prüft die sechs Sek-II-Quizze mit
+Konstruktionsaufgaben per Touch in Edge/Chromium und WebKit mit iPad-Emulation.
+Geprüft werden Auswahl vor Punktübernahme, Randpunkte, negative Koordinaten,
+nachträgliches Bearbeiten, Duplikate, Punktbegrenzung, Tastatur, Scrollgesten,
+Vergrößerung, Hoch-/Querformat und Bewertung. Offline-Konstruktionen werden in
+Chromium geprüft, WebKit kontrolliert die vorhandenen Offline-Ressourcen. Die
+WebKit-Offline-Emulation hat einen [bekannten Fehler](https://github.com/microsoft/playwright/issues/42775).
+Der Test
+verwendet ausschließlich Training und kann mit `--url URL` auch veröffentlichte
+Seiten prüfen. Benötigt Playwright, Edge und `python -m playwright install webkit`;
+`--engine chromium` oder `--engine webkit` begrenzt den Lauf auf einen Browser.
+Lokale Bilder liegen unter `.local/sekii-quiz/ipad/`.
 
 `test_quiz_seki.py` prüft die 24 Quizzuordnungen, gemeinsame lokale Ressourcen,
 Folgeseiten, Quiz- und Klassenfilter sämtlicher Ranglisten und die Trennung vom Backend. `tests/run_quiz_seki_browser.py` prüft

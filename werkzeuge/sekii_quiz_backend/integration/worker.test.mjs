@@ -24,6 +24,22 @@ before(async () => {
         await this.ready;
         return Response.json(this.round);
       }
+      if (new URL(request.url).pathname === '/__test/change') {
+        await this.ready;
+        const body = await request.json();
+        if (body.legacy) {
+          this.round.scoreVersion = 'sek2-v1';
+          for (const task of this.round.tasks) delete task.timeLimitSeconds;
+          this.currentTask().deadline = this.currentTask().openedAt + 60000;
+        }
+        if (body.elapsed) {
+          this.currentTask().openedAt -= body.elapsed;
+          this.currentTask().deadline -= body.elapsed;
+        }
+        await this.ctx.storage.setAlarm(this.currentTask().deadline);
+        await this.persist();
+        return Response.json({ok: true});
+      }
       return super.fetch(request);
     }
   }`;
@@ -81,7 +97,12 @@ test('all 15 Sek II quizzes complete real SQLite rounds with isolated D1 leaderb
       const raw = await state(quizId), task = raw.tasks[i];
       assert.equal(raw.index, i);
       assert.equal(current.question.id, task.id);
+      assert.equal(Date.parse(current.question.expiresAt) - task.openedAt, task.timeLimitSeconds * 1000);
+      assert.equal(current.question.timeLimitSeconds, task.timeLimitSeconds);
+      assert.equal(raw.scoreVersion, 'sek2-v2');
       noSolutions(current.question);
+      assert.ok(current.question.casGuidance.text.length > 30);
+      assert.ok(['recommended', 'check', 'not-needed'].includes(current.question.casGuidance.mode));
       if (i === 0) {
         const other = quizzes.find(item => item.quizId !== quizId);
         const wrong = await mf.dispatchFetch('https://worker.test/api/v1/competition/answer', {
@@ -117,6 +138,51 @@ test('all 15 Sek II quizzes complete real SQLite rounds with isolated D1 leaderb
   }
   const count = await db.prepare('SELECT COUNT(*) AS count FROM leaderboard').first();
   assert.equal(count.count, 15);
+});
+
+test('five-minute extrema keep their deadline after restart and are valid after 65 seconds', async () => {
+  const quizId = 'q1-analysis-lk', actor = randomUUID();
+  const started = await send('competition/start', {quizId, browserId: actor, name: 'Extended deadline'});
+  assert.equal(started.question.timeLimitSeconds, 300);
+  const ns = await mf.getDurableObjectNamespace('ROUNDS'), stub = ns.get(ns.idFromName(quizId + ':' + actor));
+  await stub.fetch('https://internal.test/__test/change', {method: 'POST', body: JSON.stringify({elapsed: 65000})});
+  const raw = await state(quizId, actor), task = raw.tasks[0];
+  assert.equal(task.deadline - task.openedAt, 300000);
+  await mf.unsafeEvictDurableObject('sekii-test', 'InspectedRound', {name: quizId + ':' + actor});
+  const resumed = await send(`competition/resume?quizId=${quizId}&browserId=${actor}&roundId=${started.roundId}`);
+  assert.equal(Date.parse(resumed.question.expiresAt), task.deadline);
+  const result = await send('competition/answer', {quizId, browserId: actor, roundId: started.roundId,
+    questionId: task.id, answer: answer(task), requestId: randomUUID()});
+  assert.equal(result.basePoints, 100);
+  assert.ok(result.timeBonus > 0 && result.timeBonus <= 39);
+});
+
+test('existing 60-second rounds stay in version 1 and remain separate from the new ranking', async () => {
+  const quizId = 'ef-analysis', actor = randomUUID(), alias = 'Legacy 60 seconds';
+  const started = await send('competition/start', {quizId, browserId: actor, name: alias});
+  const ns = await mf.getDurableObjectNamespace('ROUNDS'), stub = ns.get(ns.idFromName(quizId + ':' + actor));
+  await stub.fetch('https://internal.test/__test/change', {method: 'POST', body: JSON.stringify({legacy: true})});
+  const restored = await send(`competition/resume?quizId=${quizId}&browserId=${actor}&roundId=${started.roundId}`);
+  assert.equal(restored.scoreVersion, 'sek2-v1');
+  assert.equal(restored.question.timeLimitSeconds, 60);
+  for (let i = 0; i < 12; i++) {
+    const raw = await state(quizId, actor), task = raw.tasks[i];
+    assert.equal(task.deadline - task.openedAt, 60000);
+    const result = await send('competition/answer', {quizId, browserId: actor, roundId: started.roundId,
+      questionId: task.id, answer: answer(task), requestId: randomUUID()});
+    assert.equal(result.scoreVersion, 'sek2-v1');
+    if (i < 11) await send('competition/next', {quizId, browserId: actor, roundId: started.roundId, questionId: task.id});
+  }
+  const old = await send('leaderboard?quizId=ef-analysis&class=EF&scoreVersion=sek2-v1');
+  assert.equal(old.scoreVersion, 'sek2-v1');
+  assert.equal(old.entries.filter(entry => entry.name === alias).length, 1);
+  const current = await send('leaderboard?quizId=ef-analysis&class=EF');
+  assert.equal(current.scoreVersion, 'sek2-v2');
+  assert.equal(current.entries.filter(entry => entry.name === alias).length, 0);
+  const fresh = await send('competition/start', {quizId, browserId: actor, name: alias});
+  assert.equal(fresh.scoreVersion, 'sek2-v2');
+  assert.ok(fresh.question.timeLimitSeconds > 60);
+  assert.deepEqual((await send('leaderboard?quizId=ef-analysis&class=EF&scoreVersion=sek2-v1')).entries, old.entries);
 });
 
 test('older score versions do not enter the current leaderboard', async () => {

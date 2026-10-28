@@ -4,6 +4,8 @@ const CACHE_NAME = 'mathe-quest-sekii-v1:' + scope;
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll([
     new URL('index.html', scope).href,
+    // Cloudflare redirects index.html to the directory URL; cache both entry URLs.
+    new URL('./', scope).href,
     new URL('manifest.webmanifest', scope).href,
   ])).then(() => self.skipWaiting()));
 });
