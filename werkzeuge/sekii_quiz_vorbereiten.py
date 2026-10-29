@@ -19,6 +19,8 @@ def prepare():
     public.mkdir(exist_ok=True)
     shared = Path('gemeinsam/quiz-sekii/assets')
     shutil.copytree(ROOT / shared, public / shared, dirs_exist_ok=True)
+    common = Path('gemeinsam/quiz/assets')
+    shutil.copytree(ROOT / common, public / common, dirs_exist_ok=True)
     entries = json.loads((ROOT / 'dokumentation/QUIZ_SEKII_ZUORDNUNG.json').read_text(encoding='utf-8'))['quizze']
     for entry in entries:
         quiz = Path(entry['url']).parent

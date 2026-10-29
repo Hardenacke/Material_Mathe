@@ -100,7 +100,7 @@ function makeTask(quizId, index) {
     }
     if (grade === 9) {
       const a = r(4, 18), root = r(5, 14), radicand = root * root + r(1, 2);
-      if (slot === 0) return num(`Berechne \\(${root * root}\\) unter der Quadratwurzel: \\sqrt{${root * root}}.`, root, "Die Quadratwurzel macht das Quadrieren rückgängig.");
+      if (slot === 0) return num(`Berechne \\(\\sqrt{${root * root}}\\).`, root, "Die Quadratwurzel macht das Quadrieren rückgängig.");
       if (slot === 1) return choice("Welche Zahl ist irrational?", [`\\(\\sqrt{${root * root}}\\)`, `\\(\\sqrt{${root * root + 1}}\\)`, `\\(${root * root}\\)`], 1, "Die Wurzel aus einer Nicht-Quadratzahl ist irrational.");
       if (slot === 2) return slider(`Schätze \\(\\sqrt{${radicand}}\\) auf der Zahlengeraden.`, root, root + 1, Math.sqrt(radicand), "Die Wurzel liegt zwischen zwei benachbarten Quadratzahlen.", 0.01, 0.25);
       return choice(`Vereinfache \\(\\sqrt{${4 * a * a}}\\).`, [`\\(${2 * a}\\)`, `\\(${4 * a}\\)`, `\\(${a * a}\\)`], 0, "Ziehe die Wurzel aus dem Quadrat.");

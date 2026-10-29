@@ -6,6 +6,9 @@ Jedes Quiz hat eine eigene Kennung, Wettbewerbsrunde und Rangliste. Ein gemeinsa
 
 ## Zugänge
 
+Die aktuelle Überarbeitung von Textfeldern, Navigation und Formelschreibweise ist
+in [Gemeinsame Quizdarstellung](QUIZ_DARSTELLUNG.md) dokumentiert.
+
 - [Alle 24 Quizze bei Cloudflare](https://mathematik-seki-quiz.physik-wettkampf-api.workers.dev/)
 - [Verbindungsprüfung](https://mathematik-seki-quiz.physik-wettkampf-api.workers.dev/api/v1/status)
 - [QuizÜbersicht in der lokalen Materialsammlung](../gemeinsam/quiz-seki/assets/index.html)

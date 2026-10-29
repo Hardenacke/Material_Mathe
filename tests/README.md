@@ -1,5 +1,13 @@
 # Tests
 
+`node --test --test-isolation=none tests/quiz_anzeige.test.mjs` prüft vereinfachte
+Formelschreibweisen und unveränderte mathematische Werte. `python tests/run_quiz_anzeige_browser.py`
+prüft die gemeinsame Darstellung aller 39 Quizze mit 4.680 Aufgabenvarianten,
+Ranglisten-Schaltflächen, Textfeldern und vollständigen Antwortvorschauen.
+Mit `--engine webkit` wird WebKit mit iPad-Emulation geprüft; `--online` verwendet
+die veröffentlichten Seiten, ohne Wettbewerbsresultate zu erzeugen.
+Details: [QUIZ_DARSTELLUNG.md](../dokumentation/QUIZ_DARSTELLUNG.md).
+
 `test_quiz_sekii.py` prüft die 15 Sek-II-Quizwelten samt EF/Q1/Q2- und GK/LK-Zuordnung,
 lokalen Ressourcen und getrennten Ranglisten. `run_quiz_sekii_browser.py` prüft
 alle 45 Trainingskombinationen und vollständige lokale Wettbewerbe; mit

@@ -1,0 +1,36 @@
+/* Shared student-facing text panels and navigation for Sek I and Sek II. */
+.topbar { flex-wrap: wrap; }
+button:hover:not(:disabled) { transform: none; }
+.hero-icon { display: none; }
+.topbar .top-actions { align-items: center; }
+.top-actions #rankBtn { min-height: 48px; padding: 12px 16px; background: var(--accent); border: 1px solid var(--accent); color: #fff; font-size: 1rem; }
+.cards .rank-link { grid-column: 1 / -1; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 6px 16px; align-items: center; min-height: 160px; padding: 22px; border: 2px solid var(--accent); background: #fff; border-radius: 20px; }
+.cards .rank-link .glyph { grid-column: 1; grid-row: 1 / 4; margin: 0; font-size: 2.2rem; }
+.cards .rank-link h2, .cards .rank-link p, .cards .rank-link button { grid-column: 2; margin: 0; }
+.cards .rank-link button { min-height: 54px; width: 100%; margin-top: 8px; padding: 14px 18px; font-size: 1.05rem; }
+.question { padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: #f7f9fc; overflow-wrap: anywhere; }
+.helper, .learning-note, .privacy-note { padding: 12px 14px; border: 1px solid var(--line, #dfe5ef); border-radius: 12px; background: #f7f9fc; line-height: 1.5; }
+.learning-note { margin-top: 16px; color: var(--muted); }
+.helper:empty { display: none; }
+.game > .helper { margin-top: 14px; }
+.match-left { padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: #f7f9fc; overflow-wrap: anywhere; }
+.answers, .match-grid, .match-row, .match-left, .match-preview { min-width: 0; max-width: 100%; }
+.match-row { overflow-x: clip; }
+.match-row select { width: 100%; min-width: 0; max-width: 100%; font-size: max(16px, 1rem); min-height: 48px; overflow: hidden; text-overflow: ellipsis; }
+.match-row select:focus-visible { outline-offset: -3px; }
+.vector-entry label { min-width: 0; }
+.vector-entry .answer-input { min-width: 0; width: 100%; font-size: max(16px, 1rem); }
+.match-preview { grid-column: 1 / -1; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; line-height: 1.5; overflow-wrap: anywhere; }
+.match-preview[hidden] { display: none; }
+.match-preview .katex { display: inline-block; max-width: 100%; padding: 2px 0; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+.board ~ .privacy-note { margin-top: 16px; }
+header > a[href="index.html"] { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 12px; border: 1px solid #ccd5e3; border-radius: 12px; background: #fff; text-decoration: none; }
+@media (max-width: 520px) {
+  .topbar .top-actions { width: 100%; }
+  .top-actions #rankBtn { flex: 1; }
+  .cards .rank-link { grid-template-columns: minmax(0, 1fr); padding: 18px; }
+  .cards .rank-link .glyph { display: none; }
+  .cards .rank-link h2, .cards .rank-link p, .cards .rank-link button { grid-column: 1; }
+  .question { padding: 12px; }
+  .vector-entry { grid-template-columns: minmax(0, 1fr); }
+}

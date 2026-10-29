@@ -6,6 +6,9 @@ In der Materialsammlung führt der Weg über **Kurs → Themenbereich → Quiz**
 
 ## Zugänge
 
+Die aktuelle Überarbeitung von Textfeldern, Navigation und Formelschreibweise ist
+in [Gemeinsame Quizdarstellung](QUIZ_DARSTELLUNG.md) dokumentiert.
+
 - [Alle 15 Quizwelten auf Cloudflare](https://mathematik-sekii-quiz.physik-wettkampf-api.workers.dev/)
 - [Verbindungsprüfung](https://mathematik-sekii-quiz.physik-wettkampf-api.workers.dev/api/v1/status)
 - [Lokale Quizübersicht](../gemeinsam/quiz-sekii/assets/index.html)

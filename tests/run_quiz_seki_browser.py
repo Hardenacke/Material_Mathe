@@ -76,7 +76,8 @@ def main():
             url = base + '/' + item['url']
             page.goto(url, wait_until='networkidle')
             expect(page.locator('#contestStart')).to_be_enabled()
-            expect(page.locator('#workerStatus')).to_have_text('Cloudflare verbunden')
+            assert page.evaluate('state.apiOnline') is True
+            assert 'Cloudflare' not in page.locator('body').inner_text()
             for width in [320, 768]:
                 page.set_viewport_size({'width': width, 'height': 1024})
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (item['quizId'], width, 'home')
