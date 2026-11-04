@@ -1,11 +1,10 @@
-# Formenwechsel – Klasse 9
+# Scheitelpunkt-Trainer – Klasse 9
 
 Der Trainer aus `Formenwechsel_Klasse_9_Materialpaket.zip` ist unter
-**Klasse 9 → Funktionen → Lernpfade** als **Formenwechsel – Trainer für Normal-
-und Scheitelpunktform** eingebunden. Die fachliche Zuordnung ist
+**Klasse 9 → Funktionen → Lernpfade** als **Scheitelpunkt-Trainer** eingebunden. Die fachliche Zuordnung ist
 `klasse-9/02-funktionen/01-quadratische-funktionen`.
 
-- [Trainer öffnen](../klasse-9/02-funktionen/01-quadratische-funktionen/formenwechsel-trainer.html)
+- [Trainer öffnen](../klasse-9/02-funktionen/01-quadratische-funktionen/scheitelpunkt-trainer.html)
 - Quellen: `werkzeuge/formenwechsel/`
 - Katalogeintrag: `dokumentation/MATERIAL_ZUORDNUNG.json`
 

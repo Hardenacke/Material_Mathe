@@ -1,7 +1,7 @@
 # Tests
 
 `node werkzeuge/formenwechsel/test.cjs` prüft Fachmodell, Aufgabenvarianten,
-Lernverlauf und Speicherung des Formenwechsel-Trainers. Die ergänzenden Tests
+Lernverlauf und Speicherung des Scheitelpunkt-Trainers. Die ergänzenden Tests
 unter `werkzeuge/formenwechsel/tests/` prüfen Rückmeldungen und den optionalen
 Transport. `python tests/run_formenwechsel_browser.py` prüft in Edge und WebKit
 den Katalogaufruf, den vollständigen Lernweg, Fortsetzen nach Neuladen, Hilfen,

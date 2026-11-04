@@ -1,4 +1,4 @@
-"""Prüft den Formenwechsel-Trainer in Edge und WebKit ohne externe Dienste."""
+"""Prüft den Scheitelpunkt-Trainer in Edge und WebKit ohne externe Dienste."""
 import argparse
 from fractions import Fraction
 from functools import partial
@@ -12,7 +12,7 @@ if (ROOT / ".local/playwright-browsers").exists():
     os.environ.setdefault("PLAYWRIGHT_BROWSERS_PATH", str(ROOT / ".local/playwright-browsers"))
 from playwright.sync_api import expect, sync_playwright
 
-TRAINER = "klasse-9/02-funktionen/01-quadratische-funktionen/formenwechsel-trainer.html"
+TRAINER = "klasse-9/02-funktionen/01-quadratische-funktionen/scheitelpunkt-trainer.html"
 CATALOG = "index.html#/klasse-9/02-funktionen/lernpfade"
 
 

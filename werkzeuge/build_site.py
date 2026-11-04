@@ -107,7 +107,7 @@ def main():
                    cwd=ROOT, check=True)
     subprocess.run([
         sys.executable, str(ROOT / "werkzeuge/formenwechsel/build.py"),
-        "--output", str(ROOT / "klasse-9/02-funktionen/01-quadratische-funktionen/formenwechsel-trainer.html"),
+        "--output", str(ROOT / "klasse-9/02-funktionen/01-quadratische-funktionen/scheitelpunkt-trainer.html"),
     ], cwd=ROOT, check=True)
     prepare_output()
 

@@ -2656,14 +2656,6 @@
                   "beschreibung": "Durch quadratische Ergänzung in Scheitelpunktform umformen."
                 },
                 {
-                  "titel": "Formenwechsel – Trainer für Normal- und Scheitelpunktform",
-                  "datei": "formenwechsel-trainer.html",
-                  "typ": "Lernpfad",
-                  "kategorie": "Lernpfad",
-                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/formenwechsel-trainer.html",
-                  "beschreibung": "Parabel-Labor, zehn adaptive Trainingsaufgaben und ein Abschlusscheck in beiden Umformungsrichtungen. Mit schrittweisen Hilfen und lokal gespeichertem Fortschritt."
-                },
-                {
                   "titel": "Parabel-Werkstatt",
                   "datei": "parabel.html",
                   "typ": "Lernspiel",
@@ -2684,6 +2676,14 @@
                   "kategorie": "Lernpfad",
                   "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/index.html",
                   "beschreibung": "Die gesamte Lernpfadreihe: von der Normalparabel und ihren Parametern bis zu Nullstellen, Modellierung und Optimierung."
+                },
+                {
+                  "titel": "Scheitelpunkt-Trainer",
+                  "datei": "scheitelpunkt-trainer.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/scheitelpunkt-trainer.html",
+                  "beschreibung": "Parabel-Labor, zehn adaptive Trainingsaufgaben und ein Abschlusscheck in beiden Umformungsrichtungen. Mit schrittweisen Hilfen und lokal gespeichertem Fortschritt."
                 },
                 {
                   "titel": "Quadratische Ergänzung – drei Erklärvideos",

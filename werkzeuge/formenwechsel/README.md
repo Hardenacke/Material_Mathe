@@ -1,13 +1,13 @@
-# Formenwechsel – adaptiver Lernpfad, Version 3.2
+# Scheitelpunkt-Trainer – adaptiver Lernpfad, Version 3.2
 
 Mathematik, Klasse 9 · etwa 20 Minuten · eigenständige HTML-Datei.
 
 ## Starten
 
 Im Material-Repository liegt der Trainer unter
-`klasse-9/02-funktionen/01-quadratische-funktionen/formenwechsel-trainer.html`.
+`klasse-9/02-funktionen/01-quadratische-funktionen/scheitelpunkt-trainer.html`.
 Er erscheint unter **Klasse 9 → Funktionen → Lernpfade** als
-**Formenwechsel – Trainer für Normal- und Scheitelpunktform**.
+**Scheitelpunkt-Trainer**.
 `python werkzeuge/build_site.py` erzeugt diese Datei aus den hier abgelegten Quellen
 und übernimmt sie in die Website. Die Datei lässt sich auch direkt im Browser öffnen.
 Installation oder KI-Zugang sind für die Nutzung nicht nötig.

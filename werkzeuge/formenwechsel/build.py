@@ -1,4 +1,4 @@
-"""Baut den eigenständigen Formenwechsel-Trainer mit lokalen Schriften."""
+"""Baut den eigenständigen Scheitelpunkt-Trainer mit lokalen Schriften."""
 from __future__ import annotations
 
 import argparse
@@ -54,7 +54,7 @@ def main():
     parser.add_argument("--output", type=Path, default=ROOT / "dist/index.html")
     parser.add_argument("--worker-url", help="Optionale Adresse einer eingerichteten Lernbegleitung")
     args = parser.parse_args()
-    print("FORMENWECHSEL BUILD OK:", build(args.output.resolve(), args.worker_url))
+    print("SCHEITELPUNKT-TRAINER BUILD OK:", build(args.output.resolve(), args.worker_url))
 
 
 if __name__ == "__main__":
