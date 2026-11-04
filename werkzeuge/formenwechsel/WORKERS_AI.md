@@ -33,15 +33,44 @@ Der fobizz-Freigabelink bleibt als zusätzliche Chat-Lernhilfe erreichbar.
 5. Der Browser prüft Herkunft, Anfragezuordnung und Anspruch erneut. Die nächste
    Aufgabe übernimmt Richtung, Stufe und Zahlenwerte des freigegebenen Plans.
 
-Die Oberfläche kennzeichnet echte Modellantworten als **KI-Lernbegleitung ·
-Cloudflare**. Modellfehler und Zeitüberschreitungen lassen die lokale Steuerung
+Die Oberfläche zeigt Rückmeldungen in der Box **Charles**. Das Antwortfeld
+`source: workers-ai` kennzeichnet echte Modellantworten technisch.
+Modellfehler und Zeitüberschreitungen lassen die lokale Steuerung
 übernehmen. Lob erhöht den Hilfenzähler nicht; KI-Hinweise zu einer ungelösten
 Aufgabe zählen als Unterstützung. Beide Abschlussrichtungen bleiben erhalten.
 
-Die Anfragen enthalten Rechenschritte, eingegebene Zahlen, maximal zwölf
+Die automatischen Anfragen enthalten Rechenschritte, eingegebene Zahlen, maximal zwölf
 Verlaufsbeobachtungen und einen begrenzten Aufgabenkatalog. Namen, Klassenlisten
 und fobizz-Zugangsdaten werden nicht übermittelt. Die Sitzung ist technisch und
 stellt keine Anmeldung oder benotbare Leistungsakte dar.
+
+## Direkte Fragen an Charles
+
+`POST /api/coach/question` benötigt dieselbe origin-gebundene Sitzung wie die
+automatische Rückmeldung. `worker/questions.mjs` prüft Frage (maximal 600 Zeichen),
+Aufgaben- oder Beispielkontext und höchstens sechs vorherige Nachrichten. Der
+Worker berechnet Normalform, Scheitelpunkt, Ergänzungszahl, äußeren Ausgleich
+und erwartete Eingaben selbst. Diese Fakten bilden die Rechengrundlage für Charles.
+Das Modell liefert ausschließlich `{answer}` mit höchstens 1200 Zeichen.
+Für typische Fragen zum Halbieren, Ergänzen, Vorzeichen, Ausgleich,
+Verschieben oder ersten Rechenschritt gibt der Worker eine passende Erklärung
+mit nachgerechneten Zahlen vor. Das Modell muss sie unverändert übernehmen;
+abweichende Antworten werden verworfen. Weitere Fragen erhalten freie,
+auf die Rechenfakten gestützte Erklärungen.
+Antworten auf freie Fragen bleiben generierte Hilfen; sie ersetzen nicht die
+unabhängige mathematische Prüfung der Zahleneingaben.
+
+Fragen haben einen eigenen Sequenzzähler und Cache-Namensraum. Sie machen
+gleichzeitige automatische Rückmeldungen nicht ungültig und können keinen
+Aufgabenplan ändern. Beide Endpunkte teilen dieselben Tages- und Sitzungslimits.
+Der Browser erstellt auch bei parallelen Anfragen nur eine Sitzung.
+
+Fragetext, sichtbare Aufgabe und begrenzter Verlauf werden an Workers AI gesendet.
+Der Verlauf bleibt im Tab-Arbeitsspeicher und wird bei Kontextwechsel oder
+Neuladen geleert. Der Worker hält bis zu 40 Anfrageergebnisse beider Endpunkte
+zur Wiederholungssicherung in der sechs Stunden gültigen Sitzung vor; der
+Sitzungsalarm löscht sie anschließend. Frageinhalte werden nicht eigens geloggt.
+Die Oberfläche bittet, keine persönlichen Angaben einzugeben.
 
 Aktuelle Grenzen: 500 Modellaufrufe pro UTC-Tag für den Worker, 15 pro Minute
 und 120 insgesamt je Sitzung sowie 200 neue Sitzungen pro Stunde. Zusätzlich
@@ -73,6 +102,8 @@ python werkzeuge/site_pruefen.py
 python werkzeuge/struktur_pruefen.py
 .local\manim-venv\Scripts\python.exe tests/run_formenwechsel_browser.py
 .local\manim-venv\Scripts\python.exe tests/run_formenwechsel_ai_browser.py
+.local\manim-venv\Scripts\python.exe tests/run_charles_browser.py
+.local\manim-venv\Scripts\python.exe tests/run_charles_browser.py --live
 ```
 
 Der erste Browsercheck prüft den Betrieb ohne KI-Netzwerk. Der zweite prüft

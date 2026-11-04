@@ -90,7 +90,7 @@ def check(browser, engine, base):
         page.locator("#v1").fill("999")
         page.locator("#check").tap()
         expect(page.locator("#coachDock")).to_have_attribute("data-unread", "true")
-        expect(page.locator("#coachLauncher")).to_have_attribute("aria-label", "Neue Rückmeldung – Lernbegleitung öffnen")
+        expect(page.locator("#coachLauncher")).to_have_attribute("aria-label", "Neue Rückmeldung – Charles öffnen")
         expect(page.locator("#autoCoachCard")).to_be_hidden()
         page.screenshot(path=str(output / f"{engine}-neue-rueckmeldung.png"))
         page.locator("#coachLauncher").tap()

@@ -27,7 +27,7 @@ def build(output: Path, worker_url: str | None = None) -> Path:
     if worker_url is not None:
         config["workerUrl"] = worker_url
     assistant_url = config.get("assistantUrl", "")
-    assistant_card = assistant_footer = ""
+    assistant_footer = ""
     if assistant_url:
         address = urlsplit(assistant_url)
         if (address.scheme != "https" or address.netloc != "app.fobizz.com"
@@ -38,12 +38,6 @@ def build(output: Path, worker_url: str | None = None) -> Path:
             f'<a href="{escape(assistant_url, quote=True)}" data-fobizz-link '
             'target="_blank" rel="noopener noreferrer" '
         )
-        assistant_card = (
-            '<details class="fobizzHelp"><summary>Zusätzliche Lernhilfe</summary>' + link + 'class="fobizzLink">'
-            'fobizz-Lernhilfe öffnen <span aria-hidden="true">↗</span></a>'
-            '<p class="small">Öffnet einen neuen Tab. Beschreibe dort deine Aufgabe '
-            'und den Rechenschritt, bei dem du Hilfe brauchst.</p></details>'
-        )
         assistant_footer = link + 'class="fobizzFooterLink">fobizz-Lernhilfe ↗</a>'
     replacements = {
         "/* KATEX_CSS */": css,
@@ -51,9 +45,9 @@ def build(output: Path, worker_url: str | None = None) -> Path:
         "/* DESIGN_CSS */": (ROOT / "design.css").read_text(encoding="utf-8"),
         "/* APP_JS */": (ROOT / "app.js").read_text(encoding="utf-8"),
         "/* COACH_DOCK_JS */": (ROOT / "coach-dock.js").read_text(encoding="utf-8"),
+        "/* CHARLES_CHAT_JS */": (ROOT / "charles-chat.js").read_text(encoding="utf-8"),
         "/* AUTO_JS */": (ROOT / "automatic.js").read_text(encoding="utf-8"),
         "/* COACH_CONFIG */": json.dumps(config, ensure_ascii=False).replace("<", "\\u003c"),
-        "<!-- FOBIZZ_CARD -->": assistant_card,
         "<!-- FOBIZZ_FOOTER -->": assistant_footer,
     }
     html = (ROOT / "template.html").read_text(encoding="utf-8")

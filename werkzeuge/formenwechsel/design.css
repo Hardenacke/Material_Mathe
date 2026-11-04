@@ -76,3 +76,28 @@ button,summary{min-height:44px}
 @media(max-width:370px){#fields{grid-template-columns:minmax(0,1fr)}.hero{padding-inline:19px}.hero h1{font-size:clamp(2.15rem,11vw,2.7rem)}}
 @media(max-height:500px){#coachDock .autoCoachCard{max-height:min(230px,calc(var(--coach-vh,100vh)*.5))}.coachDockHeader{padding-block:4px}.coachDockBody{padding-block:8px}}
 @media(prefers-reduced-motion:reduce){#coachDock .autoCoachCard{animation:none}.coachLauncherDot{transition:none}}
+
+/* Charles: Verlauf scrollt, das Fragenfeld bleibt in Reichweite. */
+#coachDock .autoCoachCard{max-height:min(620px,calc(var(--coach-vh,100dvh)*.75),calc(var(--coach-vh,100dvh) - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)))}
+.coachDockBody{flex:1 1 auto}
+.charlesMessages{display:grid;gap:10px;margin-top:12px}
+.charlesMessages:empty{display:none}
+.charlesMessage{padding:10px 11px;border-radius:12px;background:#ffffffc9;overflow-wrap:anywhere}
+.charlesMessage.user{background:#153b4b0c}
+.charlesMessage strong{display:block;font-size:.7rem;color:#076c68;margin-bottom:4px}
+#coachDock .charlesMessage p{margin:0;white-space:pre-wrap}
+.charlesForm{flex:0 0 auto;padding:10px 14px 12px;border-top:1px solid #173b4b18;background:#f6faf7}
+.charlesForm label{display:block;font-size:.8rem;font-weight:750;margin-bottom:6px}
+.charlesComposer{display:flex;align-items:stretch;gap:7px}
+.charlesComposer textarea{display:block;flex:1 1 auto;min-width:0;width:100%;min-height:64px;max-height:110px;resize:vertical;border:1px solid #9ebdb1;border-radius:10px;padding:9px;font:inherit;font-size:16px;line-height:1.35;color:var(--ink);background:#fff}
+.charlesComposer textarea:focus-visible{outline:3px solid #077d7940;outline-offset:1px}
+.charlesComposer button{flex:0 0 auto;min-width:44px;padding:8px;font-size:.75rem}
+#coachDock .charlesForm small{display:block;margin-top:6px;font-size:.65rem}
+#coachDock .charlesForm p{margin:6px 0 0;font-size:.72rem;line-height:1.4}
+#charlesStatus:empty{display:none}
+@media(max-width:560px){#coachDock .autoCoachCard{max-height:min(500px,calc(var(--coach-vh,100dvh)*.72))}}
+@media(max-height:500px){
+ #coachDock .autoCoachCard{max-height:calc(var(--coach-vh,100dvh)*.85)}
+ .charlesForm{padding-block:6px}.charlesComposer textarea{min-height:44px;max-height:64px}
+ #coachDock .charlesForm small{display:none}
+}

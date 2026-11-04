@@ -10,6 +10,9 @@ export function modelInput(packet) {
  return {
   messages: [
    {role:'system',content:instruction + ' Antworte ausschließlich mit dem verlangten JSON-Objekt. '
+    + 'Du heißt Charles. Sprich die Schülerin oder den Schüler direkt mit du an. '
+    + 'Lobe richtige Rechenschritte und ermutige freundlich zum Weiterrechnen. '
+    + 'Sprich über die Aufgabe, nicht über Lernsteuerung, Daten, Systeme oder deine Rolle. '
     + 'Dein feedback ist ein kurzer deutscher Satz mit höchstens 180 Zeichen. '
     + 'Bei der Auswahl: Festige beobachtete Fehlerschritte; ohne Fehler wähle eine passende neue Herausforderung. '
     + 'Nenne im feedback einen konkreten Rechenschritt statt allgemeiner Sätze wie "Prüfe deine Rechnung". '
@@ -36,13 +39,19 @@ export function modelInput(packet) {
 }
 
 export async function callWorkersAI(packet, env, {timeoutMs=8000}={}) {
+ const answer=await runModel(modelInput(packet),env,{timeoutMs});
+ if(packet.guidance&&answer.feedback!==packet.guidance)throw new Problem('INVALID_PROVIDER_RESPONSE',502);
+ return answer;
+}
+
+export async function runModel(input, env, {timeoutMs=8000}={}) {
  if(providerProblems(env).length)throw new Problem('AI_NOT_CONFIGURED',503);
  let timer;
  const deadline=new Promise((_,reject)=>{
   timer=setTimeout(()=>reject(new Problem('AI_TIMEOUT',504)),timeoutMs);
  });
  try{
-  const result=await Promise.race([env.AI.run(modelName(env),modelInput(packet)),deadline]);
+  const result=await Promise.race([env.AI.run(modelName(env),input),deadline]);
   let answer=result?.response;
   if(typeof answer==='string'){
    if(answer.length>4096)throw new Problem('PROVIDER_RESPONSE_TOO_LARGE',502);
@@ -50,7 +59,6 @@ export async function callWorkersAI(packet, env, {timeoutMs=8000}={}) {
   }
   if(!answer||typeof answer!=='object'||Array.isArray(answer)||JSON.stringify(answer).length>4096)
    throw new Problem('INVALID_PROVIDER_RESPONSE',502);
-  if(packet.guidance&&answer.feedback!==packet.guidance)throw new Problem('INVALID_PROVIDER_RESPONSE',502);
   return answer;
  }catch(error){
   if(error instanceof Problem)throw error;

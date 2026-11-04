@@ -1,5 +1,6 @@
 import { Problem,validateRequest,analyse,candidates,providerPrompt,parseProvider } from './domain.mjs';
 import { callCoach,providerReady,providerProblems,providerName,providerDetails } from './coach.mjs';
+import {validateQuestion,answerQuestion} from './questions.mjs';
 const json=(data,status=200,headers={})=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store',...headers}});
 const enc=new TextEncoder();
 const b64=bytes=>btoa(String.fromCharCode(...bytes)).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');
@@ -38,11 +39,13 @@ export default {async fetch(request,env){
    const ip=request.headers.get('cf-connecting-ip')||'unknown',ipKey=await digest(env.SESSION_SECRET+ip);
    const allowance=await gate.fetch(new Request('https://gate.internal/session',{method:'POST',body:JSON.stringify({ipKey})}));
    if(!allowance.ok){response=allowance;}else{const exp=Date.now()+6*60*60*1000;response=json({token:await sign({id:crypto.randomUUID(),exp,origin},env.SESSION_SECRET),expiresAt:exp});}
-  }else if(url.pathname==='/api/coach/automatic'){
+  }else if(['/api/coach/automatic','/api/coach/question'].includes(url.pathname)){
    const session=await verify((request.headers.get('authorization')||'').replace(/^Bearer /,''),env.SESSION_SECRET,origin);
-   const x=validateRequest(await body(request));
+   const question=url.pathname.endsWith('/question');
+   if(question&&providerName(env)!=='workers-ai')throw new Problem('QUESTIONS_NOT_CONFIGURED',503);
+   const x=(question?validateQuestion:validateRequest)(await body(request));
    const stub=env.COACH_SESSIONS.get(env.COACH_SESSIONS.idFromName(session.id));
-   response=await stub.fetch(new Request('https://session.internal/coach',{method:'POST',headers:{'content-type':'application/json','x-session-expiry':String(session.exp)},body:JSON.stringify(x)}));
+   response=await stub.fetch(new Request('https://session.internal/'+(question?'question':'coach'),{method:'POST',headers:{'content-type':'application/json','x-session-expiry':String(session.exp)},body:JSON.stringify(x)}));
   }else throw new Problem('NOT_FOUND',404);
  }catch(e){response=json({error:e instanceof Problem?e.code:'INTERNAL_ERROR'},e instanceof Problem?e.status:500);}
  return new Response(response.body,{status:response.status,headers:{...Object.fromEntries(response.headers),...cors}});
@@ -72,16 +75,18 @@ export class CoachSession {
  constructor(ctx,env){this.ctx=ctx;this.env=env;}
  async fetch(request){
   let x,hash;
+  const question=new URL(request.url).pathname==='/question',lane=question?'questionSequence':'sequence';
   try{
-   x=validateRequest(await request.json());hash=await digest(JSON.stringify(x));
+   x=(question?validateQuestion:validateRequest)(await request.json());hash=await digest(JSON.stringify(x));
+   const cacheKey=(question?'question:':'')+x.requestId;
    const now=Date.now(),reservation=await this.ctx.storage.transaction(async tx=>{
     const s=await tx.get('state')||{sequence:0,minute:0,calls:0,total:0,cache:{}};
-    const old=s.cache[x.requestId];if(old){if(old.hash!==hash)throw new Problem('REQUEST_ID_REUSED',409);return old;}
-    if(x.sequence<=s.sequence)throw new Problem('STALE_REQUEST',409);
+    const old=s.cache[cacheKey];if(old){if(old.hash!==hash)throw new Problem('REQUEST_ID_REUSED',409);return old;}
+    if(x.sequence<=(s[lane]||0))throw new Problem('STALE_REQUEST',409);
     const minute=Math.floor(now/60000);if(s.minute!==minute){s.minute=minute;s.calls=0;}
     if(s.calls>=15||s.total>=120)throw new Problem('SESSION_QUOTA_REACHED',429);
-    s.calls++;s.total++;s.sequence=x.sequence;
-    const entry={hash,status:'pending',sequence:x.sequence};s.cache[x.requestId]=entry;
+    s.calls++;s.total++;s[lane]=x.sequence;
+    const entry={hash,status:'pending',sequence:x.sequence};s.cache[cacheKey]=entry;
     const keys=Object.keys(s.cache);while(keys.length>40)delete s.cache[keys.shift()];
     await tx.put('state',s);return {...entry,reserved:true};
    });
@@ -91,10 +96,11 @@ export class CoachSession {
    try{
     const gate=this.env.COACH_GATE.get(this.env.COACH_GATE.idFromName('global'));
     const quota=await gate.fetch(new Request('https://gate.internal/call',{method:'POST',body:'{}'}));if(!quota.ok)throw new Problem('QUOTA_REACHED',429);
-    const observation=analyse(x),choices=candidates(x),raw=await callCoach(providerPrompt(x,observation,choices),this.env);
-    result={schemaVersion:3,requestId:x.requestId,sequence:x.sequence,revision:x.revision,source:providerName(this.env),...parseProvider(raw,choices,observation)};
+    if(question){result={schemaVersion:1,requestId:x.requestId,sequence:x.sequence,revision:x.revision,source:'workers-ai',...await answerQuestion(x,this.env)};}
+    else{const observation=analyse(x),choices=candidates(x),raw=await callCoach(providerPrompt(x,observation,choices),this.env);
+     result={schemaVersion:3,requestId:x.requestId,sequence:x.sequence,revision:x.revision,source:providerName(this.env),...parseProvider(raw,choices,observation)};}
    }catch(e){status=e instanceof Problem?e.status:502;result={error:e instanceof Problem?e.code:'COACH_UNAVAILABLE'};}
-   const stale=await this.ctx.storage.transaction(async tx=>{const s=await tx.get('state');if(!s||s.sequence!==x.sequence)return true;s.cache[x.requestId]={hash,status:'done',sequence:x.sequence,body:result,httpStatus:status};await tx.put('state',s);return false;});
+   const stale=await this.ctx.storage.transaction(async tx=>{const s=await tx.get('state');if(!s||s[lane]!==x.sequence)return true;s.cache[cacheKey]={hash,status:'done',sequence:x.sequence,body:result,httpStatus:status};await tx.put('state',s);return false;});
    if(stale)throw new Problem('STALE_RESPONSE',409);
    return json(result,status);
   }catch(e){return json({error:e instanceof Problem?e.code:'INTERNAL_ERROR'},e instanceof Problem?e.status:500);}

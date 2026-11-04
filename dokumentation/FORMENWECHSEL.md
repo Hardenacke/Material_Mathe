@@ -23,10 +23,9 @@ einzelne HTML-Datei öffnen. Fortschritt wird unter `formenwechsel-k9-v1` im
 jeweiligen Browser gespeichert. Auf gemeinsam genutzten Geräten vor dem Wechsel
 der Lernenden **Neu beginnen** verwenden.
 
-Der von der Lehrkraft vorgegebene fobizz-Assistent ist über **fobizz-Lernhilfe
-öffnen** unter **Zusätzliche Lernhilfe** in der schwebenden Feedbackbox und über
+Der von der Lehrkraft vorgegebene fobizz-Assistent ist weiterhin über
 **fobizz-Lernhilfe** im Seitenfuß erreichbar.
-Beide Links öffnen denselben freigegebenen Assistenten in einem neuen Tab.
+Der Link öffnet den freigegebenen Assistenten in einem neuen Tab.
 Der vorgegebene Zugang wurde aufgerufen und lieferte HTTP 200 mit dem Titel
 **Adaptiver Mathematik-Tutor Klasse 9**. Es wurde keine Chatnachricht versendet.
 Seine Adresse steht unter `assistantUrl` in
@@ -40,7 +39,25 @@ bereitgestellten Worker `https://formenwechsel-tutor.physik-wettkampf-api.worker
 Das Modell `@cf/meta/llama-3.3-70b-instruct-fp8-fast` wählt konkrete Folgeaufgaben
 aus einem vom Worker geprüften Pool und gibt kurze Hinweise. Der Worker prüft
 die Antwort; der Browser übernimmt Richtung, Stufe und Zahlenwerte der Auswahl.
-Die Oberfläche kennzeichnet echte Antworten als **KI-Lernbegleitung · Cloudflare**.
+Die Oberfläche zeigt die Rückmeldungen in der schwebenden Box **Charles**.
+
+Charles lobt richtige Schritte, gibt konkrete Hinweise und motiviert zum
+Weiterrechnen. Über **Frag Charles** können Lernende direkt in der HTML-Datei
+Fragen stellen. Der Worker erhält die sichtbare Aufgabe mit Eingaben und
+Rechenschritt oder das eingestellte Beispiel aus dem Parabel-Labor. Er berechnet
+die dazugehörigen Rechenfakten selbst als Grundlage der generierten Erklärung.
+Die Fragefunktion ändert keine Aufgabenwerte und bewertet die Lösung nicht;
+die unabhängige mathematische Prüfung bleibt beim Knopf **Prüfen**.
+
+Eine Frage zu einer offenen Aufgabe zählt als Hilfe. Reines Lob zählt nicht als
+Unterstützung. Der Verlauf umfasst höchstens drei Frage-Antwort-Paare im
+Tab-Arbeitsspeicher und wird bei einem neuen Beispiel, Rechenschritt, Seitenwechsel
+oder Neuladen geleert. Verspätete Antworten erscheinen nicht im neuen Kontext.
+Das Fragenfeld bleibt unter dem scrollbaren Verlauf sichtbar. Persönliche Angaben
+werden nicht benötigt; ein kurzer Hinweis steht direkt am Fragenfeld.
+Freitext und Verlauf werden an Workers AI übermittelt. Der Worker speichert
+begrenzt Anfrageergebnisse für die Wiederholungssicherung bis zum Sitzungsablauf
+nach sechs Stunden. Einzelheiten: `werkzeuge/formenwechsel/WORKERS_AI.md`.
 
 Die öffentliche Worker-Adresse und der erwartete Provider `workers-ai` stehen in
 `werkzeuge/formenwechsel/config.public.json`. Das Sitzungssecret liegt ausschließlich
@@ -81,6 +98,8 @@ node --test --test-isolation=none werkzeuge/formenwechsel/tests/client.test.mjs 
 .local\manim-venv\Scripts\python.exe tests/run_formenwechsel_browser.py
 .local\manim-venv\Scripts\python.exe tests/run_formenwechsel_ai_browser.py
 .local\manim-venv\Scripts\python.exe tests/run_formenwechsel_mobile_browser.py
+.local\manim-venv\Scripts\python.exe tests/run_charles_browser.py
+.local\manim-venv\Scripts\python.exe tests/run_charles_browser.py --live
 node werkzeuge/formenwechsel/scripts/check-live.mjs
 python -m unittest discover -s tests
 ```
@@ -96,7 +115,7 @@ Prüfstand vom 4. November 2026:
 
 - Website-Build, Websiteprüfung und Strukturprüfung bestanden: 9 Bereiche,
   33 Inhaltsfelder, 105 Themen und 364 Materialien.
-- 21 Fach-/Verlaufsprüfgruppen sowie 55 ergänzende Client-, Rückmeldungs-,
+- 21 Fach-/Verlaufsprüfgruppen sowie 65 ergänzende Client-, Rückmeldungs-,
   Provider- und Worker-Tests bestanden. Die Fachtests rechnen 858 Aufgabenvarianten und
   5.150 Kombinationen des optionalen Aufgabenvertrags unabhängig nach.
 - Vollständige Browserprüfung in Edge und WebKit bestanden, einschließlich
@@ -126,3 +145,12 @@ Die mobile Browserprüfung testet in Edge und WebKit acht Touch-Ansichten von
 Geprüft werden dynamische Abmessungen, feste Position beim Scrollen, Ein-/Ausklappen,
 gespeicherte Ansicht, neue Rückmeldungen am Punkt und die Anpassung an eine
 simulierte Bildschirmtastatur. Dies ersetzt keinen Test auf einem physischen iPad.
+
+Charles wurde zusätzlich in Edge und WebKit mit direkten Fragen zum Beispiel
+und zur Aufgabe live geprüft, einschließlich einer freien Erklärung zu beiden
+Funktionsformen. Die Gesprächsprüfung deckt Kontextwechsel, Rückfragen,
+veraltete Antworten, Netzfehler, sichere Textausgabe, neue Antworten am
+eingeklappten Punkt und das Leeren beim Neustart ab. Fünf Touch-Ansichten prüfen,
+dass Fragenfeld und Sendeknopf auch bei wenig Platz erreichbar bleiben.
+Bei häufigen Rechenfragen verhindern feste, nachgerechnete Erklärungen unter
+anderem eine Verwechslung der Verschiebungsrichtungen.

@@ -55,6 +55,14 @@ Seiten prüfen. Benötigt Playwright, Edge und `python -m playwright install web
 `--engine chromium` oder `--engine webkit` begrenzt den Lauf auf einen Browser.
 Lokale Bilder liegen unter `.local/sekii-quiz/ipad/`.
 
+`python tests/run_charles_browser.py` prüft Charles in Edge und WebKit: direkte
+Fragen, Kontext und Verlauf, geänderte Beispiele, veraltete Antworten, Netzfehler,
+Textausgabe und fünf Touch-Ansichten samt simulierter Bildschirmtastatur.
+Mit `--live` werden je Browser vier echte Fragen und eine Aufgabenwahl gegen den
+bereitgestellten Cloudflare-Worker geprüft. Die vorbereiteten Website-Dateien
+werden unter dem erlaubten Pages-Ursprung geladen. Dafür zuerst die Website bauen.
+Vorschauen liegen unter `.local/formenwechsel/charles/`.
+
 `test_quiz_seki.py` prüft die 24 Quizzuordnungen, gemeinsame lokale Ressourcen,
 Folgeseiten, Quiz- und Klassenfilter sämtlicher Ranglisten und die Trennung vom Backend. `tests/run_quiz_seki_browser.py` prüft
 die Oberflächen gegen den lokalen Cloudflare-Worker; Einrichtung und genaue

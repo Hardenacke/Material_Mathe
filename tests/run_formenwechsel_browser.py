@@ -120,8 +120,7 @@ def run_flow(browser, engine, base, output):
 
         page.locator("#resume").click()
         expect(page.locator("#practice")).to_be_visible()
-        assistant = page.locator(".fobizzLink")
-        page.locator(".fobizzHelp summary").click()
+        assistant = page.locator(".fobizzFooterLink")
         expect(assistant).to_have_attribute("href", ASSISTANT_URL)
         expect(assistant).to_have_attribute("target", "_blank")
         expect(assistant).to_have_attribute("rel", "noopener noreferrer")

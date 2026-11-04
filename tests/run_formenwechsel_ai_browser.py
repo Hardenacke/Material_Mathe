@@ -48,7 +48,7 @@ def run(browser, engine, full):
         answers.append(data)
         print(f"{engine}: KI-Antwort {len(answers)} ({data['feedbackKind']})", flush=True)
         expect(page.locator("#autoCoachCard")).to_have_attribute("data-state", "workers-ai", timeout=15000)
-        expect(page.locator("#autoCoachSource")).to_contain_text("Cloudflare")
+        expect(page.locator("#autoCoachSource")).to_contain_text("Charles")
         return data
 
     def submit(values):

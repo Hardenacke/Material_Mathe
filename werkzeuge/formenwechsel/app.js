@@ -42,7 +42,7 @@ const blankSkill=()=>({level:0,independent:0,helped:0,seen:0,byLevel:[0,0,0],str
 const fresh=()=>({version:2,revision:0,page:'intro',lessonTab:'complete',lessonStep:0,p:3,q:5,practiceLimit:10,total:12,
   stats:{expand:blankSkill(),complete:blankSkill()},records:[],current:null,mode:'single_chat',modeVersion:0,queue:null,feedback:''});
 let state=fresh(),pending=null,storageOK=true,recovery='';
-let autoGeneration=0,autoBusy=false,autoSelecting=false,autoView={text:'',source:'local'};
+let autoGeneration=0,questionReset=0,autoBusy=false,autoSelecting=false,autoView={text:'',source:'local'};
 let autoConfig={};try{autoConfig=JSON.parse($('#coachConfig').textContent||'{}');}catch{}
 const autoTransport=globalThis.createCoachTransport?.(autoConfig)||{enabled:false,request:async()=>{throw Error('NOT_CONFIGURED');},reset(){}};
 const integer=(x,max=100000)=>Number.isInteger(x)&&x>=0&&x<=max;
@@ -143,7 +143,7 @@ function paint(){
   $('#intro').hidden=state.page!=='intro';$('#practice').hidden=state.page!=='practice';$('#summary').hidden=state.page!=='summary';paintJourney();
   $('#navIntro').setAttribute('aria-current',String(state.page==='intro'));$('#navPractice').setAttribute('aria-current',String(state.page==='practice'));
   if(state.page==='intro')paintLesson();if(state.page==='practice'){if(!state.current){newTask();return;}paintTask();}if(state.page==='summary')paintSummary();
-  $('#resume').textContent=state.current?'Deinen Weg fortsetzen':'Los geht’s · Training starten';render();save();
+  $('#resume').textContent=state.current?'Deinen Weg fortsetzen':'Los geht’s · Training starten';render();save();paintQuestionContext();
 }
 function paintLesson() {
   const p=state.p,q=state.q,step=state.lessonStep,com=state.lessonTab==='complete';
@@ -170,7 +170,7 @@ function paintLesson() {
   // Graph: ausschließlich das vollständig erklärte Beispiel, nie eine aktive Übungsaufgabe.
   paintGraph(p,k);
   $('#squareExplain').innerHTML=`Der lineare Koeffizient ist ${tex(fmt(2*p))}. Seine Hälfte ist ${tex(fmt(p))}; ihr Quadrat ist ${tex(fmt(p*p))}. Deshalb ergänzen wir ${tex(fmt(p*p))} und ziehen ${tex(fmt(p*p))} wieder ab. Der Termwert bleibt gleich.`;
-  render($('#intro'));
+  render($('#intro'));paintQuestionContext();
 }
 function paintGraph(p,k) {
   const w=400,h=260,xmin=-8,xmax=8,ymin=-25,ymax=40;
@@ -195,7 +195,7 @@ function paintTask(){
   $('#phaseLabel').textContent=t.exit?'Dein Abschlusscheck':state.records.length>=state.total?'Deine Extrarunde':'Deine Trainingsrunde';
   $('#taskTitle').textContent=exp?'Entfalte die Klammer.':'Finde den Scheitelpunkt.';
   $('#directionLabel').textContent=exp?'Scheitelpunktform → Normalform':'Normalform → Scheitelpunktform';
-  $('#taskOrigin').hidden=!onlineSource(t.source)&&!t.coachNote;$('#taskOrigin').textContent=onlineSource(t.source)?'Vom Tutor ausgewählt · mathematisch geprüft':t.coachNote||'';
+  $('#taskOrigin').hidden=!onlineSource(t.source)&&!t.coachNote;$('#taskOrigin').textContent=onlineSource(t.source)?'Charles hat diese Aufgabe für dich ausgesucht.':t.coachNote||'';
   $('#levelName').textContent=['Basis · ganze Zahlen','Vertiefung · halbe Zahlen','Erweiterung · Vorfaktoren'][t.level];
   $('#taskFormula').innerHTML=tex(`f(x)=${exp?vertex(t.a,t.p,t.k):poly(t.a,t.b,t.c)}`,true);
   $('#targetFormula').innerHTML=exp?`Dein Ziel: ${tex(`f(x)=${term(t.a,'x^{2}',true)}+bx+c`)}`:`Dein Ziel: ${tex(`f(x)=${t.a===1?'':t.a===-1?'-':fmt(t.a)}(x-d)^{2}+e`)}`;
@@ -300,13 +300,27 @@ function recommendationLevel(skill,challenge){const s=state.stats[skill];let lev
 function inputSnapshot(){const t=state.current;return t?JSON.stringify({id:t.id,stage:t.stage,values:t.values,solved:t.solved,attempts:t.attempts,hints:t.hints}):null;}
 function automaticTask(){const t=state.current;return t?{id:t.id,skill:t.skill,level:t.level+1,a:t.a,p:t.p,k:t.k,promptStyle:t.promptStyle||'standard',guided:t.guided,stage:t.guided?t.stage:2,answers:t.values.map(parse),hints:t.hints,failures:t.failures}:null;}
 function automaticPacket(event,task){return {schemaVersion:3,requestId:uid(),revision:state.revision,event,task,finished:event!=='select'&&!!state.current?.solved,records:state.records.slice(0,200).map(r=>({skill:r.skill,level:r.level,independent:r.independent,hints:r.hints,revealed:r.revealed,exit:r.exit,aiAssisted:!!r.aiAssisted,signature:r.signature||''})),practiceLimit:state.practiceLimit};}
+function questionContext(){return {task:state.page==='practice'?automaticTask():null,lesson:state.page==='intro'?{p:state.p,q:state.q,skill:state.lessonTab,step:state.lessonStep}:null,solved:state.page==='practice'&&!!state.current?.solved};}
+function paintQuestionContext(){
+ const c=questionContext(),t=c.task;
+ $('#coachDock').dataset.questionContext=JSON.stringify([questionReset,t?[t.id,t.a,t.p,t.k,t.stage,c.solved]:[state.page,c.lesson]]);
+ $('#coachDock').dataset.questionReady=String(!!autoTransport.enabled&&typeof autoTransport.ask==='function'&&!autoSelecting);
+}
+async function askCharles(question,history=[]){
+ const text=String(question).trim();if(!text||text.length>600||!autoTransport.enabled||typeof autoTransport.ask!=='function'||autoSelecting)throw Error('QUESTION_UNAVAILABLE');
+ const context=questionContext();
+ // Eine ausdrücklich angefragte Hilfe zählt bei der offenen Aufgabe als Unterstützung.
+ if(context.task&&!state.current.solved){state.current.aiAssisted=true;save();}
+ return autoTransport.ask({schemaVersion:1,requestId:uid(),revision:state.revision,question:text,context,history:history.slice(-6)});
+}
 function paintAutomatic(){
  const t=state.current;
- shortMathText($('#autoCoachText'),autoView.text||(autoTransport.enabled?'Nach dem Prüfen erhältst du eine kurze Rückmeldung. Dein Tutor wählt passende Folgeaufgaben.':autoConfig.assistantUrl?'Hier erhältst du Rückmeldungen zu deinen Eingaben. Für weitere Fragen öffne die fobizz-Lernhilfe.':'Du übst mit den integrierten Hinweisen. Die Online-Lernbegleitung ist hier noch nicht verbunden.'));
- $('#autoCoachSource').textContent=autoBusy?'Dein Tutor schaut auf deinen Rechenschritt …':autoView.source==='workers-ai'?'KI-Lernbegleitung · Cloudflare':onlineSource(autoView.source)?'Rückmeldung deines Tutors':autoTransport.enabled?'Integrierte Rückmeldung · Tutor bei Bedarf erreichbar':'Integrierte Lernbegleitung';
+ shortMathText($('#autoCoachText'),autoView.text||(autoTransport.enabled?'Hallo, ich bin Charles! Ich gebe dir Feedback zu deiner Lösung. Frag mich unten, wenn du bei einem Rechenschritt Hilfe brauchst.':'Hallo, ich bin Charles! Nutze die Hinweise an der Aufgabe. Zum Fragenstellen brauche ich eine Internetverbindung zur eingerichteten Lernhilfe.'));
+ $('#autoCoachSource').textContent=autoBusy?'Ich schaue mir deinen Rechenschritt an …':'Charles · Mathehilfe';
  $('#autoCoachCard').dataset.state=autoBusy?'loading':autoView.source;
  $('#autoCoachCard').dataset.tone=autoView.tone||'neutral';$('#autoCoachIcon').textContent=autoView.tone==='correct'?'✓':autoView.tone==='incorrect'?'!':'✦';
  if(t&&state.page==='practice'){$('#nextTask').disabled=autoBusy;$('#check').disabled=t.solved||autoSelecting;for(const id of ['#v0','#v1'])$(id).disabled=t.solved||autoSelecting;$('#hint').disabled=t.solved||t.hints>=2||autoSelecting;$('#worked').disabled=autoSelecting;}
+ paintQuestionContext();
 }
 function shortMathText(node,text){
  node.replaceChildren();
@@ -344,7 +358,7 @@ async function automaticRequest(event,submitted=null){
   }else if(r.taskPlan)state.queue={focus:r.taskPlan.skill,level:r.taskPlan.level-1,challenge:'maintain',plan:r.taskPlan,automatic:true,source:r.source};
   if(!selection&&r.feedbackKind==='hint'&&state.current&&!state.current.solved)state.current.aiAssisted=true;
   autoView={text:r.feedback,source:r.source,tone:event==='checked'?(correct?'correct':'incorrect'):'neutral'};save();
- }catch(e){if(gen===autoGeneration)autoView={text:selection?'Deine nächste Aufgabe ist bereit. Heute übernimmt die integrierte Aufgabensteuerung.':localFeedback||'Die integrierte Prüfung gilt weiter. Du kannst weiterüben.',source:'local',tone:selection?'neutral':localTone};}
+ }catch(e){if(gen===autoGeneration)autoView={text:selection?'Deine nächste Aufgabe ist bereit. Probier den ersten Rechenschritt – du schaffst das!':localFeedback||'Mach mit dem nächsten Rechenschritt weiter. Die Hinweise an der Aufgabe helfen dir.',source:'local',tone:selection?'neutral':localTone};}
  finally{if(gen===autoGeneration){autoBusy=false;autoSelecting=false;paintAutomatic();if(onlineSource(autoView.source))shortMathText($('#autoCoachText'),autoView.text);}}
 }
 function checkWithTutor(){
@@ -359,9 +373,9 @@ function checkWithTutor(){
  }
 }
 
-function cancelAutomatic(){autoGeneration++;autoBusy=false;autoSelecting=false;autoView={text:'',source:'local'};autoTransport.reset();paintAutomatic();}
+function cancelAutomatic(){autoGeneration++;questionReset++;autoBusy=false;autoSelecting=false;autoView={text:'',source:'local'};autoTransport.reset();paintAutomatic();}
 // Öffentliche reine Funktionen dienen unabhängigen Fach- und Regressionstests.
-globalThis.Formenwechsel={parse,poly,vertex,parameters,makeTask,diagnostic,currentExpected,restore,validPlan,automaticPacket,allowedAutomaticPlan,automaticRequest,getState:()=>JSON.parse(JSON.stringify(state))};
+globalThis.Formenwechsel={parse,poly,vertex,parameters,makeTask,diagnostic,currentExpected,restore,validPlan,automaticPacket,allowedAutomaticPlan,automaticRequest,questionContext,askCharles,getState:()=>JSON.parse(JSON.stringify(state))};
 $('#resume').onclick=()=>{if(state.current)showPage('practice');else newTask();};
 $('#navIntro').onclick=()=>showPage('intro');
 $('#navPractice').onclick=()=>{if(state.current)showPage('practice');else newTask();};

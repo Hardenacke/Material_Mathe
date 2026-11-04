@@ -39,11 +39,11 @@
   dock.dataset.collapsed=String(collapsed);
   dock.dataset.unread=String(unread);
   dock.dataset.tone=card.dataset.tone||'neutral';
-  dock.dataset.loading=String(card.dataset.state==='loading');
+  dock.dataset.loading=String(card.dataset.state==='loading'||card.dataset.questionLoading==='true');
   document.body.dataset.coachCollapsed=String(collapsed);
   launcher.setAttribute('aria-expanded',String(!collapsed));
   collapse.setAttribute('aria-expanded',String(!collapsed));
-  launcher.setAttribute('aria-label',unread?'Neue Rückmeldung – Lernbegleitung öffnen':'Lernbegleitung öffnen');
+  launcher.setAttribute('aria-label',unread?'Neue Rückmeldung – Charles öffnen':'Charles öffnen');
   scheduleFit();
  }
  function setCollapsed(value){
@@ -59,7 +59,7 @@
   if(event.key==='Escape'&&!collapsed){event.preventDefault();setCollapsed(true);}
  });
  function feedbackChanged(){
-  const text=document.querySelector('#autoCoachText').textContent.trim();
+  const text=[document.querySelector('#autoCoachText').textContent,document.querySelector('#charlesMessages').textContent].join('|').trim();
   const stamp=[card.dataset.state,card.dataset.tone,text].join('|');
   if(card.dataset.state!=='loading'){
    if(collapsed&&lastFeedback&&stamp!==lastFeedback&&text)unread=true;
@@ -69,7 +69,7 @@
  }
  new MutationObserver(feedbackChanged).observe(card,{
   subtree:true,childList:true,characterData:true,attributes:true,
-  attributeFilter:['data-state','data-tone'],
+  attributeFilter:['data-state','data-tone','data-question-loading'],
  });
  if(window.ResizeObserver)new ResizeObserver(scheduleFit).observe(dock);
  window.addEventListener('resize',scheduleFit,{passive:true});

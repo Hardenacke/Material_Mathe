@@ -72,7 +72,7 @@ test('Workers-AI-Auswahl, Feedback, Hilfe und Folgewahl bleiben im Lernverlauf a
  b.click('#resume');await tick();
  assert.equal(b.api.getState().current.source,'workers-ai');
  assert.equal(b.get('#autoCoachCard').dataset.state,'workers-ai');
- assert.match(b.get('#autoCoachSource').textContent,/Cloudflare/);
+ assert.match(b.get('#autoCoachSource').textContent,/Charles/);
  b.fill(0,999);b.fill(1,999);b.submit();await tick();
  assert.equal(b.api.getState().current.aiAssisted,true);
  assert.equal(b.get('#autoCoachCard').dataset.state,'workers-ai');

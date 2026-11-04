@@ -80,6 +80,31 @@ button,summary{min-height:44px}
 @media(max-width:370px){#fields{grid-template-columns:minmax(0,1fr)}.hero{padding-inline:19px}.hero h1{font-size:clamp(2.15rem,11vw,2.7rem)}}
 @media(max-height:500px){#coachDock .autoCoachCard{max-height:min(230px,calc(var(--coach-vh,100vh)*.5))}.coachDockHeader{padding-block:4px}.coachDockBody{padding-block:8px}}
 @media(prefers-reduced-motion:reduce){#coachDock .autoCoachCard{animation:none}.coachLauncherDot{transition:none}}
+
+/* Charles: Verlauf scrollt, das Fragenfeld bleibt in Reichweite. */
+#coachDock .autoCoachCard{max-height:min(620px,calc(var(--coach-vh,100dvh)*.75),calc(var(--coach-vh,100dvh) - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)))}
+.coachDockBody{flex:1 1 auto}
+.charlesMessages{display:grid;gap:10px;margin-top:12px}
+.charlesMessages:empty{display:none}
+.charlesMessage{padding:10px 11px;border-radius:12px;background:#ffffffc9;overflow-wrap:anywhere}
+.charlesMessage.user{background:#153b4b0c}
+.charlesMessage strong{display:block;font-size:.7rem;color:#076c68;margin-bottom:4px}
+#coachDock .charlesMessage p{margin:0;white-space:pre-wrap}
+.charlesForm{flex:0 0 auto;padding:10px 14px 12px;border-top:1px solid #173b4b18;background:#f6faf7}
+.charlesForm label{display:block;font-size:.8rem;font-weight:750;margin-bottom:6px}
+.charlesComposer{display:flex;align-items:stretch;gap:7px}
+.charlesComposer textarea{display:block;flex:1 1 auto;min-width:0;width:100%;min-height:64px;max-height:110px;resize:vertical;border:1px solid #9ebdb1;border-radius:10px;padding:9px;font:inherit;font-size:16px;line-height:1.35;color:var(--ink);background:#fff}
+.charlesComposer textarea:focus-visible{outline:3px solid #077d7940;outline-offset:1px}
+.charlesComposer button{flex:0 0 auto;min-width:44px;padding:8px;font-size:.75rem}
+#coachDock .charlesForm small{display:block;margin-top:6px;font-size:.65rem}
+#coachDock .charlesForm p{margin:6px 0 0;font-size:.72rem;line-height:1.4}
+#charlesStatus:empty{display:none}
+@media(max-width:560px){#coachDock .autoCoachCard{max-height:min(500px,calc(var(--coach-vh,100dvh)*.72))}}
+@media(max-height:500px){
+ #coachDock .autoCoachCard{max-height:calc(var(--coach-vh,100dvh)*.85)}
+ .charlesForm{padding-block:6px}.charlesComposer textarea{min-height:44px;max-height:64px}
+ #coachDock .charlesForm small{display:none}
+}
 </style><script type="text/plain" id="third-party-notices">KaTeX 0.16.11
 https://github.com/KaTeX/KaTeX
 The MIT License (MIT)
@@ -442,12 +467,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 <section id="practice" hidden><div class="practiceHeading"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18L18 6M7 6h11v11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Ein Schritt nach dem anderen.</strong><br>Ausprobieren. Prüfen. Weiterkommen.</p></div><div class="practiceGrid"><article class="card practiceCard"><div class="taskTop"><div class="eyebrow" id="phaseLabel">Adaptives Training</div><span class="tag" id="levelName"></span></div><p class="direction" id="directionLabel"></p><p class="taskOrigin" id="taskOrigin" hidden></p><h2 class="taskTitle" id="taskTitle" tabindex="-1"></h2><div class="taskSurface"><small>Deine Aufgabe</small><div id="taskFormula"></div></div><p id="targetFormula"></p><div class="processBanner" id="processBanner" hidden><div class="processSteps" id="processSteps"></div><p id="processNote"></p></div><p id="taskPrompt"></p><form id="answerForm" novalidate><div class="answerCaption">Deine Lösung</div><div id="fields"></div><p class="small">Zahlen, Brüche und gemischte Zahlen sind möglich. Der Vorzeichenknopf hilft bei negativen Zahlen.</p><div class="controls"><button type="submit" class="primary" id="check">Prüfen</button><button type="button" id="hint">Hinweis</button><button type="button" id="worked" hidden>Rechenweg ansehen</button></div></form><div id="taskFeedback" class="feedback" role="status" aria-live="polite" hidden></div><div class="helpbox" id="hintBox" hidden></div><div class="helpbox" id="solutionBox" hidden></div><div class="controls"><button class="primary" id="nextTask" hidden>Nächste Aufgabe</button></div><p class="small" id="adaptation" style="margin-top:22px"></p></article><aside class="card toolkit"><div class="focusBlock"><span class="focusIcon" aria-hidden="true">↗</span><div class="eyebrow">Dein Fokus</div><h3 id="skillFocus"></h3><p id="skillDetail"></p><hr></div><details><summary>Dein Werkzeugkasten</summary><p style="margin-top:15px"><strong>Ausmultiplizieren</strong><span data-tex="(x+p)^{2}=x^{2}+2px+p^{2}" class="mathline"></span>Beachte danach auch den äußeren Vorfaktor.</p><p><strong>Quadratisch ergänzen</strong><br>Ausklammern, falls nötig · halbieren · quadrieren · ergänzen und ausgleichen.</p><p>Innen ergänzt und subtrahierst du dieselbe Zahl. Beim Ausgleich außerhalb rechnest du mit dem Vorfaktor.</p></details><small style="margin-top:15px">Ein Fehler zeigt dir, welchen Schritt du als Nächstes festigen kannst.</small></aside></div></section>
 <section id="summary" hidden><div class="summaryHero"><div class="summarySymbol" id="summarySymbol" aria-hidden="true">✓</div><div class="eyebrow">Deine Auswertung</div><h1>Dein Weg. Dein Fortschritt.</h1><p id="summaryLead" class="bigLead" style="margin-top:20px"></p></div><div class="processCount" id="processCount"></div><div class="statgrid" id="summaryCards"></div><article class="card"><h2>Das nimmst du mit</h2><div id="summaryRule"></div><p><strong>Erkläre zum Schluss:</strong> Warum muss die Ergänzung wieder abgezogen werden? Erkläre es an einem Beispiel auf Papier.</p><p class="small">Deine Erklärung wird hier nicht automatisch bewertet. Prüfe: Du ergänzt und subtrahierst denselben Wert; der Funktionsterm bleibt gleich.</p></article><div class="controls"><button class="primary" id="morePractice">Gezielt weiterüben</button></div></section>
 <footer class="footer"><p id="saveInfo"></p><div class="footerActions"><a href="https://app.fobizz.com/ai/chats/public_assistants/8a017c8d-602b-4736-87ab-3d777f9a87a5?token=8a45d8548e03e78a3d576f8c130449d3" data-fobizz-link target="_blank" rel="noopener noreferrer" class="fobizzFooterLink">fobizz-Lernhilfe ↗</a><button class="ghost" id="reset">Neu beginnen</button></div></footer></main>
-<aside id="coachDock" class="coachDock" aria-label="Deine Lernbegleitung" data-collapsed="false" data-unread="false">
+<aside id="coachDock" class="coachDock" aria-label="Charles – deine Mathehilfe" data-collapsed="false" data-unread="false">
 <section id="autoCoachCard" class="autoCoachCard" aria-labelledby="autoCoachTitle">
-<div class="coachDockHeader"><span class="autoCoachIcon" id="autoCoachIcon" aria-hidden="true">✦</span><h3 id="autoCoachTitle">Deine Lernbegleitung</h3><button type="button" id="coachCollapse" class="coachCollapse" aria-label="Lernbegleitung einklappen" aria-controls="autoCoachCard" aria-expanded="true"><span aria-hidden="true">›</span></button></div>
-<div class="coachDockBody"><p id="autoCoachText" role="status" aria-live="polite" aria-atomic="true"></p><small id="autoCoachSource"></small><details class="fobizzHelp"><summary>Zusätzliche Lernhilfe</summary><a href="https://app.fobizz.com/ai/chats/public_assistants/8a017c8d-602b-4736-87ab-3d777f9a87a5?token=8a45d8548e03e78a3d576f8c130449d3" data-fobizz-link target="_blank" rel="noopener noreferrer" class="fobizzLink">fobizz-Lernhilfe öffnen <span aria-hidden="true">↗</span></a><p class="small">Öffnet einen neuen Tab. Beschreibe dort deine Aufgabe und den Rechenschritt, bei dem du Hilfe brauchst.</p></details></div>
+<div class="coachDockHeader"><span class="autoCoachIcon" id="autoCoachIcon" aria-hidden="true">✦</span><h3 id="autoCoachTitle">Charles</h3><button type="button" id="coachCollapse" class="coachCollapse" aria-label="Charles einklappen" aria-controls="autoCoachCard" aria-expanded="true"><span aria-hidden="true">›</span></button></div>
+<div class="coachDockBody"><p id="autoCoachText" role="status" aria-live="polite" aria-atomic="true"></p><small id="autoCoachSource"></small><div id="charlesMessages" class="charlesMessages" role="log" aria-label="Dein Gespräch mit Charles" aria-live="polite" aria-relevant="additions"></div></div>
+<form id="charlesForm" class="charlesForm"><label for="charlesQuestion">Frag Charles</label><div class="charlesComposer"><textarea id="charlesQuestion" rows="2" maxlength="600" placeholder="Warum muss ich hier halbieren?" aria-describedby="charlesHelp charlesStatus" enterkeyhint="send"></textarea><button id="charlesSend" type="submit" class="primary" aria-label="Frage an Charles senden">Senden</button></div><small id="charlesHelp">Eine Frage zur offenen Aufgabe zählt als Hilfe. Bitte keine persönlichen Angaben.</small><p id="charlesStatus" role="status" aria-live="polite"></p></form>
 </section>
-<button type="button" id="coachLauncher" class="coachLauncher" aria-label="Lernbegleitung öffnen" aria-controls="autoCoachCard" aria-expanded="false" hidden><span class="coachLauncherDot" aria-hidden="true">✦</span><span class="coachUnreadDot" aria-hidden="true"></span></button>
+<button type="button" id="coachLauncher" class="coachLauncher" aria-label="Charles öffnen" aria-controls="autoCoachCard" aria-expanded="false" hidden><span class="coachLauncherDot" aria-hidden="true">✦</span><span class="coachUnreadDot" aria-hidden="true"></span></button>
 </aside>
 <dialog id="resetDialog" aria-labelledby="resetTitle"><h2 id="resetTitle">Neu beginnen?</h2><p>Damit löschst du den gespeicherten Fortschritt dieses Lernpfads in diesem Browser.</p><div class="controls"><button id="cancelReset">Abbrechen</button><button class="primary" id="confirmReset">Fortschritt löschen</button></div></dialog>
 
@@ -458,27 +484,32 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   const fetcher=deps.fetch||globalThis.fetch?.bind(globalThis);
   let storage=deps.storage;try{if(!storage)storage=globalThis.sessionStorage;}catch{}
   let base='';try{if(config.workerUrl){const u=new URL(config.workerUrl);if((u.protocol!=='https:'&&!(/^localhost$|^127\.0\.0\.1$/.test(u.hostname)&&u.protocol==='http:'))||u.username||u.password||u.search||u.hash||u.pathname!=='/')throw Error();base=u.origin;}}catch{base='';}
-  const storageKey='formenwechsel-auto:'+base;let session=null,sequence=0,generation=0;
-  try{const s=JSON.parse(storage?.getItem(storageKey)||'null');if(s&&typeof s.token==='string'&&Number.isFinite(s.expiresAt)&&s.expiresAt>Date.now()+10000){session=s;sequence=Number.isSafeInteger(s.sequence)?s.sequence:0;}}catch{}
+  const storageKey='formenwechsel-auto:'+base;let session=null,sequence=0,questionSequence=0,generation=0,sessionPending=null;
+  try{const s=JSON.parse(storage?.getItem(storageKey)||'null');if(s&&typeof s.token==='string'&&Number.isFinite(s.expiresAt)&&s.expiresAt>Date.now()+10000){session=s;sequence=Number.isSafeInteger(s.sequence)?s.sequence:0;questionSequence=Number.isSafeInteger(s.questionSequence)?s.questionSequence:0;}}catch{}
   const enabled=!!base&&!!fetcher;
-  async function request(packet){
+  async function send(packet,question=false){
    if(!enabled)throw Error('NOT_CONFIGURED');
    const epoch=generation,controller=new AbortController(),timer=setTimeout(()=>controller.abort(),Math.min(12000,Math.max(1000,Number(config.timeoutMs)||9000)));
    try{
-    if(!session||session.expiresAt<Date.now()+10000){const r=await fetcher(base+'/api/session',{method:'POST',headers:{'content-type':'application/json'},body:'{}',signal:controller.signal,credentials:'omit'});if(!r.ok)throw Error('SESSION_UNAVAILABLE');const s=await r.json();if(typeof s.token!=='string'||!Number.isFinite(s.expiresAt))throw Error('INVALID_SESSION');session=s;}
+    if(!session||session.expiresAt<Date.now()+10000){
+     if(!sessionPending){const pending=(async()=>{const r=await fetcher(base+'/api/session',{method:'POST',headers:{'content-type':'application/json'},body:'{}',signal:controller.signal,credentials:'omit'});if(!r.ok)throw Error('SESSION_UNAVAILABLE');const s=await r.json();if(typeof s.token!=='string'||!Number.isFinite(s.expiresAt))throw Error('INVALID_SESSION');if(epoch!==generation)throw Error('CANCELLED');session=s;})();sessionPending=pending;pending.finally(()=>{if(sessionPending===pending)sessionPending=null;}).catch(()=>{});}
+     await sessionPending;
+    }
     if(epoch!==generation)throw Error('CANCELLED');
-    sequence++;try{storage?.setItem(storageKey,JSON.stringify({...session,sequence}));}catch{}
-    const body={...packet,sequence};
-    const r=await fetcher(base+'/api/coach/automatic',{method:'POST',headers:{'content-type':'application/json','authorization':'Bearer '+session.token},body:JSON.stringify(body),signal:controller.signal,credentials:'omit'});
+    const currentSequence=question?++questionSequence:++sequence;
+    try{storage?.setItem(storageKey,JSON.stringify({...session,sequence,questionSequence}));}catch{}
+    const body={...packet,sequence:currentSequence};
+    const r=await fetcher(base+'/api/coach/'+(question?'question':'automatic'),{method:'POST',headers:{'content-type':'application/json','authorization':'Bearer '+session.token},body:JSON.stringify(body),signal:controller.signal,credentials:'omit'});
     if(r.status===401){session=null;try{storage?.removeItem(storageKey);}catch{}}
     if(!r.ok||r.status===202)throw Error('COACH_UNAVAILABLE');
     const result=await r.json();if(epoch!==generation)throw Error('CANCELLED');
-    if(result.schemaVersion!==3||result.requestId!==body.requestId||result.sequence!==sequence||result.revision!==body.revision||!['fobizz','workers-ai'].includes(result.source)||(config.provider&&result.source!==config.provider)||typeof result.feedback!=='string'||!result.feedback.trim()||result.feedback.length>220||!['hint','praise','encouragement'].includes(result.feedbackKind))throw Error('INVALID_RESPONSE');
+    if(result.schemaVersion!==(question?1:3)||result.requestId!==body.requestId||result.sequence!==currentSequence||result.revision!==body.revision||!['fobizz','workers-ai'].includes(result.source)||(config.provider&&result.source!==config.provider))throw Error('INVALID_RESPONSE');
+    if(question?(result.source!=='workers-ai'||typeof result.answer!=='string'||!result.answer.trim()||result.answer.length>1200):(typeof result.feedback!=='string'||!result.feedback.trim()||result.feedback.length>220||!['hint','praise','encouragement'].includes(result.feedbackKind)))throw Error('INVALID_RESPONSE');
     return result;
    }finally{clearTimeout(timer);}
   }
-  function reset(){generation++;session=null;sequence=0;try{storage?.removeItem(storageKey);}catch{}}
-  return {enabled,request,reset};
+  function reset(){generation++;session=null;sessionPending=null;sequence=0;questionSequence=0;try{storage?.removeItem(storageKey);}catch{}}
+  return {enabled,request:packet=>send(packet),ask:packet=>send(packet,true),reset};
  };
 })();
 </script><noscript><p>Für diesen Lernpfad muss JavaScript im Browser aktiviert sein.</p></noscript><script>/* Formenwechsel – fachlich geprüfte Vorlagen, keine externen Laufzeitabhängigkeiten. */
@@ -525,7 +556,7 @@ const blankSkill=()=>({level:0,independent:0,helped:0,seen:0,byLevel:[0,0,0],str
 const fresh=()=>({version:2,revision:0,page:'intro',lessonTab:'complete',lessonStep:0,p:3,q:5,practiceLimit:10,total:12,
   stats:{expand:blankSkill(),complete:blankSkill()},records:[],current:null,mode:'single_chat',modeVersion:0,queue:null,feedback:''});
 let state=fresh(),pending=null,storageOK=true,recovery='';
-let autoGeneration=0,autoBusy=false,autoSelecting=false,autoView={text:'',source:'local'};
+let autoGeneration=0,questionReset=0,autoBusy=false,autoSelecting=false,autoView={text:'',source:'local'};
 let autoConfig={};try{autoConfig=JSON.parse($('#coachConfig').textContent||'{}');}catch{}
 const autoTransport=globalThis.createCoachTransport?.(autoConfig)||{enabled:false,request:async()=>{throw Error('NOT_CONFIGURED');},reset(){}};
 const integer=(x,max=100000)=>Number.isInteger(x)&&x>=0&&x<=max;
@@ -626,7 +657,7 @@ function paint(){
   $('#intro').hidden=state.page!=='intro';$('#practice').hidden=state.page!=='practice';$('#summary').hidden=state.page!=='summary';paintJourney();
   $('#navIntro').setAttribute('aria-current',String(state.page==='intro'));$('#navPractice').setAttribute('aria-current',String(state.page==='practice'));
   if(state.page==='intro')paintLesson();if(state.page==='practice'){if(!state.current){newTask();return;}paintTask();}if(state.page==='summary')paintSummary();
-  $('#resume').textContent=state.current?'Deinen Weg fortsetzen':'Los geht’s · Training starten';render();save();
+  $('#resume').textContent=state.current?'Deinen Weg fortsetzen':'Los geht’s · Training starten';render();save();paintQuestionContext();
 }
 function paintLesson() {
   const p=state.p,q=state.q,step=state.lessonStep,com=state.lessonTab==='complete';
@@ -653,7 +684,7 @@ function paintLesson() {
   // Graph: ausschließlich das vollständig erklärte Beispiel, nie eine aktive Übungsaufgabe.
   paintGraph(p,k);
   $('#squareExplain').innerHTML=`Der lineare Koeffizient ist ${tex(fmt(2*p))}. Seine Hälfte ist ${tex(fmt(p))}; ihr Quadrat ist ${tex(fmt(p*p))}. Deshalb ergänzen wir ${tex(fmt(p*p))} und ziehen ${tex(fmt(p*p))} wieder ab. Der Termwert bleibt gleich.`;
-  render($('#intro'));
+  render($('#intro'));paintQuestionContext();
 }
 function paintGraph(p,k) {
   const w=400,h=260,xmin=-8,xmax=8,ymin=-25,ymax=40;
@@ -678,7 +709,7 @@ function paintTask(){
   $('#phaseLabel').textContent=t.exit?'Dein Abschlusscheck':state.records.length>=state.total?'Deine Extrarunde':'Deine Trainingsrunde';
   $('#taskTitle').textContent=exp?'Entfalte die Klammer.':'Finde den Scheitelpunkt.';
   $('#directionLabel').textContent=exp?'Scheitelpunktform → Normalform':'Normalform → Scheitelpunktform';
-  $('#taskOrigin').hidden=!onlineSource(t.source)&&!t.coachNote;$('#taskOrigin').textContent=onlineSource(t.source)?'Vom Tutor ausgewählt · mathematisch geprüft':t.coachNote||'';
+  $('#taskOrigin').hidden=!onlineSource(t.source)&&!t.coachNote;$('#taskOrigin').textContent=onlineSource(t.source)?'Charles hat diese Aufgabe für dich ausgesucht.':t.coachNote||'';
   $('#levelName').textContent=['Basis · ganze Zahlen','Vertiefung · halbe Zahlen','Erweiterung · Vorfaktoren'][t.level];
   $('#taskFormula').innerHTML=tex(`f(x)=${exp?vertex(t.a,t.p,t.k):poly(t.a,t.b,t.c)}`,true);
   $('#targetFormula').innerHTML=exp?`Dein Ziel: ${tex(`f(x)=${term(t.a,'x^{2}',true)}+bx+c`)}`:`Dein Ziel: ${tex(`f(x)=${t.a===1?'':t.a===-1?'-':fmt(t.a)}(x-d)^{2}+e`)}`;
@@ -783,13 +814,27 @@ function recommendationLevel(skill,challenge){const s=state.stats[skill];let lev
 function inputSnapshot(){const t=state.current;return t?JSON.stringify({id:t.id,stage:t.stage,values:t.values,solved:t.solved,attempts:t.attempts,hints:t.hints}):null;}
 function automaticTask(){const t=state.current;return t?{id:t.id,skill:t.skill,level:t.level+1,a:t.a,p:t.p,k:t.k,promptStyle:t.promptStyle||'standard',guided:t.guided,stage:t.guided?t.stage:2,answers:t.values.map(parse),hints:t.hints,failures:t.failures}:null;}
 function automaticPacket(event,task){return {schemaVersion:3,requestId:uid(),revision:state.revision,event,task,finished:event!=='select'&&!!state.current?.solved,records:state.records.slice(0,200).map(r=>({skill:r.skill,level:r.level,independent:r.independent,hints:r.hints,revealed:r.revealed,exit:r.exit,aiAssisted:!!r.aiAssisted,signature:r.signature||''})),practiceLimit:state.practiceLimit};}
+function questionContext(){return {task:state.page==='practice'?automaticTask():null,lesson:state.page==='intro'?{p:state.p,q:state.q,skill:state.lessonTab,step:state.lessonStep}:null,solved:state.page==='practice'&&!!state.current?.solved};}
+function paintQuestionContext(){
+ const c=questionContext(),t=c.task;
+ $('#coachDock').dataset.questionContext=JSON.stringify([questionReset,t?[t.id,t.a,t.p,t.k,t.stage,c.solved]:[state.page,c.lesson]]);
+ $('#coachDock').dataset.questionReady=String(!!autoTransport.enabled&&typeof autoTransport.ask==='function'&&!autoSelecting);
+}
+async function askCharles(question,history=[]){
+ const text=String(question).trim();if(!text||text.length>600||!autoTransport.enabled||typeof autoTransport.ask!=='function'||autoSelecting)throw Error('QUESTION_UNAVAILABLE');
+ const context=questionContext();
+ // Eine ausdrücklich angefragte Hilfe zählt bei der offenen Aufgabe als Unterstützung.
+ if(context.task&&!state.current.solved){state.current.aiAssisted=true;save();}
+ return autoTransport.ask({schemaVersion:1,requestId:uid(),revision:state.revision,question:text,context,history:history.slice(-6)});
+}
 function paintAutomatic(){
  const t=state.current;
- shortMathText($('#autoCoachText'),autoView.text||(autoTransport.enabled?'Nach dem Prüfen erhältst du eine kurze Rückmeldung. Dein Tutor wählt passende Folgeaufgaben.':autoConfig.assistantUrl?'Hier erhältst du Rückmeldungen zu deinen Eingaben. Für weitere Fragen öffne die fobizz-Lernhilfe.':'Du übst mit den integrierten Hinweisen. Die Online-Lernbegleitung ist hier noch nicht verbunden.'));
- $('#autoCoachSource').textContent=autoBusy?'Dein Tutor schaut auf deinen Rechenschritt …':autoView.source==='workers-ai'?'KI-Lernbegleitung · Cloudflare':onlineSource(autoView.source)?'Rückmeldung deines Tutors':autoTransport.enabled?'Integrierte Rückmeldung · Tutor bei Bedarf erreichbar':'Integrierte Lernbegleitung';
+ shortMathText($('#autoCoachText'),autoView.text||(autoTransport.enabled?'Hallo, ich bin Charles! Ich gebe dir Feedback zu deiner Lösung. Frag mich unten, wenn du bei einem Rechenschritt Hilfe brauchst.':'Hallo, ich bin Charles! Nutze die Hinweise an der Aufgabe. Zum Fragenstellen brauche ich eine Internetverbindung zur eingerichteten Lernhilfe.'));
+ $('#autoCoachSource').textContent=autoBusy?'Ich schaue mir deinen Rechenschritt an …':'Charles · Mathehilfe';
  $('#autoCoachCard').dataset.state=autoBusy?'loading':autoView.source;
  $('#autoCoachCard').dataset.tone=autoView.tone||'neutral';$('#autoCoachIcon').textContent=autoView.tone==='correct'?'✓':autoView.tone==='incorrect'?'!':'✦';
  if(t&&state.page==='practice'){$('#nextTask').disabled=autoBusy;$('#check').disabled=t.solved||autoSelecting;for(const id of ['#v0','#v1'])$(id).disabled=t.solved||autoSelecting;$('#hint').disabled=t.solved||t.hints>=2||autoSelecting;$('#worked').disabled=autoSelecting;}
+ paintQuestionContext();
 }
 function shortMathText(node,text){
  node.replaceChildren();
@@ -827,7 +872,7 @@ async function automaticRequest(event,submitted=null){
   }else if(r.taskPlan)state.queue={focus:r.taskPlan.skill,level:r.taskPlan.level-1,challenge:'maintain',plan:r.taskPlan,automatic:true,source:r.source};
   if(!selection&&r.feedbackKind==='hint'&&state.current&&!state.current.solved)state.current.aiAssisted=true;
   autoView={text:r.feedback,source:r.source,tone:event==='checked'?(correct?'correct':'incorrect'):'neutral'};save();
- }catch(e){if(gen===autoGeneration)autoView={text:selection?'Deine nächste Aufgabe ist bereit. Heute übernimmt die integrierte Aufgabensteuerung.':localFeedback||'Die integrierte Prüfung gilt weiter. Du kannst weiterüben.',source:'local',tone:selection?'neutral':localTone};}
+ }catch(e){if(gen===autoGeneration)autoView={text:selection?'Deine nächste Aufgabe ist bereit. Probier den ersten Rechenschritt – du schaffst das!':localFeedback||'Mach mit dem nächsten Rechenschritt weiter. Die Hinweise an der Aufgabe helfen dir.',source:'local',tone:selection?'neutral':localTone};}
  finally{if(gen===autoGeneration){autoBusy=false;autoSelecting=false;paintAutomatic();if(onlineSource(autoView.source))shortMathText($('#autoCoachText'),autoView.text);}}
 }
 function checkWithTutor(){
@@ -842,9 +887,9 @@ function checkWithTutor(){
  }
 }
 
-function cancelAutomatic(){autoGeneration++;autoBusy=false;autoSelecting=false;autoView={text:'',source:'local'};autoTransport.reset();paintAutomatic();}
+function cancelAutomatic(){autoGeneration++;questionReset++;autoBusy=false;autoSelecting=false;autoView={text:'',source:'local'};autoTransport.reset();paintAutomatic();}
 // Öffentliche reine Funktionen dienen unabhängigen Fach- und Regressionstests.
-globalThis.Formenwechsel={parse,poly,vertex,parameters,makeTask,diagnostic,currentExpected,restore,validPlan,automaticPacket,allowedAutomaticPlan,automaticRequest,getState:()=>JSON.parse(JSON.stringify(state))};
+globalThis.Formenwechsel={parse,poly,vertex,parameters,makeTask,diagnostic,currentExpected,restore,validPlan,automaticPacket,allowedAutomaticPlan,automaticRequest,questionContext,askCharles,getState:()=>JSON.parse(JSON.stringify(state))};
 $('#resume').onclick=()=>{if(state.current)showPage('practice');else newTask();};
 $('#navIntro').onclick=()=>showPage('intro');
 $('#navPractice').onclick=()=>{if(state.current)showPage('practice');else newTask();};
@@ -864,6 +909,55 @@ $('#cancelReset').onclick=()=>$('#resetDialog').close();
 $('#confirmReset').onclick=()=>{cancelAutomatic();state=fresh();pending=null;save();paint();$('#resetDialog').close();};
 
 paint();paintAutomatic();
+})();
+</script><script>/* Gespräch bleibt im geöffneten Tab und wird bei einem neuen Kontext geleert. */
+'use strict';
+(()=>{
+ const dock=document.querySelector('#coachDock'),card=document.querySelector('#autoCoachCard');
+ const form=document.querySelector('#charlesForm'),input=document.querySelector('#charlesQuestion'),send=document.querySelector('#charlesSend');
+ const log=document.querySelector('#charlesMessages'),status=document.querySelector('#charlesStatus');
+ let context='',history=[],generation=0,busy=false;
+ function paint(){
+  const ready=dock.dataset.questionReady==='true';
+  input.disabled=!ready;send.disabled=!ready||busy||!input.value.trim();
+  form.setAttribute('aria-busy',String(busy));card.dataset.questionLoading=String(busy);
+  if(!ready&&!busy)status.textContent='Fragen sind gerade nicht verfügbar. Nutze die Hinweise an der Aufgabe oder versuche es gleich erneut.';
+ }
+ function sync(){
+  const next=dock.dataset.questionContext||'';
+  if(next!==context){context=next;generation++;history=[];busy=false;log.replaceChildren();input.value='';status.textContent='';}
+  if(dock.dataset.questionReady==='true'&&!busy&&!history.length)status.textContent='';
+  paint();
+ }
+ function message(role,text){
+  const box=document.createElement('div');box.className='charlesMessage '+role;
+  const label=document.createElement('strong');label.textContent=role==='user'?'Du':'Charles';
+  const content=document.createElement('p');content.textContent=text;box.append(label,content);log.append(box);
+  // Ältere Nachrichten bleiben nur im begrenzten Verlauf dieses Beispiels.
+  while(log.children.length>8)log.firstElementChild.remove();
+  const body=log.closest('.coachDockBody');body.scrollTop=body.scrollHeight;
+ }
+ form.addEventListener('submit',async event=>{
+  event.preventDefault();const question=input.value.trim();
+  if(busy||dock.dataset.questionReady!=='true')return;
+  if(!question){input.focus();return;}
+  if(question.length>600){status.textContent='Kürze deine Frage bitte auf höchstens 600 Zeichen.';return;}
+  const epoch=generation,stamp=context,previous=history.slice(-6);
+  message('user',question);input.value='';busy=true;status.textContent='Charles denkt nach …';paint();
+  try{
+   const result=await globalThis.Formenwechsel.askCharles(question,previous);
+   if(epoch!==generation||stamp!==dock.dataset.questionContext)return;
+   history=[...previous,{role:'user',text:question},{role:'assistant',text:result.answer}].slice(-6);
+   message('assistant',result.answer);status.textContent='';
+  }catch{
+   if(epoch!==generation||stamp!==dock.dataset.questionContext)return;
+   input.value=question;status.textContent='Charles konnte gerade nicht antworten. Sende deine Frage noch einmal oder nutze den Hinweis an der Aufgabe.';
+  }finally{if(epoch===generation){busy=false;paint();}}
+ });
+ input.addEventListener('input',paint);
+ input.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();form.requestSubmit();}});
+ new MutationObserver(sync).observe(dock,{attributes:true,attributeFilter:['data-question-context','data-question-ready']});
+ sync();
 })();
 </script><script>/* Bildschirmfeste Lernbegleitung; unabhängig von Aufgaben und KI-Anfragen. */
 'use strict';
@@ -906,11 +1000,11 @@ paint();paintAutomatic();
   dock.dataset.collapsed=String(collapsed);
   dock.dataset.unread=String(unread);
   dock.dataset.tone=card.dataset.tone||'neutral';
-  dock.dataset.loading=String(card.dataset.state==='loading');
+  dock.dataset.loading=String(card.dataset.state==='loading'||card.dataset.questionLoading==='true');
   document.body.dataset.coachCollapsed=String(collapsed);
   launcher.setAttribute('aria-expanded',String(!collapsed));
   collapse.setAttribute('aria-expanded',String(!collapsed));
-  launcher.setAttribute('aria-label',unread?'Neue Rückmeldung – Lernbegleitung öffnen':'Lernbegleitung öffnen');
+  launcher.setAttribute('aria-label',unread?'Neue Rückmeldung – Charles öffnen':'Charles öffnen');
   scheduleFit();
  }
  function setCollapsed(value){
@@ -926,7 +1020,7 @@ paint();paintAutomatic();
   if(event.key==='Escape'&&!collapsed){event.preventDefault();setCollapsed(true);}
  });
  function feedbackChanged(){
-  const text=document.querySelector('#autoCoachText').textContent.trim();
+  const text=[document.querySelector('#autoCoachText').textContent,document.querySelector('#charlesMessages').textContent].join('|').trim();
   const stamp=[card.dataset.state,card.dataset.tone,text].join('|');
   if(card.dataset.state!=='loading'){
    if(collapsed&&lastFeedback&&stamp!==lastFeedback&&text)unread=true;
@@ -936,7 +1030,7 @@ paint();paintAutomatic();
  }
  new MutationObserver(feedbackChanged).observe(card,{
   subtree:true,childList:true,characterData:true,attributes:true,
-  attributeFilter:['data-state','data-tone'],
+  attributeFilter:['data-state','data-tone','data-question-loading'],
  });
  if(window.ResizeObserver)new ResizeObserver(scheduleFit).observe(dock);
  window.addEventListener('resize',scheduleFit,{passive:true});

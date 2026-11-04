@@ -21,7 +21,22 @@ Materialpaket. Für diese Repositoryintegration wurde zusätzlich ein Fehler bei
 Neuladen außerhalb der Trainingsansicht behoben und der vollständige Lernweg in
 Edge und WebKit geprüft.
 
-Auf dem iPad empfiehlt sich ein normaler HTTPS-Aufruf, beispielsweise über GitHub Pages. Die Dateien-App-Vorschau kann JavaScript einschränken. Die HTML-Datei enthält KaTeX und alle Mathematikschriften; das lokale Training benötigt keine externen Laufzeitressourcen. Die automatische Lernbegleitung benötigt einen eingerichteten Cloudflare Worker und einen bestätigten fobizz-Zugang. Der frühere Tutor-Chat wurde aus der Oberfläche entfernt. Ein realer iPad-/Safari- und Offline-Gerätetest bleibt offen.
+Auf dem iPad empfiehlt sich ein normaler HTTPS-Aufruf, beispielsweise über GitHub Pages. Die Dateien-App-Vorschau kann JavaScript einschränken. Die HTML-Datei enthält KaTeX und alle Mathematikschriften; das lokale Training benötigt keine externen Laufzeitressourcen. Charles benötigt für automatische Rückmeldungen und direkte Fragen den eingerichteten Cloudflare Worker mit Workers AI. Ein realer iPad-/Safari- und Offline-Gerätetest bleibt offen.
+
+## Charles direkt fragen
+
+Die schwebende Box heißt **Charles**. Sie gibt kurze Rückmeldungen zu Lösungen,
+ermutigt zum Weiterrechnen und enthält ein eigenes Fragenfeld. Mit **Senden**
+oder Enter wird die Frage abgeschickt; Umschalt+Enter fügt eine neue Zeile ein.
+Charles kennt die sichtbare Aufgabe, den Rechenschritt und die eingegebenen Zahlen.
+In der Einführung bezieht er sich auf das veränderte Beispiel im Parabel-Labor.
+
+Bis zu drei Frage-Antwort-Paare stehen für Rückfragen zur Verfügung. Bei einem
+neuen Beispiel, Rechenschritt, Ansichtswechsel oder Neuladen wird das Gespräch
+geleert. Der Gesprächsverlauf wird nicht im lokalen Lernstand gespeichert.
+Eine Frage zu einer offenen Trainingsaufgabe zählt als Hilfe; reines Lob nicht.
+Das Fragenfeld bleibt am unteren Rand der Box erreichbar, der Verlauf scrollt.
+Charles kann weiterhin zu einem kleinen Punkt eingeklappt werden.
 
 ## Regler und Rückmeldungen in Version 3.2
 
@@ -79,7 +94,7 @@ Gültige ältere Stände werden migriert. Fertige alte Durchgänge behalten ihre
 
 ## Automatische Lernbegleitung
 
-Nach einer gültigen Antwort kann der Lernpfad automatisch einen Cloudflare Worker aufrufen. Dieser rechnet die verlangten Zahlen nach, fordert kurzes Feedback an und lässt den Tutor die nächste passende Aufgabe aus einem geprüften Kandidatenkatalog auswählen. Ein richtiger Schritt erhält kurzes Lob; eine falsche Rechnung einen Denkanstoß. Die laufende Aufgabe wird nicht ausgetauscht. Es gibt keinen Chatdialog und keinen Kopier-/Einfügeschritt mehr.
+Nach einer gültigen Antwort kann der Lernpfad automatisch einen Cloudflare Worker aufrufen. Dieser rechnet die verlangten Zahlen nach, fordert kurzes Feedback an und lässt Charles die nächste passende Aufgabe aus einem geprüften Kandidatenkatalog auswählen. Ein richtiger Schritt erhält kurzes Lob; eine falsche Rechnung einen Denkanstoß. Die laufende Aufgabe wird nicht ausgetauscht. Direkte Fragen sind ohne Kopier-/Einfügeschritt in derselben Box möglich.
 
 Die Rückmeldung erscheint in einer bildschirmfesten, einklappbaren Box rechts.
 Gültige Modellwahlen werden für die nächste Runde übernommen. Hinweise zur laufenden
@@ -89,12 +104,12 @@ beide Umwandlungsrichtungen und die Abschlussgrenzen bleiben erhalten.
 **Aktueller Betriebsstand:** Die automatische Aufgabenauswahl läuft über den
 bereitgestellten Cloudflare-Worker mit **Workers AI / Llama 3.3 70B**. Echte
 KI-Antworten bestimmen die Folgeaufgabe aus dem geprüften Pool. Die Oberfläche
-kennzeichnet sie als **KI-Lernbegleitung · Cloudflare**. Bei Fehlern und
+zeigt sie in der Box **Charles** an. Bei Fehlern und
 Zeitüberschreitungen bleibt die lokale Steuerung verfügbar. Der Worker wurde
 mit synthetischen Antworten live geprüft. Einrichtung: [WORKERS_AI.md](WORKERS_AI.md).
 
 Der vorgegebene freigegebene fobizz-Assistent ist zusätzlich über
-**fobizz-Lernhilfe öffnen** in der Trainingskarte und über den Seitenfuß erreichbar.
+**fobizz-Lernhilfe** im Seitenfuß erreichbar.
 Die Adresse steht als `assistantUrl` in `config.public.json`. Der Chat öffnet in
 einem neuen Tab; Aufgaben und Antworten werden nicht automatisch übertragen.
 Der Link wird erst beim Anklicken aufgerufen und benötigt keinen Cloudflare-Worker.
@@ -110,6 +125,7 @@ Bei Netzwerkfehlern oder nach dem Zeitlimit übernimmt die lokale Steuerung. Ver
 
 - `app.js`: Fachmodell, Lernverlauf, Eingaben, Speicherung und automatische Rückmeldungen.
 - `automatic.js`: Browsertransport und Sitzung.
+- `charles-chat.js`: direktes Fragenfeld, begrenzter Gesprächsverlauf und Kontextwechsel.
 - `coach-dock.js`: schwebende Lernbegleitung, Touch-Bedienung, Ansichtsspeicherung
   und Anpassung an den sichtbaren Bildschirmbereich.
 - `worker/`: Cloudflare Gateway, Fachvertrag und Connector-Anschluss.
