@@ -1,10 +1,34 @@
 # Automatischer Hintergrundtutor: Einrichtung
 
+> Frühere, optionale fobizz-API-Vorbereitung. Der aktive Tutor verwendet jetzt
+> Cloudflare Workers AI und ist live bereitgestellt. Aktuelle Einrichtung und
+> Prüfungen: [WORKERS_AI.md](WORKERS_AI.md). Die folgenden Angaben zur fehlenden
+> fobizz-Verbindung betreffen ausschließlich den früheren Providerweg.
+
 Version 3.0 · Stand 4. November 2026
 
 Der Lernpfad besitzt jetzt einen automatischen Ablauf über einen Cloudflare Worker. Die frühere Chat-Einbettung und das manuelle Kopieren von Anfragen wurden entfernt. Die KI wählt die folgende Aufgabe und liefert kurze Rückmeldungen; die Lernenden bedienen nur den Lernpfad.
 
-**Noch nicht live verbunden:** Für den vorhandenen öffentlichen fobizz-Tutor wurde keine unterstützte externe API dokumentiert oder bereitgestellt. In dieser Arbeitsumgebung fehlen außerdem die Cloudflare-Zugangsdaten. Deshalb wurde kein Produktions-Worker eingerichtet. Der konkrete fobizz-Protokolladapter muss nach einer bestätigten API-Dokumentation ergänzt werden. Die mitgelieferte HTML-Datei enthält zunächst eine leere Worker-Adresse und funktioniert mit der lokalen Aufgabensteuerung. Die automatischen Abläufe wurden mit einem ausdrücklich als Testanschluss implementierten Connector geprüft.
+**Noch nicht live mit fobizz verbunden:** Für den vorgegebenen öffentlichen fobizz-Tutor wurde keine unterstützte externe API dokumentiert oder bereitgestellt. Der konkrete fobizz-Protokolladapter muss nach einer bestätigten API-Dokumentation ergänzt werden. Die HTML-Datei enthält deshalb weiterhin eine leere Worker-Adresse und funktioniert mit der lokalen Aufgabensteuerung. Die automatischen Abläufe wurden mit einem ausdrücklich als Testanschluss implementierten Connector in der lokalen Cloudflare-Laufzeit geprüft. Der vorhandene Cloudflare-Kontozugang ist nutzbar.
+
+## Festgelegter Agent und Einfluss auf die Aufgaben
+
+`wrangler.jsonc` hinterlegt unter `FOBIZZ_ASSISTANT_ID` den vom Benutzer
+vorgegebenen Agenten **Adaptiver Mathematik-Tutor Klasse 9**:
+`8a017c8d-602b-4736-87ab-3d777f9a87a5`.
+Bei jedem Connectoraufruf ergänzt der Worker diese Kennung als `assistantId`.
+Sie stammt aus der Serverkonfiguration und lässt sich nicht durch ein Browserpaket
+ersetzen. Der Connector muss Anfragen tatsächlich an diesen Agenten richten.
+
+Die Agentenantwort `nextTaskId` legt eine konkrete Folgeaufgabe aus dem mitgesendeten
+Pool fest. Deren Richtung, Stufe, Vorfaktor und Zahlenwerte werden in den Trainer
+übernommen. Ein lokaler Lauf mit zwei unterschiedlichen Wahlen des Test-Connectors
+bestätigt zwei unterschiedliche Folgeaufgaben. Dies ist noch kein echter fobizz-Aufruf.
+
+`GET /api/status` zeigt zusätzlich `assistantId`, `selectionMode` und `missing`.
+`selectionMode: "agent"` erscheint erst mit eingerichtetem Connector,
+bestätigter API und Sitzungssecret. Ohne diese Einrichtung ist der Status
+`ready: false`, `selectionMode: "local"`; `missing` benennt die fehlenden Teile.
 
 ## Ablauf nach der Aktivierung
 
@@ -53,7 +77,10 @@ Content-Type: application/json
 
 Dieser Host ist nur die interne Adresse eines Service-Binding-Aufrufs. Er wird nicht öffentlich aufgelöst und ist keine erfundene fobizz-URL. Das aufzurufende Connector-Programm muss anhand der bestätigten Providerdokumentation implementiert werden. Es muss den vorhandenen fobizz-Tutor ansprechen, nicht stillschweigend einen anderen Anbieter verwenden. Zugangsdaten und etwaige Gesprächskennungen bleiben dort serverseitig.
 
-Der Worker sendet eine klare Anweisung, das nachgerechnete Ergebnis, den aktuellen Rechenschritt, höchstens die letzten zwölf Beobachtungen und einen begrenzten Aufgabenkatalog. Die Connector-Antwort muss auf dieses eigene Format abgebildet werden:
+Der Worker sendet die serverseitige `assistantId`, eine klare Anweisung,
+das nachgerechnete Ergebnis, den aktuellen Rechenschritt, höchstens die letzten
+zwölf Beobachtungen und einen begrenzten Aufgabenkatalog. Die Connector-Antwort
+muss auf dieses eigene Format abgebildet werden:
 
 ```json
 {"feedback":"Gut gemacht – du hast den äußeren Vorfaktor berücksichtigt.","nextTaskId":"C4"}
@@ -63,9 +90,12 @@ Der Worker sendet eine klare Anweisung, das nachgerechnete Ergebnis, den aktuell
 
 ## Einrichtung in VS Code / PowerShell
 
-Den Ordner `Quellen` aus dem Materialpaket öffnen. Die folgenden Befehle aus genau diesem Ordner ausführen. Eine aktuelle Node.js-Installation ist erforderlich; geprüft wurde mit Node.js 24.22.1.
+Im Material-Repository zunächst in den Quellordner des Trainers wechseln.
+Die folgenden Befehle aus diesem Ordner ausführen. Eine aktuelle
+Node.js-Installation ist erforderlich; geprüft wurde mit Node.js 24.22.1.
 
 ```powershell
+cd "C:\Users\johar\OneDrive\Schule\Material_Mathe\werkzeuge\formenwechsel"
 npm ci
 npm test
 npx wrangler login
@@ -109,7 +139,15 @@ Alternativ die tatsächlich ausgegebene Worker-URL beim Bauen übergeben:
 python build.py --worker-url https://DEIN-WORKER.DEINE-SUBDOMAIN.workers.dev
 ```
 
-`dist/index.html` anschließend über GitHub Pages bereitstellen. Die Datei ist eigenständig; alle Mathematikschriften sind enthalten. Für die Hintergrundanbindung ist eine Netzwerkverbindung erforderlich. Ohne konfigurierte Worker-Adresse findet keine automatische Übertragung statt. Ein lokaler `file://`-Aufruf mit konfigurierter API ist kein freigegebener Webursprung; hierfür die HTTPS-Seite verwenden.
+Im Material-Repository anschließend vom Stammordner aus
+`python werkzeuge/build_site.py` ausführen. Dieser Build erzeugt
+`klasse-9/02-funktionen/01-quadratische-funktionen/scheitelpunkt-trainer.html`
+einschließlich der Worker-Adresse und übernimmt sie nach `_site/`.
+Die Datei ist eigenständig; alle Mathematikschriften sind enthalten.
+Für die Hintergrundanbindung ist eine Netzwerkverbindung erforderlich.
+Ohne konfigurierte Worker-Adresse findet keine automatische Übertragung statt.
+Ein lokaler `file://`-Aufruf mit konfigurierter API ist kein freigegebener
+Webursprung; hierfür die HTTPS-Seite verwenden.
 
 Zum Prüfen von `GET /api/status` muss der erlaubte `Origin` mitgesendet werden. Eine erfolgreiche Konfiguration meldet `ready:true`. Danach einen richtigen und einen falschen Rechenschritt sowie einen vollständigen Aufgabenwechsel in der echten Seite prüfen. Erst das belegt den Live-Betrieb mit fobizz.
 

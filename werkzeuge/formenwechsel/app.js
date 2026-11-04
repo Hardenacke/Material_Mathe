@@ -4,6 +4,7 @@
 const $ = s => document.querySelector(s);
 const KEY = 'formenwechsel-k9-v1';
 const skills = ['expand','complete'];
+const onlineSource = source => ['fobizz','workers-ai'].includes(source);
 const names = {expand:'Ausmultiplizieren', complete:'Quadratisch ergänzen'};
 const fmt = n => {
   const s=String(n);
@@ -114,12 +115,12 @@ function newTask(){
   if(queued?.plan){
     const plan=queued.plan;
     if(validPlan(plan)&&plan.skill===skill&&plan.level-1<=level&&!avoid.includes(signature(plan))&&!(plan.level===3&&plan.p===0&&!state.records.some(r=>r.skill===skill&&r.level===2&&r.independent))){
-      Object.assign(task,{a:plan.a,p:plan.p,k:plan.k,b:2*plan.a*plan.p,c:plan.a*plan.p*plan.p+plan.k,level:plan.level-1,source:'fobizz',promptStyle:plan.promptStyle});
+      Object.assign(task,{a:plan.a,p:plan.p,k:plan.k,b:2*plan.a*plan.p,c:plan.a*plan.p*plan.p+plan.k,level:plan.level-1,source:onlineSource(queued.source)?queued.source:'fobizz',promptStyle:plan.promptStyle});
     }else task.coachNote='Der Vorschlag passt inzwischen nicht mehr zum Lernstand. Du erhältst eine geprüfte lokale Aufgabe.';
   }
   state.current=task;state.page='practice';state.revision++;pending=null;save();paint();window.scrollTo({top:0,behavior:'auto'});
   autoView={text:'',source:'local'};paintAutomatic();
-  if(task.source!=='fobizz'&&autoTransport.enabled)void automaticRequest('select');
+  if(!onlineSource(task.source)&&autoTransport.enabled)void automaticRequest('select');
 }
 function showPage(page){state.page=page;save();paint();window.scrollTo({top:0,behavior:'auto'});}
 function field(label,i,variable){return `<label class="field"><span>${label} ${tex(variable)}</span><div class="inputrow"><input id="v${i}" aria-label="${label} ${variable}" aria-describedby="preview${i} answerStatus${i}" aria-invalid="false" inputmode="decimal" autocomplete="off" maxlength="24"><button type="button" class="sign" data-sign="${i}" aria-label="Vorzeichen von ${variable} wechseln">${tex('\\pm')}</button></div><span class="answerState" id="answerStatus${i}" role="status" aria-live="polite"></span><output id="preview${i}" aria-label="Deine Eingabe"></output></label>`;}
@@ -194,15 +195,15 @@ function paintTask(){
   $('#phaseLabel').textContent=t.exit?'Dein Abschlusscheck':state.records.length>=state.total?'Deine Extrarunde':'Deine Trainingsrunde';
   $('#taskTitle').textContent=exp?'Entfalte die Klammer.':'Finde den Scheitelpunkt.';
   $('#directionLabel').textContent=exp?'Scheitelpunktform → Normalform':'Normalform → Scheitelpunktform';
-  $('#taskOrigin').hidden=t.source!=='fobizz'&&!t.coachNote;$('#taskOrigin').textContent=t.source==='fobizz'?'Vom Tutor ausgewählt · mathematisch geprüft':t.coachNote||'';
+  $('#taskOrigin').hidden=!onlineSource(t.source)&&!t.coachNote;$('#taskOrigin').textContent=onlineSource(t.source)?'Vom Tutor ausgewählt · mathematisch geprüft':t.coachNote||'';
   $('#levelName').textContent=['Basis · ganze Zahlen','Vertiefung · halbe Zahlen','Erweiterung · Vorfaktoren'][t.level];
   $('#taskFormula').innerHTML=tex(`f(x)=${exp?vertex(t.a,t.p,t.k):poly(t.a,t.b,t.c)}`,true);
   $('#targetFormula').innerHTML=exp?`Dein Ziel: ${tex(`f(x)=${term(t.a,'x^{2}',true)}+bx+c`)}`:`Dein Ziel: ${tex(`f(x)=${t.a===1?'':t.a===-1?'-':fmt(t.a)}(x-d)^{2}+e`)}`;
   $('#processBanner').hidden=!t.guided;
   if(t.guided){$('#processSteps').innerHTML=['Halbieren','Ergänzen & ausgleichen','Zusammensetzen'].map((label,i)=>`<span class="processStep ${i<stage||(t.solved&&!t.revealed)?'done':i===stage&&!t.solved?'active':''}">${i<stage||(t.solved&&!t.revealed)?'✓ ':''}${label}</span>`).join('');$('#processNote').innerHTML=stage===0?(t.a===1?'Bestimme den linearen Koeffizienten und seine Hälfte.':`Klammere zuerst ${tex(fmt(t.a))} aus den Termen mit ${tex('x')} aus. Bestimme dann den linearen Koeffizienten in dieser Klammer und seine Hälfte.`):stage===1?`Ergänze und subtrahiere innen dieselbe Zahl ${tex('z')}. Bestimme danach den Ausgleich ${tex('r=-az')} außerhalb der Klammer.`:'Setze die Scheitelpunktform zusammen. Denke an das Minus vor der ersten Scheitelkoordinate.';}
   $('#taskPrompt').textContent=t.guided&&stage<2?'Arbeite Schritt für Schritt. Prüfe deine Eingaben, um den nächsten Rechenschritt zu öffnen.':exp?'Multipliziere aus und fasse zusammen. Trage beide Koeffizienten mit Vorzeichen ein.':'Trage die Scheitelkoordinaten mit Vorzeichen ein. Vergleiche deine Klammer mit der Zielform.';
-  if(t.source==='fobizz'&&t.promptStyle==='check_signs')$('#taskPrompt').textContent+=' Achte besonders auf die Vorzeichen und einen äußeren Vorfaktor.';
-  if(t.source==='fobizz'&&t.promptStyle==='step_by_step')$('#taskPrompt').textContent+=' Notiere deine Zwischenschritte und prüfe jede Umformung.';
+  if(onlineSource(t.source)&&t.promptStyle==='check_signs')$('#taskPrompt').textContent+=' Achte besonders auf die Vorzeichen und einen äußeren Vorfaktor.';
+  if(onlineSource(t.source)&&t.promptStyle==='step_by_step')$('#taskPrompt').textContent+=' Notiere deine Zwischenschritte und prüfe jede Umformung.';
   if(t.guided&&stage===0)$('#fields').innerHTML=field(t.a===1?'Linearer Koeffizient':'Linearer Koeffizient nach Ausklammern',0,'B')+field('Hälfte des Koeffizienten',1,'p');
   else if(t.guided&&stage===1)$('#fields').innerHTML=field('Ergänzungszahl in der Klammer',0,'z')+field('Ausgleich außerhalb der Klammer',1,'r');
   else $('#fields').innerHTML=exp?field('Koeffizient',0,'b')+field('Konstante',1,'c'):field('Erste Scheitelkoordinate',0,'d')+field('Zweite Scheitelkoordinate',1,'e');
@@ -261,7 +262,7 @@ function finish(independent,revealed=false){
   if(independent){s.independent++;s.byLevel[t.level]++;s.streak=s.streak.map((n,l)=>l===t.level?n+1:0);s.level=t.level;if(s.streak[t.level]>=2)s.level=Math.min(2,t.level+1);}
   else{s.helped++;s.streak=[0,0,0];s.level=Math.max(0,t.level-1);}
   t.milestone=independent&&s.level>previous?'Deine neuen sicheren Lösungen öffnen die nächste Anforderung.':t.guided&&!revealed?'Halbiert, ergänzt und ausgeglichen: Du hast alle Rechenschritte geprüft.':revealed?'':'Du hast diese Umwandlung erfolgreich geprüft.';
-  state.records.push({skill:t.skill,level:t.level,independent,attempts:t.attempts,hints:t.hints,revealed,exit:t.exit,errors:[...new Set(t.errors)],guided:t.guided,processChecked:t.guided&&!revealed&&t.stepsDone.every(Boolean),signature:signature(t),aiAssisted:!!t.aiAssisted,source:t.source==='fobizz'?'fobizz':'local'});
+  state.records.push({skill:t.skill,level:t.level,independent,attempts:t.attempts,hints:t.hints,revealed,exit:t.exit,errors:[...new Set(t.errors)],guided:t.guided,processChecked:t.guided&&!revealed&&t.stepsDone.every(Boolean),signature:signature(t),aiAssisted:!!t.aiAssisted,source:onlineSource(t.source)?t.source:'local'});
   state.revision++;pending=null;save();paint();$('#nextTask').focus();
 }
 function check(){
@@ -301,8 +302,8 @@ function automaticTask(){const t=state.current;return t?{id:t.id,skill:t.skill,l
 function automaticPacket(event,task){return {schemaVersion:3,requestId:uid(),revision:state.revision,event,task,finished:event!=='select'&&!!state.current?.solved,records:state.records.slice(0,200).map(r=>({skill:r.skill,level:r.level,independent:r.independent,hints:r.hints,revealed:r.revealed,exit:r.exit,aiAssisted:!!r.aiAssisted,signature:r.signature||''})),practiceLimit:state.practiceLimit};}
 function paintAutomatic(){
  const t=state.current;
- shortMathText($('#autoCoachText'),autoView.text||(autoTransport.enabled?'Nach dem Prüfen erhältst du eine kurze Rückmeldung. Dein Tutor wählt passende Folgeaufgaben.':'Du übst mit den integrierten Hinweisen. Die Online-Lernbegleitung ist hier noch nicht verbunden.'));
- $('#autoCoachSource').textContent=autoBusy?'Dein Tutor schaut auf deinen Rechenschritt …':autoView.source==='fobizz'?'Rückmeldung deines Tutors':autoTransport.enabled?'Integrierte Rückmeldung · Tutor bei Bedarf erreichbar':'Integrierte Lernbegleitung';
+ shortMathText($('#autoCoachText'),autoView.text||(autoTransport.enabled?'Nach dem Prüfen erhältst du eine kurze Rückmeldung. Dein Tutor wählt passende Folgeaufgaben.':autoConfig.assistantUrl?'Hier erhältst du Rückmeldungen zu deinen Eingaben. Für weitere Fragen öffne die fobizz-Lernhilfe.':'Du übst mit den integrierten Hinweisen. Die Online-Lernbegleitung ist hier noch nicht verbunden.'));
+ $('#autoCoachSource').textContent=autoBusy?'Dein Tutor schaut auf deinen Rechenschritt …':autoView.source==='workers-ai'?'KI-Lernbegleitung · Cloudflare':onlineSource(autoView.source)?'Rückmeldung deines Tutors':autoTransport.enabled?'Integrierte Rückmeldung · Tutor bei Bedarf erreichbar':'Integrierte Lernbegleitung';
  $('#autoCoachCard').dataset.state=autoBusy?'loading':autoView.source;
  $('#autoCoachCard').dataset.tone=autoView.tone||'neutral';$('#autoCoachIcon').textContent=autoView.tone==='correct'?'✓':autoView.tone==='incorrect'?'!':'✦';
  if(t&&state.page==='practice'){$('#nextTask').disabled=autoBusy;$('#check').disabled=t.solved||autoSelecting;for(const id of ['#v0','#v1'])$(id).disabled=t.solved||autoSelecting;$('#hint').disabled=t.solved||t.hints>=2||autoSelecting;$('#worked').disabled=autoSelecting;}
@@ -338,13 +339,13 @@ async function automaticRequest(event,submitted=null){
   if(event==='checked'&&r.feedbackKind!==(correct?'praise':'hint'))throw Error('INVALID_FEEDBACK_KIND');
   if(selection){
    const old=state.current,p=r.taskPlan;
-   Object.assign(old,{skill:p.skill,level:p.level-1,a:p.a,p:p.p,k:p.k,b:2*p.a*p.p,c:p.a*p.p*p.p+p.k,source:'fobizz',promptStyle:p.promptStyle,guided:p.skill==='complete'&&!old.exit,stage:p.skill==='complete'&&!old.exit?0:2});
+   Object.assign(old,{skill:p.skill,level:p.level-1,a:p.a,p:p.p,k:p.k,b:2*p.a*p.p,c:p.a*p.p*p.p+p.k,source:r.source,promptStyle:p.promptStyle,guided:p.skill==='complete'&&!old.exit,stage:p.skill==='complete'&&!old.exit?0:2});
    state.revision++;save();paintTask();
-  }else if(r.taskPlan)state.queue={focus:r.taskPlan.skill,level:r.taskPlan.level-1,challenge:'maintain',plan:r.taskPlan,automatic:true};
+  }else if(r.taskPlan)state.queue={focus:r.taskPlan.skill,level:r.taskPlan.level-1,challenge:'maintain',plan:r.taskPlan,automatic:true,source:r.source};
   if(!selection&&r.feedbackKind==='hint'&&state.current&&!state.current.solved)state.current.aiAssisted=true;
-  autoView={text:r.feedback,source:'fobizz',tone:event==='checked'?(correct?'correct':'incorrect'):'neutral'};save();
+  autoView={text:r.feedback,source:r.source,tone:event==='checked'?(correct?'correct':'incorrect'):'neutral'};save();
  }catch(e){if(gen===autoGeneration)autoView={text:selection?'Deine nächste Aufgabe ist bereit. Heute übernimmt die integrierte Aufgabensteuerung.':localFeedback||'Die integrierte Prüfung gilt weiter. Du kannst weiterüben.',source:'local',tone:selection?'neutral':localTone};}
- finally{if(gen===autoGeneration){autoBusy=false;autoSelecting=false;paintAutomatic();if(autoView.source==='fobizz')shortMathText($('#autoCoachText'),autoView.text);}}
+ finally{if(gen===autoGeneration){autoBusy=false;autoSelecting=false;paintAutomatic();if(onlineSource(autoView.source))shortMathText($('#autoCoachText'),autoView.text);}}
 }
 function checkWithTutor(){
  if(autoSelecting)return;

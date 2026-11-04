@@ -1,5 +1,5 @@
 import { Problem,validateRequest,analyse,candidates,providerPrompt,parseProvider } from './domain.mjs';
-import { callFobizz,providerReady } from './fobizz-adapter.mjs';
+import { callCoach,providerReady,providerProblems,providerName,providerDetails } from './coach.mjs';
 const json=(data,status=200,headers={})=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store',...headers}});
 const enc=new TextEncoder();
 const b64=bytes=>btoa(String.fromCharCode(...bytes)).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');
@@ -18,14 +18,20 @@ async function body(request,max=24000){
 }
 function origins(env){return (env.ALLOWED_ORIGINS||'').split(',').map(x=>x.trim()).filter(Boolean);}
 function configured(env){return providerReady(env)&&typeof env.SESSION_SECRET==='string'&&env.SESSION_SECRET.length>=32&&origins(env).length>0;}
+function status(env){
+ const missing=providerProblems(env);
+ if(typeof env.SESSION_SECRET!=='string'||env.SESSION_SECRET.length<32)missing.push('SESSION_SECRET');
+ const ready=configured(env);
+ return {schemaVersion:3,ready,provider:ready?providerName(env):null,...providerDetails(env),selectionMode:ready?'agent':'local',missing};
+}
 export default {async fetch(request,env){
  const origin=request.headers.get('origin')||'',url=new URL(request.url);let response;
  const cors={'access-control-allow-origin':origin,'access-control-allow-methods':'POST, GET, OPTIONS','access-control-allow-headers':'Content-Type, Authorization','access-control-max-age':'600','vary':'Origin','x-content-type-options':'nosniff'};
  try{
   if(!origins(env).includes(origin))throw new Problem('ORIGIN_NOT_ALLOWED',403);
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers:cors});
-  if(url.pathname==='/api/status'&&request.method==='GET')return json({schemaVersion:3,ready:configured(env),provider:configured(env)?'fobizz':null},200,cors);
-  if(!configured(env))throw new Problem('FOBIZZ_NOT_CONFIGURED',503);
+  if(url.pathname==='/api/status'&&request.method==='GET')return json(status(env),200,cors);
+  if(!configured(env))throw new Problem('COACH_NOT_CONFIGURED',503);
   if(request.method!=='POST')throw new Problem('METHOD_NOT_ALLOWED',405);
   const gate=env.COACH_GATE.get(env.COACH_GATE.idFromName('global'));
   if(url.pathname==='/api/session'){
@@ -85,9 +91,9 @@ export class CoachSession {
    try{
     const gate=this.env.COACH_GATE.get(this.env.COACH_GATE.idFromName('global'));
     const quota=await gate.fetch(new Request('https://gate.internal/call',{method:'POST',body:'{}'}));if(!quota.ok)throw new Problem('QUOTA_REACHED',429);
-    const observation=analyse(x),choices=candidates(x),raw=await callFobizz(providerPrompt(x,observation,choices),this.env);
-    result={schemaVersion:3,requestId:x.requestId,sequence:x.sequence,revision:x.revision,source:'fobizz',...parseProvider(raw,choices,observation)};
-   }catch(e){status=e instanceof Problem?e.status:502;result={error:e instanceof Problem?e.code:'FOBIZZ_UNAVAILABLE'};}
+    const observation=analyse(x),choices=candidates(x),raw=await callCoach(providerPrompt(x,observation,choices),this.env);
+    result={schemaVersion:3,requestId:x.requestId,sequence:x.sequence,revision:x.revision,source:providerName(this.env),...parseProvider(raw,choices,observation)};
+   }catch(e){status=e instanceof Problem?e.status:502;result={error:e instanceof Problem?e.code:'COACH_UNAVAILABLE'};}
    const stale=await this.ctx.storage.transaction(async tx=>{const s=await tx.get('state');if(!s||s.sequence!==x.sequence)return true;s.cache[x.requestId]={hash,status:'done',sequence:x.sequence,body:result,httpStatus:status};await tx.put('state',s);return false;});
    if(stale)throw new Problem('STALE_RESPONSE',409);
    return json(result,status);

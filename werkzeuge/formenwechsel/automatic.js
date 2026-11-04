@@ -20,7 +20,7 @@
     if(r.status===401){session=null;try{storage?.removeItem(storageKey);}catch{}}
     if(!r.ok||r.status===202)throw Error('COACH_UNAVAILABLE');
     const result=await r.json();if(epoch!==generation)throw Error('CANCELLED');
-    if(result.schemaVersion!==3||result.requestId!==body.requestId||result.sequence!==sequence||result.revision!==body.revision||result.source!=='fobizz'||typeof result.feedback!=='string'||!result.feedback.trim()||result.feedback.length>220||!['hint','praise','encouragement'].includes(result.feedbackKind))throw Error('INVALID_RESPONSE');
+    if(result.schemaVersion!==3||result.requestId!==body.requestId||result.sequence!==sequence||result.revision!==body.revision||!['fobizz','workers-ai'].includes(result.source)||(config.provider&&result.source!==config.provider)||typeof result.feedback!=='string'||!result.feedback.trim()||result.feedback.length>220||!['hint','praise','encouragement'].includes(result.feedbackKind))throw Error('INVALID_RESPONSE');
     return result;
    }finally{clearTimeout(timer);}
   }

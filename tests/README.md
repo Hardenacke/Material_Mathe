@@ -6,6 +6,14 @@ unter `werkzeuge/formenwechsel/tests/` prüfen Rückmeldungen und den optionalen
 Transport. `python tests/run_formenwechsel_browser.py` prüft in Edge und WebKit
 den Katalogaufruf, den vollständigen Lernweg, Fortsetzen nach Neuladen, Hilfen,
 Neustart und Bildschirmbreiten 390/768/1024 Pixel ohne externe Dienste.
+`python tests/run_formenwechsel_mobile_browser.py` prüft in beiden Browsern acht
+Touch-Ansichten einschließlich iPad-Hoch-/Querformat, Split View, schwebender
+Feedbackbox, Punkt, neuen Rückmeldungen, gespeicherter Ansicht und einer simulierten
+Bildschirmtastatur. Dafür werden keine KI-Aufrufe benötigt.
+`python tests/run_formenwechsel_ai_browser.py` prüft die vorbereiteten Pages-Dateien
+gegen den echten Cloudflare-KI-Worker: vollständiger Durchgang in Edge und
+Folgeaufgabenübernahme in WebKit. `node werkzeuge/formenwechsel/scripts/check-live.mjs`
+prüft die Live-Kette mit synthetischen Antworten. Beide verwenden echte KI-Aufrufe.
 Details: [FORMENWECHSEL.md](../dokumentation/FORMENWECHSEL.md).
 
 `npm.cmd --prefix werkzeuge/adaptive_lernpfade test` prüft die adaptiven Aufgaben,

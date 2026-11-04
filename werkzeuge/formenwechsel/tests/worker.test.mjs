@@ -7,16 +7,49 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {fileURLToPath} from 'node:url';
 import {validateRequest,analyse,candidates,parseProvider,validPlan,expected} from '../worker/domain.mjs';
 const origin='https://hardenacke.github.io';
+const selectedAssistant='8a017c8d-602b-4736-87ab-3d777f9a87a5';
 const base={schemaVersion:3,requestId:'request-00001',sequence:1,revision:1,event:'select',task:null,finished:false,records:[],practiceLimit:10};
 const task={id:'task-0001',skill:'complete',level:3,a:-2,p:3,k:-5,promptStyle:'standard',guided:true,stage:1,answers:[9,18],hints:0,failures:0};
 let calls=0,mode='ok',releaseProvider,notifyStarted;
-const options={modules:['index.mjs','domain.mjs','fobizz-adapter.mjs'].map(name=>({type:'ESModule',path:fileURLToPath(new URL('../worker/'+name,import.meta.url))})),compatibilityDate:'2026-11-04'};
+const options={modules:['index.mjs','domain.mjs','fobizz-adapter.mjs','coach.mjs','workers-ai.mjs'].map(name=>({type:'ESModule',path:fileURLToPath(new URL('../worker/'+name,import.meta.url))})),compatibilityDate:'2026-11-04'};
 const setup=x=>new Miniflare(convertV4MiniflareOptions(x));
-const mf=setup({workers:[{...options,durableObjects:{COACH_SESSIONS:{className:'CoachSession',useSQLite:true},COACH_GATE:{className:'CoachGate',useSQLite:true}},bindings:{ALLOWED_ORIGINS:origin,FOBIZZ_API_CONFIRMED:'true',SESSION_SECRET:'test-only-not-a-real-secret-0123456789',MAX_PROVIDER_CALLS_PER_DAY:'40'},serviceBindings:{FOBIZZ_CONNECTOR:async req=>{calls++;const p=await req.json();if(mode==='hold'){notifyStarted?.();await new Promise(r=>releaseProvider=r);}if(mode==='error')return new Response('failure',{status:500});if(mode==='malformed')return Response.json({feedback:'<img>',nextTaskId:'not-allowed'});return Response.json({feedback:p.observation.correct===false?'Prüfe beim äußeren Ausgleich auch den Vorfaktor.':'Gut gemacht – dein Rechenschritt stimmt.',nextTaskId:p.candidates.at(-1)?.id||null});}}}]});
+const mf=setup({workers:[{...options,durableObjects:{COACH_SESSIONS:{className:'CoachSession',useSQLite:true},COACH_GATE:{className:'CoachGate',useSQLite:true}},bindings:{ALLOWED_ORIGINS:origin,FOBIZZ_ASSISTANT_ID:selectedAssistant,FOBIZZ_API_CONFIRMED:'true',SESSION_SECRET:'test-only-not-a-real-secret-0123456789',MAX_PROVIDER_CALLS_PER_DAY:'40'},serviceBindings:{FOBIZZ_CONNECTOR:async req=>{calls++;const p=await req.json();assert.equal(p.assistantId,selectedAssistant);if(mode==='hold'){notifyStarted?.();await new Promise(r=>releaseProvider=r);}if(mode==='error')return new Response('failure',{status:500});if(mode==='malformed')return Response.json({feedback:'<img>',nextTaskId:'not-allowed'});return Response.json({feedback:p.observation.correct===false?'Prüfe beim äußeren Ausgleich auch den Vorfaktor.':'Gut gemacht – dein Rechenschritt stimmt.',nextTaskId:(mode==='first'?p.candidates[0]:p.candidates.at(-1))?.id||null});}}}]});
 test.after(async()=>mf.dispose());
 async function api(path,body,token,extra={}){return mf.dispatchFetch('http://localhost'+path,{method:body?'POST':'GET',headers:{origin,'content-type':'application/json',...(token?{authorization:'Bearer '+token}:{}),...extra},...(body?{body:JSON.stringify(body)}:{})});}
 async function session(){const r=await api('/api/session',{});assert.equal(r.status,200);return (await r.json()).token;}
 let token;
+
+test('Status nennt den serverseitig festgelegten Assistenten und aktive Aufgabensteuerung',async()=>{
+ const response=await api('/api/status');
+ const result=await response.json();
+ assert.equal(result.assistantId,selectedAssistant);
+ assert.equal(result.selectionMode,'agent');
+ assert.deepEqual(result.missing,[]);
+});
+
+test('Zwei verschiedene Wahlen des Test-Connectors führen zu verschiedenen Folgeaufgaben',async()=>{
+ const t=await session(),choices=candidates(base);
+ try{
+  mode='first';
+  const first=await (await api('/api/coach/automatic',{...base,requestId:'choice-first'},t)).json();
+  mode='ok';
+  const last=await (await api('/api/coach/automatic',{...base,requestId:'choice-last',sequence:2},t)).json();
+  assert.deepEqual(first.taskPlan,choices[0].plan);
+  assert.deepEqual(last.taskPlan,choices.at(-1).plan);
+  assert.notDeepEqual(first.taskPlan,last.taskPlan);
+ }finally{mode='ok';}
+});
+
+test('Produktionsvorbereitung nennt fehlende Anbindung ohne einen aktiven Agenten vorzutäuschen',async()=>{
+ const off=setup({workers:[{...options,bindings:{ALLOWED_ORIGINS:origin,FOBIZZ_ASSISTANT_ID:selectedAssistant,FOBIZZ_API_CONFIRMED:'false'}}]});
+ try{
+  const r=await off.dispatchFetch('http://localhost/api/status',{headers:{origin}}),s=await r.json();
+  assert.equal(s.assistantId,selectedAssistant);
+  assert.equal(s.ready,false);
+  assert.equal(s.selectionMode,'local');
+  assert.deepEqual(s.missing,['FOBIZZ_API_CONFIRMED','FOBIZZ_CONNECTOR','SESSION_SECRET']);
+ }finally{await off.dispose();}
+});
 test('Echte workerd-Laufzeit: Status und Sitzung mit CORS',async()=>{const r=await api('/api/status');assert.equal(r.status,200);assert.equal((await r.json()).ready,true);assert.equal(r.headers.get('access-control-allow-origin'),origin);token=await session();});
 test('Tutor wählt tatsächlich die letzte angebotene Aufgabe',async()=>{const r=await api('/api/coach/automatic',base,token);assert.equal(r.status,200);const data=await r.json();assert.deepEqual(data.taskPlan,candidates(base).at(-1).plan);assert.equal(data.source,'fobizz');assert(validPlan(data.taskPlan));});
 test('Wiederholung derselben Anfrage verursacht keinen zweiten Modellaufruf',async()=>{const before=calls;const r=await api('/api/coach/automatic',base,token);assert.equal(r.status,200);assert.equal(calls,before);});
@@ -42,4 +75,4 @@ test('Gesamtkette: HTML-Logik, echter Transport, echter Worker, Tutor-Auswahl un
  assert.equal(b.api.getState().queue.automatic,true);b.click('#nextTask');assert.equal(b.api.getState().current.source,'fobizz');assert.equal(trace.filter(u=>u.endsWith('/api/session')).length,1);assert(trace.filter(u=>u.endsWith('/api/coach/automatic')).length>=3);
 });
 test('Gemeinsames Tageskontingent gilt über verschiedene Sitzungen hinweg',async()=>{const before=calls,gate=await mf.getDurableObjectNamespace('COACH_GATE'),stub=gate.get(gate.idFromName('global'));let denied=false;for(let i=0;i<45;i++){const r=await stub.fetch('https://gate.internal/call',{method:'POST',body:'{}'});if(r.status===429){denied=true;break;}}assert(denied);assert.equal(calls,before);});
-test('Nicht konfigurierte Produktion bleibt geschlossen',async()=>{const off=setup({workers:[{...options,bindings:{ALLOWED_ORIGINS:origin,FOBIZZ_API_CONFIRMED:'false'}}]});try{const r=await off.dispatchFetch('http://localhost/api/session',{method:'POST',headers:{origin}});assert.equal(r.status,503);assert.equal((await r.json()).error,'FOBIZZ_NOT_CONFIGURED');}finally{await off.dispose();}});
+test('Nicht konfigurierte Produktion bleibt geschlossen',async()=>{const off=setup({workers:[{...options,bindings:{ALLOWED_ORIGINS:origin,FOBIZZ_API_CONFIRMED:'false'}}]});try{const r=await off.dispatchFetch('http://localhost/api/session',{method:'POST',headers:{origin}});assert.equal(r.status,503);assert.equal((await r.json()).error,'COACH_NOT_CONFIGURED');}finally{await off.dispose();}});

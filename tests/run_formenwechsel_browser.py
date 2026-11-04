@@ -3,9 +3,12 @@ import argparse
 from fractions import Fraction
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+import json
 import os
 from pathlib import Path
+import re
 from threading import Thread
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 if (ROOT / ".local/playwright-browsers").exists():
@@ -14,11 +17,27 @@ from playwright.sync_api import expect, sync_playwright
 
 TRAINER = "klasse-9/02-funktionen/01-quadratische-funktionen/scheitelpunkt-trainer.html"
 CATALOG = "index.html#/klasse-9/02-funktionen/lernpfade"
+ASSISTANT_URL = json.loads((ROOT / "werkzeuge/formenwechsel/config.public.json").read_text(encoding="utf-8"))["assistantUrl"]
 
 
 class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
         self.path = self.path.removeprefix("/material-mathe")
+        if urlsplit(self.path).path.lstrip("/") == TRAINER:
+            # Dieser Test prüft ausdrücklich den lokalen Betrieb ohne KI-Netzwerk.
+            content = (ROOT / "_site" / TRAINER).read_text(encoding="utf-8")
+            def offline(match):
+                config = json.loads(match[2])
+                config["workerUrl"] = ""
+                return match[1] + json.dumps(config) + match[3]
+            content = re.sub(r'(<script type="application/json" id="coachConfig">)(.*?)(</script>)', offline, content, flags=re.S)
+            data = content.encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+            return
         super().do_GET()
 
     def log_message(self, *_args):
@@ -76,6 +95,7 @@ def run_flow(browser, engine, base, output):
         expect(link).to_have_count(1)
         link.click()
         expect(page.locator("#intro")).to_be_visible()
+        expect(page.locator(".fobizzFooterLink")).to_have_attribute("href", ASSISTANT_URL)
         expect(page.locator("#sammlung-navigation a").first).to_have_attribute("href", base + CATALOG)
         assert page.locator(".katex").count() > 20
         no_overflow(page)
@@ -100,6 +120,22 @@ def run_flow(browser, engine, base, output):
 
         page.locator("#resume").click()
         expect(page.locator("#practice")).to_be_visible()
+        assistant = page.locator(".fobizzLink")
+        page.locator(".fobizzHelp summary").click()
+        expect(assistant).to_have_attribute("href", ASSISTANT_URL)
+        expect(assistant).to_have_attribute("target", "_blank")
+        expect(assistant).to_have_attribute("rel", "noopener noreferrer")
+        # Nur das Linkziel pruefen; keine Anfrage oder Nachricht an fobizz senden.
+        before_assistant = state(page)
+        context.route(ASSISTANT_URL, lambda route: route.fulfill(status=200, content_type="text/html", body="<title>Testziel</title>"))
+        with page.expect_popup() as opened:
+            assistant.click()
+        popup = opened.value
+        popup.wait_for_load_state()
+        assert popup.url == ASSISTANT_URL
+        popup.close()
+        context.unroute(ASSISTANT_URL)
+        assert state(page) == before_assistant
         page.locator("#check").click()
         assert state(page)["current"]["attempts"] == 0
         expect(page.locator("#v0")).to_have_attribute("data-verdict", "invalid")
@@ -181,7 +217,7 @@ def run_flow(browser, engine, base, output):
         expect(page.locator(f'.file-link[href*="{TRAINER}"]')).to_have_count(1)
         assert not errors, errors
         assert not remote, remote
-        print(f"PASS {engine}: Katalog, Regler, Hilfen, 12 Aufgaben, Reload, Extrarunde, Reset und 390/768/1024 px; keine externen Aufrufe.")
+        print(f"PASS {engine}: Katalog, fobizz-Linkziel (abgefangen), Regler, Hilfen, 12 Aufgaben, Reload, Extrarunde, Reset und 390/768/1024 px; keine externen Aufrufe.")
     finally:
         context.close()
 

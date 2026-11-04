@@ -1,1 +1,6 @@
-{"workerUrl":"","timeoutMs":9000}
+{
+  "workerUrl": "https://formenwechsel-tutor.physik-wettkampf-api.workers.dev",
+  "timeoutMs": 12000,
+  "provider": "workers-ai",
+  "assistantUrl": "https://app.fobizz.com/ai/chats/public_assistants/8a017c8d-602b-4736-87ab-3d777f9a87a5?token=8a45d8548e03e78a3d576f8c130449d3"
+}

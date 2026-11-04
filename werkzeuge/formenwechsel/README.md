@@ -37,7 +37,12 @@ Ein neues Farbsystem aus Dunkelblau, Grün und Lavendel, größere Formelbereich
 
 Das Parabel-Labor zeigt die Normalform und die Scheitelpunktform desselben veränderbaren Beispiels gleichzeitig. Scheitelpunkt, Hilfslinien und ein feineres Koordinatengitter unterstützen die Zuordnung. Der Achsenausschnitt bleibt beim Verändern gleich, damit die Bewegung der Parabel vergleichbar bleibt. Die Darstellung enthält keine Vorschau der Lösung einer aktiven Trainingsaufgabe.
 
-Die Rückmeldung bleibt rechts beziehungsweise in schmaler Ansicht oberhalb der Aufgabe erreichbar. Die schmale Gestaltung und die Vorzeichenknöpfe wurden im Browser geprüft. Ein physischer iPad-/Safari-Test ist damit nicht ersetzt.
+Die Rückmeldung bleibt jetzt als schwebende Box am Bildschirmrand erreichbar.
+Sie lässt sich zu einem kleinen Punkt einklappen und wieder öffnen. Neue
+Rückmeldungen werden am Punkt angezeigt; die gewählte Ansicht wird gespeichert.
+Breite und Höhe passen sich auch bei Drehung, Split View und veränderter sichtbarer
+Bildschirmhöhe an. Die Touch-Gestaltung wurde in Edge und WebKit geprüft.
+Ein physischer iPad-/Safari-Test ist damit nicht ersetzt.
 
 ## Ziel und Ablauf
 
@@ -76,11 +81,28 @@ Gültige ältere Stände werden migriert. Fertige alte Durchgänge behalten ihre
 
 Nach einer gültigen Antwort kann der Lernpfad automatisch einen Cloudflare Worker aufrufen. Dieser rechnet die verlangten Zahlen nach, fordert kurzes Feedback an und lässt den Tutor die nächste passende Aufgabe aus einem geprüften Kandidatenkatalog auswählen. Ein richtiger Schritt erhält kurzes Lob; eine falsche Rechnung einen Denkanstoß. Die laufende Aufgabe wird nicht ausgetauscht. Es gibt keinen Chatdialog und keinen Kopier-/Einfügeschritt mehr.
 
-Die Rückmeldung erscheint in einer kleinen Karte rechts; in schmalen Ansichten steht sie über der Aufgabe und bleibt beim Scrollen erreichbar. Gültige Modellwahlen werden für die nächste Runde übernommen. Hinweise zur laufenden Bearbeitung zählen als Hilfe, bestätigendes Lob nicht. Die bisherige unabhängige Aufgabenprüfung, beide Umwandlungsrichtungen und die Abschlussgrenzen bleiben erhalten.
+Die Rückmeldung erscheint in einer bildschirmfesten, einklappbaren Box rechts.
+Gültige Modellwahlen werden für die nächste Runde übernommen. Hinweise zur laufenden
+Bearbeitung zählen als Hilfe, bestätigendes Lob nicht. Die unabhängige Aufgabenprüfung,
+beide Umwandlungsrichtungen und die Abschlussgrenzen bleiben erhalten.
 
-**Aktueller Betriebsstand:** Die automatische Browser-/Worker-Kette ist implementiert und in der lokalen Cloudflare-Laufzeit mit einem Test-Connector geprüft. Ein tatsächlicher externer fobizz-API-Zugang ist für den geteilten Tutor nicht bestätigt. Cloudflare wurde nicht produktiv eingerichtet. Die ausgelieferte HTML-Datei enthält deshalb eine leere Worker-Adresse und verwendet die örtliche Aufgabensteuerung; sie behauptet keine aktive KI-Verbindung.
+**Aktueller Betriebsstand:** Die automatische Aufgabenauswahl läuft über den
+bereitgestellten Cloudflare-Worker mit **Workers AI / Llama 3.3 70B**. Echte
+KI-Antworten bestimmen die Folgeaufgabe aus dem geprüften Pool. Die Oberfläche
+kennzeichnet sie als **KI-Lernbegleitung · Cloudflare**. Bei Fehlern und
+Zeitüberschreitungen bleibt die lokale Steuerung verfügbar. Der Worker wurde
+mit synthetischen Antworten live geprüft. Einrichtung: [WORKERS_AI.md](WORKERS_AI.md).
 
-Die vollständige Einrichtung steht in `Einrichtung_Cloudflare_fobizz.md`. Nach Anbindung des bestätigten Connectors wird die tatsächliche Worker-Adresse in `config.public.json` eingetragen und die HTML-Datei neu gebaut. Secrets gehören ausschließlich auf den Server. Die alte öffentliche Tutor-URL ist nicht mehr im HTML enthalten.
+Der vorgegebene freigegebene fobizz-Assistent ist zusätzlich über
+**fobizz-Lernhilfe öffnen** in der Trainingskarte und über den Seitenfuß erreichbar.
+Die Adresse steht als `assistantUrl` in `config.public.json`. Der Chat öffnet in
+einem neuen Tab; Aufgaben und Antworten werden nicht automatisch übertragen.
+Der Link wird erst beim Anklicken aufgerufen und benötigt keinen Cloudflare-Worker.
+
+Die aktive Verbindung ist in `config.public.json` und `wrangler.jsonc` eingerichtet.
+Secrets gehören ausschließlich auf den Server. `Einrichtung_Cloudflare_fobizz.md`
+beschreibt die frühere, optionale fobizz-API-Vorbereitung. Der öffentliche
+Freigabelink ist kein API-Schlüssel.
 
 Bei Netzwerkfehlern oder nach dem Zeitlimit übernimmt die lokale Steuerung. Verspätete Rückmeldungen werden nicht auf geänderte Eingaben angewendet. Der Browser speichert keine serverseitigen Provider-Schlüssel. Es werden keine Namen oder Klassenlisten verlangt. Die eigene technische Sitzung ist keine überprüfte schulische Identität und die lokal veränderbare Übungshistorie kein Notenbuch.
 
@@ -88,6 +110,8 @@ Bei Netzwerkfehlern oder nach dem Zeitlimit übernimmt die lokale Steuerung. Ver
 
 - `app.js`: Fachmodell, Lernverlauf, Eingaben, Speicherung und automatische Rückmeldungen.
 - `automatic.js`: Browsertransport und Sitzung.
+- `coach-dock.js`: schwebende Lernbegleitung, Touch-Bedienung, Ansichtsspeicherung
+  und Anpassung an den sichtbaren Bildschirmbereich.
 - `worker/`: Cloudflare Gateway, Fachvertrag und Connector-Anschluss.
 - `template.html`: Struktur der Oberfläche.
 - `design.css`: vollständiges responsives Design; wird beim Build in die HTML-Datei eingebettet.

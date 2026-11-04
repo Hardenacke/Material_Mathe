@@ -6,10 +6,12 @@
   "workers_dev": true,
   "vars": {
     "ALLOWED_ORIGINS": "https://hardenacke.github.io",
-    "FOBIZZ_API_CONFIRMED": "false",
+    "COACH_PROVIDER": "workers-ai",
+    "AI_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
     "MAX_PROVIDER_CALLS_PER_DAY": "500",
     "MAX_SESSIONS_PER_HOUR": "200"
   },
+  "ai": {"binding":"AI"},
   "durable_objects": {"bindings": [
     {"name":"COACH_SESSIONS","class_name":"CoachSession"},
     {"name":"COACH_GATE","class_name":"CoachGate"}
