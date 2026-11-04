@@ -4,9 +4,9 @@
   "version": 1,
   "periodId": "2026-10",
   "instanceId": "cc5d0a88-fc07-49b2-9532-cedb45e088ef",
-  "revision": 2,
-  "final": false,
-  "generatedAt": 1793125575454,
+  "revision": 3,
+  "final": true,
+  "generatedAt": 1793487600367,
   "leaderboard": [
     {
       "rank": 1,
