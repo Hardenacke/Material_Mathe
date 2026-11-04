@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "formenwechsel-tutor",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2026-11-04",
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "https://hardenacke.github.io",
+    "FOBIZZ_API_CONFIRMED": "false",
+    "MAX_PROVIDER_CALLS_PER_DAY": "500",
+    "MAX_SESSIONS_PER_HOUR": "200"
+  },
+  "durable_objects": {"bindings": [
+    {"name":"COACH_SESSIONS","class_name":"CoachSession"},
+    {"name":"COACH_GATE","class_name":"CoachGate"}
+  ]},
+  "migrations": [{"tag":"v1","new_sqlite_classes":["CoachSession","CoachGate"]}]
+}

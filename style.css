@@ -140,6 +140,8 @@ a {
   text-decoration: none;
 }
 
+.learning-path-entry { display: inline-block; color: white; padding: 12px 0; text-underline-offset: 5px; }
+.learning-path-entry:focus-visible { outline: 3px solid #eab308; outline-offset: 4px; }
 .competition-entry:hover { background: rgba(109, 40, 217, 0.65); }
 .competition-entry:focus-visible { outline: 3px solid #eab308; outline-offset: 4px; }
 @media (max-width: 600px) {

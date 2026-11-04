@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 2,
+  "packetId": "248427b3-5ff2-4a39-bf0e-91489dd495a2",
+  "feedback": "Es liegen noch keine bearbeiteten Aufgaben oder Lösungsschritte vor. Deshalb bleiben wir zunächst auf der Grundstufe und üben die quadratische Ergänzung Schritt für Schritt. Achte darauf, die Zahl in der Klammer passend zu wählen.",
+  "nextFocus": "complete",
+  "challenge": "maintain",
+  "taskPlan": {
+    "skill": "complete",
+    "level": 1,
+    "a": 1,
+    "p": -4,
+    "k": 5,
+    "promptStyle": "step_by_step"
+  }
+}

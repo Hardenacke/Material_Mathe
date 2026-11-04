@@ -1,0 +1,11 @@
+{
+  "name": "adaptiver-lernpfad-fobizz", "version": "3.0.0", "private": true,
+  "type": "module", "engines": { "node": ">=24" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test --test-isolation=none tests/*.test.mjs",
+    "dev:worker": "npx wrangler@4.153.0 dev --port 8790 --persist-to ../../.local/adaptive-lernpfade/state",
+    "deploy:check": "npx wrangler@4.153.0 deploy --dry-run --outdir ../../.local/adaptive-lernpfade/bundle",
+    "deploy:worker": "npx wrangler@4.153.0 deploy"
+  }
+}

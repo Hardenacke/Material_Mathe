@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><title>Bewegung verstehen · Adaptiver Lernpfad</title>
+<style>
+:root{font:17px/1.55 system-ui,sans-serif;color:#20324b;background:#f4f6f8;--blue:#245dce;--line:#dbe2ed}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button,a.action{min-height:48px;border:0;border-radius:12px;padding:11px 19px;background:var(--blue);color:white;cursor:pointer;font-weight:650;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}button.secondary{background:#edf2fb;color:#244d91}button:disabled{opacity:.5;cursor:default}input,select,textarea{border:1px solid #aebbd0;border-radius:10px;padding:12px;width:100%;background:white;color:inherit}textarea{min-height:130px;font-size:14px}input:focus-visible,button:focus-visible,summary:focus-visible,a:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #eba839;outline-offset:3px}label{display:block;font-weight:600;font-size:.9rem}header{background:#142d54;color:white;padding:27px max(24px,calc((100vw - 1150px)/2))}header small{color:#b8ceee;letter-spacing:.08em}h1{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;margin:10px 0}h2{font-size:1.3rem;margin:0 0 15px}h3{font-size:1rem;margin:0}p{margin:10px 0}.shell{max-width:1200px;margin:auto;padding:25px;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px,1fr);gap:22px}.card{background:white;border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:0 6px 20px #1a325009}.wide{grid-column:1/-1}.muted{color:#5a6980;font-size:.88rem}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.answer{display:grid;grid-template-columns:minmax(120px,1fr) 115px;gap:12px;margin:22px 0}.badge{font-size:.78rem;font-weight:700;border-radius:20px;background:#e6efff;color:#254e90;padding:5px 11px;display:inline-block}#mode{background:#ffffff1a;color:#d2e5ff}#question{font-size:1.23rem;line-height:1.7;margin:22px 0;min-height:115px}#result{padding:15px;border-radius:12px;background:#f0f4fa;min-height:58px}.success{background:#e7f6ef!important;color:#13563b}.error{background:#fff0eb!important;color:#913910}#hintText{background:#fff8e5;padding:15px;border-radius:12px}progress{width:100%;height:10px;accent-color:#2c6bdc}.skill{padding:14px 0;border-top:1px solid var(--line)}.skill strong{display:block;font-size:.9rem}.skill span{font-size:.8rem;color:#596c85}.track{position:relative;overflow:hidden;border-radius:15px;background:#eaf2fc;margin:20px 0 0;height:92px}.track svg{width:100%;height:100%}.coach{border-left:4px solid #56b899;background:#edf8f3;padding:13px 16px;margin-top:17px}details>summary{cursor:pointer;font-weight:650;min-height:44px;display:list-item;padding:8px 0}details p{font-size:.9rem}.settings{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0}#packetArea{margin-top:16px}footer{max-width:1150px;margin:0 auto 30px;padding:0 25px;color:#607087;font-size:.8rem} [hidden]{display:none!important}#notice{padding:10px 0;color:#8d431e;min-height:25px}.step{color:#315b97;font-weight:700;font-size:.8rem;letter-spacing:.06em}#coachReply{margin:10px 0}@media(max-width:800px){.shell{grid-template-columns:1fr;padding:15px;gap:15px}.card{padding:21px}.settings{grid-template-columns:1fr}#question{min-height:0}header{padding:23px}.wide{grid-column:auto}}@media(prefers-reduced-motion:no-preference){.car{animation:drive 8s linear infinite}@keyframes drive{from{transform:translateX(-90px)}to{transform:translateX(600px)}}}
+</style>
+<header><small>PHYSIK / GLEICHFÖRMIGE BEWEGUNG</small><h1 id="pageTitle">Bewegung verstehen</h1><p>Dein Weg. Dein Tempo. Der nächste passende Schritt.</p><span class="badge" id="mode">Lokale Übung · ohne KI-Verbindung</span></header>
+<main>
+<section id="loginPanel" class="shell" style="display:block;max-width:700px"><div class="card">
+<span class="step">DEIN PERSÖNLICHER LERNPLATZ</span><h2 style="margin-top:12px">Mit deinem Lerncode anmelden</h2>
+<p>Dein Code öffnet deinen gespeicherten Lernstand. Du brauchst keinen Namen und keine E-Mail-Adresse einzugeben.</p>
+<form id="loginForm"><label for="learningCode">Lerncode</label><input id="learningCode" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="64" required placeholder="XXXXX-XXXXX-XXXXX-XXXXX" style="margin:10px 0 18px;font-family:monospace;font-size:1.1rem"><button id="login" type="submit">Lernpfad öffnen →</button></form>
+<p class="muted">Bewahre deinen Code auf. Damit kannst du später auch auf einem anderen Gerät weiterarbeiten. Teile ihn nicht mit anderen.</p>
+<p id="setupNotice" class="muted" role="status"></p>
+<button id="demo" class="secondary" style="margin-top:12px">Ohne Code ausprobieren</button><p id="loginMessage" role="alert"></p>
+</div></section><div class="shell" id="learningPanel" hidden>
+<section class="card wide"><div class="row" style="justify-content:space-between"><div><strong id="classroomName"></strong><p class="muted" id="learnerInfo"></p></div><button id="logout" class="secondary">Abmelden</button></div><p class="muted" id="saveInfo"></p></section>
+<section class="card" aria-labelledby="taskTitle"><div class="row"><span class="badge" id="taskNo"></span><span class="muted" id="level"></span></div><h2 id="taskTitle" style="margin-top:18px">Deine nächste Aufgabe</h2><p id="question"></p>
+<form id="answerForm"><div class="answer"><label>Dein Ergebnis<input id="value" inputmode="decimal" autocomplete="off" required maxlength="30" placeholder="z. B. 12,5"></label><label>Einheit<select id="unit" aria-label="Einheit"><option>m/s</option><option>km/h</option><option>s</option><option>min</option><option>m</option><option>km</option></select></label></div><div class="row"><button type="submit" id="check">Antwort prüfen</button><button type="button" class="secondary" id="hint">Hinweis</button><button type="button" id="next" hidden>Weiter →</button></div></form>
+<p id="hintText" hidden></p><p id="result" role="status" aria-live="polite">Du kannst in deinem Tempo arbeiten.</p>
+<div class="track" aria-hidden="true"><svg viewBox="0 0 600 92"><path d="M0 66H600" stroke="#a8bdd9" stroke-width="3"/><path d="M0 79H600" stroke="#c2d1e4" stroke-width="2" stroke-dasharray="24 18"/><g class="car"><path d="M35 49l10-16h39l13 16h13v15H22V49z" fill="#3472d7"/><path d="M49 37h28l10 12H41z" fill="#d9e9ff"/><circle cx="42" cy="65" r="9" fill="#203955"/><circle cx="91" cy="65" r="9" fill="#203955"/></g></svg></div></section>
+<aside class="card"><span class="step">DEIN LERNWEG</span><h2 style="margin-top:8px">Schritt für Schritt sicherer</h2><p class="muted">Die Anforderungen passen sich an deine Antworten und Hilfen an. Jede Kompetenz entwickelt sich einzeln.</p><div id="skills"></div><div class="coach"><h3>Dein Zwischenstand</h3><p id="summary"></p></div><p class="muted">Ein Fehler ist ein Hinweis für den nächsten Übungsschritt. Es gibt keinen Zeitdruck.</p></aside>
+<section class="card wide"><span class="step">DEINE LERNBEGLEITUNG</span><h2 style="margin-top:8px">Einzelchat oder fobizz-Klassenraum</h2><p>Beide Wege führen deinen Lernstand weiter. Im Einzelchat ist kein fobizz-Klassenraum nötig.</p>
+<form id="learningModeForm"><div class="settings"><label>Lernmodus<select id="learningMode"><option value="single_chat">Persönlicher Einzelchat</option><option value="classroom">fobizz-Klassenraum</option></select></label><div><button id="changeMode" type="submit">Lernmodus wählen</button></div></div></form>
+<div id="modeStatuses" class="muted" aria-live="polite"></div><p id="coachStatus" role="status"></p>
+<div id="chatPanel" hidden><h3>Dein persönlicher Chat</h3><p class="muted">Stelle Fragen zur Aufgabe, ohne Namen oder persönliche Angaben einzutragen. Eine Chathilfe zählt als Unterstützung. Der Verlauf gehört nur zu deinem Lernplatz und diesem Modus.</p><div id="chatHistory" aria-live="polite" aria-label="Dein Chatverlauf"></div><form id="chatForm"><label for="chatMessage">Deine Frage (höchstens 2000 Zeichen)</label><textarea id="chatMessage" maxlength="2000" required></textarea><button id="sendChat">Frage senden</button></form><button id="deleteChat" class="secondary" style="margin:12px 0">Chatverlauf löschen</button><p class="muted">Das Löschen entfernt den hier gespeicherten Verlauf und erhält deine Übungsergebnisse.</p></div>
+<div class="row"><button id="packet">Lernstand für fobizz vorbereiten</button><a class="action" id="fobizz" target="_blank" rel="noopener noreferrer" hidden>fobizz öffnen ↗</a></div>
+<div id="packetArea" hidden><label for="packetText">1. Diesen Text in den geteilten fobizz-Assistenten kopieren</label><textarea id="packetText" readonly></textarea><button class="secondary" id="copy" style="margin:10px 0">Text kopieren</button><label for="coachReply">2. Die JSON-Antwort von fobizz hier einfügen</label><textarea id="coachReply" maxlength="4096" placeholder='{"schemaVersion":1,...}'></textarea><button id="apply">Rückmeldung prüfen und übernehmen</button><p class="muted">Nach weiteren Eingaben wird der vorbereitete Transfer ungültig. Erstelle ihn dann erneut.</p></div><div id="coachResult" class="coach" hidden role="status"></div>
+</section>
+<section class="wide"><p id="notice" role="alert"></p></section></div></main><footer>Übungsprototyp · Der Lernstand wird nach jeder Bearbeitung im Klassenraum gespeichert. Im lokalen Demo-Modus bleibt er nur im Arbeitsspeicher. fobizz erhält den Lernstand durch deinen bewussten Transfer. <a href="admin.html">Lehrkraftverwaltung</a></footer>
+<script type="module">
+const SKILLS = {
+  speed: 'Geschwindigkeit berechnen',
+  rearrange: 'Formeln umstellen',
+  units: 'Einheiten umrechnen'
+};
+const factors = { 'm/s': ['speed', 1], 'km/h': ['speed', 1 / 3.6], s: ['time', 1], min: ['time', 60], m: ['distance', 1], km: ['distance', 1000] };
+const pick = (a, random) => a[Math.floor(random() * a.length)];
+const fmt = n => new Intl.NumberFormat('de-DE', {maximumFractionDigits: 3}).format(n);
+const TASK_TEMPLATES = Object.freeze({'speed-v1':'speed','rearrange-v1':'rearrange','units-v1':'units'});
+function parameterOptions(skill,level){
+  if(skill==='speed')return {speed:level<3?[2,3,4,5]:[2.5,4.5,7.5,12.5],seconds:level>=3?[30,60,90,120]:[8,12,20,40]};
+  if(skill==='rearrange')return {speed:[3,5,8,12],seconds:[10,15,25,40]};
+  if(skill==='units')return {base:level>=3?[2.5,7.5,12.5,22.5]:[5,10,15,20]};
+  throw new Error('Unbekannte Kompetenz.');
+}
+function validateTaskPlan(s,plan){
+  if(!plan||!Object.hasOwn(TASK_TEMPLATES,plan.templateId))throw new Error('Unbekannte Aufgabenvorlage.');
+  const skill=TASK_TEMPLATES[plan.templateId],level=plan.level;
+  if(!Number.isInteger(level)||level<Math.max(1,s.skills[skill].level-1)||level>s.skills[skill].level)throw new Error('Anforderungsstufe nicht belegt.');
+  if(![0,1].includes(plan.wordingVariant)||!['standard','steps'].includes(plan.hintVariant))throw new Error('Unbekannte Textvariante.');
+  const options=parameterOptions(skill,level),parameters=plan.parameters;
+  if(!parameters||typeof parameters!=='object'||Array.isArray(parameters)||Object.keys(parameters).length!==Object.keys(options).length||Object.entries(options).some(([key,values])=>!values.includes(parameters[key])))throw new Error('Ungültige Aufgabenparameter.');
+  return {templateId:plan.templateId,level,parameters:{...parameters},wordingVariant:plan.wordingVariant,hintVariant:plan.hintVariant};
+}
+function newId() {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+  const b = crypto.getRandomValues(new Uint8Array(16)); b[6] = (b[6] & 15) | 64; b[8] = (b[8] & 63) | 128;
+  const h = Array.from(b, x => x.toString(16).padStart(2, '0')).join('');
+  return `${h.slice(0,8)}-${h.slice(8,12)}-${h.slice(12,16)}-${h.slice(16,20)}-${h.slice(20)}`;
+}
+function createState(random = Math.random) {
+  const s = {version: 1, revision: 0, completed: 0, history: [], pendingSkill: null, coach: null,
+    skills: Object.fromEntries(Object.keys(SKILLS).map(k => [k, {level: 1, streak: 0, independent: 0, completed: 0, misses: 0}]))};
+  s.task = makeTask('speed', 1, random); return s;
+}
+function makeTask(skill, level, random = Math.random, plan = null) {
+  const t = {id: newId(), skill, level, attempts: 0, hinted: false, solved: false};
+  const options=parameterOptions(skill,level),value=key=>plan?plan.parameters[key]:pick(options[key],random);
+  if (skill === 'speed') {
+    const v = value('speed');
+    const seconds = value('seconds'), metres = v * seconds;
+    const mixed = level >= 3;
+    t.prompt = `Ein Fahrzeug fährt gleichförmig ${fmt(metres)} m in ${fmt(mixed ? seconds / 60 : seconds)} ${mixed ? 'min' : 's'}. Berechne seine Geschwindigkeit in m/s.`;
+    Object.assign(t, {answer: v, unit: 'm/s', dimension: 'speed', hint: mixed ? 'Rechne die Zeit zuerst in Sekunden um. Nutze dann v = s / t.' : 'Teile den zurückgelegten Weg durch die benötigte Zeit: v = s / t.'});
+    if (level === 1) t.prompt += ' Nutze v = s / t.';
+  } else if (skill === 'rearrange') {
+    const v = value('speed'), seconds = value('seconds');
+    const seekTime = level >= 2, mixed = level >= 3;
+    t.prompt = seekTime ? `Ein Fahrzeug fährt gleichförmig mit ${fmt(mixed ? v * 3.6 : v)} ${mixed ? 'km/h' : 'm/s'}. Nach welcher Zeit hat es ${fmt(v * seconds)} m zurückgelegt? Gib Sekunden an.` : `Ein Fahrzeug fährt gleichförmig mit ${v} m/s. Welchen Weg legt es in ${seconds} s zurück? Gib Meter an.`;
+    Object.assign(t, {answer: seekTime ? seconds : v * seconds, unit: seekTime ? 's' : 'm', dimension: seekTime ? 'time' : 'distance', hint: seekTime ? 'Stelle v = s / t nach t um: t = s / v. Achte vorher auf passende Einheiten.' : 'Stelle v = s / t nach s um: s = v · t.'});
+    if (level === 4) t.prompt = `Prüfe die Aussage „Für die Fahrzeit muss ich Weg und Geschwindigkeit multiplizieren“. Begründe sie zunächst für dich. ${t.prompt}`;
+  } else if (skill === 'units') {
+    const toKmh = level >= 2, base = value('base');
+    Object.assign(t, {prompt: `Rechne ${fmt(toKmh ? base : base * 3.6)} ${toKmh ? 'm/s' : 'km/h'} in ${toKmh ? 'km/h' : 'm/s'} um.`, answer: toKmh ? base * 3.6 : base, unit: toKmh ? 'km/h' : 'm/s', dimension: 'speed', hint: '1 m/s entspricht 3,6 km/h. Von m/s nach km/h multiplizierst du mit 3,6; zurück dividierst du durch 3,6.'});
+    if (level === 4) t.prompt = `Ein Messgerät verwendet eine andere Geschwindigkeitseinheit als dein Protokoll. ${t.prompt}`;
+  } else throw new Error('Unbekannte Kompetenz.');
+  if(plan?.wordingVariant===1)t.prompt='Arbeite Schritt für Schritt. '+t.prompt;
+  if(plan?.hintVariant==='steps')t.hint='1. Notiere die gegebenen Größen. 2. Prüfe die Einheiten. 3. '+t.hint;
+  if(!Number.isFinite(t.answer)||t.answer<=0)throw new Error('Aufgabe nicht lösbar.');
+  return t;
+}
+function parseNumber(value) {
+  const text = String(value).trim();
+  if (!/^-?\d+(?:[.,]\d+)?$/.test(text)) throw new Error('Gib eine Zahl ein, zum Beispiel 12,5.');
+  const n = Number(text.replace(',', '.'));
+  if (!Number.isFinite(n) || Math.abs(n) > 1e9) throw new Error('Die Zahl liegt außerhalb des erlaubten Bereichs.');
+  return n;
+}
+function submitAnswer(s, value, unit) {
+  if (s.task.solved) throw new Error('Diese Aufgabe ist bereits abgeschlossen.');
+  const n = parseNumber(value), f = factors[unit];
+  if (!f || f[0] !== s.task.dimension) throw new Error('Wähle eine passende Einheit.');
+  const t = s.task, p = s.skills[t.skill];
+  t.attempts++; s.revision++; s.coach = null;
+  // Die Einheit der Aufgabe gehört zum Lernziel. Numerische Toleranz: 0,5 %.
+  const correctNumber = Math.abs(n - t.answer) <= Math.max(.015, Math.abs(t.answer) * .005);
+  const correct = correctNumber && unit === t.unit;
+  if (!correct) {
+    p.misses++; p.streak = 0;
+    if (p.misses >= 2) {p.level = Math.max(1, p.level - 1); p.misses = 0;}
+    return {correct: false, message: unit !== t.unit ? `Gib dein Ergebnis in ${t.unit} an. Rechne gegebenenfalls um.` : 'Prüfe deinen Ansatz und die Einheiten. Du kannst einen Hinweis öffnen und erneut versuchen.'};
+  }
+  const independent = t.attempts === 1 && !t.hinted;
+  t.solved = true; s.completed++; p.completed++; p.misses = 0;
+  if (independent) {p.independent++; p.streak++;} else p.streak = 0;
+  if (p.streak >= 2) {p.level = Math.min(4, p.level + 1); p.streak = 0;}
+  s.history.push({skill: t.skill, level: t.level, independent, attempts: t.attempts, hinted: t.hinted});
+  s.history = s.history.slice(-12);
+  return {correct: true, message: independent ? 'Geschafft! Du hast diese Aufgabe selbstständig gelöst.' : 'Geschafft! Festige den Ansatz bei der nächsten passenden Aufgabe.'};
+}
+function useHint(s) {s.task.hinted = true; s.revision++; s.coach = null; return s.task.hint;}
+function nextTask(s, random = Math.random) {
+  if (!s.task.solved) throw new Error('Schließe zuerst die aktuelle Aufgabe ab.');
+  const keys = Object.keys(SKILLS);
+  if(s.pendingTaskPlan){
+    let plan;try{plan=validateTaskPlan(s,s.pendingTaskPlan);}catch{/* Inzwischen geänderte Erfolgsbelege: reguläre Auswahl. */}
+    s.pendingTaskPlan=null;
+    if(plan){s.task=makeTask(TASK_TEMPLATES[plan.templateId],plan.level,random,plan);s.pendingSkill=null;s.revision++;s.coach=null;return;}
+  }
+  const skill = s.pendingSkill || [...keys].sort((a, b) => s.skills[a].completed - s.skills[b].completed || s.skills[a].independent - s.skills[b].independent)[0];
+  s.pendingSkill = null; s.task = makeTask(skill, s.skills[skill].level, random); s.revision++; s.coach = null;
+}
+function publicState(s) {
+  const {answer, hint, ...task} = s.task;
+  return {version: s.version, revision: s.revision, completed: s.completed, skills: s.skills, history: s.history, task, summary: summary(s)};
+}
+function summary(s) {
+  if (!s.completed) return 'Beginne mit der ersten Aufgabe. Dein Lernstand ergibt sich Schritt für Schritt.';
+  const h = s.history, n = h.filter(x => x.independent).length;
+  const weak = Object.keys(SKILLS).sort((a,b) => s.skills[a].independent - s.skills[b].independent)[0];
+  return `Bei den letzten ${h.length} abgeschlossenen Aufgaben hast du ${n} im ersten Versuch ohne Hinweis gelöst. Dein nächster Übungsschwerpunkt: ${SKILLS[weak]}. Das ist eine vorläufige Übungsrückmeldung.`;
+}
+function coachPacket(s) {
+  if (s.completed < 2) throw new Error('Bearbeite zuerst mindestens zwei Aufgaben.');
+  const packetId = newId(); s.coach = {packetId, revision: s.revision};
+  const evidence = {completed: s.completed, skills: s.skills, recent: s.history};
+  return {packetId, prompt: `Du bist ein unterstützender Lerncoach für Physik (gleichförmige Bewegung). Die folgenden Angaben sind vorläufige Übungsbeobachtungen, keine Noten. Verwende nur diese Belege. Keine Diagnosen, Vergleiche mit anderen oder Aussagen zur Intelligenz. Nenne einen belegten Erfolg, einen konkreten Übungsschritt und motiviere sachlich. Gib keine Lösung zur aktuellen Aufgabe. Antworte ausschließlich mit einem JSON-Objekt ohne Markdown. Schema: {"schemaVersion":1,"packetId":"${packetId}","feedback":"höchstens 500 Zeichen","nextFocus":"speed|rearrange|units","challenge":"maintain|support|increase"}. Wähle jeweils genau einen erlaubten Wert; die senkrechten Striche bedeuten Alternativen. Beobachtungen: ${JSON.stringify(evidence)}`};
+}
+function applyCoach(s, data) {
+  if (!data || data.schemaVersion !== 1 || !s.coach || data.packetId !== s.coach.packetId || s.coach.revision !== s.revision) throw new Error('Die Rückmeldung passt nicht zum aktuellen Lernstand. Erstelle einen neuen Transfer.');
+  if (typeof data.feedback !== 'string' || !data.feedback.trim() || data.feedback.length > 500 || !Object.hasOwn(SKILLS, data.nextFocus) || !['maintain', 'support', 'increase'].includes(data.challenge)) throw new Error('Die KI-Antwort hat nicht das erwartete Format.');
+  const p = s.skills[data.nextFocus];
+  // KI darf höchstens einen Schritt ändern; Aufstieg erfordert lokale Erfolgsbelege.
+  if (data.challenge === 'support') p.level = Math.max(1, p.level - 1);
+  const proven = s.history.filter(x => x.skill === data.nextFocus && x.independent).reduce((max, x) => Math.max(max, x.level), 0);
+  if (data.challenge === 'increase' && p.independent >= 3) p.level = Math.max(p.level, Math.min(4, p.level + 1, proven + 1));
+  s.pendingSkill = data.nextFocus; s.coach = null; s.revision++;
+  return {feedback: data.feedback.trim(), nextFocus: data.nextFocus};
+}
+
+const CONFIG = {"workerBase":"","title":"Bewegung verstehen","allowLocalDemo":true};
+const $=id=>document.getElementById(id);
+if(typeof CONFIG.title==='string'){document.title=CONFIG.title+' · Adaptiver Lernpfad';$('pageTitle').textContent=CONFIG.title;}
+let localState=null,view=null,remote=null,busy=false;
+$('demo').hidden=CONFIG.allowLocalDemo!==true;
+$('setupNotice').textContent=CONFIG.workerBase?'Melde dich mit dem Code deiner Lehrkraft an.':'Die Anmeldung wird nach der Cloudflare-Einrichtung freigeschaltet. Du kannst die Aufgaben bereits ohne Code ausprobieren.';
+const modeLabel=mode=>mode==='single_chat'?'Persönlicher Einzelchat':'fobizz-Klassenraum';
+function drawChat(messages=[]){
+  $('chatHistory').replaceChildren();
+  for(const message of messages){const box=document.createElement('div');box.className='coach';const name=document.createElement('strong'),text=document.createElement('p');name.textContent=message.role==='user'?'Du':'Lernbegleitung';text.textContent=message.text;text.style.whiteSpace='pre-wrap';box.append(name,text);$('chatHistory').append(box);}
+}
+function renderCoach(){
+  const selected=remote?.capabilities?.find(c=>c.learningMode===remote.learningMode);
+  $('learningMode').value=remote?.learningMode||'single_chat';
+  $('learningMode').disabled=!remote||busy;$('changeMode').disabled=!remote||busy;
+  const statuses={ready:'nutzbar',api_unconfirmed:'automatische Schnittstelle noch nicht bestätigt',setup_required:'Einrichtung durch die Lehrkraft nötig',disabled:'nicht freigegeben'};
+  $('modeStatuses').replaceChildren();
+  for(const option of $('learningMode').options){
+    const c=remote?.capabilities?.find(c=>c.learningMode===option.value);option.disabled=Boolean(c&&!c.allowed);
+    const p=document.createElement('p');p.textContent=modeLabel(option.value)+': '+(c?statuses[c.status]:'in der Demo ohne fobizz-Verbindung');$('modeStatuses').append(p);
+  }
+  $('coachStatus').textContent=!remote?'Die Demo passt Aufgaben anhand deiner Antworten an. fobizz wird dabei nicht aufgerufen.':selected?.status==='api_unconfirmed'?'Du kannst hier weiterüben. Der persönliche Livechat wird nach Einrichtung einer bestätigten fobizz-Schnittstelle verfügbar.':selected?.status==='setup_required'?'Du kannst hier weiterüben. Deine Lehrkraft hinterlegt den fobizz-Klassenraum separat.':selected?.transportMode==='fobizz-transfer'?'Nach zwei Aufgaben kannst du deinen Lernstand bewusst übertragen und die Rückmeldung hier prüfen lassen. Ein Klassenraumlink überträgt keine Chats automatisch.':'Frage deine Lernbegleitung zur aktuellen Aufgabe.';
+  const chatReady=Boolean(selected?.available&&selected.transportMode==='fobizz-api');
+  $('chatPanel').hidden=!chatReady&&!$('chatHistory').children.length;$('chatForm').hidden=!chatReady;$('sendChat').disabled=!chatReady||busy;$('deleteChat').disabled=!remote||busy;
+  $('packet').hidden=selected?.transportMode!=='fobizz-transfer';$('packet').disabled=!selected?.available||!view||view.completed<2||busy;
+  $('fobizz').hidden=!(remote?.learningMode==='classroom'&&remote.fobizzUrl);
+  if(remote?.learningMode==='classroom'&&remote.fobizzUrl)$('fobizz').href=remote.fobizzUrl;else $('fobizz').removeAttribute('href');
+}
+function baseUrl(){let u;try{u=new URL(CONFIG.workerBase);}catch{throw new Error('Der Klassenraum ist noch nicht eingerichtet. Bitte deine Lehrkraft informieren.');}if(!(u.protocol==='https:'||(u.protocol==='http:'&&['localhost','127.0.0.1'].includes(u.hostname)))||u.username||u.password||u.search||u.hash||u.pathname!=='/')throw new Error('Die Klassenraum-Adresse ist nicht korrekt eingerichtet.');return u.origin;}
+function render(){
+  $('loginPanel').hidden=!(!remote&&!localState);$('learningPanel').hidden=!view||(!remote&&!localState);
+  $('mode').textContent=remote?'Angemeldet · Lernstand wird gespeichert':localState?'Lokale Demo · ohne Speicherung':'Dein Lerncode öffnet deinen Lernplatz';
+  $('login').disabled=!CONFIG.workerBase||busy;
+  if(!view){$('skills').replaceChildren();$('question').textContent='';$('summary').textContent='';$('classroomName').textContent='';$('learnerInfo').textContent='';$('saveInfo').textContent='';$('fobizz').hidden=true;$('fobizz').removeAttribute('href');return;}
+  $('taskNo').textContent=`Aufgabe ${view.completed+(view.task.solved?0:1)}`;$('level').textContent=`Anforderung ${view.task.level} von 4`;$('question').textContent=view.task.prompt;
+  $('check').hidden=view.task.solved;$('next').hidden=!view.task.solved;$('hint').disabled=view.task.solved||busy;$('value').disabled=view.task.solved||busy;$('unit').disabled=view.task.solved||busy;
+  $('summary').textContent=view.summary;$('packet').disabled=view.completed<2||busy;
+  $('skills').replaceChildren();
+  for(const[key,p]of Object.entries(view.skills)){
+    const box=document.createElement('div');box.className='skill';const strong=document.createElement('strong');strong.textContent=SKILLS[key];const progress=document.createElement('progress');progress.max=4;progress.value=p.level;progress.setAttribute('aria-label',`${SKILLS[key]}: aktuelle Anforderung ${p.level} von 4`);const span=document.createElement('span');span.textContent=`${p.completed} abgeschlossen · ${p.independent} im ersten Versuch ohne Hinweis`;box.append(strong,progress,span);$('skills').append(box);
+  }
+  $('classroomName').textContent=remote?remote.room.name:'Übung ohne Anmeldung';$('learnerInfo').textContent=remote?`${remote.label} · ohne Namenseingabe`:'Diese Demo startet beim nächsten Öffnen neu.';
+  $('saveInfo').textContent=remote?`Dein Lernstand bleibt bis zum ${new Date(remote.room.expiresAt).toLocaleDateString('de-DE')} gespeichert. Abmelden beendet nur die Sitzung.`:'Deine Demo-Eingaben werden nicht an Cloudflare gesendet.';
+  renderCoach();
+}
+async function api(path,body,method){
+  const payload=body?JSON.stringify(body):undefined;
+  for(let attempt=0;attempt<2;attempt++){
+    try{
+      const r=await fetch(baseUrl()+path,{method:method||(body?'POST':'GET'),headers:{...(body?{'Content-Type':'application/json'}:{}),...(remote?{Authorization:'Bearer '+remote.token}:{})},body:payload,credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(path==='/api/chat/messages'?24000:12000)});
+      let data;try{data=await r.json();}catch{const e=new Error('Der Dienst hat keine lesbare Antwort geliefert.');e.status=r.status;throw e;}
+      if(!r.ok){const e=new Error(data.error||'Aktion fehlgeschlagen.');e.status=r.status;throw e;}return data;
+    }catch(e){if(e.status||attempt===1)throw e;}
+  }
+}
+function clearPanels(){$('value').value='';$('unit').value='m/s';$('packetArea').hidden=true;$('coachResult').hidden=true;$('hintText').hidden=true;$('packetText').value='';$('coachReply').value='';$('chatMessage').value='';drawChat();$('result').className='';$('result').textContent='Du kannst in deinem Tempo arbeiten.';}
+function absorb(data){view=data.state;if(remote){if(data.classroom)remote.room=data.classroom;if(data.learnerLabel)remote.label=data.learnerLabel;for(const key of ['learningMode','modeVersion','capabilities'])if(Object.hasOwn(data,key))remote[key]=data[key];}let url=null;try{const u=new URL(data.fobizzClassroomUrl);if(u.protocol==='https:'&&['app.fobizz.com','go.fobizz.com','tools.fobizz.com'].includes(u.hostname)&&!u.username&&!u.password)url=u.href;}catch{}if(remote)remote.fobizzUrl=url;if(data.messages)drawChat(data.messages);if(data.lastFeedback){$('coachResult').textContent=data.lastFeedback;$('coachResult').hidden=false;}}
+async function loadChat(){if(remote)drawChat((await api('/api/chat/history')).messages);}
+async function withBusy(fn){if(busy)return;busy=true;$('notice').textContent='';$('loginMessage').textContent='';for(const b of document.querySelectorAll('button'))b.disabled=true;try{await fn();}catch(e){
+  if(e.status===401&&remote){remote=null;view=null;localState=null;clearPanels();$('loginMessage').textContent=e.message;}
+  else if(e.status===409&&remote){try{clearPanels();absorb(await api('/api/state'));await loadChat();}catch{}$('notice').textContent=e.message;}
+  else{$('notice').textContent=e.message||'Verbindung fehlgeschlagen.';$('loginMessage').textContent=e.message||'Verbindung fehlgeschlagen.';}
+}finally{busy=false;for(const b of document.querySelectorAll('button'))b.disabled=false;render();}}
+async function action(path,data={},method){let r;if(remote){r=await api('/api/'+path,{requestId:newId(),revision:view.revision,modeVersion:remote.modeVersion,...data},method);absorb(r);}else{
+  r={};if(path==='answer')r.result=submitAnswer(localState,data.value,data.unit);if(path==='hint')r.hint=useHint(localState);if(path==='next')nextTask(localState);if(path==='coach/packet')r.packet=coachPacket(localState);if(path==='coach/apply')r.coach=applyCoach(localState,data.recommendation);view=publicState(localState);
+}render();return r;}
+$('loginForm').onsubmit=e=>{e.preventDefault();withBusy(async()=>{const r=await api('/api/session',{code:$('learningCode').value});remote={token:r.token,room:r.classroom,label:r.learnerLabel};localState=null;clearPanels();absorb(r);$('learningCode').value='';await loadChat();if(r.hint){$('hintText').textContent=r.hint;$('hintText').hidden=false;}if(view.task.solved)$('result').textContent='Diese Aufgabe hast du bereits gelöst. Du kannst direkt weiterarbeiten.';});};
+$('demo').onclick=()=>withBusy(async()=>{remote=null;localState=createState();view=publicState(localState);clearPanels();$('fobizz').hidden=true;$('fobizz').removeAttribute('href');});
+$('logout').onclick=()=>withBusy(async()=>{const wasRemote=Boolean(remote);let offline=false;if(remote){try{await api('/api/session',null,'DELETE');}catch(e){if(e.status!==401)offline=true;}}remote=null;localState=null;view=null;clearPanels();$('learningCode').value='';$('loginMessage').textContent=offline?'Auf diesem Gerät abgemeldet. Die Serversitzung konnte nicht beendet werden und läuft automatisch ab. Dein Lernstand bleibt gespeichert.':wasRemote?'Abgemeldet. Dein gespeicherter Lernstand bleibt erhalten.':'Demo beendet. Die lokalen Eingaben wurden verworfen.';});
+$('answerForm').onsubmit=e=>{e.preventDefault();withBusy(async()=>{const r=await action('answer',{taskId:view.task.id,value:$('value').value,unit:$('unit').value});$('result').textContent=r.result.message;$('result').className=r.result.correct?'success':'error';});};
+$('hint').onclick=()=>withBusy(async()=>{const r=await action('hint');$('hintText').textContent=r.hint;$('hintText').hidden=false;});
+$('next').onclick=()=>withBusy(async()=>{await action('next');$('value').value='';$('unit').value='m/s';$('hintText').hidden=true;$('result').className='';$('result').textContent='Neuer Schritt, neue Chance.';$('packetArea').hidden=true;if(view.completed%4===0){$('coachResult').textContent=view.summary;$('coachResult').hidden=false;}setTimeout(()=>$('value').focus(),0);});
+$('packet').onclick=()=>withBusy(async()=>{const r=await action('coach/packet');$('packetText').value=r.packet.prompt;$('coachReply').value='';$('packetArea').hidden=false;});
+$('copy').onclick=()=>withBusy(async()=>{try{await navigator.clipboard.writeText($('packetText').value);$('notice').textContent='Text kopiert. Füge ihn in deinen freigegebenen fobizz-Assistenten ein.';}catch{$('packetText').focus();$('packetText').select();$('notice').textContent='Bitte den markierten Text über das Gerätemenü kopieren.';}});
+$('apply').onclick=()=>withBusy(async()=>{let recommendation;try{recommendation=JSON.parse($('coachReply').value);}catch{throw new Error('Bitte ausschließlich das JSON-Objekt von fobizz einfügen.');}const r=await action('coach/apply',{recommendation});$('coachResult').textContent=r.coach.feedback;$('coachResult').hidden=false;$('packetArea').hidden=true;});
+$('learningModeForm').onsubmit=e=>{e.preventDefault();withBusy(async()=>{const learningMode=$('learningMode').value;await action('learning-mode',{learningMode},'PATCH');$('packetArea').hidden=true;$('chatMessage').value='';await loadChat();});};
+$('chatForm').onsubmit=e=>{e.preventDefault();withBusy(async()=>{const r=await action('chat/messages',{message:$('chatMessage').value,taskId:view.task.id});$('chatMessage').value='';$('packetArea').hidden=true;if(r.recommendationStatus==='rejected'||r.taskPlanStatus==='rejected')$('notice').textContent='Die Antwort ist da. Eine unpassende Aufgabenempfehlung wurde verworfen.';});};
+$('deleteChat').onclick=()=>withBusy(async()=>{await action('chat/history',{},'DELETE');$('notice').textContent='Dein hier gespeicherter Verlauf wurde gelöscht. Dein Lernstand bleibt erhalten.';});
+render();
+
+</script></html>

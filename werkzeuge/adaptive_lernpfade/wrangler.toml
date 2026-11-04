@@ -1,0 +1,29 @@
+name = "mathematik-adaptive-lernpfade"
+main = "worker/index.mjs"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://hardenacke.github.io"
+SCHOOL_ID = "rivius-lernpfad-pilot-v2"
+
+[[durable_objects.bindings]]
+name = "SCHOOL"
+class_name = "School"
+
+# Alte Migration nie umbenennen, wenn v1 bereits deployt wurde.
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["LearningRoom"]
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["School"]
+
+[observability]
+enabled = false
+
+# Separat und interaktiv setzen, niemals in Git eintragen:
+# npx wrangler@4 secret put TEACHER_KEY
+# npx wrangler@4 secret put CODE_PEPPER
+# Beide Werte mindestens 32 zufällige Zeichen; CODE_PEPPER stabil aufbewahren.

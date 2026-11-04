@@ -54,7 +54,7 @@ def main():
             page.on("request", lambda request: remote.append(request.url) if request.url.startswith(("http://", "https://")) and not request.url.startswith(base.removesuffix("material-mathe/")) else None)
 
             page.goto(base + "index.html#/klasse-9/02-funktionen/lernpfade")
-            expect(page.locator(".file-link")).to_have_count(12)
+            expect(page.locator(".file-link")).to_have_count(13)
             assert page.get_by_role("link", name="Von der Normalform", exact=False).count() == 1
             lesson_link = page.locator('.file-link[href*="06_Normalform_in_Scheitelpunktform.html"]')
             lesson_link.click()

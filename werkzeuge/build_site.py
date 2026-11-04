@@ -2,7 +2,7 @@
 """Baut die veröffentlichbare GitHub-Pages-Ausgabe nach _site/."""
 from __future__ import annotations
 from pathlib import Path
-import json, os, re, shutil, stat, sys, time
+import json, os, re, shutil, stat, subprocess, sys, time
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
@@ -103,6 +103,12 @@ def add_material_navigation():
 
 
 def main():
+    subprocess.run(["node", str(ROOT / "werkzeuge/adaptive_lernpfade/scripts/build.mjs")],
+                   cwd=ROOT, check=True)
+    subprocess.run([
+        sys.executable, str(ROOT / "werkzeuge/formenwechsel/build.py"),
+        "--output", str(ROOT / "klasse-9/02-funktionen/01-quadratische-funktionen/formenwechsel-trainer.html"),
+    ], cwd=ROOT, check=True)
     prepare_output()
 
     for name in ["index.html", "style.css", "script.js", "material-navigation.js", "favicon.svg"]:

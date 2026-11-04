@@ -1,0 +1,1 @@
+{"schemaVersion":2,"packetId":"fobizz-schnittstellentest-20261104","feedback":"Gut erkannt: e=-4 stimmt. Achte beim Vorzeichen darauf: In (x-d)^2 steht d mit dem entgegengesetzten Vorzeichen zum Term in der Klammer. Prüfe d noch einmal.","nextFocus":"complete","challenge":"maintain","taskPlan":{"skill":"complete","level":1,"a":1,"p":-2,"k":3,"promptStyle":"standard"}}

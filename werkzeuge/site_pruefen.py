@@ -29,6 +29,13 @@ if (ROOT/"wettkaempfe").exists():
         if any((ROOT/"_site").rglob(pattern)): errors.append(f"Private Wettbewerbsdatei in _site: {pattern}")
 if any(path.is_dir() for path in (ROOT/"_site").rglob("ergebnisse")):
     errors.append("Wettbewerbsergebnisse gehören ins GitHub-Archiv, nicht in _site.")
+if (ROOT/"werkzeuge/adaptive_lernpfade").exists():
+    for name in ["index.html", "admin.html"]:
+        if not (ROOT/"_site/gemeinsam/adaptive-lernpfade"/name).is_file():
+            errors.append(f"Adaptive Lernpfade unvollständig: {name}")
+    for private in ["worker", "src", "tests", "node_modules", ".dev.vars", "wrangler.toml"]:
+        if (ROOT/"_site/gemeinsam/adaptive-lernpfade"/private).exists():
+            errors.append(f"Backend-Datei bei öffentlichen Lernpfaden: {private}")
 
 def check_material(mat):
     if not (ROOT/mat["url"]).exists(): errors.append(f"Materialpfad fehlt: {mat['url']}")

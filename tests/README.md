@@ -1,5 +1,20 @@
 # Tests
 
+`node werkzeuge/formenwechsel/test.cjs` prüft Fachmodell, Aufgabenvarianten,
+Lernverlauf und Speicherung des Formenwechsel-Trainers. Die ergänzenden Tests
+unter `werkzeuge/formenwechsel/tests/` prüfen Rückmeldungen und den optionalen
+Transport. `python tests/run_formenwechsel_browser.py` prüft in Edge und WebKit
+den Katalogaufruf, den vollständigen Lernweg, Fortsetzen nach Neuladen, Hilfen,
+Neustart und Bildschirmbreiten 390/768/1024 Pixel ohne externe Dienste.
+Details: [FORMENWECHSEL.md](../dokumentation/FORMENWECHSEL.md).
+
+`npm.cmd --prefix werkzeuge/adaptive_lernpfade test` prüft die adaptiven Aufgaben,
+Lerncodes, Rollen, Moduswechsel, getrennten Chatkontexte und asynchronen Rückmeldungen.
+`python tests/run_adaptive_lernpfade_browser.py` prüft die Oberflächen in Edge und
+WebKit gegen den lokalen Worker, einschließlich SQLite-Fortsetzen, zweier getrennter
+Lernplätze, manuellem Transfer und Bildschirmgrößen 390/768/1024 Pixel.
+Einrichtung: [ADAPTIVE_LERNPFADE.md](../dokumentation/ADAPTIVE_LERNPFADE.md).
+
 `node --test --test-isolation=none tests/quiz_anzeige.test.mjs` prüft vereinfachte
 Formelschreibweisen und unveränderte mathematische Werte. `python tests/run_quiz_anzeige_browser.py`
 prüft die gemeinsame Darstellung aller 39 Quizze mit 4.680 Aufgabenvarianten,

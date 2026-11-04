@@ -1,0 +1,1 @@
+{"name":"formenwechsel-hintergrundtutor","private":true,"version":"3.0.0","type":"module","scripts":{"test":"node test.cjs && node --test tests/*.test.mjs","dev":"wrangler dev","deploy":"wrangler deploy"},"devDependencies":{"miniflare":"5.20261103.0-beta","wrangler":"4.157.0"}}

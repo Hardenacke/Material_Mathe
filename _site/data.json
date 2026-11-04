@@ -5,7 +5,7 @@
     "bereiche": 9,
     "inhaltsfelder": 33,
     "themen": 105,
-    "materialien": 362,
+    "materialien": 364,
     "lernspiele": 74,
     "unterstuetzung": 12,
     "zusatzaufgaben": 187,
@@ -1531,6 +1531,14 @@
               "titel": "Proportionale und antiproportionale Zuordnungen; Darstellungen und Dreisatz",
               "materialien": [
                 {
+                  "titel": "Adaptiver Lernpfad: Geschwindigkeit, Formeln und Einheiten",
+                  "datei": "index.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "gemeinsam/adaptive-lernpfade/index.html",
+                  "beschreibung": "Pilot mit variierenden Aufgaben, persönlichen Lerncodes und optionaler fobizz-Lernbegleitung. Lokale Demo ohne Anmeldung."
+                },
+                {
                   "titel": "Zuordnungs-Zentrale",
                   "datei": "zuordnung.html",
                   "typ": "Lernspiel",
@@ -2646,6 +2654,14 @@
                   "kategorie": "Lernpfad",
                   "url": "klasse-9/02-funktionen/01-quadratische-funktionen/lernpfad-quadratische-funktionen/06_Normalform_in_Scheitelpunktform.html",
                   "beschreibung": "Durch quadratische Ergänzung in Scheitelpunktform umformen."
+                },
+                {
+                  "titel": "Formenwechsel – Trainer für Normal- und Scheitelpunktform",
+                  "datei": "formenwechsel-trainer.html",
+                  "typ": "Lernpfad",
+                  "kategorie": "Lernpfad",
+                  "url": "klasse-9/02-funktionen/01-quadratische-funktionen/formenwechsel-trainer.html",
+                  "beschreibung": "Parabel-Labor, zehn adaptive Trainingsaufgaben und ein Abschlusscheck in beiden Umformungsrichtungen. Mit schrittweisen Hilfen und lokal gespeichertem Fortschritt."
                 },
                 {
                   "titel": "Parabel-Werkstatt",

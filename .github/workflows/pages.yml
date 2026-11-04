@@ -29,6 +29,15 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Adaptive Lernpfade pruefen
+        working-directory: werkzeuge/adaptive_lernpfade
+        run: npm test
+
       - name: GitHub Pages einrichten
         uses: actions/configure-pages@v5
 
