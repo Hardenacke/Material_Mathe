@@ -209,6 +209,29 @@ body{min-width:0;max-width:100%;overflow-x:clip}
 @media(max-height:500px) and (orientation:landscape){.graph-expanded .graphbox{max-width:90vh}.graph-expanded .graph-tools{margin-bottom:0}.graph-expanded .graph-landscape-tip{display:none}}
 @media print{.graph-tools,.table-scroll-tip,.ggb-screen-tip,.graph-landscape-tip{display:none!important}.graph-card.graph-expanded{position:static;width:100%;height:auto}}
 </style>
+<style data-eigene-rechnungen>
+/* Eigene Terme, einzeln geprüfte Werte und sichtbare Rechenwege. */
+.step-nav,.table-wrap{position:relative}.top h1{overflow-wrap:anywhere}
+.step-button>span:last-child{min-width:0;white-space:normal}
+.term-builder{margin:20px 0;padding:18px;border:1px solid #add9ce;border-radius:19px;background:#f0faf5}
+.term-builder h3{margin-top:0;color:#175c58}.term-builder p{color:#42666d}
+.term-bank,.term-workspace{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.term-bank{padding-bottom:14px}.term-tile,.term-piece{display:inline-flex;align-items:center;justify-content:center;min-width:46px;min-height:48px;padding:9px 12px;border:1px solid #a8c9c3;border-radius:12px;background:#fff;color:#154e53;font-size:1.1rem}
+.term-tile:hover{background:#dcf6eb}.term-piece{background:#d4f5e5;border-color:#6ebb9f}.term-piece:after{content:'×';font:700 .7rem system-ui;margin-left:9px;color:#54827a}
+.term-workspace{min-height:72px;padding:12px;border:2px dashed #99c7bd;border-radius:14px;background:#fff}
+.term-preview{display:block;min-height:44px;margin-top:12px;font-weight:750;color:#165c56;overflow-x:auto}
+.calculation-fields{min-width:0;margin:20px 0;padding:0;border:0}.calculation-fields legend{font-weight:800;font-size:1.08rem;color:#175c58}
+.workshop-locked .calculation-fields{opacity:.65}.calculation-table{min-width:610px;table-layout:fixed}.calculation-table th:first-child{width:62px}
+.value-check{display:block;margin:8px auto 4px;min-height:44px;padding:7px 9px;border:1px solid #95c9bc;border-radius:10px;background:#e7f8f0;color:#155f59;font-weight:750;font-size:.83rem}
+.value-status{display:block;min-height:2.4em;margin:6px 0 0;font-size:.82rem;line-height:1.3;font-weight:750}.value-status.good{color:#076c51}.value-status.bad{color:#a3402e}
+.sample-work{margin-top:22px}.sample-card{padding:16px;margin:12px 0;border:1px solid #cce2dc;border-radius:16px;background:#f7fcfa}.sample-card h4{margin:0 0 12px;color:#315e69}
+.calculation-chain{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:15px}.calculation-slot{display:inline-flex;align-items:center;gap:3px}.calculation-slot .number-input{width:65px;max-width:none;min-height:48px}
+.point-calculation{padding:16px;margin:16px 0;background:#edf8f2;border:1px solid #b8dbcf;border-radius:16px}.point-calculation h3{margin:0 0 10px}.point-calculation .answer-line label{min-width:0}.point-calculation .fine{margin-bottom:0}
+.point-calculation button:disabled,.term-tile:disabled,.value-check:disabled{opacity:.5;cursor:not-allowed}.graph-click:disabled{cursor:default}
+@media(max-width:640px){.term-builder,.sample-card,.point-calculation{padding:13px}.term-bank{gap:7px}.term-tile,.term-piece{min-width:44px;padding:8px 10px}.calculation-chain{gap:7px}.calculation-slot .number-input{width:57px}.calculation-table{min-width:610px}.term-builder .btnrow button{flex:1 1 130px}}
+@media print{.term-bank,.term-workspace,.value-check,[data-term-check],[data-term-undo],[data-term-clear]{display:none!important}}
+
+</style>
 </head>
 <body>
 <div class="shell">
@@ -244,20 +267,22 @@ body{min-width:0;max-width:100%;overflow-x:clip}
     <div class="taskbox"><strong>Finde eine Gemeinsamkeit.</strong><p>Teste die Eingaben <span data-tex="-3"></span> und <span data-tex="3"></span>. Wie hängen ihre Ausgaben zusammen?</p></div>
     <div class="question"><h3>Welche Aussage passt zur Maschine?</h3><div class="options" id="machineOptions" role="group" aria-label="Aussagen zur Zahlenmaschine"><button class="opt" data-val="different" aria-pressed="false">Die Ausgaben haben verschiedene Vorzeichen.</button><button class="opt" data-val="same" aria-pressed="false">Die Ausgaben sind gleich.</button><button class="opt" data-val="zero" aria-pressed="false">Beide Ausgaben sind <span data-tex="0"></span>.</button></div><button class="primary" id="machineCheck">Antwort überprüfen</button><div class="feedback" id="fb0" role="status" aria-live="polite"></div><button class="hint-button" data-hint="0">Tipp anzeigen</button><div class="hint" id="hint0"></div></div>
    </section>
-   <section class="step" data-step="1" aria-labelledby="h1"><div class="chapter"><span class="dot"></span>Entdeckung B</div><h2 id="h1">Entschlüssele die Rechenregel</h2><p class="intro">Untersuche die Zahlenpaare genauer. Die Maschine verwendet für jede Eingabe dieselbe Rechenregel.</p>
-    <div class="taskbox"><strong>Vervollständige die Wertetabelle.</strong><p>Nutze deine Entdeckungen aus der Zahlenmaschine. Trage die fehlenden Ausgaben ein.</p></div>
-    <div class="table-wrap" tabindex="0" role="region" aria-label="Wertetabelle, bei wenig Platz seitlich scrollbar"><table class="values-table"><thead><tr><th><span data-tex="x"></span></th><th data-tex="-3"></th><th data-tex="-2"></th><th data-tex="-1"></th><th data-tex="0"></th><th data-tex="1"></th><th data-tex="2"></th><th data-tex="3"></th></tr></thead><tbody><tr><th><span data-tex="f(x)"></span></th><td><input class="number-input table-answer" aria-label="Ausgabe zu minus drei" inputmode="decimal" data-x="-3" placeholder="?"></td><td data-tex="4"></td><td><input class="number-input table-answer" aria-label="Ausgabe zu minus eins" inputmode="decimal" data-x="-1" placeholder="?"></td><td data-tex="0"></td><td><input class="number-input table-answer" aria-label="Ausgabe zu eins" inputmode="decimal" data-x="1" placeholder="?"></td><td data-tex="4"></td><td><input class="number-input table-answer" aria-label="Ausgabe zu drei" inputmode="decimal" data-x="3" placeholder="?"></td></tr></tbody></table></div><p class="table-scroll-tip">↔ Die Wertetabelle kannst du bei wenig Platz mit dem Finger nach links und rechts verschieben.</p>
-    <p class="fine">Bei den Eingabefeldern kannst du ein Komma oder einen Punkt verwenden.</p>
-    <div class="question"><h3>Welche Regel beschreibt die Maschine?</h3><div class="options" id="ruleOptions" role="group" aria-label="Regel auswählen"><button class="opt" data-val="double" aria-pressed="false"><span data-tex="f(x)=2x"></span></button><button class="opt" data-val="square" aria-pressed="false"><span data-tex="f(x)=x^{2}"></span></button><button class="opt" data-val="plus" aria-pressed="false"><span data-tex="f(x)=x+2"></span></button></div><button class="primary" id="tableCheck">Tabelle und Regel prüfen</button><div class="feedback" id="fb1" role="status" aria-live="polite"></div><button class="hint-button" data-hint="1">Tipp anzeigen</button><div class="hint" id="hint1"></div></div>
-    <div class="question" id="signDiagnostic"><h3>Ein genauer Blick auf das Minuszeichen</h3><p>Diese beiden Terme sehen ähnlich aus, haben aber unterschiedliche Ergebnisse. Berechne beide.</p><div class="answer-line"><label for="signParen" data-tex="(-3)^2="></label><input class="number-input" id="signParen" inputmode="decimal" aria-label="Ergebnis von minus drei in Klammern zum Quadrat"><label for="signUnparen" data-tex="-3^2="></label><input class="number-input" id="signUnparen" inputmode="decimal" aria-label="Ergebnis von minus drei zum Quadrat ohne Klammern"></div><p class="fine">Prüfe anschließend deine Wertetabelle und beide Ergebnisse gemeinsam.</p></div>
+   <section class="step" data-step="1" aria-labelledby="h1">
+    <div class="chapter"><span class="dot"></span>Entdeckung B</div><h2 id="h1">Baue die Rechenregel selbst</h2>
+    <p class="intro">Wie lässt sich die Zahlenmaschine mit einer Variablen beschreiben? Setze deinen eigenen Funktionsterm aus Bausteinen zusammen.</p>
+    <div class="taskbox"><strong>Vom Muster zur eigenen Rechnung.</strong><p>Baue und prüfe zuerst deinen Term. Berechne anschließend jeden Tabellenwert einzeln. Für zwei Eingaben zeigst du zusätzlich deinen vollständigen Rechenweg.</p></div>
+    <div class="term-builder" id="baseTermBuilder"></div>
+    <div id="baseValueWorkshop"></div>
+    <div class="question" id="signDiagnostic"><h3>Ein genauer Blick auf das Minuszeichen</h3><p>Diese beiden Terme sehen ähnlich aus, haben aber unterschiedliche Ergebnisse. Berechne beide.</p><div class="answer-line"><label for="signParen" data-tex="(-3)^2="></label><input class="number-input" id="signParen" inputmode="decimal" aria-label="Ergebnis von minus drei in Klammern zum Quadrat"><label for="signUnparen" data-tex="-3^2="></label><input class="number-input" id="signUnparen" inputmode="text" aria-label="Ergebnis von minus drei zum Quadrat ohne Klammern"></div></div>
+    <div class="btnrow"><button class="primary" id="tableCheck">Meine Rechnungen abschließen</button></div><div class="feedback" id="fb1" role="status" aria-live="polite"></div><button class="hint-button" data-hint="1">Tipp anzeigen</button><div class="hint" id="hint1"></div>
     <div class="formula-card" id="formulaReveal"><strong>Deine entdeckte Funktionsgleichung</strong><div class="large" data-tex="\boxed{f(x)=x^{2}}"></div><span>Die Zahl wird mit sich selbst multipliziert.</span></div>
    </section>
    <section class="step" data-step="2" aria-labelledby="h2"><div class="chapter"><span class="dot"></span>Entdeckung C</div><h2 id="h2">Aus Zahlen wird eine Kurve</h2><p class="intro">Jedes Zahlenpaar gehört zu einem Punkt <span data-tex="P(x\mid f(x))"></span>. Setze diese Punkte selbst in das Koordinatensystem.</p>
-    <div class="taskbox"><strong>So funktioniert die Graphenwerkstatt:</strong><p>Lies die geforderte Eingabe ab, tippe auf die passende Stelle im Koordinatensystem und prüfe deinen Punkt. Wenn du alle Punkte richtig gesetzt hast, entsteht die Kurve.</p></div>
-    <div class="plot-toolbar"><div class="plot-task">Setze den Punkt für <span id="targetX" data-tex="x=-3"></span>.</div><div class="mini-pill">Richtige Punkte: <span id="plotCounter" data-tex="0\,/\,5"></span></div></div>
+    <div class="taskbox"><strong>So funktioniert die Graphenwerkstatt:</strong><p>Berechne für jede Eingabe zuerst den Funktionswert und prüfe deine Rechnung. Setze danach den Punkt im Koordinatensystem. Alle sieben Werte werden einzeln bearbeitet.</p></div>
+    <div class="plot-toolbar"><div class="plot-task">Setze den Punkt für <span id="targetX" data-tex="x=-3"></span>.</div><div class="mini-pill">Richtige Punkte: <span id="plotCounter" data-tex="0\,/\,7"></span></div></div>
+    <div class="point-calculation" id="plotCalculation"><h3>Erst rechnen, dann einzeichnen</h3><div class="answer-line"><label for="plotY"><span id="plotFunctionValue" data-tex="f(-3)="></span></label><input class="number-input" id="plotY" inputmode="decimal" aria-label="Selbst berechneter Funktionswert für den aktuellen Punkt"><span id="plotYPreview" class="fine"></span><button class="secondary" id="plotValueCheck">Rechnung prüfen</button><button class="secondary" id="plotSelectHeight" disabled>Per Tastatur setzen</button></div><p class="fine" id="plotCalculationStatus" role="status" aria-live="polite">Berechne zuerst die Höhe dieses Punktes.</p></div>
     <div class="graph-card"><div class="graphbox" id="graphbox"><svg id="plotGraph" viewBox="0 0 680 390" aria-hidden="true"></svg><div id="plotLabels"></div><button type="button" class="graph-click" id="graphClick" aria-label="Punkt im Koordinatensystem setzen"></button></div></div>
     <p class="preview-line">Dein gewählter Punkt: <span id="selectedPoint" data-tex="\text{Noch keinen Punkt gesetzt}"></span></p>
-    <div class="answer-line" style="margin-bottom:2px"><label for="plotY">Alternativ: Höhe <span data-tex="y"></span> eingeben</label><input class="number-input" id="plotY" inputmode="numeric" aria-label="Höhe des Punktes auf dem Graphen"><span id="plotYPreview" class="fine">Noch keine Eingabe</span><button class="secondary" id="plotSelectHeight">Punkt übernehmen</button></div>
     <div class="plot-controls"><button class="primary" id="plotCheck" disabled>Punkt überprüfen</button><button class="secondary" id="plotClear">Auswahl entfernen</button></div>
     <div class="feedback" id="fb2" role="status" aria-live="polite"></div><button class="hint-button" data-hint="2">Tipp anzeigen</button><div class="hint" id="hint2"></div>
     <div class="formula-card" id="curveReveal"><strong>Das ist die Normalparabel!</strong><div class="large" data-tex="f(x)=x^{2}"></div><span>Die eingetragenen Punkte liegen auf einer durchgehenden, nach oben geöffneten Kurve.</span></div>
@@ -287,18 +312,20 @@ body{min-width:0;max-width:100%;overflow-x:clip}
   </section>
   <aside class="sidebar" id="advancedSidebar" hidden><h2>Teil B · Vorfaktor</h2><nav id="advancedNav" class="step-nav" aria-label="Entdeckungen zum Vorfaktor"></nav><p class="sidebar-foot">Experimentieren · Skizzieren · Begründen</p></aside>
   <main class="stage" id="advancedMain" hidden>
-   <section class="step active" data-adv-step="0" aria-labelledby="a0"><div class="chapter"><span class="dot"></span>Parabel-Labor A</div><h2 id="a0">Was passiert bei <span data-tex="a=2"></span>?</h2><p class="intro">Die neue Funktion lautet <span data-tex="f(x)=2x^{2}"></span>. Wie verändert sich die Normalparabel? Berechne die Werte und skizziere dann den Graphen.</p>
+   <section class="step active" data-adv-step="0" aria-labelledby="a0"><div class="chapter"><span class="dot"></span>Parabel-Labor A</div><h2 id="a0">Was passiert bei <span data-tex="a=2"></span>?</h2><p class="intro">Die neue Zahlenmaschine verdoppelt jede Ausgabe der Normalparabel. Baue zuerst den passenden Funktionsterm. Berechne dann alle Werte und zeichne den Graphen.</p>
     <div class="taskbox"><strong>Dein Auftrag:</strong><p>Setze nacheinander die geforderten Punkte im Koordinatensystem. Zeichne anschließend mit dem Finger oder der Maus einen passenden Kurvenverlauf.</p></div>
+    <div class="term-builder" id="advTermBuilder0"></div><div id="advValueWorkshop0"></div>
     <div class="advanced-graph-info"><strong>Aktueller Punkt: <span id="advTarget0" data-tex="x=-2"></span></strong><span class="mini-pill">Punkte: <span id="advCount0" data-tex="0\,/\,5"></span></span></div>
+    <div class="point-calculation" id="advCalculation0"><h3>Erst rechnen, dann einzeichnen</h3><div class="answer-line"><label for="advHeight0"><span id="advFunctionValue0"></span></label><input class="number-input" id="advHeight0" inputmode="decimal" aria-label="Berechneter Funktionswert für den aktuellen Punkt"><button class="secondary" id="advHeightSet0">Rechnung prüfen</button><button class="secondary" id="advKeyboardSet0" disabled>Per Tastatur setzen</button><button class="primary" id="advCheck0" disabled>Punkt prüfen</button></div><p class="fine" id="advCalculationStatus0" role="status" aria-live="polite"></p></div>
     <div class="graph-card"><div class="graphbox"><svg id="advGraph0" viewBox="0 0 680 390" aria-hidden="true"></svg><div id="advLabels0"></div><button id="advGraphClick0" class="graph-click" aria-label="Punkt für die gestreckte Parabel setzen"></button><svg class="adv-draw-overlay" id="advDrawing0" viewBox="0 0 680 390" hidden aria-label="Skizziere den Graphen mit dem Finger"></svg></div></div>
-    <p class="preview-line">Dein Punkt: <span id="advPoint0" data-tex="\text{Noch nicht gesetzt}"></span></p><div class="answer-line"><label for="advHeight0">Alternativ: Höhe <span data-tex="y"></span></label><input class="number-input" id="advHeight0" inputmode="decimal"><button class="secondary" id="advHeightSet0">Punkt übernehmen</button><button class="primary" id="advCheck0" disabled>Punkt prüfen</button></div>
-    <div class="feedback" id="advFeedback0" role="status" aria-live="polite"></div><div class="adv-sketch" id="advSketchArea0" hidden><strong>Jetzt die Kurve skizzieren!</strong><p>Verbinde die Punkte in einem durchgehenden Bogen. Vergleiche erst danach deine Skizze mit der Musterkurve.</p><div class="btnrow"><button class="secondary" id="advErase0">Skizze löschen</button><button class="primary" id="advCompare0" disabled>Skizze vergleichen</button></div></div><div class="goal" id="advReveal0" hidden><strong>Beobachtung:</strong> Der Graph ist nach oben geöffnet und <strong>schmaler</strong> als die Normalparabel. Er wurde in <span data-tex="y"></span>-Richtung mit Faktor <span data-tex="2"></span> gestreckt.</div>
+    <p class="preview-line">Dein Punkt: <span id="advPoint0" data-tex="\text{Noch nicht gesetzt}"></span></p>    <div class="feedback" id="advFeedback0" role="status" aria-live="polite"></div><div class="adv-sketch" id="advSketchArea0" hidden><strong>Jetzt die Kurve skizzieren!</strong><p>Verbinde die Punkte in einem durchgehenden Bogen. Vergleiche erst danach deine Skizze mit der Musterkurve.</p><div class="btnrow"><button class="secondary" id="advErase0">Skizze löschen</button><button class="primary" id="advCompare0" disabled>Skizze vergleichen</button></div></div><div class="goal" id="advReveal0" hidden><strong>Beobachtung:</strong> Der Graph ist nach oben geöffnet und <strong>schmaler</strong> als die Normalparabel. Er wurde in <span data-tex="y"></span>-Richtung mit Faktor <span data-tex="2"></span> gestreckt.</div>
    </section>
-   <section class="step" data-adv-step="1" aria-labelledby="a1"><div class="chapter"><span class="dot"></span>Parabel-Labor B</div><h2 id="a1">Was passiert bei <span data-tex="a=-1"></span>?</h2><p class="intro">Erstelle eine zweite Skizze zur Funktion <span data-tex="f(x)=-x^{2}"></span>. Achte besonders auf die Richtung, in die sich die Parabel öffnet.</p>
+   <section class="step" data-adv-step="1" aria-labelledby="a1"><div class="chapter"><span class="dot"></span>Parabel-Labor B</div><h2 id="a1">Was passiert bei <span data-tex="a=-1"></span>?</h2><p class="intro">Die zweite Zahlenmaschine bildet zu jeder Ausgabe der Normalparabel die Gegenzahl. Baue ihren Term und berechne alle Werte. Achte beim Einzeichnen auf die Vorzeichen.</p>
+    <div class="term-builder" id="advTermBuilder1"></div><div id="advValueWorkshop1"></div>
     <div class="advanced-graph-info"><strong>Aktueller Punkt: <span id="advTarget1" data-tex="x=-2"></span></strong><span class="mini-pill">Punkte: <span id="advCount1" data-tex="0\,/\,5"></span></span></div>
+    <div class="point-calculation" id="advCalculation1"><h3>Erst rechnen, dann einzeichnen</h3><div class="answer-line"><label for="advHeight1"><span id="advFunctionValue1"></span></label><input class="number-input" id="advHeight1" inputmode="text" aria-label="Berechneter Funktionswert für den aktuellen Punkt"><button class="secondary" id="advHeightSet1">Rechnung prüfen</button><button class="secondary" id="advKeyboardSet1" disabled>Per Tastatur setzen</button><button class="primary" id="advCheck1" disabled>Punkt prüfen</button></div><p class="fine" id="advCalculationStatus1" role="status" aria-live="polite"></p></div>
     <div class="graph-card"><div class="graphbox"><svg id="advGraph1" viewBox="0 0 680 390" aria-hidden="true"></svg><div id="advLabels1"></div><button id="advGraphClick1" class="graph-click" aria-label="Punkt für die gespiegelte Parabel setzen"></button><svg class="adv-draw-overlay" id="advDrawing1" viewBox="0 0 680 390" hidden aria-label="Skizziere die zweite Kurve mit dem Finger"></svg></div></div>
-    <p class="preview-line">Dein Punkt: <span id="advPoint1" data-tex="\text{Noch nicht gesetzt}"></span></p><div class="answer-line"><label for="advHeight1">Alternativ: Höhe <span data-tex="y"></span></label><input class="number-input" id="advHeight1" inputmode="decimal"><button class="secondary" id="advHeightSet1">Punkt übernehmen</button><button class="primary" id="advCheck1" disabled>Punkt prüfen</button></div>
-    <div class="feedback" id="advFeedback1" role="status" aria-live="polite"></div><div class="adv-sketch" id="advSketchArea1" hidden><strong>Jetzt die Kurve skizzieren!</strong><p>Zeichne den Verlauf durch die Punkte und vergleiche anschließend.</p><div class="btnrow"><button class="secondary" id="advErase1">Skizze löschen</button><button class="primary" id="advCompare1" disabled>Skizze vergleichen</button></div></div><div class="goal" id="advReveal1" hidden><strong>Beobachtung:</strong> Der Graph wird an der <span data-tex="x"></span>-Achse gespiegelt. Er öffnet sich nach unten, bleibt aber genauso breit wie die Normalparabel.</div>
+    <p class="preview-line">Dein Punkt: <span id="advPoint1" data-tex="\text{Noch nicht gesetzt}"></span></p>    <div class="feedback" id="advFeedback1" role="status" aria-live="polite"></div><div class="adv-sketch" id="advSketchArea1" hidden><strong>Jetzt die Kurve skizzieren!</strong><p>Zeichne den Verlauf durch die Punkte und vergleiche anschließend.</p><div class="btnrow"><button class="secondary" id="advErase1">Skizze löschen</button><button class="primary" id="advCompare1" disabled>Skizze vergleichen</button></div></div><div class="goal" id="advReveal1" hidden><strong>Beobachtung:</strong> Der Graph wird an der <span data-tex="x"></span>-Achse gespiegelt. Er öffnet sich nach unten, bleibt aber genauso breit wie die Normalparabel.</div>
    </section>
    <section class="step" data-adv-step="2" aria-labelledby="a2"><div class="chapter"><span class="dot"></span>GeoGebra-Forschung</div><h2 id="a2">Ein Vorfaktor – viele Parabeln</h2><p class="intro">Entdecke jetzt mit GeoGebra, wie der Vorfaktor <span data-tex="a"></span> die Funktion <span data-tex="f(x)=a\cdot x^{2}"></span> beeinflusst.</p>
     <div class="taskbox"><strong>Experimentiere gezielt:</strong><p>Stelle zunächst zwei Vermutungen auf. Erst danach kannst du den Regler bewegen. Untersuche anschließend einen positiven großen, einen positiven kleinen und einen negativen Vorfaktor. Vergleiche stets mit der grauen Normalparabel.</p></div>
@@ -324,13 +351,176 @@ body{min-width:0;max-width:100%;overflow-x:clip}
   </main>
  </div>
 </div>
+<script data-workshop-tools>
+// Gemeinsam verwendete Werkzeuge für Termbaukasten und eigene Rechnungen.
+// Der Parser verarbeitet ausschließlich die angebotenen Bausteine, ohne eval.
+const TERM_TILES = ['x', '0', '1', '2', '3', '+', '-', '*', '^2', '(', ')'];
+const tileTex = token => ({'*': String.raw`\cdot`, '^2': '{}^{2}'}[token] || token);
+function termPolynomial(tokens) {
+  if (!Array.isArray(tokens) || !tokens.length || tokens.length > 40 || tokens.some(t => !TERM_TILES.includes(t))) return null;
+  let index = 0;
+  const trim = p => { while (p.length > 1 && p.at(-1) === 0) p.pop(); return p; };
+  const add = (a, b, sign = 1) => trim(Array.from({length: Math.max(a.length, b.length)}, (_, i) => (a[i] || 0) + sign * (b[i] || 0)));
+  const multiply = (a, b) => {
+    if (a.length + b.length > 10) throw Error('Der Term ist zu verschachtelt.');
+    const p = Array(a.length + b.length - 1).fill(0);
+    a.forEach((v, i) => b.forEach((w, j) => p[i + j] += v * w));
+    if (!p.every(Number.isFinite)) throw Error('Der Term ist zu groß.');
+    return trim(p);
+  };
+  function atom() {
+    const token = tokens[index++];
+    if (token === 'x') return [0, 1];
+    if (['0', '1', '2', '3'].includes(token)) return [Number(token)];
+    if (token === '(') {
+      const p = sum();
+      if (tokens[index++] !== ')') throw Error('Schließe die Klammer.');
+      return p;
+    }
+    throw Error('Hier fehlt eine Zahl, eine Variable oder eine Klammer.');
+  }
+  function power() {
+    let p = atom();
+    if (tokens[index] === '^2') { index++; p = multiply(p, p); }
+    return p;
+  }
+  function unary() {
+    if (tokens[index] === '+') { index++; return unary(); }
+    if (tokens[index] === '-') { index++; return unary().map(v => -v); }
+    return power();
+  }
+  function product() {
+    let p = unary();
+    while (tokens[index] === '*' || tokens[index] === 'x' || tokens[index] === '(') {
+      if (tokens[index] === '*') index++;
+      p = multiply(p, unary());
+    }
+    return p;
+  }
+  function sum() {
+    let p = product();
+    while (tokens[index] === '+' || tokens[index] === '-') {
+      const sign = tokens[index++] === '+' ? 1 : -1;
+      p = add(p, product(), sign);
+    }
+    return p;
+  }
+  try { const p = sum(); return index === tokens.length ? trim(p) : null; } catch (_) { return null; }
+}
+function createTermBuilder(holder, options) {
+  const work = options.work;
+  work.tokens = Array.isArray(work.tokens) ? work.tokens.filter(t => TERM_TILES.includes(t)).slice(0, 40) : [];
+  const matches = () => {
+    const p = termPolynomial(work.tokens);
+    return p !== null && p.length === 3 && p[0] === 0 && p[1] === 0 && p[2] === options.a;
+  };
+  work.verified = Boolean(work.verified && matches());
+  holder.innerHTML = `<h3>Dein Termbaukasten</h3><p>Tippe Zahlen, Variablen und Rechenzeichen in der gewünschten Reihenfolge an. Du kannst jeden Baustein mehrfach verwenden. Tippe einen eingesetzten Baustein an, um ihn zu entfernen.</p><div class="term-bank" role="group" aria-label="Bausteine für den Funktionsterm"></div><div class="term-workspace" role="group" aria-label="Dein zusammengesetzter Term"></div><output class="term-preview" aria-live="polite"></output><div class="btnrow"><button class="secondary" type="button" data-term-undo>Letzten entfernen</button><button class="secondary" type="button" data-term-clear>Term leeren</button><button class="primary" type="button" data-term-check>Meinen Term prüfen</button></div><div class="feedback" data-term-feedback role="status" aria-live="polite"></div>`;
+  const bank = holder.querySelector('.term-bank'), workspace = holder.querySelector('.term-workspace');
+  const feedback = holder.querySelector('[data-term-feedback]'), preview = holder.querySelector('.term-preview');
+  const tileNames = {'*': 'mal', '^2': 'zum Quadrat', '-': 'minus', '+': 'plus', '(': 'Klammer auf', ')': 'Klammer zu'};
+  const say = (kind, message) => { feedback.className = 'feedback visible ' + kind; feedback.textContent = message; };
+  function render() {
+    workspace.replaceChildren();
+    if (!work.tokens.length) { const empty = document.createElement('span'); empty.className = 'fine'; empty.textContent = 'Hier entsteht dein Term.'; workspace.append(empty); }
+    work.tokens.forEach((token, index) => {
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'term-piece';
+      button.setAttribute('aria-label', `Baustein ${index + 1}: ${tileNames[token] || token} entfernen`);
+      math(button, tileTex(token)); button.addEventListener('click', () => change(() => work.tokens.splice(index, 1))); workspace.append(button);
+    });
+    preview.removeAttribute('data-tex');
+    if (termPolynomial(work.tokens)) math(preview, 'f(x)=' + work.tokens.map(t => t === '^2' ? '^{2}' : tileTex(t)).join(' '));
+    else { preview.replaceChildren(); preview.textContent = work.tokens.length ? 'Baue den Term fertig und prüfe ihn anschließend.' : 'Wähle deinen ersten Baustein.'; }
+    holder.querySelector('[data-term-undo]').disabled = !work.tokens.length;
+    holder.querySelector('[data-term-clear]').disabled = !work.tokens.length;
+    bank.querySelectorAll('button').forEach(b => b.disabled = work.tokens.length >= 40);
+  }
+  function change(edit) { edit(); work.verified = false; feedback.className = 'feedback'; feedback.textContent = ''; render(); options.onChange(); }
+  TERM_TILES.forEach(token => {
+    const button = document.createElement('button'); button.type = 'button'; button.className = 'term-tile'; button.dataset.token = token;
+    button.setAttribute('aria-label', `Baustein ${tileNames[token] || token} hinzufügen`); math(button, tileTex(token));
+    button.addEventListener('click', () => change(() => work.tokens.push(token))); bank.append(button);
+  });
+  holder.querySelector('[data-term-undo]').addEventListener('click', () => change(() => work.tokens.pop()));
+  holder.querySelector('[data-term-clear]').addEventListener('click', () => change(() => { work.tokens = []; }));
+  holder.querySelector('[data-term-check]').addEventListener('click', () => {
+    if (!termPolynomial(work.tokens)) { say('bad', 'Dein Term ist noch nicht vollständig. Prüfe die Reihenfolge der Bausteine und die Klammern.'); return; }
+    work.verified = matches();
+    say(work.verified ? 'ok' : 'bad', work.verified ? '✓ Dein selbst gebauter Term passt. Berechne jetzt jeden Tabellenwert einzeln.' : options.hint);
+    options.onChange();
+  });
+  render();
+  if (work.verified) say('ok', '✓ Dein selbst gebauter Term wurde geprüft.');
+  return {isCorrect: () => work.verified && matches()};
+}
+function createValueWorkshop(holder, options) {
+  const work = options.work, {prefix, xs, a, samples} = options;
+  work.answers = work.answers || {}; work.checked = Array.isArray(work.checked) ? work.checked : [];
+  work.samples = work.samples || {}; work.sampleChecked = Array.isArray(work.sampleChecked) ? work.sampleChecked : [];
+  const fields = new Map(), sampleFields = new Map();
+  holder.innerHTML = `<fieldset class="calculation-fields"><legend>Jeden Wert selbst berechnen</legend><p>Setze jede Eingabe in deinen Term ein. Prüfe die sieben Werte einzeln.</p><div class="table-wrap" tabindex="0" role="region" aria-label="Wertetabelle, seitlich scrollbar"><table class="values-table calculation-table"><thead><tr><th scope="col"><span data-tex="x"></span></th></tr></thead><tbody><tr><th scope="row"><span data-tex="f(x)"></span></th></tr></tbody></table></div><p class="fine">Bei wenig Platz kannst du die Tabelle seitlich verschieben. Komma und Punkt sind als Dezimalzeichen erlaubt.</p><div class="sample-work"><h3>Zwei Rechenwege sichtbar machen</h3><p>Zeige für diese beiden Eingaben zusätzlich, welche Zahlen du einsetzt und miteinander multiplizierst. Negative Faktoren gehören in Klammern.</p></div><p class="workshop-status fine" role="status" aria-live="polite"></p></fieldset>`;
+  holder.querySelector('fieldset > p').textContent = `Setze jede Eingabe in deinen Term ein. Prüfe alle ${xs.length} Werte einzeln.`;
+  const header = holder.querySelector('thead tr'), row = holder.querySelector('tbody tr'), sampleArea = holder.querySelector('.sample-work');
+  const read = input => numberValue(input.value);
+  const expected = (x, key) => key === 'result' ? a * x * x : key === 'factor' ? a : x;
+  xs.forEach((x, index) => {
+    const th = document.createElement('th'); th.scope = 'col'; math(th, texNum(x)); header.append(th);
+    const cell = document.createElement('td');
+    const input = document.createElement('input'); input.className = 'number-input table-answer'; input.id = prefix + 'Value' + index; input.inputMode = a < 0 ? 'text' : 'decimal'; input.autocomplete = 'off'; input.placeholder = '?'; input.dataset.x = x; input.setAttribute('aria-label', `Funktionswert für x gleich ${x}`); input.value = work.answers[x] || '';
+    const button = document.createElement('button'); button.type = 'button'; button.className = 'value-check'; button.dataset.checkX = x; button.textContent = 'Prüfen'; button.setAttribute('aria-label', `Wert für x gleich ${x} prüfen`);
+    const note = document.createElement('span'); note.className = 'value-status'; note.setAttribute('role', 'status'); note.setAttribute('aria-live', 'polite');
+    const update = () => { const good = work.checked.includes(x) && read(input) === a * x * x; input.classList.toggle('valid', good); if (good) { note.textContent = '✓ Geprüft'; note.className = 'value-status good'; } return good; };
+    if (!update()) work.checked = work.checked.filter(v => v !== x);
+    input.addEventListener('input', () => { work.answers[x] = input.value; work.checked = work.checked.filter(v => v !== x); input.classList.remove('valid', 'invalid'); input.removeAttribute('aria-invalid'); note.textContent = ''; status(); options.onChange(); });
+    button.addEventListener('click', () => { const good = read(input) === a * x * x; input.classList.toggle('valid', good); input.classList.toggle('invalid', !good); input.setAttribute('aria-invalid', String(!good)); work.checked = work.checked.filter(v => v !== x); if (good) work.checked.push(x); note.textContent = good ? '✓ Geprüft' : 'Noch einmal rechnen'; note.className = 'value-status ' + (good ? 'good' : 'bad'); status(); options.onChange(); });
+    cell.append(input, button, note); row.append(cell); fields.set(x, input);
+  });
+  samples.forEach((x, index) => {
+    const key = String(x); work.samples[key] = work.samples[key] || {};
+    const card = document.createElement('div'); card.className = 'sample-card'; card.dataset.sampleX = x;
+    const title = document.createElement('h4'); title.textContent = `Rechenweg ${index + 1}`; card.append(title);
+    const line = document.createElement('div'); line.className = 'calculation-chain';
+    const formula = document.createElement('span'); math(formula, `f(${texNum(x)})=`); line.append(formula);
+    const inputs = new Map(), keys = a === 1 ? ['left', 'right', 'result'] : ['factor', 'left', 'right', 'result'];
+    keys.forEach((name, n) => {
+      if (n) { const op = document.createElement('span'); math(op, name === 'result' ? '=' : String.raw`\cdot`); line.append(op); }
+      const label = document.createElement('label'); label.className = 'calculation-slot';
+      const span = document.createElement('span'); span.className = 'screen-reader'; span.textContent = `${name === 'factor' ? 'Vorfaktor' : name === 'result' ? 'Ergebnis' : name === 'left' ? 'Erster eingesetzter x-Wert' : 'Zweiter eingesetzter x-Wert'} für x gleich ${x}`;
+      const input = document.createElement('input'); input.id = prefix + 'Sample' + index + name; input.className = 'number-input'; input.inputMode = name === 'result' && a > 0 ? 'decimal' : 'text'; input.autocomplete = 'off'; input.dataset.part = name; input.value = work.samples[key][name] || ''; input.placeholder = '?';
+      label.append(span);
+      if (name !== 'result') label.append(document.createTextNode('('));
+      label.append(input);
+      if (name !== 'result') label.append(document.createTextNode(')'));
+      line.append(label); inputs.set(name, input);
+      input.addEventListener('input', () => { work.samples[key][name] = input.value; work.sampleChecked = work.sampleChecked.filter(v => v !== x); input.classList.remove('valid', 'invalid'); input.removeAttribute('aria-invalid'); note.textContent = ''; status(); options.onChange(); });
+    });
+    const button = document.createElement('button'); button.type = 'button'; button.className = 'secondary'; button.dataset.sampleCheck = x; button.textContent = 'Rechenweg prüfen';
+    const note = document.createElement('p'); note.className = 'value-status'; note.setAttribute('role', 'status'); note.setAttribute('aria-live', 'polite');
+    const correct = () => [...inputs].every(([name, input]) => read(input) === expected(x, name));
+    if (!correct()) work.sampleChecked = work.sampleChecked.filter(v => v !== x);
+    if (work.sampleChecked.includes(x)) { note.textContent = '✓ Einsetzen und Ergebnis stimmen.'; note.className = 'value-status good'; }
+    button.addEventListener('click', () => {
+      inputs.forEach((input, name) => { const good = read(input) === expected(x, name); input.classList.toggle('valid', good); input.classList.toggle('invalid', !good); input.setAttribute('aria-invalid', String(!good)); });
+      work.sampleChecked = work.sampleChecked.filter(v => v !== x); const good = correct(); if (good) work.sampleChecked.push(x);
+      note.textContent = good ? '✓ Einsetzen und Ergebnis stimmen.' : 'Prüfe die eingesetzten Zahlen, die Vorzeichen und das Ergebnis. Das Ergebnis allein genügt hier noch nicht.'; note.className = 'value-status ' + (good ? 'good' : 'bad'); status(); options.onChange();
+    });
+    card.append(line, button, note); sampleArea.append(card); sampleFields.set(x, {correct});
+  });
+  function ready() { return xs.every(x => work.checked.includes(x) && read(fields.get(x)) === a * x * x) && samples.every(x => work.sampleChecked.includes(x) && sampleFields.get(x).correct()); }
+  function status() { holder.querySelector('.workshop-status').textContent = `${xs.filter(x => work.checked.includes(x)).length} von ${xs.length} Werten und ${samples.filter(x => work.sampleChecked.includes(x)).length} von ${samples.length} Rechenwegen geprüft.`; }
+  renderAll(holder); status();
+  return {ready, setEnabled: enabled => { holder.querySelector('fieldset').disabled = !enabled; holder.classList.toggle('workshop-locked', !enabled); }};
+}
+
+</script>
 <script>
 'use strict';
-const TOTAL=5, STORAGE='normalparabel-lp-v2', TARGETS=[-3,-1,0,1,3];
+const TOTAL=5, STORAGE='normalparabel-lp-v3', TARGETS=[-3,-2,-1,0,1,2,3];
 const $=s=>document.querySelector(s);
 const $$=s=>[...document.querySelectorAll(s)];
-const initial=()=>({step:0,completed:[false,false,false,false,false],plotted:[],answers:{},hints:[0,0,0,0,0],choices:{}});
+const initial=()=>({step:0,completed:[false,false,false,false,false],plotted:[],answers:{},hints:[0,0,0,0,0],choices:{},termWork:{tokens:[],verified:false},valueWork:{},graphWork:{answers:{},checked:[]}});
 let state=initial(),selected=null,chosenPlot=null;
+let baseTerm,baseValues;
 try{const raw=JSON.parse(localStorage.getItem(STORAGE)||'null');if(raw&&Array.isArray(raw.completed)&&raw.completed.length===TOTAL){state={...initial(),...raw};state.completed=raw.completed.map(Boolean);state.step=Math.max(0,Math.min(TOTAL,Number(raw.step)||0));state.plotted=[...new Set((raw.plotted||[]).filter(v=>TARGETS.includes(v)))];}}catch(_err){}
 function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));}catch(_err){}}
 function texNum(v){return Number(v).toLocaleString('de-DE',{useGrouping:false,maximumFractionDigits:3}).replace(',', '{,}');}
@@ -338,7 +528,8 @@ function math(n,expr){if(!n)return;n.dataset.tex=expr;try{katex.render(expr,n,{t
 function renderAll(root=document){root.querySelectorAll('[data-tex]').forEach(n=>math(n,n.dataset.tex));}
 function fb(i,kind,html){const n=$('#fb'+i);n.className='feedback visible '+kind;n.innerHTML=html;renderAll(n);}
 function clearFb(i){const n=$('#fb'+i);n.className='feedback';n.textContent='';}
-function parsed(id){let str=$(id).value.trim().replace(/\s/g,'').replace(',','.');return str&&/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(str)?Number(str):null;}
+function numberValue(value){const str=String(value).trim().replace(/−/g,'-').replace(/\s/g,'').replace(',','.');return str&&/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(str)&&Number.isFinite(Number(str))?Number(str):null;}
+function parsed(id){return numberValue($(id).value);}
 function attachEcho(input){const out=document.createElement('output');out.className='value-echo';out.setAttribute('aria-live','polite');input.insertAdjacentElement('afterend',out);const update=()=>{const v=parsed('#'+input.id);if(v===null){out.replaceChildren();}else{math(out,texNum(v));}};input.addEventListener('input',update);update();}
 function clearNumberFeedback(input){const wrap=input.closest('.live-field');if(!wrap)return;const note=wrap.querySelector('.live-note');if(note){note.textContent='';note.className='live-note';}input.classList.remove('valid','invalid');input.removeAttribute('aria-invalid');}
 function setNumberFeedback(input,good,hint='Prüfe deine Rechnung.'){const note=input.closest('.live-field')?.querySelector('.live-note');input.classList.toggle('valid',good);input.classList.toggle('invalid',!good);input.setAttribute('aria-invalid',String(!good));if(note){note.className='live-note '+(good?'good':'bad');note.textContent=good?'✓ Richtig':'✕ '+hint;}}
@@ -346,10 +537,10 @@ function mountLiveNumberFeedback(input,correct,hint='Prüfe deine Rechnung.'){if
  const check=()=>{clearTimeout(timer);const raw=input.value.trim(),val=parsed('#'+input.id);if(!raw){clearNumberFeedback(input);return;}if(val===null){input.classList.remove('valid','invalid');input.removeAttribute('aria-invalid');note.className='live-note pending';note.textContent='Zahl eingeben';return;}const expected=correct(val);if(expected===null){clearNumberFeedback(input);return;}setNumberFeedback(input,Boolean(expected),hint);};
  input.addEventListener('input',()=>{clearTimeout(timer);clearNumberFeedback(input);if(input.value.trim())timer=setTimeout(check,480);});input.addEventListener('blur',check);input.liveCheck=check;check();}
 function showChoiceFeedback(container,expected){if(!container||!expected)return;container.querySelectorAll('.opt').forEach(b=>b.classList.remove('answer-right','answer-wrong'));let note=container.nextElementSibling;if(!note?.classList.contains('choice-note')){note=document.createElement('div');container.insertAdjacentElement('afterend',note);note.setAttribute('role','status');note.setAttribute('aria-live','polite');}const chosen=container.querySelector('.opt[aria-pressed="true"]');if(!chosen){note.className='choice-note';note.hidden=true;return;}const good=chosen.dataset.val===expected;chosen.classList.add(good?'answer-right':'answer-wrong');note.hidden=false;note.className='choice-note '+(good?'good':'bad');note.textContent=good?'✓ Diese Antwort ist richtig.':'✕ Das passt noch nicht. Probiere eine andere Antwort.';}
-const baseChoiceCorrect={machineOptions:'same',ruleOptions:'square',symOptions:'vertical',vertexOptions:'b',transferOptions:'equal'};
+const baseChoiceCorrect={machineOptions:'same',symOptions:'vertical',vertexOptions:'b',transferOptions:'equal'};
 function pick(container,event){const b=event.target.closest('.opt');if(!b)return;container.querySelectorAll('.opt').forEach(e=>e.setAttribute('aria-pressed',String(e===b)));selected=b.dataset.val;state.choices[container.id]=selected;save();showChoiceFeedback(container,baseChoiceCorrect[container.id]);}
 function choice(id){return state.choices[id]||null;}
-function registerOptions(){['machineOptions','ruleOptions','symOptions','vertexOptions','transferOptions'].forEach(id=>{const c=$('#'+id);c.addEventListener('click',e=>pick(c,e));if(state.choices[id]){const btn=c.querySelector('[data-val="'+state.choices[id]+'"]');if(btn)btn.setAttribute('aria-pressed','true');showChoiceFeedback(c,baseChoiceCorrect[id]);}});}
+function registerOptions(){['machineOptions','symOptions','vertexOptions','transferOptions'].forEach(id=>{const c=$('#'+id);c.addEventListener('click',e=>pick(c,e));if(state.choices[id]){const btn=c.querySelector('[data-val="'+state.choices[id]+'"]');if(btn)btn.setAttribute('aria-pressed','true');showChoiceFeedback(c,baseChoiceCorrect[id]);}});}
 function celebrateDiscovery(){const toast=document.createElement('div');toast.className='celebration-toast';toast.setAttribute('role','status');toast.textContent='✦ Entdeckung geschafft! ✦';document.body.appendChild(toast);setTimeout(()=>toast.remove(),1500);if(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)return;const colors=['#40c9a9','#ffd278','#f38c76','#a9b2f3','#b1eecb'];for(let k=0;k<14;k++){const shard=document.createElement('i');shard.className='spark';shard.style.setProperty('--spark',colors[k%colors.length]);shard.style.setProperty('--tx',Math.round(Math.cos(k*Math.PI/7)*((90+k%5*27)))+'px');shard.style.setProperty('--ty',Math.round(Math.sin(k*Math.PI/7)*((90+k%4*19)))+'px');shard.style.setProperty('--rot',(k%2?280:-270)+'deg');shard.setAttribute('aria-hidden','true');document.body.appendChild(shard);setTimeout(()=>shard.remove(),1100);}}
 function complete(i){const fresh=!state.completed[i];state.completed[i]=true;save();renderNav();updateProgress();updateNavigation();if(fresh)celebrateDiscovery();}
 function unlocked(i){return i===0||state.completed.slice(0,i).every(Boolean);}
@@ -361,8 +552,14 @@ function go(i){if(i<0||i>TOTAL||!unlocked(i))return;state.step=i;save();$$('.ste
 function updateMachine(){let x=Number($('#machineSlider').value),y=x*x;math($('#machineX'),texNum(x));math($('#machineY'),texNum(y));math($('#machineCurrent'),texNum(x));math($('#tileSide'),texNum(Math.abs(x)));math($('#tileArea'),texNum(y));const g=$('#tileGrid');g.innerHTML='';if(x===0){g.className='zero-tile';math(g,String.raw`0`);}else{g.className='tile-grid';g.style.setProperty('--count',Math.abs(x));for(let i=0;i<y;i++){let t=document.createElement('span');t.className='tile';g.append(t);}}}
 $('#machineSlider').addEventListener('input',updateMachine);
 $('#machineCheck').addEventListener('click',()=>{if(!choice('machineOptions')){fb(0,'bad','Wähle zuerst eine Aussage aus.');return;}if(choice('machineOptions')==='same'){fb(0,'ok','✓ Richtig! Zwei entgegengesetzte Eingaben liefern denselben positiven Wert.');complete(0);}else{fb(0,'bad','Noch nicht. Probiere beide Eingaben am Regler aus und vergleiche die beiden Ausgaben.');}});
-$('#tableCheck').addEventListener('click',()=>{$$('.table-answer').forEach(inp=>inp.liveCheck?.());let bad=0,empty=0;$$('.table-answer').forEach(inp=>{let x=Number(inp.dataset.x),v=parsed('#'+inp.id); // IDs werden direkt danach bei Initialisierung vergeben
- if(v===null){empty++;inp.classList.remove('valid','invalid');}else if(v===x*x){inp.classList.add('valid');inp.classList.remove('invalid');}else{bad++;inp.classList.add('invalid');inp.classList.remove('valid');}});if(empty||bad){fb(1,'bad',(empty?'Es fehlen noch Tabellenwerte. ':'')+(bad?'Einige Werte stimmen noch nicht. Multipliziere jede Eingabe mit sich selbst.':''));return;}if(!choice('ruleOptions')){fb(1,'bad','Super, die Tabelle stimmt! Wähle noch die passende Rechenregel.');return;}if(choice('ruleOptions')!=='square'){fb(1,'bad','Die Tabelle stimmt. Welche Regel liefert auch bei negativen Zahlen immer die gezeigten Werte?');return;}const inParen=parsed('#signParen'),withoutParen=parsed('#signUnparen');$('#signParen').classList.toggle('valid',inParen===9);$('#signParen').classList.toggle('invalid',inParen!==9);$('#signUnparen').classList.toggle('valid',withoutParen===-9);$('#signUnparen').classList.toggle('invalid',withoutParen!==-9);if(inParen!==9||withoutParen!==-9){fb(1,'bad','Achte auf die Klammern: Bei <span data-tex="(-3)^2"></span> wird die negative Zahl quadriert. Bei <span data-tex="-3^2"></span> steht das Minus vor dem Quadrat. Berechne beide erneut.');return;}fb(1,'ok','✓ Entdeckt! Du kannst außerdem <span data-tex="(-3)^2=9"></span> und <span data-tex="-3^2=-9"></span> richtig unterscheiden.');$('#formulaReveal').classList.add('visible');complete(1);});
+$('#tableCheck').addEventListener('click',()=>{
+ if(!baseTerm.isCorrect()){fb(1,'bad','Baue zuerst deinen eigenen Funktionsterm und prüfe ihn mit dem Termbaukasten.');return;}
+ if(!baseValues.ready()){fb(1,'bad','Prüfe alle sieben Tabellenwerte einzeln und rechne die beiden Beispiele mit eingesetzten Faktoren vollständig vor.');return;}
+ const inParen=parsed('#signParen'),withoutParen=parsed('#signUnparen');
+ setNumberFeedback($('#signParen'),inParen===9,'Klammer beachten');setNumberFeedback($('#signUnparen'),withoutParen===-9,'Minus beachten');
+ if(inParen!==9||withoutParen!==-9){fb(1,'bad','Prüfe zusätzlich die beiden Terme mit und ohne Klammern. Wird die negative Zahl quadriert oder steht das Minus vor dem Quadrat?');return;}
+ fb(1,'ok','✓ Du hast den Term selbst gebaut, jeden Wert berechnet und beide Rechenwege gezeigt.');$('#formulaReveal').classList.add('visible');complete(1);
+});
 // Interaktives Koordinatensystem. Alle mathematischen Achsenbeschriftungen sind HTML-KaTeX-Overlays.
 const plot={W:680,H:390,L:44,R:658,T:18,B:354},ns='http://www.w3.org/2000/svg';
 const px=x=>plot.L+(x+4)*(plot.R-plot.L)/8,py=y=>plot.B-y*(plot.B-plot.T)/16;
@@ -376,28 +573,109 @@ function drawGraph(){const svg=$('#plotGraph'),labels=$('#plotLabels');svg.repla
  else {const target=TARGETS[state.plotted.length];svgEl('line',{x1:px(target),x2:px(target),y1:plot.T,y2:plot.B,stroke:'#d8a35a','stroke-width':3,'stroke-dasharray':'7 8',opacity:.8},svg);}
  state.plotted.forEach(x=>{svgEl('circle',{cx:px(x),cy:py(x*x),r:12,fill:'#31bba3',opacity:.16},svg);svgEl('circle',{cx:px(x),cy:py(x*x),r:8,fill:'#098679',stroke:'white','stroke-width':3},svg);});
  if(chosenPlot){svgEl('circle',{cx:px(chosenPlot.x),cy:py(chosenPlot.y),r:9,fill:'#f7af51',stroke:'#8f611c','stroke-width':2},svg);}
- math($('#targetX'),state.plotted.length===TARGETS.length?String.raw`\text{Alle Punkte gesetzt}`:String.raw`x=`+texNum(TARGETS[state.plotted.length]));math($('#plotCounter'),texNum(state.plotted.length)+String.raw`\,/\,`+texNum(TARGETS.length));}
-$('#graphClick').addEventListener('click',e=>{if(state.completed[2])return;const rect=$('#graphClick').getBoundingClientRect();let a=(e.clientX-rect.left)/rect.width*plot.W,b=(e.clientY-rect.top)/rect.height*plot.H;chosenPlot={x:Math.max(-4,Math.min(4,Math.round((a-plot.L)/(plot.R-plot.L)*8-4))),y:Math.max(0,Math.min(16,Math.round((plot.B-b)/(plot.B-plot.T)*16)))};math($('#selectedPoint'),String.raw`P(`+texNum(chosenPlot.x)+String.raw`\mid`+texNum(chosenPlot.y)+')');$('#plotCheck').disabled=false;drawGraph();});
-$('#plotY').addEventListener('input',()=>{const v=parsed('#plotY');if(v===null){$('#plotYPreview').textContent='Noch keine Eingabe';}else{math($('#plotYPreview'),texNum(v));}});
-$('#plotSelectHeight').addEventListener('click',()=>{if(state.completed[2])return;const v=parsed('#plotY');if(v===null||!Number.isInteger(v)||v<0||v>16){fb(2,'bad','Gib eine ganze Höhe zwischen <span data-tex="0"></span> und <span data-tex="16"></span> ein.');return;}chosenPlot={x:TARGETS[state.plotted.length],y:v};math($('#selectedPoint'),String.raw`P(`+texNum(chosenPlot.x)+String.raw`\mid`+texNum(chosenPlot.y)+')');$('#plotCheck').disabled=false;clearFb(2);drawGraph();});
-$('#plotClear').addEventListener('click',()=>{chosenPlot=null;math($('#selectedPoint'),String.raw`\text{Noch keinen Punkt gesetzt}`);$('#plotCheck').disabled=true;drawGraph();clearFb(2);});
-$('#plotCheck').addEventListener('click',()=>{if(!chosenPlot||state.completed[2])return;const target=TARGETS[state.plotted.length];if(chosenPlot.x!==target){fb(2,'bad','Der waagerechte Wert stimmt noch nicht. Suche die gelb markierte senkrechte Linie.');return;}if(chosenPlot.y!==target*target){fb(2,'bad','Die Höhe passt noch nicht. Berechne den Funktionswert und zähle die Schritte nach oben.');return;}state.plotted.push(target);chosenPlot=null;$('#plotY').value='';$('#plotYPreview').textContent='Noch keine Eingabe';$('#plotCheck').disabled=true;math($('#selectedPoint'),String.raw`\text{Noch keinen Punkt gesetzt}`);save();drawGraph();if(state.plotted.length===TARGETS.length){fb(2,'ok','✓ Alle Punkte richtig gesetzt! Die verbundenen Punkte bilden eine Parabel.');$('#curveReveal').classList.add('visible');complete(2);}else{fb(2,'ok','✓ Richtig platziert! Der nächste Punkt wartet schon.');}});
+ math($('#targetX'),state.plotted.length===TARGETS.length?String.raw`\text{Alle Punkte gesetzt}`:String.raw`x=`+texNum(TARGETS[state.plotted.length]));math($('#plotCounter'),texNum(state.plotted.length)+String.raw`\,/\,`+texNum(TARGETS.length));syncPlotCalculation();}
+function reopenBaseWork() {
+  state.completed[1] = false;
+  $('#formulaReveal').classList.remove('visible');
+  baseValues?.setEnabled(baseTerm.isCorrect());
+  save(); renderNav(); updateProgress(); updateNavigation();
+}
+function initBaseWorkshop() {
+  baseTerm = createTermBuilder($('#baseTermBuilder'), {
+    work: state.termWork, a: 1,
+    hint: 'Der Term passt noch nicht zu allen Zahlenpaaren. Wie kannst du ausdrücken, dass die Eingabe mit sich selbst multipliziert wird?',
+    onChange: reopenBaseWork
+  });
+  baseValues = createValueWorkshop($('#baseValueWorkshop'), {
+    prefix: 'base', xs: TARGETS, a: 1, samples: [-3, 2], work: state.valueWork,
+    onChange: reopenBaseWork
+  });
+  baseValues.setEnabled(baseTerm.isCorrect());
+}
+function basePointCalculationReady() {
+  const x = TARGETS[state.plotted.length];
+  return x !== undefined && state.graphWork.checked.includes(x) && parsed('#plotY') === x * x;
+}
+let activePlotTarget = null;
+function syncPlotCalculation() {
+  const x = TARGETS[state.plotted.length], done = x === undefined;
+  $('#plotCalculation').hidden = done;
+  if (x !== activePlotTarget) {
+    activePlotTarget = x;
+    $('#plotY').value = done ? '' : state.graphWork.answers[x] || '';
+    clearNumberFeedback($('#plotY'));
+    $('#plotYPreview').replaceChildren();
+    if (!done) math($('#plotFunctionValue'), `f(${texNum(x)})=`);
+  }
+  const ready = basePointCalculationReady();
+  $('#graphClick').disabled = done || !ready;
+  $('#graphClick').hidden = done;
+  $('#plotSelectHeight').disabled = done || !ready;
+  $('#plotCheck').disabled = done || !ready || !chosenPlot;
+  $('#plotCalculationStatus').textContent = done ? 'Alle Funktionswerte berechnet.' : ready ? '✓ Rechnung geprüft. Setze jetzt den Punkt im Graphen.' : 'Berechne und prüfe zuerst die Höhe dieses Punktes.';
+}
+$('#plotY').addEventListener('input', () => {
+  const x = TARGETS[state.plotted.length]; if (x === undefined) return;
+  state.graphWork.answers[x] = $('#plotY').value;
+  state.graphWork.checked = state.graphWork.checked.filter(v => v !== x);
+  chosenPlot = null; clearNumberFeedback($('#plotY'));
+  math($('#selectedPoint'), String.raw`\text{Noch keinen Punkt gesetzt}`);
+  const v = parsed('#plotY'); $('#plotYPreview').replaceChildren();
+  if (v !== null) math($('#plotYPreview'), texNum(v));
+  save(); drawGraph();
+});
+$('#plotValueCheck').addEventListener('click', () => {
+  const x = TARGETS[state.plotted.length]; if (x === undefined) return;
+  const good = parsed('#plotY') === x * x;
+  setNumberFeedback($('#plotY'), good, 'Setze x in deinen Term ein.');
+  state.graphWork.checked = state.graphWork.checked.filter(v => v !== x);
+  if (good) state.graphWork.checked.push(x);
+  save(); drawGraph();
+  fb(2, good ? 'ok' : 'bad', good ? '✓ Der Funktionswert stimmt. Trage den Punkt jetzt selbst ein oder nutze den Knopf für die Tastatureingabe.' : 'Die Höhe stimmt noch nicht. Multipliziere die Eingabe mit sich selbst und achte auf negative Faktoren.');
+});
+function chooseBasePoint(x, y) {
+  if (!basePointCalculationReady() || state.completed[2]) return;
+  chosenPlot = {x, y};
+  math($('#selectedPoint'), String.raw`P(` + texNum(x) + String.raw`\mid` + texNum(y) + ')');
+  clearFb(2); drawGraph();
+}
+$('#graphClick').addEventListener('click', e => {
+  const rect = $('#graphClick').getBoundingClientRect();
+  const a = (e.clientX - rect.left) / rect.width * plot.W, b = (e.clientY - rect.top) / rect.height * plot.H;
+  chooseBasePoint(Math.max(-4, Math.min(4, Math.round((a - plot.L) / (plot.R - plot.L) * 8 - 4))), Math.max(0, Math.min(16, Math.round((plot.B - b) / (plot.B - plot.T) * 16))));
+});
+$('#plotSelectHeight').addEventListener('click', () => chooseBasePoint(TARGETS[state.plotted.length], parsed('#plotY')));
+$('#plotClear').addEventListener('click', () => {
+  chosenPlot = null; math($('#selectedPoint'), String.raw`\text{Noch keinen Punkt gesetzt}`); drawGraph(); clearFb(2);
+});
+$('#plotCheck').addEventListener('click', () => {
+  if (!chosenPlot || state.completed[2] || !basePointCalculationReady()) return;
+  const target = TARGETS[state.plotted.length];
+  if (chosenPlot.x !== target) { fb(2, 'bad', 'Der waagerechte Wert stimmt noch nicht. Suche die gelb markierte senkrechte Linie.'); return; }
+  if (chosenPlot.y !== target * target) { fb(2, 'bad', 'Deine berechnete Höhe stimmt. Setze den Punkt im Koordinatensystem genau auf diese Höhe.'); return; }
+  state.plotted.push(target); chosenPlot = null;
+  math($('#selectedPoint'), String.raw`\text{Noch keinen Punkt gesetzt}`);
+  save(); drawGraph();
+  if (state.plotted.length === TARGETS.length) {
+    fb(2, 'ok', '✓ Du hast alle sieben Funktionswerte selbst berechnet und alle Punkte richtig gesetzt.');
+    $('#curveReveal').classList.add('visible'); complete(2);
+  } else fb(2, 'ok', '✓ Richtig platziert! Berechne jetzt den Funktionswert für den nächsten Punkt.');
+});
+
 function updateMirror(){let a=Number($('#mirrorSlider').value);math($('#mirrorCurrent'),texNum(a));math($('#mirrorLeft'),String.raw`P(`+texNum(-a)+String.raw`\mid`+texNum(a*a)+')');math($('#mirrorRight'),String.raw`Q(`+texNum(a)+String.raw`\mid`+texNum(a*a)+')');}
 $('#mirrorSlider').addEventListener('input',updateMirror);
 $('#propertyCheck').addEventListener('click',()=>{if(choice('symOptions')==='vertical'&&choice('vertexOptions')==='b'){fb(3,'ok','✓ Genau! Die Parabel ist an der <span data-tex="y"></span>-Achse gespiegelt. Ihr tiefster Punkt ist der Ursprung.');complete(3);}else{fb(3,'bad','Prüfe den Verlauf der Punkte: Welche Gerade liegt genau zwischen zwei Spiegelpunkten? Wo ist der kleinste Funktionswert?');}});
 $('#transferCheck').addEventListener('click',()=>{let a=parsed('#transferValue'),b=parsed('#rootA'),c=parsed('#rootB');let good1=a!==null&&Math.abs(a-6.25)<1e-8,good2=b!==null&&c!==null&&((b===3&&c===-3)||(b===-3&&c===3)),good3=choice('transferOptions')==='equal';setNumberFeedback($('#transferValue'),good1,'Quadrat prüfen');const rootHint=b!==null&&b===c?'Zahlen müssen verschieden sein':'Beide Vorzeichen suchen';setNumberFeedback($('#rootA'),good2,rootHint);setNumberFeedback($('#rootB'),good2,rootHint);if(good1&&good2&&good3){fb(4,'ok','✓ Alles richtig! Du kannst Funktionswerte berechnen und zwei passende Eingaben finden.');complete(4);}else{let issues=[];if(!good1)issues.push('Bei A: Multipliziere <span data-tex="2{,}5"></span> mit sich selbst.');if(!good2)issues.push('Bei B: Suche eine positive und eine negative Zahl mit demselben Quadrat.');if(!good3)issues.push('Bei C: Nutze die Symmetrie.');fb(4,'bad','Noch nicht ganz. '+issues.join(' '));}});
 ['#transferValue','#rootA','#rootB'].forEach(id=>$(id).addEventListener('input',()=>{state.answers[id]=$(id).value;save();if(id==='#transferValue'){let v=parsed(id);math($('#transferPreview'),v===null?String.raw`\text{Noch keine Eingabe}`:texNum(v));}}));
-const hints=[['Beobachte die Ausgaben bei <span data-tex="-1"></span> und <span data-tex="1"></span>.','Teste direkt <span data-tex="-3"></span> und <span data-tex="3"></span>. Vergleiche die Zahlen in der Ausgabebox.'],['Die Ausgabe entsteht, wenn du die Eingabe mit sich selbst multiplizierst.','Bei einer negativen Eingabe gilt zum Beispiel <span data-tex="(-1)\cdot(-1)=1"></span>.'],['Der Punkt hat zuerst die waagerechte Koordinate <span data-tex="x"></span>.','Berechne die Höhe mit <span data-tex="y=x^{2}"></span>. Für den ersten Punkt gilt <span data-tex="(-3)^{2}=9"></span>.'],['Links und rechts vom Ursprung liegen Spiegelpunkte gleich hoch.','Die Symmetrieachse verläuft senkrecht durch <span data-tex="(0\mid0)"></span>. Dort liegt auch der niedrigste Punkt.'],['Nutze die Rechenregel <span data-tex="f(x)=x^{2}"></span>.','Zahlen mit gleichem Abstand zur <span data-tex="0"></span> haben denselben Funktionswert.']];
+const hints=[['Beobachte die Ausgaben bei <span data-tex="-1"></span> und <span data-tex="1"></span>.','Teste direkt <span data-tex="-3"></span> und <span data-tex="3"></span>. Vergleiche die Zahlen in der Ausgabebox.'],['Die Ausgabe entsteht, wenn du die Eingabe mit sich selbst multiplizierst.','Bei einer negativen Eingabe gilt zum Beispiel <span data-tex="(-1)\cdot(-1)=1"></span>.'],['Der Punkt hat zuerst die waagerechte Koordinate <span data-tex="x"></span>.','Berechne die Höhe mit <span data-tex="y=x^{2}"></span>. Setze negative Eingaben in Klammern und rechne das Produkt selbst aus.'],['Links und rechts vom Ursprung liegen Spiegelpunkte gleich hoch.','Die Symmetrieachse verläuft senkrecht durch <span data-tex="(0\mid0)"></span>. Dort liegt auch der niedrigste Punkt.'],['Nutze die Rechenregel <span data-tex="f(x)=x^{2}"></span>.','Zahlen mit gleichem Abstand zur <span data-tex="0"></span> haben denselben Funktionswert.']];
 $$('[data-hint]').forEach(btn=>btn.addEventListener('click',()=>{const i=Number(btn.dataset.hint),next=Math.min(2,(state.hints[i]||0)+1);state.hints[i]=next;save();const box=$('#hint'+i);box.innerHTML=hints[i].slice(0,next).map((x,k)=>'<p><strong>Tipp <span data-tex="'+texNum(k+1)+'"></span>: </strong>'+x+'</p>').join('');box.classList.add('visible');renderAll(box);btn.textContent=next===2?'Alle Tipps angezeigt':'Nächster Tipp';}));
 $('#nextButton').addEventListener('click',()=>go(state.step+1));$('#prevButton').addEventListener('click',()=>go(state.step-1));
-function resetAll(){if(!confirm('Möchtest du deinen gespeicherten Lernfortschritt in beiden Modi wirklich löschen?'))return;try{localStorage.removeItem(STORAGE);localStorage.removeItem('normalparabel-lp-v1');localStorage.removeItem('normalparabel-vorfaktor-v1');localStorage.removeItem('normalparabel-vorfaktor-v2');}catch(_){}location.reload();}
+function resetAll(){if(!confirm('Möchtest du deinen gespeicherten Lernfortschritt in beiden Modi wirklich löschen?'))return;try{localStorage.removeItem(STORAGE);localStorage.removeItem('normalparabel-lp-v2');localStorage.removeItem('normalparabel-vorfaktor-v3');localStorage.removeItem('normalparabel-lp-v1');localStorage.removeItem('normalparabel-vorfaktor-v1');localStorage.removeItem('normalparabel-vorfaktor-v2');}catch(_){}location.reload();}
 $('#resetButton').addEventListener('click',resetAll);$('#resetEverywhere').addEventListener('click',resetAll);$('#repeatButton').addEventListener('click',resetAll);$('#printButton').addEventListener('click',()=>window.print());
-function init(){renderAll();$$('.table-answer').forEach((e,i)=>{e.id='tableAnswer'+i;e.value=state.answers[e.id]||'';e.addEventListener('input',()=>{state.answers[e.id]=e.value;save();e.classList.remove('valid','invalid');});});['#transferValue','#rootA','#rootB','#signParen','#signUnparen'].forEach(id=>{if(state.answers[id])$(id).value=state.answers[id];});$$('.table-answer,#rootA,#rootB,#signParen,#signUnparen').forEach(attachEcho);['#signParen','#signUnparen'].forEach(id=>$(id).addEventListener('input',()=>{state.answers[id]=$(id).value;save();$(id).classList.remove('invalid','valid');}));registerOptions();updateMachine();updateMirror();for(let i=0;i<TOTAL;i++){if(state.hints[i]){const box=$('#hint'+i);box.innerHTML=hints[i].slice(0,state.hints[i]).map((x,k)=>'<p><strong>Tipp <span data-tex="'+texNum(k+1)+'"></span>: </strong>'+x+'</p>').join('');box.classList.add('visible');renderAll(box);}}go(unlocked(state.step)?state.step:state.completed.findIndex(v=>!v));updateProgress();if(state.completed[1])$('#formulaReveal').classList.add('visible');if(state.completed[2])$('#curveReveal').classList.add('visible');}
+function init(){renderAll();initBaseWorkshop();['#transferValue','#rootA','#rootB','#signParen','#signUnparen'].forEach(id=>{if(state.answers[id])$(id).value=state.answers[id];});$$('#rootA,#rootB,#signParen,#signUnparen').forEach(attachEcho);['#signParen','#signUnparen'].forEach(id=>$(id).addEventListener('input',()=>{state.answers[id]=$(id).value;reopenBaseWork();$(id).classList.remove('invalid','valid');}));registerOptions();updateMachine();updateMirror();for(let i=0;i<TOTAL;i++){if(state.hints[i]){const box=$('#hint'+i);box.innerHTML=hints[i].slice(0,state.hints[i]).map((x,k)=>'<p><strong>Tipp <span data-tex="'+texNum(k+1)+'"></span>: </strong>'+x+'</p>').join('');box.classList.add('visible');renderAll(box);}}go(unlocked(state.step)?state.step:state.completed.findIndex(v=>!v));updateProgress();if(state.completed[1])$('#formulaReveal').classList.add('visible');if(state.completed[2])$('#curveReveal').classList.add('visible');}
 function initLiveNumbers(){
- $$('.table-answer').forEach(input=>mountLiveNumberFeedback(input,v=>v===Number(input.dataset.x)**2,'Prüfen'));
  mountLiveNumberFeedback($('#signParen'),v=>v===9,'Klammer beachten');
  mountLiveNumberFeedback($('#signUnparen'),v=>v===-9,'Minus beachten');
- mountLiveNumberFeedback($('#plotY'),v=>state.plotted.length===TARGETS.length?null:v===TARGETS[state.plotted.length]**2,'Höhe prüfen');
  mountLiveNumberFeedback($('#transferValue'),v=>Math.abs(v-6.25)<1e-8,'Quadrat prüfen');
  mountLiveNumberFeedback($('#rootA'),v=>Math.abs(v)===3&&(parsed('#rootB')===null||parsed('#rootB')!==v),'Andere Zahl suchen');
  mountLiveNumberFeedback($('#rootB'),v=>Math.abs(v)===3&&(parsed('#rootA')===null||parsed('#rootA')!==v),'Andere Zahl suchen');
@@ -424,10 +702,11 @@ window.addEventListener('DOMContentLoaded',initGraphEnlargement);
 <script>
 'use strict';
 // Zweiter, didaktisch passwortgeschützter Lernmodus. Die technische Freigabe ist keine Zugriffssicherung.
-const ADV_STORE='normalparabel-vorfaktor-v2';
+const ADV_STORE='normalparabel-vorfaktor-v3';
 const ADV_X=[-2,-1,0,1,2], ADV_A=[2,-1], ADV_COUNT=4;
-const advFresh=()=>({unlocked:false,step:0,completed:[false,false,false,false],plotted:[[],[]],visited:{negative:false,stretch:false,stauch:false,zero:false},a:1,explanation:'',choices:{},predictions:{},predictionsMade:false});
+const advFresh=()=>({unlocked:false,step:0,completed:[false,false,false,false],plotted:[[],[]],visited:{negative:false,stretch:false,stauch:false,zero:false},a:1,explanation:'',choices:{},predictions:{},predictionsMade:false,termWork:[{},{}],valueWork:[{},{}],graphWork:[{answers:{},checked:[]},{answers:{},checked:[]}]});
 let advanced=advFresh(),advSelected=[null,null],advGgb=null,advGgbLoading=false,advStroke=[0,0],advDrawingActive=[false,false],advDrawnStrokes=[[],[]];
+const advTerms=[],advTables=[],advActiveTargets=[null,null];
 try{const p=JSON.parse(localStorage.getItem(ADV_STORE)||'null');if(p&&Array.isArray(p.completed)&&p.completed.length===ADV_COUNT){advanced={...advFresh(),...p};advanced.unlocked=false;advanced.completed=p.completed.map(Boolean);advanced.plotted=[0,1].map(i=>[...new Set((p.plotted?.[i]||[]).filter(x=>ADV_X.includes(x)))]);advanced.step=Math.max(0,Math.min(ADV_COUNT,Number(p.step)||0));advanced.a=Number.isFinite(+p.a)?Math.max(-3,Math.min(3,+p.a)):1;advanced.predictions=p.predictions||{};advanced.visited={...advFresh().visited,...(p.visited||{})};}}catch(_e){}
 function advSave(){try{localStorage.setItem(ADV_STORE,JSON.stringify(advanced));}catch(_e){}}
 function advFeedback(i,kind,html){const n=$('#advFeedback'+i);n.className='feedback visible '+kind;n.innerHTML=html;renderAll(n);}
@@ -456,19 +735,87 @@ function advDrawGraph(i){const svg=$('#advGraph'+i),labels=$('#advLabels'+i),a=A
  points.forEach(x=>{svgEl('circle',{cx:advPx(x),cy:advPy(a*x*x),r:13,fill:'#19bb98',opacity:.16},svg);svgEl('circle',{cx:advPx(x),cy:advPy(a*x*x),r:8,fill:'#0d8c7d',stroke:'#fff','stroke-width':3},svg);});
  const sel=advSelected[i];if(sel&&!done)svgEl('circle',{cx:advPx(sel.x),cy:advPy(sel.y),r:9,fill:'#f6ae56',stroke:'#885719','stroke-width':2},svg);
  math($('#advTarget'+i),points.length===ADV_X.length?String.raw`\text{Alle Punkte gesetzt}`:String.raw`x=`+texNum(ADV_X[points.length]));math($('#advCount'+i),texNum(points.length)+String.raw`\,/\,`+texNum(ADV_X.length));
- $('#advGraphClick'+i).hidden=done||points.length===ADV_X.length;const drawn=$('#advDrawing'+i);drawn.hidden=done?!drawn.childElementCount:points.length!==ADV_X.length;drawn.style.pointerEvents=done?'none':'auto';$('#advSketchArea'+i).hidden=done||points.length!==ADV_X.length;$('#advReveal'+i).hidden=!done;}
-function advChoose(i,x,y){if(advanced.completed[i]||advanced.plotted[i].length===ADV_X.length)return;advSelected[i]={x,y};math($('#advPoint'+i),String.raw`P(`+texNum(x)+String.raw`\mid`+texNum(y)+')');$('#advCheck'+i).disabled=false;advDrawGraph(i);}
-function advCheck(i){const sel=advSelected[i],points=advanced.plotted[i],target=ADV_X[points.length];if(!sel)return;if(sel.x!==target){advFeedback(i,'bad','Prüfe zuerst die waagerechte Koordinate. Die gelbe Linie zeigt die gesuchte Stelle.');return;}if(sel.y!==ADV_A[i]*target*target){advFeedback(i,'bad','Noch nicht die richtige Höhe. Berechne <span data-tex="a\cdot x^{2}"></span> und beachte das Vorzeichen.');return;}
+ $('#advGraphClick'+i).hidden=done||points.length===ADV_X.length;const drawn=$('#advDrawing'+i);drawn.toggleAttribute('hidden',done?!drawn.childElementCount:points.length!==ADV_X.length);drawn.style.pointerEvents=done?'none':'auto';$('#advSketchArea'+i).hidden=done||points.length!==ADV_X.length;$('#advReveal'+i).hidden=!done;advSyncCalculation(i);}
+function advChoose(i,x,y){if(!advPointCalculationReady(i)||advanced.completed[i]||advanced.plotted[i].length===ADV_X.length)return;advSelected[i]={x,y};math($('#advPoint'+i),String.raw`P(`+texNum(x)+String.raw`\mid`+texNum(y)+')');$('#advCheck'+i).disabled=false;advDrawGraph(i);}
+function advCheck(i){if(!advPointCalculationReady(i)){advFeedback(i,'bad','Prüfe zuerst den Term, jeden Tabellenwert und deine Rechnung für diesen Punkt.');return;}const sel=advSelected[i],points=advanced.plotted[i],target=ADV_X[points.length];if(!sel)return;if(sel.x!==target){advFeedback(i,'bad','Prüfe zuerst die waagerechte Koordinate. Die gelbe Linie zeigt die gesuchte Stelle.');return;}if(sel.y!==ADV_A[i]*target*target){advFeedback(i,'bad','Noch nicht die richtige Höhe. Berechne <span data-tex="a\cdot x^{2}"></span> und beachte das Vorzeichen.');return;}
  points.push(target);advSelected[i]=null;$('#advCheck'+i).disabled=true;$('#advHeight'+i).value='';math($('#advPoint'+i),String.raw`\text{Noch nicht gesetzt}`);advSave();advDrawGraph(i);if(points.length===ADV_X.length)advFeedback(i,'ok','✓ Alle Punkte stimmen. Jetzt zeichne selbst den Verlauf durch die Punkte!');else advFeedback(i,'ok','✓ Richtig! Setze nun den nächsten Punkt.');}
 function advReviewSketch(strokes,a){const s=strokes.filter(arr=>arr.length>=12).sort((u,v)=>v.length-u.length)[0];if(!s)return {ok:false,reason:'Zeichne möglichst einen zusammenhängenden Bogen durch die Punkte.'};const ps=s.map(p=>({x:-3+(p.x-ap.L)*6/(ap.R-ap.L),y:10-(p.y-ap.T)*20/(ap.B-ap.T)})).filter(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&Math.abs(p.x)<=2.3);if(ps.length<12)return {ok:false,reason:'Die Skizze ist noch zu kurz. Verbinde beide Äste der Parabel.'};const xs=ps.map(p=>p.x);if(Math.min(...xs)>-1.75||Math.max(...xs)<1.75)return {ok:false,reason:'Zeichne die Kurve über beide Seiten des Koordinatensystems – von links über den Ursprung nach rechts.'};const hit=[-2,-1,0,1,2].every(x=>ps.some(p=>Math.abs(p.x-x)<.42&&Math.abs(p.y-a*x*x)<1.5));if(!hit)return {ok:false,reason:'Deine Kurve sollte durch alle grünen Punkte verlaufen. Prüfe besonders beide Äste und den Scheitelpunkt.'};const err=ps.map(p=>Math.abs(p.y-a*p.x*p.x));const near=err.filter(v=>v<1.3).length/err.length;const average=err.reduce((s,v)=>s+v,0)/err.length;if(near<.72||average>1.15)return {ok:false,reason:'Ein Teil deiner Linie weicht noch deutlich von der Parabelform ab. Prüfe die Krümmung zwischen den Punkten.'};const directions=ps.slice(1).map((p,j)=>p.x-ps[j].x).filter(dx=>Math.abs(dx)>.025);const positive=directions.filter(dx=>dx>0).length;if(directions.length>8&&Math.max(positive,directions.length-positive)/directions.length<.7)return {ok:false,reason:'Versuche, die Kurve in einem ruhigen Zug von einem Ast zum anderen zu zeichnen.'};return {ok:true};}
-function advFinishSketch(i,fromPaper=false){if(advanced.plotted[i].length!==ADV_X.length||advanced.completed[i])return;if(!fromPaper){const result=advReviewSketch(advDrawnStrokes[i],ADV_A[i]);if(!result.ok){advFeedback(i,'bad',result.reason+' Du kannst die Skizze löschen und erneut zeichnen.');return;}}advComplete(i);advDrawGraph(i);advFeedback(i,'ok',fromPaper?'✓ Die Musterkurve ist jetzt sichtbar. Vergleiche sie mit deiner auf Papier geprüften Skizze.':'✓ Deine Skizze folgt näherungsweise der Parabel. Vergleiche die gelbe Zeichnung mit der exakten roten Kurve.');}
+function advFinishSketch(i,fromPaper=false){if(!advWorkshopReady(i)||advanced.plotted[i].length!==ADV_X.length||advanced.completed[i])return;if(!fromPaper){const result=advReviewSketch(advDrawnStrokes[i],ADV_A[i]);if(!result.ok){advFeedback(i,'bad',result.reason+' Du kannst die Skizze löschen und erneut zeichnen.');return;}}advComplete(i);advDrawGraph(i);advFeedback(i,'ok',fromPaper?'✓ Die Musterkurve ist jetzt sichtbar. Vergleiche sie mit deiner auf Papier geprüften Skizze.':'✓ Deine Skizze folgt näherungsweise der Parabel. Vergleiche die gelbe Zeichnung mit der exakten roten Kurve.');}
 function advInitDrawing(i){const el=$('#advDrawing'+i);let current=null,moved=0,stroke=null;
  const coord=e=>{const rect=el.getBoundingClientRect();return [(e.clientX-rect.left)*ap.W/rect.width,(e.clientY-rect.top)*ap.H/rect.height];};
  el.addEventListener('pointerdown',e=>{if(advanced.completed[i]||advanced.plotted[i].length!==ADV_X.length)return;e.preventDefault();el.setPointerCapture(e.pointerId);const [x,y]=coord(e);current=svgEl('path',{d:`M${x.toFixed(1)},${y.toFixed(1)}`,fill:'none',stroke:'#e1a341','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},el);stroke=[{x,y}];advDrawnStrokes[i].push(stroke);moved=0;advDrawingActive[i]=true;});
  el.addEventListener('pointermove',e=>{if(!advDrawingActive[i]||!current)return;e.preventDefault();const [x,y]=coord(e);current.setAttribute('d',current.getAttribute('d')+` L${x.toFixed(1)},${y.toFixed(1)}`);stroke.push({x,y});moved++;});
  const finish=()=>{if(!advDrawingActive[i])return;advDrawingActive[i]=false;advStroke[i]+=moved;if(advStroke[i]>=8)$('#advCompare'+i).disabled=false;};el.addEventListener('pointerup',finish);el.addEventListener('pointercancel',finish);
  $('#advErase'+i).addEventListener('click',()=>{el.replaceChildren();advStroke[i]=0;advDrawnStrokes[i]=[];$('#advCompare'+i).disabled=true;});$('#advCompare'+i).addEventListener('click',()=>advFinishSketch(i));const paper=document.createElement('button');paper.className='secondary';paper.type='button';paper.textContent='Auf Papier gezeichnet';$('#advCompare'+i).insertAdjacentElement('afterend',paper);const check=document.createElement('div');check.className='paper-selfcheck';check.hidden=true;check.innerHTML=String.raw`<strong>Vergleiche deine Papierskizze selbst:</strong><label><input type="checkbox"> Beide Äste verlaufen durch die berechneten Punkte.</label><label><input type="checkbox"> Die Kurve geht durch den Scheitelpunkt <span data-tex="S(0\mid0)"></span>.</label><label><input type="checkbox"> Öffnungsrichtung und Krümmung sind plausibel.</label><button class="primary" type="button" disabled>Selbstkontrolle abschließen</button>`;paper.insertAdjacentElement('afterend',check);renderAll(check);paper.addEventListener('click',()=>{check.hidden=!check.hidden;});const boxes=[...check.querySelectorAll('input[type=checkbox]')],finishButton=check.querySelector('button');boxes.forEach(b=>b.addEventListener('change',()=>{finishButton.disabled=!boxes.every(x=>x.checked);}));finishButton.addEventListener('click',()=>advFinishSketch(i,true));}
-function advInitGraph(i){const click=$('#advGraphClick'+i);click.addEventListener('click',e=>{const rect=click.getBoundingClientRect();const x=(e.clientX-rect.left)/rect.width*ap.W,y=(e.clientY-rect.top)/rect.height*ap.H;advChoose(i,Math.max(-3,Math.min(3,Math.round((x-ap.L)/(ap.R-ap.L)*6-3))),Math.max(-10,Math.min(10,Math.round(10-(y-ap.T)/(ap.B-ap.T)*20))));});$('#advHeightSet'+i).addEventListener('click',()=>{const y=parsed('#advHeight'+i);if(y===null||!Number.isInteger(y)||y< -10||y>10){advFeedback(i,'bad','Gib eine ganze Höhe zwischen <span data-tex="-10"></span> und <span data-tex="10"></span> ein.');return;}advChoose(i,ADV_X[advanced.plotted[i].length],y);});$('#advCheck'+i).addEventListener('click',()=>advCheck(i));attachEcho($('#advHeight'+i));mountLiveNumberFeedback($('#advHeight'+i),v=>advanced.plotted[i].length===ADV_X.length?null:v===ADV_A[i]*ADV_X[advanced.plotted[i].length]**2,'Vorzeichen prüfen');$('#advCheck'+i).addEventListener('click',()=>{if(!$('#advHeight'+i).value.trim())clearNumberFeedback($('#advHeight'+i));});advInitDrawing(i);}
+function advWorkshopReady(i) { return Boolean(advTerms[i]?.isCorrect() && advTables[i]?.ready()); }
+function advInitWorkshop(i) {
+  const changed = () => {
+    advanced.completed[i] = false;
+    advTables[i]?.setEnabled(advTerms[i].isCorrect());
+    advSave(); advDrawGraph(i); advNav(); advNavButtons(); advProgress();
+  };
+  advTerms[i] = createTermBuilder($('#advTermBuilder' + i), {
+    work: advanced.termWork[i], a: ADV_A[i], onChange: changed,
+    hint: i === 0 ? 'Verdopple die Ausgabe der Normalparabel. Achte darauf, dass das Quadrieren erhalten bleibt.' : 'Bilde die Gegenzahl der Ausgabe der Normalparabel. Achte auf die Reihenfolge von Minuszeichen und Quadrat.'
+  });
+  advTables[i] = createValueWorkshop($('#advValueWorkshop' + i), {
+    prefix: 'adv' + i, xs: ADV_X, a: ADV_A[i], samples: [-2, 2], work: advanced.valueWork[i], onChange: changed
+  });
+  advTables[i].setEnabled(advTerms[i].isCorrect());
+}
+function advPointCalculationReady(i) {
+  const x = ADV_X[advanced.plotted[i].length];
+  return advWorkshopReady(i) && x !== undefined && advanced.graphWork[i].checked.includes(x) && parsed('#advHeight' + i) === ADV_A[i] * x * x;
+}
+function advSyncCalculation(i) {
+  const x = ADV_X[advanced.plotted[i].length], done = x === undefined;
+  $('#advCalculation' + i).hidden = done;
+  if (x !== advActiveTargets[i]) {
+    advActiveTargets[i] = x;
+    $('#advHeight' + i).value = done ? '' : advanced.graphWork[i].answers[x] || '';
+    if (!done) math($('#advFunctionValue' + i), `f(${texNum(x)})=`);
+    clearNumberFeedback($('#advHeight' + i));
+  }
+  const workshopReady = advWorkshopReady(i), ready = advPointCalculationReady(i);
+  $('#advHeight' + i).disabled = !workshopReady;
+  $('#advHeightSet' + i).disabled = !workshopReady;
+  $('#advKeyboardSet' + i).disabled = !ready;
+  $('#advCheck' + i).disabled = !ready || !advSelected[i] || advanced.completed[i];
+  $('#advGraphClick' + i).disabled = !ready;
+  $('#advGraphClick' + i).hidden = !ready || done;
+  $('#advCalculationStatus' + i).textContent = !workshopReady ? 'Baue zuerst den Term und prüfe jeden Tabellenwert sowie beide Rechenwege.' : ready ? '✓ Rechnung geprüft. Setze jetzt den Punkt.' : 'Berechne zuerst die Höhe für den aktuellen Punkt.';
+  if (!workshopReady) { $('#advDrawing' + i).toggleAttribute('hidden', true); $('#advSketchArea' + i).hidden = true; }
+}
+function advInitGraph(i) {
+  const click = $('#advGraphClick' + i);
+  click.addEventListener('click', e => {
+    const rect = click.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width * ap.W, y = (e.clientY - rect.top) / rect.height * ap.H;
+    advChoose(i, Math.max(-3, Math.min(3, Math.round((x - ap.L) / (ap.R - ap.L) * 6 - 3))), Math.max(-10, Math.min(10, Math.round(10 - (y - ap.T) / (ap.B - ap.T) * 20))));
+  });
+  $('#advHeight' + i).addEventListener('input', () => {
+    const x = ADV_X[advanced.plotted[i].length]; if (x === undefined) return;
+    advanced.graphWork[i].answers[x] = $('#advHeight' + i).value;
+    advanced.graphWork[i].checked = advanced.graphWork[i].checked.filter(v => v !== x);
+    advSelected[i] = null; math($('#advPoint' + i), String.raw`\text{Noch nicht gesetzt}`);
+    clearNumberFeedback($('#advHeight' + i)); advSave(); advDrawGraph(i);
+  });
+  $('#advHeightSet' + i).addEventListener('click', () => {
+    const x = ADV_X[advanced.plotted[i].length]; if (x === undefined || !advWorkshopReady(i)) return;
+    const good = parsed('#advHeight' + i) === ADV_A[i] * x * x;
+    setNumberFeedback($('#advHeight' + i), good, 'Vorfaktor und Vorzeichen prüfen');
+    advanced.graphWork[i].checked = advanced.graphWork[i].checked.filter(v => v !== x);
+    if (good) advanced.graphWork[i].checked.push(x);
+    advSave(); advDrawGraph(i);
+    advFeedback(i, good ? 'ok' : 'bad', good ? '✓ Der Funktionswert stimmt. Setze jetzt den Punkt im Koordinatensystem.' : 'Prüfe deinen Term: Quadriere zuerst die Eingabe und multipliziere anschließend mit dem Vorfaktor.');
+  });
+  $('#advKeyboardSet' + i).addEventListener('click', () => {
+    if (advPointCalculationReady(i)) advChoose(i, ADV_X[advanced.plotted[i].length], parsed('#advHeight' + i));
+  });
+  $('#advCheck' + i).addEventListener('click', () => advCheck(i));
+  attachEcho($('#advHeight' + i)); advInitDrawing(i);
+}
+
 function advSetA(value,visit=true){const a=Math.round(Math.max(-3,Math.min(3,Number(value)))*10)/10;advanced.a=a;$('#advASlider').value=String(a);math($('#advAValue'),texNum(a));$('#advPresets').querySelectorAll('[data-a]').forEach(b=>b.classList.toggle('active',Number(b.dataset.a)===a));if(visit&&advanced.predictionsMade){if(a<0)advanced.visited.negative=true;if(Math.abs(a)>1)advanced.visited.stretch=true;if(Math.abs(a)>0&&Math.abs(a)<1)advanced.visited.stauch=true;if(a===0)advanced.visited.zero=true;}
  const observation=$('#advObservation');observation.replaceChildren();observation.append(document.createTextNode('Lies am Graphen ab und vergleiche: '));const val=document.createElement('span');observation.append(val);math(val,String.raw`f(2)=`+texNum(4*a));advDrawLive();if(advGgb){try{advGgb.setValue('a',a);}catch(_e){}}advSave();}
 function advUpdatePredictionUI(){const made=Boolean(advanced.predictionsMade);$('#advASlider').disabled=!made;$$('#advPresets [data-a]').forEach(b=>b.disabled=!made);$('#advPredictionSave').disabled=made;$('#advPredictionStatus').textContent=made?'Vermutungen festgehalten. Jetzt probiere die Fälle aus; du vergleichst sie später mit den Ergebnissen.':'Die Vermutungen werden noch nicht bewertet.';$$('#advPredictionPanel .options .opt').forEach(btn=>{const id=btn.closest('.options').id;btn.setAttribute('aria-pressed',String(advanced.predictions[id]===btn.dataset.val));btn.disabled=made;});}
@@ -480,7 +827,7 @@ function advRestoreChoices(){$$('[id^="advQA"] .opt').forEach(b=>b.setAttribute(
 function advStart(){
  $('#modeBase').addEventListener('click',()=>advSetMode('base'));$('#modeAdvanced').addEventListener('click',()=>advSetMode('advanced'));
  $('#advancedUnlockForm').addEventListener('submit',e=>{e.preventDefault();const attempt=$('#advancedPassword').value.normalize('NFKC').trim().replace(/\s+/g,' ').toLocaleLowerCase('de-DE');if(attempt!=='normale parabel'){const f=$('#advancedGateFeedback');f.className='feedback visible bad';f.textContent='Das Kennwort stimmt noch nicht. Prüfe die Schreibweise.';return;}advanced.unlocked=true;advSave();$('#advancedPassword').value='';$('#advLockIcon').textContent='🔓';$('#advLockIcon').setAttribute('aria-label','freigeschaltet');advSetMode('advanced');});
- for(let i=0;i<2;i++)advInitGraph(i);
+ for(let i=0;i<2;i++){advInitWorkshop(i);advInitGraph(i);}
  $$('#advPredictionPanel .options .opt').forEach(btn=>btn.addEventListener('click',()=>{if(advanced.predictionsMade)return;const group=btn.closest('.options');advanced.predictions[group.id]=btn.dataset.val;advUpdatePredictionUI();advSave();}));
  $('#advPredictionSave').addEventListener('click',()=>{if(!advanced.predictions.advPredictDown||!advanced.predictions.advPredictWidth){$('#advPredictionStatus').textContent='Wähle zuerst zu beiden Fragen eine Vermutung.';return;}advanced.predictionsMade=true;advUpdatePredictionUI();advSave();});advUpdatePredictionUI();
  $('#advASlider').addEventListener('input',e=>advSetA(e.target.value));$$('#advPresets [data-a]').forEach(b=>b.addEventListener('click',()=>advSetA(b.dataset.a)));$('#advExplanation').value=advanced.explanation||'';$('#advExplanation').addEventListener('input',e=>{advanced.explanation=e.target.value;advSave();});
