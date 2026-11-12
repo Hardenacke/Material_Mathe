@@ -138,7 +138,7 @@ def run(page, url, output):
     expect(page.locator('#h5')).to_be_visible()
 
     page.locator('#modeAdvanced').click()
-    page.locator('#advancedPassword').fill('normale parabel')
+    page.locator('#advancedPassword').fill('Normalparabel')
     page.locator('#advancedUnlockForm button').click()
     for i, a, tokens in [(0, 2, ['2', 'x', '^2']), (1, -1, ['-', 'x', '^2'])]:
         expect(page.locator(f'#advHeight{i}')).to_be_disabled()
