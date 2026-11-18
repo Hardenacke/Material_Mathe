@@ -158,7 +158,7 @@ function renderHeader(step, title, description, theme) {
   const header = document.createElement("section");
   header.className = "view-header";
   applyTheme(header, theme);
-  header.appendChild(createText("p", "step-label", `Schritt ${step} von 4`));
+  header.appendChild(createText("p", "step-label", `Schritt ${step} von ${route[0] === "werkzeuge" ? 2 : 4}`));
   const heading = createText("h2", "", title);
   heading.id = "view-title";
   heading.tabIndex = -1;
@@ -197,7 +197,7 @@ function renderNavigation(crumbs, step) {
   const journey = document.createElement("ol");
   journey.className = "journey";
   journey.setAttribute("aria-label", "Dein Weg zum Material");
-  const labels = route[0] === "methoden"
+  const labels = route[0] === "werkzeuge" ? ["Startseite", "Werkzeuge"] : route[0] === "methoden"
     ? ["Kurswahl", "Methoden", "Methodenthema", "Material"]
     : ["Kurswahl", "Themenbereich", "Materialart", "Material"];
   labels.forEach((label, index) => {
@@ -265,9 +265,18 @@ function renderHome(query) {
     section.appendChild(createCard({ title: methods.titel || "Methoden", description: methods.beschreibung, parts: ["methoden"], theme: methodTheme, icon: "↗" }));
     catalogRoot.appendChild(section);
   }
-  if (!areas.length && !hasMethods) renderEmpty("Keine passenden Kurse oder Methoden gefunden.");
+  const tools = catalogData.werkzeuge;
+  const hasTools = tools?.materialien?.length
+    && matches(`${tools.titel} ${tools.beschreibung} ${tools.materialien.map(materialText).join(" ")}`, query);
+  if (hasTools) {
+    const section = document.createElement("section");
+    section.className = "method-section";
+    section.appendChild(createCard({ title: tools.titel, description: tools.beschreibung, parts: ["werkzeuge"], theme: methodTheme, icon: "⚙", meta: plural(tools.materialien.length, "Tool", "Tools") }));
+    catalogRoot.appendChild(section);
+  }
+  if (!areas.length && !hasMethods && !hasTools) renderEmpty("Keine passenden Kurse, Methoden oder Werkzeuge gefunden.");
   summaryRoot.textContent = query
-    ? `${plural(areas.length, "passender Kurs", "passende Kurse")}${hasMethods ? " · Methoden" : ""}`
+    ? `${plural(areas.length, "passender Kurs", "passende Kurse")}${hasMethods ? " · Methoden" : ""}${hasTools ? " · Werkzeuge" : ""}`
     : `${catalogData.statistik.bereiche} Bereiche · ${catalogData.statistik.inhaltsfelder} Themenbereiche · ${catalogData.statistik.themen} Themen`;
 }
 
@@ -441,6 +450,18 @@ function renderMethods(query) {
   summaryRoot.textContent = `${stage.titel} · ${plural(count, "Material", "Materialien")}`;
 }
 
+function renderTools(query) {
+  const tools = catalogData.werkzeuge;
+  const crumbs = [{ title: "Startseite", parts: [] }, { title: "Werkzeuge", parts: ["werkzeuge"] }];
+  if (route.length > 1) return renderNotFound(crumbs.slice(0, 1));
+  renderNavigation(crumbs, 2);
+  renderHeader(2, "Werkzeuge", tools?.beschreibung || "Fachübergreifende Tools für den Unterricht.", methodTheme);
+  const entries = (tools?.materialien || []).map((material) => ({ material, context: "Fachübergreifende Tools" }));
+  const localQuery = matches(`${tools?.titel} ${tools?.beschreibung}`, query) ? "" : query;
+  const count = renderEntryList(entries, localQuery, methodTheme);
+  summaryRoot.textContent = `Werkzeuge · ${plural(count, "Tool", "Tools")}`;
+}
+
 function renderNotFound(crumbs = [{ title: "Klassen und Kurse", parts: [] }]) {
   const parent = crumbs[crumbs.length - 1];
   renderNavigation([...crumbs, { title: "Seite nicht gefunden", parts: route }], Math.min(4, crumbs.length + 1));
@@ -455,6 +476,7 @@ function render({ focus = false } = {}) {
   catalogRoot.replaceChildren();
   if (!route.length) renderHome(query);
   else if (route[0] === "methoden") renderMethods(query);
+  else if (route[0] === "werkzeuge") renderTools(query);
   else {
     const area = catalogData.bereiche.find((item) => item.id === route[0]);
     const field = area?.inhaltsfelder.find((item) => item.id === route[1]);

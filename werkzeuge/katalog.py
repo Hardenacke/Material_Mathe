@@ -19,12 +19,14 @@ DISPLAY_EXT = {
 TECHNICAL_DIRS = {"assets", "css", "js", "images", "img", "fonts", "vendor", "lib"}
 HIDDEN_NAMES = {".gitkeep", "desktop.ini", "thumbs.db"}
 SPECIAL_TITLES = {
+    "ruhe-safari.html": "Ruhe-Safari",
     "badesee-sinus-modellierung-ipad.html": "Badesee: Sinusfunktion modellieren (iPad)",
     "einfuehrung-transformationen-funktionen-ipad.html": "Einführung: Transformationen von Funktionen (iPad)",
     "sinusfunktion-fassade-ipad.html": "Modellierung mit der Sinusfunktion: Wellenfassade (iPad)",
 }
 LEARNING_GAMES_DIR = ROOT / "lernspiele"
 METHODS_DIR = ROOT / "methoden"
+TOOLS_DIR = ROOT / "tools"
 SUPPORT_DIR_NAME = "unterstuetzung"
 EXTRA_TASKS_DIR_NAME = "zusatzaufgaben"
 FERMI_ASSIGNMENTS_FILE = ROOT / "dokumentation" / "FERMI_ZUORDNUNG.json"
@@ -451,6 +453,15 @@ def build_catalog() -> dict:
     assigned, assigned_urls = assigned_materials_by_destination()
     methoden = methods_catalog()
     total_method_materials = method_material_count(methoden)
+    tools = {
+        "titel": "Werkzeuge",
+        "beschreibung": "Fachübergreifende Tools für den Unterricht und das gemeinsame Arbeiten.",
+        "materialien": materials_in(TOOLS_DIR, recursive=True),
+    }
+    for material in tools["materialien"]:
+        material["kategorie"] = "Werkzeug"
+        if material["datei"] == "ruhe-safari.html":
+            material["beschreibung"] = "Eine ruhige Arbeitsatmosphäre sichtbar machen: Wähle eine Themenwelt und lass bei ruhiger Arbeit Motive wachsen. Mit Mikrofon oder im Testmodus."
     total_fields = total_topics = total_materials = total_learning_games = total_support = 0
     total_extra_tasks = 0
     for area in STRUCT["bereiche"]:
@@ -492,6 +503,7 @@ def build_catalog() -> dict:
         areas.append(out_area)
     categories = set(catalog_categories(areas))
     categories.update(method_categories(methoden))
+    categories.update(material["kategorie"] for material in tools["materialien"])
     return {
         "projekt": STRUCT.get("projekt", "Mathematik NRW"),
         "stand": STRUCT.get("stand", date.today().isoformat()),
@@ -508,10 +520,12 @@ def build_catalog() -> dict:
                 if material["typ"] == "Fermi-Aufgabe"
             }),
             "methodenmaterialien": total_method_materials,
+            "werkzeuge": len(tools["materialien"]),
         },
         "kategorien": sorted(categories, key=lambda value: (value != "Lernspiel", value.lower())),
         "bereiche": areas,
         "methoden": methoden,
+        "werkzeuge": tools,
     }
 
 

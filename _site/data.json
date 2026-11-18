@@ -10,7 +10,8 @@
     "unterstuetzung": 12,
     "zusatzaufgaben": 187,
     "fermi_aufgaben": 160,
-    "methodenmaterialien": 1
+    "methodenmaterialien": 1,
+    "werkzeuge": 1
   },
   "kategorien": [
     "Lernspiel",
@@ -20,6 +21,7 @@
     "Quiz",
     "Unterstützung",
     "Video",
+    "Werkzeug",
     "Zusatzaufgaben"
   ],
   "bereiche": [
@@ -5214,6 +5216,20 @@
             ]
           }
         ]
+      }
+    ]
+  },
+  "werkzeuge": {
+    "titel": "Werkzeuge",
+    "beschreibung": "Fachübergreifende Tools für den Unterricht und das gemeinsame Arbeiten.",
+    "materialien": [
+      {
+        "titel": "Ruhe-Safari",
+        "datei": "ruhe-safari.html",
+        "typ": "HTML",
+        "kategorie": "Werkzeug",
+        "url": "tools/ruhe-safari.html",
+        "beschreibung": "Eine ruhige Arbeitsatmosphäre sichtbar machen: Wähle eine Themenwelt und lass bei ruhiger Arbeit Motive wachsen. Mit Mikrofon oder im Testmodus."
       }
     ]
   }

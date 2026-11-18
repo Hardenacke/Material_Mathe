@@ -72,6 +72,8 @@ Die Website führt über vier eigene Ansichten zum Material: **Klasse/Kurs → T
 
 Fächerübergreifende Methodenmaterialien liegen unter `methoden/sek-i/` oder `methoden/sek-ii/`. Der Methoden-Einstieg auf der Startseite führt über Schulstufe und Methodenthema zu den Materialien. Die Ablage zählt nicht zu den 9 Mathematik-Bereichen, 33 Inhaltsfeldern und 105 Themen der fachlichen Sollstruktur.
 
+Fachübergreifende Tools liegen unter `tools/` und erscheinen im eigenen Einstieg **Werkzeuge** auf der Startseite. Weitere Dateien werden beim Build automatisch in diesen Katalog aufgenommen; technische Asset-Ordner bleiben ausgeblendet. Die **Ruhe-Safari** (`tools/ruhe-safari.html`) lässt bei ruhiger Arbeit eine Themenwelt wachsen. Mikrofonzugriff benötigt HTTPS (GitHub Pages) oder localhost und die Freigabe im Browser; zum Ausprobieren gibt es einen Testmodus ohne Mikrofon. `werkzeuge/` bleibt die technische, unveröffentlichte Ablage für Build-Skripte und Backends. Die fachliche Sollstruktur bleibt unverändert.
+
 Lernspiele liegen gesammelt unter `lernspiele/`, damit ihre gemeinsame JavaScript-/CSS-Basis und Offline-Dateien erhalten bleiben. `werkzeuge/katalog.py` ordnet sie anhand von `lernspiele/data.json` fachlich den passenden vorhandenen Inhaltsfeldern und Themen zu und markiert sie auf der Website als Kategorie `Lernspiel`.
 
 Jahrgangsbezogene Question-Shell-Dateien liegen im jeweiligen Bereichsordner unter `unterstuetzung/`. Sie sind über die eigene Kategorie **Unterstützung** für den ganzen Kurs erreichbar. Unter **Zusatzaufgaben** eines Themenbereichs erscheinen ausschließlich die diesem Inhaltsfeld zugeordneten Fermi-Aufgaben. Eine zusätzliche kursweite Übersicht bietet alle Zusatzaufgaben des Jahrgangs an.

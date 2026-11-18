@@ -58,6 +58,10 @@ for stage in data.get("methoden",{}).get("stufen",[]):
     for topic in stage.get("themen",[]):
         for mat in topic.get("materialien",[]):
             check_material(mat)
+for mat in data.get("werkzeuge", {}).get("materialien", []):
+    check_material(mat)
+if (ROOT/"tools").exists() and s.get("werkzeuge", 0) < 1:
+    errors.append("Werkzeuge vorhanden, aber nicht im Katalog sichtbar.")
 if errors:
     print("SITE-PRÜFUNG FEHLGESCHLAGEN")
     for e in errors: print("-",e)

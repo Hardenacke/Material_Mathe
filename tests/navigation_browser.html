@@ -119,6 +119,20 @@
       await visit(invalid);
       assert(doc().querySelector("#view-title").textContent === "Seite nicht gefunden", "Ungültige Route nicht behandelt: " + invalid);
     }
+    await visit("#/?q=Ruhe-Safari");
+    assert(doc().querySelectorAll(".class-card").length === 0, "Werkzeug als Mathematikkurs einsortiert");
+    await click('.topic-button[href*="#/werkzeuge"]');
+    assert(doc().querySelector("#view-title").textContent === "Werkzeuge", "Werkzeuge-Einstieg fehlt");
+    assert(doc().querySelectorAll(".journey li").length === 2, "Werkzeuge-Schrittanzeige falsch");
+    const safariLink = doc().querySelector('.file-link[href*="/tools/ruhe-safari.html"]');
+    assert(safariLink && safariLink.textContent.includes("Ruhe-Safari"), "Ruhe-Safari fehlt");
+    assert(new URL(safariLink.href).searchParams.get("sammlung") === "#/werkzeuge?q=Ruhe-Safari", "Werkzeug-Rückweg fehlt");
+    await visit("#/werkzeuge?q=UNAUFFINDBAR");
+    assert(doc().querySelector(".empty-state"), "Leere Werkzeugsuche fehlt");
+    doc().querySelector(".clear-search").click();
+    assert(doc().querySelectorAll(".file-link").length === data.werkzeuge.materialien.length, "Werkzeug-Suchreset fehlerhaft");
+    await click(".back-button");
+    assert(doc().querySelectorAll(".class-card").length === 9, "Werkzeuge-Rückweg zur Startseite falsch");
     await visit("#/methoden");
     assert(doc().querySelectorAll(".file-link").length === 0, "Methodenmaterialien zu früh sichtbar");
     await click('.topic-button[href="#/methoden/sek-ii"]');
@@ -129,7 +143,7 @@
     for (const width of [320, 390, 768, 1024]) {
       frame.width = width;
       await pause(30);
-      for (const hash of ["#/", "#/q1-q2-leistungskurs", "#/q1-q2-leistungskurs/02-analytische-geometrie-und-lineare-algebra", "#/klasse-5/01-arithmetik-algebra/lernspiele"]) {
+      for (const hash of ["#/", "#/werkzeuge", "#/q1-q2-leistungskurs", "#/q1-q2-leistungskurs/02-analytische-geometrie-und-lineare-algebra", "#/klasse-5/01-arithmetik-algebra/lernspiele"]) {
         await visit(hash);
         assert(doc().documentElement.scrollWidth <= doc().documentElement.clientWidth, `Horizontaler Überlauf bei ${width}px: ${hash}, Inhalt ${doc().documentElement.scrollWidth}px`);
       }
@@ -186,8 +200,16 @@
     frame.src = lastReturn;
     await until(() => doc().querySelector(".file-link"));
     assert(doc().querySelector("#view-title").textContent === "Zusatzaufgaben", "Aufgabe führt nicht zur Zusatzaufgabenauswahl zurück");
+    frame.src = "/material-mathe/tools/ruhe-safari.html?sammlung=" + encodeURIComponent("#/werkzeuge");
+    await until(() => doc().getElementById("theme")?.options.length === 10 && doc().getElementById("sammlung-navigation"));
+    assert(doc().title.includes("Ruhe-Safari"), "Werkzeugtitel falsch");
+    assert(doc().getElementById("sammlung-navigation").shadowRoot.querySelector("a").hash === "#/werkzeuge", "Ruhe-Safari-Rückweg falsch");
+    doc().getElementById("demo").click();
+    assert(doc().getElementById("mic-note").textContent.includes("Demo ohne Mikrofon"), "Ruhe-Safari-Testmodus startet nicht");
+    assert(!doc().getElementById("pause").disabled, "Ruhe-Safari läuft nicht");
+    doc().getElementById("pause").click();
     assert(errors.length === 0, "JavaScript-Fehler: " + errors.join(", "));
-    output.textContent = `PASS: ${checks} Prüfungen; ${seen.size} unterschiedliche Mathematik-Materialien erreichbar; Methoden und Rückwege geprüft.`;
+    output.textContent = `PASS: ${checks} Prüfungen; ${seen.size} unterschiedliche Mathematik-Materialien erreichbar; Methoden, Werkzeuge, Ruhe-Safari-Demo und Rückwege geprüft.`;
   } catch (error) {
     output.textContent = `FAIL nach ${checks} Prüfungen: ${error.stack}`;
   }
