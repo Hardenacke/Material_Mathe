@@ -10,7 +10,7 @@
 .stage{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) clamp(48px,5.5vw,76px);background:#d6dac4;overflow:hidden}.scene{position:relative;isolation:isolate;min-width:0;height:100%;overflow:hidden;background:#b6cec0 center/cover no-repeat;container-type:size}.scale-sidebar{display:flex;align-items:center;justify-content:center;background:#f3f1e2;border-left:1px solid #d6dfc7;padding:calc(30px + env(safe-area-inset-top)) 14px calc(30px + env(safe-area-inset-bottom));cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.noise-meter{position:relative;width:19px;height:100%;max-height:80vh;border:2px solid #788a67;border-radius:99px;background:linear-gradient(to top,#78a56d 0%,#b4cb78 45%,#e3c071 70%,#c77965 100%)}.meter-dot{position:absolute;bottom:0;left:50%;width:25px;height:25px;background:#3e6042;border:3px solid #fff6df;border-radius:50%;transform:translate(-50%,50%);box-shadow:0 2px 5px #263b3244;transition:bottom .1s linear}.meter-target{position:absolute;left:-7px;right:-7px;height:3px;bottom:50%;border-radius:2px;background:#455a3c}.scale-tick{position:absolute;right:calc(100% + 7px);font-size:8px;color:#526049;font-variant-numeric:tabular-nums}.t100{top:-5px}.t50{top:calc(50% - 5px)}.t0{bottom:-5px}.placed{position:absolute;width:min(20%,24vh);width:min(20cqw,24cqh);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;transition:opacity .6s;z-index:2}.placed.unseen{opacity:0;visibility:hidden}.placed.sheltered{opacity:0}.placed.arrived .sprite{animation:arrive .7s ease-out!important}.placed.frightened .sprite{animation:flinch .32s ease-in-out infinite!important}.float{animation:float 7s ease-in-out infinite}.sway{animation:sway 8s ease-in-out infinite}.twinkle{animation:twinkle 7s ease-in-out infinite}#app.still .sprite{animation:none!important}.haze{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;background:#e8cea930;transition:opacity .6s}.startled .haze{opacity:1}.startled-sign{position:absolute;top:4%;right:4%;z-index:6;opacity:0;border:2px solid #ba8d51;background:#fff2dbdd;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:25px;font-weight:700;color:#966d39;transition:opacity .3s}.startled .startled-sign{opacity:1}.page-scene{overflow:hidden}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .placed .sprite img{animation:gentle-drift var(--motion-duration,8s) ease-in-out var(--motion-delay,0s) infinite}
 .world-plane{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);overflow:hidden;isolation:isolate;container-type:size;background:center/100% 100% no-repeat}
-.sprite.gentle{--motion-x:3%;--motion-y:0%;--motion-tilt:.6deg}
+.sprite.roaming img{animation-timing-function:linear}
 .ambient-layer{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .ambient-detail{position:absolute;display:block;animation-duration:var(--ambient-duration,15s);animation-delay:var(--ambient-delay,0s);animation-timing-function:ease-in-out;animation-iteration-count:infinite;pointer-events:none}
 .ambient-cloud{width:13%;height:6%;border-radius:50%;background:radial-gradient(ellipse at 30% 70%,#fff9 0 33%,transparent 35%),radial-gradient(ellipse at 54% 40%,#fff9 0 39%,transparent 41%),radial-gradient(ellipse at 78% 70%,#fff9 0 30%,transparent 32%);animation-name:ambient-drift;opacity:.55}
@@ -25,16 +25,13 @@
 .ambient-snow{width:.6%;aspect-ratio:1;border-radius:50%;background:#fff;animation-name:ambient-fall;opacity:.6}
 .ambient-aurora{width:27%;height:9%;filter:blur(7px);border-radius:50%;background:linear-gradient(115deg,transparent,#9ff9cb66,#bbb5ff55,transparent);animation-name:ambient-drift;opacity:.45}
 #app.still .ambient-detail{animation-play-state:paused}
-@keyframes ambient-drift{0%,100%{transform:translateX(-12%)}50%{transform:translateX(18%)}}
-@keyframes ambient-ripple{0%,100%{transform:scale(.75);opacity:.15}50%{transform:scale(1.15);opacity:.55}}
-@keyframes ambient-sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg)}}
-@keyframes ambient-rise{0%{transform:translateY(0);opacity:0}20%,75%{opacity:.55}100%{transform:translateY(-9cqh);opacity:0}}
-@keyframes ambient-fall{0%{transform:translate(0,0) rotate(0deg);opacity:0}20%,75%{opacity:.6}100%{transform:translate(2cqw,9cqh) rotate(35deg);opacity:0}}
-@keyframes ambient-twinkle{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:.85;transform:scale(1.2)}}
+@keyframes ambient-drift{0%,100%{transform:translate(-3cqw,0)}50%{transform:translate(4cqw,-1cqh)}}
+@keyframes ambient-ripple{0%,100%{transform:scale(.5);opacity:.15}50%{transform:scale(1.5);opacity:.8}}
+@keyframes ambient-sway{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(12deg)}}
+@keyframes ambient-rise{0%{transform:translateY(0);opacity:0}15%,80%{opacity:.7}100%{transform:translateY(-28cqh);opacity:0}}
+@keyframes ambient-fall{0%{transform:translate(0,0) rotate(0deg);opacity:0}15%,80%{opacity:.8}100%{transform:translate(6cqw,25cqh) rotate(70deg);opacity:0}}
+@keyframes ambient-twinkle{0%,100%{opacity:.1;transform:scale(.55)}50%{opacity:1;transform:scale(1.45)}}
 @media(prefers-reduced-motion:reduce){#app .ambient-detail{animation:none!important}}
-.sprite.roaming{--motion-x:14%;--motion-y:3%;--motion-tilt:2deg}
-.sprite.swimming{--motion-x:18%;--motion-y:7%;--motion-tilt:3deg}
-.sprite.fluttering{--motion-x:18%;--motion-y:12%;--motion-tilt:5deg}
 .placed.unseen .sprite img,.placed.sheltered .sprite img,.placed.frightened .sprite img{animation-play-state:paused}
 #app.still .sprite img{animation:none!important}
 @media(prefers-reduced-motion:reduce){#app .sprite img{animation:none!important}}
@@ -283,8 +280,12 @@ function renderScene(layout=null){
     actor.style.left=position.x*100+'%';actor.style.top=position.y*100+'%';actor.style.width=position.size*100+'%';
     actor.dataset.index=item.index;
     const visual=sprite(item),motion=RuheSafariScene.motionFor(w,item);visual.classList.add(motion);
-    visual.style.setProperty('--motion-duration',((motion==='gentle'?7:5.5)+item.index%5*.65)+'s');
-    visual.style.setProperty('--motion-delay',(-item.index*.7)+'s');
+    const profile=RuheSafariScene.motionProfileFor(w,item);
+    visual.style.setProperty('--motion-x',profile.horizontal*100+'%');
+    visual.style.setProperty('--motion-y',profile.vertical*100+'%');
+    visual.style.setProperty('--motion-tilt',profile.tilt+'deg');
+    visual.style.setProperty('--motion-duration',(profile.duration+item.index%5*.22)+'s');
+    visual.style.setProperty('--motion-delay',(-item.index*.43)+'s');
     actor.append(visual);plane.append(actor);actorNodes.set(item.index,actor);
   }
   const haze=document.createElement('div');haze.className='haze';haze.setAttribute('aria-hidden','true');plane.append(haze);

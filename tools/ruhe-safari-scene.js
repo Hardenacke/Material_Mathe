@@ -4,10 +4,10 @@
   const pond = [0.59, 0.73, 0.94, 0.94];
   const sea = [0.35, 0.26, 0.77, 0.45];
   const profiles = {
-    gentle: { horizontal: 0.03, vertical: 0, tilt: 0.6 },
-    roaming: { horizontal: 0.14, vertical: 0.03, tilt: 2 },
-    swimming: { horizontal: 0.18, vertical: 0.07, tilt: 3 },
-    fluttering: { horizontal: 0.18, vertical: 0.12, tilt: 5 }
+    gentle: { horizontal: 0.09, vertical: 0.02, tilt: 2, duration: 3.8 },
+    roaming: { horizontal: 0.55, vertical: 0.08, tilt: 3, duration: 2.8 },
+    swimming: { horizontal: 0.7, vertical: 0.18, tilt: 5, duration: 3 },
+    fluttering: { horizontal: 0.65, vertical: 0.32, tilt: 7, duration: 2.2 }
   };
 
   function motionFor(world, item) {
@@ -44,6 +44,10 @@
     return { zones: [ground], blocked: [] };
   }
 
+  function motionProfileFor(world, item) {
+    return profiles[motionFor(world, item)];
+  }
+
   function overlaps(first, second) {
     return first[0] < second[2] && first[2] > second[0] && first[1] < second[3] && first[3] > second[1];
   }
@@ -62,7 +66,7 @@
       for (const entry of items) {
         const { item, habitat } = entry;
         const size = height * 0.22 * scale * entry.variation;
-        const motion = profiles[motionFor(world, item)];
+        const motion = motionProfileFor(world, item);
         const halfWidth = size * (0.5 + motion.horizontal + 0.1) + 7;
         const halfHeight = size * (0.5 + motion.vertical + 0.1) + 7;
         const zones = habitat.zones.map((zone) => [zone[0] * 1000 + halfWidth, zone[1] * height + halfHeight,
@@ -115,7 +119,8 @@
         detail.className = `ambient-detail ambient-${kind}`;
         detail.style.left = (zone[0] + random() * (zone[2] - zone[0])) * 100 + '%';
         detail.style.top = (zone[1] + random() * (zone[3] - zone[1])) * 100 + '%';
-        detail.style.setProperty('--ambient-duration', (9 + random() * 16) + 's');
+        const duration = ['star', 'glint', 'ripple', 'grass'].includes(kind) ? 2.5 : 5;
+        detail.style.setProperty('--ambient-duration', (duration + random() * 3) + 's');
         detail.style.setProperty('--ambient-delay', (-random() * 30) + 's');
         layer.append(detail);
       }
@@ -123,5 +128,5 @@
     return layer;
   }
 
-  globalThis.RuheSafariScene = { motionFor, habitatFor, overlaps, createLayout, createAmbiance };
+  globalThis.RuheSafariScene = { motionFor, motionProfileFor, habitatFor, overlaps, createLayout, createAmbiance };
 })();

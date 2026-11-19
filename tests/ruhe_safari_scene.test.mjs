@@ -54,3 +54,13 @@ test('Wassertiere bleiben im Wasser und Landtiere meiden den Teich', () => {
     } else assert.ok(!scene.overlaps(placed.bounds, [0.59, 0.73, 0.94, 0.94]));
   }
 });
+
+test('Aktive Motive legen mindestens eine Körperlänge in kurzen Bewegungszyklen zurück', () => {
+  const examples = [['safari', 'Elefant'], ['unterwasser', 'Clownfisch'], ['zaubergarten', 'Schmetterling']];
+  for (const [worldId, name] of examples) {
+    const world = worlds.find((entry) => entry.id === worldId);
+    const profile = scene.motionProfileFor(world, world.items.find((item) => item.name === name));
+    assert.ok(profile.horizontal * 2 >= 1, name);
+    assert.ok(profile.duration <= 3, name);
+  }
+});
