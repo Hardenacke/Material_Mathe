@@ -1,21 +1,27 @@
 (() => {
-  const ground = [0.08, 0.48, 0.92, 0.94];
+  const ground = [0.08, 0.43, 0.92, 0.95];
   const sky = [0.08, 0.08, 0.92, 0.44];
   const pond = [0.59, 0.73, 0.94, 0.94];
   const sea = [0.35, 0.26, 0.77, 0.45];
   const profiles = {
-    gentle: { horizontal: 0.09, vertical: 0.02, tilt: 2, duration: 5.5 },
-    roaming: { horizontal: 0.55, vertical: 0.08, tilt: 3, duration: 3.8 },
-    swimming: { horizontal: 0.7, vertical: 0.18, tilt: 5, duration: 4.2 },
-    fluttering: { horizontal: 0.65, vertical: 0.32, tilt: 7, duration: 3.4 }
+    rooted: { horizontal: 0, vertical: 0, tilt: 0, duration: 16, speed: 0 },
+    gentle: { horizontal: 0.015, vertical: 0.005, tilt: 0.7, duration: 14, speed: 0 },
+    roaming: { horizontal: 0.02, vertical: 0.007, tilt: 0.8, duration: 12, speed: 0.008 },
+    swimming: { horizontal: 0.025, vertical: 0.012, tilt: 1.2, duration: 14, speed: 0.01 },
+    fluttering: { horizontal: 0.035, vertical: 0.025, tilt: 2, duration: 10, speed: 0.012 },
+    drifting: { horizontal: 0.015, vertical: 0.01, tilt: 1, duration: 16, speed: 0.006 },
+    crawling: { horizontal: 0.005, vertical: 0, tilt: 0.3, duration: 16, speed: 0.003 }
   };
 
   function motionFor(world, item) {
     if (['Schmetterling', 'Biene', 'Mosaikvogel'].includes(item.name)) return 'fluttering';
+    if (['Einsiedlerkrebs', 'Seestern'].includes(item.name)) return 'crawling';
     if ((world.id === 'unterwasser' && item.name !== 'Korallengruppe') || item.name === 'Mosaikfisch') return 'swimming';
     if (world.id === 'safari' || (world.id === 'dinosaurier' && item.name !== 'Dinosauriernest')
-      || ['Marienkäfer', 'Winterfuchs', 'Schneehase', 'Astronaut'].includes(item.name)) return 'roaming';
-    return 'gentle';
+      || ['Marienkäfer', 'Winterfuchs', 'Schneehase', 'Straßenbahn', 'Lastenrad'].includes(item.name)) return 'roaming';
+    if (['Astronaut', 'Versorgungsraumschiff', 'Satellit', 'Kleiner Satellit', 'Forschungsboot'].includes(item.name)) return 'drifting';
+    if (/Pflanze|Keimling|strauch|baum|blume|Tanne|Polarlicht|Schneeflocke|Koralle|Messboje|Wolke|Windrad/i.test(item.name)) return 'gentle';
+    return 'rooted';
   }
 
   function habitatFor(world, item) {
@@ -58,33 +64,55 @@
     const items = world.items.filter((item) => selected.includes(item.index)).map((item) => {
       const habitat = habitatFor(world, item);
       const area = habitat.zones.reduce((sum, zone) => sum + (zone[2] - zone[0]) * (zone[3] - zone[1]), 0);
-      return { item, habitat, priority: area + random() * 0.01, variation: 0.92 + random() * 0.16 };
+      const mobile = motionProfileFor(world, item).speed > 0;
+      const large = /Elefant|Nashorn|Nilpferd|Walhai|Langhalssaurier|Triceratops/.test(item.name);
+      return { item, habitat, priority: area + random() * 0.01,
+        preferred: large ? 0.125 : mobile ? 0.11 : 0.1,
+        minimum: large ? 0.08 : mobile ? 0.07 : 0.055 };
     }).sort((first, second) => first.priority - second.priority);
     if (!items.length) return { aspect, placements: [] };
-    for (let scale = 1; scale > 0.15; scale *= 0.88) {
+    for (let attemptLayout = 0; attemptLayout < 32; attemptLayout++) {
+      const scale = Math.max(0.5, 1 - attemptLayout * 0.035);
       const placements = [];
       for (const entry of items) {
         const { item, habitat } = entry;
-        const size = height * 0.22 * scale * entry.variation;
+        const size = Math.max(entry.minimum, entry.preferred * scale) * 1000;
         const motion = motionProfileFor(world, item);
-        const halfWidth = size * (0.5 + motion.horizontal + 0.1) + 7;
-        const halfHeight = size * (0.5 + motion.vertical + 0.1) + 7;
+        const halfWidth = size * (0.5 + motion.horizontal + 0.08) + 3;
+        const halfHeight = size * (0.5 + motion.vertical + 0.08) + 3;
         const zones = habitat.zones.map((zone) => [zone[0] * 1000 + halfWidth, zone[1] * height + halfHeight,
           zone[2] * 1000 - halfWidth, zone[3] * height - halfHeight]).filter((zone) => zone[0] <= zone[2] && zone[1] <= zone[3]);
         if (!zones.length) break;
         let candidate = null;
         let bestDistance = -1;
-        for (let attempt = 0; attempt < 220; attempt++) {
+        const grid = [];
+        if (attemptLayout >= 24) {
+          const related = items.filter((other) => JSON.stringify(other.habitat.zones) === JSON.stringify(habitat.zones));
+          const largest = Math.max(...related.map((other) => Math.max(other.minimum, other.preferred * scale))) * 1000;
+          const spacingWidth = largest * 1.23 + 6;
+          const spacingHeight = largest * 1.21 + 6;
+          for (const zone of habitat.zones) {
+            const columns = Math.floor((zone[2] - zone[0]) * 1000 / spacingWidth);
+            const rows = Math.floor((zone[3] - zone[1]) * height / spacingHeight);
+            for (let row = 0; row < rows; row++) for (let column = 0; column < columns; column++) {
+              grid.push({ left: zone[0] * 1000 + (column + 0.5) * (zone[2] - zone[0]) * 1000 / columns,
+                top: zone[1] * height + (row + 0.5) * (zone[3] - zone[1]) * height / rows });
+            }
+          }
+        }
+        for (let attempt = 0; attempt < (grid.length || 320); attempt++) {
           const zone = zones[Math.floor(random() * zones.length)];
-          const left = zone[0] + random() * (zone[2] - zone[0]);
-          const top = zone[1] + random() * (zone[3] - zone[1]);
+          const left = grid.length ? grid[attempt].left : zone[0] + random() * (zone[2] - zone[0]);
+          const top = grid.length ? grid[attempt].top : zone[1] + random() * (zone[3] - zone[1]);
+          if (!zones.some((allowed) => left >= allowed[0] && left <= allowed[2] && top >= allowed[1] && top <= allowed[3])) continue;
           const bounds = [(left - halfWidth) / 1000, (top - halfHeight) / height,
             (left + halfWidth) / 1000, (top + halfHeight) / height];
           if (habitat.blocked.some((blocked) => overlaps(bounds, blocked)) || placements.some((placed) => overlaps(bounds, placed.bounds))) continue;
           const distance = placements.length ? Math.min(...placements.map((placed) => Math.hypot(left - placed.x * 1000, top - placed.y * height))) : random();
           if (distance > bestDistance) {
             bestDistance = distance;
-            candidate = { index: item.index, x: left / 1000, y: top / height, size: size / 1000, bounds };
+            candidate = { index: item.index, x: left / 1000, y: top / height, size: size / 1000,
+              halfWidth: halfWidth / 1000, halfHeight: halfHeight / height, bounds };
           }
         }
         if (!candidate) break;
@@ -93,6 +121,155 @@
       if (placements.length === items.length) return { aspect, placements };
     }
     throw new Error('Für diese Auswahl konnten keine freien Plätze gefunden werden.');
+  }
+
+  function boundsAt(actor, point) {
+    return [point.x - actor.halfWidth, point.y - actor.halfHeight,
+      point.x + actor.halfWidth, point.y + actor.halfHeight];
+  }
+
+  function segmentHits(from, to, rectangle) {
+    let entry = 0;
+    let exit = 1;
+    for (const [start, end, minimum, maximum] of [[from.x, to.x, rectangle[0], rectangle[2]], [from.y, to.y, rectangle[1], rectangle[3]]]) {
+      const change = end - start;
+      if (Math.abs(change) < 1e-12) {
+        if (start <= minimum || start >= maximum) return false;
+      } else {
+        const first = (minimum - start) / change;
+        const second = (maximum - start) / change;
+        entry = Math.max(entry, Math.min(first, second));
+        exit = Math.min(exit, Math.max(first, second));
+        if (entry >= exit) return false;
+      }
+    }
+    return entry < exit;
+  }
+
+  function clearSegment(world, actor, from, to, actors) {
+    const item = world.items.find((item) => item.index === actor.index);
+    const habitat = habitatFor(world, item);
+    const start = boundsAt(actor, from);
+    const finish = boundsAt(actor, to);
+    if (!habitat.zones.some((zone) => start[0] >= zone[0] - 1e-10 && start[1] >= zone[1] - 1e-10 && start[2] <= zone[2] + 1e-10 && start[3] <= zone[3] + 1e-10
+      && finish[0] >= zone[0] - 1e-10 && finish[1] >= zone[1] - 1e-10 && finish[2] <= zone[2] + 1e-10 && finish[3] <= zone[3] + 1e-10)) return false;
+    const obstacles = [...habitat.blocked, ...actors.filter((other) => other.index !== actor.index).map((other) => other.bounds)];
+    return obstacles.every((bounds) => !segmentHits(from, to, [bounds[0] - actor.halfWidth, bounds[1] - actor.halfHeight,
+      bounds[2] + actor.halfWidth, bounds[3] + actor.halfHeight]));
+  }
+
+  function findRoute(world, actor, actors, random = Math.random) {
+    const item = world.items.find((item) => item.index === actor.index);
+    const habitat = habitatFor(world, item);
+    const obstacles = [...habitat.blocked, ...actors.filter((other) => other.index !== actor.index).map((other) => other.bounds)];
+    const unique = (values) => [...new Set(values.filter((value) => value >= 0 && value <= 1))].sort((first, second) => first - second);
+    const horizontal = unique([actor.x, ...Array.from({ length: 21 }, (_, index) => index / 20),
+      ...habitat.zones.flatMap((zone) => [zone[0] + actor.halfWidth + 0.0001, zone[2] - actor.halfWidth - 0.0001]),
+      ...obstacles.flatMap((bounds) => [bounds[0] - actor.halfWidth - 0.0001, bounds[2] + actor.halfWidth + 0.0001])]);
+    const vertical = unique([actor.y, ...Array.from({ length: 15 }, (_, index) => index / 14),
+      ...habitat.zones.flatMap((zone) => [zone[1] + actor.halfHeight + 0.0001, zone[3] - actor.halfHeight - 0.0001]),
+      ...obstacles.flatMap((bounds) => [bounds[1] - actor.halfHeight - 0.0001, bounds[3] + actor.halfHeight + 0.0001])]);
+    const columns = horizontal.length - 1;
+    const rows = vertical.length - 1;
+    const pointAt = (index) => ({ x: horizontal[index % (columns + 1)], y: vertical[Math.floor(index / (columns + 1))] });
+    const parents = new Map();
+    const queue = [];
+    const nearestColumn = horizontal.indexOf(actor.x);
+    const nearestRow = vertical.indexOf(actor.y);
+    for (let row = nearestRow - 1; row <= nearestRow + 1; row++) for (let column = nearestColumn - 1; column <= nearestColumn + 1; column++) {
+      if (column < 0 || column > columns || row < 0 || row > rows) continue;
+      const index = row * (columns + 1) + column;
+      if (clearSegment(world, actor, actor, pointAt(index), actors)) { parents.set(index, -1); queue.push(index); }
+    }
+    for (let cursor = 0; cursor < queue.length; cursor++) {
+      const index = queue[cursor];
+      const column = index % (columns + 1);
+      const row = Math.floor(index / (columns + 1));
+      for (const [horizontal, vertical] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, 1], [1, -1], [-1, -1]]) {
+        const nextColumn = column + horizontal;
+        const nextRow = row + vertical;
+        if (nextColumn < 0 || nextColumn > columns || nextRow < 0 || nextRow > rows) continue;
+        const next = nextRow * (columns + 1) + nextColumn;
+        if (parents.has(next) || !clearSegment(world, actor, pointAt(index), pointAt(next), actors)) continue;
+        parents.set(next, index); queue.push(next);
+      }
+    }
+    if (!queue.length) return [];
+    const distanceTo = (index) => Math.hypot(pointAt(index).x - actor.x, (pointAt(index).y - actor.y) / (1672 / 941));
+    const furthest = Math.max(...queue.map(distanceTo));
+    if (furthest < actor.size * 0.5) return [];
+    const destinations = queue.filter((index) => distanceTo(index) >= furthest * 0.9);
+    let target = destinations[Math.floor(random() * destinations.length)];
+    const path = [];
+    while (target !== -1) { path.unshift(pointAt(target)); target = parents.get(target); }
+    const simplified = [];
+    let start = actor;
+    while (path.length) {
+      let end = path.length - 1;
+      while (end > 0 && !clearSegment(world, actor, start, path[end], actors)) end--;
+      const point = path[end]; simplified.push(point); start = point; path.splice(0, end + 1);
+    }
+    return simplified;
+  }
+
+  function syncVisible(world, layout, visible, random = Math.random) {
+    const requested = new Set(visible);
+    const present = new Set((layout.present || []).filter((index) => requested.has(index)));
+    for (const actor of layout.placements) {
+      if (!requested.has(actor.index) || present.has(actor.index)) continue;
+      const obstacles = layout.placements.filter((other) => present.has(other.index)
+        || !motionProfileFor(world, world.items.find((item) => item.index === other.index)).speed);
+      let position = clearSegment(world, actor, actor, actor, obstacles) ? actor : null;
+      const item = world.items.find((item) => item.index === actor.index);
+      const zones = habitatFor(world, item).zones;
+      for (let attempt = 0; !position && attempt < 400; attempt++) {
+        const zone = zones[Math.floor(random() * zones.length)];
+        const point = { x: zone[0] + actor.halfWidth + random() * (zone[2] - zone[0] - actor.halfWidth * 2),
+          y: zone[1] + actor.halfHeight + random() * (zone[3] - zone[1] - actor.halfHeight * 2) };
+        if (clearSegment(world, actor, point, point, obstacles)) position = point;
+      }
+      if (!position) continue;
+      if (position !== actor) { actor.x = position.x; actor.y = position.y; actor.bounds = boundsAt(actor, actor); }
+      if (layout.travel) delete layout.travel[actor.index];
+      present.add(actor.index);
+    }
+    layout.present = [...present];
+    return layout.present;
+  }
+
+  function stepMotion(world, layout, visible, seconds, random = Math.random) {
+    const elapsed = Math.max(0, Math.min(0.1, seconds));
+    if (!elapsed) return [];
+    const active = new Set(syncVisible(world, layout, visible, random));
+    const obstacles = layout.placements.filter((actor) => active.has(actor.index)
+      || !motionProfileFor(world, world.items.find((item) => item.index === actor.index)).speed);
+    const moved = [];
+    layout.travel ||= {};
+    let planned = false;
+    for (const actor of layout.placements) {
+      const item = world.items.find((item) => item.index === actor.index);
+      const speed = motionProfileFor(world, item).speed;
+      if (!active.has(actor.index) || !speed) continue;
+      const travel = layout.travel[actor.index] ||= { path: [], wait: 1 + random() * 4 };
+      if (travel.wait > 0) { travel.wait -= elapsed; continue; }
+      if (!travel.path.length) {
+        if (planned || Object.entries(layout.travel).filter(([index, entry]) => active.has(Number(index)) && entry.path.length).length >= 3) continue;
+        travel.path = findRoute(world, actor, obstacles, random); planned = true;
+        if (!travel.path.length) { travel.wait = 3 + random() * 4; continue; }
+      }
+      const target = travel.path[0];
+      const distance = Math.hypot(target.x - actor.x, (target.y - actor.y) / layout.aspect);
+      const stride = Math.min(distance, speed * elapsed * Math.min(1, 0.25 + distance / 0.015));
+      const portion = distance ? stride / distance : 1;
+      const next = { x: actor.x + (target.x - actor.x) * portion, y: actor.y + (target.y - actor.y) * portion };
+      if (!clearSegment(world, actor, actor, next, obstacles)) {
+        travel.path = []; travel.wait = 2 + random() * 3; continue;
+      }
+      actor.x = next.x; actor.y = next.y; actor.bounds = boundsAt(actor, actor); moved.push(actor);
+      if (distance <= stride + 1e-8) travel.path.shift();
+      if (!travel.path.length) travel.wait = 2 + random() * 5;
+    }
+    return moved;
   }
 
   const ambiance = {
@@ -178,5 +355,5 @@
     return layer;
   }
 
-  globalThis.RuheSafariScene = { motionFor, motionProfileFor, moodFor, habitatFor, overlaps, createLayout, createAmbiance };
+  globalThis.RuheSafariScene = { motionFor, motionProfileFor, moodFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
 })();

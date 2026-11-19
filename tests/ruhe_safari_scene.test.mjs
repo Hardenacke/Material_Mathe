@@ -24,7 +24,8 @@ for (const world of worlds) {
       for (const [index, placed] of layout.placements.entries()) {
         const item = world.items.find((entry) => entry.index === placed.index);
         const habitat = scene.habitatFor(world, item);
-        assert.ok(placed.size > 0.02, `${item.name} ist zu klein`);
+        assert.ok(placed.size >= 0.055, `${item.name} ist zu klein`);
+        if (scene.motionProfileFor(world, item).speed > 0) assert.ok(placed.size >= 0.07, item.name);
         assert.ok(habitat.zones.some((zone) => placed.bounds[0] >= zone[0] - 1e-10 && placed.bounds[1] >= zone[1] - 1e-10
           && placed.bounds[2] <= zone[2] + 1e-10 && placed.bounds[3] <= zone[3] + 1e-10), `${item.name} verlässt seine Zone`);
         assert.ok(habitat.blocked.every((blocked) => !scene.overlaps(placed.bounds, blocked)));
@@ -55,13 +56,78 @@ test('Wassertiere bleiben im Wasser und Landtiere meiden den Teich', () => {
   }
 });
 
-test('Aktive Motive behalten große Wege bei ruhigeren Bewegungszyklen', () => {
+test('Aktive Motive bewegen sich langsam; Gebäude bleiben an ihrem Platz', () => {
   const examples = [['safari', 'Elefant'], ['unterwasser', 'Clownfisch'], ['zaubergarten', 'Schmetterling']];
   for (const [worldId, name] of examples) {
     const world = worlds.find((entry) => entry.id === worldId);
     const profile = scene.motionProfileFor(world, world.items.find((item) => item.name === name));
-    assert.ok(profile.horizontal * 2 >= 1, name);
-    assert.ok(profile.duration >= 3 && profile.duration <= 5, name);
+    assert.ok(profile.speed > 0 && profile.speed <= 0.012, name);
+    assert.ok(profile.duration >= 10, name);
+  }
+  const city = worlds.find((world) => world.id === 'zukunftsstadt');
+  assert.equal(scene.motionProfileFor(city, city.items.find((item) => item.name === 'Wohnhaus')).speed, 0);
+});
+
+test('Einzelne Tiere finden Wege durch ihre ganze Landschaft und meiden den Teich', () => {
+  const world = worlds.find((world) => world.id === 'safari');
+  const layout = scene.createLayout(world, [0], seededRandom(2));
+  const actor = layout.placements[0];
+  const route = scene.findRoute(world, actor, layout.placements, seededRandom(3));
+  assert.ok(route.length > 0);
+  const destination = route.at(-1);
+  assert.ok(Math.hypot(destination.x - actor.x, (destination.y - actor.y) / layout.aspect) > 0.3);
+  const start = { x: actor.x, y: actor.y };
+  const random = seededRandom(5);
+  let furthest = 0;
+  for (let frame = 0; frame < 1000; frame++) {
+    scene.stepMotion(world, layout, [actor.index], 0.1, random);
+    furthest = Math.max(furthest, Math.hypot(actor.x - start.x, (actor.y - start.y) / layout.aspect));
+  }
+  assert.ok(furthest > 0.3, `Zurückgelegter Bereich: ${furthest}`);
+});
+
+test('Neue Entdeckungen erscheinen auch während des Wanderns ohne Zusammenstoß', () => {
+  for (const world of worlds) {
+    const random = seededRandom(23);
+    const layout = scene.createLayout(world, world.items.map((item) => item.index), random);
+    let travelled = 0;
+    for (let frame = 0; frame < 1200; frame++) {
+      const requested = world.items.slice(0, 1 + Math.floor(frame / 100)).map((item) => item.index);
+      scene.syncVisible(world, layout, requested, random);
+      const before = new Map(layout.placements.map((actor) => [actor.index, { x: actor.x, y: actor.y }]));
+      for (const actor of scene.stepMotion(world, layout, requested, 0.1, random)) {
+        const previous = before.get(actor.index);
+        travelled += Math.hypot(actor.x - previous.x, (actor.y - previous.y) / layout.aspect);
+      }
+      const actors = layout.placements.filter((actor) => layout.present.includes(actor.index));
+      for (const [index, actor] of actors.entries()) for (const other of actors.slice(index + 1)) assert.ok(!scene.overlaps(actor.bounds, other.bounds), world.id);
+    }
+    if (world.items.some((item) => scene.motionProfileFor(world, item).speed)) assert.ok(travelled > 0.03, world.id);
+  }
+});
+
+test('Große Motive bleiben beim langsamen Wandern in allen Welten kollisionsfrei', () => {
+  for (const world of worlds) {
+    const random = seededRandom(19);
+    const layout = scene.createLayout(world, world.items.map((item) => item.index), random);
+    const starts = structuredClone(layout.placements);
+    const visible = world.items.map((item) => item.index);
+    for (let frame = 0; frame < 1200; frame++) {
+      const previous = structuredClone(layout.placements);
+      scene.stepMotion(world, layout, visible, 0.1, random);
+      for (const [index, actor] of layout.placements.entries()) {
+        const item = world.items.find((item) => item.index === actor.index);
+        const profile = scene.motionProfileFor(world, item);
+        const before = previous[index];
+        assert.ok(Math.hypot(actor.x - before.x, (actor.y - before.y) / layout.aspect) <= profile.speed * 0.1 + 1e-10);
+        const habitat = scene.habitatFor(world, item);
+        assert.ok(habitat.zones.some((zone) => actor.bounds[0] >= zone[0] - 1e-10 && actor.bounds[1] >= zone[1] - 1e-10
+          && actor.bounds[2] <= zone[2] + 1e-10 && actor.bounds[3] <= zone[3] + 1e-10));
+        assert.ok(habitat.blocked.every((blocked) => !scene.overlaps(actor.bounds, blocked)));
+        for (const other of layout.placements.slice(index + 1)) assert.ok(!scene.overlaps(actor.bounds, other.bounds));
+        if (!profile.speed) assert.deepEqual(actor, starts[index]);
+      }
+    }
   }
 });
 

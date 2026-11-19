@@ -191,6 +191,7 @@ let session=0,frame=0,lastFrame=null,lastPaint=0,smoothDb=null,calibration=[],ca
 let pausedRound=null;
 let actorNodes=new Map(),lastVisible=new Set(),deviceSelection='';
 let sceneLayout=null;
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 const mediaPromises=new Map();
 try{
   const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
@@ -320,14 +321,23 @@ function renderScene(layout=null){
   refreshVisibility();
 }
 function refreshVisibility(){
-  if(!engine)return;
-  const visible=new Set(engine.visible()),earned=new Set(engine.earned);$('scene').classList.toggle('startled',engine.startled);
+  if(!engine||!sceneLayout)return;
+  const visible=new Set(RuheSafariScene.syncVisible(current(),sceneLayout,engine.visible())),earned=new Set(engine.earned);$('scene').classList.toggle('startled',engine.startled);
   for(const [id,el] of actorNodes){
+    const position=sceneLayout.placements.find(actor=>actor.index===id);
+    el.style.left=position.x*100+'%';el.style.top=position.y*100+'%';
     el.classList.toggle('unseen',!earned.has(id));el.classList.toggle('sheltered',earned.has(id)&&!visible.has(id));el.classList.toggle('frightened',engine.startled&&visible.has(id));
     el.setAttribute('aria-hidden',String(!visible.has(id)));
     if(visible.has(id)&&!lastVisible.has(id)){el.classList.add('arrived');setTimeout(()=>el.classList.remove('arrived'),750);}
   }
   lastVisible=visible;$('scene').setAttribute('aria-label',current().name+' · '+visible.size+' sichtbare Motive');
+}
+function moveActors(seconds){
+  if(!engine||!sceneLayout||mode!=='running'||engine.startled||!state.settings.motion||reducedMotion.matches)return;
+  for(const actor of RuheSafariScene.stepMotion(current(),sceneLayout,engine.visible(),seconds)){
+    const node=actorNodes.get(actor.index);
+    if(node){node.style.left=actor.x*100+'%';node.style.top=actor.y*100+'%';}
+  }
 }
 function setView(next){
   view=next;const live=next==='scene';$('setup').hidden=live;$('stage').hidden=!live;document.body.classList.toggle('page-scene',live);
@@ -458,6 +468,7 @@ function loop(time){
       setStatus('mic-status','✓ Mikrofon bereit. Die Skala reagiert auf deine Stimme. Jetzt kannst du die Welt starten.');
     }else setStatus('mic-status','Raum einmessen: noch '+Math.max(1,Math.ceil(6-calibrationTime))+' Sekunden bei der gewünschten Arbeitsruhe bleiben.');
   }else if(mode==='running')engine.tick(smoothDb,dt,state.settings);
+  moveActors(dt);
   if(time-lastPaint>=100||lastPaint===0){lastPaint=time;paint(smoothDb);}frame=requestAnimationFrame(loop);
 }
 $('theme').value=state.theme;$('interval').value=String(state.settings.interval);$('tolerance').value=String(state.settings.tolerance);

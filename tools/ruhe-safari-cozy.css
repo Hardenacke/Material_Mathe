@@ -154,6 +154,7 @@ summary, .options label { font-size: 14px; line-height: 1.6; }
 .meter-target { background: var(--cozy-ink); }
 .scale-tick { font-size: 11px; color: var(--cozy-ink); right: calc(100% + 7px); }
 .sprite.roaming img { animation-timing-function: ease-in-out; }
+.sprite.rooted img { animation: none; }
 .placed.frightened .sprite { animation-duration: .85s !important; }
 .haze { background: #e8cea91c; }
 .startled-sign { background: #fff3dce6; border-color: #c8a778; color: #896b43; }
