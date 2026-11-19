@@ -354,6 +354,49 @@
     return moods[world.id] || moods.safari;
   }
 
+  const effectProfiles = {
+    cloud: { rotation: 4, skew: 6, stretchX: 0.24, stretchY: 0.18, sway: 1.5, morph: 16 },
+    ripple: { rotation: 4, skew: 4, stretchX: 0.25, stretchY: 0.14, sway: 1, morph: 3 },
+    grass: { rotation: 7, skew: 3, stretchX: 0.18, stretchY: 0.22, sway: 5, morph: 0 },
+    bubble: { rotation: 6, skew: 1, stretchX: 0.1, stretchY: 0.07, sway: 2, morph: 3 },
+    ray: { rotation: 7, skew: 2, stretchX: 0.2, stretchY: 0.15, sway: 3, morph: 0 },
+    star: { rotation: 0, skew: 0, stretchX: 0.18, stretchY: 0.18, sway: 0, morph: 0 },
+    glint: { rotation: 0, skew: 0, stretchX: 0.2, stretchY: 0.2, sway: 0, morph: 0 },
+    pollen: { rotation: 20, skew: 2, stretchX: 0.16, stretchY: 0.12, sway: 4, morph: 8 },
+    leaf: { rotation: 35, skew: 8, stretchX: 0.2, stretchY: 0.25, sway: 14, morph: 15 },
+    snow: { rotation: 0, skew: 0, stretchX: 0.2, stretchY: 0.15, sway: 0, morph: 3 },
+    aurora: { rotation: 5, skew: 8, stretchX: 0.12, stretchY: 0.2, sway: 3, morph: 17 },
+    sunshine: { rotation: 0, skew: 0, stretchX: 0.07, stretchY: 0.07, sway: 0, morph: 0 },
+    sunbeam: { rotation: 4, skew: 2, stretchX: 0.18, stretchY: 0.14, sway: 2, morph: 0 },
+    caustic: { rotation: 5, skew: 6, stretchX: 0.15, stretchY: 0.16, sway: 2, morph: 14 },
+    nebula: { rotation: 14, skew: 8, stretchX: 0.2, stretchY: 0.2, sway: 3, morph: 18 },
+    meteor: { rotation: 7, skew: 0, stretchX: 0.2, stretchY: 0.1, sway: 0, morph: 0 },
+    rainbow: { rotation: 2, skew: 1, stretchX: 0.08, stretchY: 0.05, sway: 0.5, morph: 0 },
+    firefly: { rotation: 0, skew: 0, stretchX: 0.18, stretchY: 0.15, sway: 0, morph: 0 },
+    prism: { rotation: 8, skew: 6, stretchX: 0.15, stretchY: 0.12, sway: 2, morph: 10 },
+    mist: { rotation: 3, skew: 5, stretchX: 0.22, stretchY: 0.18, sway: 1, morph: 18 },
+    'sea-sparkle': { rotation: 25, skew: 2, stretchX: 0.18, stretchY: 0.12, sway: 1, morph: 0 },
+    frost: { rotation: 35, skew: 2, stretchX: 0.12, stretchY: 0.12, sway: 1, morph: 0 },
+    confetti: { rotation: 35, skew: 8, stretchX: 0.2, stretchY: 0.2, sway: 12, morph: 18 }
+  };
+
+  function effectVariationFor(kind, random = Math.random) {
+    const profile = effectProfiles[kind] || effectProfiles.pollen;
+    const signed = (limit) => (random() * 2 - 1) * limit;
+    const radius = () => Array.from({ length: 4 }, () => (50 + signed(profile.morph)).toFixed(1) + '%').join(' ')
+      + ' / ' + Array.from({ length: 4 }, () => (50 + signed(profile.morph)).toFixed(1) + '%').join(' ');
+    const rotation = (kind === 'meteor' ? 25 : 0) + signed(profile.rotation);
+    const driftX = 1.5 + random() * 2.5;
+    const fallX = kind === 'meteor' ? 18 + random() * 10 : 2 + random() * 4;
+    return {
+      rotation, skew: signed(profile.skew), scaleX: 1 + signed(profile.stretchX), scaleY: 1 + signed(profile.stretchY),
+      sway: profile.sway * (0.65 + random() * 0.35), driftX, driftY: 0.4 + random() * 1.2,
+      fallX, fallY: kind === 'meteor' ? fallX * (1672 / 941) * Math.tan(rotation * Math.PI / 180) : 18 + random() * 12,
+      radiusStart: radius(), radiusEnd: radius(), puffLeft: 23 + random() * 12, puffTop: 32 + random() * 16,
+      opacity: 0.8 + random() * 0.2
+    };
+  }
+
   function createAmbiance(world, random = Math.random) {
     const layer = document.createElement('div');
     layer.className = 'ambient-layer';
@@ -364,18 +407,30 @@
       for (let index = 0; index < count; index++) {
         const detail = document.createElement('span');
         detail.className = `ambient-detail ambient-${kind}`;
-        detail.style.left = (zone[0] + random() * (zone[2] - zone[0])) * 100 + '%';
-        detail.style.top = (zone[1] + random() * (zone[3] - zone[1])) * 100 + '%';
+        const placement = kind === 'ripple' ? [zone[0] + 0.03, zone[1] + 0.025, zone[2] - 0.12, zone[3] - 0.05]
+          : kind === 'sea-sparkle' ? [zone[0] + 0.01, zone[1] + 0.015, zone[2] - 0.01, zone[3] - 0.015] : zone;
+        detail.style.left = (placement[0] + random() * (placement[2] - placement[0])) * 100 + '%';
+        detail.style.top = (placement[1] + random() * (placement[3] - placement[1])) * 100 + '%';
         const duration = kind === 'meteor' ? 18 : ['star', 'glint', 'ripple', 'grass', 'sea-sparkle', 'frost'].includes(kind) ? 5 : 9;
         detail.style.setProperty('--ambient-duration', (duration + random() * 4) + 's');
         detail.style.setProperty('--ambient-delay', (-random() * 30) + 's');
         detail.style.setProperty('--atmosphere-color', colors[index % colors.length]);
         detail.style.setProperty('--beam-angle', ((index - (count - 1) / 2) * 18) + 'deg');
+        const shape = effectVariationFor(kind, random);
+        for (const key of ['rotation', 'skew', 'sway']) detail.style.setProperty('--effect-' + key, shape[key].toFixed(3) + 'deg');
+        for (const key of ['scaleX', 'scaleY', 'opacity']) detail.style.setProperty('--effect-' + key.replace(/[A-Z]/g, (letter) => '-' + letter.toLowerCase()), shape[key].toFixed(3));
+        for (const [key, unit] of [['driftX', 'cqw'], ['driftY', 'cqh'], ['fallX', 'cqw'], ['fallY', 'cqh']]) {
+          detail.style.setProperty('--effect-' + key.replace(/[A-Z]/g, (letter) => '-' + letter.toLowerCase()), shape[key].toFixed(3) + unit);
+        }
+        detail.style.setProperty('--effect-radius-start', shape.radiusStart);
+        detail.style.setProperty('--effect-radius-end', shape.radiusEnd);
+        detail.style.setProperty('--cloud-puff-left', shape.puffLeft.toFixed(2) + '%');
+        detail.style.setProperty('--cloud-puff-top', shape.puffTop.toFixed(2) + '%');
         layer.append(detail);
       }
     }
     return layer;
   }
 
-  globalThis.RuheSafariScene = { motionFor, motionProfileFor, sizeProfileFor, shuffleOrder, moodFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
+  globalThis.RuheSafariScene = { motionFor, motionProfileFor, sizeProfileFor, shuffleOrder, moodFor, effectVariationFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
 })();

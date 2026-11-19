@@ -78,6 +78,8 @@ Die Ruhe-Safari ergänzt jede Welt um bewegte Hintergrunddetails wie Wolken, Was
 
 Zusätzliche Farbstimmungen passen zur jeweiligen Welt: goldener Sonnenschein in der Savanne, türkisfarbene Wasserreflexe, bunte Nebel und Sternschnuppen im All, Regenbogen und Leuchtpunkte im Garten, tropisches Meeresfunkeln, Polarlichter und Schneeglitzern sowie farbige Lichtreflexe in Murmelbahn und Kunstwerk. Die Effekte bleiben hinter den Motiven und folgen ebenfalls dem Bewegungsschalter.
 
+Atmosphärische Details erhalten individuelle, leicht verformte oder geneigte Formen und unterschiedliche Bewegungsbahnen. Wolken verändern weich ihre Konturen, Wasserkringel bleiben flach, Sonnenstrahlen schwenken an ihrer Lichtquelle und Sternschnuppen sind entlang ihrer geraden Flugbahn ausgerichtet. Die zusätzlichen Form- und Bewegungsstile liegen in `tools/ruhe-safari-atmosphere.css`; die gemütliche Geschwindigkeit und reduzierte Bewegung bleiben erhalten.
+
 Die gemütliche Gestaltung verwendet Creme- und Salbeitöne, weiche Bildrahmen, pastelliges Licht und ruhigeres Funkeln. Jede Welt hat eine eigene Rahmenfarbe, auch mit dunklen Nachtfarben im All. Tiere behalten ihre gut sichtbaren Bewegungswege bei sanfteren Bewegungszyklen. Die zusätzlichen Stile liegen lokal in `tools/ruhe-safari-cozy.css`.
 
 Motive haben feste Mindestgrößen und werden für lange Wege nicht verkleinert. Tiere, Fische, Insekten und geeignete Fahrzeuge erkunden langsam die erreichbaren Bereiche ihrer Landschaft; Pflanzen und Gebäude bleiben verankert. Die Wegsuche berücksichtigt Boden und Wasser, Hindernisse und andere Figuren. Bei wenig Platz warten Motive. Neue Entdeckungen erhalten einen freien Erscheinungsplatz; Pause, Bewegungsschalter und reduzierte Bewegung halten auch das Wandern an.

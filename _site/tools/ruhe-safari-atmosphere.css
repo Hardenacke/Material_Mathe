@@ -1,0 +1,147 @@
+.ambient-detail {
+  --effect-anchor-x: 0%;
+  --effect-anchor-y: 0%;
+  transform: translate(var(--effect-anchor-x), var(--effect-anchor-y)) rotate(var(--effect-rotation)) skewX(var(--effect-skew)) scale(var(--effect-scale-x), var(--effect-scale-y));
+}
+.ambient-sunshine, .ambient-nebula, .ambient-rainbow, .ambient-caustic, .ambient-prism, .ambient-mist {
+  --effect-anchor-x: -50%;
+  --effect-anchor-y: -50%;
+}
+.ambient-aurora { --effect-anchor-x: -25%; --effect-anchor-y: -15%; }
+.ambient-sunbeam {
+  --effect-anchor-x: -50%;
+  transform: translateX(-50%) rotate(calc(var(--beam-angle) + var(--effect-rotation))) skewX(var(--effect-skew)) scale(var(--effect-scale-x), var(--effect-scale-y));
+}
+.ambient-cloud, .ambient-ripple, .ambient-bubble, .ambient-pollen, .ambient-snow,
+.ambient-aurora, .ambient-caustic, .ambient-nebula, .ambient-prism, .ambient-mist, .ambient-confetti {
+  border-radius: var(--effect-radius-start);
+}
+.ambient-cloud {
+  background: radial-gradient(ellipse at var(--cloud-puff-left) 70%, #fff9 0 33%, transparent 35%),
+    radial-gradient(ellipse at 54% var(--cloud-puff-top), #fff9 0 39%, transparent 41%),
+    radial-gradient(ellipse at 78% 70%, #fff9 0 30%, transparent 32%);
+}
+
+@keyframes ambient-drift {
+  0%, 100% {
+    transform: translate(calc(var(--effect-anchor-x) - var(--effect-drift-x)), var(--effect-anchor-y)) rotate(calc(var(--effect-rotation) - var(--effect-sway))) skewX(var(--effect-skew)) scale(var(--effect-scale-x), var(--effect-scale-y));
+    border-radius: var(--effect-radius-start);
+  }
+  50% {
+    transform: translate(calc(var(--effect-anchor-x) + var(--effect-drift-x)), calc(var(--effect-anchor-y) - var(--effect-drift-y))) rotate(calc(var(--effect-rotation) + var(--effect-sway))) skewX(var(--effect-skew)) scale(calc(var(--effect-scale-x) * 1.03), calc(var(--effect-scale-y) * .98));
+    border-radius: var(--effect-radius-end);
+  }
+}
+@keyframes ambient-ripple {
+  0%, 100% {
+    transform: rotate(var(--effect-rotation)) skewX(var(--effect-skew)) scale(calc(var(--effect-scale-x) * .55), calc(var(--effect-scale-y) * .7));
+    border-radius: var(--effect-radius-start);
+    opacity: calc(var(--effect-opacity) * .15);
+  }
+  50% {
+    transform: rotate(calc(var(--effect-rotation) + var(--effect-sway))) skewX(var(--effect-skew)) scale(calc(var(--effect-scale-x) * 1.4), calc(var(--effect-scale-y) * 1.15));
+    border-radius: var(--effect-radius-end);
+    opacity: calc(var(--effect-opacity) * .7);
+  }
+}
+@keyframes ambient-sway {
+  0%, 100% { transform: rotate(calc(var(--effect-rotation) - var(--effect-sway))) skewX(var(--effect-skew)) scale(var(--effect-scale-x), var(--effect-scale-y)); }
+  50% { transform: rotate(calc(var(--effect-rotation) + var(--effect-sway))) skewX(calc(var(--effect-skew) * .6)) scale(var(--effect-scale-x), var(--effect-scale-y)); }
+}
+@keyframes ambient-rise {
+  0% {
+    transform: translate(0, 0) rotate(var(--effect-rotation)) scale(var(--effect-scale-x), var(--effect-scale-y));
+    border-radius: var(--effect-radius-start);
+    opacity: 0;
+  }
+  20%, 75% { opacity: calc(var(--effect-opacity) * .65); }
+  50% { border-radius: var(--effect-radius-end); }
+  100% {
+    transform: translate(var(--effect-drift-x), calc(0cqh - var(--effect-fall-y))) rotate(calc(var(--effect-rotation) + var(--effect-sway))) scale(calc(var(--effect-scale-x) * 1.04), calc(var(--effect-scale-y) * .97));
+    border-radius: var(--effect-radius-start);
+    opacity: 0;
+  }
+}
+@keyframes ambient-fall {
+  0% {
+    transform: translate(0, 0) rotate(var(--effect-rotation)) skewX(var(--effect-skew)) scale(var(--effect-scale-x), var(--effect-scale-y));
+    opacity: 0;
+  }
+  20%, 75% { opacity: calc(var(--effect-opacity) * .7); }
+  50% { transform: translate(calc(var(--effect-fall-x) * .35), calc(var(--effect-fall-y) * .5)) rotate(calc(var(--effect-rotation) - var(--effect-sway))) skewX(calc(var(--effect-skew) * -.5)) scale(var(--effect-scale-x), var(--effect-scale-y)); }
+  100% {
+    transform: translate(var(--effect-fall-x), var(--effect-fall-y)) rotate(calc(var(--effect-rotation) + var(--effect-sway))) skewX(var(--effect-skew)) scale(var(--effect-scale-x), var(--effect-scale-y));
+    opacity: 0;
+  }
+}
+@keyframes ambient-twinkle {
+  0%, 100% {
+    transform: rotate(var(--effect-rotation)) skewX(var(--effect-skew)) scale(calc(var(--effect-scale-x) * .85), calc(var(--effect-scale-y) * .85));
+    opacity: calc(var(--effect-opacity) * .35);
+  }
+  50% {
+    transform: rotate(calc(var(--effect-rotation) + var(--effect-sway))) skewX(var(--effect-skew)) scale(calc(var(--effect-scale-x) * 1.15), calc(var(--effect-scale-y) * 1.15));
+    opacity: calc(var(--effect-opacity) * .8);
+  }
+}
+@keyframes atmosphere-glow {
+  0%, 100% {
+    transform: translate(var(--effect-anchor-x), var(--effect-anchor-y)) rotate(calc(var(--effect-rotation) - var(--effect-sway))) skewX(var(--effect-skew)) scale(calc(var(--effect-scale-x) * .96), calc(var(--effect-scale-y) * .98));
+    opacity: calc(var(--effect-opacity) * .45);
+  }
+  50% {
+    transform: translate(var(--effect-anchor-x), var(--effect-anchor-y)) rotate(calc(var(--effect-rotation) + var(--effect-sway))) skewX(calc(var(--effect-skew) * .6)) scale(calc(var(--effect-scale-x) * 1.06), calc(var(--effect-scale-y) * 1.03));
+    opacity: calc(var(--effect-opacity) * .65);
+  }
+}
+@keyframes atmosphere-beam {
+  0%, 100% {
+    transform: translateX(-50%) rotate(calc(var(--beam-angle) + var(--effect-rotation) - var(--effect-sway))) skewX(var(--effect-skew)) scale(var(--effect-scale-x), var(--effect-scale-y));
+    opacity: calc(var(--effect-opacity) * .3);
+  }
+  50% {
+    transform: translateX(-50%) rotate(calc(var(--beam-angle) + var(--effect-rotation) + var(--effect-sway))) skewX(calc(var(--effect-skew) * .7)) scale(calc(var(--effect-scale-x) * 1.04), var(--effect-scale-y));
+    opacity: calc(var(--effect-opacity) * .55);
+  }
+}
+@keyframes atmosphere-water {
+  0%, 100% {
+    transform: translate(var(--effect-anchor-x), var(--effect-anchor-y)) rotate(calc(var(--effect-rotation) - var(--effect-sway))) skewX(var(--effect-skew)) scale(var(--effect-scale-x), var(--effect-scale-y));
+    border-radius: var(--effect-radius-start);
+    opacity: calc(var(--effect-opacity) * .35);
+  }
+  50% {
+    transform: translate(calc(var(--effect-anchor-x) + var(--effect-drift-x)), calc(var(--effect-anchor-y) - var(--effect-drift-y))) rotate(calc(var(--effect-rotation) + var(--effect-sway))) skewX(calc(var(--effect-skew) * -.5)) scale(calc(var(--effect-scale-x) * 1.04), calc(var(--effect-scale-y) * .96));
+    border-radius: var(--effect-radius-end);
+    opacity: calc(var(--effect-opacity) * .6);
+  }
+}
+@keyframes atmosphere-meteor {
+  0%, 2% { transform: translate(0, 0) rotate(var(--effect-rotation)) scale(var(--effect-scale-x), var(--effect-scale-y)); opacity: 0; }
+  4% { opacity: calc(var(--effect-opacity) * .9); }
+  16%, 100% { transform: translate(var(--effect-fall-x), var(--effect-fall-y)) rotate(var(--effect-rotation)) scale(var(--effect-scale-x), var(--effect-scale-y)); opacity: 0; }
+}
+@keyframes atmosphere-firefly {
+  0%, 100% {
+    transform: translate(calc(0cqw - var(--effect-drift-x)), var(--effect-drift-y)) rotate(calc(var(--effect-rotation) - var(--effect-sway))) skewX(var(--effect-skew)) scale(var(--effect-scale-x), var(--effect-scale-y));
+    border-radius: var(--effect-radius-start);
+    opacity: calc(var(--effect-opacity) * .3);
+  }
+  50% {
+    transform: translate(var(--effect-drift-x), calc(0cqh - var(--effect-drift-y))) rotate(calc(var(--effect-rotation) + var(--effect-sway))) skewX(calc(var(--effect-skew) * -.5)) scale(calc(var(--effect-scale-x) * .96), calc(var(--effect-scale-y) * 1.04));
+    border-radius: var(--effect-radius-end);
+    opacity: calc(var(--effect-opacity) * .85);
+  }
+}
+@keyframes atmosphere-aurora {
+  0%, 100% {
+    transform: translate(var(--effect-anchor-x), var(--effect-anchor-y)) rotate(calc(var(--effect-rotation) - var(--effect-sway))) skewX(calc(var(--effect-skew) - 6deg)) scale(var(--effect-scale-x), calc(var(--effect-scale-y) * .88));
+    border-radius: var(--effect-radius-start);
+    opacity: calc(var(--effect-opacity) * .4);
+  }
+  50% {
+    transform: translate(calc(var(--effect-anchor-x) + var(--effect-drift-x)), var(--effect-anchor-y)) rotate(calc(var(--effect-rotation) + var(--effect-sway))) skewX(calc(var(--effect-skew) + 6deg)) scale(calc(var(--effect-scale-x) * 1.03), calc(var(--effect-scale-y) * 1.08));
+    border-radius: var(--effect-radius-end);
+    opacity: calc(var(--effect-opacity) * .7);
+  }
+}

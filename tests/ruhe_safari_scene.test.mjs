@@ -201,11 +201,45 @@ test('Alle atmosphärischen Details haben lokale Stile und bleiben dekorativ', (
         const kind = detail.className.split(' ')[1];
         assert.ok(source.includes(`.${kind}{`) || source.includes(`.${kind},`), `${world.id}: Stil für ${kind} fehlt`);
         assert.match(detail.style['--atmosphere-color'], /^#[0-9a-f]{6}$/i);
+        assert.match(detail.style['--effect-rotation'], /^-?[\d.]+deg$/);
+        assert.ok(Number(detail.style['--effect-scale-x']) > 0.7);
+        assert.ok(Number(detail.style['--effect-scale-y']) > 0.7);
+        assert.ok(detail.style['--effect-radius-start'].includes(' / '));
       }
       if (world.id === 'safari') assert.ok(layer.children.some((detail) => detail.className.includes('ambient-sunshine')));
     }
   } finally {
     if (previousDocument === undefined) delete globalThis.document;
     else globalThis.document = previousDocument;
+  }
+});
+
+test('Atmosphärische Formen variieren reproduzierbar und nur leicht', () => {
+  const kinds = ['cloud', 'ripple', 'grass', 'bubble', 'ray', 'star', 'glint', 'pollen', 'leaf', 'snow',
+    'aurora', 'sunshine', 'sunbeam', 'caustic', 'nebula', 'meteor', 'rainbow', 'firefly', 'prism', 'mist', 'sea-sparkle', 'frost', 'confetti'];
+  for (const kind of kinds) {
+    const first = scene.effectVariationFor(kind, seededRandom(12));
+    const second = scene.effectVariationFor(kind, seededRandom(13));
+    assert.notDeepEqual(first, second, kind);
+    assert.deepEqual(scene.effectVariationFor(kind, seededRandom(12)), first);
+    for (const shape of [first, second]) {
+      assert.ok(shape.scaleX >= 0.75 && shape.scaleX <= 1.25, kind);
+      assert.ok(shape.scaleY >= 0.75 && shape.scaleY <= 1.25, kind);
+      assert.ok(Math.abs(shape.rotation) <= 35 && Math.abs(shape.skew) <= 8, kind);
+      assert.ok(shape.opacity >= 0.8 && shape.opacity <= 1, kind);
+    }
+  }
+});
+
+test('Sonnenlicht dreht nicht und Sternschnuppen bleiben entlang ihrer Flugbahn ausgerichtet', () => {
+  for (let seed = 1; seed <= 80; seed++) {
+    const sun = scene.effectVariationFor('sunshine', seededRandom(seed));
+    assert.equal(Math.abs(sun.rotation), 0);
+    assert.equal(Math.abs(sun.skew), 0);
+    const ripple = scene.effectVariationFor('ripple', seededRandom(seed));
+    assert.ok(Math.abs(ripple.rotation) <= 4);
+    const meteor = scene.effectVariationFor('meteor', seededRandom(seed));
+    const heading = Math.atan2(meteor.fallY / (1672 / 941), meteor.fallX) * 180 / Math.PI;
+    assert.ok(Math.abs(heading - meteor.rotation) < 1e-10);
   }
 });
