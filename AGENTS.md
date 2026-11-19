@@ -27,6 +27,7 @@ Dieses Repository ist die gemeinsame lokale und GitHub-basierte Materialstruktur
 ## Git
 - Kein `push`, `force-push`, `reset --hard`, Rebase oder automatisches Konfliktlösen ohne ausdrücklichen Auftrag.
 - Änderungen lokal erstellen, testen und dem Benutzer zur Kontrolle bereitstellen.
+- Nach jedem Update in der Abschlussantwort immer die Option zum Stagen (`git add`), Committen (`git commit`) und Pushen (`git push`) anbieten. Dazu passende Befehle mit einer aussagekräftigen Commit-Nachricht angeben; die Ausführung erfolgt nur auf ausdrücklichen Auftrag.
 - Der Pages-Workflow veröffentlicht erst nach einem Push auf `main`.
 
 ## Qualitätskontrolle

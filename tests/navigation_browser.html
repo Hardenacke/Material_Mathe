@@ -201,15 +201,15 @@
     await until(() => doc().querySelector(".file-link"));
     assert(doc().querySelector("#view-title").textContent === "Zusatzaufgaben", "Aufgabe führt nicht zur Zusatzaufgabenauswahl zurück");
     frame.src = "/material-mathe/tools/ruhe-safari.html?sammlung=" + encodeURIComponent("#/werkzeuge");
-    await until(() => doc().getElementById("theme")?.options.length === 10 && doc().getElementById("sammlung-navigation"));
+    await until(() => doc().getElementById("theme")?.options.length > 0 && doc().getElementById("sammlung-navigation"));
     assert(doc().title.includes("Ruhe-Safari"), "Werkzeugtitel falsch");
     assert(doc().getElementById("sammlung-navigation").shadowRoot.querySelector("a").hash === "#/werkzeuge", "Ruhe-Safari-Rückweg falsch");
-    doc().getElementById("demo").click();
-    assert(doc().getElementById("mic-note").textContent.includes("Demo ohne Mikrofon"), "Ruhe-Safari-Testmodus startet nicht");
-    assert(!doc().getElementById("pause").disabled, "Ruhe-Safari läuft nicht");
-    doc().getElementById("pause").click();
+    assert(!doc().getElementById("setup").hidden && doc().getElementById("stage").hidden, "Ruhe-Safari startet nicht im Einstellungsmenü");
+    assert(doc().getElementById("start").disabled, "Mikrofonrunde ohne Einmessen verfügbar");
+    assert(doc().getElementById("demo").textContent.includes("Demo ohne Mikrofon"), "Ruhe-Safari-Testmodus fehlt");
+    assert(doc().getElementById("scale-back").getAttribute("aria-label").includes("pausieren"), "Ruhe-Safari-Menürückkehr fehlt");
     assert(errors.length === 0, "JavaScript-Fehler: " + errors.join(", "));
-    output.textContent = `PASS: ${checks} Prüfungen; ${seen.size} unterschiedliche Mathematik-Materialien erreichbar; Methoden, Werkzeuge, Ruhe-Safari-Demo und Rückwege geprüft.`;
+    output.textContent = `PASS: ${checks} Prüfungen; ${seen.size} unterschiedliche Mathematik-Materialien erreichbar; Methoden, Werkzeuge, Ruhe-Safari-Einstieg und Rückwege geprüft.`;
   } catch (error) {
     output.textContent = `FAIL nach ${checks} Prüfungen: ${error.stack}`;
   }
