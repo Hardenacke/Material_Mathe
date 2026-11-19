@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#315d47">
+<meta name="theme-color" content="#f5efe4">
 <title>Ruhe-Safari · Ruhige Welten</title>
 <style>:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#233e34;background:#f5f4ed;color-scheme:light}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0}button,select,input{font:inherit}button,select{min-height:48px;border-radius:12px;border:1px solid #bdcaba;background:#fff;color:inherit;padding:10px 15px}button{cursor:pointer}button:hover{background:#e9f0e3}button:disabled{opacity:.5;cursor:default}button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible,.scale-sidebar:focus-visible{outline:3px solid #b78339;outline-offset:3px}.primary{background:#315d47;border-color:#315d47;color:#fff;font-weight:700}.primary:hover{background:#244b39}.setup{width:min(1000px,100%);margin:auto;padding:clamp(20px,4vw,48px) clamp(16px,3vw,36px)}.eyebrow{font-size:12px;letter-spacing:.15em;color:#70806a;font-weight:700;margin:0 0 9px}h1{font-size:clamp(30px,5vw,45px);line-height:1.12;letter-spacing:-.035em;margin:0 0 12px}p{line-height:1.55}.intro{color:#62705c;margin:0 0 26px;max-width:65ch}.field{display:grid;gap:9px;font-size:14px;font-weight:650;min-width:0}.field select{width:100%;min-width:0}.world-header{display:grid;grid-template-columns:1fr 220px;gap:22px;align-items:center;margin-bottom:26px}.world-header img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px}.section-line{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:13px}h2{font-size:17px;margin:0}.section-line span{font-size:13px;color:#637258;margin-right:auto}.section-line button{font-size:12px;min-height:40px;padding:7px 11px}.cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}.card{position:relative;min-width:0;padding:7px 5px 12px;border:2px solid #e0e4d9;background:#fff;line-height:1.25}.card[aria-pressed=true]{background:#eaf0e3;border-color:#54805d}.card-name{display:block;font-size:12px;min-height:2.6em;font-weight:600}.check{position:absolute;right:6px;top:6px;z-index:2;border-radius:50%;width:21px;height:21px;display:grid;place-items:center;background:#e3e9dd;color:transparent;font-size:14px}.card[aria-pressed=true] .check{background:#4c7553;color:white}.sprite{display:block;position:relative;width:100%;height:100%;aspect-ratio:1;pointer-events:none}.sprite img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none;-webkit-user-drag:none}.card .sprite{height:auto;margin-bottom:6px}.status{font-size:13px;color:#4f684a;min-height:1.5em}.status.error{color:#9c3b26}.audio-panel{background:#e9ede2;border-radius:18px;padding:22px;margin:26px 0}.audio-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:15px}.hint{font-size:13px;color:#607157}.audio-panel .hint{margin:12px 0 18px}.mic-preview{display:flex;gap:12px;align-items:center;margin-top:18px;font-size:12px}.mic-preview meter{flex:1;min-width:50px;accent-color:#537750}.mic-preview span{width:30px;text-align:right;font-variant-numeric:tabular-nums}.technical{font-size:11px;color:#6c7965}.settings{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-bottom:22px}input[type=range]{width:100%;accent-color:#426b4b;min-height:36px}output{font-size:12px;color:#5b7053}details{border-top:1px solid #d7dfd1;padding-top:14px}summary{cursor:pointer;font-size:13px;min-height:40px;padding:8px 0}.options{display:grid;gap:12px;padding:12px 0 18px}.options label{display:flex;gap:9px;align-items:center;font-size:13px;min-height:30px}.options input{width:20px;height:20px;accent-color:#416b4c}.start-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.start-row .primary{flex:1;min-height:55px;font-size:17px}
 /* The live view deliberately contains only the picture and the scale. */
@@ -18,12 +18,33 @@
 .ambient-grass{width:.7%;height:4%;border-left:2px solid #858e3b;border-radius:80% 0 0;transform-origin:bottom;animation-name:ambient-sway;opacity:.5}
 .ambient-bubble{width:.9%;aspect-ratio:1;border:1px solid #efffff;border-radius:50%;animation-name:ambient-rise;opacity:.5}
 .ambient-ray{width:5%;height:65%;transform-origin:top;filter:blur(3px);background:linear-gradient(#fff4,transparent);animation-name:ambient-sway;opacity:.35}
-.ambient-star,.ambient-glint{width:.35%;aspect-ratio:1;border-radius:50%;background:#fff9df;box-shadow:0 0 6px #fffbc5;animation-name:ambient-twinkle}
+.ambient-star,.ambient-glint{width:.35%;aspect-ratio:1;border-radius:50%;background:var(--atmosphere-color,#fff9df);box-shadow:0 0 6px var(--atmosphere-color,#fffbc5);animation-name:ambient-twinkle}
 .ambient-glint{width:.6%;background:#ffedb3;opacity:.5}
 .ambient-pollen{width:.5%;aspect-ratio:1;border-radius:50%;background:#fff2ac;animation-name:ambient-drift;opacity:.6}
 .ambient-leaf{width:1.5%;height:1%;border-radius:80% 0;background:#8ca36a;animation-name:ambient-fall;opacity:.5}
 .ambient-snow{width:.6%;aspect-ratio:1;border-radius:50%;background:#fff;animation-name:ambient-fall;opacity:.6}
-.ambient-aurora{width:27%;height:9%;filter:blur(7px);border-radius:50%;background:linear-gradient(115deg,transparent,#9ff9cb66,#bbb5ff55,transparent);animation-name:ambient-drift;opacity:.45}
+.ambient-aurora{width:52%;height:22%;filter:blur(5px);border-radius:50%;background:repeating-linear-gradient(105deg,transparent 0 7%,#76ffd399 10%,#a6eaff66 14%,#c096ff88 18%,transparent 25%);animation-name:atmosphere-aurora;opacity:.55}
+.ambient-sunshine{width:38%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff9d6b3 0,#ffe17b88 17%,#ffba5838 40%,transparent 68%);mix-blend-mode:screen;animation-name:atmosphere-glow}
+.ambient-sunbeam{width:14%;height:78%;transform-origin:50% 0;background:linear-gradient(#fff8cb88,#ffd36e33 55%,transparent);clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);mix-blend-mode:screen;animation-name:atmosphere-beam}
+.ambient-caustic{width:72%;height:64%;border-radius:50%;background:repeating-radial-gradient(ellipse at 35% 40%,transparent 0 6%,#9bffe448 7% 8%,transparent 9% 14%),radial-gradient(ellipse,#67dcf044,transparent 70%);mix-blend-mode:screen;animation-name:atmosphere-water}
+.ambient-nebula{width:58%;height:44%;border-radius:50%;background:radial-gradient(ellipse at 35% 40%,#c58aff55,transparent 60%),radial-gradient(ellipse at 70% 55%,#69dcff44,transparent 55%),radial-gradient(ellipse at 45% 75%,#ff9bdc33,transparent 60%);mix-blend-mode:screen;animation-name:atmosphere-glow}
+.ambient-meteor{width:12%;height:.4%;border-radius:99px;background:linear-gradient(90deg,transparent,var(--atmosphere-color),#fff);box-shadow:0 0 7px var(--atmosphere-color);animation-name:atmosphere-meteor;animation-timing-function:linear;opacity:0}
+.ambient-rainbow{width:46%;height:38%;background:radial-gradient(ellipse at 50% 100%,transparent 0 48%,#b698ff88 49% 52%,#8fbaff88 53% 56%,#87e8ce88 57% 60%,#fff19388 61% 64%,#ffbb8d88 65% 68%,#ff9cbd88 69% 72%,transparent 73%);animation-name:atmosphere-glow;opacity:.65}
+.ambient-firefly{width:.6%;aspect-ratio:1;border-radius:50%;background:var(--atmosphere-color);box-shadow:0 0 7px 2px var(--atmosphere-color);animation-name:atmosphere-firefly}
+.ambient-prism{width:24%;height:90%;background:linear-gradient(105deg,transparent,#ffb0cf22,#ffe99c33,#9af4e533,#a1bbff33,transparent);mix-blend-mode:screen;animation-name:atmosphere-water}
+.ambient-mist{width:65%;height:14%;border-radius:50%;background:radial-gradient(ellipse,#c8efd455,transparent 70%);animation-name:atmosphere-water}
+.ambient-sea-sparkle,.ambient-frost{width:.8%;aspect-ratio:1;background:var(--atmosphere-color);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation-name:ambient-twinkle}
+.ambient-frost{width:.6%}
+.ambient-confetti{width:.8%;height:2.2%;border-radius:30%;background:var(--atmosphere-color);animation-name:atmosphere-firefly;opacity:.6}
+.ambient-sunshine,.ambient-nebula,.ambient-rainbow,.ambient-caustic,.ambient-prism,.ambient-mist{transform:translate(-50%,-50%);opacity:.6}
+.ambient-sunbeam{transform:translateX(-50%) rotate(var(--beam-angle))}
+.ambient-aurora{transform:translate(-25%,-15%)}
+@keyframes atmosphere-glow{0%,100%{transform:translate(-50%,-50%) scale(.9);opacity:.5}50%{transform:translate(-50%,-50%) scale(1.12);opacity:.8}}
+@keyframes atmosphere-beam{0%,100%{transform:translateX(-50%) rotate(calc(var(--beam-angle) - 5deg));opacity:.35}50%{transform:translateX(-50%) rotate(calc(var(--beam-angle) + 5deg));opacity:.7}}
+@keyframes atmosphere-water{0%,100%{transform:translate(-50%,-50%) rotate(-4deg);opacity:.35}50%{transform:translate(-45%,-47%) rotate(4deg);opacity:.65}}
+@keyframes atmosphere-meteor{0%,2%{transform:translate(0,0) rotate(25deg);opacity:0}4%{opacity:.9}16%,100%{transform:translate(24cqw,12cqh) rotate(25deg);opacity:0}}
+@keyframes atmosphere-firefly{0%,100%{transform:translate(-1cqw,1cqh) rotate(-15deg);opacity:.3}50%{transform:translate(2cqw,-3cqh) rotate(20deg);opacity:.9}}
+@keyframes atmosphere-aurora{0%,100%{transform:translate(-30%,-20%) skewX(-12deg) scaleY(.8);opacity:.4}50%{transform:translate(-20%,-10%) skewX(12deg) scaleY(1.2);opacity:.75}}
 #app.still .ambient-detail{animation-play-state:paused}
 @keyframes ambient-drift{0%,100%{transform:translate(-3cqw,0)}50%{transform:translate(4cqw,-1cqh)}}
 @keyframes ambient-ripple{0%,100%{transform:scale(.5);opacity:.15}50%{transform:scale(1.5);opacity:.8}}
@@ -41,13 +62,16 @@
 
 .scale-sidebar{position:relative}.scale-exit{position:absolute;inset:0;z-index:5;width:100%;height:100%;min-height:0;border:0;border-radius:0;padding:0;background:transparent;cursor:pointer;touch-action:manipulation}.scale-exit:hover{background:transparent}.scale-exit:focus-visible{outline-offset:-4px}.noise-meter.signal-missing{filter:grayscale(1);opacity:.45}
 </style>
+<link rel="stylesheet" href="ruhe-safari-cozy.css">
 </head>
 <body>
 <main id="app">
   <section id="setup" class="setup" aria-labelledby="heading">
-    <p class="eyebrow">RUHIGE WELTEN</p>
-    <h1 id="heading">Eine Welt voller Ruhe.</h1>
-    <p class="intro">Welt wählen, Mikrofon einstellen und starten. Je ruhiger ihr arbeitet, desto mehr Tiere und Motive kommen dazu.</p>
+    <header class="welcome">
+      <p class="eyebrow">RUHIGE WELTEN · ZEIT ZUM DURCHATMEN</p>
+      <h1 id="heading">Ein kleiner Ort voller Ruhe.</h1>
+      <p class="intro">Sucht euch eine Welt aus und macht es euch gemütlich. Während ihr in Ruhe arbeitet, erwacht euer kleiner Lieblingsort zum Leben.</p>
+    </header>
     <div class="world-header"><label class="field" for="theme">1. Welche Welt soll wachsen?<select id="theme"></select></label><img id="world-preview" alt="Vorschau der gewählten Welt"></div>
     <div class="section-line"><h2>2. Welche Motive dürfen erscheinen?</h2><span id="count"></span><button id="all" type="button">Alle wählen</button></div>
     <div id="cards" class="cards"></div>
@@ -269,6 +293,8 @@ function fitScene(){
 }
 function renderScene(layout=null){
   const w=current(),scene=$('scene');scene.replaceChildren();scene.style.backgroundImage='none';
+  const mood=RuheSafariScene.moodFor(w);$('stage').dataset.world=w.id;
+  for(const [key,value] of Object.entries(mood))$('stage').style.setProperty('--cozy-'+key,value);
   sceneLayout=layout||RuheSafariScene.createLayout(w,state.selected[w.id]);
   const plane=document.createElement('div');plane.className='world-plane';plane.style.backgroundImage='url("'+w.background+'")';scene.append(plane);
   plane.append(RuheSafariScene.createAmbiance(w));

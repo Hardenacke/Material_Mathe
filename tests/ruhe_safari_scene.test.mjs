@@ -55,12 +55,62 @@ test('Wassertiere bleiben im Wasser und Landtiere meiden den Teich', () => {
   }
 });
 
-test('Aktive Motive legen mindestens eine Körperlänge in kurzen Bewegungszyklen zurück', () => {
+test('Aktive Motive behalten große Wege bei ruhigeren Bewegungszyklen', () => {
   const examples = [['safari', 'Elefant'], ['unterwasser', 'Clownfisch'], ['zaubergarten', 'Schmetterling']];
   for (const [worldId, name] of examples) {
     const world = worlds.find((entry) => entry.id === worldId);
     const profile = scene.motionProfileFor(world, world.items.find((item) => item.name === name));
     assert.ok(profile.horizontal * 2 >= 1, name);
-    assert.ok(profile.duration <= 3, name);
+    assert.ok(profile.duration >= 3 && profile.duration <= 5, name);
+  }
+});
+
+test('Jede Welt hat eine eigene Farbstimmung mit lesbarer Skala', () => {
+  const luminance = (color) => {
+    const channels = color.slice(1).match(/../g).map((channel) => {
+      const value = parseInt(channel, 16) / 255;
+      return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+    });
+    return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+  };
+  const backdrops = new Set();
+  for (const world of worlds) {
+    const mood = scene.moodFor(world);
+    for (const color of Object.values(mood)) assert.match(color, /^#(?:[0-9a-f]{6}|[0-9a-f]{8})$/i);
+    backdrops.add(mood.backdrop);
+    const brightness = [luminance(mood.ink), luminance(mood.frame)].sort((first, second) => first - second);
+    const contrast = (brightness[1] + 0.05) / (brightness[0] + 0.05);
+    assert.ok(contrast >= 4.5, `${world.id}: Skalenkontrast ${contrast.toFixed(2)}`);
+  }
+  assert.equal(backdrops.size, worlds.length);
+});
+
+test('Alle atmosphärischen Details haben lokale Stile und bleiben dekorativ', () => {
+  const previousDocument = globalThis.document;
+  globalThis.document = {
+    createElement() {
+      return {
+        children: [], attributes: {}, properties: {},
+        style: { setProperty(name, value) { this[name] = value; } },
+        setAttribute(name, value) { this.attributes[name] = value; },
+        append(child) { this.children.push(child); }
+      };
+    }
+  };
+  try {
+    for (const world of worlds) {
+      const layer = scene.createAmbiance(world, seededRandom(1));
+      assert.equal(layer.attributes['aria-hidden'], 'true');
+      assert.ok(layer.children.length > 0 && layer.children.length <= 60);
+      for (const detail of layer.children) {
+        const kind = detail.className.split(' ')[1];
+        assert.ok(source.includes(`.${kind}{`) || source.includes(`.${kind},`), `${world.id}: Stil für ${kind} fehlt`);
+        assert.match(detail.style['--atmosphere-color'], /^#[0-9a-f]{6}$/i);
+      }
+      if (world.id === 'safari') assert.ok(layer.children.some((detail) => detail.className.includes('ambient-sunshine')));
+    }
+  } finally {
+    if (previousDocument === undefined) delete globalThis.document;
+    else globalThis.document = previousDocument;
   }
 });
