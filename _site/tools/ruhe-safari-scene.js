@@ -13,6 +13,34 @@
     crawling: { horizontal: 0.005, vertical: 0, tilt: 0.3, duration: 16, speed: 0.003 }
   };
 
+  const baseSizes = {
+    safari: [0.1, 0.093, 0.087, 0.093, 0.084, 0.08, 0.1, 0.086, 0.085, 0.092, 0.084, 0.081],
+    unterwasser: [0.084, 0.093, 0.099, 0.08, 0.091, 0.085, 0.1, 0.088, 0.08, 0.079, 0.105, 0.073],
+    weltraumstation: [0.11, 0.108, 0.105, 0.11, 0.086, 0.112, 0.086, 0.091, 0.097, 0.094, 0.105, 0.089],
+    zaubergarten: [0.062, 0.064, 0.067, 0.081, 0.07, 0.078, 0.079, 0.079, 0.063, 0.064, 0.068, 0.07],
+    zukunftsstadt: [0.095, 0.09, 0.098, 0.093, 0.096, 0.086, 0.098, 0.091, 0.1, 0.092, 0.082, 0.096],
+    dinosaurier: [0.088, 0.089, 0.082, 0.08, 0.081, 0.08, 0.083, 0.08, 0.085, 0.082, 0.082, 0.063],
+    forschungsinsel: [0.088, 0.086, 0.09, 0.078, 0.084, 0.082, 0.078, 0.086, 0.077, 0.096, 0.088, 0.069],
+    sternenhimmel: [0.083, 0.084, 0.099, 0.11, 0.108, 0.11, 0.105, 0.089, 0.106, 0.098, 0.085, 0.094],
+    murmelbahn: [0.1, 0.098, 0.11, 0.085, 0.101, 0.08, 0.095, 0.103, 0.101, 0.1, 0.109, 0.085],
+    winterdorf: [0.095, 0.101, 0.092, 0.088, 0.079, 0.102, 0.087, 0.094, 0.084, 0.086, 0.08, 0.092],
+    kunstwerk: [0.088, 0.095, 0.09, 0.092, 0.089, 0.095, 0.082, 0.081, 0.079, 0.091, 0.102, 0.081]
+  };
+
+  function sizeProfileFor(world, item) {
+    return { base: baseSizes[world.id]?.[item.index] || 0.09,
+      variation: world.id === 'forschungsinsel' && item.name === 'Forschungsboot' ? 0.08 : 0.1 };
+  }
+
+  function shuffleOrder(selected, random = Math.random) {
+    const order = [...selected];
+    for (let index = order.length - 1; index > 0; index--) {
+      const other = Math.floor(random() * (index + 1));
+      [order[index], order[other]] = [order[other], order[index]];
+    }
+    return order;
+  }
+
   function motionFor(world, item) {
     if (['Schmetterling', 'Biene', 'Mosaikvogel'].includes(item.name)) return 'fluttering';
     if (['Einsiedlerkrebs', 'Seestern'].includes(item.name)) return 'crawling';
@@ -35,11 +63,11 @@
     if (world.id === 'weltraumstation') return { zones: [[0.12, 0.08, 0.94, 0.86]], blocked: [[0, 0.73, 0.23, 1]] };
     if (world.id === 'sternenhimmel') return { zones: [[0.07, 0.07, 0.93, 0.85]], blocked: [] };
     if (world.id === 'zaubergarten') return { zones: motionFor(world, item) === 'fluttering' ? [sky]
-      : [[0.04, 0.61, 0.21, 0.91], [0.3, 0.61, 0.71, 0.91], [0.8, 0.61, 0.96, 0.91]], blocked: [] };
+      : [[0.04, 0.58, 0.21, 0.92], [0.3, 0.58, 0.71, 0.92], [0.8, 0.58, 0.96, 0.92]], blocked: [] };
     if (world.id === 'zukunftsstadt') return { zones: [[0.09, 0.4, 0.91, 0.93]], blocked: [] };
-    if (world.id === 'dinosaurier') return { zones: [[0.17, 0.54, 0.86, 0.94]], blocked: [] };
+    if (world.id === 'dinosaurier') return { zones: [[0.15, 0.51, 0.88, 0.95]], blocked: [] };
     if (world.id === 'forschungsinsel') return ['Forschungsboot', 'Messboje'].includes(name)
-      ? { zones: [sea], blocked: [] } : { zones: [[0.13, 0.56, 0.9, 0.94]], blocked: [] };
+      ? { zones: [sea], blocked: [] } : { zones: [[0.12, 0.52, 0.9, 0.95]], blocked: [] };
     if (world.id === 'winterdorf') return { zones: [['Polarlicht', 'Schneeflockengruppe'].includes(name)
       ? sky : [0.14, 0.5, 0.86, 0.94]], blocked: [] };
     if (world.id === 'murmelbahn') return { zones: [[0.08, 0.1, 0.92, 0.87]], blocked: [] };
@@ -64,19 +92,17 @@
     const items = world.items.filter((item) => selected.includes(item.index)).map((item) => {
       const habitat = habitatFor(world, item);
       const area = habitat.zones.reduce((sum, zone) => sum + (zone[2] - zone[0]) * (zone[3] - zone[1]), 0);
-      const mobile = motionProfileFor(world, item).speed > 0;
-      const large = /Elefant|Nashorn|Nilpferd|Walhai|Langhalssaurier|Triceratops/.test(item.name);
-      return { item, habitat, priority: area + random() * 0.01,
-        preferred: large ? 0.125 : mobile ? 0.11 : 0.1,
-        minimum: large ? 0.08 : mobile ? 0.07 : 0.055 };
-    }).sort((first, second) => first.priority - second.priority);
+      const sizing = sizeProfileFor(world, item);
+      const sizeFactor = 1 + (random() * 2 - 1) * sizing.variation;
+      return { item, habitat, area, priority: random(),
+        baseSize: sizing.base, sizeFactor, size: sizing.base * sizeFactor };
+    }).sort((first, second) => first.area - second.area || second.size - first.size || first.priority - second.priority);
     if (!items.length) return { aspect, placements: [] };
-    for (let attemptLayout = 0; attemptLayout < 32; attemptLayout++) {
-      const scale = Math.max(0.5, 1 - attemptLayout * 0.035);
+    for (let attemptLayout = 0; attemptLayout < 64; attemptLayout++) {
       const placements = [];
       for (const entry of items) {
         const { item, habitat } = entry;
-        const size = Math.max(entry.minimum, entry.preferred * scale) * 1000;
+        const size = entry.size * 1000;
         const motion = motionProfileFor(world, item);
         const halfWidth = size * (0.5 + motion.horizontal + 0.08) + 3;
         const halfHeight = size * (0.5 + motion.vertical + 0.08) + 3;
@@ -84,21 +110,15 @@
           zone[2] * 1000 - halfWidth, zone[3] * height - halfHeight]).filter((zone) => zone[0] <= zone[2] && zone[1] <= zone[3]);
         if (!zones.length) break;
         let candidate = null;
-        let bestDistance = -1;
+        let bestDistance = -Infinity;
         const grid = [];
-        if (attemptLayout >= 24) {
-          const related = items.filter((other) => JSON.stringify(other.habitat.zones) === JSON.stringify(habitat.zones));
-          const largest = Math.max(...related.map((other) => Math.max(other.minimum, other.preferred * scale))) * 1000;
-          const spacingWidth = largest * 1.23 + 6;
-          const spacingHeight = largest * 1.21 + 6;
-          for (const zone of habitat.zones) {
-            const columns = Math.floor((zone[2] - zone[0]) * 1000 / spacingWidth);
-            const rows = Math.floor((zone[3] - zone[1]) * height / spacingHeight);
-            for (let row = 0; row < rows; row++) for (let column = 0; column < columns; column++) {
-              grid.push({ left: zone[0] * 1000 + (column + 0.5) * (zone[2] - zone[0]) * 1000 / columns,
-                top: zone[1] * height + (row + 0.5) * (zone[3] - zone[1]) * height / rows });
-            }
-          }
+        const compact = attemptLayout >= 16;
+        if (compact) for (const zone of zones) {
+          const occupied = [...habitat.blocked.map((bounds) => [bounds[0] * 1000, bounds[1] * height, bounds[2] * 1000, bounds[3] * height]),
+            ...placements.map((placed) => [placed.bounds[0] * 1000, placed.bounds[1] * height, placed.bounds[2] * 1000, placed.bounds[3] * height])];
+          const horizontal = [zone[0], zone[2], ...occupied.flatMap((bounds) => [bounds[0] - halfWidth - 0.001, bounds[2] + halfWidth + 0.001])];
+          const vertical = [zone[1], zone[3], ...occupied.flatMap((bounds) => [bounds[1] - halfHeight - 0.001, bounds[3] + halfHeight + 0.001])];
+          for (const left of horizontal) for (const top of vertical) grid.push({ left, top });
         }
         for (let attempt = 0; attempt < (grid.length || 320); attempt++) {
           const zone = zones[Math.floor(random() * zones.length)];
@@ -108,10 +128,12 @@
           const bounds = [(left - halfWidth) / 1000, (top - halfHeight) / height,
             (left + halfWidth) / 1000, (top + halfHeight) / height];
           if (habitat.blocked.some((blocked) => overlaps(bounds, blocked)) || placements.some((placed) => overlaps(bounds, placed.bounds))) continue;
-          const distance = placements.length ? Math.min(...placements.map((placed) => Math.hypot(left - placed.x * 1000, top - placed.y * height))) : random();
+          const orientation = attemptLayout % 4;
+          const distance = compact ? (orientation < 2 ? -top : top) * 10000 + (orientation % 2 ? left : -left)
+            : placements.length ? Math.min(...placements.map((placed) => Math.hypot(left - placed.x * 1000, top - placed.y * height))) : random();
           if (distance > bestDistance) {
             bestDistance = distance;
-            candidate = { index: item.index, x: left / 1000, y: top / height, size: size / 1000,
+            candidate = { index: item.index, x: left / 1000, y: top / height, size: size / 1000, baseSize: entry.baseSize, sizeFactor: entry.sizeFactor,
               halfWidth: halfWidth / 1000, halfHeight: halfHeight / height, bounds };
           }
         }
@@ -120,7 +142,7 @@
       }
       if (placements.length === items.length) return { aspect, placements };
     }
-    throw new Error('Für diese Auswahl konnten keine freien Plätze gefunden werden.');
+    throw new Error(`Für die Auswahl in „${world.name || world.id}“ konnten keine freien Plätze gefunden werden.`);
   }
 
   function boundsAt(actor, point) {
@@ -355,5 +377,5 @@
     return layer;
   }
 
-  globalThis.RuheSafariScene = { motionFor, motionProfileFor, moodFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
+  globalThis.RuheSafariScene = { motionFor, motionProfileFor, sizeProfileFor, shuffleOrder, moodFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
 })();

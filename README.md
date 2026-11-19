@@ -82,6 +82,10 @@ Die gemütliche Gestaltung verwendet Creme- und Salbeitöne, weiche Bildrahmen, 
 
 Motive haben feste Mindestgrößen und werden für lange Wege nicht verkleinert. Tiere, Fische, Insekten und geeignete Fahrzeuge erkunden langsam die erreichbaren Bereiche ihrer Landschaft; Pflanzen und Gebäude bleiben verankert. Die Wegsuche berücksichtigt Boden und Wasser, Hindernisse und andere Figuren. Bei wenig Platz warten Motive. Neue Entdeckungen erhalten einen freien Erscheinungsplatz; Pause, Bewegungsschalter und reduzierte Bewegung halten auch das Wandern an.
 
+Jede neue Runde mischt die Erscheinungsreihenfolge der ausgewählten Motive. Jedes der 132 Motive besitzt eine eigene Basisgröße relativ zur Bildbreite; daraus wird pro Runde eine feste Größe mit bis zu ±10 Prozent Abweichung ausgelost (beim Forschungsboot wegen der schmalen Wasserzone ±8 Prozent). Die Platzierung sucht passende freie Plätze, ohne diese Größen nachträglich zu reduzieren. Beim Pausieren und Fortsetzen bleiben Reihenfolge und Größen erhalten.
+
+Bei zu hoher Lautstärke erscheint ein großer Hinweis „Zu laut – Bitte wieder leiser arbeiten.“ mit Ausrufezeichen. Ein kräftiger Rahmen und die farblich hervorgehobene Lautstärkeskala unterstützen die Warnung auch bei ausgeschalteter oder reduzierter Bewegung. Nach ausreichend ruhiger Arbeit verschwindet sie automatisch.
+
 Lernspiele liegen gesammelt unter `lernspiele/`, damit ihre gemeinsame JavaScript-/CSS-Basis und Offline-Dateien erhalten bleiben. `werkzeuge/katalog.py` ordnet sie anhand von `lernspiele/data.json` fachlich den passenden vorhandenen Inhaltsfeldern und Themen zu und markiert sie auf der Website als Kategorie `Lernspiel`.
 
 Jahrgangsbezogene Question-Shell-Dateien liegen im jeweiligen Bereichsordner unter `unterstuetzung/`. Sie sind über die eigene Kategorie **Unterstützung** für den ganzen Kurs erreichbar. Unter **Zusatzaufgaben** eines Themenbereichs erscheinen ausschließlich die diesem Inhaltsfeld zugeordneten Fermi-Aufgaben. Eine zusätzliche kursweite Übersicht bietet alle Zusatzaufgaben des Jahrgangs an.

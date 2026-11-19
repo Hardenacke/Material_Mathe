@@ -17,13 +17,17 @@ function seededRandom(seed) {
 
 for (const world of worlds) {
   test(`${world.id}: alle Motive samt Bewegungsraum passen kollisionsfrei in ihre Lebensräume`, () => {
-    for (let seed = 1; seed <= 40; seed++) {
+    for (let seed = 1; seed <= 80; seed++) {
       const layout = scene.createLayout(world, world.items.map((item) => item.index), seededRandom(seed));
       assert.equal(layout.placements.length, world.items.length);
       assert.equal(new Set(layout.placements.map((placed) => placed.index)).size, world.items.length);
       for (const [index, placed] of layout.placements.entries()) {
         const item = world.items.find((entry) => entry.index === placed.index);
         const habitat = scene.habitatFor(world, item);
+        const sizing = scene.sizeProfileFor(world, item);
+        assert.equal(placed.baseSize, sizing.base);
+        assert.ok(placed.sizeFactor >= 1 - sizing.variation && placed.sizeFactor <= 1 + sizing.variation);
+        assert.ok(Math.abs(placed.size - sizing.base * placed.sizeFactor) < 1e-12);
         assert.ok(placed.size >= 0.055, `${item.name} ist zu klein`);
         if (scene.motionProfileFor(world, item).speed > 0) assert.ok(placed.size >= 0.07, item.name);
         assert.ok(habitat.zones.some((zone) => placed.bounds[0] >= zone[0] - 1e-10 && placed.bounds[1] >= zone[1] - 1e-10
@@ -34,6 +38,31 @@ for (const world of worlds) {
     }
   });
 }
+
+test('Erscheinungsreihenfolge wird gemischt, ohne die Auswahl zu verändern', () => {
+  const selected = Array.from({ length: 12 }, (_, index) => index);
+  const first = scene.shuffleOrder(selected, seededRandom(12));
+  const second = scene.shuffleOrder(selected, seededRandom(13));
+  assert.notDeepEqual(first, second);
+  assert.deepEqual([...first].sort((first, second) => first - second), selected);
+  assert.deepEqual(selected, Array.from({ length: 12 }, (_, index) => index));
+  assert.deepEqual(scene.shuffleOrder(selected, seededRandom(12)), first);
+  assert.deepEqual(scene.shuffleOrder([], seededRandom(1)), []);
+  assert.deepEqual(scene.shuffleOrder([7], seededRandom(1)), [7]);
+});
+
+test('Größen streuen je Motiv um eine feste Basis und bleiben in einer Runde unverändert', () => {
+  const world = worlds[0];
+  const selected = world.items.map((item) => item.index);
+  const first = scene.createLayout(world, selected, seededRandom(12));
+  const second = scene.createLayout(world, selected, seededRandom(13));
+  assert.ok(new Set(first.placements.map((actor) => actor.sizeFactor.toFixed(6))).size > 1);
+  assert.ok(first.placements.some((actor) => actor.size !== second.placements.find((other) => other.index === actor.index).size));
+  const sizes = new Map(first.placements.map((actor) => [actor.index, actor.size]));
+  const random = seededRandom(15);
+  for (let frame = 0; frame < 100; frame++) scene.stepMotion(world, first, selected, 0.1, random);
+  for (const actor of first.placements) assert.equal(actor.size, sizes.get(actor.index));
+});
 
 test('Neue Runden erhalten neue Plätze; eine kleine Auswahl bleibt vollständig', () => {
   const world = worlds[0];

@@ -316,7 +316,12 @@ function renderScene(layout=null){
     actor.append(visual);plane.append(actor);actorNodes.set(item.index,actor);
   }
   const haze=document.createElement('div');haze.className='haze';haze.setAttribute('aria-hidden','true');plane.append(haze);
-  const sign=document.createElement('span');sign.className='startled-sign';sign.textContent='!';sign.setAttribute('aria-hidden','true');plane.append(sign);
+  const sign=document.createElement('div');sign.id='noise-warning';sign.className='startled-sign';sign.hidden=true;sign.setAttribute('aria-hidden','true');
+  const symbol=document.createElement('span');symbol.className='warning-symbol';symbol.textContent='!';
+  const copy=document.createElement('span');copy.className='warning-copy';
+  const title=document.createElement('strong');title.textContent='Zu laut';
+  const instruction=document.createElement('span');instruction.textContent='Bitte wieder leiser arbeiten.';
+  copy.append(title,instruction);sign.append(symbol,copy);plane.append(sign);
   fitScene();
   refreshVisibility();
 }
@@ -407,7 +412,7 @@ function enterScene(demo=false){
   const resume=canResume(demo),layout=resume?pausedRound.layout:null;
   if(resume)engine=pausedRound.engine;
   else{
-    engine=new QuietWorldEngine(state.selected[state.theme],state.settings.interval);
+    engine=new QuietWorldEngine(RuheSafariScene.shuffleOrder(state.selected[state.theme]),state.settings.interval);
     // A first selected picture is visible immediately; quiet time earns the rest.
     engine.earned.push(engine.pool[0]);
   }
@@ -427,6 +432,9 @@ function paint(db=null){
   $('meter-target').title=engine?.startled?'Ruhegrenze für die Rückkehr':'Grenze für ruhige Arbeit';
   $('noise-meter').setAttribute('aria-valuenow',String(Math.round(value)));$('noise-meter').setAttribute('aria-valuetext',valid?Math.round(value)+' von 100'+(demoMode?' · Demo ohne Mikrofon':''):'Kein gültiges Mikrofonsignal');
   refreshVisibility();
+  const tooLoud=Boolean(valid&&mode==='running'&&engine?.startled);
+  $('stage').classList.toggle('is-too-loud',tooLoud);
+  const warning=$('noise-warning');if(warning)warning.hidden=!tooLoud;
   const status=!valid?'Mikrofonsignal fehlt. Der Fortschritt wartet.':engine?.startled?'Zu laut. Die Motive erschrecken. Bitte unter die Ruhemarke kommen.':engine?.hidden?'Die Motive kehren zurück.':'Ruhige Arbeit lässt eure Welt wachsen.';
   if($('live-status').textContent!==status)$('live-status').textContent=status;
 }
