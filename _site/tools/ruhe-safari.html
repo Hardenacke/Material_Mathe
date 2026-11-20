@@ -314,6 +314,8 @@ function renderScene(layout=null){
     actor.dataset.index=item.index;
     const visual=sprite(item),motion=RuheSafariScene.motionFor(w,item);visual.classList.add(motion);
     const profile=RuheSafariScene.motionProfileFor(w,item);
+    const art=RuheSafariScene.artworkFor(w,item),image=visual.querySelector('img');
+    image.style.position='relative';image.style.left=art.offsetX*100+'%';image.style.top=art.offsetY*100+'%';
     visual.style.setProperty('--motion-x',profile.horizontal*100+'%');
     visual.style.setProperty('--motion-y',profile.vertical*100+'%');
     visual.style.setProperty('--motion-tilt',profile.tilt+'deg');

@@ -29,8 +29,9 @@ for (const world of worlds) {
         assert.equal(placed.baseSize, sizing.base);
         assert.ok(placed.sizeFactor >= 1 - sizing.variation && placed.sizeFactor <= 1 + sizing.variation);
         assert.ok(Math.abs(placed.size - sizing.base * placed.sizeFactor) < 1e-12);
-        assert.ok(placed.size >= 0.055, `${item.name} ist zu klein`);
-        if (scene.motionProfileFor(world, item).speed > 0) assert.ok(placed.size >= 0.07, item.name);
+        const art = scene.artworkFor(world, item);
+        assert.ok(placed.size >= 0.045, `${item.name} ist zu klein`);
+        assert.ok(placed.size * Math.max(art.right - art.left, art.bottom - art.top) >= 0.025, item.name);
         assert.ok(habitat.zones.some((zone) => placed.bounds[0] >= zone[0] - 1e-10 && placed.bounds[1] >= zone[1] - 1e-10
           && placed.bounds[2] <= zone[2] + 1e-10 && placed.bounds[3] <= zone[3] + 1e-10), `${item.name} verlässt seine Zone`);
         assert.ok(habitat.blocked.every((blocked) => !scene.overlaps(placed.bounds, blocked)));
@@ -75,14 +76,37 @@ test('Neue Runden erhalten neue Plätze; eine kleine Auswahl bleibt vollständig
   assert.deepEqual(scene.createLayout(world, [], seededRandom(1)).placements, []);
 });
 
-test('Wassertiere bleiben im Wasser und Landtiere meiden den Teich', () => {
+test('Wassertiere bleiben am Gewässer und Landtiere meiden den Teich', () => {
   const world = worlds.find((entry) => entry.id === 'safari');
   const layout = scene.createLayout(world, world.items.map((item) => item.index), seededRandom(42));
   for (const placed of layout.placements) {
     const name = world.items.find((item) => item.index === placed.index).name;
-    if (['Nilpferd', 'Flamingo'].includes(name)) {
+    if (name === 'Nilpferd') {
+      assert.ok(placed.bounds[0] >= 0.58 && placed.bounds[1] >= 0.69);
+    } else if (name === 'Flamingo') {
       assert.ok(placed.bounds[0] >= 0.59 && placed.bounds[1] >= 0.73);
     } else assert.ok(!scene.overlaps(placed.bounds, [0.59, 0.73, 0.94, 0.94]));
+  }
+});
+
+test('Große Tiere und Objekte sind auch bei maximaler Zufallsstreuung sichtbar mindestens doppelt so groß', () => {
+  const pairs = [
+    ['safari', 'Elefant', 'Erdmännchen'], ['unterwasser', 'Walhai', 'Seepferdchen'],
+    ['weltraumstation', 'Versorgungsraumschiff', 'Astronaut'], ['zaubergarten', 'Apfelbaum', 'Marienkäfer'],
+    ['zukunftsstadt', 'Schule', 'Lastenrad'], ['dinosaurier', 'Langhalssaurier', 'Schlüpfender Dinosaurier'],
+    ['forschungsinsel', 'Forschungsstation', 'Mikroskop'], ['sternenhimmel', 'Dekorative Galaxie', 'Warmer Stern'],
+    ['murmelbahn', 'Loopingelement', 'Blaue Murmel'], ['winterdorf', 'Hohes Winterhaus', 'Schneehase'],
+    ['kunstwerk', 'Mosaikberge', 'Mosaikfisch']
+  ];
+  for (const [worldId, largeName, smallName] of pairs) {
+    const world = worlds.find((world) => world.id === worldId);
+    const extent = (name, direction) => {
+      const item = world.items.find((item) => item.name === name);
+      const sizing = scene.sizeProfileFor(world, item);
+      const art = scene.artworkFor(world, item);
+      return sizing.base * (1 + direction * sizing.variation) * Math.max(art.right - art.left, art.bottom - art.top);
+    };
+    assert.ok(extent(largeName, -1) >= extent(smallName, 1) * 2, worldId);
   }
 });
 
