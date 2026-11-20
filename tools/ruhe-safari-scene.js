@@ -1,7 +1,7 @@
 (() => {
-  const ground = [0.06, 0.38, 0.94, 0.96];
+  const ground = [0.04, 0.38, 0.96, 0.96];
   const sky = [0.08, 0.08, 0.92, 0.44];
-  const pond = [0.59, 0.73, 0.94, 0.94];
+  const pond = [0.62, 0.73, 0.97, 0.94];
   const sea = [0.35, 0.26, 0.77, 0.45];
   const profiles = {
     rooted: { horizontal: 0, vertical: 0, tilt: 0, duration: 16, speed: 0 },
@@ -14,17 +14,17 @@
   };
 
   const baseSizes = {
-    safari: [0.16, 0.15, 0.1, 0.11, 0.087, 0.062, 0.15, 0.15, 0.09, 0.125, 0.09, 0.085],
-    unterwasser: [0.065, 0.115, 0.145, 0.055, 0.11, 0.075, 0.14, 0.085, 0.055, 0.058, 0.18, 0.095],
-    weltraumstation: [0.15, 0.145, 0.135, 0.15, 0.065, 0.16, 0.06, 0.09, 0.09, 0.085, 0.12, 0.07],
-    zaubergarten: [0.06, 0.07, 0.08, 0.065, 0.105, 0.15, 0.055, 0.055, 0.065, 0.075, 0.105, 0.1],
-    zukunftsstadt: [0.115, 0.11, 0.14, 0.13, 0.115, 0.08, 0.12, 0.095, 0.145, 0.12, 0.055, 0.135],
-    dinosaurier: [0.135, 0.16, 0.12, 0.075, 0.115, 0.062, 0.115, 0.085, 0.135, 0.11, 0.12, 0.07],
-    forschungsinsel: [0.115, 0.1, 0.095, 0.06, 0.09, 0.095, 0.14, 0.085, 0.055, 0.16, 0.125, 0.06],
-    sternenhimmel: [0.06, 0.065, 0.135, 0.105, 0.1, 0.17, 0.15, 0.08, 0.17, 0.14, 0.06, 0.085],
-    murmelbahn: [0.13, 0.12, 0.15, 0.065, 0.1, 0.055, 0.105, 0.14, 0.12, 0.12, 0.16, 0.06],
+    safari: [0.22, 0.25, 0.115, 0.105, 0.082, 0.055, 0.18, 0.145, 0.095, 0.16, 0.085, 0.08],
+    unterwasser: [0.055, 0.105, 0.16, 0.05, 0.105, 0.065, 0.14, 0.075, 0.055, 0.055, 0.28, 0.14],
+    weltraumstation: [0.23, 0.21, 0.22, 0.23, 0.10, 0.25, 0.06, 0.10, 0.13, 0.12, 0.18, 0.075],
+    zaubergarten: [0.06, 0.09, 0.125, 0.055, 0.165, 0.22, 0.055, 0.05, 0.08, 0.095, 0.145, 0.15],
+    zukunftsstadt: [0.22, 0.16, 0.25, 0.23, 0.18, 0.12, 0.22, 0.14, 0.26, 0.17, 0.055, 0.23],
+    dinosaurier: [0.17, 0.24, 0.16, 0.08, 0.145, 0.055, 0.14, 0.085, 0.20, 0.15, 0.165, 0.08],
+    forschungsinsel: [0.17, 0.13, 0.14, 0.06, 0.11, 0.13, 0.14, 0.11, 0.055, 0.27, 0.16, 0.06],
+    sternenhimmel: [0.06, 0.065, 0.17, 0.105, 0.10, 0.22, 0.20, 0.09, 0.23, 0.19, 0.055, 0.085],
+    murmelbahn: [0.16, 0.17, 0.19, 0.11, 0.14, 0.055, 0.14, 0.18, 0.16, 0.16, 0.21, 0.075],
     winterdorf: [0.48, 0.60, 0.25, 0.12, 0.22, 0.18, 0.12, 0.22, 0.13, 0.075, 0.05, 0.07],
-    kunstwerk: [0.12, 0.15, 0.1, 0.13, 0.12, 0.15, 0.075, 0.055, 0.065, 0.135, 0.17, 0.055]
+    kunstwerk: [0.14, 0.22, 0.11, 0.18, 0.16, 0.21, 0.095, 0.055, 0.09, 0.15, 0.24, 0.055]
   };
 
   const artworkBounds = {
@@ -88,8 +88,10 @@
     const name = item.name;
     if (world.mode === 'meerkats') return { zones: [ground], blocked: [pond] };
     if (world.id === 'safari') {
-      if (name === 'Nilpferd') return { zones: [[0.58, 0.69, 0.96, 0.95]], blocked: [] };
-      return name === 'Flamingo' ? { zones: [pond], blocked: [] } : { zones: [ground], blocked: [pond] };
+      if (name === 'Nilpferd') return { zones: [[0.61, 0.69, 0.98, 0.95]], blocked: [] };
+      if (name === 'Giraffe') return { zones: [[0.04, 0.18, 0.96, 0.96]], blocked: [pond] };
+      return name === 'Flamingo' ? { zones: [pond], blocked: [] }
+        : { zones: [['Elefant', 'Nashorn', 'Büffel'].includes(name) ? [0.04, 0.3, 0.96, 0.96] : ground], blocked: [pond] };
     }
     if (world.id === 'unterwasser') return { zones: [
       ['Einsiedlerkrebs', 'Seestern', 'Korallengruppe'].includes(name)
@@ -97,10 +99,12 @@
     ], blocked: [] };
     if (world.id === 'weltraumstation') return { zones: [[0.12, 0.08, 0.94, 0.86]], blocked: [[0, 0.73, 0.23, 1]] };
     if (world.id === 'sternenhimmel') return { zones: [[0.07, 0.07, 0.93, 0.85]], blocked: [] };
+    if (world.id === 'zaubergarten' && name === 'Apfelbaum') return { zones: [[0.02, 0.24, 0.34, 0.64], [0.66, 0.24, 0.98, 0.64]], blocked: [] };
     if (world.id === 'zaubergarten') return { zones: motionFor(world, item) === 'fluttering' ? [sky]
-      : [[0.04, 0.58, 0.21, 0.92], [0.3, 0.58, 0.71, 0.92], [0.8, 0.58, 0.96, 0.92]], blocked: [] };
-    if (world.id === 'zukunftsstadt') return { zones: [[0.09, 0.4, 0.91, 0.93]], blocked: [] };
-    if (world.id === 'dinosaurier') return { zones: [[0.12, 0.47, 0.92, 0.96]], blocked: [[0.12, 0.47, 0.22, 0.58], [0.84, 0.47, 0.92, 0.56]] };
+      : [[0.02, 0.58, 0.11, 0.92], [0.24, 0.55, 0.78, 0.95], [0.9, 0.58, 0.98, 0.92]], blocked: [] };
+    if (world.id === 'zukunftsstadt') return { zones: [/Wohnhaus|Bibliothek|Gemeinschaftshaus|Schule|gewächshaus|Windrad/.test(name)
+      ? [0.05, 0.23, 0.95, 0.96] : [0.05, 0.38, 0.95, 0.96]], blocked: [] };
+    if (world.id === 'dinosaurier') return { zones: [[0.04, 0.38, 0.96, 0.98]], blocked: [[0.04, 0.38, 0.15, 0.57], [0.88, 0.38, 0.96, 0.55]] };
     if (world.id === 'forschungsinsel') return ['Forschungsboot', 'Messboje'].includes(name)
       ? { zones: [sea], blocked: [] } : { zones: [[0.12, 0.52, 0.9, 0.95]], blocked: [] };
     if (world.id === 'winterdorf') return { zones: [['Polarlicht', 'Schneeflockengruppe'].includes(name)
@@ -108,7 +112,7 @@
     if (world.id === 'murmelbahn') return { zones: [[0.08, 0.1, 0.92, 0.87]], blocked: [] };
     if (world.id === 'kunstwerk') return { zones: [
       ['Mosaiksonne', 'Mosaikwolke', 'Mosaikvogel', 'Mosaikregenbogen'].includes(name)
-        ? [0.08, 0.1, 0.92, 0.45] : [0.08, 0.48, 0.92, 0.9]
+        ? [0.08, 0.1, 0.92, 0.45] : [0.08, 0.4, 0.92, 0.92]
     ], blocked: [] };
     return { zones: [ground], blocked: [] };
   }
@@ -122,20 +126,39 @@
   }
 
   function aspectFor(world) {
-    return world.id === 'winterdorf' ? 4 / 3 : 1672 / 941;
+    return ['safari', 'erdmaennchensafari', 'zaubergarten', 'zukunftsstadt', 'dinosaurier', 'forschungsinsel', 'winterdorf'].includes(world.id) ? 4 / 3 : 1672 / 941;
   }
 
-  function hasGroundPerspective(world, item) {
-    return world.id === 'winterdorf' && !item.name.endsWith('Winterhaus')
-      && !['Polarlicht', 'Schneeflockengruppe'].includes(item.name);
+  const perspectives = {
+    safari: { reference: 0.68, slope: 0.35, minimum: 0.9, maximum: 1.1, contact: true },
+    erdmaennchensafari: { reference: 0.68, slope: 0.3, minimum: 0.94, maximum: 1.06, contact: true },
+    unterwasser: { reference: 0.45, slope: 0.16, minimum: 0.94, maximum: 1.06, contact: false },
+    zaubergarten: { reference: 0.78, slope: 0.35, minimum: 0.92, maximum: 1.06, contact: true },
+    zukunftsstadt: { reference: 0.68, slope: 0.3, minimum: 0.9, maximum: 1.08, contact: true },
+    dinosaurier: { reference: 0.68, slope: 0.32, minimum: 0.9, maximum: 1.08, contact: true },
+    forschungsinsel: { reference: 0.72, slope: 0.3, minimum: 0.92, maximum: 1.08, contact: true },
+    winterdorf: { reference: 0.65, slope: 0.3, minimum: 0.92, maximum: 1.1, contact: true }
+  };
+  const bankPerspective = { ...perspectives.safari, maximum: 1.04 };
+  const waterPerspective = { reference: 0.36, slope: 0.12, minimum: 0.97, maximum: 1.04, contact: false };
+
+  function perspectiveProfileFor(world, item) {
+    if (world.id === 'winterdorf' && (item.name.endsWith('Winterhaus')
+      || ['Polarlicht', 'Schneeflockengruppe'].includes(item.name))) return null;
+    if (world.id === 'zaubergarten' && motionFor(world, item) === 'fluttering') return null;
+    if (world.id === 'safari' && ['Nilpferd', 'Flamingo'].includes(item.name)) return bankPerspective;
+    if (world.id === 'forschungsinsel' && ['Forschungsboot', 'Messboje'].includes(item.name)) return waterPerspective;
+    return perspectives[world.id] || null;
   }
 
   function visualSizeFor(world, item, actor) {
-    if (!hasGroundPerspective(world, item)) return actor.size;
+    const perspective = perspectiveProfileFor(world, item);
+    if (!perspective) return actor.size;
     const art = artworkFor(world, item);
-    const scale = (1 + 0.3 * (actor.y - 0.65))
-      / (1 - actor.size * 0.3 * (art.bottom - art.top) * aspectFor(world) / 2);
-    return actor.size * Math.max(0.92, Math.min(1.1, scale));
+    const contact = perspective.contact ? (art.bottom - art.top) * aspectFor(world) / 2 : 0;
+    const scale = (1 + perspective.slope * (actor.y - perspective.reference))
+      / (1 - actor.size * perspective.slope * contact);
+    return actor.size * Math.max(perspective.minimum, Math.min(perspective.maximum, scale));
   }
 
   function placeWinterHouses(entries, aspect, random) {
@@ -167,8 +190,8 @@
       const size = sizing.base * sizeFactor;
       const motion = motionProfileFor(world, item);
       const art = artworkFor(world, item);
-      const padding = world.id === 'winterdorf' && !motion.speed ? (item.name.endsWith('Winterhaus') ? 0.025 : 0.04) : 0.08;
-      const reservationScale = hasGroundPerspective(world, item) ? 1.1 : 1;
+      const padding = !motion.speed ? (world.id === 'winterdorf' && item.name.endsWith('Winterhaus') ? 0.025 : 0.04) : 0.07;
+      const reservationScale = perspectiveProfileFor(world, item)?.maximum || 1;
       return { item, habitat, area, priority: random(),
         baseSize: sizing.base, sizeFactor, size, artHeight: art.bottom - art.top,
         halfWidth: size * reservationScale * ((art.right - art.left) / 2 + motion.horizontal + padding) + 0.003,
@@ -177,7 +200,11 @@
     if (!items.length) return { aspect, placements: [] };
     for (let attemptLayout = 0; attemptLayout < 64; attemptLayout++) {
       const placements = world.id === 'winterdorf' ? placeWinterHouses(items, aspect, random) : [];
-      for (const entry of items) {
+      const packingOrder = Math.floor((attemptLayout - 16) / 4) % 4;
+      const measure = (entry) => [entry.halfHeight, entry.halfWidth, entry.halfWidth * entry.halfHeight, entry.size][packingOrder];
+      const ordered = attemptLayout < 16 ? items : [...items].sort((first, second) => (attemptLayout < 32 ? Math.min(0.3, first.area) - Math.min(0.3, second.area) : 0)
+        || measure(second) - measure(first));
+      for (const entry of ordered) {
         if (placements.some((actor) => actor.index === entry.item.index)) continue;
         const { item, habitat } = entry;
         const size = entry.size * 1000;
@@ -401,7 +428,7 @@
   };
 
   const atmosphere = {
-    safari: [['sunshine', 1, [0.76, 0.1, 0.76, 0.1]], ['sunbeam', 3, [0.76, 0.1, 0.76, 0.1]]],
+    safari: [['sunshine', 1, [0.847, 0.1, 0.847, 0.1]], ['sunbeam', 3, [0.847, 0.1, 0.847, 0.1]]],
     unterwasser: [['caustic', 1, [0.35, 0.35, 0.65, 0.55]], ['sea-sparkle', 8, [0.2, 0.2, 0.8, 0.75]]],
     weltraumstation: [['nebula', 2, [0.3, 0.25, 0.75, 0.6]], ['meteor', 2, [0.12, 0.12, 0.55, 0.4]]],
     zaubergarten: [['rainbow', 1, [0.5, 0.27, 0.5, 0.27]], ['firefly', 8, [0.1, 0.42, 0.9, 0.86]]],
@@ -525,5 +552,5 @@
     return layer;
   }
 
-  globalThis.RuheSafariScene = { withSpecialWorlds, artworkFor, motionFor, motionProfileFor, sizeProfileFor, visualSizeFor, shuffleOrder, moodFor, effectVariationFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
+  globalThis.RuheSafariScene = { withSpecialWorlds, artworkFor, motionFor, motionProfileFor, sizeProfileFor, perspectiveProfileFor, visualSizeFor, shuffleOrder, moodFor, effectVariationFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
 })();

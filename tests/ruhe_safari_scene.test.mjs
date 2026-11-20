@@ -30,8 +30,11 @@ for (const world of worlds) {
         assert.ok(placed.sizeFactor >= 1 - sizing.variation && placed.sizeFactor <= 1 + sizing.variation);
         assert.ok(Math.abs(placed.size - sizing.base * placed.sizeFactor) < 1e-12);
         const art = scene.artworkFor(world, item);
+        const visibleSize = scene.visualSizeFor(world, item, placed);
         assert.ok(placed.size >= 0.045, `${item.name} ist zu klein`);
-        assert.ok(placed.size * Math.max(art.right - art.left, art.bottom - art.top) >= 0.025, item.name);
+        assert.ok(visibleSize * Math.max(art.right - art.left, art.bottom - art.top) >= 0.025, item.name);
+        assert.ok(visibleSize * (art.right - art.left) / 2 < placed.halfWidth);
+        assert.ok(visibleSize * (art.bottom - art.top) * layout.aspect / 2 < placed.halfHeight);
         assert.ok(habitat.zones.some((zone) => placed.bounds[0] >= zone[0] - 1e-10 && placed.bounds[1] >= zone[1] - 1e-10
           && placed.bounds[2] <= zone[2] + 1e-10 && placed.bounds[3] <= zone[3] + 1e-10), `${item.name} verlässt seine Zone`);
         assert.ok(habitat.blocked.every((blocked) => !scene.overlaps(placed.bounds, blocked)));
@@ -40,6 +43,48 @@ for (const world of worlds) {
     }
   });
 }
+
+test('Alle Welten passen auch mit gleichzeitig minimaler oder maximaler Größenstreuung', () => {
+  for (const world of worlds) for (const value of [0, 0.999999]) {
+    const layout = scene.createLayout(world, world.items.map((item) => item.index), () => value);
+    assert.equal(layout.placements.length, world.items.length);
+    for (const actor of layout.placements) {
+      const habitat = scene.habitatFor(world, world.items[actor.index]);
+      assert.ok(habitat.zones.some((zone) => actor.bounds[0] >= zone[0] - 1e-10 && actor.bounds[1] >= zone[1] - 1e-10
+        && actor.bounds[2] <= zone[2] + 1e-10 && actor.bounds[3] <= zone[3] + 1e-10), world.id);
+      assert.ok(!layout.placements.some((other) => other !== actor && scene.overlaps(actor.bounds, other.bounds)), world.id);
+    }
+  }
+});
+
+test('Bildtiefe richtet sich nach Landschaft und Bodenkontakt; Himmelsbilder und Bauplatten bleiben maßstabsfest', () => {
+  const landscapes = ['safari', 'erdmaennchensafari', 'unterwasser', 'zaubergarten', 'zukunftsstadt', 'dinosaurier', 'forschungsinsel', 'winterdorf'];
+  for (const world of worlds) {
+    let hasPerspective = false;
+    for (const item of world.items) {
+      const perspective = scene.perspectiveProfileFor(world, item);
+      const size = scene.sizeProfileFor(world, item).base;
+      let previous = 0;
+      if (perspective) hasPerspective = true;
+      for (let step = 0; step <= 100; step++) {
+        const actor = { size, y: step / 100 };
+        const visible = scene.visualSizeFor(world, item, actor);
+        if (!perspective) assert.equal(visible, size);
+        else {
+          assert.ok(visible >= size * perspective.minimum && visible <= size * perspective.maximum);
+          const art = scene.artworkFor(world, item);
+          const layout = scene.createLayout(world, [], seededRandom(1));
+          const contact = perspective.contact ? actor.y + visible * (art.bottom - art.top) * layout.aspect / 2 : actor.y;
+          const expected = size * Math.max(perspective.minimum, Math.min(perspective.maximum, 1 + perspective.slope * (contact - perspective.reference)));
+          assert.ok(Math.abs(visible - expected) < 1e-12);
+        }
+        if (previous) assert.ok(visible >= previous && visible - previous < size * 0.006);
+        previous = visible;
+      }
+    }
+    assert.equal(hasPerspective, landscapes.includes(world.id), world.id);
+  }
+});
 
 test('Erscheinungsreihenfolge wird gemischt, ohne die Auswahl zu verändern', () => {
   const selected = Array.from({ length: 12 }, (_, index) => index);
@@ -155,7 +200,8 @@ test('Winterperspektive folgt dem Bodenkontakt und verändert sich beim Wandern 
       previous = visibleSize;
     }
   }
-  assert.equal(scene.visualSizeFor(worlds[0], worlds[0].items[0], actor), actor.size);
+  const space = worlds.find((entry) => entry.id === 'weltraumstation');
+  assert.equal(scene.visualSizeFor(space, space.items[0], actor), actor.size);
   const random = seededRandom(17);
   const layout = scene.createLayout(world, world.items.map((item) => item.index), random);
   const moving = layout.placements.find((entry) => entry.index === fox.index);
@@ -187,7 +233,7 @@ test('Wassertiere bleiben am Gewässer und Landtiere meiden den Teich', () => {
       assert.ok(placed.bounds[0] >= 0.58 && placed.bounds[1] >= 0.69);
     } else if (name === 'Flamingo') {
       assert.ok(placed.bounds[0] >= 0.59 && placed.bounds[1] >= 0.73);
-    } else assert.ok(!scene.overlaps(placed.bounds, [0.59, 0.73, 0.94, 0.94]));
+    } else assert.ok(!scene.overlaps(placed.bounds, [0.62, 0.73, 0.97, 0.94]));
   }
 });
 
@@ -209,6 +255,32 @@ test('Große Tiere und Objekte sind auch bei maximaler Zufallsstreuung sichtbar 
       return sizing.base * (1 + direction * sizing.variation) * Math.max(art.right - art.left, art.bottom - art.top);
     };
     assert.ok(extent(largeName, -1) >= extent(smallName, 1) * 2, worldId);
+  }
+});
+
+test('Szenenspezifische Proportionen berücksichtigen Tierhöhen, Gebäude und Nutzgegenstände', () => {
+  const comparisons = [
+    ['safari', 'Giraffe', 'Elefant', 'height', 1.35],
+    ['safari', 'Elefant', 'Löwe', 'height', 1.8],
+    ['unterwasser', 'Walhai', 'Delfin', 'width', 2],
+    ['weltraumstation', 'Wohnmodul', 'Astronaut', 'height', 3],
+    ['zaubergarten', 'Apfelbaum', 'Sonnenblume', 'height', 1.5],
+    ['zukunftsstadt', 'Schule', 'Lastenrad', 'height', 4],
+    ['dinosaurier', 'Langhalssaurier', 'Schlüpfender Dinosaurier', 'height', 4],
+    ['forschungsinsel', 'Forschungsstation', 'Materialkiste', 'height', 4],
+    ['sternenhimmel', 'Ringplanet', 'Warmer Stern', 'height', 3],
+    ['murmelbahn', 'Loopingelement', 'Blaue Murmel', 'height', 4],
+    ['kunstwerk', 'Mosaikbaum', 'Mosaikhaus', 'height', 1.15],
+    ['kunstwerk', 'Mosaikberge', 'Mosaikhügel', 'width', 1.6]
+  ];
+  for (const [worldId, large, small, axis, ratio] of comparisons) {
+    const world = worlds.find((entry) => entry.id === worldId);
+    const extent = (name) => {
+      const item = world.items.find((entry) => entry.name === name);
+      const art = scene.artworkFor(world, item);
+      return scene.sizeProfileFor(world, item).base * (axis === 'width' ? art.right - art.left : art.bottom - art.top);
+    };
+    assert.ok(extent(large) >= extent(small) * ratio, `${worldId}: ${large} zu ${small}`);
   }
 });
 
