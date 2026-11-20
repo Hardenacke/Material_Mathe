@@ -294,6 +294,7 @@ function updateControls(){
 }
 function fitScene(){
   const scene=$('scene'),plane=scene.querySelector('.world-plane');
+  $('stage').style.setProperty('--navigation-height',Math.max(0,$('sammlung-navigation')?.getBoundingClientRect().bottom||0)+'px');
   if(!plane||!sceneLayout||!scene.clientWidth||!scene.clientHeight)return;
   const width=Math.min(scene.clientWidth,scene.clientHeight*sceneLayout.aspect);
   plane.style.width=width+'px';plane.style.height=width/sceneLayout.aspect+'px';

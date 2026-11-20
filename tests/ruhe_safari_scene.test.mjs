@@ -86,7 +86,7 @@ test('Winterhäuser bilden ein großes, enges Dorf mit gemeinsamer Bodenlinie un
     assert.equal(houses.length, 2);
     const feet = houses.map((house) => {
       const art = scene.artworkFor(world, world.items[house.index]);
-      assert.ok(house.size >= (house.index === 0 ? 0.24 : 0.30) * 0.9 - 1e-12);
+      assert.ok(house.size >= (house.index === 0 ? 0.48 : 0.60) * 0.9 - 1e-12);
       return house.y + house.size * (art.bottom - art.top) * layout.aspect / 2;
     });
     assert.ok(Math.abs(feet[0] - feet[1]) < 1e-12);
@@ -101,6 +101,26 @@ test('Winterhäuser bilden ein großes, enges Dorf mit gemeinsamer Bodenlinie un
   for (const selected of [[], [0], [1], [0, 1], [3, 9, 10]]) {
     const layout = scene.createLayout(world, selected, seededRandom(42));
     assert.deepEqual(layout.placements.map((actor) => actor.index).sort((first, second) => first - second), selected);
+  }
+});
+
+test('Winterhäuser, Laterne, Winterbrücke und Schneebank sind gegenüber der vorigen Version doppelt so groß', () => {
+  const world = worlds.find((entry) => entry.id === 'winterdorf');
+  const previousSizes = new Map([[0, 0.24], [1, 0.30], [4, 0.06], [7, 0.135], [8, 0.115]]);
+  for (const [index, previous] of previousSizes) {
+    const sizing = scene.sizeProfileFor(world, world.items[index]);
+    assert.equal(sizing.base, previous * 2);
+    assert.equal(sizing.variation, 0.1);
+  }
+  const selected = world.items.map((item) => item.index);
+  for (const value of [0, 0.999999]) {
+    const layout = scene.createLayout(world, selected, () => value);
+    assert.equal(layout.aspect, 4 / 3);
+    assert.equal(layout.placements.length, selected.length);
+    for (const actor of layout.placements) {
+      assert.ok(actor.bounds.every((coordinate) => coordinate >= 0 && coordinate <= 1));
+      assert.ok(!layout.placements.some((other) => other !== actor && scene.overlaps(actor.bounds, other.bounds)));
+    }
   }
 });
 

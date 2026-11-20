@@ -23,7 +23,7 @@
     forschungsinsel: [0.115, 0.1, 0.095, 0.06, 0.09, 0.095, 0.14, 0.085, 0.055, 0.16, 0.125, 0.06],
     sternenhimmel: [0.06, 0.065, 0.135, 0.105, 0.1, 0.17, 0.15, 0.08, 0.17, 0.14, 0.06, 0.085],
     murmelbahn: [0.13, 0.12, 0.15, 0.065, 0.1, 0.055, 0.105, 0.14, 0.12, 0.12, 0.16, 0.06],
-    winterdorf: [0.24, 0.30, 0.14, 0.085, 0.06, 0.18, 0.08, 0.135, 0.115, 0.075, 0.058, 0.07],
+    winterdorf: [0.48, 0.60, 0.14, 0.085, 0.12, 0.18, 0.08, 0.27, 0.23, 0.075, 0.058, 0.07],
     kunstwerk: [0.12, 0.15, 0.1, 0.13, 0.12, 0.15, 0.075, 0.055, 0.065, 0.135, 0.17, 0.055]
   };
 
@@ -104,7 +104,7 @@
     if (world.id === 'forschungsinsel') return ['Forschungsboot', 'Messboje'].includes(name)
       ? { zones: [sea], blocked: [] } : { zones: [[0.12, 0.52, 0.9, 0.95]], blocked: [] };
     if (world.id === 'winterdorf') return { zones: [['Polarlicht', 'Schneeflockengruppe'].includes(name)
-      ? sky : name.endsWith('Winterhaus') ? [0.12, 0.28, 0.88, 0.93] : [0.14, 0.5, 0.86, 0.97]], blocked: [] };
+      ? sky : name.endsWith('Winterhaus') ? [0.04, 0.02, 0.96, 0.75] : [0.04, 0.44, 0.96, 0.99]], blocked: [] };
     if (world.id === 'murmelbahn') return { zones: [[0.08, 0.1, 0.92, 0.87]], blocked: [] };
     if (world.id === 'kunstwerk') return { zones: [
       ['Mosaiksonne', 'Mosaikwolke', 'Mosaikvogel', 'Mosaikregenbogen'].includes(name)
@@ -121,12 +121,16 @@
     return first[0] < second[2] && first[2] > second[0] && first[1] < second[3] && first[3] > second[1];
   }
 
+  function aspectFor(world) {
+    return world.id === 'winterdorf' ? 4 / 3 : 1672 / 941;
+  }
+
   function placeWinterHouses(entries, aspect, random) {
     const houses = shuffleOrder(entries.filter((entry) => entry.item.name.endsWith('Winterhaus')), random);
     if (!houses.length) return [];
     const gap = 0.004 + random() * 0.006;
     const width = houses.reduce((sum, entry) => sum + entry.halfWidth * 2, 0) + gap * (houses.length - 1);
-    const baseline = 0.765 + random() * 0.02;
+    const baseline = 0.66 + random() * 0.015;
     let left = 0.5 + (random() - 0.5) * 0.04 - width / 2;
     return houses.map((entry) => {
       const actor = { index: entry.item.index, x: left + entry.halfWidth,
@@ -140,7 +144,7 @@
   }
 
   function createLayout(world, selected, random = Math.random) {
-    const aspect = 1672 / 941;
+    const aspect = aspectFor(world);
     const height = 1000 / aspect;
     const items = world.items.filter((item) => selected.includes(item.index)).map((item) => {
       const habitat = habitatFor(world, item);
@@ -150,10 +154,11 @@
       const size = sizing.base * sizeFactor;
       const motion = motionProfileFor(world, item);
       const art = artworkFor(world, item);
+      const padding = world.id === 'winterdorf' && item.name.endsWith('Winterhaus') ? 0.025 : 0.08;
       return { item, habitat, area, priority: random(),
         baseSize: sizing.base, sizeFactor, size, artHeight: art.bottom - art.top,
-        halfWidth: size * ((art.right - art.left) / 2 + motion.horizontal + 0.08) + 0.003,
-        halfHeight: (size * ((art.bottom - art.top) / 2 + motion.vertical + 0.08) + 0.003) * aspect };
+        halfWidth: size * ((art.right - art.left) / 2 + motion.horizontal + padding) + 0.003,
+        halfHeight: (size * ((art.bottom - art.top) / 2 + motion.vertical + padding) + 0.003) * aspect };
     }).sort((first, second) => first.area - second.area || second.size - first.size || first.priority - second.priority);
     if (!items.length) return { aspect, placements: [] };
     for (let attemptLayout = 0; attemptLayout < 64; attemptLayout++) {
@@ -290,7 +295,7 @@
       }
     }
     if (!queue.length) return [];
-    const distanceTo = (index) => Math.hypot(pointAt(index).x - actor.x, (pointAt(index).y - actor.y) / (1672 / 941));
+    const distanceTo = (index) => Math.hypot(pointAt(index).x - actor.x, (pointAt(index).y - actor.y) / aspectFor(world));
     const furthest = Math.max(...queue.map(distanceTo));
     if (furthest < actor.size * 0.5) return [];
     const destinations = queue.filter((index) => distanceTo(index) >= furthest * 0.9);
