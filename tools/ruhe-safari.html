@@ -311,7 +311,7 @@ function renderScene(layout=null){
     if(!state.selected[w.id].includes(item.index))continue;
     const actor=document.createElement('div');actor.className='placed unseen';actor.setAttribute('role','img');actor.setAttribute('aria-label',item.name);
     const position=sceneLayout.placements.find(placed=>placed.index===item.index);
-    actor.style.left=position.x*100+'%';actor.style.top=position.y*100+'%';actor.style.width=position.size*100+'%';
+    actor.style.left=position.x*100+'%';actor.style.top=position.y*100+'%';actor.style.width=RuheSafariScene.visualSizeFor(w,item,position)*100+'%';
     actor.dataset.index=item.index;
     const visual=sprite(item),motion=RuheSafariScene.motionFor(w,item);visual.classList.add(motion);
     const profile=RuheSafariScene.motionProfileFor(w,item);
@@ -340,6 +340,7 @@ function refreshVisibility(){
   for(const [id,el] of actorNodes){
     const position=sceneLayout.placements.find(actor=>actor.index===id);
     el.style.left=position.x*100+'%';el.style.top=position.y*100+'%';
+    el.style.width=RuheSafariScene.visualSizeFor(current(),current().items.find(item=>item.index===id),position)*100+'%';
     el.classList.toggle('unseen',!earned.has(id));el.classList.toggle('sheltered',earned.has(id)&&!visible.has(id));el.classList.toggle('frightened',engine.startled&&visible.has(id));
     el.setAttribute('aria-hidden',String(!visible.has(id)));
     if(visible.has(id)&&!lastVisible.has(id)){el.classList.add('arrived');setTimeout(()=>el.classList.remove('arrived'),750);}
@@ -350,7 +351,7 @@ function moveActors(seconds){
   if(!engine||!sceneLayout||mode!=='running'||engine.startled||!state.settings.motion||reducedMotion.matches)return;
   for(const actor of RuheSafariScene.stepMotion(current(),sceneLayout,engine.visible(),seconds)){
     const node=actorNodes.get(actor.index);
-    if(node){node.style.left=actor.x*100+'%';node.style.top=actor.y*100+'%';}
+    if(node){node.style.left=actor.x*100+'%';node.style.top=actor.y*100+'%';node.style.width=RuheSafariScene.visualSizeFor(current(),current().items.find(item=>item.index===actor.index),actor)*100+'%';}
   }
 }
 function setView(next){

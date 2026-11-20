@@ -23,7 +23,7 @@
     forschungsinsel: [0.115, 0.1, 0.095, 0.06, 0.09, 0.095, 0.14, 0.085, 0.055, 0.16, 0.125, 0.06],
     sternenhimmel: [0.06, 0.065, 0.135, 0.105, 0.1, 0.17, 0.15, 0.08, 0.17, 0.14, 0.06, 0.085],
     murmelbahn: [0.13, 0.12, 0.15, 0.065, 0.1, 0.055, 0.105, 0.14, 0.12, 0.12, 0.16, 0.06],
-    winterdorf: [0.48, 0.60, 0.14, 0.085, 0.12, 0.18, 0.08, 0.27, 0.23, 0.075, 0.058, 0.07],
+    winterdorf: [0.48, 0.60, 0.25, 0.12, 0.22, 0.18, 0.12, 0.22, 0.13, 0.075, 0.05, 0.07],
     kunstwerk: [0.12, 0.15, 0.1, 0.13, 0.12, 0.15, 0.075, 0.055, 0.065, 0.135, 0.17, 0.055]
   };
 
@@ -125,12 +125,25 @@
     return world.id === 'winterdorf' ? 4 / 3 : 1672 / 941;
   }
 
+  function hasGroundPerspective(world, item) {
+    return world.id === 'winterdorf' && !item.name.endsWith('Winterhaus')
+      && !['Polarlicht', 'Schneeflockengruppe'].includes(item.name);
+  }
+
+  function visualSizeFor(world, item, actor) {
+    if (!hasGroundPerspective(world, item)) return actor.size;
+    const art = artworkFor(world, item);
+    const scale = (1 + 0.3 * (actor.y - 0.65))
+      / (1 - actor.size * 0.3 * (art.bottom - art.top) * aspectFor(world) / 2);
+    return actor.size * Math.max(0.92, Math.min(1.1, scale));
+  }
+
   function placeWinterHouses(entries, aspect, random) {
     const houses = shuffleOrder(entries.filter((entry) => entry.item.name.endsWith('Winterhaus')), random);
     if (!houses.length) return [];
     const gap = 0.004 + random() * 0.006;
     const width = houses.reduce((sum, entry) => sum + entry.halfWidth * 2, 0) + gap * (houses.length - 1);
-    const baseline = 0.66 + random() * 0.015;
+    const baseline = 0.645 + random() * 0.005;
     let left = 0.5 + (random() - 0.5) * 0.04 - width / 2;
     return houses.map((entry) => {
       const actor = { index: entry.item.index, x: left + entry.halfWidth,
@@ -154,11 +167,12 @@
       const size = sizing.base * sizeFactor;
       const motion = motionProfileFor(world, item);
       const art = artworkFor(world, item);
-      const padding = world.id === 'winterdorf' && item.name.endsWith('Winterhaus') ? 0.025 : 0.08;
+      const padding = world.id === 'winterdorf' && !motion.speed ? (item.name.endsWith('Winterhaus') ? 0.025 : 0.04) : 0.08;
+      const reservationScale = hasGroundPerspective(world, item) ? 1.1 : 1;
       return { item, habitat, area, priority: random(),
         baseSize: sizing.base, sizeFactor, size, artHeight: art.bottom - art.top,
-        halfWidth: size * ((art.right - art.left) / 2 + motion.horizontal + padding) + 0.003,
-        halfHeight: (size * ((art.bottom - art.top) / 2 + motion.vertical + padding) + 0.003) * aspect };
+        halfWidth: size * reservationScale * ((art.right - art.left) / 2 + motion.horizontal + padding) + 0.003,
+        halfHeight: (size * reservationScale * ((art.bottom - art.top) / 2 + motion.vertical + padding) + 0.003) * aspect };
     }).sort((first, second) => first.area - second.area || second.size - first.size || first.priority - second.priority);
     if (!items.length) return { aspect, placements: [] };
     for (let attemptLayout = 0; attemptLayout < 64; attemptLayout++) {
@@ -511,5 +525,5 @@
     return layer;
   }
 
-  globalThis.RuheSafariScene = { withSpecialWorlds, artworkFor, motionFor, motionProfileFor, sizeProfileFor, shuffleOrder, moodFor, effectVariationFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
+  globalThis.RuheSafariScene = { withSpecialWorlds, artworkFor, motionFor, motionProfileFor, sizeProfileFor, visualSizeFor, shuffleOrder, moodFor, effectVariationFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
 })();

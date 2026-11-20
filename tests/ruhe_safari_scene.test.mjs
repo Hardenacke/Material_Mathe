@@ -104,14 +104,20 @@ test('Winterhäuser bilden ein großes, enges Dorf mit gemeinsamer Bodenlinie un
   }
 });
 
-test('Winterhäuser, Laterne, Winterbrücke und Schneebank sind gegenüber der vorigen Version doppelt so groß', () => {
+test('Wintermotive besitzen stimmige Größenverhältnisse zu Bank, Schlitten und Tieren', () => {
   const world = worlds.find((entry) => entry.id === 'winterdorf');
-  const previousSizes = new Map([[0, 0.24], [1, 0.30], [4, 0.06], [7, 0.135], [8, 0.115]]);
-  for (const [index, previous] of previousSizes) {
-    const sizing = scene.sizeProfileFor(world, world.items[index]);
-    assert.equal(sizing.base, previous * 2);
-    assert.equal(sizing.variation, 0.1);
-  }
+  const extent = (index, axis) => {
+    const item = world.items[index];
+    const art = scene.artworkFor(world, item);
+    return scene.sizeProfileFor(world, item).base * (axis === 'width' ? art.right - art.left : art.bottom - art.top);
+  };
+  assert.ok(extent(2, 'height') > extent(8, 'height') * 2.4);
+  assert.ok(extent(4, 'height') > extent(8, 'height') * 2);
+  assert.ok(extent(3, 'height') > extent(9, 'height') * 1.4);
+  assert.ok(extent(9, 'height') > extent(10, 'height') * 1.3);
+  assert.ok(extent(6, 'width') > extent(8, 'width') * 0.7);
+  assert.ok(extent(6, 'width') < extent(8, 'width') * 1.1);
+  assert.ok(extent(7, 'width') > extent(8, 'width') * 1.5);
   const selected = world.items.map((item) => item.index);
   for (const value of [0, 0.999999]) {
     const layout = scene.createLayout(world, selected, () => value);
@@ -122,6 +128,54 @@ test('Winterhäuser, Laterne, Winterbrücke und Schneebank sind gegenüber der v
       assert.ok(!layout.placements.some((other) => other !== actor && scene.overlaps(actor.bounds, other.bounds)));
     }
   }
+});
+
+test('Winterperspektive folgt dem Bodenkontakt und verändert sich beim Wandern gleichmäßig', () => {
+  const world = worlds.find((entry) => entry.id === 'winterdorf');
+  const fox = world.items[9];
+  const actor = { size: scene.sizeProfileFor(world, fox).base, y: 0.6 };
+  const farSize = scene.visualSizeFor(world, fox, actor);
+  const nearSize = scene.visualSizeFor(world, fox, { ...actor, y: 0.92 });
+  assert.ok(nearSize > farSize * 1.08);
+  for (const item of world.items) {
+    const nominal = scene.sizeProfileFor(world, item).base;
+    let previous = 0;
+    for (let step = 0; step <= 100; step++) {
+      const placed = { size: nominal, y: 0.44 + step * 0.005 };
+      const visibleSize = scene.visualSizeFor(world, item, placed);
+      assert.ok(visibleSize >= nominal * 0.92 && visibleSize <= nominal * 1.1);
+      if (previous) assert.ok(visibleSize >= previous && visibleSize - previous < nominal * 0.003);
+      if (item.index < 2 || [5, 11].includes(item.index)) assert.equal(visibleSize, nominal);
+      else {
+        const art = scene.artworkFor(world, item);
+        const feet = placed.y + visibleSize * (art.bottom - art.top) * (4 / 3) / 2;
+        const expected = nominal * Math.max(0.92, Math.min(1.1, 1 + 0.3 * (feet - 0.65)));
+        assert.ok(Math.abs(visibleSize - expected) < 1e-12);
+      }
+      previous = visibleSize;
+    }
+  }
+  assert.equal(scene.visualSizeFor(worlds[0], worlds[0].items[0], actor), actor.size);
+  const random = seededRandom(17);
+  const layout = scene.createLayout(world, world.items.map((item) => item.index), random);
+  const moving = layout.placements.find((entry) => entry.index === fox.index);
+  let changed = false;
+  for (let frame = 0; frame < 1200; frame++) {
+    const before = scene.visualSizeFor(world, fox, moving);
+    scene.stepMotion(world, layout, world.items.map((item) => item.index), 0.1, random);
+    const after = scene.visualSizeFor(world, fox, moving);
+    assert.ok(Math.abs(after - before) < moving.size * 0.001);
+    if (Math.abs(after - before) > 1e-8) changed = true;
+    for (const placed of layout.placements) {
+      const item = world.items[placed.index];
+      const art = scene.artworkFor(world, item);
+      const size = scene.visualSizeFor(world, item, placed);
+      const halfWidth = size * (art.right - art.left) / 2;
+      const halfHeight = size * (art.bottom - art.top) * layout.aspect / 2;
+      assert.ok(halfWidth < placed.halfWidth && halfHeight < placed.halfHeight);
+    }
+  }
+  assert.ok(changed, 'Die Perspektive muss während einer echten Wanderung nachgeführt werden');
 });
 
 test('Wassertiere bleiben am Gewässer und Landtiere meiden den Teich', () => {
