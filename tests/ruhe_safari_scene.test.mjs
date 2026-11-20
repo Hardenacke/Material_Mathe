@@ -76,6 +76,34 @@ test('Neue Runden erhalten neue Plätze; eine kleine Auswahl bleibt vollständig
   assert.deepEqual(scene.createLayout(world, [], seededRandom(1)).placements, []);
 });
 
+test('Winterhäuser bilden ein großes, enges Dorf mit gemeinsamer Bodenlinie und freiem Vordergrund', () => {
+  const world = worlds.find((entry) => entry.id === 'winterdorf');
+  const centers = new Set();
+  for (let seed = 1; seed <= 80; seed++) {
+    const layout = scene.createLayout(world, world.items.map((item) => item.index), seededRandom(seed));
+    const houses = layout.placements.filter((actor) => world.items[actor.index].name.endsWith('Winterhaus'))
+      .sort((first, second) => first.x - second.x);
+    assert.equal(houses.length, 2);
+    const feet = houses.map((house) => {
+      const art = scene.artworkFor(world, world.items[house.index]);
+      assert.ok(house.size >= (house.index === 0 ? 0.24 : 0.30) * 0.9 - 1e-12);
+      return house.y + house.size * (art.bottom - art.top) * layout.aspect / 2;
+    });
+    assert.ok(Math.abs(feet[0] - feet[1]) < 1e-12);
+    const gap = houses[1].bounds[0] - houses[0].bounds[2];
+    assert.ok(gap >= 0.004 - 1e-12 && gap <= 0.01 + 1e-12);
+    const fox = layout.placements.find((actor) => world.items[actor.index].name === 'Winterfuchs');
+    const ground = scene.habitatFor(world, world.items[fox.index]).zones[0];
+    assert.ok(ground[3] - Math.max(...houses.map((house) => house.bounds[3])) > fox.halfHeight * 2);
+    centers.add(houses.map((house) => house.x.toFixed(4)).join(','));
+  }
+  assert.ok(centers.size > 60);
+  for (const selected of [[], [0], [1], [0, 1], [3, 9, 10]]) {
+    const layout = scene.createLayout(world, selected, seededRandom(42));
+    assert.deepEqual(layout.placements.map((actor) => actor.index).sort((first, second) => first - second), selected);
+  }
+});
+
 test('Wassertiere bleiben am Gewässer und Landtiere meiden den Teich', () => {
   const world = worlds.find((entry) => entry.id === 'safari');
   const layout = scene.createLayout(world, world.items.map((item) => item.index), seededRandom(42));

@@ -23,7 +23,7 @@
     forschungsinsel: [0.115, 0.1, 0.095, 0.06, 0.09, 0.095, 0.14, 0.085, 0.055, 0.16, 0.125, 0.06],
     sternenhimmel: [0.06, 0.065, 0.135, 0.105, 0.1, 0.17, 0.15, 0.08, 0.17, 0.14, 0.06, 0.085],
     murmelbahn: [0.13, 0.12, 0.15, 0.065, 0.1, 0.055, 0.105, 0.14, 0.12, 0.12, 0.16, 0.06],
-    winterdorf: [0.115, 0.145, 0.14, 0.085, 0.06, 0.18, 0.08, 0.135, 0.115, 0.075, 0.058, 0.07],
+    winterdorf: [0.24, 0.30, 0.14, 0.085, 0.06, 0.18, 0.08, 0.135, 0.115, 0.075, 0.058, 0.07],
     kunstwerk: [0.12, 0.15, 0.1, 0.13, 0.12, 0.15, 0.075, 0.055, 0.065, 0.135, 0.17, 0.055]
   };
 
@@ -104,7 +104,7 @@
     if (world.id === 'forschungsinsel') return ['Forschungsboot', 'Messboje'].includes(name)
       ? { zones: [sea], blocked: [] } : { zones: [[0.12, 0.52, 0.9, 0.95]], blocked: [] };
     if (world.id === 'winterdorf') return { zones: [['Polarlicht', 'Schneeflockengruppe'].includes(name)
-      ? sky : [0.14, 0.5, 0.86, 0.94]], blocked: [] };
+      ? sky : name.endsWith('Winterhaus') ? [0.12, 0.28, 0.88, 0.93] : [0.14, 0.5, 0.86, 0.97]], blocked: [] };
     if (world.id === 'murmelbahn') return { zones: [[0.08, 0.1, 0.92, 0.87]], blocked: [] };
     if (world.id === 'kunstwerk') return { zones: [
       ['Mosaiksonne', 'Mosaikwolke', 'Mosaikvogel', 'Mosaikregenbogen'].includes(name)
@@ -121,6 +121,24 @@
     return first[0] < second[2] && first[2] > second[0] && first[1] < second[3] && first[3] > second[1];
   }
 
+  function placeWinterHouses(entries, aspect, random) {
+    const houses = shuffleOrder(entries.filter((entry) => entry.item.name.endsWith('Winterhaus')), random);
+    if (!houses.length) return [];
+    const gap = 0.004 + random() * 0.006;
+    const width = houses.reduce((sum, entry) => sum + entry.halfWidth * 2, 0) + gap * (houses.length - 1);
+    const baseline = 0.765 + random() * 0.02;
+    let left = 0.5 + (random() - 0.5) * 0.04 - width / 2;
+    return houses.map((entry) => {
+      const actor = { index: entry.item.index, x: left + entry.halfWidth,
+        y: baseline - entry.size * entry.artHeight * aspect / 2,
+        size: entry.size, baseSize: entry.baseSize, sizeFactor: entry.sizeFactor,
+        halfWidth: entry.halfWidth, halfHeight: entry.halfHeight };
+      actor.bounds = boundsAt(actor, actor);
+      left += entry.halfWidth * 2 + gap;
+      return actor;
+    });
+  }
+
   function createLayout(world, selected, random = Math.random) {
     const aspect = 1672 / 941;
     const height = 1000 / aspect;
@@ -129,19 +147,23 @@
       const area = habitat.zones.reduce((sum, zone) => sum + (zone[2] - zone[0]) * (zone[3] - zone[1]), 0);
       const sizing = sizeProfileFor(world, item);
       const sizeFactor = 1 + (random() * 2 - 1) * sizing.variation;
+      const size = sizing.base * sizeFactor;
+      const motion = motionProfileFor(world, item);
+      const art = artworkFor(world, item);
       return { item, habitat, area, priority: random(),
-        baseSize: sizing.base, sizeFactor, size: sizing.base * sizeFactor };
+        baseSize: sizing.base, sizeFactor, size, artHeight: art.bottom - art.top,
+        halfWidth: size * ((art.right - art.left) / 2 + motion.horizontal + 0.08) + 0.003,
+        halfHeight: (size * ((art.bottom - art.top) / 2 + motion.vertical + 0.08) + 0.003) * aspect };
     }).sort((first, second) => first.area - second.area || second.size - first.size || first.priority - second.priority);
     if (!items.length) return { aspect, placements: [] };
     for (let attemptLayout = 0; attemptLayout < 64; attemptLayout++) {
-      const placements = [];
+      const placements = world.id === 'winterdorf' ? placeWinterHouses(items, aspect, random) : [];
       for (const entry of items) {
+        if (placements.some((actor) => actor.index === entry.item.index)) continue;
         const { item, habitat } = entry;
         const size = entry.size * 1000;
-        const motion = motionProfileFor(world, item);
-        const art = artworkFor(world, item);
-        const halfWidth = size * ((art.right - art.left) / 2 + motion.horizontal + 0.08) + 3;
-        const halfHeight = size * ((art.bottom - art.top) / 2 + motion.vertical + 0.08) + 3;
+        const halfWidth = entry.halfWidth * 1000;
+        const halfHeight = entry.halfHeight * height;
         const zones = habitat.zones.map((zone) => [zone[0] * 1000 + halfWidth, zone[1] * height + halfHeight,
           zone[2] * 1000 - halfWidth, zone[3] * height - halfHeight]).filter((zone) => zone[0] <= zone[2] && zone[1] <= zone[3]);
         if (!zones.length) break;
