@@ -88,6 +88,8 @@ Jede neue Runde mischt die Erscheinungsreihenfolge der ausgewählten Motive. Jed
 
 Bei zu hoher Lautstärke erscheint ein großer Hinweis „Zu laut – Bitte wieder leiser arbeiten.“ mit Ausrufezeichen. Ein kräftiger Rahmen und die farblich hervorgehobene Lautstärkeskala unterstützen die Warnung auch bei ausgeschalteter oder reduzierter Bewegung. Nach ausreichend ruhiger Arbeit verschwindet sie automatisch.
 
+Unter **Welche Welt soll wachsen? → Erdmännchensafari** gibt es einen zusätzlichen Modus mit bis zu **30 Erdmännchen**. Die Kolonie nutzt das vorhandene Savannenbild und ausschließlich das Erdmännchenmotiv; weitere Bilddateien werden nicht benötigt. Die Tiere erscheinen nach und nach in zufälliger Reihenfolge, haben individuelle Größen mit ±8 Prozent Abweichung und bewegen sich langsam auf dem Boden mit Abstand zum Teich und zueinander. Die schmale sichtbare Form wird bei den Abständen berücksichtigt. Mikrofon, Demo, Pause, Warnung und Bewegungsschalter funktionieren wie in den anderen Welten.
+
 Lernspiele liegen gesammelt unter `lernspiele/`, damit ihre gemeinsame JavaScript-/CSS-Basis und Offline-Dateien erhalten bleiben. `werkzeuge/katalog.py` ordnet sie anhand von `lernspiele/data.json` fachlich den passenden vorhandenen Inhaltsfeldern und Themen zu und markiert sie auf der Website als Kategorie `Lernspiel`.
 
 Jahrgangsbezogene Question-Shell-Dateien liegen im jeweiligen Bereichsordner unter `unterstuetzung/`. Sie sind über die eigene Kategorie **Unterstützung** für den ganzen Kurs erreichbar. Unter **Zusatzaufgaben** eines Themenbereichs erscheinen ausschließlich die diesem Inhaltsfeld zugeordneten Fermi-Aufgaben. Eine zusätzliche kursweite Übersicht bietet alle Zusatzaufgaben des Jahrgangs an.

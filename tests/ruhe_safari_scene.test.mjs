@@ -4,8 +4,9 @@ import test from 'node:test';
 import '../tools/ruhe-safari-scene.js';
 
 const source = readFileSync(new URL('../tools/ruhe-safari.html', import.meta.url), 'utf8');
-const worlds = JSON.parse(source.match(/world-data[^>]*>(.*?)<\/script>/s)[1]);
 const scene = globalThis.RuheSafariScene;
+const baseWorlds = JSON.parse(source.match(/world-data[^>]*>(.*?)<\/script>/s)[1]);
+const worlds = scene.withSpecialWorlds(baseWorlds);
 
 function seededRandom(seed) {
   let state = seed;
@@ -160,7 +161,7 @@ test('Große Motive bleiben beim langsamen Wandern in allen Welten kollisionsfre
   }
 });
 
-test('Jede Welt hat eine eigene Farbstimmung mit lesbarer Skala', () => {
+test('Jede Welt hat eine passende Farbstimmung mit lesbarer Skala', () => {
   const luminance = (color) => {
     const channels = color.slice(1).match(/../g).map((channel) => {
       const value = parseInt(channel, 16) / 255;
@@ -177,7 +178,20 @@ test('Jede Welt hat eine eigene Farbstimmung mit lesbarer Skala', () => {
     const contrast = (brightness[1] + 0.05) / (brightness[0] + 0.05);
     assert.ok(contrast >= 4.5, `${world.id}: Skalenkontrast ${contrast.toFixed(2)}`);
   }
-  assert.equal(backdrops.size, worlds.length);
+  assert.equal(backdrops.size, new Set(worlds.map((world) => world.atmosphere || world.id)).size);
+});
+
+test('Erdmännchensafari ergänzt ausschließlich 30 Erdmännchen mit dem vorhandenen Bild', () => {
+  const colony = worlds.find((world) => world.id === 'erdmaennchensafari');
+  const safari = baseWorlds.find((world) => world.id === 'safari');
+  const meerkat = safari.items.find((item) => item.name === 'Erdmännchen');
+  assert.equal(colony.items.length, 30);
+  assert.equal(new Set(colony.items.map((item) => item.index)).size, 30);
+  assert.ok(colony.items.every((item) => /^Erdmännchen \d+$/.test(item.name) && item.image === meerkat.image));
+  assert.equal(colony.background, safari.background);
+  assert.equal(baseWorlds.length, 11);
+  assert.equal(scene.withSpecialWorlds(worlds).length, worlds.length);
+  assert.deepEqual(scene.moodFor(colony), scene.moodFor(safari));
 });
 
 test('Alle atmosphärischen Details haben lokale Stile und bleiben dekorativ', () => {

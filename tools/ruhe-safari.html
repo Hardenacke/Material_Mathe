@@ -74,7 +74,7 @@
       <p class="intro">Sucht euch eine Welt aus und macht es euch gemütlich. Während ihr in Ruhe arbeitet, erwacht euer kleiner Lieblingsort zum Leben.</p>
     </header>
     <div class="world-header"><label class="field" for="theme">1. Welche Welt soll wachsen?<select id="theme"></select></label><img id="world-preview" alt="Vorschau der gewählten Welt"></div>
-    <div class="section-line"><h2>2. Welche Motive dürfen erscheinen?</h2><span id="count"></span><button id="all" type="button">Alle wählen</button></div>
+    <div class="section-line"><h2 id="motif-heading">2. Welche Motive dürfen erscheinen?</h2><span id="count"></span><button id="all" type="button">Alle wählen</button></div>
     <div id="cards" class="cards"></div>
     <p id="asset-status" class="status" role="status">Bilder werden geprüft …</p>
     <button id="retry-media" type="button" hidden>Bilder erneut prüfen</button>
@@ -182,7 +182,7 @@ class QuietWorldEngine {
 }
 
 'use strict';
-const worlds=JSON.parse(document.getElementById('world-data').textContent);
+const worlds=RuheSafariScene.withSpecialWorlds(JSON.parse(document.getElementById('world-data').textContent));
 const $=id=>document.getElementById(id);
 const STORAGE_KEY='ruhige-welten-motivauswahl-v1';
 const state={theme:'safari',selected:{},settings:{interval:45,tolerance:10,motion:true,adaptive:true}};
@@ -244,7 +244,7 @@ function imageLoaded(src,transparent=false){
 }
 async function loadCurrentMedia(){
   const token=++mediaToken;mediaReady=false;updateControls();$('retry-media').hidden=true;
-  setStatus('asset-status','Hintergrund und alle zwölf Einzelbilder werden geprüft …');
+  setStatus('asset-status','Hintergrund und '+current().items.length+' Motive werden geprüft …');
   try{
     const w=current();await Promise.all([imageLoaded(w.background),...w.items.map(i=>imageLoaded(i.image,true))]);
     if(token!==mediaToken)return;mediaReady=true;setStatus('asset-status','✓ Hintergrund und alle '+w.items.length+' Motive sind geladen und sichtbar.');
@@ -253,17 +253,22 @@ async function loadCurrentMedia(){
 }
 function renderCards(){
   const w=current(),chosen=new Set(state.selected[w.id]);$('cards').replaceChildren();
-  for(const item of w.items){
+  const colony=w.mode==='meerkats';$('cards').classList.toggle('colony-cards',colony);
+  $('motif-heading').textContent=colony?'2. Eure Erdmännchenkolonie':'2. Welche Motive dürfen erscheinen?';
+  for(const item of colony?[w.items[0]]:w.items){
     const card=document.createElement('button');card.type='button';card.className='card';card.dataset.index=item.index;
-    card.setAttribute('aria-pressed',String(chosen.has(item.index)));card.setAttribute('aria-label',item.name);
+    const active=colony?chosen.size===w.items.length:chosen.has(item.index);
+    card.setAttribute('aria-pressed',String(active));card.setAttribute('aria-label',colony?'Kolonie mit 30 Erdmännchen auswählen':item.name);
     const check=document.createElement('span');check.className='check';check.textContent='✓';check.setAttribute('aria-hidden','true');
-    const name=document.createElement('span');name.className='card-name';name.textContent=item.name;
+    const name=document.createElement('span');name.className='card-name';name.textContent=colony?'30 Erdmännchen':item.name;
     card.append(check,sprite(item),name);card.onclick=()=>{
-      const next=new Set(state.selected[w.id]);next.has(item.index)?next.delete(item.index):next.add(item.index);
-      state.selected[w.id]=[...next];save();renderCards();updateControls();
+      if(colony)state.selected[w.id]=active?[]:w.items.map(item=>item.index);
+      else{const next=new Set(state.selected[w.id]);next.has(item.index)?next.delete(item.index):next.add(item.index);state.selected[w.id]=[...next];}
+      save();renderCards();updateControls();
       $('cards').querySelector('[data-index="'+item.index+'"]').focus({preventScroll:true});
     };$('cards').append(card);
   }
+  if(colony){const note=document.createElement('p');note.className='colony-note';note.textContent='Eine ganze Kolonie für eure Savanne: Bei ruhiger Arbeit erscheinen nach und nach bis zu 30 Erdmännchen. Jedes ist ein bisschen anders groß und erkundet langsam seinen Platz.';$('cards').append(note);}
   $('count').textContent=chosen.size+' / '+w.items.length;
 }
 function showWorld(){

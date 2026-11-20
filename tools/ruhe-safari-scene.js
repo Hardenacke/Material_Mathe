@@ -28,8 +28,18 @@
   };
 
   function sizeProfileFor(world, item) {
+    if (world.mode === 'meerkats') return { base: 0.078, variation: 0.08 };
     return { base: baseSizes[world.id]?.[item.index] || 0.09,
       variation: world.id === 'forschungsinsel' && item.name === 'Forschungsboot' ? 0.08 : 0.1 };
+  }
+
+  function withSpecialWorlds(worlds) {
+    if (worlds.some((world) => world.id === 'erdmaennchensafari')) return [...worlds];
+    const safari = worlds.find((world) => world.id === 'safari');
+    const meerkat = safari?.items.find((item) => item.name === 'Erdmännchen');
+    if (!meerkat) return [...worlds];
+    return [...worlds, { id: 'erdmaennchensafari', name: 'Erdmännchensafari', mode: 'meerkats', atmosphere: 'safari',
+      background: safari.background, items: Array.from({ length: 30 }, (_, index) => ({ ...meerkat, index, name: `Erdmännchen ${index + 1}` })) }];
   }
 
   function shuffleOrder(selected, random = Math.random) {
@@ -42,6 +52,7 @@
   }
 
   function motionFor(world, item) {
+    if (world.mode === 'meerkats') return 'roaming';
     if (['Schmetterling', 'Biene', 'Mosaikvogel'].includes(item.name)) return 'fluttering';
     if (['Einsiedlerkrebs', 'Seestern'].includes(item.name)) return 'crawling';
     if ((world.id === 'unterwasser' && item.name !== 'Korallengruppe') || item.name === 'Mosaikfisch') return 'swimming';
@@ -54,6 +65,7 @@
 
   function habitatFor(world, item) {
     const name = item.name;
+    if (world.mode === 'meerkats') return { zones: [[0.06, 0.38, 0.94, 0.96]], blocked: [pond] };
     if (world.id === 'safari') return ['Nilpferd', 'Flamingo'].includes(name)
       ? { zones: [pond], blocked: [] } : { zones: [ground], blocked: [pond] };
     if (world.id === 'unterwasser') return { zones: [
@@ -104,8 +116,8 @@
         const { item, habitat } = entry;
         const size = entry.size * 1000;
         const motion = motionProfileFor(world, item);
-        const halfWidth = size * (0.5 + motion.horizontal + 0.08) + 3;
-        const halfHeight = size * (0.5 + motion.vertical + 0.08) + 3;
+        const halfWidth = size * ((world.mode === 'meerkats' ? 0.25 : 0.5) + motion.horizontal + 0.08) + 3;
+        const halfHeight = size * ((world.mode === 'meerkats' ? 0.44 : 0.5) + motion.vertical + 0.08) + 3;
         const zones = habitat.zones.map((zone) => [zone[0] * 1000 + halfWidth, zone[1] * height + halfHeight,
           zone[2] * 1000 - halfWidth, zone[3] * height - halfHeight]).filter((zone) => zone[0] <= zone[2] && zone[1] <= zone[3]);
         if (!zones.length) break;
@@ -140,7 +152,22 @@
         if (!candidate) break;
         placements.push(candidate);
       }
-      if (placements.length === items.length) return { aspect, placements };
+      if (placements.length === items.length) {
+        if (world.mode === 'meerkats') {
+          for (let pass = 0; pass < 10; pass++) for (const actor of shuffleOrder(placements, random)) {
+            const item = world.items.find((item) => item.index === actor.index);
+            const habitat = habitatFor(world, item);
+            for (let attempt = 0; attempt < 20; attempt++) {
+              const zone = habitat.zones[Math.floor(random() * habitat.zones.length)];
+              const point = { x: zone[0] + actor.halfWidth + random() * (zone[2] - zone[0] - actor.halfWidth * 2),
+                y: zone[1] + actor.halfHeight + random() * (zone[3] - zone[1] - actor.halfHeight * 2) };
+              if (!clearSegment(world, actor, point, point, placements)) continue;
+              actor.x = point.x; actor.y = point.y; actor.bounds = boundsAt(actor, actor); break;
+            }
+          }
+        }
+        return { aspect, placements };
+      }
     }
     throw new Error(`Für die Auswahl in „${world.name || world.id}“ konnten keine freien Plätze gefunden werden.`);
   }
@@ -351,7 +378,7 @@
   };
 
   function moodFor(world) {
-    return moods[world.id] || moods.safari;
+    return moods[world.atmosphere || world.id] || moods.safari;
   }
 
   const effectProfiles = {
@@ -401,8 +428,9 @@
     const layer = document.createElement('div');
     layer.className = 'ambient-layer';
     layer.setAttribute('aria-hidden', 'true');
-    const effects = [...(ambiance[world.id] || []), ...(atmosphere[world.id] || [])];
-    const colors = palettes[world.id] || ['#fff2b0'];
+    const environment = world.atmosphere || world.id;
+    const effects = [...(ambiance[environment] || []), ...(atmosphere[environment] || [])];
+    const colors = palettes[environment] || ['#fff2b0'];
     for (const [kind, count, zone] of effects) {
       for (let index = 0; index < count; index++) {
         const detail = document.createElement('span');
@@ -432,5 +460,5 @@
     return layer;
   }
 
-  globalThis.RuheSafariScene = { motionFor, motionProfileFor, sizeProfileFor, shuffleOrder, moodFor, effectVariationFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
+  globalThis.RuheSafariScene = { withSpecialWorlds, motionFor, motionProfileFor, sizeProfileFor, shuffleOrder, moodFor, effectVariationFor, habitatFor, overlaps, createLayout, findRoute, syncVisible, stepMotion, createAmbiance };
 })();
