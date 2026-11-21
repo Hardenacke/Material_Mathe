@@ -5,6 +5,7 @@ import '../tools/ruhe-safari-scene.js';
 import '../tools/ruhe-safari-worlds.js';
 
 const source = readFileSync(new URL('../tools/ruhe-safari.html', import.meta.url), 'utf8');
+const atmosphereStyles = source + readFileSync(new URL('../tools/ruhe-safari-atmosphere.css', import.meta.url), 'utf8');
 const scene = globalThis.RuheSafariScene;
 const baseWorlds = JSON.parse(source.match(/world-data[^>]*>(.*?)<\/script>/s)[1]);
 const worlds = scene.withSpecialWorlds([...baseWorlds, ...globalThis.RuheSafariAdditionalWorlds]);
@@ -18,13 +19,16 @@ function seededRandom(seed) {
 }
 
 test('Neue Welten enthalten ausschließlich die vollständigen lokalen Bildsätze mit vermessenen Bildgrenzen', () => {
-  assert.equal(globalThis.RuheSafariAdditionalWorlds.length, 2);
-  for (const [worldId, count] of [['zauberwald', 36], ['otterwelt', 12]]) {
+  assert.equal(new Set(worlds.map((world) => world.id)).size, worlds.length);
+  const expected = [['zauberwald', 36], ['otterwelt', 12], ['regenwald', 6], ['bauernhof', 8],
+    ['almwiese', 6], ['nachtgarten', 6], ['kueste', 6], ['oase', 6], ['kirschblueten', 6],
+    ['maercheninseln', 6], ['fruehling', 6], ['sommer', 6], ['herbst', 6], ['winter', 6]];
+  for (const [worldId, count] of expected) {
     const world = worlds.find((entry) => entry.id === worldId);
     assert.equal(world.items.length, count);
     assert.equal(new Set(world.items.map((item) => item.image)).size, count);
     for (const asset of [world.background, ...world.items.map((item) => item.image)]) {
-      assert.ok(asset.startsWith(`assets/ruhe-safari/${worldId}/`) && asset.endsWith('.webp'));
+      assert.match(asset, /^assets\/ruhe-safari\/[a-z-]+\/[a-z0-9-]+\.webp$/);
       const bytes = readFileSync(new URL(`../tools/${asset}`, import.meta.url));
       assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
       assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
@@ -34,6 +38,28 @@ test('Neue Welten enthalten ausschließlich die vollständigen lokalen Bildsätz
       assert.ok(item.artworkBounds.every((coordinate) => coordinate >= 0 && coordinate <= 1));
       assert.ok(item.artworkBounds[0] < item.artworkBounds[2] && item.artworkBounds[1] < item.artworkBounds[3]);
       assert.ok(scene.motionProfileFor(world, item));
+    }
+  }
+});
+
+test('Stilwelten nutzen die Hochformatkomposition mit ausreichendem Abstand und größeren Kleinstmotiven', () => {
+  const compositions = worlds.filter((world) => world.composition);
+  assert.equal(compositions.length, 12);
+  for (const landscape of compositions) {
+    const portrait = { ...landscape, portrait: true };
+    const selected = landscape.items.map((item) => item.index);
+    const sources = [() => 0, () => 0.999999, ...Array.from({ length: 32 }, (_, index) => seededRandom(index + 1))];
+    for (const random of sources) {
+      const layout = scene.createLayout(portrait, selected, random);
+      assert.equal(layout.aspect, 5 / 4);
+      assert.equal(layout.placements.length, selected.length);
+      for (const actor of layout.placements) {
+        const item = portrait.items[actor.index];
+        assert.ok(actor.bounds.every((coordinate) => coordinate > 0 && coordinate < 1));
+        assert.ok(Math.abs(actor.x - item.pose.portraitX) < 0.16, item.name);
+        assert.ok(actor.baseSize > scene.sizeProfileFor(landscape, item).base, item.name);
+        assert.ok(!layout.placements.some((other) => other !== actor && scene.overlaps(actor.bounds, other.bounds)));
+      }
     }
   }
 });
@@ -458,7 +484,7 @@ test('Alle atmosphärischen Details haben lokale Stile und bleiben dekorativ', (
       assert.ok(layer.children.length > 0 && layer.children.length <= 60);
       for (const detail of layer.children) {
         const kind = detail.className.split(' ')[1];
-        assert.ok(source.includes(`.${kind}{`) || source.includes(`.${kind},`), `${world.id}: Stil für ${kind} fehlt`);
+        assert.match(atmosphereStyles, new RegExp(`\\.${kind}(?:\\s*\\{|,)`), `${world.id}: Stil für ${kind} fehlt`);
         assert.match(detail.style['--atmosphere-color'], /^#[0-9a-f]{6}$/i);
         assert.match(detail.style['--effect-rotation'], /^-?[\d.]+deg$/);
         assert.ok(Number(detail.style['--effect-scale-x']) > 0.7);

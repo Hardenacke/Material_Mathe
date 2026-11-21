@@ -22,6 +22,75 @@
     radial-gradient(ellipse at 78% 70%, #fff9 0 30%, transparent 32%);
 }
 
+.ambient-rain, .ambient-falls, .ambient-dust, .ambient-canopy-leaf,
+.ambient-autumn-leaf, .ambient-blossom, .ambient-winter-flake {
+  animation-name: ambient-fall;
+}
+.ambient-rain {
+  height: 3.2%;
+  border-radius: 50%;
+  background: linear-gradient(transparent, #dffaff90);
+}
+.ambient-falls {
+  height: 20%;
+  background: repeating-linear-gradient(90deg, #cefaff80 0 12%, transparent 12% 32%);
+  mask-image: linear-gradient(transparent, black 28%, transparent 95%);
+  animation-name: ambient-waterfall;
+}
+.ambient-dust, .ambient-winter-flake {
+  aspect-ratio: 1;
+  border-radius: var(--effect-radius-start);
+  background: #faffff;
+}
+.ambient-dust { background: #f6cf96; animation-name: ambient-drift; }
+.ambient-canopy-leaf, .ambient-autumn-leaf, .ambient-blossom {
+  aspect-ratio: .72;
+  border-radius: 75% 10% 72% 28%;
+  background: #9ab953b3;
+}
+.ambient-autumn-leaf { background: #dd844bbd; }
+.ambient-blossom { background: #ffd5e1d9; }
+.ambient-cartoon-cloud, .ambient-cloudshade, .ambient-nightcloud, .ambient-heat {
+  height: 9%;
+  animation-name: ambient-drift;
+}
+.ambient-cartoon-cloud {
+  background: radial-gradient(ellipse at 28% 66%, #fff2 0 32%, transparent 35%),
+    radial-gradient(ellipse at 58% 40%, #fff5 0 40%, transparent 43%);
+}
+.ambient-nightcloud { background: radial-gradient(ellipse, #b4c8f02b, transparent 72%); }
+.ambient-cloudshade { background: radial-gradient(ellipse, #39526535, transparent 70%); }
+.ambient-heat {
+  background: repeating-linear-gradient(0deg, transparent 0 12%, #ffe9ca44 14%, transparent 20%);
+  mask-image: radial-gradient(ellipse, black, transparent 72%);
+}
+.ambient-sunpatch, .ambient-moonhalo {
+  --effect-anchor-x: -50%;
+  --effect-anchor-y: -50%;
+  aspect-ratio: 1.6;
+  animation-name: atmosphere-glow;
+  background: radial-gradient(ellipse, #fff4b964, transparent 70%);
+}
+.ambient-moonhalo { background: radial-gradient(ellipse, #d9ebfb63, transparent 70%); }
+.ambient-stream, .ambient-surf {
+  height: 1.1%;
+  border-top: 2px solid #f7ffffc0;
+  border-radius: var(--effect-radius-start);
+  animation-name: ambient-ripple;
+}
+.ambient-surf { background: linear-gradient(#e3f7f673, transparent); }
+.ambient-spark {
+  aspect-ratio: 1;
+  background: var(--atmosphere-color);
+  clip-path: polygon(50% 0, 62% 37%, 100% 50%, 62% 63%, 50% 100%, 38% 63%, 0 50%, 38% 37%);
+  animation-name: ambient-twinkle;
+}
+@keyframes ambient-waterfall {
+  from { transform: translateY(-5%) skewX(var(--effect-skew)) scaleX(var(--effect-scale-x)); opacity: .25; }
+  50% { opacity: .65; }
+  to { transform: translateY(15%) skewX(var(--effect-skew)) scaleX(calc(var(--effect-scale-x) * 1.1)); opacity: .25; }
+}
+
 @keyframes ambient-drift {
   0%, 100% {
     transform: translate(calc(var(--effect-anchor-x) - var(--effect-drift-x)), var(--effect-anchor-y)) rotate(calc(var(--effect-rotation) - var(--effect-sway))) skewX(var(--effect-skew)) scale(var(--effect-scale-x), var(--effect-scale-y));

@@ -193,6 +193,8 @@ let session=0,frame=0,lastFrame=null,lastPaint=0,smoothDb=null,calibration=[],ca
 let pausedRound=null;
 let actorNodes=new Map(),lastVisible=new Set(),deviceSelection='';
 let sceneLayout=null;
+let sceneWorld=null;
+const portraitViewport=window.matchMedia('(orientation: portrait)');
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 const mediaPromises=new Map();
 try{
@@ -297,14 +299,22 @@ function fitScene(){
   const scene=$('scene'),plane=scene.querySelector('.world-plane');
   $('stage').style.setProperty('--navigation-height',Math.max(0,$('sammlung-navigation')?.getBoundingClientRect().bottom||0)+'px');
   if(!plane||!sceneLayout||!scene.clientWidth||!scene.clientHeight)return;
+  if(view==='scene'&&sceneWorld.composition&&sceneWorld.portrait!==portraitViewport.matches){
+    renderScene();
+    return;
+  }
   const width=Math.min(scene.clientWidth,scene.clientHeight*sceneLayout.aspect);
   plane.style.width=width+'px';plane.style.height=width/sceneLayout.aspect+'px';
 }
 function renderScene(layout=null){
-  const w=current(),scene=$('scene');scene.replaceChildren();scene.style.backgroundImage='none';
+  const world=current(),scene=$('scene');scene.replaceChildren();scene.style.backgroundImage='none';
+  const w=world.composition?{...world,portrait:portraitViewport.matches}:world;
+  sceneWorld=w;
   const mood=RuheSafariScene.moodFor(w);$('stage').dataset.world=w.id;
   for(const [key,value] of Object.entries(mood))$('stage').style.setProperty('--cozy-'+key,value);
-  sceneLayout=layout||RuheSafariScene.createLayout(w,state.selected[w.id]);
+  const sameFormat=!w.composition||Boolean(layout?.portrait)===w.portrait;
+  sceneLayout=(sameFormat&&layout)||RuheSafariScene.createLayout(w,state.selected[w.id]);
+  if(w.composition)sceneLayout.portrait=w.portrait;
   const plane=document.createElement('div');plane.className='world-plane';plane.style.backgroundImage='url("'+w.background+'")';scene.append(plane);
   plane.append(RuheSafariScene.createAmbiance(w));
   actorNodes=new Map();lastVisible=new Set();
@@ -337,11 +347,11 @@ function renderScene(layout=null){
 }
 function refreshVisibility(){
   if(!engine||!sceneLayout)return;
-  const visible=new Set(RuheSafariScene.syncVisible(current(),sceneLayout,engine.visible())),earned=new Set(engine.earned);$('scene').classList.toggle('startled',engine.startled);
+  const visible=new Set(RuheSafariScene.syncVisible(sceneWorld,sceneLayout,engine.visible())),earned=new Set(engine.earned);$('scene').classList.toggle('startled',engine.startled);
   for(const [id,el] of actorNodes){
     const position=sceneLayout.placements.find(actor=>actor.index===id);
     el.style.left=position.x*100+'%';el.style.top=position.y*100+'%';
-    el.style.width=RuheSafariScene.visualSizeFor(current(),current().items.find(item=>item.index===id),position)*100+'%';
+    el.style.width=RuheSafariScene.visualSizeFor(sceneWorld,sceneWorld.items.find(item=>item.index===id),position)*100+'%';
     el.classList.toggle('unseen',!earned.has(id));el.classList.toggle('sheltered',earned.has(id)&&!visible.has(id));el.classList.toggle('frightened',engine.startled&&visible.has(id));
     el.setAttribute('aria-hidden',String(!visible.has(id)));
     if(visible.has(id)&&!lastVisible.has(id)){el.classList.add('arrived');setTimeout(()=>el.classList.remove('arrived'),750);}
@@ -350,9 +360,9 @@ function refreshVisibility(){
 }
 function moveActors(seconds){
   if(!engine||!sceneLayout||mode!=='running'||engine.startled||!state.settings.motion||reducedMotion.matches)return;
-  for(const actor of RuheSafariScene.stepMotion(current(),sceneLayout,engine.visible(),seconds)){
+  for(const actor of RuheSafariScene.stepMotion(sceneWorld,sceneLayout,engine.visible(),seconds)){
     const node=actorNodes.get(actor.index);
-    if(node){node.style.left=actor.x*100+'%';node.style.top=actor.y*100+'%';node.style.width=RuheSafariScene.visualSizeFor(current(),current().items.find(item=>item.index===actor.index),actor)*100+'%';}
+    if(node){node.style.left=actor.x*100+'%';node.style.top=actor.y*100+'%';node.style.width=RuheSafariScene.visualSizeFor(sceneWorld,sceneWorld.items.find(item=>item.index===actor.index),actor)*100+'%';}
   }
 }
 function setView(next){

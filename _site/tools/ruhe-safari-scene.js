@@ -12,6 +12,8 @@
     roaming: { horizontal: 0.02, vertical: 0.007, tilt: 0.8, duration: 12, speed: 0.008 },
     swimming: { horizontal: 0.025, vertical: 0.012, tilt: 1.2, duration: 14, speed: 0.01 },
     paddling: { horizontal: 0.012, vertical: 0.006, tilt: 0.7, duration: 16, speed: 0.006 },
+    strolling: { horizontal: 0.012, vertical: 0.004, tilt: 0.5, duration: 16, speed: 0.004 },
+    gliding: { horizontal: 0.025, vertical: 0.012, tilt: 1.4, duration: 14, speed: 0.009 },
     fluttering: { horizontal: 0.035, vertical: 0.025, tilt: 2, duration: 10, speed: 0.012 },
     drifting: { horizontal: 0.015, vertical: 0.01, tilt: 1, duration: 16, speed: 0.006 },
     crawling: { horizontal: 0.005, vertical: 0, tilt: 0.3, duration: 16, speed: 0.003 }
@@ -54,6 +56,7 @@
 
   function sizeProfileFor(world, item) {
     if (world.mode === 'meerkats') return { base: 0.078, variation: 0.08 };
+    if (world.composition) return { base: world.portrait ? item.pose.portraitSize : item.baseSize, variation: 0.06 };
     return { base: baseSizes[world.id]?.[item.index] || item.baseSize || 0.09,
       variation: world.id === 'forschungsinsel' && item.name === 'Forschungsboot' ? 0.08 : 0.1 };
   }
@@ -77,7 +80,7 @@
   }
 
   function motionFor(world, item) {
-    if (['zauberwald', 'otterwelt'].includes(world.id)) return item.sceneMotion;
+    if (item.sceneMotion) return item.sceneMotion;
     if (world.mode === 'meerkats') return 'roaming';
     if (['Schmetterling', 'Biene', 'Mosaikvogel'].includes(item.name)) return 'fluttering';
     if (['Einsiedlerkrebs', 'Seestern'].includes(item.name)) return 'crawling';
@@ -91,6 +94,17 @@
 
   function habitatFor(world, item) {
     const name = item.name;
+    if (world.composition) {
+      const center = compositionCenter(world, item);
+      const art = artworkFor(world, item);
+      const size = sizeProfileFor(world, item).base * 1.06;
+      const motion = motionProfileFor(world, item);
+      const verticalTravel = item.pose.ground ? 0.065 : 0.095;
+      const width = size * ((art.right - art.left) / 2 + motion.horizontal + 0.07) + 0.16;
+      const height = size * ((art.bottom - art.top) / 2 + motion.vertical + 0.07) * aspectFor(world) + verticalTravel;
+      return { zones: [[Math.max(0.015, center.x - width), Math.max(0.025, center.y - height),
+        Math.min(0.985, center.x + width), Math.min(0.985, center.y + height)]], blocked: [] };
+    }
     if (world.id === 'zauberwald') {
       if (item.surface === 'water') return { zones: forestStream.map((zone) => [zone[0], item.index === 24 ? 0.8 : zone[1], zone[2], zone[3]]), blocked: [] };
       if (item.surface === 'bank') return { zones: [[0.04, 0.62, 0.4, 0.825], [0.6, 0.62, 0.96, 0.825]], blocked: [] };
@@ -140,7 +154,16 @@
   }
 
   function aspectFor(world) {
+    if (world.composition && world.portrait) return 5 / 4;
     return ['safari', 'erdmaennchensafari', 'zaubergarten', 'zukunftsstadt', 'dinosaurier', 'forschungsinsel', 'winterdorf', 'zauberwald', 'otterwelt'].includes(world.id) ? 4 / 3 : 1672 / 941;
+  }
+
+  function compositionCenter(world, item, size = sizeProfileFor(world, item).base) {
+    const pose = item.pose;
+    const art = artworkFor(world, item);
+    const anchor = world.portrait ? pose.portraitY : pose.y;
+    const halfHeight = size * (art.bottom - art.top) * aspectFor(world) / 2;
+    return { x: world.portrait ? pose.portraitX : pose.x, y: pose.ground ? anchor - halfHeight : anchor };
   }
 
   const perspectives = {
@@ -209,7 +232,10 @@
       const art = artworkFor(world, item);
       const padding = !motion.speed ? (world.id === 'winterdorf' && item.name.endsWith('Winterhaus') ? 0.025 : 0.04) : 0.07;
       const reservationScale = perspectiveProfileFor(world, item)?.maximum || 1;
-      return { item, habitat, area, priority: random(),
+      const center = world.composition ? compositionCenter(world, item, size) : null;
+      const preferred = center && { x: (center.x + (random() - 0.5) * 0.034) * 1000,
+        y: (center.y + (random() - 0.5) * 0.022) * height };
+      return { item, habitat, area, preferred, priority: random(),
         baseSize: sizing.base, sizeFactor, size, artHeight: art.bottom - art.top,
         halfWidth: size * reservationScale * ((art.right - art.left) / 2 + motion.horizontal + padding) + 0.003,
         halfHeight: (size * reservationScale * ((art.bottom - art.top) / 2 + motion.vertical + padding) + 0.003) * aspect };
@@ -232,7 +258,12 @@
         if (!zones.length) break;
         let candidate = null;
         let bestDistance = -Infinity;
+        const preferred = entry.preferred;
         const grid = [];
+        if (preferred) {
+          const [left, top, right, bottom] = zones[0];
+          grid.push({ left: Math.max(left, Math.min(right, preferred.x)), top: Math.max(top, Math.min(bottom, preferred.y)) });
+        }
         const compact = attemptLayout >= 16;
         if (compact) for (const zone of zones) {
           const occupied = [...habitat.blocked.map((bounds) => [bounds[0] * 1000, bounds[1] * height, bounds[2] * 1000, bounds[3] * height]),
@@ -241,16 +272,18 @@
           const vertical = [zone[1], zone[3], ...occupied.flatMap((bounds) => [bounds[1] - halfHeight - 0.001, bounds[3] + halfHeight + 0.001])];
           for (const left of horizontal) for (const top of vertical) grid.push({ left, top });
         }
-        for (let attempt = 0; attempt < (grid.length || 320); attempt++) {
+        const candidateCount = compact ? grid.length : 320 + grid.length;
+        for (let attempt = 0; attempt < candidateCount; attempt++) {
           const zone = zones[Math.floor(random() * zones.length)];
-          const left = grid.length ? grid[attempt].left : zone[0] + random() * (zone[2] - zone[0]);
-          const top = grid.length ? grid[attempt].top : zone[1] + random() * (zone[3] - zone[1]);
+          const left = grid[attempt]?.left ?? (zone[0] + random() * (zone[2] - zone[0]));
+          const top = grid[attempt]?.top ?? (zone[1] + random() * (zone[3] - zone[1]));
           if (!zones.some((allowed) => left >= allowed[0] && left <= allowed[2] && top >= allowed[1] && top <= allowed[3])) continue;
           const bounds = [(left - halfWidth) / 1000, (top - halfHeight) / height,
             (left + halfWidth) / 1000, (top + halfHeight) / height];
           if (habitat.blocked.some((blocked) => overlaps(bounds, blocked)) || placements.some((placed) => overlaps(bounds, placed.bounds))) continue;
           const orientation = attemptLayout % 4;
-          const distance = compact ? (orientation < 2 ? -top : top) * 10000 + (orientation % 2 ? left : -left)
+          const distance = preferred ? -Math.hypot(left - preferred.x, top - preferred.y)
+            : compact ? (orientation < 2 ? -top : top) * 10000 + (orientation % 2 ? left : -left)
             : placements.length ? Math.min(...placements.map((placed) => Math.hypot(left - placed.x * 1000, top - placed.y * height))) : random();
           if (distance > bestDistance) {
             bestDistance = distance;
@@ -491,7 +524,19 @@
     winterdorf: { backdrop: '#d6d6e3', halo: '#f5e3df', edge: '#68638322', frame: '#e8e4ed', ink: '#665e77' },
     kunstwerk: { backdrop: '#e8dacb', halo: '#fff2df', edge: '#957b6b22', frame: '#f5ebdd', ink: '#796556' },
     zauberwald: { backdrop: '#ccd8bc', halo: '#fff2c5', edge: '#456b4222', frame: '#e5ebd9', ink: '#506346' },
-    otterwelt: { backdrop: '#c7e1d6', halo: '#fff1cf', edge: '#386d6222', frame: '#e1eee2', ink: '#47695e' }
+    otterwelt: { backdrop: '#c7e1d6', halo: '#fff1cf', edge: '#386d6222', frame: '#e1eee2', ink: '#47695e' },
+    regenwald: { backdrop: '#c3d5ba', halo: '#edf2c5', edge: '#25492935', frame: '#e4eddf', ink: '#40583a' },
+    bauernhof: { backdrop: '#d9e6aa', halo: '#fff0bc', edge: '#80693825', frame: '#f3edcb', ink: '#545f36' },
+    almwiese: { backdrop: '#c5d8df', halo: '#f0f6df', edge: '#38667c29', frame: '#e7eef0', ink: '#455b62' },
+    nachtgarten: { backdrop: '#252e4e', halo: '#48577e', edge: '#1c223c44', frame: '#303b57', ink: '#eef0d4' },
+    kueste: { backdrop: '#c4dade', halo: '#e5f0ef', edge: '#40697833', frame: '#e4eced', ink: '#415b61' },
+    oase: { backdrop: '#e8c19d', halo: '#ffebba', edge: '#8a593523', frame: '#f4e2c9', ink: '#6c503d' },
+    kirschblueten: { backdrop: '#e4cdd3', halo: '#ffe8db', edge: '#92596220', frame: '#f5e6e8', ink: '#67505c' },
+    maercheninseln: { backdrop: '#d8c6e8', halo: '#fce5e9', edge: '#775ea522', frame: '#ece3f2', ink: '#5d4c72' },
+    fruehling: { backdrop: '#dce5c2', halo: '#fff1dd', edge: '#5f733223', frame: '#edf0db', ink: '#52603c' },
+    sommer: { backdrop: '#d0ddaa', halo: '#fff1b8', edge: '#686f2925', frame: '#ebedcf', ink: '#556039' },
+    herbst: { backdrop: '#dfc2a3', halo: '#ffe9bf', edge: '#885c3230', frame: '#f0e3d1', ink: '#674d35' },
+    winter: { backdrop: '#cbd9e9', halo: '#eef2ff', edge: '#536a9230', frame: '#e7edf5', ink: '#4e607c' }
   };
 
   function moodFor(world) {
@@ -546,19 +591,26 @@
     layer.className = 'ambient-layer';
     layer.setAttribute('aria-hidden', 'true');
     const environment = world.atmosphere || world.id;
-    const effects = [...(ambiance[environment] || []), ...(atmosphere[environment] || [])];
-    const colors = palettes[environment] || ['#fff2b0'];
-    for (const [kind, count, zone] of effects) {
+    const effects = world.decorations
+      ? world.decorations.map(([kind, x, y, width, duration, phase]) => [kind, 1, [x / 100, y / 100, x / 100, y / 100], { width, duration, phase }])
+      : [...(ambiance[environment] || []), ...(atmosphere[environment] || [])];
+    const colors = palettes[environment] || ['#fff2b0', '#eaf9ff', '#f6d7ce'];
+    const crop = world.composition && world.portrait ? (1672 / 941) / aspectFor(world) : 1;
+    for (const [kind, count, zone, decoration] of effects) {
       for (let index = 0; index < count; index++) {
         const detail = document.createElement('span');
         detail.className = `ambient-detail ambient-${kind}`;
-        const placement = kind === 'ripple' ? [zone[0] + 0.03, zone[1] + 0.025, zone[2] - 0.12, zone[3] - 0.05]
+        const placement = !decoration && kind === 'ripple' ? [zone[0] + 0.03, zone[1] + 0.025, zone[2] - 0.12, zone[3] - 0.05]
           : kind === 'sea-sparkle' ? [zone[0] + 0.01, zone[1] + 0.015, zone[2] - 0.01, zone[3] - 0.015] : zone;
-        detail.style.left = (placement[0] + random() * (placement[2] - placement[0])) * 100 + '%';
+        const x = placement[0] + random() * (placement[2] - placement[0]);
+        detail.style.left = (0.5 + (x - 0.5) * crop) * 100 + '%';
         detail.style.top = (placement[1] + random() * (placement[3] - placement[1])) * 100 + '%';
         const duration = kind === 'meteor' ? 18 : ['star', 'glint', 'ripple', 'grass', 'sea-sparkle', 'frost'].includes(kind) ? 5 : 9;
-        detail.style.setProperty('--ambient-duration', (duration + random() * 4) + 's');
-        detail.style.setProperty('--ambient-delay', (-random() * 30) + 's');
+        if (decoration) {
+          detail.style.width = decoration.width.endsWith('%') ? parseFloat(decoration.width) * crop + '%' : decoration.width;
+        }
+        detail.style.setProperty('--ambient-duration', (decoration?.duration ?? duration + random() * 4) + 's');
+        detail.style.setProperty('--ambient-delay', -(decoration?.phase ?? random() * 30) + 's');
         detail.style.setProperty('--atmosphere-color', colors[index % colors.length]);
         detail.style.setProperty('--beam-angle', ((index - (count - 1) / 2) * 18) + 'deg');
         const shape = effectVariationFor(kind, random);
