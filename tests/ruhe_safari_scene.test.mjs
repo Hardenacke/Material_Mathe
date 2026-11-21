@@ -2,11 +2,12 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import '../tools/ruhe-safari-scene.js';
+import '../tools/ruhe-safari-worlds.js';
 
 const source = readFileSync(new URL('../tools/ruhe-safari.html', import.meta.url), 'utf8');
 const scene = globalThis.RuheSafariScene;
 const baseWorlds = JSON.parse(source.match(/world-data[^>]*>(.*?)<\/script>/s)[1]);
-const worlds = scene.withSpecialWorlds(baseWorlds);
+const worlds = scene.withSpecialWorlds([...baseWorlds, ...globalThis.RuheSafariAdditionalWorlds]);
 
 function seededRandom(seed) {
   let state = seed;
@@ -15,6 +16,52 @@ function seededRandom(seed) {
     return state / 4294967296;
   };
 }
+
+test('Neue Welten enthalten ausschließlich die vollständigen lokalen Bildsätze mit vermessenen Bildgrenzen', () => {
+  assert.equal(globalThis.RuheSafariAdditionalWorlds.length, 2);
+  for (const [worldId, count] of [['zauberwald', 36], ['otterwelt', 12]]) {
+    const world = worlds.find((entry) => entry.id === worldId);
+    assert.equal(world.items.length, count);
+    assert.equal(new Set(world.items.map((item) => item.image)).size, count);
+    for (const asset of [world.background, ...world.items.map((item) => item.image)]) {
+      assert.ok(asset.startsWith(`assets/ruhe-safari/${worldId}/`) && asset.endsWith('.webp'));
+      const bytes = readFileSync(new URL(`../tools/${asset}`, import.meta.url));
+      assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
+      assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
+    }
+    for (const item of world.items) {
+      assert.equal(item.artworkBounds.length, 4);
+      assert.ok(item.artworkBounds.every((coordinate) => coordinate >= 0 && coordinate <= 1));
+      assert.ok(item.artworkBounds[0] < item.artworkBounds[2] && item.artworkBounds[1] < item.artworkBounds[3]);
+      assert.ok(scene.motionProfileFor(world, item));
+    }
+  }
+});
+
+test('Waldtiere bleiben auf Lichtung, am Bach oder in der Luft; Otter meiden die Ufer und ruhende Motive bleiben still', () => {
+  const forest = worlds.find((world) => world.id === 'zauberwald');
+  const otters = worlds.find((world) => world.id === 'otterwelt');
+  for (let seed = 1; seed <= 24; seed++) {
+    const layout = scene.createLayout(forest, forest.items.map((item) => item.index), seededRandom(seed));
+    for (const actor of layout.placements) {
+      const item = forest.items[actor.index];
+      if (item.surface === 'water') {
+        assert.ok(actor.bounds[2] <= 0.4 + 1e-10 || actor.bounds[0] >= 0.59 - 1e-10);
+        assert.ok(actor.bounds[3] <= 0.94 + 1e-10);
+        assert.equal(scene.motionFor(forest, item), 'swimming');
+      } else if (item.surface !== 'air') assert.ok(actor.bounds[3] <= 0.825 + 1e-10);
+    }
+    const otterLayout = scene.createLayout(otters, otters.items.map((item) => item.index), seededRandom(seed));
+    const resting = otterLayout.placements.find((actor) => actor.index === 3);
+    assert.ok(resting.bounds[2] <= 0.28 + 1e-10 || resting.bounds[0] >= 0.75 - 1e-10);
+  }
+  assert.equal(scene.motionProfileFor(otters, otters.items[3]).speed, 0);
+  assert.equal(scene.motionProfileFor(otters, otters.items[11]).speed, 0);
+  assert.ok(scene.motionProfileFor(otters, otters.items[0]).speed <= 0.006);
+  assert.ok(scene.sizeProfileFor(otters, otters.items[8]).base < scene.sizeProfileFor(otters, otters.items[0]).base);
+  assert.ok(scene.sizeProfileFor(otters, otters.items[10]).base > scene.sizeProfileFor(otters, otters.items[0]).base);
+  assert.ok(scene.sizeProfileFor(forest, forest.items[0]).base > scene.sizeProfileFor(forest, forest.items[16]).base * 2.5);
+});
 
 for (const world of worlds) {
   test(`${world.id}: alle Motive samt Bewegungsraum passen kollisionsfrei in ihre Lebensräume`, () => {
@@ -58,7 +105,7 @@ test('Alle Welten passen auch mit gleichzeitig minimaler oder maximaler Größen
 });
 
 test('Bildtiefe richtet sich nach Landschaft und Bodenkontakt; Himmelsbilder und Bauplatten bleiben maßstabsfest', () => {
-  const landscapes = ['safari', 'erdmaennchensafari', 'unterwasser', 'zaubergarten', 'zukunftsstadt', 'dinosaurier', 'forschungsinsel', 'winterdorf'];
+  const landscapes = ['safari', 'erdmaennchensafari', 'unterwasser', 'zaubergarten', 'zukunftsstadt', 'dinosaurier', 'forschungsinsel', 'winterdorf', 'zauberwald', 'otterwelt'];
   for (const world of worlds) {
     let hasPerspective = false;
     for (const item of world.items) {

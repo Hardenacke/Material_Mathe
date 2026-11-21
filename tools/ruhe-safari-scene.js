@@ -3,11 +3,15 @@
   const sky = [0.08, 0.08, 0.92, 0.44];
   const pond = [0.62, 0.73, 0.97, 0.94];
   const sea = [0.35, 0.26, 0.77, 0.45];
+  const forestStream = [[0.04, 0.73, 0.4, 0.94], [0.59, 0.73, 0.96, 0.94]];
+  const otterWater = [0.06, 0.29, 0.94, 0.99];
+  const otterBanks = [[0, 0.87, 0.28, 1], [0.86, 0.88, 1, 1]];
   const profiles = {
     rooted: { horizontal: 0, vertical: 0, tilt: 0, duration: 16, speed: 0 },
     gentle: { horizontal: 0.015, vertical: 0.005, tilt: 0.7, duration: 14, speed: 0 },
     roaming: { horizontal: 0.02, vertical: 0.007, tilt: 0.8, duration: 12, speed: 0.008 },
     swimming: { horizontal: 0.025, vertical: 0.012, tilt: 1.2, duration: 14, speed: 0.01 },
+    paddling: { horizontal: 0.012, vertical: 0.006, tilt: 0.7, duration: 16, speed: 0.006 },
     fluttering: { horizontal: 0.035, vertical: 0.025, tilt: 2, duration: 10, speed: 0.012 },
     drifting: { horizontal: 0.015, vertical: 0.01, tilt: 1, duration: 16, speed: 0.006 },
     crawling: { horizontal: 0.005, vertical: 0, tilt: 0.3, duration: 16, speed: 0.003 }
@@ -44,13 +48,13 @@
   function artworkFor(world, item) {
     const source = world.mode === 'meerkats' ? 'safari' : world.id;
     const index = world.mode === 'meerkats' ? 5 : item.index;
-    const [left, top, right, bottom] = artworkBounds[source]?.[index] || [0, 0, 1, 1];
+    const [left, top, right, bottom] = item.artworkBounds || artworkBounds[source]?.[index] || [0, 0, 1, 1];
     return { left, top, right, bottom, offsetX: 0.5 - (left + right) / 2, offsetY: 0.5 - (top + bottom) / 2 };
   }
 
   function sizeProfileFor(world, item) {
     if (world.mode === 'meerkats') return { base: 0.078, variation: 0.08 };
-    return { base: baseSizes[world.id]?.[item.index] || 0.09,
+    return { base: baseSizes[world.id]?.[item.index] || item.baseSize || 0.09,
       variation: world.id === 'forschungsinsel' && item.name === 'Forschungsboot' ? 0.08 : 0.1 };
   }
 
@@ -73,6 +77,7 @@
   }
 
   function motionFor(world, item) {
+    if (['zauberwald', 'otterwelt'].includes(world.id)) return item.sceneMotion;
     if (world.mode === 'meerkats') return 'roaming';
     if (['Schmetterling', 'Biene', 'Mosaikvogel'].includes(item.name)) return 'fluttering';
     if (['Einsiedlerkrebs', 'Seestern'].includes(item.name)) return 'crawling';
@@ -86,6 +91,15 @@
 
   function habitatFor(world, item) {
     const name = item.name;
+    if (world.id === 'zauberwald') {
+      if (item.surface === 'water') return { zones: forestStream.map((zone) => [zone[0], item.index === 24 ? 0.8 : zone[1], zone[2], zone[3]]), blocked: [] };
+      if (item.surface === 'bank') return { zones: [[0.04, 0.62, 0.4, 0.825], [0.6, 0.62, 0.96, 0.825]], blocked: [] };
+      if (item.surface === 'air') return { zones: [item.index < 24 ? [0.08, 0.14, 0.92, 0.38] : [0.05, 0.22, 0.95, 0.82]], blocked: [] };
+      return { zones: [[0.09, item.index < 6 ? 0.3 : 0.38, 0.91, 0.825]], blocked: [] };
+    }
+    if (world.id === 'otterwelt') return item.surface === 'rest'
+      ? { zones: [[0.015, 0.74, 0.28, 0.99], [0.75, 0.74, 0.99, 0.99]], blocked: [] }
+      : { zones: [otterWater], blocked: otterBanks };
     if (world.mode === 'meerkats') return { zones: [ground], blocked: [pond] };
     if (world.id === 'safari') {
       if (name === 'Nilpferd') return { zones: [[0.61, 0.69, 0.98, 0.95]], blocked: [] };
@@ -126,7 +140,7 @@
   }
 
   function aspectFor(world) {
-    return ['safari', 'erdmaennchensafari', 'zaubergarten', 'zukunftsstadt', 'dinosaurier', 'forschungsinsel', 'winterdorf'].includes(world.id) ? 4 / 3 : 1672 / 941;
+    return ['safari', 'erdmaennchensafari', 'zaubergarten', 'zukunftsstadt', 'dinosaurier', 'forschungsinsel', 'winterdorf', 'zauberwald', 'otterwelt'].includes(world.id) ? 4 / 3 : 1672 / 941;
   }
 
   const perspectives = {
@@ -137,12 +151,15 @@
     zukunftsstadt: { reference: 0.68, slope: 0.3, minimum: 0.9, maximum: 1.08, contact: true },
     dinosaurier: { reference: 0.68, slope: 0.32, minimum: 0.9, maximum: 1.08, contact: true },
     forschungsinsel: { reference: 0.72, slope: 0.3, minimum: 0.92, maximum: 1.08, contact: true },
-    winterdorf: { reference: 0.65, slope: 0.3, minimum: 0.92, maximum: 1.1, contact: true }
+    winterdorf: { reference: 0.65, slope: 0.3, minimum: 0.92, maximum: 1.1, contact: true },
+    zauberwald: { reference: 0.7, slope: 0.22, minimum: 0.94, maximum: 1.06, contact: true },
+    otterwelt: { reference: 0.62, slope: 0.2, minimum: 0.94, maximum: 1.06, contact: false }
   };
   const bankPerspective = { ...perspectives.safari, maximum: 1.04 };
   const waterPerspective = { reference: 0.36, slope: 0.12, minimum: 0.97, maximum: 1.04, contact: false };
 
   function perspectiveProfileFor(world, item) {
+    if (world.id === 'zauberwald' && item.surface === 'air') return null;
     if (world.id === 'winterdorf' && (item.name.endsWith('Winterhaus')
       || ['Polarlicht', 'Schneeflockengruppe'].includes(item.name))) return null;
     if (world.id === 'zaubergarten' && motionFor(world, item) === 'fluttering') return null;
@@ -424,7 +441,9 @@
     sternenhimmel: [['star', 26, [0.08, 0.06, 0.94, 0.83]]],
     murmelbahn: [['glint', 8, [0.12, 0.15, 0.87, 0.82]]],
     winterdorf: [['snow', 14, [0.07, 0.06, 0.92, 0.74]], ['aurora', 2, [0.21, 0.13, 0.65, 0.3]]],
-    kunstwerk: [['glint', 10, [0.1, 0.13, 0.89, 0.84]]]
+    kunstwerk: [['glint', 10, [0.1, 0.13, 0.89, 0.84]]],
+    zauberwald: [['leaf', 10, [0.1, 0.08, 0.9, 0.42]], ['ripple', 6, [0.06, 0.85, 0.94, 0.91]], ['pollen', 9, [0.12, 0.38, 0.88, 0.75]]],
+    otterwelt: [['cloud', 3, [0.25, 0.04, 0.75, 0.17]], ['ripple', 12, [0.12, 0.4, 0.84, 0.83]]]
   };
 
   const atmosphere = {
@@ -438,7 +457,9 @@
     sternenhimmel: [['nebula', 2, [0.3, 0.3, 0.78, 0.65]], ['meteor', 3, [0.12, 0.1, 0.6, 0.35]]],
     murmelbahn: [['prism', 2, [0.25, 0.5, 0.7, 0.5]], ['sea-sparkle', 8, [0.14, 0.15, 0.86, 0.8]]],
     winterdorf: [['frost', 14, [0.15, 0.56, 0.86, 0.92]]],
-    kunstwerk: [['prism', 2, [0.3, 0.5, 0.7, 0.5]], ['confetti', 8, [0.12, 0.16, 0.85, 0.72]]]
+    kunstwerk: [['prism', 2, [0.3, 0.5, 0.7, 0.5]], ['confetti', 8, [0.12, 0.16, 0.85, 0.72]]],
+    zauberwald: [['sunbeam', 3, [0.65, 0.05, 0.65, 0.05]], ['firefly', 10, [0.1, 0.32, 0.9, 0.8]], ['mist', 2, [0.22, 0.45, 0.78, 0.53]]],
+    otterwelt: [['sea-sparkle', 12, [0.13, 0.4, 0.83, 0.85]], ['firefly', 5, [0.1, 0.25, 0.9, 0.32]]]
   };
 
   const palettes = {
@@ -452,7 +473,9 @@
     sternenhimmel: ['#cec0e3', '#e3c0cf', '#bed4e3'],
     murmelbahn: ['#e7c2cd', '#bddde2', '#cec0df'],
     winterdorf: ['#c9dfe9', '#d6c9e4', '#c3e3d8'],
-    kunstwerk: ['#e5b6c3', '#b4d9d4', '#f0d9a7', '#c9bbdc', '#d4dfb7']
+    kunstwerk: ['#e5b6c3', '#b4d9d4', '#f0d9a7', '#c9bbdc', '#d4dfb7'],
+    zauberwald: ['#e5edac', '#edd4aa', '#c9e5c1', '#e7c4db'],
+    otterwelt: ['#d1f2e1', '#bfe8e8', '#f0e4b9']
   };
 
   const moods = {
@@ -466,7 +489,9 @@
     sternenhimmel: { backdrop: '#303047', halo: '#5c4666', edge: '#211c3733', frame: '#3a354e', ink: '#e7dff0' },
     murmelbahn: { backdrop: '#e5d7bf', halo: '#fff0d2', edge: '#9a785522', frame: '#f1e5d1', ink: '#786246' },
     winterdorf: { backdrop: '#d6d6e3', halo: '#f5e3df', edge: '#68638322', frame: '#e8e4ed', ink: '#665e77' },
-    kunstwerk: { backdrop: '#e8dacb', halo: '#fff2df', edge: '#957b6b22', frame: '#f5ebdd', ink: '#796556' }
+    kunstwerk: { backdrop: '#e8dacb', halo: '#fff2df', edge: '#957b6b22', frame: '#f5ebdd', ink: '#796556' },
+    zauberwald: { backdrop: '#ccd8bc', halo: '#fff2c5', edge: '#456b4222', frame: '#e5ebd9', ink: '#506346' },
+    otterwelt: { backdrop: '#c7e1d6', halo: '#fff1cf', edge: '#386d6222', frame: '#e1eee2', ink: '#47695e' }
   };
 
   function moodFor(world) {
