@@ -72,6 +72,8 @@
       <p class="eyebrow">RUHIGE WELTEN · ZEIT ZUM DURCHATMEN</p>
       <h1 id="heading">Ein kleiner Ort voller Ruhe.</h1>
       <p class="intro">Sucht euch eine Welt aus und macht es euch gemütlich. Während ihr in Ruhe arbeitet, erwacht euer kleiner Lieblingsort zum Leben.</p>
+      <button id="fullscreen-toggle" class="fullscreen-toggle" type="button" hidden>Vollbild öffnen</button>
+      <p id="fullscreen-status" class="status" role="status" hidden></p>
     </header>
     <div class="world-header"><label class="field" for="theme">1. Welche Welt soll wachsen?<select id="theme"></select></label><img id="world-preview" alt="Vorschau der gewählten Welt"></div>
     <div class="section-line"><h2 id="motif-heading">2. Welche Motive dürfen erscheinen?</h2><span id="count"></span><button id="all" type="button">Alle wählen</button></div>
@@ -90,7 +92,7 @@
       <label class="field" for="interval">4. Tempo der neuen Motive<select id="interval"><option value="20">Schnell · etwa 20 ruhige Sekunden</option><option value="45">Normal · etwa 45 ruhige Sekunden</option><option value="90">Langsam · etwa 90 ruhige Sekunden</option><option value="180">Sehr langsam · etwa 3 Minuten</option></select></label>
       <label class="field" for="tolerance">Spielraum über der eingemessenen Ruhe<input id="tolerance" type="range" min="4" max="20" value="10"><output id="tolerance-label">Leise Arbeit</output></label>
     </div>
-    <details><summary>Weitere Einstellungen</summary><div class="options"><label><input id="motion" type="checkbox" checked>Motive und Hintergrund bewegen</label><label><input id="adaptive" type="checkbox" checked>Raumreferenz in ruhigen Phasen nachführen</label><label><input id="native-fullscreen" type="checkbox" checked>Browser-Vollbild anfordern</label></div></details>
+    <details><summary>Weitere Einstellungen</summary><div class="options"><label><input id="motion" type="checkbox" checked>Motive und Hintergrund bewegen</label><label><input id="adaptive" type="checkbox" checked>Raumreferenz in ruhigen Phasen nachführen</label><label id="fullscreen-option"><input id="native-fullscreen" type="checkbox" checked>Vollbild beim Rundenstart öffnen</label></div></details>
     <p id="round-status" class="status" role="status" hidden></p>
     <div class="start-row"><button id="start" class="primary" type="button" disabled>Welt im Vollbild starten →</button><button id="demo" type="button" disabled>Demo ohne Mikrofon</button><button id="reset-round" type="button" hidden>Rundenstand löschen</button></div>
     <p class="hint">In der Szene siehst du nur eure Welt und rechts die Lautstärkeskala. Die Linie markiert die nötige Ruhe; nach einem Erschrecken liegt sie etwas tiefer. Tippe auf die Skala oder drücke Esc, um die Runde zu pausieren und zu diesem Menü zurückzukehren. Unterstützt der Browser kein Vollbild, füllt die Szene den verfügbaren Bildschirm aus.</p>
@@ -364,14 +366,58 @@ function setView(next){
   if(live)fitScene();
   try{history.replaceState({view:next},'',live?'#szene':'#auswahl');}catch{}
 }
-function requestFullscreen(){
-  if(!$('native-fullscreen').checked)return;
-  const root=document.documentElement,request=root.requestFullscreen||root.webkitRequestFullscreen;
-  if(request)try{const promise=request.call(root,{navigationUI:'hide'});promise?.catch(()=>{});}catch{}
+function isFullscreen(){
+  return Boolean(document.fullscreenElement||document.webkitFullscreenElement);
 }
-function exitFullscreen(){
-  if(!(document.fullscreenElement||document.webkitFullscreenElement))return;
-  try{const promise=(document.exitFullscreen||document.webkitExitFullscreen)?.call(document);promise?.catch(()=>{});}catch{}
+function updateFullscreenControls(){
+  const root=document.documentElement;
+  const supported=Boolean((root.requestFullscreen&&document.fullscreenEnabled!==false)
+    || (root.webkitRequestFullscreen&&document.webkitFullscreenEnabled!==false));
+  const button=$('fullscreen-toggle');
+  button.hidden=!supported;
+  button.textContent=isFullscreen()?'Vollbild verlassen':'Vollbild öffnen';
+  $('fullscreen-option').hidden=!supported;
+  $('fullscreen-status').hidden=true;
+}
+async function requestFullscreen(showError=false){
+  if(isFullscreen()||$('fullscreen-toggle').hidden)return;
+  const root=document.documentElement;
+  try{
+    if(root.requestFullscreen&&document.fullscreenEnabled!==false){
+      await root.requestFullscreen({navigationUI:'hide'});
+    }else{
+      await root.webkitRequestFullscreen();
+    }
+  }catch{
+    if(showError){
+      setStatus('fullscreen-status','Das Vollbild konnte nicht geöffnet werden. Du kannst im Browserfenster fortfahren.');
+      $('fullscreen-status').hidden=false;
+    }
+  }
+}
+async function toggleFullscreen(){
+  if(!isFullscreen()){
+    await requestFullscreen(true);
+    return;
+  }
+  try{
+    const exit=document.exitFullscreen||document.webkitExitFullscreen;
+    await exit.call(document);
+  }catch{
+    setStatus('fullscreen-status','Nutze Esc oder die Vollbildsteuerung deines Browsers, um das Vollbild zu verlassen.');
+    $('fullscreen-status').hidden=false;
+  }
+}
+async function openFullscreenOnLoad(){
+  if(!$('native-fullscreen').checked||!navigator.permissions?.query)return;
+  try{
+    const permission=await navigator.permissions.query({name:'fullscreen',allowWithoutGesture:true});
+    if(permission.state==='granted'&&!document.hidden){
+      await requestFullscreen();
+    }
+  }catch{
+    // Browsers without automatic fullscreen still accept the button in the setup view.
+  }
 }
 function releaseAudio(){
   session++;cancelAnimationFrame(frame);frame=0;const old=stream;stream=null;old?.getTracks().forEach(t=>t.stop());
@@ -380,7 +426,7 @@ function releaseAudio(){
 }
 function backToSetup(message='Mikrofon ist aus. Zum Starten erneut aktivieren und einmessen.'){
   if(view==='scene'&&engine?.pool.length)pausedRound={engine,theme:state.theme,selection:selectionKey(),demo:demoMode,layout:sceneLayout};
-  releaseAudio();mode='setup';engine=null;demoMode=false;setView('setup');exitFullscreen();
+  releaseAudio();mode='setup';engine=null;demoMode=false;setView('setup');
   setStatus('mic-status',message);paint();updateControls();$('prepare').focus({preventScroll:true});
 }
 async function refreshDevices(token=session){
@@ -433,7 +479,9 @@ function enterScene(demo=false){
   }
   pausedRound=null;engine.interval=demo?Math.min(12,state.settings.interval):state.settings.interval;engine.calibrate([base]);
   mode='running';lastFrame=null;lastPaint=0;
-  renderScene(layout);setView('scene');paint(base);requestFullscreen();$('scale-back').focus({preventScroll:true});
+  renderScene(layout);setView('scene');paint(base);
+  if($('native-fullscreen').checked)void requestFullscreen();
+  $('scale-back').focus({preventScroll:true});
   if(demo)frame=requestAnimationFrame(loop);
 }
 function paint(db=null){
@@ -508,9 +556,11 @@ $('reset-round').onclick=()=>{pausedRound=null;updateControls();};
 $('microphone').onchange=()=>{deviceSelection=$('microphone').value;releaseAudio();engine=null;mode='setup';paint();setStatus('mic-status','Mikrofon gewählt. Bitte aktivieren und neu einmessen.');updateControls();};
 for(const id of ['interval','tolerance','motion','adaptive'])$(id).addEventListener(id==='tolerance'?'input':'change',settingsChanged);
 $('scale-back').onclick=()=>backToSetup();
+$('fullscreen-toggle').onclick=()=>void toggleFullscreen();
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&view==='scene')backToSetup();});
 for(const event of ['fullscreenchange','webkitfullscreenchange'])document.addEventListener(event,()=>{
-  if(view==='scene'&&!document.fullscreenElement&&!document.webkitFullscreenElement)backToSetup();
+  updateFullscreenControls();
+  if(view==='scene'&&!isFullscreen())backToSetup();
 });
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&['starting','calibrating','ready','running'].includes(mode))backToSetup('Ansicht verlassen · Mikrofon ausgeschaltet. Bitte erneut aktivieren und einmessen.');});
 window.addEventListener('pagehide',()=>{if(view==='scene')backToSetup('Ansicht verlassen · Runde pausiert und Mikrofon ausgeschaltet.');else releaseAudio();});
@@ -518,7 +568,8 @@ navigator.mediaDevices?.addEventListener?.('devicechange',()=>void refreshDevice
 if(window.ResizeObserver)new ResizeObserver(fitScene).observe($('scene'));
 else window.addEventListener('resize',fitScene);
 // Never restore a live view or start a microphone from a saved URL or settings.
-setView('setup');settingsChanged();showWorld();void refreshDevices();updateControls();
+setView('setup');updateFullscreenControls();settingsChanged();showWorld();void refreshDevices();updateControls();
+void openFullscreenOnLoad();
 </script>
 <script src="../material-navigation.js" defer data-sammlung-navigation></script>
 </body>
