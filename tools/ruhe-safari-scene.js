@@ -3,7 +3,10 @@
   const sky = [0.08, 0.08, 0.92, 0.44];
   const pond = [0.62, 0.73, 0.97, 0.94];
   const sea = [0.35, 0.26, 0.77, 0.45];
-  const forestStream = [[0.04, 0.73, 0.4, 0.94], [0.59, 0.73, 0.96, 0.94]];
+  const landscapeAspect = 1672 / 941;
+  const forestStream = [[0.04, 0.73, 0.425, 0.922], [0.57, 0.73, 0.96, 0.922]];
+  const summerStream = [[0.04, 0.78, 0.425, 0.922], [0.57, 0.78, 0.96, 0.922]];
+  const cherryPond = [[0.225, 0.455, 0.82, 0.887]];
   const otterWater = [0.06, 0.29, 0.94, 0.99];
   const otterBanks = [[0, 0.87, 0.28, 1], [0.86, 0.88, 1, 1]];
   const profiles = {
@@ -94,6 +97,12 @@
 
   function habitatFor(world, item) {
     const name = item.name;
+    if (world.id === 'sommer' && item.surface === 'water') {
+      return { zones: zonesInScene(world, summerStream), blocked: [] };
+    }
+    if (world.id === 'kirschblueten' && item.surface === 'water') {
+      return { zones: zonesInScene(world, cherryPond), blocked: [] };
+    }
     if (world.composition) {
       const center = compositionCenter(world, item);
       const art = artworkFor(world, item);
@@ -106,7 +115,10 @@
         Math.min(0.985, center.x + width), Math.min(0.985, center.y + height)]], blocked: [] };
     }
     if (world.id === 'zauberwald') {
-      if (item.surface === 'water') return { zones: forestStream.map((zone) => [zone[0], item.index === 24 ? 0.8 : zone[1], zone[2], zone[3]]), blocked: [] };
+      if (item.surface === 'water') {
+        const zones = zonesInScene(world, forestStream);
+        return { zones: item.name === 'Stockente' ? zones.map(([left, , right, bottom]) => [left, 0.78, right, bottom]) : zones, blocked: [] };
+      }
       if (item.surface === 'bank') return { zones: [[0.04, 0.62, 0.4, 0.825], [0.6, 0.62, 0.96, 0.825]], blocked: [] };
       if (item.surface === 'air') return { zones: [item.index < 24 ? [0.08, 0.14, 0.92, 0.38] : [0.05, 0.22, 0.95, 0.82]], blocked: [] };
       return { zones: [[0.09, item.index < 6 ? 0.3 : 0.38, 0.91, 0.825]], blocked: [] };
@@ -155,7 +167,15 @@
 
   function aspectFor(world) {
     if (world.composition && world.portrait) return 5 / 4;
-    return ['safari', 'erdmaennchensafari', 'zaubergarten', 'zukunftsstadt', 'dinosaurier', 'forschungsinsel', 'winterdorf', 'zauberwald', 'otterwelt'].includes(world.id) ? 4 / 3 : 1672 / 941;
+    return ['safari', 'erdmaennchensafari', 'zaubergarten', 'zukunftsstadt', 'dinosaurier', 'forschungsinsel', 'winterdorf', 'zauberwald', 'otterwelt'].includes(world.id) ? 4 / 3 : landscapeAspect;
+  }
+
+  function zonesInScene(world, zones) {
+    const scale = landscapeAspect / aspectFor(world);
+    return zones.map(([left, top, right, bottom]) => [
+      Math.max(0.015, 0.5 + (left - 0.5) * scale), top,
+      Math.min(0.985, 0.5 + (right - 0.5) * scale), bottom
+    ]);
   }
 
   function compositionCenter(world, item, size = sizeProfileFor(world, item).base) {
@@ -403,7 +423,23 @@
     return simplified;
   }
 
+  function recoverAppearance(layout, arriving, obstacles) {
+    const returning = new Set([arriving]);
+    for (const actor of returning) {
+      const home = layout.homes[actor.index];
+      for (const neighbor of obstacles) {
+        if (overlaps(home.bounds, neighbor.bounds)) returning.add(neighbor);
+      }
+    }
+    // The initial homes are disjoint. Also return any actor that currently blocks one of those homes.
+    for (const actor of returning) {
+      Object.assign(actor, layout.homes[actor.index]);
+      if (layout.travel) delete layout.travel[actor.index];
+    }
+  }
+
   function syncVisible(world, layout, visible, random = Math.random) {
+    layout.homes ||= Object.fromEntries(layout.placements.map(({ index, x, y, bounds }) => [index, { x, y, bounds }]));
     const requested = new Set(visible);
     const present = new Set((layout.present || []).filter((index) => requested.has(index)));
     for (const actor of layout.placements) {
@@ -411,16 +447,23 @@
       const obstacles = layout.placements.filter((other) => present.has(other.index)
         || !motionProfileFor(world, world.items.find((item) => item.index === other.index)).speed);
       let position = clearSegment(world, actor, actor, actor, obstacles) ? actor : null;
-      const item = world.items.find((item) => item.index === actor.index);
-      const zones = habitatFor(world, item).zones;
-      for (let attempt = 0; !position && attempt < 400; attempt++) {
-        const zone = zones[Math.floor(random() * zones.length)];
-        const point = { x: zone[0] + actor.halfWidth + random() * (zone[2] - zone[0] - actor.halfWidth * 2),
-          y: zone[1] + actor.halfHeight + random() * (zone[3] - zone[1] - actor.halfHeight * 2) };
-        if (clearSegment(world, actor, point, point, obstacles)) position = point;
+      if (!position) {
+        const item = world.items.find((entry) => entry.index === actor.index);
+        const zones = habitatFor(world, item).zones.filter(([left, top, right, bottom]) =>
+          right - left >= actor.halfWidth * 2 && bottom - top >= actor.halfHeight * 2);
+        for (let attempt = 0; !position && zones.length && attempt < 120; attempt++) {
+          const [left, top, right, bottom] = zones[Math.floor(random() * zones.length)];
+          const point = { x: left + actor.halfWidth + random() * (right - left - actor.halfWidth * 2),
+            y: top + actor.halfHeight + random() * (bottom - top - actor.halfHeight * 2) };
+          if (clearSegment(world, actor, point, point, obstacles)) position = point;
+        }
       }
-      if (!position) continue;
-      if (position !== actor) { actor.x = position.x; actor.y = position.y; actor.bounds = boundsAt(actor, actor); }
+      if (!position) recoverAppearance(layout, actor, obstacles);
+      else if (position !== actor) {
+        actor.x = position.x;
+        actor.y = position.y;
+        actor.bounds = boundsAt(actor, actor);
+      }
       if (layout.travel) delete layout.travel[actor.index];
       present.add(actor.index);
     }
@@ -595,7 +638,7 @@
       ? world.decorations.map(([kind, x, y, width, duration, phase]) => [kind, 1, [x / 100, y / 100, x / 100, y / 100], { width, duration, phase }])
       : [...(ambiance[environment] || []), ...(atmosphere[environment] || [])];
     const colors = palettes[environment] || ['#fff2b0', '#eaf9ff', '#f6d7ce'];
-    const crop = world.composition && world.portrait ? (1672 / 941) / aspectFor(world) : 1;
+    const crop = world.composition ? landscapeAspect / aspectFor(world) : 1;
     for (const [kind, count, zone, decoration] of effects) {
       for (let index = 0; index < count; index++) {
         const detail = document.createElement('span');

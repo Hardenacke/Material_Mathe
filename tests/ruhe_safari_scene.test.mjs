@@ -7,8 +7,8 @@ import '../tools/ruhe-safari-worlds.js';
 const source = readFileSync(new URL('../tools/ruhe-safari.html', import.meta.url), 'utf8');
 const atmosphereStyles = source + readFileSync(new URL('../tools/ruhe-safari-atmosphere.css', import.meta.url), 'utf8');
 const scene = globalThis.RuheSafariScene;
-const baseWorlds = JSON.parse(source.match(/world-data[^>]*>(.*?)<\/script>/s)[1]);
-const worlds = scene.withSpecialWorlds([...baseWorlds, ...globalThis.RuheSafariAdditionalWorlds]);
+const baseWorlds = globalThis.RuheSafariWorlds;
+const worlds = scene.withSpecialWorlds(baseWorlds);
 
 function seededRandom(seed) {
   let state = seed;
@@ -38,6 +38,19 @@ test('Neue Welten enthalten ausschließlich die vollständigen lokalen Bildsätz
       assert.ok(item.artworkBounds.every((coordinate) => coordinate >= 0 && coordinate <= 1));
       assert.ok(item.artworkBounds[0] < item.artworkBounds[2] && item.artworkBounds[1] < item.artworkBounds[3]);
       assert.ok(scene.motionProfileFor(world, item));
+    }
+  }
+});
+
+test('Alle Weltbilder liegen lokal vor und sind vom HTML getrennt', () => {
+  assert.equal(baseWorlds.length, 25);
+  assert.doesNotMatch(source, /data:image\/|id="world-data"/);
+  for (const world of baseWorlds) {
+    for (const asset of [world.background, ...world.items.map((item) => item.image)]) {
+      assert.match(asset, /^assets\/ruhe-safari\/[a-z-]+\/[a-z0-9-]+\.webp$/);
+      const bytes = readFileSync(new URL(`../tools/${asset}`, import.meta.url));
+      assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
+      assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
     }
   }
 });
@@ -401,9 +414,92 @@ test('Neue Entdeckungen erscheinen auch während des Wanderns ohne Zusammenstoß
         travelled += Math.hypot(actor.x - previous.x, (actor.y - previous.y) / layout.aspect);
       }
       const actors = layout.placements.filter((actor) => layout.present.includes(actor.index));
+      assert.equal(actors.length, requested.length, world.id);
       for (const [index, actor] of actors.entries()) for (const other of actors.slice(index + 1)) assert.ok(!scene.overlaps(actor.bounds, other.bounds), world.id);
     }
     if (world.items.some((item) => scene.motionProfileFor(world, item).speed)) assert.ok(travelled > 0.03, world.id);
+  }
+});
+
+test('Im vollen Zauberwald erscheinen alle 36 Tiere auch nach langen Wanderungen', () => {
+  const world = worlds.find((entry) => entry.id === 'zauberwald');
+  const selected = world.items.map((item) => item.index);
+  for (const interval of [8, 30]) {
+    const random = seededRandom(2);
+    const order = scene.shuffleOrder(selected, random);
+    const layout = scene.createLayout(world, selected, random);
+    for (let count = 1; count <= order.length; count++) {
+      const visible = order.slice(0, count);
+      scene.syncVisible(world, layout, visible, random);
+      assert.equal(layout.present.length, count);
+      const present = layout.placements.filter((actor) => layout.present.includes(actor.index));
+      for (const [index, actor] of present.entries()) {
+        assert.ok(!present.slice(index + 1).some((other) => scene.overlaps(actor.bounds, other.bounds)));
+      }
+      if (count < order.length) for (let step = 0; step < interval * 10; step++) {
+        scene.stepMotion(world, layout, visible, 0.1, random);
+      }
+    }
+    const hidden = order.slice(0, 29);
+    const before = structuredClone(layout.placements);
+    assert.equal(scene.syncVisible(world, layout, hidden, random).length, 29);
+    assert.equal(scene.syncVisible(world, layout, order, random).length, 36);
+    assert.deepEqual(layout.placements, before);
+  }
+});
+
+test('Bei einem blockierten Erscheinungsplatz greift die sichere Startaufstellung', () => {
+  const world = worlds.find((entry) => entry.id === 'safari');
+  const selected = [3, 4];
+  const layout = scene.createLayout(world, selected, seededRandom(42));
+  const initial = structuredClone(layout.placements);
+  scene.syncVisible(world, layout, [3]);
+  for (const actor of layout.placements) {
+    actor.x = 0.5;
+    actor.y = 0.67;
+    actor.bounds = [actor.x - actor.halfWidth, actor.y - actor.halfHeight,
+      actor.x + actor.halfWidth, actor.y + actor.halfHeight];
+  }
+  assert.equal(scene.syncVisible(world, layout, selected, () => 0.5).length, 2);
+  const newcomer = layout.placements.find((actor) => actor.index === 4);
+  assert.deepEqual(newcomer, initial.find((actor) => actor.index === 4));
+  assert.ok(!scene.overlaps(...layout.placements.map((actor) => actor.bounds)));
+});
+
+test('Stockente und Koi bleiben im Wasser und außerhalb des Stegs, auch im Hochformat', () => {
+  for (const worldId of ['sommer', 'kirschblueten']) for (const portrait of [false, true]) {
+    const world = { ...worlds.find((entry) => entry.id === worldId), portrait };
+    const swimmers = world.items.filter((item) => item.surface === 'water');
+    assert.equal(swimmers.length, worldId === 'sommer' ? 1 : 3);
+    const visible = swimmers.map((item) => item.index);
+    for (const seed of [1, 2, 19]) {
+      const random = seededRandom(seed);
+      const layout = scene.createLayout(world, visible, random);
+      let travelled = 0;
+      for (let step = 0; step < 1800; step++) {
+        const before = new Map(layout.placements.map((actor) => [actor.index, actor.x]));
+        for (const actor of scene.stepMotion(world, layout, visible, 0.1, random)) {
+          travelled += Math.abs(actor.x - before.get(actor.index));
+        }
+        for (const actor of layout.placements) {
+          const art = scene.artworkFor(world, world.items[actor.index]);
+          const inverseCrop = layout.aspect * 941 / 1672;
+          const halfWidth = actor.size * (art.right - art.left) / 2;
+          const halfHeight = actor.size * (art.bottom - art.top) * layout.aspect / 2;
+          const left = 0.5 + (actor.x - halfWidth - 0.5) * inverseCrop;
+          const right = 0.5 + (actor.x + halfWidth - 0.5) * inverseCrop;
+          const waterline = actor.y + halfHeight;
+          if (worldId === 'sommer') {
+            assert.ok(waterline >= 0.838 && waterline <= 0.915);
+            assert.ok(right < 0.43 || left > 0.56);
+          } else {
+            assert.ok(actor.y - halfHeight >= 0.45 && waterline < 0.89);
+            assert.ok(left > 0.22 && right < 0.83);
+          }
+        }
+      }
+      assert.ok(travelled > 0.15, worldId);
+    }
   }
 });
 
@@ -460,7 +556,6 @@ test('Erdmännchensafari ergänzt ausschließlich 30 Erdmännchen mit dem vorhan
   assert.equal(new Set(colony.items.map((item) => item.index)).size, 30);
   assert.ok(colony.items.every((item) => /^Erdmännchen \d+$/.test(item.name) && item.image === meerkat.image));
   assert.equal(colony.background, safari.background);
-  assert.equal(baseWorlds.length, 11);
   assert.equal(scene.withSpecialWorlds(worlds).length, worlds.length);
   assert.deepEqual(scene.moodFor(colony), scene.moodFor(safari));
 });

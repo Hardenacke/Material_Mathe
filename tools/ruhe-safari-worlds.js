@@ -1,4 +1,213 @@
-globalThis.RuheSafariAdditionalWorlds = [
+globalThis.RuheSafariWorlds = [
+  {
+    "id": "safari",
+    "name": "Safari – Savanne",
+    "background": "assets/ruhe-safari/safari/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Elefant", "image": "assets/ruhe-safari/safari/00-elefant.webp"},
+      {"index": 1, "name": "Giraffe", "image": "assets/ruhe-safari/safari/01-giraffe.webp"},
+      {"index": 2, "name": "Zebra", "image": "assets/ruhe-safari/safari/02-zebra.webp"},
+      {"index": 3, "name": "Löwe", "image": "assets/ruhe-safari/safari/03-lowe.webp"},
+      {"index": 4, "name": "Gazelle", "image": "assets/ruhe-safari/safari/04-gazelle.webp"},
+      {"index": 5, "name": "Erdmännchen", "image": "assets/ruhe-safari/safari/05-erdmannchen.webp"},
+      {"index": 6, "name": "Nashorn", "image": "assets/ruhe-safari/safari/06-nashorn.webp"},
+      {"index": 7, "name": "Nilpferd", "image": "assets/ruhe-safari/safari/07-nilpferd.webp"},
+      {"index": 8, "name": "Strauß", "image": "assets/ruhe-safari/safari/08-strau.webp"},
+      {"index": 9, "name": "Büffel", "image": "assets/ruhe-safari/safari/09-buffel.webp"},
+      {"index": 10, "name": "Gepard", "image": "assets/ruhe-safari/safari/10-gepard.webp"},
+      {"index": 11, "name": "Flamingo", "image": "assets/ruhe-safari/safari/11-flamingo.webp"}
+    ]
+  },
+  {
+    "id": "unterwasser",
+    "name": "Unterwasserwelt",
+    "background": "assets/ruhe-safari/unterwasser/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Clownfisch", "image": "assets/ruhe-safari/unterwasser/00-clownfisch.webp"},
+      {"index": 1, "name": "Meeresschildkröte", "image": "assets/ruhe-safari/unterwasser/01-meeresschildkrote.webp"},
+      {"index": 2, "name": "Mantarochen", "image": "assets/ruhe-safari/unterwasser/02-mantarochen.webp"},
+      {"index": 3, "name": "Seepferdchen", "image": "assets/ruhe-safari/unterwasser/03-seepferdchen.webp"},
+      {"index": 4, "name": "Oktopus", "image": "assets/ruhe-safari/unterwasser/04-oktopus.webp"},
+      {"index": 5, "name": "Blauer Fisch", "image": "assets/ruhe-safari/unterwasser/05-blauer-fisch.webp"},
+      {"index": 6, "name": "Delfin", "image": "assets/ruhe-safari/unterwasser/06-delfin.webp"},
+      {"index": 7, "name": "Qualle", "image": "assets/ruhe-safari/unterwasser/07-qualle.webp"},
+      {"index": 8, "name": "Einsiedlerkrebs", "image": "assets/ruhe-safari/unterwasser/08-einsiedlerkrebs.webp"},
+      {"index": 9, "name": "Seestern", "image": "assets/ruhe-safari/unterwasser/09-seestern.webp"},
+      {"index": 10, "name": "Walhai", "image": "assets/ruhe-safari/unterwasser/10-walhai.webp"},
+      {"index": 11, "name": "Korallengruppe", "image": "assets/ruhe-safari/unterwasser/11-korallengruppe.webp"}
+    ]
+  },
+  {
+    "id": "weltraumstation",
+    "name": "Weltraumstation",
+    "background": "assets/ruhe-safari/weltraumstation/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Wohnmodul", "image": "assets/ruhe-safari/weltraumstation/00-wohnmodul.webp"},
+      {"index": 1, "name": "Solarmodul", "image": "assets/ruhe-safari/weltraumstation/01-solarmodul.webp"},
+      {"index": 2, "name": "Gewächshaus", "image": "assets/ruhe-safari/weltraumstation/02-gewachshaus.webp"},
+      {"index": 3, "name": "Forschungsmodul", "image": "assets/ruhe-safari/weltraumstation/03-forschungsmodul.webp"},
+      {"index": 4, "name": "Antenne", "image": "assets/ruhe-safari/weltraumstation/04-antenne.webp"},
+      {"index": 5, "name": "Versorgungsraumschiff", "image": "assets/ruhe-safari/weltraumstation/05-versorgungsraumschiff.webp"},
+      {"index": 6, "name": "Astronaut", "image": "assets/ruhe-safari/weltraumstation/06-astronaut.webp"},
+      {"index": 7, "name": "Satellit", "image": "assets/ruhe-safari/weltraumstation/07-satellit.webp"},
+      {"index": 8, "name": "Roboterarm", "image": "assets/ruhe-safari/weltraumstation/08-roboterarm.webp"},
+      {"index": 9, "name": "Andockknoten", "image": "assets/ruhe-safari/weltraumstation/09-andockknoten.webp"},
+      {"index": 10, "name": "Beobachtungskuppel", "image": "assets/ruhe-safari/weltraumstation/10-beobachtungskuppel.webp"},
+      {"index": 11, "name": "Materialcontainer", "image": "assets/ruhe-safari/weltraumstation/11-materialcontainer.webp"}
+    ]
+  },
+  {
+    "id": "zaubergarten",
+    "name": "Zaubergarten",
+    "background": "assets/ruhe-safari/zaubergarten/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Keimling", "image": "assets/ruhe-safari/zaubergarten/00-keimling.webp"},
+      {"index": 1, "name": "Pflanze mit Knospe", "image": "assets/ruhe-safari/zaubergarten/01-pflanze-mit-knospe.webp"},
+      {"index": 2, "name": "Blühende Pflanze", "image": "assets/ruhe-safari/zaubergarten/02-bluhende-pflanze.webp"},
+      {"index": 3, "name": "Schmetterling", "image": "assets/ruhe-safari/zaubergarten/03-schmetterling.webp"},
+      {"index": 4, "name": "Blütenstrauch", "image": "assets/ruhe-safari/zaubergarten/04-blutenstrauch.webp"},
+      {"index": 5, "name": "Apfelbaum", "image": "assets/ruhe-safari/zaubergarten/05-apfelbaum.webp"},
+      {"index": 6, "name": "Marienkäfer", "image": "assets/ruhe-safari/zaubergarten/06-marienkafer.webp"},
+      {"index": 7, "name": "Biene", "image": "assets/ruhe-safari/zaubergarten/07-biene.webp"},
+      {"index": 8, "name": "Pilzgruppe", "image": "assets/ruhe-safari/zaubergarten/08-pilzgruppe.webp"},
+      {"index": 9, "name": "Gießkanne", "image": "assets/ruhe-safari/zaubergarten/09-giekanne.webp"},
+      {"index": 10, "name": "Sonnenblume", "image": "assets/ruhe-safari/zaubergarten/10-sonnenblume.webp"},
+      {"index": 11, "name": "Beerenstrauch", "image": "assets/ruhe-safari/zaubergarten/11-beerenstrauch.webp"}
+    ]
+  },
+  {
+    "id": "zukunftsstadt",
+    "name": "Stadt der Zukunft",
+    "background": "assets/ruhe-safari/zukunftsstadt/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Wohnhaus", "image": "assets/ruhe-safari/zukunftsstadt/00-wohnhaus.webp"},
+      {"index": 1, "name": "Park", "image": "assets/ruhe-safari/zukunftsstadt/01-park.webp"},
+      {"index": 2, "name": "Bibliothek", "image": "assets/ruhe-safari/zukunftsstadt/02-bibliothek.webp"},
+      {"index": 3, "name": "Gemeinschaftshaus", "image": "assets/ruhe-safari/zukunftsstadt/03-gemeinschaftshaus.webp"},
+      {"index": 4, "name": "Straßenbahn", "image": "assets/ruhe-safari/zukunftsstadt/04-straenbahn.webp"},
+      {"index": 5, "name": "Fahrradunterstand", "image": "assets/ruhe-safari/zukunftsstadt/05-fahrradunterstand.webp"},
+      {"index": 6, "name": "Windrad", "image": "assets/ruhe-safari/zukunftsstadt/06-windrad.webp"},
+      {"index": 7, "name": "Spielplatz", "image": "assets/ruhe-safari/zukunftsstadt/07-spielplatz.webp"},
+      {"index": 8, "name": "Schule", "image": "assets/ruhe-safari/zukunftsstadt/08-schule.webp"},
+      {"index": 9, "name": "Fußgängerbrücke", "image": "assets/ruhe-safari/zukunftsstadt/09-fugangerbrucke.webp"},
+      {"index": 10, "name": "Lastenrad", "image": "assets/ruhe-safari/zukunftsstadt/10-lastenrad.webp"},
+      {"index": 11, "name": "Stadtgewächshaus", "image": "assets/ruhe-safari/zukunftsstadt/11-stadtgewachshaus.webp"}
+    ]
+  },
+  {
+    "id": "dinosaurier",
+    "name": "Dinosaurierwelt",
+    "background": "assets/ruhe-safari/dinosaurier/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Triceratops", "image": "assets/ruhe-safari/dinosaurier/00-triceratops.webp"},
+      {"index": 1, "name": "Langhalssaurier", "image": "assets/ruhe-safari/dinosaurier/01-langhalssaurier.webp"},
+      {"index": 2, "name": "Stegosaurus", "image": "assets/ruhe-safari/dinosaurier/02-stegosaurus.webp"},
+      {"index": 3, "name": "Gefiederter Dinosaurier", "image": "assets/ruhe-safari/dinosaurier/03-gefiederter-dinosaurier.webp"},
+      {"index": 4, "name": "Ankylosaurus", "image": "assets/ruhe-safari/dinosaurier/04-ankylosaurus.webp"},
+      {"index": 5, "name": "Schlüpfender Dinosaurier", "image": "assets/ruhe-safari/dinosaurier/05-schlupfender-dinosaurier.webp"},
+      {"index": 6, "name": "Parasaurolophus", "image": "assets/ruhe-safari/dinosaurier/06-parasaurolophus.webp"},
+      {"index": 7, "name": "Pachycephalosaurus", "image": "assets/ruhe-safari/dinosaurier/07-pachycephalosaurus.webp"},
+      {"index": 8, "name": "Spinosaurus", "image": "assets/ruhe-safari/dinosaurier/08-spinosaurus.webp"},
+      {"index": 9, "name": "Iguanodon", "image": "assets/ruhe-safari/dinosaurier/09-iguanodon.webp"},
+      {"index": 10, "name": "Therizinosaurus", "image": "assets/ruhe-safari/dinosaurier/10-therizinosaurus.webp"},
+      {"index": 11, "name": "Dinosauriernest", "image": "assets/ruhe-safari/dinosaurier/11-dinosauriernest.webp"}
+    ]
+  },
+  {
+    "id": "forschungsinsel",
+    "name": "Forschungsinsel",
+    "background": "assets/ruhe-safari/forschungsinsel/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Forschungszelt", "image": "assets/ruhe-safari/forschungsinsel/00-forschungszelt.webp"},
+      {"index": 1, "name": "Solaranlage", "image": "assets/ruhe-safari/forschungsinsel/01-solaranlage.webp"},
+      {"index": 2, "name": "Wetterstation", "image": "assets/ruhe-safari/forschungsinsel/02-wetterstation.webp"},
+      {"index": 3, "name": "Materialkiste", "image": "assets/ruhe-safari/forschungsinsel/03-materialkiste.webp"},
+      {"index": 4, "name": "Forschungstisch", "image": "assets/ruhe-safari/forschungsinsel/04-forschungstisch.webp"},
+      {"index": 5, "name": "Funkstation", "image": "assets/ruhe-safari/forschungsinsel/05-funkstation.webp"},
+      {"index": 6, "name": "Forschungsboot", "image": "assets/ruhe-safari/forschungsinsel/06-forschungsboot.webp"},
+      {"index": 7, "name": "Teleskop", "image": "assets/ruhe-safari/forschungsinsel/07-teleskop.webp"},
+      {"index": 8, "name": "Mikroskop", "image": "assets/ruhe-safari/forschungsinsel/08-mikroskop.webp"},
+      {"index": 9, "name": "Forschungsstation", "image": "assets/ruhe-safari/forschungsinsel/09-forschungsstation.webp"},
+      {"index": 10, "name": "Holzsteg", "image": "assets/ruhe-safari/forschungsinsel/10-holzsteg.webp"},
+      {"index": 11, "name": "Messboje", "image": "assets/ruhe-safari/forschungsinsel/11-messboje.webp"}
+    ]
+  },
+  {
+    "id": "sternenhimmel",
+    "name": "Sternenhimmel",
+    "background": "assets/ruhe-safari/sternenhimmel/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Warmer Stern", "image": "assets/ruhe-safari/sternenhimmel/00-warmer-stern.webp"},
+      {"index": 1, "name": "Blauer Stern", "image": "assets/ruhe-safari/sternenhimmel/01-blauer-stern.webp"},
+      {"index": 2, "name": "Mondsichel", "image": "assets/ruhe-safari/sternenhimmel/02-mondsichel.webp"},
+      {"index": 3, "name": "Sternengruppe als Bogen", "image": "assets/ruhe-safari/sternenhimmel/03-sternengruppe-als-bogen.webp"},
+      {"index": 4, "name": "Sternengruppe im Zickzack", "image": "assets/ruhe-safari/sternenhimmel/04-sternengruppe-im-zickzack.webp"},
+      {"index": 5, "name": "Dekorative Galaxie", "image": "assets/ruhe-safari/sternenhimmel/05-dekorative-galaxie.webp"},
+      {"index": 6, "name": "Ringplanet", "image": "assets/ruhe-safari/sternenhimmel/06-ringplanet.webp"},
+      {"index": 7, "name": "Komet", "image": "assets/ruhe-safari/sternenhimmel/07-komet.webp"},
+      {"index": 8, "name": "Nebelmotiv", "image": "assets/ruhe-safari/sternenhimmel/08-nebelmotiv.webp"},
+      {"index": 9, "name": "Blauer Planet", "image": "assets/ruhe-safari/sternenhimmel/09-blauer-planet.webp"},
+      {"index": 10, "name": "Kleiner Satellit", "image": "assets/ruhe-safari/sternenhimmel/10-kleiner-satellit.webp"},
+      {"index": 11, "name": "Doppelsternmotiv", "image": "assets/ruhe-safari/sternenhimmel/11-doppelsternmotiv.webp"}
+    ]
+  },
+  {
+    "id": "murmelbahn",
+    "name": "Murmelbahn",
+    "background": "assets/ruhe-safari/murmelbahn/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Gerade Rinne", "image": "assets/ruhe-safari/murmelbahn/00-gerade-rinne.webp"},
+      {"index": 1, "name": "U-Kurve", "image": "assets/ruhe-safari/murmelbahn/01-u-kurve.webp"},
+      {"index": 2, "name": "Spiraltrichter", "image": "assets/ruhe-safari/murmelbahn/02-spiraltrichter.webp"},
+      {"index": 3, "name": "Stütze", "image": "assets/ruhe-safari/murmelbahn/03-stutze.webp"},
+      {"index": 4, "name": "Auffangschale", "image": "assets/ruhe-safari/murmelbahn/04-auffangschale.webp"},
+      {"index": 5, "name": "Blaue Murmel", "image": "assets/ruhe-safari/murmelbahn/05-blaue-murmel.webp"},
+      {"index": 6, "name": "Wippenelement", "image": "assets/ruhe-safari/murmelbahn/06-wippenelement.webp"},
+      {"index": 7, "name": "Brückenrinne", "image": "assets/ruhe-safari/murmelbahn/07-bruckenrinne.webp"},
+      {"index": 8, "name": "S-Kurve", "image": "assets/ruhe-safari/murmelbahn/08-s-kurve.webp"},
+      {"index": 9, "name": "Y-Verzweigung", "image": "assets/ruhe-safari/murmelbahn/09-y-verzweigung.webp"},
+      {"index": 10, "name": "Loopingelement", "image": "assets/ruhe-safari/murmelbahn/10-loopingelement.webp"},
+      {"index": 11, "name": "Zielfähnchen", "image": "assets/ruhe-safari/murmelbahn/11-zielfahnchen.webp"}
+    ]
+  },
+  {
+    "id": "winterdorf",
+    "name": "Winterdorf",
+    "background": "assets/ruhe-safari/winterdorf/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Kleines Winterhaus", "image": "assets/ruhe-safari/winterdorf/00-kleines-winterhaus.webp"},
+      {"index": 1, "name": "Hohes Winterhaus", "image": "assets/ruhe-safari/winterdorf/01-hohes-winterhaus.webp"},
+      {"index": 2, "name": "Tanne", "image": "assets/ruhe-safari/winterdorf/02-tanne.webp"},
+      {"index": 3, "name": "Schneemann", "image": "assets/ruhe-safari/winterdorf/03-schneemann.webp"},
+      {"index": 4, "name": "Laterne", "image": "assets/ruhe-safari/winterdorf/04-laterne.webp"},
+      {"index": 5, "name": "Polarlicht", "image": "assets/ruhe-safari/winterdorf/05-polarlicht.webp"},
+      {"index": 6, "name": "Schlitten", "image": "assets/ruhe-safari/winterdorf/06-schlitten.webp"},
+      {"index": 7, "name": "Winterbrücke", "image": "assets/ruhe-safari/winterdorf/07-winterbrucke.webp"},
+      {"index": 8, "name": "Schneebank", "image": "assets/ruhe-safari/winterdorf/08-schneebank.webp"},
+      {"index": 9, "name": "Winterfuchs", "image": "assets/ruhe-safari/winterdorf/09-winterfuchs.webp"},
+      {"index": 10, "name": "Schneehase", "image": "assets/ruhe-safari/winterdorf/10-schneehase.webp"},
+      {"index": 11, "name": "Schneeflockengruppe", "image": "assets/ruhe-safari/winterdorf/11-schneeflockengruppe.webp"}
+    ]
+  },
+  {
+    "id": "kunstwerk",
+    "name": "Kunstwerk",
+    "background": "assets/ruhe-safari/kunstwerk/hintergrund.webp",
+    "items": [
+      {"index": 0, "name": "Mosaiksonne", "image": "assets/ruhe-safari/kunstwerk/00-mosaiksonne.webp"},
+      {"index": 1, "name": "Mosaikberge", "image": "assets/ruhe-safari/kunstwerk/01-mosaikberge.webp"},
+      {"index": 2, "name": "Mosaikwolke", "image": "assets/ruhe-safari/kunstwerk/02-mosaikwolke.webp"},
+      {"index": 3, "name": "Mosaikbaum", "image": "assets/ruhe-safari/kunstwerk/03-mosaikbaum.webp"},
+      {"index": 4, "name": "Mosaikhaus", "image": "assets/ruhe-safari/kunstwerk/04-mosaikhaus.webp"},
+      {"index": 5, "name": "Mosaikfluss", "image": "assets/ruhe-safari/kunstwerk/05-mosaikfluss.webp"},
+      {"index": 6, "name": "Mosaikboot", "image": "assets/ruhe-safari/kunstwerk/06-mosaikboot.webp"},
+      {"index": 7, "name": "Mosaikvogel", "image": "assets/ruhe-safari/kunstwerk/07-mosaikvogel.webp"},
+      {"index": 8, "name": "Mosaikblume", "image": "assets/ruhe-safari/kunstwerk/08-mosaikblume.webp"},
+      {"index": 9, "name": "Mosaikhügel", "image": "assets/ruhe-safari/kunstwerk/09-mosaikhugel.webp"},
+      {"index": 10, "name": "Mosaikregenbogen", "image": "assets/ruhe-safari/kunstwerk/10-mosaikregenbogen.webp"},
+      {"index": 11, "name": "Mosaikfisch", "image": "assets/ruhe-safari/kunstwerk/11-mosaikfisch.webp"}
+    ]
+  },
   {
     "id": "zauberwald",
     "name": "Zauberwald – Lichtung und Bach",
@@ -904,9 +1113,9 @@ globalThis.RuheSafariAdditionalWorlds = [
       ["stream", 77, 60, "6%", 13, 8.32]
     ],
     "items": [
-      {"index": 0, "name": "Koi, rot-weiß", "image": "assets/ruhe-safari/kirschblueten/01-koi-rot-wei.webp", "baseSize": 0.1013, "sceneMotion": "paddling", "pose": {"x": 0.37, "y": 0.76, "portraitX": 0.3151, "portraitY": 0.76, "portraitSize": 0.144, "ground": false}, "artworkBounds": [0.255, 0.015, 0.745, 0.985]},
-      {"index": 1, "name": "Koi, goldfarben", "image": "assets/ruhe-safari/kirschblueten/02-koi-goldfarben.webp", "baseSize": 0.09, "sceneMotion": "paddling", "pose": {"x": 0.65, "y": 0.69, "portraitX": 0.7133, "portraitY": 0.69, "portraitSize": 0.128, "ground": false}, "artworkBounds": [0.235, 0.015, 0.76, 0.985]},
-      {"index": 2, "name": "Stockente", "image": "assets/ruhe-safari/kirschblueten/03-stockente.webp", "baseSize": 0.0788, "sceneMotion": "drifting", "pose": {"x": 0.53, "y": 0.57, "portraitX": 0.5427, "portraitY": 0.57, "portraitSize": 0.112, "ground": false}, "artworkBounds": [0.015, 0.22, 0.985, 0.78]},
+      {"index": 0, "name": "Koi, rot-weiß", "image": "assets/ruhe-safari/kirschblueten/01-koi-rot-wei.webp", "baseSize": 0.1013, "surface": "water", "sceneMotion": "paddling", "pose": {"x": 0.37, "y": 0.76, "portraitX": 0.3151, "portraitY": 0.76, "portraitSize": 0.144, "ground": false}, "artworkBounds": [0.255, 0.015, 0.745, 0.985]},
+      {"index": 1, "name": "Koi, goldfarben", "image": "assets/ruhe-safari/kirschblueten/02-koi-goldfarben.webp", "baseSize": 0.09, "surface": "water", "sceneMotion": "paddling", "pose": {"x": 0.65, "y": 0.69, "portraitX": 0.7133, "portraitY": 0.69, "portraitSize": 0.128, "ground": false}, "artworkBounds": [0.235, 0.015, 0.76, 0.985]},
+      {"index": 2, "name": "Stockente", "image": "assets/ruhe-safari/kirschblueten/03-stockente.webp", "baseSize": 0.0788, "surface": "water", "sceneMotion": "drifting", "pose": {"x": 0.53, "y": 0.57, "portraitX": 0.5427, "portraitY": 0.57, "portraitSize": 0.112, "ground": false}, "artworkBounds": [0.015, 0.22, 0.985, 0.78]},
       {"index": 3, "name": "Teichschildkröte", "image": "assets/ruhe-safari/kirschblueten/04-teichschildkrote.webp", "baseSize": 0.0619, "sceneMotion": "strolling", "pose": {"x": 0.77, "y": 0.9, "portraitX": 0.884, "portraitY": 0.9, "portraitSize": 0.088, "ground": true}, "artworkBounds": [0.015, 0.38, 0.985, 0.99]},
       {"index": 4, "name": "Japanischer Brillenvogel", "image": "assets/ruhe-safari/kirschblueten/05-japanischer-brillenvogel.webp", "baseSize": 0.0507, "sceneMotion": "gliding", "pose": {"x": 0.32, "y": 0.31, "portraitX": 0.244, "portraitY": 0.31, "portraitSize": 0.072, "ground": false}, "artworkBounds": [0.05, 0.015, 0.95, 0.985]},
       {"index": 5, "name": "Schwalbenschwanz", "image": "assets/ruhe-safari/kirschblueten/06-schwalbenschwanz.webp", "baseSize": 0.05, "sceneMotion": "fluttering", "pose": {"x": 0.75, "y": 0.44, "portraitX": 0.8556, "portraitY": 0.44, "portraitSize": 0.0719, "ground": false}, "artworkBounds": [0.015, 0.155, 0.985, 0.84]}
@@ -1010,7 +1219,7 @@ globalThis.RuheSafariAdditionalWorlds = [
       {"index": 0, "name": "Rothirsch", "image": "assets/ruhe-safari/zauberwald/tier-00-rothirsch.webp", "baseSize": 0.1238, "sceneMotion": "strolling", "pose": {"x": 0.22, "y": 0.62, "portraitX": 0.108, "portraitY": 0.62, "portraitSize": 0.176, "ground": true}, "artworkBounds": [0.145, 0.02, 0.86, 0.95]},
       {"index": 1, "name": "Eichhörnchen", "image": "assets/ruhe-safari/zauberwald/tier-14-eichhoernchen.webp", "baseSize": 0.05, "sceneMotion": "strolling", "pose": {"x": 0.58, "y": 0.74, "portraitX": 0.6138, "portraitY": 0.74, "portraitSize": 0.0808, "ground": true}, "artworkBounds": [0.09, 0.09, 0.88, 0.92]},
       {"index": 2, "name": "Eisvogel", "image": "assets/ruhe-safari/zauberwald/tier-20-eisvogel.webp", "baseSize": 0.05, "sceneMotion": "gliding", "pose": {"x": 0.66, "y": 0.39, "portraitX": 0.7276, "portraitY": 0.39, "portraitSize": 0.0778, "ground": false}, "artworkBounds": [0.075, 0.05, 0.925, 0.915]},
-      {"index": 3, "name": "Stockente", "image": "assets/ruhe-safari/zauberwald/tier-24-stockente.webp", "baseSize": 0.05, "sceneMotion": "drifting", "pose": {"x": 0.38, "y": 0.89, "portraitX": 0.3293, "portraitY": 0.89, "portraitSize": 0.0778, "ground": true}, "artworkBounds": [0.075, 0.19, 0.94, 0.88]},
+      {"index": 3, "name": "Stockente", "image": "assets/ruhe-safari/zauberwald/tier-24-stockente.webp", "baseSize": 0.05, "surface": "water", "sceneMotion": "drifting", "pose": {"x": 0.38, "y": 0.89, "portraitX": 0.3293, "portraitY": 0.89, "portraitSize": 0.0778, "ground": true}, "artworkBounds": [0.075, 0.19, 0.94, 0.88]},
       {"index": 4, "name": "Libelle", "image": "assets/ruhe-safari/zauberwald/tier-31-libelle.webp", "baseSize": 0.05, "sceneMotion": "fluttering", "pose": {"x": 0.73, "y": 0.88, "portraitX": 0.8271, "portraitY": 0.88, "portraitSize": 0.0749, "ground": false}, "artworkBounds": [0.05, 0.16, 0.955, 0.84]},
       {"index": 5, "name": "Hummel", "image": "assets/ruhe-safari/zauberwald/tier-33-hummel.webp", "baseSize": 0.05, "sceneMotion": "fluttering", "pose": {"x": 0.91, "y": 0.71, "portraitX": 0.87, "portraitY": 0.7, "portraitSize": 0.0808, "ground": false}, "artworkBounds": [0.105, 0.09, 0.95, 0.845]}
     ]
