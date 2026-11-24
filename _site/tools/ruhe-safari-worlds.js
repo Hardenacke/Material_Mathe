@@ -44,8 +44,8 @@ globalThis.RuheSafariWorlds = [
     "composition": true,
     "arrivalOrder": [0, 6, 2, 4, 3, 1, 5, 7],
     "decorations": [
-      ["aquarium-plant", 21.8, 56.6, "9%", 9, 3, "assets/ruhe-safari/axolotl/pflanze-1.webp"],
-      ["aquarium-plant", 72.7, 61.89, "7.2%", 12, 5, "assets/ruhe-safari/axolotl/pflanze-2.webp"],
+      ["aquarium-plant", 21.8, 56.6, "9%", 9, 3, "assets/ruhe-safari/axolotl/pflanze-1-gouache.webp"],
+      ["aquarium-plant", 72.7, 61.89, "7.2%", 12, 5, "assets/ruhe-safari/axolotl/pflanze-2-gouache.webp"],
       ["ray", 40, -16, "16%", 25, 11],
       ["ray", 66, -13, "22%", 34, 4],
       ["ray", 85, -18, "13%", 31, 23],

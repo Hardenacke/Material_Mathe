@@ -591,7 +591,7 @@ test('Alle atmosphärischen Details haben lokale Stile und bleiben dekorativ', (
       if (world.id === 'axolotl') {
         const plants = layer.children.filter((detail) => detail.className.includes('ambient-aquarium-plant'));
         assert.deepEqual(plants.map((plant) => plant.children[0].src), [
-          'assets/ruhe-safari/axolotl/pflanze-1.webp', 'assets/ruhe-safari/axolotl/pflanze-2.webp'
+          'assets/ruhe-safari/axolotl/pflanze-1-gouache.webp', 'assets/ruhe-safari/axolotl/pflanze-2-gouache.webp'
         ]);
       }
     }
