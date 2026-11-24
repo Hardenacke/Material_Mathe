@@ -245,7 +245,8 @@ async function loadCurrentMedia(){
   setStatus('asset-status','Hintergrund und '+current().items.length+' Motive werden geprüft …');
   try{
     const world=current();
-    await Promise.all([...new Set([world.background,...world.items.map(item=>item.image)])].map(imageLoaded));
+    const decorationImages=(world.decorations||[]).map(([, , , , , , image])=>image).filter(Boolean);
+    await Promise.all([...new Set([world.background,...world.items.map(item=>item.image),...decorationImages])].map(imageLoaded));
     if(token!==mediaToken)return;mediaReady=true;setStatus('asset-status','✓ Hintergrund und alle '+world.items.length+' Motive sind geladen und sichtbar.');
   }catch(e){if(token!==mediaToken)return;setStatus('asset-status','Ein Bild konnte nicht geprüft werden. Bitte erneut prüfen oder die Datei neu öffnen.',true);$('retry-media').hidden=false;}
   updateControls();
@@ -473,7 +474,9 @@ function enterScene(demo=false){
   const resume=canResume(demo),layout=resume?pausedRound.layout:null;
   if(resume)engine=pausedRound.engine;
   else{
-    engine=new QuietWorldEngine(RuheSafariScene.shuffleOrder(state.selected[state.theme]),state.settings.interval);
+    const world=current(),selected=state.selected[world.id];
+    const order=world.arrivalOrder?world.arrivalOrder.filter(index=>selected.includes(index)):RuheSafariScene.shuffleOrder(selected);
+    engine=new QuietWorldEngine(order,state.settings.interval);
     // A first selected picture is visible immediately; quiet time earns the rest.
     engine.earned.push(engine.pool[0]);
   }

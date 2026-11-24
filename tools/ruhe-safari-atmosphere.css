@@ -22,6 +22,28 @@
     radial-gradient(ellipse at 78% 70%, #fff9 0 30%, transparent 32%);
 }
 
+.ambient-aquarium-plant {
+  transform-origin: 50% 97%;
+  animation-name: ambient-sway;
+  opacity: .93;
+}
+.ambient-aquarium-plant img { display: block; width: 100%; height: auto; }
+[data-world="axolotl"] .ambient-bubble {
+  --bubble-rise: 56cqh;
+  border-color: #e0fff0a8;
+  background: radial-gradient(circle at 31% 26%, #f5fff3b0 4%, transparent 23%);
+}
+[data-world="axolotl"] .ambient-ray {
+  height: 75%;
+  opacity: .24;
+  background: linear-gradient(90deg, transparent, #e8ffcb58 48%, transparent);
+  rotate: 22deg;
+}
+[data-world="axolotl"] .ambient-caustic {
+  height: 9%;
+  background: radial-gradient(ellipse, #fff7c780, transparent 68%);
+}
+
 .ambient-rain, .ambient-falls, .ambient-dust, .ambient-canopy-leaf,
 .ambient-autumn-leaf, .ambient-blossom, .ambient-winter-flake {
   animation-name: ambient-fall;
@@ -126,7 +148,7 @@
   20%, 75% { opacity: calc(var(--effect-opacity) * .65); }
   50% { border-radius: var(--effect-radius-end); }
   100% {
-    transform: translate(var(--effect-drift-x), calc(0cqh - var(--effect-fall-y))) rotate(calc(var(--effect-rotation) + var(--effect-sway))) scale(calc(var(--effect-scale-x) * 1.04), calc(var(--effect-scale-y) * .97));
+    transform: translate(var(--effect-drift-x), calc(0cqh - var(--bubble-rise, var(--effect-fall-y)))) rotate(calc(var(--effect-rotation) + var(--effect-sway))) scale(calc(var(--effect-scale-x) * 1.04), calc(var(--effect-scale-y) * .97));
     border-radius: var(--effect-radius-start);
     opacity: 0;
   }

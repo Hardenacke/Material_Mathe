@@ -20,7 +20,7 @@ function seededRandom(seed) {
 
 test('Neue Welten enthalten ausschließlich die vollständigen lokalen Bildsätze mit vermessenen Bildgrenzen', () => {
   assert.equal(new Set(worlds.map((world) => world.id)).size, worlds.length);
-  const expected = [['zauberwald', 36], ['otterwelt', 12], ['regenwald', 6], ['bauernhof', 8],
+  const expected = [['zauberwald', 36], ['otterwelt', 12], ['axolotl', 8], ['regenwald', 6], ['bauernhof', 8],
     ['almwiese', 6], ['nachtgarten', 6], ['kueste', 6], ['oase', 6], ['kirschblueten', 6],
     ['maercheninseln', 6], ['fruehling', 6], ['sommer', 6], ['herbst', 6], ['winter', 6]];
   for (const [worldId, count] of expected) {
@@ -43,10 +43,11 @@ test('Neue Welten enthalten ausschließlich die vollständigen lokalen Bildsätz
 });
 
 test('Alle Weltbilder liegen lokal vor und sind vom HTML getrennt', () => {
-  assert.equal(baseWorlds.length, 25);
+  assert.equal(baseWorlds.length, 26);
   assert.doesNotMatch(source, /data:image\/|id="world-data"/);
   for (const world of baseWorlds) {
-    for (const asset of [world.background, ...world.items.map((item) => item.image)]) {
+    const decorations = (world.decorations || []).flatMap(([, , , , , , image]) => image ? [image] : []);
+    for (const asset of [world.background, ...world.items.map((item) => item.image), ...decorations]) {
       assert.match(asset, /^assets\/ruhe-safari\/[a-z-]+\/[a-z0-9-]+\.webp$/);
       const bytes = readFileSync(new URL(`../tools/${asset}`, import.meta.url));
       assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
@@ -57,7 +58,7 @@ test('Alle Weltbilder liegen lokal vor und sind vom HTML getrennt', () => {
 
 test('Stilwelten nutzen die Hochformatkomposition mit ausreichendem Abstand und größeren Kleinstmotiven', () => {
   const compositions = worlds.filter((world) => world.composition);
-  assert.equal(compositions.length, 12);
+  assert.equal(compositions.length, 13);
   for (const landscape of compositions) {
     const portrait = { ...landscape, portrait: true };
     const selected = landscape.items.map((item) => item.index);
@@ -587,6 +588,12 @@ test('Alle atmosphärischen Details haben lokale Stile und bleiben dekorativ', (
         assert.ok(detail.style['--effect-radius-start'].includes(' / '));
       }
       if (world.id === 'safari') assert.ok(layer.children.some((detail) => detail.className.includes('ambient-sunshine')));
+      if (world.id === 'axolotl') {
+        const plants = layer.children.filter((detail) => detail.className.includes('ambient-aquarium-plant'));
+        assert.deepEqual(plants.map((plant) => plant.children[0].src), [
+          'assets/ruhe-safari/axolotl/pflanze-1.webp', 'assets/ruhe-safari/axolotl/pflanze-2.webp'
+        ]);
+      }
     }
   } finally {
     if (previousDocument === undefined) delete globalThis.document;

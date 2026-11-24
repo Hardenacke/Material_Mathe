@@ -38,6 +38,46 @@ globalThis.RuheSafariWorlds = [
     ]
   },
   {
+    "id": "axolotl",
+    "name": "Axolotl-Aquarium",
+    "background": "assets/ruhe-safari/axolotl/hintergrund.webp",
+    "composition": true,
+    "arrivalOrder": [0, 6, 2, 4, 3, 1, 5, 7],
+    "decorations": [
+      ["aquarium-plant", 21.8, 56.6, "9%", 9, 3, "assets/ruhe-safari/axolotl/pflanze-1.webp"],
+      ["aquarium-plant", 72.7, 61.89, "7.2%", 12, 5, "assets/ruhe-safari/axolotl/pflanze-2.webp"],
+      ["ray", 40, -16, "16%", 25, 11],
+      ["ray", 66, -13, "22%", 34, 4],
+      ["ray", 85, -18, "13%", 31, 23],
+      ["caustic", 23, 79, "24%", 12, 8],
+      ["caustic", 47, 87, "27%", 17, 4],
+      ["caustic", 69, 78, "19%", 13, 10],
+      ["caustic", 76, 93, "19%", 19, 2],
+      ["bubble", 31, 72, "4px", 13, 5.65],
+      ["bubble", 31.48, 73.9, "7px", 16, 8.05],
+      ["bubble", 31.96, 75.8, "5px", 11, 10.45],
+      ["bubble", 32.44, 77.7, "9px", 19, 12.85],
+      ["bubble", 54, 72, "4px", 13, 9.1],
+      ["bubble", 54.48, 73.9, "7px", 16, 11.5],
+      ["bubble", 54.96, 75.8, "5px", 11, 13.9],
+      ["bubble", 55.44, 77.7, "9px", 19, 16.3],
+      ["bubble", 72, 72, "4px", 13, 11.8],
+      ["bubble", 72.48, 73.9, "7px", 16, 14.2],
+      ["bubble", 72.96, 75.8, "5px", 11, 16.6],
+      ["bubble", 73.44, 77.7, "9px", 19, 19]
+    ],
+    "items": [
+      {"index": 0, "name": "Rosafarbener Axolotl", "image": "assets/ruhe-safari/axolotl/rosa.webp", "baseSize": 0.1519, "sceneMotion": "gentle", "pose": {"x": 0.43, "y": 0.93, "portraitX": 0.35, "portraitY": 0.94, "portraitSize": 0.216, "ground": true}, "artworkBounds": [0.025, 0.481, 0.977, 0.984]},
+      {"index": 1, "name": "Dunkler Axolotl", "image": "assets/ruhe-safari/axolotl/dunkel.webp", "baseSize": 0.1294, "sceneMotion": "paddling", "pose": {"x": 0.72, "y": 0.42, "portraitX": 0.76, "portraitY": 0.4, "portraitSize": 0.184, "ground": false}, "artworkBounds": [0.025, 0.185, 0.975, 0.815]},
+      {"index": 2, "name": "Goldener Axolotl", "image": "assets/ruhe-safari/axolotl/gold.webp", "baseSize": 0.1406, "sceneMotion": "gentle", "pose": {"x": 0.67, "y": 0.8, "portraitX": 0.7, "portraitY": 0.77, "portraitSize": 0.2, "ground": true}, "artworkBounds": [0.025, 0.562, 0.975, 0.984]},
+      {"index": 3, "name": "Braun gesprenkelter Axolotl", "image": "assets/ruhe-safari/axolotl/braun.webp", "baseSize": 0.1238, "sceneMotion": "gentle", "pose": {"x": 0.2, "y": 0.8, "portraitX": 0.17, "portraitY": 0.8, "portraitSize": 0.176, "ground": true}, "artworkBounds": [0.025, 0.458, 0.975, 0.984]},
+      {"index": 4, "name": "Junger Axolotl", "image": "assets/ruhe-safari/axolotl/jungtier.webp", "baseSize": 0.0844, "sceneMotion": "paddling", "pose": {"x": 0.55, "y": 0.6, "portraitX": 0.54, "portraitY": 0.59, "portraitSize": 0.12, "ground": false}, "artworkBounds": [0.023, 0.181, 0.975, 0.817]},
+      {"index": 5, "name": "Elfenbeinfarbener Axolotl", "image": "assets/ruhe-safari/axolotl/elfenbein.webp", "baseSize": 0.1181, "sceneMotion": "gentle", "pose": {"x": 0.45, "y": 0.74, "portraitX": 0.43, "portraitY": 0.74, "portraitSize": 0.168, "ground": true}, "artworkBounds": [0.025, 0.359, 0.975, 0.984]},
+      {"index": 6, "name": "Blaugrauer Axolotl", "image": "assets/ruhe-safari/axolotl/blaugrau.webp", "baseSize": 0.1238, "sceneMotion": "paddling", "pose": {"x": 0.29, "y": 0.41, "portraitX": 0.23, "portraitY": 0.39, "portraitSize": 0.176, "ground": false}, "artworkBounds": [0.025, 0.255, 0.975, 0.743]},
+      {"index": 7, "name": "Hellrosa Axolotl mit Sommersprossen", "image": "assets/ruhe-safari/axolotl/hellrosa.webp", "baseSize": 0.135, "sceneMotion": "gentle", "pose": {"x": 0.85, "y": 0.94, "portraitX": 0.81, "portraitY": 0.94, "portraitSize": 0.192, "ground": true}, "artworkBounds": [0.025, 0.493, 0.975, 0.984]}
+    ]
+  },
+  {
     "id": "weltraumstation",
     "name": "Weltraumstation",
     "background": "assets/ruhe-safari/weltraumstation/hintergrund.webp",

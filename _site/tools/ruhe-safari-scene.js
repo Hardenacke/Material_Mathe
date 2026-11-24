@@ -557,6 +557,7 @@
   const moods = {
     safari: { backdrop: '#ded3b6', halo: '#fff0ce', edge: '#805f3b22', frame: '#eee5cf', ink: '#6e634b' },
     unterwasser: { backdrop: '#c9ded8', halo: '#e5fff0', edge: '#285c6222', frame: '#ddebe4', ink: '#466b63' },
+    axolotl: { backdrop: '#bfdcd1', halo: '#edffe6', edge: '#386d5529', frame: '#e0eee2', ink: '#426654' },
     weltraumstation: { backdrop: '#292b44', halo: '#4d4262', edge: '#171d3633', frame: '#34364a', ink: '#e8dfce' },
     zaubergarten: { backdrop: '#d9dfc8', halo: '#fff0d3', edge: '#62704a22', frame: '#eaeedc', ink: '#5e6d51' },
     zukunftsstadt: { backdrop: '#d9e0dd', halo: '#f9e7d6', edge: '#5d6b7222', frame: '#e8ece2', ink: '#5c6d66' },
@@ -590,6 +591,7 @@
     cloud: { rotation: 4, skew: 6, stretchX: 0.24, stretchY: 0.18, sway: 1.5, morph: 16 },
     ripple: { rotation: 4, skew: 4, stretchX: 0.25, stretchY: 0.14, sway: 1, morph: 3 },
     grass: { rotation: 7, skew: 3, stretchX: 0.18, stretchY: 0.22, sway: 5, morph: 0 },
+    'aquarium-plant': { rotation: 1, skew: 3, stretchX: 0, stretchY: 0, sway: 3, morph: 0 },
     bubble: { rotation: 6, skew: 1, stretchX: 0.1, stretchY: 0.07, sway: 2, morph: 3 },
     ray: { rotation: 7, skew: 2, stretchX: 0.2, stretchY: 0.15, sway: 3, morph: 0 },
     star: { rotation: 0, skew: 0, stretchX: 0.18, stretchY: 0.18, sway: 0, morph: 0 },
@@ -635,7 +637,8 @@
     layer.setAttribute('aria-hidden', 'true');
     const environment = world.atmosphere || world.id;
     const effects = world.decorations
-      ? world.decorations.map(([kind, x, y, width, duration, phase]) => [kind, 1, [x / 100, y / 100, x / 100, y / 100], { width, duration, phase }])
+      ? world.decorations.map(([kind, x, y, width, duration, phase, image]) => [kind, 1,
+        [x / 100, y / 100, x / 100, y / 100], { width, duration, phase, image }])
       : [...(ambiance[environment] || []), ...(atmosphere[environment] || [])];
     const colors = palettes[environment] || ['#fff2b0', '#eaf9ff', '#f6d7ce'];
     const crop = world.composition ? landscapeAspect / aspectFor(world) : 1;
@@ -651,6 +654,12 @@
         const duration = kind === 'meteor' ? 18 : ['star', 'glint', 'ripple', 'grass', 'sea-sparkle', 'frost'].includes(kind) ? 5 : 9;
         if (decoration) {
           detail.style.width = decoration.width.endsWith('%') ? parseFloat(decoration.width) * crop + '%' : decoration.width;
+          if (decoration.image) {
+            const image = document.createElement('img');
+            image.alt = '';
+            image.src = decoration.image;
+            detail.append(image);
+          }
         }
         detail.style.setProperty('--ambient-duration', (decoration?.duration ?? duration + random() * 4) + 's');
         detail.style.setProperty('--ambient-delay', -(decoration?.phase ?? random() * 30) + 's');
